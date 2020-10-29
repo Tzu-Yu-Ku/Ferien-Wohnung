@@ -1,0 +1,34 @@
+= Protokoll Gruppe 25
+
+Treffen am 27.10.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   18:10 Uhr +
+Ende:     19:40 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+02.11.2020, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Bemerkungen
+An diesem Dienstag hat das Softwarepraktikum des Wintersemesters 20/21 begonnen und wir durften uns nach der Einführungsveranstaltung von Frau Dr. Birgit Demut das erste mal kennenlernen. Zunächst wurden hauptsächlich organisatorische Vereinbarungen getroffen, wie beispielsweise die Festlegung eines wöchentlichen Termins für unser Team-Meeting (jeden Montag um 17:00 Uhr). Zusätzlich haben wir uns zur internen Kommunikation einer gemeinsamen Telegram-Gruppe angeschlossen.
+
+
+== +++<del>+++Retrospektive des letzten Sprints+++</del>+++
+
+== Aktueller Stand
+Unser GitHub repository ist eingerichtet und jedes Gruppenmitglied setzt sich nun mit der Erweiterung des exemplarischen "Guestbook"-Projekts ausseinander um dieses mit weiteren Funktionen zu versehen und so ein Grundverständnis der verwendeten Frameworks zu erlangen.
+
+== Planung des nächsten Sprints
+Zunächst folgt die objektorientierte Analyse. Dazu werden wir gemeinsam die Aufgabenstellung durchforsten um die verschiedenen Komponenten, Beziehungen, Akteure und Notwendikeiten zu extrahieren. (#1)
