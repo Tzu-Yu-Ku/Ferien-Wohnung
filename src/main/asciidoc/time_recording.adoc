@@ -6,7 +6,7 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 // See http://asciidoctor.org/docs/user-manual/#tables
 [option="headers"]
 |===
-|Woche |Tzu-Yu Ku |Jesko Kloß |Marten Freese |Julian Böhm |Jimmy Pöhlmann |Janujan Thanabalasingham |Meeting
+|Woche |Tzu-Yu Ku |Jesko Kloß |Marten Freese |Julian Böhm |Jimmy Pöhlmann |Janujan Thanabalasingham |Meeting(s)
 |1  |…   |…    |…    |…    |…    |4h    |2.5h    
 |2  |…   |…    |…    |…    |…    |6h    |3.5h    
 |3  |…   |…    |…    |…    |…    |…    |…    
