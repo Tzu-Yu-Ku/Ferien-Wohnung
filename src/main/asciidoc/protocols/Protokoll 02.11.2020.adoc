@@ -1,0 +1,66 @@
+= Protokoll Gruppe 25
+
+Treffen am 02.11.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   17:00 Uhr +
+Ende:     21:00 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+(intern) 04.11.2020, 19:30 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Aktueller Stand
+Unser erstes Team-Meeting hat sich als durchaus erfolgreich herausgestellt. Jedes Teammitglied konnte das Gästebuch-Demoprojekt um einfache Funktionen erweitern, lediglich Marten hatte zu Beginn Schwierigkeiten, die lokal gehostete Seite aufzurufen. (Der Fehler wurde glücklicherweise gefunden.)
+Die ersten Schritte zur OOA sind bewältigt. Gemeinsam mit allen Gruppenmitgliedern habe ich via Bildschirmübertragung/BBB erste CRC-Karten entworfen. (Siese crc ordner im repo.) Somit konnten wir uns einen ersten Überblick schaffen, welche Klassen, welche Abhängigkeiten, welche Verantwortlichkeiten und welche Kollaborateure existieren müssen um die Aufgabenstellung zu erfüllen.
+Die verschiedenen Bestandteile der OOA haben wir zunächst auf alle Gruppenmitglieder verteilt, um die ersten Entwürfe, basierend auf unseren Überlegungen aus der CRC-Session, bei bei unserem nächsten Meeting zu präsentieren, mit unserem Kunden abzusprechen und sie dann in Form eines Pflichtenhefts zusammenzutragen. Es kümmern sich...
+
+- ... Tzu-Yu & Jesko um erste Sequenzdiagramme und Use-Cases.
+- ... Marten überlegt sich geeignete Akzeptanztestfälle.
+- ... Julian entwirft das Kontextdiagramm und definiert unsere Stakeholder.
+- ... Jimmy entwirft das Top-Level-Architektur-Diagramm.
+- ... und ich mache einen ersten GUI-Entwurf und überlege mir möglichst auch einen Use-Case & ein mögliches Sequenzdiagramm.
+
+Desweiteren arbeitet jeder an einer der Aufgaben zur Erweiterung des berühmt berüchtigten Videoshops.
+
+- Ich bearbeite Aufgabe 1)
+- Jesko macht Aufgabe 2)
+- Jimmy bezwingt Aufgabe 3)
+- Julian erledigt Aufgabe 4)
+- Marten bearbeitet Aufgabe 5)
+- Tzu-Yu kümmert sich um Aufgabe 6)
+
+Sollte Zeit sein und sich jemand dazu ermutigt fühlen, bearbeiten wir sicherlich auch Aufgaben 7) und 8).
+https://github.com/st-tu-dresden-praktikum/swt20w25/issues/2[Issue #2] referenziert unseren Fortschritt zum Thema Videoshop und jedes Gruppenmitglied checkt seine entsprechende Checkbox, wenn dessen Aufgabe bewältigt wurde.
+
+
+
+== Retrospektive des letzten Sprints
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]     |OOA durchführen       |Alle beteiltigten Mitglieder fertigen nun ihren Teil der Analyse an.      |
+|===
+
+
+== +++<del>+++Bemerkungen+++</del>+++
+
+
+== Planung des nächsten Sprints
+Die Teilaufgaben jedes Mitglieds vorstellen. Gemeinsames Ausarbeiten der einzelnen Bestandteile der OOA. CRC-Karten, Diagramme, Use-Cases, etc. gemeinsam bewerten, kritisieren, verbessern und zu guter letzt im Pflichtenheft festhalten.
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]     |OOA anfertigen     |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]  |alle Gruppenmitglieder                | work in progress
+|===
