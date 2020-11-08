@@ -7,8 +7,8 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 [option="headers"]
 |===
 |Woche |Tzu-Yu Ku |Jesko Kloß |Marten Freese |Julian Böhm |Jimmy Pöhlmann |Janujan Thanabalasingham |Meeting(s)
-|1  |10h   |8.75h    |…    |6h    |…    |4h    |2.5h    
-|2  |2.5h   |8.25h    |6h    |10.5h    |2.5h    |10.5h    |3.5h    
+|1  |10h   |8.75h    |…    |6h    |4h   |4h    |2.5h    
+|2  |2.5h   |8.25h    |6h    |10.5h    |22.5h    |10.5h    |3.5h    
 |3  |…   |…    |…    |…    |…    |…    |…    
 |4  |…   |…    |…    |…    |…    |…    |…    
 |5  |…   |…    |…    |…    |…    |…    |…    
