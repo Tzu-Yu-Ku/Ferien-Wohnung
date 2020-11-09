@@ -36,6 +36,7 @@ Eine Optimierung für folgende Webbrowser steht im Vordergrund:
 Eine einfache Bedienung des webshops sollte ohne vertieftes technisches Verständnis möglich sein, um eine möglichst breite Zielgruppe anzusprechen. Sämtliche Daten sollen in einer Datenbank persistiert werden und durch den Webshop abfragbar sein.
 
 == 4. Interessenvertreter (Stakeholders)
+
 Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, welche mit der Software interagieren oder dessen Anforderungen beeinflussen. Ferner erfolgt eine Priorisierung der Akteure zusammen mit einer Beschreibung ihrer vorrangigen Ziele. Die Priorisierung erfolgt absteigend, wobei 1 als niedrigste und 5 als höchste Priorität zu verstehen ist.
 
 |===
@@ -50,36 +51,53 @@ Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, we
 == 5. Systemgrenzen und Top-Level-Architektur
 
 === 5.1 Kontextdiagramm
+
 Das Kontextdiagramm beschreibt die Integration das geplante Systems. Berücksichtigt werden alle Nutzergruppen und deren Zugriff auf das System sowie jegliche Software Dritter, welche auf das System zugreift oder auf die durch unser System zugegriffen wird.
 
 --- PASTE THE DIAGRAM HERE ---
 
 === 5.2 Top-Level-Architektur
 
+Die Top-Level-Architektur des Systems verdeutlicht das nachfolgende Diagramm:
 
-== Anwendungsfälle
+--- PASTE THE DIAGRAM HERE ---
 
-=== Akteure
+== 6. Anwendungsfälle
 
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
-Weitere relevante Spalten können bei Bedarf ergänzt werden.
+Der folgende Abschnitt gewährt einen Überblick über die durch das System erwartbar zu handhabenden Anwendungsfälle. Die Anwendungsfälle beschreiben die Funktionalität, die das System besitzen muss sowie die involvierten Akteure, wobei die Beschreibung hauptsächlich aus Sicht des Klienten erfolgt. 
 
-// See http://asciidoctor.org/docs/user-manual/#tables
+=== 6.1 Akteure
+
+Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Die nachfolgende Tabelle listet alle Akteure der Software und deren Beschreibung auf. Lassen sich Akteure zu einer Gruppe zusammenfassen, wird diese _kurisv_ dargestellt.
+
 [options="header"]
 [cols="1,4"]
 |===
 |Name |Beschreibung
-|...  |...
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
 |===
 
-=== Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
+=== 6.2 Überblick Anwendungsfalldiagramm
+Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt.
 
-=== Anwendungsfallbeschreibungen
-Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung müssen noch nicht alle Sonderfälle und Varianten berücksichtigt werden. Schwerpunkt ist es, die wichtigsten Anwendungsfälle des Systems zu finden. Wichtig sind solche Anwendungsfälle, die für den Auftraggeber, den Nutzer den größten Nutzen bringen.
-Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
-Einfache Anwendungsfälle mit einem Absatz beschreiben.
-Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
+--- PASTE DIAGRAM HERE ---
+
+=== 6.3 Anwendungsfallbeschreibungen
+Dieser Unterabschnitt beschreibt die Anwendungsfälle.
+
+|===
+|ID |[UC####]
+|Name | ---
+|Beschreibung | ---
+|Akteure | ---
+|Auslöser | ---
+|Vorbedingungen | ---
+
+|===
 
 == Funktionale Anforderungen
 
