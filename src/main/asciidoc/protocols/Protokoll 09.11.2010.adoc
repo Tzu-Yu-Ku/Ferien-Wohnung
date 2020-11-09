@@ -35,8 +35,8 @@ Während des Meetings haben wir uns in zwei Gruppen aufgeteilt. Tzu-Yu, Julian u
 [option="headers"]
 |===
 |Issue |Aufgabe |Status |Bemerkung
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]     |OOA anfertigen      |Alle Teammitglieder tragen Ihren Teil der OOA gemeinsam im Pflichtenheft zusammen.      | 
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/2[#2] |Videoshop erweitern |Alle Teammitglieder erweitern den Videoshop um die Funktionen einer Aufgabenstellung | 
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]     |OOA anfertigen      |Alle Teammitglieder müssen Ihren Teil der OOA gemeinsam im Pflichtenheft zusammentragen.      | 
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/2[#2] |Videoshop erweitern |Es verbleiben noch Teammitglieder, die den Videoshop um die Funktionen einer Aufgabenstellung erweitern müssen. | 
 |===
 
 
