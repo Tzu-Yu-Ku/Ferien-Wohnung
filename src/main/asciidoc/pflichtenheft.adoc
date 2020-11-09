@@ -1,27 +1,37 @@
 = Pflichtenheft
-:project_name: Projektname
+:project_name: FeWoDre
 == __{project_name}__
 
 [options="header"]
 [cols="1, 1, 1, 1, 4"]
 |===
 |Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
-|0.1     | In Arbeit   | 10.10.2020          | Autor       | Initiale Version
+|0.1     | In Arbeit   | 10.10.2020          | Jimmy Julian Janujan      | Initiale Version
 |===
 
 == Inhaltsverzeichnis
-Dieses Dokument benötigt ein Inhaltsverzeichnis. Es existieren mehrere Einbindungsmöglichkeiten.
+1. Zusammenfassung
 
-== Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+== 1. Zusammenfassung
+Dieses Dokument repräsentiert das Pflichtenheft des Projekts *FewoDre*. Ziel ist es, eine Übersicht über die zu entwerfende Software zu gewährleisten, welche als Grundlage für die Kommunikation zwischen den Interessenvertretern des Projekts und dem Entwicklerteam dient. Zielstellung ist es, dieses Dokument als Grundlage des Vertrags zwischen dem Auftraggeber und den Entwicklern anzunehmen, weshalb es hinsichtlich seiner Korrektheit und Konsistenz zu überprüfen ist. Folgendes Pflichtenheft beschreit die Anforderungen an das gewünschte System und, in Ansätzen, deren Implementierung durch die Entwickler.
 
-== Aufgabenstellung und Zielsetzung
+Generell besteht der Anspruch, dass das Pflichtenheft *korrekt*, *komplett* und *konsistent* ist. Da dieses Pflichtenheft bei Abgabe als Maßstab für die Software dient, sollten sämtliche definierten Ziele *erfüllbar* sein. Eine *Rückfervolgung* ist wichtig, da das Pfilchtenheft während des gesamten Entwicklungsprozesses verwendet und als Referenz herangezogen wird. Ferner besteht der Anspruch der einfachen Erweiterbarkait, obgleich Änderungen nach Zustimmung durch die Interessenvertreter auf ein Minumum begrenzt werden sollten.  Da Anforderungen und Umstände konstanten Änderungen unterliegen, sind Anpassungen erwartbar und müssen entsprechend dokumentiert werden.
+
+
+== 2. Aufgabenstellung & Zielsetzung
 Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
-Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
+Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen. 
 
-== Produktnutzung
-In welchem Kontext soll das System später genutzt werden? Welche Rahmenbedingungen gelten?
-Zusätzlich kurze Einleitung für fachfremde Personen
+
+== 3. Produktnutzung
+Dieser Abschnitt wird im Folgenden einen Überblick über die geplante Nutzung der Software und dessen Einbettung geben.
+
+Ziel der Software ist es als Web-Shop Kunden der Firma FeWoDre das digitale Buchen von Ferienhäusern in und um Dresden zu ermöglichen. Auf einem Server gehostet soll der Web-Shop rund um die Uhr und unter Nutzung eines Webbrowsers über das Internet erreichbar sein.
+
+Eine Optimierung für folgende Webbrowser steht im Vordergrund:
+
+- Mozilla Firefox, version 55.0.3+
+- Google Chrome, version 61.0.3163+
 
 == Interessensgruppen (Stakeholders)
 Welche realen und juristischen Personen(-gruppen) haben Einfluss auf die Anforderungen im Projekt?
