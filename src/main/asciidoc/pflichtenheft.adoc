@@ -80,6 +80,7 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 |Host |---
 |Admin |---
 |Eventemployee/EventCompany |---
+|... |...
 |===
 
 === 6.2 Überblick Anwendungsfalldiagramm
