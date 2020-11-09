@@ -33,16 +33,29 @@ Eine Optimierung für folgende Webbrowser steht im Vordergrund:
 - Mozilla Firefox, version 55.0.3+
 - Google Chrome, version 61.0.3163+
 
-== Interessensgruppen (Stakeholders)
-Welche realen und juristischen Personen(-gruppen) haben Einfluss auf die Anforderungen im Projekt?
+Eine einfache Bedienung des webshops sollte ohne vertieftes technisches Verständnis möglich sein, um eine möglichst breite Zielgruppe anzusprechen. Sämtliche Daten sollen in einer Datenbank persistiert werden und durch den Webshop abfragbar sein.
 
-== Systemgrenze und Top-Level-Architektur
+== 4. Interessenvertreter (Stakeholders)
+Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, welche mit der Software interagieren oder dessen Anforderungen beeinflussen. Ferner erfolgt eine Priorisierung der Akteure zusammen mit einer Beschreibung ihrer vorrangigen Ziele. Die Priorisierung erfolgt absteigend, wobei 1 als niedrigste und 5 als höchste Priorität zu verstehen ist.
 
-=== Kontextdiagramm
-Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme. Die Grafik kann auch informell gehalten sein. Überlegen Sie sich dann geeignete Symbole. Die Grafik kann beispielsweise mit Visio erstellt werden. Wenn nötig, erläutern Sie diese Grafik.
+|===
+|*Name* |*Priorität* |*Beschreibung* |*Ziele*
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
+|--- |--- |--- |---
+|===
 
-=== Top-Level-Architektur
-Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
+== 5. Systemgrenzen und Top-Level-Architektur
+
+=== 5.1 Kontextdiagramm
+Das Kontextdiagramm beschreibt die Integration das geplante Systems. Berücksichtigt werden alle Nutzergruppen und deren Zugriff auf das System sowie jegliche Software Dritter, welche auf das System zugreift oder auf die durch unser System zugegriffen wird.
+
+--- PASTE THE DIAGRAM HERE ---
+
+=== 5.2 Top-Level-Architektur
+
 
 == Anwendungsfälle
 
