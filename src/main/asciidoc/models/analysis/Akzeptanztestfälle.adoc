@@ -34,26 +34,25 @@
 |ID                   |AT0040
 |Anwendungfall        |UC0120
 |Vorbedingung         |unregisteredPerson benutzt das System.
-|Event                |unregisteredPerson drückt auf "egistrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345, ...) aus und klickt anschließend erneut auf "Registrieren".
+|Event                |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345, ...) aus und klickt anschließend erneut auf "Registrieren".
 |Erwartete Resultate a|
 - System soll anzeigen, dass diese Email-Adresse bereits vergeben ist und die Registrieung nicht abgeschlossen werden kann.
 |===
 
 |===
 |ID                   |AT0050
-|Anwendungfall        |UC0100
-|Vorbedingung         |UserAccount exsistiert und ist nicht eingeloggt.
-|Event                |UserAccount drückt auf "Login". Er gibt seine Anmeldedaten(Peter, Hans, 01.01.2000, hanspeter@gmail.com, 12hans34,...) ein
-|Erwartete Resultate a|
-- UserAccount wird angezeigt, dass das von ihn eingegebene Passwot falsch ist
+|Anwendungfall        |admin bestätigt regist.
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
 
 |===
 |ID                   |AT0060
-|Anwendungfall        |
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount exsistiert und ist nicht eingeloggt.
+|Event                |passwort falsch eingegeben
+|Erwartete Resultate a|
 |===
 
 |===
