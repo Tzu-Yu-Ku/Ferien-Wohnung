@@ -1,77 +1,88 @@
 = Akzeptanztestfälle
 
+
 |===
-|ID                   |AT010
-|Anwendungfall        |UC0100
-|Vorbedingung         |Das System hat existierende UserAccount.
-|Event                |UserAccount öffnet die "Login"-Funktion und gibt seine Anmeldedaten ein und drückt auf "Login".
-|Erwartete Resultate a| 
-- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte seines UserAccounts warzunehmen.
-- Der UserAccount ist nun auf der "Hauptseite" des Systems, angepasst an den entsprechenden UserAccount.
+|ID                   |AT0010
+|Anwendungfall        |UC0120
+|Vorbedingung         |unregisteredUser benutzt das System.
+|Ereignis             |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345) aus und klickt auf "Registrieren".
+|Erwartete Resultate a|
+- Der unregisteredUser ist nun auf Hauptseite des Systems.
+- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestätigt werden.
 |===
 
 |===
 |ID                   |AT0020
-|Anwendungfall        |UC0100
-|Vorbedingung         |UserAccount ist eingeloggt.
-|Event                |UserAccount klickt auf "Ausloggen".
+|Anwendungfall        |UC0520
+|Vorbedingung         |Admin ist eingeloggt und eine Registrierung wurde durchgeführt.
+|Ereignis             |Admin klickt auf "Mieter verwalten" dann auf "Neue Registrierungen". Nun wählt er den entsprechenden Antragstellers(Max Musterman) aus und dann auf "Registrierung bestätigen"
 |Erwartete Resultate a|
-- UserAccount ist nicht mehr eingeloggt und hat keinen Zugriff mehr auf die besonderen Rechte seines UserAccounts.
-- UserAccount ist nun auf der Hauptseite des Systems
+- Die Registrierung des Tanents ist nun abgeschlossen und er kann sich einloggen.
+- Der Admin ist zurück auf der Seite "Neue Registrierungen"
 |===
 
 |===
 |ID                   |AT0030
 |Anwendungfall        |UC0120
-|Vorbedingung         |unregisteredUser benutzt das System.
-|Event                |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2020, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
-|Erwartete Resultate a|
-- Der unregisteredUser findet sich nun auf der Hauptseite des Systems wieder.
-- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestätigt werden.
-|===
-
-|===
-|ID                   |AT0040
-|Anwendungfall        |UC0520
-|Vorbedingung         |Admin ist eingeloggt und eine Registrierung wurde durchgeführt.
-|Event                |Admin klickt auf "Mieter verwalten" und anschließend auf "Registrierung bestätigen".
-|Erwartete Resultate a|
-- Die Registrierung des Tanents ist nun abgeschlossen und er kann sich einloggen.
-|===
-
-|===
-|ID                   |AT0050
-|Anwendungfall        |UC0120
 |Vorbedingung         |unregisteredPerson benutzt das System.
-|Event                |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345, ...) aus und klickt anschließend erneut auf "Registrieren".
+|Ereignis             |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
 |Erwartete Resultate a|
 - System soll anzeigen, dass diese Email-Adresse bereits vergeben ist und die Registrieung nicht abgeschlossen werden kann.
 |===
 
 |===
-|ID                   |AT0060
+|ID                   |AT0040
 |Anwendungfall        |UC0100
 |Vorbedingung         |UserAccount exsistiert.
-|Event                |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(!das Passwort ist aber Falsch!). Anschließend klickt er nochmals auf "Login"
+|Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 11111) ein und drückt auf "Login"
 |Erwartete Resultate a|
-- Dem UserAccount wird angezeigt, dass das eingegebene Passwort oder Benutzername falsch ist.
+- Anzeige, dass das eingegebene Passwort ist falsch.
 - Er wird nicht eingeloggt.
 |===
 
 |===
-|ID                   |AT0070
-|Anwendungfall        |
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
+|ID                   |AT050
+|Anwendungfall        |UC0100
+|Vorbedingung         |Das System hat mind. ein existierenden UserAccount(Max Musterman).
+|Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 12345) ein und drückt auf "Login".
+|Erwartete Resultate a| 
+- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte als Tanent warzunehmen.
+- Der UserAccount ist nun auf der "Hauptseite" eines Tanent UserAccounts.
+|===
+
+|===
+|ID                   |AT0020
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount(Max Musterman) ist eingeloggt.
+|Ereignis             |UserAccount klickt auf "Ausloggen".
+|Erwartete Resultate a|
+- UserAccount ist nicht mehr eingeloggt und hat keinen Zugriff mehr auf die besonderen Rechte seines UserAccounts.
+- UserAccount ist nun auf der Hauptseite des Systems
+|===
+
+
+
+
+
+|===
+|ID                   |AT0070 (auch mit EventEmployee oder EventCompany möglich)
+|Anwendungfall        |UC0500
+|Vorbedingung         |Admin ist eingeloggt und ein Vermieter mochte einen Host UserAccount in dem System haben. Dazu hat der dem Admin die benötigten Daten von sich selbst gegeben.
+|Ereignis             |Admin klickt auf "Vermieter verwalten" und dann auf "Vermieter hinzufügen". Er gibt die benötigten Daten ein um einen Host zu erstellen und drückt anschließend auf speichern.
+|Erwartete Resultate a|
+- Es wurde ein Host UserAccount dem System hinzugefügt
+- Dert Host ist nun in der Lage sich in dem System einzuloggen.
+- Der Admin ist wieder auf der "Vermieter verwalten" Ansicht.
 |===
 
 |===
 |ID                   |AT0080
-|Anwendungfall        |
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
+|Anwendungfall        |UC0400
+|Vorbedingung         |Host ist eingeloggt.
+|Ereignis             |Host klickt auf "Ferienhäuser verwalten" und dann auf "Ferienhaus hinzufügen". Er gibt die benötigten Daten für eine Erstellung eines Ferienhauses ein und klickt auf "Fertig".
+|Erwartete Resultate a|
+- Das erstelle Ferienhaus wurde in das System aufgenommen.
+- Der Host ist wieder in der Ansicht "Ferienhäuser verwalten".
 |===
 
 |===
@@ -81,6 +92,26 @@
 |Event                |
 |Erwartete Resultate  |
 |===
+
+|===
+|ID                   |AT0100
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
+|===
+
+|===
+|ID                   |AT0110 (auch mit EventEmployee oder EventCompany möglich)
+|Anwendungfall        |UC0510
+|Vorbedingung         |Admin ist eingeloggt und es existiert mind. ein Host.
+|Event                |Admin klickt auf "Vermieter verwalten" und dann auf "Vermieter löschen". Er bestätigt die Abfrage "Wollen sie diesen Vermieter wirklich löschen?" mit "Ja".
+|Erwartete Resultate a|
+- Der gelöschte host wurde aus dem System gelöscht, wie seine HolidayHomes und erkann sich nun nicht mehr einloggen
+- Der Admin ist nun wieder auf der Ansicht "Vermieter verwalten"
+|===
+
+
 
 |===
 |ID                   |AT0100
