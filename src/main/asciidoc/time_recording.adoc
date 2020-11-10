@@ -20,7 +20,6 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |11   |…        |…          |…            |…          |…              |…                        |…    
 |12   |…        |…          |…            |…          |…              |…                        |…    
 |===
-SUMME(SPALTE(Dev1))
 
 Bitte tragen Sie am Ende des Praktikums noch folgende weitere Werte ein:
 Summe der Arbeitsstunden pro Student:
