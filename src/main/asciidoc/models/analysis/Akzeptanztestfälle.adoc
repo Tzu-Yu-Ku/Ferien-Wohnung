@@ -27,7 +27,7 @@
 |Event                |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2020, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
 |Erwartete Resultate a|
 - Der unregisteredUser findet sich nun auf der Hauptseite des Systems wieder.
-- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestötigt werden.
+- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestätigt werden.
 |===
 
 |===
