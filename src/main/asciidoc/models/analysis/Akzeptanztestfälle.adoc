@@ -32,19 +32,19 @@
 
 |===
 |ID                   |AT0040
+|Anwendungfall        |Admin bestätigt regist.
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
+|===
+
+|===
+|ID                   |AT0050
 |Anwendungfall        |UC0120
 |Vorbedingung         |unregisteredPerson benutzt das System.
 |Event                |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345, ...) aus und klickt anschließend erneut auf "Registrieren".
 |Erwartete Resultate a|
 - System soll anzeigen, dass diese Email-Adresse bereits vergeben ist und die Registrieung nicht abgeschlossen werden kann.
-|===
-
-|===
-|ID                   |AT0050
-|Anwendungfall        |admin bestätigt regist.
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
 |===
 
 |===
