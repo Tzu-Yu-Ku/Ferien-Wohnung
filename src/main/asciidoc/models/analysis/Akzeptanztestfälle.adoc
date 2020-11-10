@@ -14,7 +14,7 @@
 |ID                   |AT0020
 |Anwendungfall        |UC0100
 |Vorbedingung         |UserAccount ist eingeloggt.
-|Event                |UserAccount klickt auf ausloggen.
+|Event                |UserAccount klickt auf "Ausloggen".
 |Erwartete Resultate a|
 - UserAccount ist nicht mehr eingeloggt und hat keinen Zugriff mehr auf die besonderen Rechte seines UserAccounts.
 - UserAccount ist nun auf der "normalen" Hauptseite des Systems
