@@ -6,8 +6,8 @@
 |Vorbedingung       |Das System hat existierende UserAccount.
 |Event              |UserAccount öffnet die "Login"-Funktion und gibt seine Anmeldedaten ein und drückt auf "Login".
 |Erwartete Resultate| 
-- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte seines UserAccounts warzunehmen.
-- Der UserAccount ist nun wieder auf der "Hauptseite", angepasst an den entsprechenden UserAccount.
+- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte seines UserAccounts warzunehmen
+- Der UserAccount ist nun wieder auf der "Hauptseite", angepasst an den entsprechenden UserAccount
 |===
 
 |===
