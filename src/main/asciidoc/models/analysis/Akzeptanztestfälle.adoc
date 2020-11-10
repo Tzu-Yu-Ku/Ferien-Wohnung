@@ -2,10 +2,10 @@
 
 |===
 |ID|AT010
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|Anwendungfall|UC0100
+|Vorbedingung|Das System hat existierende UserAccount.
+|Event|UserAccount öffnet die "Login"-Funktion und gibt seine Anmeldedaten ein und drückt auf "Login".
+|Erwartete Resultate| - Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechter seinen UserAccount war zu nehmen
 |===
 
 |===
