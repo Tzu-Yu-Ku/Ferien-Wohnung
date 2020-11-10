@@ -6,78 +6,84 @@
 |Vorbedingung         |Das System hat existierende UserAccount.
 |Event                |UserAccount öffnet die "Login"-Funktion und gibt seine Anmeldedaten ein und drückt auf "Login".
 |Erwartete Resultate a| 
-- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte seines UserAccounts warzunehmen
-- Der UserAccount ist nun wieder auf der "Hauptseite", angepasst an den entsprechenden UserAccount
+- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte seines UserAccounts warzunehmen.
+- Der UserAccount ist nun auf der "Hauptseite" des Systems, angepasst an den entsprechenden UserAccount.
 |===
 
 |===
-|ID|AT0020
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0020
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount ist eingeloggt.
+|Event                |UserAccount klickt auf ausloggen.
+|Erwartete Resultate a|
+- UserAccount ist nicht mehr eingeloggt und hat keinen Zugriff mehr auf die besonderen Rechte seines UserAccounts.
+- UserAccount ist nun auf der "normalen" Hauptseite des Systems
 |===
 
 |===
-|ID|AT0030
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0030
+|Anwendungfall        |UC0120
+|Vorbedingung         |unregisteredUser benutzt das System.
+|Event                |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2020, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
+|Erwartete Resultate a|
+- Der unregisteredUser findet sich nun auf der Hauptseite des Systems wieder.
+- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestötigt werden.
 |===
 
 |===
-|ID|AT0040
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0040
+|Anwendungfall        |UC0120
+|Vorbedingung         |unregisteredPerson benutzt das System.
+|Event                |unregisteredPerson drückt auf "egistrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345, ...) aus und klickt anschließend erneut auf "Registrieren".
+|Erwartete Resultate a|
+- System soll anzeigen, dass diese Email-Adresse bereits vergeben ist und die Registrieung nicht abgeschlossen werden kann.
 |===
 
 |===
-|ID|AT0050
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0050
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount exsistiert und ist nicht eingeloggt.
+|Event                |UserAccount drückt auf "Login". Er gibt seine Anmeldedaten(Peter, Hans, 01.01.2000, hanspeter@gmail.com, 12hans34,...) ein
+|Erwartete Resultate a|
+- UserAccount wird angezeigt, dass das von ihn eingegebene Passwot falsch ist
 |===
 
 |===
-|ID|AT0060
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0060
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
 
 |===
-|ID|AT0070
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0070
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
 
 |===
-|ID|AT0080
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0080
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
 
 |===
-|ID|AT0090
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0090
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
 
 |===
-|ID|AT0100
-|Anwendungfall|
-|Vorbedingung|
-|Event|
-|Erwartete Resultate|
+|ID                   |AT0100
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate  |
 |===
