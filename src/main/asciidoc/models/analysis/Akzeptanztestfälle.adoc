@@ -81,8 +81,33 @@
 - Der Host ist wieder in der Ansicht "Ferienhäuser verwalten".
 |===
 
-EventC erstellen
-EventE erstellen
+|===
+|ID                   |AT0090
+|Anwendungfall        |UC0540
+|Vorbedingung         |Admin ist eingeloggt und eine Eventfirma möchte einen EventCompany UserAccount in dem System haben. Dazu hat sie dem Admin die benötigten Registrierungsdaten(BestEventfima, ...) von sich gegeben.
+|Event                |Admin glickt auf "Eventfrima verwalten" und dann auf "Eventfirma hinzufügen". Er gibt die benötigten Daten(BesteEventfimar,...) ein und drückt dann auf "Eventfirma erstelen".
+|Erwartete Resultate a|
+- Es wurde eine EventCompany dem System hinzugefügt.
+- Die EventCompany ist nun in der Lage sich in das System einzuloggen.
+- Der Admin ist nun wieder auf der "Eventfirma verwalten" Ansicht.
+|===
+
+
+|===
+|ID                   |AT0100
+|Anwendungfall        |UC0560
+|Vorbedingung         |Admin ist eingeloggt und eine Eventmitarbeiter einer Eventfirma möchte einen EventEmployee UserAccount in dem System haben. Dazu hat er dem Admin die benötigten Registrierungsdaten(Möller, Peter, petermöller@gmail.com, mölleristhebest) von sich gegeben.
+|Event                |Admin glickt auf "Eventfrima verwalten" und dann auf die entsprechende Eventfirma in der der Eventmitarbeiter arbeitet. Der Admin klickt nun auf "Mitarbeiter hinzufügen". Er gibt die benötigten Daten(Möller, Peter, petermöller@gmail.com, mölleristhebest) ein und drückt auf "Mitatbeiter erstellen".
+|Erwartete Resultate a|
+- Es wurde ein EventEmployee dem System hinzugefügt.
+- Der EventEmployee ist nun in der Lage sich in das Sytem einzuloggen.
+- Der Admin ist nun wieder auf der Ansicht der zuvor ausgewählten Eventfirma.
+|===
+
+
+
+
+
 Event erzeugen
 Host bestätigt Event
 Tanent bucht haus und Event
