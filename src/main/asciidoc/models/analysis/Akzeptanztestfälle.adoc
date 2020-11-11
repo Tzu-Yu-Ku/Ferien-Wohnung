@@ -125,9 +125,6 @@
 |===
 
 
-
-
-Host bestätigt Event
 Tanent bucht haus und Event
 Host bestätigt zahlung
 
