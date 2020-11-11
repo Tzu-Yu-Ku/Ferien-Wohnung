@@ -124,24 +124,12 @@
 - Der Host ist nun auf der Ansicht seines HolidayHomes, das er zuvor ausgewählt hatte.
 |===
 
-
-Tanent bucht haus und Event
-Host bestätigt zahlung
-
-
 |===
 |ID                   |AT0130
-|Anwendungfall        |UC0600
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
+|Anwendungfall        |UC0210 und UC0220
+|Vorbedingung         |Tanent ist eingeloggt.
+|Event                |Tanent klickt "Ferienhäuser" und wählt sich ein HolidayHome(Villa Kunterbund) aus. Dann wählt er einen Zeitraum aus und bucht eventuall noch ein Event dazu und klickt auf "Jetzt Reservieren".
+|Erwartete Resultate a|
+- Die Reservierung ist erfolgt und wenn bezahlt wurde kann der Host diese in eine Buchung umwandeln.
+- Tanent ist nun wieder bei der ansicht "Ferienhäuser"
 |===
-
-|===
-|ID                   |AT0100
-|Anwendungfall        |
-|Vorbedingung         |
-|Event                |
-|Erwartete Resultate  |
-|===
-
