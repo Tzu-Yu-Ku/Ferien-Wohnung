@@ -117,7 +117,7 @@
 |===
 |ID                   |AT0120
 |Anwendungfall        |UC0600
-|Vorbedingung         |Host eisz eingeloggt.
+|Vorbedingung         |Host ist eingeloggt.
 |Event                |Host klickt auf "Ferienhäuser verwalten" und wählt dann ein Ferienhaus aus. Nun drückt er "Events zuordnen" und wählt alle Events aus, die bei der Buchung dieses HolidayHomes zu Verfügung stehen sollen. Wenn er alle gewünschten Events ausgewählt hat drückt er auf "Feritg".
 |Erwartete Resultate  |
 - Dem HolidayHome wurden Events zugeordnet, die bei einer Buchung des HolidayHomes zu verfügung stehen.
@@ -130,7 +130,7 @@ Host bestätigt zahlung
 
 
 |===
-|ID                   |AT0120
+|ID                   |AT0130
 |Anwendungfall        |UC0600
 |Vorbedingung         |
 |Event                |
