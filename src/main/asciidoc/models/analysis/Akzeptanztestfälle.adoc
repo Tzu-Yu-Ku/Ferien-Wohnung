@@ -97,26 +97,44 @@
 |ID                   |AT0100
 |Anwendungfall        |UC0560
 |Vorbedingung         |Admin ist eingeloggt und eine Eventmitarbeiter einer Eventfirma möchte einen EventEmployee UserAccount in dem System haben. Dazu hat er dem Admin die benötigten Registrierungsdaten(Möller, Peter, petermöller@gmail.com, mölleristhebest) von sich gegeben.
-|Event                |Admin glickt auf "Eventfrima verwalten" und dann auf die entsprechende Eventfirma in der der Eventmitarbeiter arbeitet. Der Admin klickt nun auf "Mitarbeiter hinzufügen". Er gibt die benötigten Daten(Möller, Peter, petermöller@gmail.com, mölleristhebest) ein und drückt auf "Mitatbeiter erstellen".
+|Event                |Admin klickt auf "Eventfrima verwalten" und dann auf die entsprechende Eventfirma in der der Eventmitarbeiter arbeitet. Der Admin klickt nun auf "Mitarbeiter hinzufügen". Er gibt die benötigten Daten(Möller, Peter, petermöller@gmail.com, mölleristhebest) ein und drückt auf "Mitatbeiter erstellen".
 |Erwartete Resultate a|
 - Es wurde ein EventEmployee dem System hinzugefügt.
 - Der EventEmployee ist nun in der Lage sich in das Sytem einzuloggen.
 - Der Admin ist nun wieder auf der Ansicht der zuvor ausgewählten Eventfirma.
 |===
 
+|===
+|ID                   |AT0110
+|Anwendungfall        |UC0630
+|Vorbedingung         |EventEmployee ist eingeloggt.
+|Event                |EventEmployee klickt auf "Events verwalten" und dann auf "Event hinzufügen". Er wählt "regelmäßiges Event" aus gibt die benötigten Daten(Stadtführung, Mo. 15:30Uhr, Stadtführung durch die Altstadt Dresdens.) aus und drückt dann auf "Event erstellen".
+|Erwartete Resultate a|
+- Das Event wurde dem System hinzugefügt.
+- Der EventEmployee ist nun wieder auf der Ansicht "Events verwalten"
+|===
+
+|===
+|ID                   |AT0120
+|Anwendungfall        |UC0600
+|Vorbedingung         |Host eisz eingeloggt.
+|Event                |Host klickt auf "Ferienhäuser verwalten" und wählt dann ein Ferienhaus aus. Nun drückt er "Events zuordnen" und wählt alle Events aus, die bei der Buchung dieses HolidayHomes zu Verfügung stehen sollen. Wenn er alle gewünschten Events ausgewählt hat drückt er auf "Feritg".
+|Erwartete Resultate  |
+- Dem HolidayHome wurden Events zugeordnet, die bei einer Buchung des HolidayHomes zu verfügung stehen.
+- Der Host ist nun auf der Ansicht seines HolidayHomes, das er zuvor ausgewählt hatte.
+|===
 
 
 
 
-Event erzeugen
 Host bestätigt Event
 Tanent bucht haus und Event
 Host bestätigt zahlung
 
 
 |===
-|ID                   |AT0090
-|Anwendungfall        |
+|ID                   |AT0120
+|Anwendungfall        |UC0600
 |Vorbedingung         |
 |Event                |
 |Erwartete Resultate  |
