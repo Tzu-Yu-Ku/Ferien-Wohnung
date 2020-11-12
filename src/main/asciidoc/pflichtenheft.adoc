@@ -19,9 +19,12 @@ Generell besteht der Anspruch, dass das Pflichtenheft *korrekt*, *komplett* und 
 
 
 == 2. Aufgabenstellung & Zielsetzung
-Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
-Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen. 
+Urlaub im eigenen Land liegt im Trend. und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als urlaubswilliger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWOhnungenDresden) geschlossen. Und nicht nur das, darüberhinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mitdazu buchen zu können.
 
+Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potentiellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen. 
+In Abhängigkeit von der Lage (Place) der Ferienwohung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
+
+Hauptverantwortlich für einen reibungslosen Ablauf, im Besonderen für die Integrität der Website, ist der Administrator (Admin), wecher die Vermieter, Eventfirmen und deren Mitarbeiter erstellt und löscht sowie die Mieter freischaltet oder gegebenenfalls löscht.
 
 == 3. Produktnutzung
 Dieser Abschnitt wird im Folgenden einen Überblick über die geplante Nutzung der Software und dessen Einbettung geben.
