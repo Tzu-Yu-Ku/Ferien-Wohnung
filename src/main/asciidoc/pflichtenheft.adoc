@@ -499,9 +499,49 @@ Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein m
 
 == GUI Prototyp
 
-In diesem Kapitel soll ein Entwurf der Navigationsmöglichkeiten und Dialoge des Systems erstellt werden.
-Idealerweise entsteht auch ein grafischer Prototyp, welcher dem Kunden zeigt, wie sein System visuell umgesetzt werden soll.
-Konkrete Absprachen - beispielsweise ob der grafische Prototyp oder die Dialoglandkarte höhere Priorität hat - sind mit dem Kunden zu treffen.
+[[home_image]]
+image::./../resources/static/resources/img/pflichtenheft/index_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Startseite von {project_name}", align=center]
+
+
+[[register_image]]
+image::./../resources/static/resources/img/pflichtenheft/register_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Registrierungsformular", align=center]
+
+
+[[login_image]]
+image::./../resources/static/resources/img/pflichtenheft/login_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Login-Formular", align=center]
+
+
+[[house_list]]
+image::./../resources/static/resources/img/pflichtenheft/houselist_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Auflistung angebotener Ferienhäuser", align=center]
+
+
+[[house_details]]
+image::./../resources/static/resources/img/pflichtenheft/house_details_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Detailseite eines Ferienhausangebots.", align=center]
+
+
+[[booking_details]]
+image::./../resources/static/resources/img/pflichtenheft/booking_details_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Detailseite einer getätigten Buchung.", align=center]
+
+
+[[add_house]]
+image::./../resources/static/resources/img/pflichtenheft/add_house_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Hinzufügen eines neuen Ferienhauses als Vermieter.", align=center]
+
+
+[[add_event]]
+image::./../resources/static/resources/img/pflichtenheft/add_event_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Hinzufügen eines neuen Events als Eventmitarbeiter.", align=center]
+
+
+[[create_event_acc]]
+image::./../resources/static/resources/img/pflichtenheft/create_event_account.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Erstellung eines Eventmitarbeiter-Accounts als Administrator.", align=center]
+
+
+[[create_renter_acc]]
+image::./../resources/static/resources/img/pflichtenheft/create_renter_account.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Erstellung eines Vermieter-Accounts als Administrator.", align=center]
+
+
+[[manage_users]]
+image::./../resources/static/resources/img/pflichtenheft/manageusers_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Verwaltung aller Nutzeraccounts als Admin.", align=center]
+
 
 === Überblick: Dialoglandkarte
 Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird.
