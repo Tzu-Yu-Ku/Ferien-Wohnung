@@ -578,6 +578,17 @@ Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
 * Vermieter des Hauses
 * Gesamtpreis der Bestellung
 
+|[F0400]|v0.1|Häuser a|Das System soll dauerhaft Informationen zu den angebotenen Häusern speichern.
+
+|[F0410]|v0.1|Häuser erstellen a|Das System soll es dem Vermieter ermöglichen neue Einträge für seine Häuser zu erstellen
+
+|[F0411]|v0.1|Häuser bearbeiten a|Das System soll es dem Vermieter ermöglichen die Angaben, der ihm zugeordneten Häuser bearbeiten
+
+|[F0500]|v0.1|Events a|Das System soll dauerhaft Informationen zu den angebotenen Events speichern.
+
+|[F0510]|v0.1|Events erstellen a|Das System soll es dem Event-Mitarbeiter ermöglichen neue Einträge für die Events seiner zugeordneten Firma zu erstellen.
+
+|[F0511]|v0.1|Events bearbeiten a|Das System soll es dem Event-Mitarbeiter ermöglichen die Angaben, der Events seiner zugeordneten Firma zu bearbeiten
 
 |===
 
