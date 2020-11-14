@@ -483,6 +483,16 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 === Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
+|===
+|ID|Version|Name|Description
+|[F0010]|v0.1|Authentifizierung a|Das System soll separierbar sein in öffentliche Bereiche und Bereiche die nur von Nutzern mit entsprechenden Rechten genutzt werden können.
+Ist der Nutzer bereits im System Registriert so soll es ihm möglich sein, sich anzumelden per:
+
+* Nutzername
+* Passwort
+
+|===
+
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
 
