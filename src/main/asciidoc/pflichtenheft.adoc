@@ -514,12 +514,31 @@ Je nach dem welche Zugangsrechte der jeweilligen Nutzer erlangen will müssen fo
 ** Alle Angaben die auch Mieter angeben müssen 
 Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
 
-|[F0021]|v0.1|Angaben überprüfen a|Das System soll in der Lage sein die Angegebenen Daten aus der Registrierung auf deren Korrektheit zu überprüfen.
+|[F0021]|v0.1|Angaben überprüfen a|Das System soll in der Lage sein die angegebenen Daten aus der Registrierung auf deren Korrektheit zu überprüfen.
+
+|[F0100]|v0.1|Inventar a|Das System soll in der Lage sein Daten über die angebotenen Häuser dauerhaft zu speichern.
+
+|[F0101]|v0.1|Verfügbarkeit einschränken a|Das System soll in der Lage sein einzelne Buchungsdaten von Häusern, für mögliche Mieter, zu blockieren.
+
+|[F0110]|v0.1|Katalog a|Das System soll Lesezugriff auf eingetragene Häuser, durch eine Katalog, gewähren.
+
+|[F0111]|v0.1|Authentifizierung a|Das System soll jedem Nutzer die Möglichkeit gewähren alle eingetragenen Häuser anzuschauen. 
+
+|[F0120]|v0.1|Haus Informationen anzeigen a|Das System soll in der Lage sein Details zu den Häusern anzuzeigen nach dem der Nutzer auf diese drückt.
+Diese sollen beinhlaten:
+
+* Adresse
+* Name
+* Bilder
+* Beschreibung 
+* Preis
 
 |===
 
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
+
+|[F0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Catalog nach angegeben Optionen hin, zu durchsuchen.
 
 == Nicht-Funktionale Anforderungen
 
