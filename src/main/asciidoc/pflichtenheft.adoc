@@ -491,6 +491,31 @@ Ist der Nutzer bereits im System Registriert so soll es ihm möglich sein, sich 
 * Nutzername
 * Passwort
 
+|[F0020]|v0.1|Registrieren a|Das System soll es dem unregistrierten Nutzer ermöglichen sich zu registrieren bzw eine Registrierung zu beantragen.
+Je nach dem welche Zugangsrechte der jeweilligen Nutzer erlangen will müssen folgende Informationen zur verfügung gestellt werden:
+
+* Mieter-Rechte:
+** Vorname
+** Nachname
+** Email-Adresse
+** Geburtsdatum
+** Adresse
+** Passwort
+
+* Vermieter-Rechte:
+** Alle Angaben die auch Mieter angeben müssen 
+** Angaben zur Bank
+
+* Event-Mitarbeiter:
+** Alle Angaben die auch Mieter angeben müssen 
+** Arbeitgeber
+
+* Admin-Rechte:
+** Alle Angaben die auch Mieter angeben müssen 
+Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
+
+|[F0021]|v0.1|Angaben überprüfen a|Das System soll in der Lage sein die Angegebenen Daten aus der Registrierung auf deren Korrektheit zu überprüfen.
+
 |===
 
 === Kann-Kriterien
