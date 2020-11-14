@@ -598,9 +598,19 @@ Anforderungen die das Programm leisten können soll, aber für den korrekten Bet
 |===
 |ID|Version|Name|Description
 
-|[F0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Catalog nach angegeben Optionen hin, zu durchsuchen.
+|[K0100]|v0.1|Account bearbeiten a|Das System soll es dem Nutzer erlauben bestimmte Angaben zu seinem Account zu verändern. Zum Beispiel sein Passwort. 
 
-|[F0121]|v0.1|Häuser kommentieren a|Das System soll es den Mietern ermöglichen Kommentare zu den von ihnen gebuchten Häusern abzugeben.
+|[K0110]|v0.1|Favoriten Liste a|Das System soll dem Mieter die Möglichkeiten bieten, sich eine Liste mit den eigenen Favoriten unter den registrierten Häusern zu erstellen.
+
+|[K0111]|v0.1|Favorit hinzufügen a|Das System soll dem Mieter die Möglichkeiten bieten, sich Häuser als Favorit zu makieren. Sodass nach dem den markierten Häusern gefiltert werden kann.
+
+|[K0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Katalog nach angegeben Optionen hin, zu durchsuchen.
+
+|[K0120]|v0.1|Kommunikation a|Das System soll es dem Mieter und Vermieter ermöglichen eine Kommunikation aufzubauen, wenn auch nur per angabe der Email-Adresse 
+
+|[K0121]|v0.1|Häuser kommentieren a|Das System soll es dem Mieter ermöglichen Kommentare zu den von ihnen gebuchten Häusern abzugeben.
+
+|[K0200]|v0.1|Events absagen a|Das System soll es dem Event-Mitarbeiter ermöglichen die Events seiner zugeordneten Firma abzusagen.
 
 |===
 
