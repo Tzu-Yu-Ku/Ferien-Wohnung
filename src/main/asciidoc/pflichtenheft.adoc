@@ -566,15 +566,32 @@ Bestellungen werden mit dem Status "Reserviert" erzeugt.
 
 |[F0245]|v0.1|Bestellung archivieren a|Das System soll es ermöglichen Bestellungen zu archivieren. Eine Bestellung wird archiviert wenn ihr Status auf "Completed" gesetzt wird.
 
+|[F0246]|v0.1|Authentifizierung a|Das System soll es jedem Nutzer ermöglichen sich eine Liste mit den vergangenen Buchungen jedes Ferienhauses anzeigenzulassen.
+
+|[F0300]|v0.1|Mitglieder Liste anzeigen a|Das System soll es dem Admin ermöglichen eine Liste mit allen registrierten Nutzern anzuschauen und diese zu bearbeiten.
+
+|[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen die über das Systeme erstellt wurden, anzeigen zulassen.
+Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
+
+* Erstellungszeitpunkt
+* Mieter der die Bestellung aufgab
+* Vermieter des Hauses
+* Gesamtpreis der Bestellung
+
 
 |===
 
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
 
+|===
+|ID|Version|Name|Description
+
 |[F0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Catalog nach angegeben Optionen hin, zu durchsuchen.
 
 |[F0121]|v0.1|Häuser kommentieren a|Das System soll es den Mietern ermöglichen Kommentare zu den von ihnen gebuchten Häusern abzugeben.
+
+|===
 
 == Nicht-Funktionale Anforderungen
 
