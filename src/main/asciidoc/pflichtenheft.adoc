@@ -122,7 +122,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 2. unregisteredUser gibt seine Anmeldedaten ein
 3. unregisteredUser  drückt auf “Log in”
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0010]
 |===
 
 |===
@@ -134,7 +134,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Vorbedingung(en) | UserAccount ist eingeloggt
 |Nötige Schritte | UserAccount drückt auf “logout” in der Navigation bar 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0010]
 |===
 
 |===
@@ -148,7 +148,20 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
 3. unregisteredUser  drückt auf registieren
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0020],[F0021]
+|===
+
+|===
+|ID | [UC0130]
+|Name | konto bearbeiten
+|Beschreibung | UserAccount soll die Möglichkeit haben sich seine Daten ändern zu können.
+|Akteure | UserAccount
+|Trigger | ...
+|Vorbedingung(en) | eingeloggt als UserAccount
+|Nötige Schritte | 1. Auf Konto drücken um zur Accountübersicht zu kommen
+2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
+|Erweiterung | ...
+|benötigte Funktionen | [F0010]
 |===
 
 |===
@@ -160,7 +173,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Vorbedingung(en) | Webseite wurde geöffnet
 |Nötige Schritte | 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0400]
 |===
 
 |===
@@ -176,7 +189,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 4. Tenant kann eventuelle Events dazubuchen (UC0220)
 5. Tenant klickt auf buchen/reservieren
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
 |===
@@ -190,7 +203,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 2. Tenant erhält eine Liste möglicher Events und kann davon durch klicken welche dazubuchen
 3. Buchung läuft wie in UC0210 weiter (Schritt 5)
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0202],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
 |===
@@ -202,7 +215,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Vorbedingung(en) | Tanent hat ein HolidayHome reserviert/gebucht
 |Nötige Schritte | 1. Man klick in der Navigation bar auf den Reiter Buchungen. 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
 |===
@@ -215,7 +228,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Nötige Schritte | 1. Der Host klick in der Navigation bar auf den Reiter Buchungen.
 2. Host bestätigt Häuser/Buchungen durch drücken auf Bestätigen aus. 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0400]
 |===
 
 |===
@@ -228,7 +241,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Nötige Schritte | 1. Tenant klick in der Navigation bar auf den Reiter Buchungen.
 2. Wählt eine Buchung aus und klick bei dieser auf den “stonieren” Knopf
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0244],[F0400]
 |===
 
 |===
@@ -241,7 +254,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Nötige Schritte | 1. Host klick in der Navigation bar auf den Reiter Buchungen
 2. Host wählt ein Haus und klick auf Buchungshistorie ansehen 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0244],[F0245],[F0246],[F0400]
 |===
 
 |===
@@ -256,7 +269,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 3. Host gibt Daten des Ferienhauses ein
 4. Host bestätigt alles durch klicken auf den Knopf hinzufügen 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0400],[F0410]
 |===
 
 |===
@@ -271,7 +284,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 3. Host gibt die neuen Daten des Ferienhauses ein
 4. Host bestätigt alles durch klicken auf den Knopf bestätigen 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
 
 |===
@@ -284,7 +297,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Nötige Schritte | 1. Host klickt auf Ferienhäuser
 2. Host wählt eins seiner Häuser aus und drückt auf den löschen Knopf 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0400],[F0410],[HolidayHome löschen]
 |===
 
 |===
@@ -299,7 +312,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 3. Admin gibt Daten ein und wählt Account-Art.
 4. Admin drückt auf erstellen.
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301]
 |===
 
 [[host_erstellen]]
@@ -317,7 +330,7 @@ image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%
 3. Admin wählt einen Account aus.
 4. Admin drückt auf löschen. 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301],[F0300]
 |===
 
 [[host_löschen]]
@@ -335,7 +348,7 @@ image::./models/analysis/Sequenzdiagramm/Host loeschen.png[Host löschen, 100%, 
 3. Admin wählt die Registieranfrage aus.
 4. Admin bestätigt die Anfrage durch drücken auf bestätigen.
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301]
 |===
 
 [[tenant_freischalten]]
@@ -353,7 +366,7 @@ image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischa
 3. Admin wählt einen Account aus.
 4. Admin drückt auf löschen.  
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301],[F0300]
 |===
 
 [[tenant_löschen]]
@@ -371,7 +384,7 @@ image::./models/analysis/Sequenzdiagramm/Tenant loeschen.png[Tenant löschen, 10
 3. Admin gibt Daten ein und wählt Account-Art.
 4. Admin drückt auf erstellen. 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301]
 |===
 
 [[eventCompany_erstellen]]
@@ -389,7 +402,7 @@ image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany
 3. Admin wählt einen Account aus.
 4. Admin drückt auf löschen.  
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301],[F0300]
 |===
 
 [[eventCompany_löschen]]
@@ -407,7 +420,7 @@ image::./models/analysis/Sequenzdiagramm/EventCompany loeschen.png[EventCompany 
 3. Admin gibt Daten ein und wählt Account-Art.
 4. Admin drückt auf erstellen. 
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301]
 |===
 
 [[eventEmployee_erstellen]]
@@ -425,7 +438,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmploy
 3. Admin wählt einen Account aus.
 4. Admin drückt auf löschen.  
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0301],[F0300]
 |===
 
 [[eventEmployee_löschen]]
@@ -442,7 +455,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 2. Host wählt Events in der nähe seiner Häuser aus
 3. Host bestätigt diese Events durch drücken auf bestätigen
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0511]
 |===
 
 |===
@@ -454,7 +467,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |Vorbedingung(en) | ??Soll jeder alle Events immer sehen?? - ??Oder soll man die Events erst beim Buchen sehen??
 |Nötige Schritte | 1. Man drückt auf Events  
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0520]
 |===
 
 [[events_anschauen]]
@@ -474,7 +487,7 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 5. EventEmployee ändert die Daten.
 6. EventEmployee drückt auf bestätigen.
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0202],[F0520],[F0530]
 |===
 
 [[events_bearbeiten]]
@@ -492,7 +505,7 @@ image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 
 3. EventEmployee gibt die Daten ein.
 4. EventEmployee drückt auf bestätigen .
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0202]
 |===
 
 [[event_erstellen]]
@@ -510,7 +523,7 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 3. EventEmployee wählt Event aus.
 4. EventEmployee drückt auf löschen.
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
 
 [[event_löschen_und_absagen]]
@@ -528,7 +541,7 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 3. EventEmployee wählt Event aus.
 4. EventEmployee drückt auf absagen.
 |Erweiterung | ...
-|Funktionale | ...
+|benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
 
 == Funktionale Anforderungen
@@ -621,7 +634,9 @@ Bestellungen werden mit dem Status "Reserviert" erzeugt.
 
 |[F0246]|v0.1|Authentifizierung a|Das System soll es jedem Nutzer ermöglichen sich eine Liste mit den vergangenen Buchungen jedes Ferienhauses anzeigenzulassen.
 
-|[F0300]|v0.1|Mitglieder Liste anzeigen a|Das System soll es dem Admin ermöglichen eine Liste mit allen registrierten Nutzern anzuschauen und diese zu bearbeiten.
+|[F0300]|v0.1|Mitglieder Liste anzeigen a|Das System soll es dem Admin ermöglichen eine Liste mit allen registrierten Nutzern anzuschauen und bearbeiten.
+
+|[F0301]|v0.1|Mitglieder löschen/erstellen/bestätigen a|Das System soll es dem Admin ermöglichen Nutzer zu erstellen und registrierte Nutzer zu löschen, sowie Tenants zu bestätigen.
 
 |[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen die über das Systeme erstellt wurden, anzeigen zulassen.
 Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
@@ -637,11 +652,19 @@ Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
 
 |[F0411]|v0.1|Häuser bearbeiten a|Das System soll es dem Vermieter ermöglichen die Angaben, der ihm zugeordneten Häuser bearbeiten
 
+|[F0412]|v0.1|Häuser löschen a|Das System soll es dem Vermieter ermöglichen Häuser aus dem Angebot zu entfernen.
+
 |[F0500]|v0.1|Events a|Das System soll dauerhaft Informationen zu den angebotenen Events speichern.
 
 |[F0510]|v0.1|Events erstellen a|Das System soll es dem Event-Mitarbeiter ermöglichen neue Einträge für die Events seiner zugeordneten Firma zu erstellen.
 
-|[F0511]|v0.1|Events bearbeiten a|Das System soll es dem Event-Mitarbeiter ermöglichen die Angaben, der Events seiner zugeordneten Firma zu bearbeiten
+|[F0520]|v0.1|Events ansehen a|...
+
+|[F0530]|v0.1|Events bearbeiten a|Das System soll es dem Event-Mitarbeiter ermöglichen die Angaben, der Events seiner zugeordneten Firma zu bearbeiten
+
+|[F0540]|v0.1|Events absagen/löschen a|Das System soll es dem Event-Mitarbeiter ermöglichen Events abzusagen und zu löschen.
+
+|[F0550]|v0.1|Events bestätigen a|Das System soll es dem Host ermöglichen Events zu seinen Häusern zu bestätigen.
 
 |===
 
