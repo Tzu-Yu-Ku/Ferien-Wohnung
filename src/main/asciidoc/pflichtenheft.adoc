@@ -83,7 +83,8 @@ Das Kontextdiagramm beschreibt die Integration das geplante Systems. Berücksich
 
 Die Top-Level-Architektur des Systems verdeutlicht das nachfolgende Diagramm:
 
---- PASTE THE DIAGRAM HERE ---
+[[top-level-architektur]]
+image:models/analysis/Top-Level-Architektur.png[top-level-architektur]
 
 == 6. Anwendungsfälle
 
