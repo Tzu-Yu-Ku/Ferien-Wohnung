@@ -119,9 +119,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | UserAccount
 |Trigger | unregisteredUser drückt auf einloggen in der Navigation bar um mehr Funktionen zu erhalten
 |Vorbedingung(en) | UserAccount ist registriert und noch nicht eingeloggt
-|Nötige Schritte | 1. unregisteredUser drückt auf einloggen in der Navigation bar
-2. unregisteredUser gibt seine Anmeldedaten ein
-3. unregisteredUser  drückt auf “Log in”
+|Nötige Schritte a| - 1. unregisteredUser drückt auf einloggen in der Navigation bar
+- 2. unregisteredUser gibt seine Anmeldedaten ein
+- 3. unregisteredUser  drückt auf “Log in”
 |Erweiterung | ...
 |benötigte Funktionen | [F0010]
 |===
@@ -145,9 +145,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | unregisteredUserAccount
 |Trigger | unregisteredUser will sich registrieren um ein Haus mieten zu können, indem er das Formular ausfüllt und sendet.
 |Vorbedingung(en) | unregisteredUser hat noch keinen Account
-|Nötige Schritte | 1. unregisteredUser drückt auf registieren in der Navigation bar
-2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
-3. unregisteredUser  drückt auf registieren
+|Nötige Schritte a| - 1. unregisteredUser drückt auf registieren in der Navigation bar
+- 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
+- 3. unregisteredUser  drückt auf registieren
 |Erweiterung | ...
 |benötigte Funktionen | [F0020],[F0021]
 |===
@@ -159,8 +159,8 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | UserAccount
 |Trigger | UserAccount ändert seine personlichen Daten, indem er auf sein Konto geht, die Änderungen festlegt und bestätigt.
 |Vorbedingung(en) | eingeloggt als UserAccount
-|Nötige Schritte | 1. Auf Konto drücken um zur Accountübersicht zu kommen
-2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
+|Nötige Schritte a| - 1. Auf Konto drücken um zur Accountübersicht zu kommen
+- 2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
 |Erweiterung | ...
 |benötigte Funktionen | [F0010]
 |===
@@ -172,7 +172,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | UserAccount und unregisteredUser
 |Trigger | Jeder Besucher der Seite soll zugriff auf eine Liste aller angebotenen Häuser bekommen 
 |Vorbedingung(en) | Webseite wurde geöffnet
-|Nötige Schritte | 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt 
+|Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt 
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0400]
 |===
@@ -184,11 +184,11 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Tenant
 |Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren
 |Vorbedingung(en) | Tenant ist eingeloggt
-|Nötige Schritte | 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
-2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
-3. Tenant wählte einen Zeitpunkt aus
-4. Tenant kann eventuelle Events dazubuchen (UC0220)
-5. Tenant klickt auf buchen/reservieren
+|Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
+- 2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
+- 3. Tenant wählte einen Zeitpunkt aus
+- 4. Tenant kann eventuelle Events dazubuchen (UC0220)
+- 5. Tenant klickt auf buchen/reservieren
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -200,9 +200,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Tenant
 |Trigger | Tenant bekommt während der Buchung ein Auswahlfeld und wählt per klick dazubuchbare Events aus.
 |Vorbedingung(en) | Tenant ist eingeloggt und bucht/reserviert gerade ein HolidayHome
-|Nötige Schritte | 1. Tenant führt UC0210, Schritt 1-3, aus
-2. Tenant erhält eine Liste möglicher Events und kann davon durch klicken welche dazubuchen
-3. Buchung läuft wie in UC0210 weiter (Schritt 5)
+|Nötige Schritte a| - 1. Tenant führt UC0210, Schritt 1-3, aus
+- 2. Tenant erhält eine Liste möglicher Events und kann davon durch klicken welche dazubuchen
+- 3. Buchung läuft wie in UC0210 weiter (Schritt 5)
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0202],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -214,7 +214,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host und Tenant
 |Trigger | Tenant oder Host klicken auf den Button "Buchungen".
 |Vorbedingung(en) | Tanent hat ein HolidayHome reserviert/gebucht
-|Nötige Schritte | 1. Man klick in der Navigation bar auf den Reiter Buchungen. 
+|Nötige Schritte a| - 1. Man klick in der Navigation bar auf den Reiter Buchungen. 
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -226,8 +226,8 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host
 |Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung kann dann ins Buchungsmenü gehen und diese per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host angekommen
-|Nötige Schritte | 1. Der Host klick in der Navigation bar auf den Reiter Buchungen.
-2. Host bestätigt Häuser/Buchungen durch drücken auf Bestätigen aus. 
+|Nötige Schritte a| - 1. Der Host klick in der Navigation bar auf den Reiter Buchungen.
+- 2. Host bestätigt Häuser/Buchungen durch drücken auf Bestätigen aus. 
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0400]
 |===
@@ -239,8 +239,8 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Tenant
 |Trigger | Tenant klick in der Buchungsübersicht auf den Button "stornieren"
 |Vorbedingung(en) | Tenant hat ein HolidayHome reserviert/gebucht
-|Nötige Schritte | 1. Tenant klick in der Navigation bar auf den Reiter Buchungen.
-2. Wählt eine Buchung aus und klick bei dieser auf den “stonieren” Knopf
+|Nötige Schritte a| - 1. Tenant klick in der Navigation bar auf den Reiter Buchungen.
+- 2. Wählt eine Buchung aus und klick bei dieser auf den “stonieren” Knopf
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0244],[F0400]
 |===
@@ -252,8 +252,8 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host
 |Trigger | Host wählt im Buchungsmenü den Button Historie aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
 |Vorbedingung(en) | Host ist eingeloggt
-|Nötige Schritte | 1. Host klick in der Navigation bar auf den Reiter Buchungen
-2. Host wählt ein Haus und klick auf Buchungshistorie ansehen 
+|Nötige Schritte a| - 1. Host klick in der Navigation bar auf den Reiter Buchungen
+- 2. Host wählt ein Haus und klick auf Buchungshistorie ansehen 
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0244],[F0245],[F0246],[F0400]
 |===
@@ -265,10 +265,10 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host
 |Trigger | Host geht im Ferienhausbereich auf "neue Wohnung hinzufügen" gibt die Daten dieser ein und bestätigt die per klick auf den Button "bestätigen".
 |Vorbedingung(en) | Host ist eingeloggt
-|Nötige Schritte | 1. Host klick auf Ferienhäuser in der navigation bar
-2. Host klick auf Ferienhaushinzufügen
-3. Host gibt Daten des Ferienhauses ein
-4. Host bestätigt alles durch klicken auf den Knopf hinzufügen 
+|Nötige Schritte a| - 1. Host klick auf Ferienhäuser in der navigation bar
+- 2. Host klick auf Ferienhaushinzufügen
+- 3. Host gibt Daten des Ferienhauses ein
+- 4. Host bestätigt alles durch klicken auf den Knopf hinzufügen 
 |Erweiterung | ...
 |benötigte Funktionen | [F0400],[F0410]
 |===
@@ -280,10 +280,10 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host
 |Trigger | Host wählt eines seiner Ferienhäuser aus klick auf "bearbeiten", gibt die neuen Daten ein und klick auf "bestätigen".
 |Vorbedingung(en) | Host ist eingeloggt und hat min. ein HolidayHome
-|Nötige Schritte | 1. Host klick auf Ferienhäuser
-2. Host wählt sein Haus aus und klick auf bearbeiten
-3. Host gibt die neuen Daten des Ferienhauses ein
-4. Host bestätigt alles durch klicken auf den Knopf bestätigen 
+|Nötige Schritte a| - 1. Host klick auf Ferienhäuser
+- 2. Host wählt sein Haus aus und klick auf bearbeiten
+- 3. Host gibt die neuen Daten des Ferienhauses ein
+- 4. Host bestätigt alles durch klicken auf den Knopf bestätigen 
 |Erweiterung | ...
 |benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
@@ -295,8 +295,8 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Host
 |Trigger | Host wählt eines seiner Ferienhäuser aus und klick auf "löschen/deaktivieren".
 |Vorbedingung(en) | Host ist eingeloggt und hat min. ein HolidayHome
-|Nötige Schritte | 1. Host klickt auf Ferienhäuser
-2. Host wählt eins seiner Häuser aus und drückt auf den löschen Knopf 
+|Nötige Schritte a| - 1. Host klickt auf Ferienhäuser
+- 2. Host wählt eins seiner Häuser aus und drückt auf den löschen Knopf 
 |Erweiterung | ...
 |benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
@@ -308,10 +308,10 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Akteure | Admin
 |Trigger | Admin wählt bei der Accounterstellung "Host" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account erstellen.
-3. Admin gibt Daten ein und wählt Account-Art.
-4. Admin drückt auf erstellen.
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account erstellen.
+- 3. Admin gibt Daten ein und wählt Account-Art.
+- 4. Admin drückt auf erstellen.
 |Erweiterung | ...
 |benötigte Funktionen | [F0301]
 |===
@@ -326,10 +326,10 @@ image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%
 |Akteure | Admin
 |Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und Host existiert, Host hat keine aktiven Bookings oder HolidayHome
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account löschen.
-3. Admin wählt einen Account aus.
-4. Admin drückt auf löschen. 
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account löschen.
+- 3. Admin wählt einen Account aus.
+- 4. Admin drückt auf löschen. 
 |Erweiterung | ...
 |benötigte Funktionen | [F0301],[F0300]
 |===
@@ -344,10 +344,10 @@ image::./models/analysis/Sequenzdiagramm/Host loeschen.png[Host löschen, 100%, 
 |Akteure | Admin
 |Trigger | Admin schaltet in der Accountübersicht den gewünschten Account frei, per klick auf "bestätigen".
 |Vorbedingung(en) | Als Admin eingeloggt und es gibt eine Registierungsanfrage
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Accounts freischalten.
-3. Admin wählt die Registieranfrage aus.
-4. Admin bestätigt die Anfrage durch drücken auf bestätigen.
+|Nötige Schritte a|-  1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Accounts freischalten.
+- 3. Admin wählt die Registieranfrage aus.
+- 4. Admin bestätigt die Anfrage durch drücken auf bestätigen.
 |Erweiterung | ...
 |benötigte Funktionen | [F0301]
 |===
@@ -362,10 +362,10 @@ image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischa
 |Akteure | Admin
 |Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und Tenant existiert. Tenant hat keine aktiven Bookings mehr.
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account löschen.
-3. Admin wählt einen Account aus.
-4. Admin drückt auf löschen.  
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account löschen.
+- 3. Admin wählt einen Account aus.
+- 4. Admin drückt auf löschen.  
 |Erweiterung | ...
 |benötigte Funktionen | [F0301],[F0300]
 |===
@@ -380,10 +380,10 @@ image::./models/analysis/Sequenzdiagramm/Tenant loeschen.png[Tenant löschen, 10
 |Akteure | Admin
 |Trigger | Admin wählt bei der Accounterstellung "EventCompany" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account erstellen.
-3. Admin gibt Daten ein und wählt Account-Art.
-4. Admin drückt auf erstellen. 
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account erstellen.
+- 3. Admin gibt Daten ein und wählt Account-Art.
+- 4. Admin drückt auf erstellen. 
 |Erweiterung | ...
 |benötigte Funktionen | [F0301]
 |===
@@ -398,10 +398,10 @@ image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany
 |Akteure | Admin
 |Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und keine EventEmployee der EventCompany existieren mehr
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account löschen.
-3. Admin wählt einen Account aus.
-4. Admin drückt auf löschen.  
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account löschen.
+- 3. Admin wählt einen Account aus.
+- 4. Admin drückt auf löschen.  
 |Erweiterung | ...
 |benötigte Funktionen | [F0301],[F0300]
 |===
@@ -416,10 +416,10 @@ image::./models/analysis/Sequenzdiagramm/EventCompany loeschen.png[EventCompany 
 |Akteure | Admin
 |Trigger | Admin wählt bei der Accounterstellung "EventEmployee" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt und es existiert eine bestimmte EventCompany
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account erstellen.
-3. Admin gibt Daten ein und wählt Account-Art.
-4. Admin drückt auf erstellen. 
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account erstellen.
+- 3. Admin gibt Daten ein und wählt Account-Art.
+- 4. Admin drückt auf erstellen. 
 |Erweiterung | ...
 |benötigte Funktionen | [F0301]
 |===
@@ -434,10 +434,10 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmploy
 |Akteure | Admin
 |Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt, EventEmployee und EventCompany existieren
-|Nötige Schritte | 1. Admin klick auf Adminbereich.
-2. Admin klick auf Account löschen.
-3. Admin wählt einen Account aus.
-4. Admin drückt auf löschen.  
+|Nötige Schritte a| - 1. Admin klick auf Adminbereich.
+- 2. Admin klick auf Account löschen.
+- 3. Admin wählt einen Account aus.
+- 4. Admin drückt auf löschen.  
 |Erweiterung | ...
 |benötigte Funktionen | [F0301],[F0300]
 |===
@@ -452,9 +452,9 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |Akteure | Host
 |Trigger | Host bekommt eine Nachricht über mögliche Events für seine Häuser und kann diese in einer Übersicht per klicken auf "bestätigen" für sein Haus bestätigen.
 |Vorbedingung(en) | Als Host angemeldet. Es existiert ein HolidayHome, in dessen nähe ein Event stattfindet
-|Nötige Schritte | 1. Host drückt auf Events.
-2. Host wählt Events in der nähe seiner Häuser aus
-3. Host bestätigt diese Events durch drücken auf bestätigen
+|Nötige Schritte a|-  1. Host drückt auf Events.
+- 2. Host wählt Events in der nähe seiner Häuser aus
+- 3. Host bestätigt diese Events durch drücken auf bestätigen
 |Erweiterung | ...
 |benötigte Funktionen | [F0511]
 |===
@@ -466,7 +466,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |Akteure | Alle
 |Trigger | Entweder per klick auf Events, für EventEmployees/EventCompany, oder automatisch beim buchen einer Wohnung.
 |Vorbedingung(en) | Entweder eingeloggt als EventEmployee/EventCompany oder beim Buchen eines Hauses 
-|Nötige Schritte | 1. Man drückt auf Events  
+|Nötige Schritte a| - 1. Man drückt auf Events  
 |Erweiterung | ...
 |benötigte Funktionen | [F0520]
 |===
@@ -481,12 +481,12 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 |Akteure | EventEmployee
 |Trigger | In der Eventübersicht ein Event aussuchen, auf bearbeiten klicken und dann neue Daten per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Als EventEmployee angemeldet und Event existiert
-|Nötige Schritte | 1. EventEmployee drückt auf Events.
-2. EventEmployee wählt "eigene" Events aus.
-3. EventEmployee wählt Event aus.
-4. EventEmployee drückt auf bearbeiten.
-5. EventEmployee ändert die Daten.
-6. EventEmployee drückt auf bestätigen.
+|Nötige Schritte a| - 1. EventEmployee drückt auf Events.
+- 2. EventEmployee wählt "eigene" Events aus.
+- 3. EventEmployee wählt Event aus.
+- 4. EventEmployee drückt auf bearbeiten.
+- 5. EventEmployee ändert die Daten.
+- 6. EventEmployee drückt auf bestätigen.
 |Erweiterung | ...
 |benötigte Funktionen | [F0202],[F0520],[F0530]
 |===
@@ -501,10 +501,10 @@ image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 
 |Akteure | EventEmployee
 |Trigger | In der Eventübersicht auf "Event erstellen" klicken, Daten dazu eingeben und dann bestätigen per klick auf "erstellen".
 |Vorbedingung(en) | Als EventEmployee angemeldet
-|Nötige Schritte | 1. EventEmployee drückt auf Events.
-2. EventEmployee drückt auf Event erstellen.
-3. EventEmployee gibt die Daten ein.
-4. EventEmployee drückt auf bestätigen .
+|Nötige Schritte a| - 1. EventEmployee drückt auf Events.
+- 2. EventEmployee drückt auf Event erstellen.
+- 3. EventEmployee gibt die Daten ein.
+- 4. EventEmployee drückt auf bestätigen .
 |Erweiterung | ...
 |benötigte Funktionen | [F0202]
 |===
@@ -519,10 +519,10 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 |Akteure | EventEmployee
 |Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "löschen" klicken.
 |Vorbedingung(en) | Als EventEmployee angemeldet, Event existiert( und wurde bereits abgesatg)
-|Nötige Schritte | 1. EventEmployee drückt auf Events
-2. EventEmployee wählt "eigene" Events aus.
-3. EventEmployee wählt Event aus.
-4. EventEmployee drückt auf löschen.
+|Nötige Schritte a|-  1. EventEmployee drückt auf Events
+- 2. EventEmployee wählt "eigene" Events aus.
+- 3. EventEmployee wählt Event aus.
+- 4. EventEmployee drückt auf löschen.
 |Erweiterung | ...
 |benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
@@ -537,10 +537,10 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 |Akteure | EventEmployee, EventCompany
 |Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "absagen" klicken.
 |Vorbedingung(en) | Als EventEmployee angemeldet und Event existiert
-|Nötige Schritte | 1. EventEmployee drückt auf Events
-2. EventEmployee wählt "eigene" Events aus.
-3. EventEmployee wählt Event aus.
-4. EventEmployee drückt auf absagen.
+|Nötige Schritte a| - 1. EventEmployee drückt auf Events
+- 2. EventEmployee wählt "eigene" Events aus.
+- 3. EventEmployee wählt Event aus.
+- 4. EventEmployee drückt auf absagen.
 |Erweiterung | ...
 |benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
