@@ -44,11 +44,28 @@ Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, we
 
 |===
 |*Name* |*Priorität* |*Beschreibung* |*Ziele*
-|--- |--- |--- |---
-|--- |--- |--- |---
-|--- |--- |--- |---
-|--- |--- |--- |---
-|--- |--- |--- |---
+|FeWoDre GmbH |5 |Der primäre Auftraggeber des Projekts. a| - möglichst viele Ferienwohnungen vermieten 
+- dabei mögichst wenig eigenen (Wartungs-)Aufwand haben 
+- aufgrund starker Kompetation intuitiv benutzbare und ansprechende Benutzeroberfläche darbieten
+- mögichst nahtlose Integration der Veranstalltungsfirma
+|Mieter |4 |Hauptsächlicher Nutzer der Plattform, mit dem Ziel, Umsatz zu erzeugen a|
+- möglichst einfache und intuitive Bedienbarkeit
+- schnelle Abwicklung des Mietens einer Ferienwohnung
+- möglichst detaillierte und übersichtliche Informationen über anfallende Kosten und die gebuchte Wohnung
+|Vermieter |3 |Bietet seine freien Ferienwohnungen über unsere Plattform zur Miete an a|
+- möglichst einfache und intuitive Bedienbarkeit
+- Übersicht über vergangene, aktuelle und anstehende Vermietungen der eigenen Ferienwohnung(en)
+- Einfache Integration von Verstalltungen auf der Detailseite der jeweiligen Ferienwohnung
+|Veranstalltungsmitarbeiter |3 |Erstellt und verwaltet Veranstalltungen für seine Firma, erhöht dadurch die Attraktivität der Ferienwohnungen und somit unserer Plattform a|
+- intuitive Übersicht über seine Veranstalltungen und deren Bearbeitungsmöglichkeiten
+|Administrator |2 |Erstellt und löscht Vermieter und Eventfirmen, schaltet Mieter frei und kann diese auch wieder löschen a|
+- Überblick über alle Benutzer der Plattform
+- datenschutzkonformer Umgang mit den ihm gegebenen Möglichkeiten
+|Entwickler |2 |Sind für die Implementierung der Plattform, respektive deren spätere Wartung und Betreuung, zuständig a|
+- einfach erweiterbare Anwendung
+- geringer Wartungsaufwand
+- gutes Debugging
+- gut kommentierter und verständlicher Code
 |===
 
 == 5. Systemgrenzen und Top-Level-Architektur
