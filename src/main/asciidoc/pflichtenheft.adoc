@@ -106,9 +106,8 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 === 6.2 Überblick Anwendungsfalldiagramm
 Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt.
 
---- PASTE DIAGRAM HERE ---
 [[Anwendungsfall-Diagramm]]
-image::./models/analysis/Anwendungsfalldiagramm_v1.2.pdf[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
+image::./models/analysis/Anwendungsfalldiagramm_v1.2.png[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
 
 === 6.3 Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle.
