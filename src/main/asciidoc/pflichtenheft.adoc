@@ -698,7 +698,24 @@ Anforderungen die das Programm leisten können soll, aber für den korrekten Bet
 
 === Qualitätsziele
 
-Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
+Die folgende Tabelle zeigt welche Qualitätsansprüche zu welchem Grad erfüllt sein müssen
+Jede Zeile beschreibt jeweils einen Qualitätsanspruch, wobei das "x" die Wichtung der einzelnen Ansprüche markiert.
+
+
+1 = Nicht wichtig
+5 = sehr wichtig
+
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanspruch          | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit                |   |   | x |   |
+|Benutzbarkeit              |   |   |   |   | x
+|Sicherheit                 |   |   |   |   | x
+|===
+
+Sicherheit beschreibt den Umgang mit Accountdaten bzw. personenbezogen Daten, sowie Bankdaten und ähnliches.  
+Benutzbarkeit beschreibt wie gut sich Nutzer auf der Seite zurechtfinden und wie benutzerfreundlich die Interaktionsmöglichkeiten sind.
+Wartbarkeit beschreibt wie gut sich die Seite intern Verwalten lässt (speziell aus Admin Sicht).
 
 === Konkrete Nicht-Funktionale Anforderungen
 
