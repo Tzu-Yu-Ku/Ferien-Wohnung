@@ -775,7 +775,29 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung |
-|…                  |…            |
+|FeWoMi             |
+|UserAccount        |
+|Admin              |
+|Tanent             |
+|Host               |
+|EventEmployee      |
+|Booking            |
+|HolydayHome        |
+|Event              |
+|SmallEvent         |
+|LargeEvent         |
+|Place              |
+|Booking            |
+|BookingStatus      |
+|Reserved           |
+|Confirmed          |
+|Cancelled          |
+|Completed          |
+|EventManager       |
+|AccountManager     |
+|BookingManager     |
+|HolidayHomeManager |
+|Place              |
 |===
 
 == Akzeptanztestfälle
