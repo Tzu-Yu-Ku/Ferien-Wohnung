@@ -165,7 +165,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Nötige Schritte a| - 1. Auf Konto drücken um zur Accountübersicht zu kommen
 - 2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
 |Erweiterung | ...
-|benötigte Funktionen | [F0010]
+|benötigte Funktionen | [K0100]
 |===
 
 |===
@@ -545,7 +545,7 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 - 3. EventEmployee wählt Event aus.
 - 4. EventEmployee drückt auf absagen.
 |Erweiterung | ...
-|benötigte Funktionen | [F0202],[F0520],[F0540]
+|benötigte Funktionen | [F0202],[F0520],[K0200]
 |===
 
 == Funktionale Anforderungen
@@ -666,7 +666,7 @@ Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
 
 |[F0530]|v0.1|Events bearbeiten a|Das System soll es dem Event-Mitarbeiter ermöglichen die Angaben, der Events seiner zugeordneten Firma zu bearbeiten
 
-|[F0540]|v0.1|Events absagen/löschen a|Das System soll es dem Event-Mitarbeiter ermöglichen Events abzusagen und zu löschen.
+|[F0540]|v0.1|Events löschen a|Das System soll es dem Event-Mitarbeiter ermöglichen Events zu löschen.
 
 |[F0550]|v0.1|Events bestätigen a|Das System soll es dem Host ermöglichen Events zu seinen Häusern zu bestätigen.
 
