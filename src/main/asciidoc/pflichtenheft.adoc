@@ -10,8 +10,20 @@
 |===
 
 == Inhaltsverzeichnis
-1. Zusammenfassung
 
+1. Zusammenfassung
+2. Aufgabenstellung & Zielsetzung
+3. Produktnutzung
+4. Interessenvertreter (Stakeholders)
+5. Systemgrenzen und Top-Level-Architektur
+  5.1 Kontextdiagramm
+  5.2 Top-Level-Architektur
+6. Anwendungsfälle
+  6.1 Akteure
+  6.2 Überblick Anwendungsfalldiagramm
+  6.3 Anwendungsfallbeschreibungen
+7. Funktionale Anforderungen
+ 
 == 1. Zusammenfassung
 Dieses Dokument repräsentiert das Pflichtenheft des Projekts *FewoDre*. Ziel ist es, eine Übersicht über die zu entwerfende Software zu gewährleisten, welche als Grundlage für die Kommunikation zwischen den Interessenvertretern des Projekts und dem Entwicklerteam dient. Zielstellung ist es, dieses Dokument als Grundlage des Vertrags zwischen dem Auftraggeber und den Entwicklern anzunehmen, weshalb es hinsichtlich seiner Korrektheit und Konsistenz zu überprüfen ist. Folgendes Pflichtenheft beschreit die Anforderungen an das gewünschte System und, in Ansätzen, deren Implementierung durch die Entwickler.
 
@@ -546,9 +558,9 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 |benötigte Funktionen | [F0202],[F0520],[K0200]
 |===
 
-== Funktionale Anforderungen
+== 7. Funktionale Anforderungen
 
-=== Muss-Kriterien
+=== 7.1 Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
 |===
@@ -670,7 +682,7 @@ Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
 
 |===
 
-=== Kann-Kriterien
+=== 7.2 Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
 
 |===
@@ -692,9 +704,9 @@ Anforderungen die das Programm leisten können soll, aber für den korrekten Bet
 
 |===
 
-== Nicht-Funktionale Anforderungen
+== 8.Nicht-Funktionale Anforderungen
 
-=== Qualitätsziele
+=== 8.1 Qualitätsziele
 
 Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
 
@@ -703,7 +715,7 @@ Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreic
 Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
 Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
 
-== GUI Prototyp
+== 9. GUI Prototyp
 
 [[home_image]]
 image::./../resources/static/resources/img/pflichtenheft/index_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Startseite von {project_name}", align=center]
@@ -749,9 +761,9 @@ image::./../resources/static/resources/img/pflichtenheft/create_renter_account.p
 image::./../resources/static/resources/img/pflichtenheft/manageusers_page.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Verwaltung aller Nutzeraccounts als Admin.", align=center]
 
 
-=== Überblick: Dialoglandkarte
+== 10. Dialoglandkarten
 
-== Dialoglandkarte als Kunde/Mieter
+=== Dialoglandkarte als Kunde/Mieter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_tenant.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Kunde/Mieter", align=center]
@@ -780,12 +792,12 @@ image::./models/analysis/dialoglandkarte_admin.png[Landing page, 100%, 100%, pdf
 Als Eventmitarbeiter, kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Platform bekanntgeben. Die Eventverwaltung stellt alle Verantstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
 
 
-== Datenmodell
+== 11. Datenmodell
 
-=== Überblick: Klassendiagramm
+=== 11.1 Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
 
-=== Klassen und Enumerationen
+=== 11.2 Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
 
 // See http://asciidoctor.org/docs/user-manual/#tables
@@ -816,7 +828,7 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |Place              |
 |===
 
-== Akzeptanztestfälle
+== 12.Akzeptanztestfälle
 Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
 
@@ -954,7 +966,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 - Tanent ist nun wieder bei der ansicht "Ferienhäuser"
 |===
 
-== Glossar
+== 13.Glossar
 Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
 Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
 Beispiel: Was bedeutet "Kunde"? Ein Nutzer des Systems? Der Kunde des Projektes (Auftraggeber)?
