@@ -285,6 +285,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[host_erstellen]]
+image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host erstellen", align=center]
+
 |===
 |ID | [UC0510]
 |Name | Host löschen
@@ -299,6 +302,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[host_löschen]]
+image::./models/analysis/Sequenzdiagramm/Host loeschen.png[Host löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host löschen", align=center]
 
 |===
 |ID | [UC0520]
@@ -315,6 +321,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[tenant_freischalten]]
+image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischalten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant freischalten", align=center]
+
 |===
 |ID | [UC0530]
 |Name | Tenant löschen
@@ -329,6 +338,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[tenant_löschen]]
+image::./models/analysis/Sequenzdiagramm/Tenant loeschen.png[Tenant löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant löschen", align=center]
 
 |===
 |ID | [UC0540]
@@ -345,6 +357,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[eventCompany_erstellen]]
+image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany erstellen", align=center]
+
 |===
 |ID | [UC0550]
 |Name | EventCompany löschen
@@ -359,6 +374,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[eventCompany_löschen]]
+image::./models/analysis/Sequenzdiagramm/EventCompany loeschen.png[EventCompany löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany löschen", align=center]
 
 |===
 |ID | [UC0560]
@@ -375,6 +393,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[eventEmployee_erstellen]]
+image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmployee erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee erstellen", align=center]
+
 |===
 |ID | [UC0570]
 |Name | EventEmployee löschen
@@ -389,6 +410,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[eventEmployee_löschen]]
+image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmployee löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee löschen", align=center]
 
 |===
 |ID | [UC0600]
@@ -416,6 +440,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[events_anschauen]]
+image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Events anschauen", align=center]
+
 |===
 |ID | [UC0620]
 |Name | Events bearbeiten
@@ -433,9 +460,12 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Funktionale | ...
 |===
 
+[[events_bearbeiten]]
+image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event bearbeiten", align=center]
+
 |===
 |ID | [UC0630]
-|Name | Events erstellen
+|Name | Event erstellen
 |Beschreibung | EventEmployee soll die Möglichkeit haben neue Events zu erstellen.
 |Akteure | EventEmployee
 |Trigger | ...
@@ -447,6 +477,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[event_erstellen]]
+image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event erstellen", align=center]
 
 |===
 |ID | [UC0640]
@@ -462,6 +495,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |Funktionale | ...
 |===
+
+[[event_löschen_und_absagen]]
+image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event löschen und Event absagen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event löschen und absagen", align=center]
 
 |===
 |ID | [UC0650]
