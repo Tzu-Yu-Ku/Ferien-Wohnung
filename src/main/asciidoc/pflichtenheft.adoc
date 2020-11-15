@@ -130,7 +130,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Logout
 |Beschreibung | UserAccount soll die Möglichkeit haben sich abzumelden, um die besonderen Rechte ihres Accounts abzugeben.
 |Akteure | UserAccount
-|Trigger | UserAccount will das Portal verlassen
+|Trigger | UserAccount will das Portal verlassen und drückt deswegen auf "logout"
 |Vorbedingung(en) | UserAccount ist eingeloggt
 |Nötige Schritte | UserAccount drückt auf “logout” in der Navigation bar 
 |Erweiterung | ...
@@ -142,7 +142,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Registrierung
 |Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter registrieren zu können.
 |Akteure | unregisteredUserAccount
-|Trigger | unregisteredUser will sich registrieren um ein Haus mieten zu können.
+|Trigger | unregisteredUser will sich registrieren um ein Haus mieten zu können, indem er das Formular ausfüllt und sendet.
 |Vorbedingung(en) | unregisteredUser hat noch keinen Account
 |Nötige Schritte | 1. unregisteredUser drückt auf registieren in der Navigation bar
 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
@@ -156,7 +156,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | konto bearbeiten
 |Beschreibung | UserAccount soll die Möglichkeit haben sich seine Daten ändern zu können.
 |Akteure | UserAccount
-|Trigger | ...
+|Trigger | UserAccount ändert seine personlichen Daten, indem er auf sein Konto geht, die Änderungen festlegt und bestätigt.
 |Vorbedingung(en) | eingeloggt als UserAccount
 |Nötige Schritte | 1. Auf Konto drücken um zur Accountübersicht zu kommen
 2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
@@ -181,7 +181,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | HolidayHome reservieren
 |Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren
 |Akteure | Tenant
-|Trigger | ...
+|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren
 |Vorbedingung(en) | Tenant ist eingeloggt
 |Nötige Schritte | 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
 2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
@@ -197,7 +197,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Events dazubuchen
 |Beschreibung | Tenant soll die Möglichkeiten haben, Events, die angebot sind, dazubuchen
 |Akteure | Tenant
-|Trigger | ...
+|Trigger | Tenant bekommt während der Buchung ein Auswahlfeld und wählt per klick dazubuchbare Events aus.
 |Vorbedingung(en) | Tenant ist eingeloggt und bucht/reserviert gerade ein HolidayHome
 |Nötige Schritte | 1. Tenant führt UC0210, Schritt 1-3, aus
 2. Tenant erhält eine Liste möglicher Events und kann davon durch klicken welche dazubuchen
@@ -211,7 +211,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Buchungen einsehen
 |Beschreibung | Host und Tenant sollen die Möglichkeiten haben, die Buchungen anzuschauen
 |Akteure | Host und Tenant
-|Trigger | ...
+|Trigger | Tenant oder Host klicken auf den Button "Buchungen".
 |Vorbedingung(en) | Tanent hat ein HolidayHome reserviert/gebucht
 |Nötige Schritte | 1. Man klick in der Navigation bar auf den Reiter Buchungen. 
 |Erweiterung | ...
@@ -223,7 +223,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Buchung bestätigen
 |Beschreibung | Host soll die Möglichkeiten haben, nach der Anzahlung von Tenant, die Buchungen zu bestätigen
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung kann dann ins Buchungsmenü gehen und diese per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host angekommen
 |Nötige Schritte | 1. Der Host klick in der Navigation bar auf den Reiter Buchungen.
 2. Host bestätigt Häuser/Buchungen durch drücken auf Bestätigen aus. 
@@ -236,7 +236,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Buchung stornieren
 |Beschreibung | Tenant soll die Möglichkeit haben, die Buchungen zu stornieren und die Anzahlung soll zurückgezahlt werden
 |Akteure | Tenant
-|Trigger | ...
+|Trigger | Tenant klick in der Buchungsübersicht auf den Button "stornieren"
 |Vorbedingung(en) | Tenant hat ein HolidayHome reserviert/gebucht
 |Nötige Schritte | 1. Tenant klick in der Navigation bar auf den Reiter Buchungen.
 2. Wählt eine Buchung aus und klick bei dieser auf den “stonieren” Knopf
@@ -249,7 +249,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Buchungshistorie ansehen
 |Beschreibung | Host soll die Möglichkeiten haben, die schon fertig sind, anzuschauen
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host wählt im Buchungsmenü den Button Historie aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
 |Vorbedingung(en) | Host ist eingeloggt
 |Nötige Schritte | 1. Host klick in der Navigation bar auf den Reiter Buchungen
 2. Host wählt ein Haus und klick auf Buchungshistorie ansehen 
@@ -262,7 +262,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | HolidayHome hinzufügen
 |Beschreibung | Host soll die Möglichkeiten haben, neue HolidayHome zu erstellen
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host geht im Ferienhausbereich auf "neue Wohnung hinzufügen" gibt die Daten dieser ein und bestätigt die per klick auf den Button "bestätigen".
 |Vorbedingung(en) | Host ist eingeloggt
 |Nötige Schritte | 1. Host klick auf Ferienhäuser in der navigation bar
 2. Host klick auf Ferienhaushinzufügen
@@ -277,7 +277,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | HolidayHome bearbeiten
 |Beschreibung | Host soll die Möglichkeiten haben, die Details der erstellten HolidayHome zu bearbeiten
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host wählt eines seiner Ferienhäuser aus klick auf "bearbeiten", gibt die neuen Daten ein und klick auf "bestätigen".
 |Vorbedingung(en) | Host ist eingeloggt und hat min. ein HolidayHome
 |Nötige Schritte | 1. Host klick auf Ferienhäuser
 2. Host wählt sein Haus aus und klick auf bearbeiten
@@ -292,12 +292,12 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | HolidayHome löschen
 |Beschreibung | Host soll die Möglichkeiten haben, die gewählte HolidayHome von der List des Hosts zu löschen
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host wählt eines seiner Ferienhäuser aus und klick auf "löschen/deaktivieren".
 |Vorbedingung(en) | Host ist eingeloggt und hat min. ein HolidayHome
 |Nötige Schritte | 1. Host klickt auf Ferienhäuser
 2. Host wählt eins seiner Häuser aus und drückt auf den löschen Knopf 
 |Erweiterung | ...
-|benötigte Funktionen | [F0400],[F0410],[HolidayHome löschen]
+|benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
 
 |===
@@ -305,7 +305,7 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Host erstellen
 |Beschreibung | Admin soll die Möglichkeit haben einen Host zu erstellen.
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin wählt bei der Accounterstellung "Host" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account erstellen.
@@ -323,7 +323,7 @@ image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%
 |Name | Host löschen
 |Beschreibung | Admin soll die Möglichkeit haben einen bereits existierenden Host zu löschen
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und Host existiert, Host hat keine aktiven Bookings oder HolidayHome
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account löschen.
@@ -341,7 +341,7 @@ image::./models/analysis/Sequenzdiagramm/Host loeschen.png[Host löschen, 100%, 
 |Name | Tenant freischalten
 |Beschreibung | Admin soll die Möglichkeit haben einen Tanent freizuschalten, wenn dieser sich registriert hatte.
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin schaltet in der Accountübersicht den gewünschten Account frei, per klick auf "bestätigen".
 |Vorbedingung(en) | Als Admin eingeloggt und es gibt eine Registierungsanfrage
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Accounts freischalten.
@@ -359,7 +359,7 @@ image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischa
 |Name | Tenant löschen
 |Beschreibung | Admin soll die Möglichkeit haben einen Tanent UserAccoutn zu löschen.
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und Tenant existiert. Tenant hat keine aktiven Bookings mehr.
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account löschen.
@@ -377,7 +377,7 @@ image::./models/analysis/Sequenzdiagramm/Tenant loeschen.png[Tenant löschen, 10
 |Name | EventCompany erstellen
 |Beschreibung | Admin soll die Möglichkeit haben eine EventCompany zu erstellen
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin wählt bei der Accounterstellung "EventCompany" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account erstellen.
@@ -395,7 +395,7 @@ image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany
 |Name | EventCompany löschen
 |Beschreibung | Admin soll die Möglichkeit haben eine existierenden EventCompany zu löschen.
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt und keine EventEmployee der EventCompany existieren mehr
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account löschen.
@@ -413,7 +413,7 @@ image::./models/analysis/Sequenzdiagramm/EventCompany loeschen.png[EventCompany 
 |Name | EventEmployee erstellen
 |Beschreibung | Admin hat soll die Möglichkeit haben ein EventEmployee zu erstellen
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin wählt bei der Accounterstellung "EventEmployee" aus, gibt die geforderten Daten ein und klickt auf "erstellen".
 |Vorbedingung(en) | Als Admin eingeloggt und es existiert eine bestimmte EventCompany
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account erstellen.
@@ -431,7 +431,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmploy
 |Name | EventEmployee löschen
 |Beschreibung | ...
 |Akteure | Admin
-|Trigger | ...
+|Trigger | Admin löscht in der Accountübersicht den gewünschten Account, per klick auf "löschen".
 |Vorbedingung(en) | Als Admin eingeloggt, EventEmployee und EventCompany existieren
 |Nötige Schritte | 1. Admin klick auf Adminbereich.
 2. Admin klick auf Account löschen.
@@ -449,7 +449,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |Name | Events für Häuser bestätigen
 |Beschreibung | Host soll die Möglichkeit haben zu entscheiden welche Events welchem HolidayHome bei einer Buchung zugeordnet sind und angezeigt werden.
 |Akteure | Host
-|Trigger | ...
+|Trigger | Host bekommt eine Nachricht über mögliche Events für seine Häuser und kann diese in einer Übersicht per klicken auf "bestätigen" für sein Haus bestätigen.
 |Vorbedingung(en) | Als Host angemeldet. Es existiert ein HolidayHome, in dessen nähe ein Event stattfindet
 |Nötige Schritte | 1. Host drückt auf Events.
 2. Host wählt Events in der nähe seiner Häuser aus
@@ -461,10 +461,10 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |===
 |ID | [UC0610]
 |Name | Events anschauen
-|Beschreibung | ...
-|Akteure | ...
-|Trigger | ...
-|Vorbedingung(en) | ??Soll jeder alle Events immer sehen?? - ??Oder soll man die Events erst beim Buchen sehen??
+|Beschreibung | Es sollen Eventübersichten für die EventEmployees oder beim Buchen, mit den entsprechenden Events, angezeigt werden
+|Akteure | Alle
+|Trigger | Entweder per klick auf Events, für EventEmployees/EventCompany, oder automatisch beim buchen einer Wohnung.
+|Vorbedingung(en) | Entweder eingeloggt als EventEmployee/EventCompany oder beim Buchen eines Hauses 
 |Nötige Schritte | 1. Man drückt auf Events  
 |Erweiterung | ...
 |benötigte Funktionen | [F0520]
@@ -478,7 +478,7 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 |Name | Events bearbeiten
 |Beschreibung | EventEmployee soll die Möglichkeit haben, schon erstellte Events zu bearbeiten.
 |Akteure | EventEmployee
-|Trigger | ...
+|Trigger | In der Eventübersicht ein Event aussuchen, auf bearbeiten klicken und dann neue Daten per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Als EventEmployee angemeldet und Event existiert
 |Nötige Schritte | 1. EventEmployee drückt auf Events.
 2. EventEmployee wählt "eigene" Events aus.
@@ -498,7 +498,7 @@ image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 
 |Name | Event erstellen
 |Beschreibung | EventEmployee soll die Möglichkeit haben neue Events zu erstellen.
 |Akteure | EventEmployee
-|Trigger | ...
+|Trigger | In der Eventübersicht auf "Event erstellen" klicken, Daten dazu eingeben und dann bestätigen per klick auf "erstellen".
 |Vorbedingung(en) | Als EventEmployee angemeldet
 |Nötige Schritte | 1. EventEmployee drückt auf Events.
 2. EventEmployee drückt auf Event erstellen.
@@ -516,7 +516,7 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 |Name | Events löschen
 |Beschreibung | EventEmployee soll die Möglichkeit haben schon erstellte Events zu löschen
 |Akteure | EventEmployee
-|Trigger | ...
+|Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "löschen" klicken.
 |Vorbedingung(en) | Als EventEmployee angemeldet, Event existiert( und wurde bereits abgesatg)
 |Nötige Schritte | 1. EventEmployee drückt auf Events
 2. EventEmployee wählt "eigene" Events aus.
@@ -534,7 +534,7 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 |Name | Events absagen
 |Beschreibung | EventEmployee soll die Möglichkeit haben Events abzusagen.
 |Akteure | EventEmployee, EventCompany
-|Trigger | ...
+|Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "absagen" klicken.
 |Vorbedingung(en) | Als EventEmployee angemeldet und Event existiert
 |Nötige Schritte | 1. EventEmployee drückt auf Events
 2. EventEmployee wählt "eigene" Events aus.
