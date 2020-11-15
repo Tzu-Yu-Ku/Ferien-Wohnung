@@ -779,6 +779,142 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
 
+= Akzeptanztestfälle
+
+
+|===
+|ID                   |AT0010
+|Anwendungfall        |UC0120
+|Vorbedingung         |unregisteredUser benutzt das System.
+|Ereignis             |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345) aus und klickt auf "Registrieren".
+|Erwartete Resultate a|
+- Der unregisteredUser ist nun auf Hauptseite des Systems.
+- Die Registrierung ist eingegengen und kann nun vom Admin angenommen/bestätigt werden.
+|===
+
+|===
+|ID                   |AT0020
+|Anwendungfall        |UC0520
+|Vorbedingung         |Admin ist eingeloggt und eine Registrierung wurde durchgeführt.
+|Ereignis             |Admin klickt auf "Mieter verwalten" dann auf "Neue Registrierungen". Nun wählt er den entsprechenden Antragstellers(Max Musterman) aus und dann auf "Registrierung bestätigen"
+|Erwartete Resultate a|
+- Die Registrierung des Tanents ist nun abgeschlossen und er kann sich einloggen.
+- Der Admin ist zurück auf der Seite "Neue Registrierungen"
+|===
+
+|===
+|ID                   |AT0030
+|Anwendungfall        |UC0120
+|Vorbedingung         |unregisteredPerson benutzt das System.
+|Ereignis             |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
+|Erwartete Resultate a|
+- System soll anzeigen, dass diese Email-Adresse bereits vergeben ist und die Registrieung nicht abgeschlossen werden kann.
+|===
+
+|===
+|ID                   |AT0040
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount exsistiert.
+|Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 11111) ein und drückt auf "Login"
+|Erwartete Resultate a|
+- Anzeige, dass das eingegebene Passwort ist falsch.
+- Er wird nicht eingeloggt.
+|===
+
+|===
+|ID                   |AT050
+|Anwendungfall        |UC0100
+|Vorbedingung         |Das System hat mind. ein existierenden UserAccount(Max Musterman).
+|Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 12345) ein und drückt auf "Login".
+|Erwartete Resultate a| 
+- Der UserAccount ist eingeloggt und hat nun die Möglichkeit die Rechte als Tanent warzunehmen.
+- Der UserAccount ist nun auf der "Hauptseite" eines Tanent UserAccounts.
+|===
+
+|===
+|ID                   |AT0060
+|Anwendungfall        |UC0100
+|Vorbedingung         |UserAccount(Max Musterman) ist eingeloggt.
+|Ereignis             |UserAccount klickt auf "Ausloggen".
+|Erwartete Resultate a|
+- UserAccount ist nicht mehr eingeloggt und hat nicht mehr die Rechte eines Tanents.
+- UserAccount ist nun auf der Hauptseite des Systems
+|===
+
+|===
+|ID                   |AT0070
+|Anwendungfall        |UC0500
+|Vorbedingung         |Admin ist eingeloggt und ein Vermieter mochte einen Host UserAccount in dem System haben. Dazu hat der dem Admin die benötigten Registrierungsdaten(Schwarz, Thomas, 01.01.2000, thomasschwarz@gmail.com, 13579) von sich gegeben.
+|Ereignis             |Admin klickt auf "Vermieter verwalten" und dann auf "Vermieter hinzufügen". Er gibt die benötigten Daten(Schwarz, Thomas, 01.01.2000, thomasschwarz@gmail.com, 13579) ein und drückt dann auf "Vermieter erstellen".
+|Erwartete Resultate a|
+- Es wurde ein Host(Thomas Schwarz) dem System hinzugefügt
+- Der Host ist nun in der Lage sich in das System einzuloggen.
+- Der Admin ist wieder auf der "Vermieter verwalten" Ansicht.
+|===
+
+|===
+|ID                   |AT0080
+|Anwendungfall        |UC0400
+|Vorbedingung         |Host(Thomas Schwarz) ist eingeloggt.
+|Ereignis             |Host klickt auf "Ferienhäuser verwalten" und dann auf "Ferienhaus hinzufügen". Er gibt die benötigten Daten(Villa Kunterbund, An der Goldgrube 1, ...)  ein und klickt dann auf "Ferienhaus erstellen".
+|Erwartete Resultate a|
+- Das erstelle Ferienhaus(Villa Kunterbund) wurde in das System aufgenommen.
+- Der Host ist wieder in der Ansicht "Ferienhäuser verwalten".
+|===
+
+|===
+|ID                   |AT0090
+|Anwendungfall        |UC0540
+|Vorbedingung         |Admin ist eingeloggt und eine Eventfirma möchte einen EventCompany UserAccount in dem System haben. Dazu hat sie dem Admin die benötigten Registrierungsdaten(BestEventfima, ...) von sich gegeben.
+|Event                |Admin glickt auf "Eventfrima verwalten" und dann auf "Eventfirma hinzufügen". Er gibt die benötigten Daten(BesteEventfimar,...) ein und drückt dann auf "Eventfirma erstelen".
+|Erwartete Resultate a|
+- Es wurde eine EventCompany dem System hinzugefügt.
+- Die EventCompany ist nun in der Lage sich in das System einzuloggen.
+- Der Admin ist nun wieder auf der "Eventfirma verwalten" Ansicht.
+|===
+
+
+|===
+|ID                   |AT0100
+|Anwendungfall        |UC0560
+|Vorbedingung         |Admin ist eingeloggt und eine Eventmitarbeiter einer Eventfirma möchte einen EventEmployee UserAccount in dem System haben. Dazu hat er dem Admin die benötigten Registrierungsdaten(Möller, Peter, petermöller@gmail.com, mölleristhebest) von sich gegeben.
+|Event                |Admin klickt auf "Eventfrima verwalten" und dann auf die entsprechende Eventfirma in der der Eventmitarbeiter arbeitet. Der Admin klickt nun auf "Mitarbeiter hinzufügen". Er gibt die benötigten Daten(Möller, Peter, petermöller@gmail.com, mölleristhebest) ein und drückt auf "Mitatbeiter erstellen".
+|Erwartete Resultate a|
+- Es wurde ein EventEmployee dem System hinzugefügt.
+- Der EventEmployee ist nun in der Lage sich in das Sytem einzuloggen.
+- Der Admin ist nun wieder auf der Ansicht der zuvor ausgewählten Eventfirma.
+|===
+
+|===
+|ID                   |AT0110
+|Anwendungfall        |UC0630
+|Vorbedingung         |EventEmployee ist eingeloggt.
+|Event                |EventEmployee klickt auf "Events verwalten" und dann auf "Event hinzufügen". Er wählt "regelmäßiges Event" aus gibt die benötigten Daten(Stadtführung, Mo. 15:30Uhr, Stadtführung durch die Altstadt Dresdens.) aus und drückt dann auf "Event erstellen".
+|Erwartete Resultate a|
+- Das Event wurde dem System hinzugefügt.
+- Der EventEmployee ist nun wieder auf der Ansicht "Events verwalten"
+|===
+
+|===
+|ID                   |AT0120
+|Anwendungfall        |UC0600
+|Vorbedingung         |Host ist eingeloggt.
+|Event                |Host klickt auf "Ferienhäuser verwalten" und wählt dann ein Ferienhaus aus. Nun drückt er "Events zuordnen" und wählt alle Events aus, die bei der Buchung dieses HolidayHomes zu Verfügung stehen sollen. Wenn er alle gewünschten Events ausgewählt hat drückt er auf "Feritg".
+|Erwartete Resultate  |
+- Dem HolidayHome wurden Events zugeordnet, die bei einer Buchung des HolidayHomes zu verfügung stehen.
+- Der Host ist nun auf der Ansicht seines HolidayHomes, das er zuvor ausgewählt hatte.
+|===
+
+|===
+|ID                   |AT0130
+|Anwendungfall        |UC0210 und UC0220
+|Vorbedingung         |Tanent ist eingeloggt.
+|Event                |Tanent klickt "Ferienhäuser" und wählt sich ein HolidayHome(Villa Kunterbund) aus. Dann wählt er einen Zeitraum aus und bucht eventuall noch ein Event dazu und klickt auf "Jetzt Reservieren".
+|Erwartete Resultate a|
+- Die Reservierung ist erfolgt und wenn bezahlt wurde kann der Host diese in eine Buchung umwandeln.
+- Tanent ist nun wieder bei der ansicht "Ferienhäuser"
+|===
+
 == Glossar
 Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
 Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
