@@ -563,18 +563,92 @@ Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System a
 |[F0120]|v0.1|Haus Informationen anzeigen a|Das System soll in der Lage sein Details zu den Häusern anzuzeigen nach dem der Nutzer auf diese drückt.
 Diese sollen beinhlaten:
 
-* Adresse
 * Name
+* Adresse
 * Bilder
 * Beschreibung 
 * Preis
+
+|[F0200]|v0.1|Buchung a|Das System soll es dem Nutzer ermöglichen Buchungen wie Einkauswägen zu benutzen in dem diese, vorübergehend das für den Mieter in frage 
+kommende Haus speichern, während dieser noch nach Alternativen bzw. zusätzlichen Events für das Haus suchen kann.
+
+|[F0201]|v0.1|Buchung bearbeiten a|Das System soll es dem Mieter ermöglichen das ausgewählte Haus in der Buchung zu entfernen bzw. den Buchungszeitraum zu verändern.
+
+|[F0202]|v0.1|Event hinzufügen a|Das System soll es ermöglichen der Buchung Events in der Nähe des Hauses hinzuzufügen.
+
+|[F0210]|v0.1|Buchung anzeigen a|Das System soll es dem Mieter erlauben seine Buchung azuschauen, was diesem folgende Daten zurückgeben soll:
+
+* Haus Name
+* Buchungszeitraum
+* Liste mit zusätzlichen Events jedes mit einzel Preis aufgelistet 
+* Gesamtpreis der kompletten Buchung
+
+|[F0220]|v0.1|Buchung buchen a|Das System soll es dem Mieter ermöglichen seine Buchung zu reservieren. 
+Das System wird darauffolgend die Buchung überprüfen und bei Korrektheit eine Bestellung erstellen.
+
+|[F0230]|v0.1|Buchung prüfen a|Das System soll in der Lage sein den Buchungszeitraum einer Buchung auf dessen Verfügbarkeit zu überprüfen. 
+Zusätzlich soll auch die Verfügbar von den zugebuchten Events, einer Buchung, überprüft werden.
+
+|[F0240]|v0.1|Bestellungen a|Das System soll in der Lage sein Bestellungen dauehaft zu speichern.
+
+|[F0241]|v0.1|Bestellungen erstellen a|Das System soll in der Lage sein Bestellunge aus den Angaben zur Buchung hinaus zuerstellen.
+Bestellungen werden mit dem Status "Reserviert" erzeugt.
+
+|[F0242]|v0.1|Zustellen a|Das System soll dem Nutzer die Rechnung für seine Bestellung zustellen können und dem Vermieter über die Bestellung zu seinem Haus informieren.
+
+|[F0243]|v0.1|Zahlungseingang Bestätigen a|Das System soll es dem Vermieter ermöglichen Buchungen, die sich im Zustand "Reserved" befinden, seiner Häuser als bezahlt zu bestätigen. Darauffolgend soll die Buchung in den Zustand "Confirmed" wechseln.
+
+|[F0244]|v0.1|Stornieren a|Das System soll es dem Mieter ermöglichen jede seiner Bestellungen, die noch nicht den Status "Completed" hat, wieder zu stornieren.
+
+|[F0245]|v0.1|Bestellung archivieren a|Das System soll es ermöglichen Bestellungen zu archivieren. Eine Bestellung wird archiviert wenn ihr Status auf "Completed" gesetzt wird.
+
+|[F0246]|v0.1|Authentifizierung a|Das System soll es jedem Nutzer ermöglichen sich eine Liste mit den vergangenen Buchungen jedes Ferienhauses anzeigenzulassen.
+
+|[F0300]|v0.1|Mitglieder Liste anzeigen a|Das System soll es dem Admin ermöglichen eine Liste mit allen registrierten Nutzern anzuschauen und diese zu bearbeiten.
+
+|[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen die über das Systeme erstellt wurden, anzeigen zulassen.
+Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
+
+* Erstellungszeitpunkt
+* Mieter der die Bestellung aufgab
+* Vermieter des Hauses
+* Gesamtpreis der Bestellung
+
+|[F0400]|v0.1|Häuser a|Das System soll dauerhaft Informationen zu den angebotenen Häusern speichern.
+
+|[F0410]|v0.1|Häuser erstellen a|Das System soll es dem Vermieter ermöglichen neue Einträge für seine Häuser zu erstellen
+
+|[F0411]|v0.1|Häuser bearbeiten a|Das System soll es dem Vermieter ermöglichen die Angaben, der ihm zugeordneten Häuser bearbeiten
+
+|[F0500]|v0.1|Events a|Das System soll dauerhaft Informationen zu den angebotenen Events speichern.
+
+|[F0510]|v0.1|Events erstellen a|Das System soll es dem Event-Mitarbeiter ermöglichen neue Einträge für die Events seiner zugeordneten Firma zu erstellen.
+
+|[F0511]|v0.1|Events bearbeiten a|Das System soll es dem Event-Mitarbeiter ermöglichen die Angaben, der Events seiner zugeordneten Firma zu bearbeiten
 
 |===
 
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
 
-|[F0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Catalog nach angegeben Optionen hin, zu durchsuchen.
+|===
+|ID|Version|Name|Description
+
+|[K0100]|v0.1|Account bearbeiten a|Das System soll es dem Nutzer erlauben bestimmte Angaben zu seinem Account zu verändern. Zum Beispiel sein Passwort. 
+
+|[K0110]|v0.1|Favoriten Liste a|Das System soll dem Mieter die Möglichkeiten bieten, sich eine Liste mit den eigenen Favoriten unter den registrierten Häusern zu erstellen.
+
+|[K0111]|v0.1|Favorit hinzufügen a|Das System soll dem Mieter die Möglichkeiten bieten, sich Häuser als Favorit zu makieren. Sodass nach dem den markierten Häusern gefiltert werden kann.
+
+|[K0112]|v0.1|Katalog Filtern a|Das System soll dem Nutzer die Möglichkeiten bieten, den Katalog nach angegeben Optionen hin, zu durchsuchen.
+
+|[K0120]|v0.1|Kommunikation a|Das System soll es dem Mieter und Vermieter ermöglichen eine Kommunikation aufzubauen, wenn auch nur per angabe der Email-Adresse 
+
+|[K0121]|v0.1|Häuser kommentieren a|Das System soll es dem Mieter ermöglichen Kommentare zu den von ihnen gebuchten Häusern abzugeben.
+
+|[K0200]|v0.1|Events absagen a|Das System soll es dem Event-Mitarbeiter ermöglichen die Events seiner zugeordneten Firma abzusagen.
+
+|===
 
 == Nicht-Funktionale Anforderungen
 
