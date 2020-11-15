@@ -787,7 +787,6 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |SmallEvent         |
 |LargeEvent         |
 |Place              |
-|Booking            |
 |BookingStatus      |
 |Reserved           |
 |Confirmed          |
