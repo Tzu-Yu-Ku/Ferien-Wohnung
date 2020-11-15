@@ -774,7 +774,7 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Klasse/Enumeration |Beschreibung |
+|Klasse/Enumeration |Beschreibung
 |FeWoMi             |
 |UserAccount        |
 |Admin              |
