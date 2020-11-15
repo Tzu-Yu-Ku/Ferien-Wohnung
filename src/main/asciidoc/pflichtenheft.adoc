@@ -98,13 +98,12 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 [cols="1,4"]
 |===
 |Name |Beschreibung
-|unregisteredUser |---
-|UserAccount |---
-|Tenant |---
-|Host |---
-|Admin |---
-|Eventemployee/EventCompany |---
-|... |...
+|unregisteredUser | Stellt einen nicht registrieten Besucher der Seite dar, der mit dem System interagiert.
+|UserAccount | Stellt einen registrierten Account/Benutzer der Seite dar, der mit dem System interagiert.
+|Tenant | Stellt einen Benutzer mit der Rolle "TENANT" dar. Dieser entspricht einem Mieter.
+|Host | Stellt einen Benutzer mit der Rolle "HOST" dar. Dieser entspricht einem Vermieter.
+|Admin | Stellt einen Benutzer mit der Rolle "ADMIN" dar. Dieser ist verantwortlich für die interne Verwaltung/Accountverwaltung.
+|EventEmployee | Stellt einen Benutzer mit der Rolle "EVENTEMPLOYEE" dar. Dieser ist verantwortlich für die Verwaltung von Events, die zu seiner EventCompany gehören.
 |===
 
 === 6.2 Überblick Anwendungsfalldiagramm
