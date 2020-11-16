@@ -8,9 +8,11 @@
 |Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
 |0.1     | In Arbeit   | 16.11.2020          | SWT-Gruppe 25     | Initiale Version
 |===
-
+:toc: macro
+:toc-title:
+== __{project_name}__
 == Inhaltsverzeichnis
-
+toc::[]
 * 1. Zusammenfassung
 * 2. Aufgabenstellung & Zielsetzung
 * 3. Produktnutzung
