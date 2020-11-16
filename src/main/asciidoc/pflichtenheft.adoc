@@ -917,28 +917,27 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung
-|FeWoMi             |
-|UserAccount        |
-|Admin              |
-|Tanent             |
-|Host               |
-|EventEmployee      |
-|Booking            |
-|HolydayHome        |
-|Event              |
-|SmallEvent         |
-|LargeEvent         |
-|Place              |
-|BookingStatus      |
-|Reserved           |
-|Confirmed          |
-|Cancelled          |
-|Completed          |
-|EventManager       |
-|AccountManager     |
-|BookingManager     |
-|HolidayHomeManager |
-|Place              |
+|FeWoMi             | Die zentrale Klasse des Systems, stellt die Ferienwohnungsverwaltung an sich dar.
+|UserAccount        | Die zentrale Klasse aller Accounts.
+|Admin              | Die Klasse des Accounts für den Admin.
+|Tanent             | Die Klasse des Accounts für Mieter.
+|Host               | Die Klasse des Accounts für Vermieter.
+|EventEmployee      | Die Klasse des Accounts für Eventmitarbeiter.
+|Booking            | Die Klasse stellt eine buchung dar.
+|HolydayHome        | Die Klasse stellt ein Ferienhaus dar.
+|Event              | Die Klasse stellt ein Event dar.
+|SmallEvent         | Die Klasse stellt ein spezielles kleines Event dar.
+|LargeEvent         | Die Klasse stellt ein spezielles großes Event dar.
+|Place              | Diese Klasse stellt einen Ort dar.
+|BookingStatus      | Diese Klasse stellt den Fortschritt einer Buchung dar.
+|Reserved           | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Confirmed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Cancelled          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Completed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|EventManager       | Die Klasse verwaltet alle Events.
+|AccountManager     | Die Klasse verwaltet alle Accounts.
+|BookingManager     | Die Klasse verwaltet alle Buchungen.
+|HolidayHomeManager | Die Klasse verwaltet alle Ferienwohnungen.
 |===
 
 == 12.Akzeptanztestfälle
