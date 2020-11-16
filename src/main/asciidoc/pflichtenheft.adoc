@@ -139,6 +139,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0010]
 |===
 
+[[login]]
+image::./models/analysis/Sequenzdiagramm/Login.png[Login, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Login", align=center]
+
 |===
 |ID | [UC0110]
 |Name | Logout
@@ -150,6 +153,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [F0010]
 |===
+
+[[logout]]
+image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Logout", align=center]
 
 |===
 |ID | [UC0120]
@@ -165,9 +171,12 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0020],[F0021]
 |===
 
+[[registierung]]
+image::./models/analysis/Sequenzdiagramm/Registierung.png[Registierung, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Registierung", align=center]
+
 |===
 |ID | [UC0130]
-|Name | konto bearbeiten
+|Name | UserAccount editieren
 |Beschreibung | UserAccount soll die Möglichkeit haben sich seine Daten ändern zu können.
 |Akteure | UserAccount
 |Trigger | UserAccount ändert seine personlichen Daten, indem er auf sein Konto geht, die Änderungen festlegt und bestätigt.
@@ -177,6 +186,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [K0100]
 |===
+
+[[userAccount_editieren]]
+image::./models/analysis/Sequenzdiagramm/UserAccount editieren.png[UserAccount editieren, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: UserAccount editieren", align=center]
 
 |===
 |ID | [UC0200]
@@ -189,6 +201,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0400]
 |===
+
+[[holidayHome ansehen]]
+image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ansehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome ansehen", align=center]
 
 |===
 |ID | [UC0210]
@@ -232,6 +247,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
+[[buchungen_einsehen]]
+image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einsehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchungen einsehen", align=center]
+
 |===
 |ID | [UC0310]
 |Name | Buchung bestätigen
@@ -244,6 +262,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0400]
 |===
+
+[[buchung_bestaetigen]]
+image::./models/analysis/Sequenzdiagramm/Buchungen bestaetigen.png[Buchung bestätigen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchung bestätigen", align=center]
 
 |===
 |ID | [UC0320]
@@ -258,6 +279,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0244],[F0400]
 |===
 
+[[buchung_stornieren]]
+image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornieren, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchung stornieren", align=center]
+
 |===
 |ID | [UC0330]
 |Name | Buchungshistorie ansehen
@@ -270,6 +294,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0244],[F0245],[F0246],[F0400]
 |===
+
+[[buchungshistorie_ansehen]]
+image::./models/analysis/Sequenzdiagramm/Buchungshistorie ansehen.png[Buchungshistorie ansehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchungshistorie ansehen", align=center]
 
 |===
 |ID | [UC0400]
@@ -286,6 +313,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0400],[F0410]
 |===
 
+[[holidayHome_hinzufügen]]
+image::./models/analysis/Sequenzdiagramm/HolidayHome hinzufügen.png[HolidayHome hinzufügen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome hinzufügen", align=center]
+
 |===
 |ID | [UC0410]
 |Name | HolidayHome bearbeiten
@@ -301,6 +331,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
 
+[[holidayHome_bearbeiten]]
+image::./models/analysis/Sequenzdiagramm/HolidayHome bearbeiten.png[HolidayHome bearbeiten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome bearbeiten", align=center]
+
 |===
 |ID | [UC0420]
 |Name | HolidayHome löschen
@@ -313,6 +346,9 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Erweiterung | ...
 |benötigte Funktionen | [F0400],[F0410],[F0412]
 |===
+
+[[holidayHome_löschen]]
+image::./models/analysis/Sequenzdiagramm/HolidayHome löschen.png[HolidayHome löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome löschen", align=center]
 
 |===
 |ID | [UC0500]
@@ -348,7 +384,7 @@ image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%
 |===
 
 [[host_löschen]]
-image::./models/analysis/Sequenzdiagramm/Host loeschen.png[Host löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host löschen", align=center]
+image::./models/analysis/Sequenzdiagramm/Host löschen.png[Host löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host löschen", align=center]
 
 |===
 |ID | [UC0520]
@@ -384,7 +420,7 @@ image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischa
 |===
 
 [[tenant_löschen]]
-image::./models/analysis/Sequenzdiagramm/Tenant loeschen.png[Tenant löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant löschen", align=center]
+image::./models/analysis/Sequenzdiagramm/Tenant löschen.png[Tenant löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant löschen", align=center]
 
 |===
 |ID | [UC0540]
@@ -420,7 +456,7 @@ image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany
 |===
 
 [[eventCompany_löschen]]
-image::./models/analysis/Sequenzdiagramm/EventCompany loeschen.png[EventCompany löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany löschen", align=center]
+image::./models/analysis/Sequenzdiagramm/EventCompany löschen.png[EventCompany löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany löschen", align=center]
 
 |===
 |ID | [UC0560]
@@ -456,7 +492,7 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmploy
 |===
 
 [[eventEmployee_löschen]]
-image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmployee löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee löschen", align=center]
+image::./models/analysis/Sequenzdiagramm/EventEmployee löschen.png[EventEmployee löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee löschen", align=center]
 
 |===
 |ID | [UC0600]
@@ -471,6 +507,9 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee loeschen.png[EventEmploye
 |Erweiterung | ...
 |benötigte Funktionen | [F0511]
 |===
+
+[[events_für_Häuser_bestätigen]]
+image::./models/analysis/Sequenzdiagramm/Events für Häuser bestätigen.png[Events für Häuser bestätigen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Events für Häuser bestätigen", align=center]
 
 |===
 |ID | [UC0610]
@@ -489,7 +528,7 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 
 |===
 |ID | [UC0620]
-|Name | Events bearbeiten
+|Name | Event bearbeiten
 |Beschreibung | EventEmployee soll die Möglichkeit haben, schon erstellte Events zu bearbeiten.
 |Akteure | EventEmployee
 |Trigger | In der Eventübersicht ein Event aussuchen, auf bearbeiten klicken und dann neue Daten per klick auf "bestätigen" bestätigen.
@@ -504,7 +543,7 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 |benötigte Funktionen | [F0202],[F0520],[F0530]
 |===
 
-[[events_bearbeiten]]
+[[event_bearbeiten]]
 image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event bearbeiten", align=center]
 
 |===
@@ -527,7 +566,7 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 
 |===
 |ID | [UC0640]
-|Name | Events löschen
+|Name | Event löschen
 |Beschreibung | EventEmployee soll die Möglichkeit haben schon erstellte Events zu löschen
 |Akteure | EventEmployee
 |Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "löschen" klicken.
@@ -540,12 +579,9 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 |benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
 
-[[event_löschen_und_absagen]]
-image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event löschen und Event absagen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event löschen und absagen", align=center]
-
 |===
 |ID | [UC0650]
-|Name | Events absagen
+|Name | Event absagen
 |Beschreibung | EventEmployee soll die Möglichkeit haben Events abzusagen.
 |Akteure | EventEmployee, EventCompany
 |Trigger | entprechendes Event in der Eventübersicht auswählen und dann auf "absagen" klicken.
@@ -557,6 +593,10 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und loeschen.png[Event l�
 |Erweiterung | ...
 |benötigte Funktionen | [F0202],[F0520],[K0200]
 |===
+
+[[event_löschen_und_absagen]]
+image::./models/analysis/Sequenzdiagramm/Event absagen und löschen.png[Event absagen und löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event absagen und löschen", align=center]
+
 
 == 7. Funktionale Anforderungen
 
@@ -796,6 +836,10 @@ Als Eventmitarbeiter, kann man sich stets über den "Log In" Knopf in der Kopfze
 
 === 11.1 Überblick: Klassendiagramm
 UML-Analyseklassendiagramm
+
+[[klassendiagramm]]
+image::./models/analysis/Klassendiagramm.png[Klassendiagramm, 100%, 100%, pdfwidth=100%, title= "Klassendiagramm", align=center]
+
 
 === 11.2 Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
