@@ -23,7 +23,7 @@
   6.2 Überblick Anwendungsfalldiagramm
   6.3 Anwendungsfallbeschreibungen
 7. Funktionale Anforderungen
- 
+
 == 1. Zusammenfassung
 Dieses Dokument repräsentiert das Pflichtenheft des Projekts *FewoDre*. Ziel ist es, eine Übersicht über die zu entwerfende Software zu gewährleisten, welche als Grundlage für die Kommunikation zwischen den Interessenvertretern des Projekts und dem Entwicklerteam dient. Zielstellung ist es, dieses Dokument als Grundlage des Vertrags zwischen dem Auftraggeber und den Entwicklern anzunehmen, weshalb es hinsichtlich seiner Korrektheit und Konsistenz zu überprüfen ist. Folgendes Pflichtenheft beschreit die Anforderungen an das gewünschte System und, in Ansätzen, deren Implementierung durch die Entwickler.
 
