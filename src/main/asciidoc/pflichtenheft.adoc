@@ -6,23 +6,33 @@
 [cols="1, 1, 1, 1, 4"]
 |===
 |Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
-|0.1     | In Arbeit   | 10.10.2020          | SWT-Gruppe 25     | Initiale Version
+|0.1     | In Arbeit   | 16.11.2020          | SWT-Gruppe 25     | Initiale Version
 |===
 
 == Inhaltsverzeichnis
 
-1. Zusammenfassung
-2. Aufgabenstellung & Zielsetzung
-3. Produktnutzung
-4. Interessenvertreter (Stakeholders)
-5. Systemgrenzen und Top-Level-Architektur
-  5.1 Kontextdiagramm
-  5.2 Top-Level-Architektur
-6. Anwendungsfälle
-  6.1 Akteure
-  6.2 Überblick Anwendungsfalldiagramm
-  6.3 Anwendungsfallbeschreibungen
-7. Funktionale Anforderungen
+* 1. Zusammenfassung
+* 2. Aufgabenstellung & Zielsetzung
+* 3. Produktnutzung
+* 4. Interessenvertreter (Stakeholders)
+* 5. Systemgrenzen und Top-Level-Architektur
+**  5.1 Kontextdiagramm
+**  5.2 Top-Level-Architektur
+* 6. Anwendungsfälle
+**  6.1 Akteure
+**  6.2 Überblick Anwendungsfalldiagramm
+**  6.3 Anwendungsfallbeschreibungen
+* 7. Funktionale Anforderungen
+** 7.1 Muss-Kriterien
+** 7.2 Kann-Kriterien
+* 8. Qualitätsziele
+* 9. GUI Prototyp
+* 10. Dialoglandkarten
+* 11. Datenmodell
+** 11.1 Klassendiagramm
+** 11.2 Klassen und Enumerationen
+* 12. Akzeptanztestfälle
+* 13. Glossar
  
 == 1. Zusammenfassung
 Dieses Dokument repräsentiert das Pflichtenheft des Projekts *FewoDre*. Ziel ist es, eine Übersicht über die zu entwerfende Software zu gewährleisten, welche als Grundlage für die Kommunikation zwischen den Interessenvertretern des Projekts und dem Entwicklerteam dient. Zielstellung ist es, dieses Dokument als Grundlage des Vertrags zwischen dem Auftraggeber und den Entwicklern anzunehmen, weshalb es hinsichtlich seiner Korrektheit und Konsistenz zu überprüfen ist. Folgendes Pflichtenheft beschreit die Anforderungen an das gewünschte System und, in Ansätzen, deren Implementierung durch die Entwickler.
