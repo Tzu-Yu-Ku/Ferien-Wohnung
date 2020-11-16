@@ -6,9 +6,11 @@
 [cols="1, 1, 1, 1, 4"]
 |===
 |Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
-|0.1     | In Arbeit   | 10.10.2020          | SWT-Gruppe 25     | Initiale Version
+|0.1     | In Arbeit   | 16.11.2020          | SWT-Gruppe 25     | Initiale Version
 |===
-
+:toc: macro
+:toc-title:
+== __{project_name}__
 == Inhaltsverzeichnis
 
 1. Zusammenfassung
@@ -120,7 +122,7 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt.
 
 [[Anwendungsfall-Diagramm]]
-image::./models/analysis/Anwendungsfalldiagramm_v1.3.png[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
+image::./models/analysis/Anwendungsfalldiagramm_v1.4.png[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
 
 === 6.3 Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle.
@@ -168,7 +170,7 @@ image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth
 |Name | Registrierung
 |Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter registrieren zu können.
 |Akteure | unregisteredUserAccount
-|Trigger | unregisteredUser will sich registrieren um ein Haus mieten zu können, indem er das Formular ausfüllt und sendet.
+|Trigger | unregisteredUser will sich registrieren um Tenant zu werden und Häuser mieten zu können, indem er das Formular ausfüllt und sendet.
 |Vorbedingung(en) | unregisteredUser hat noch keinen Account
 |Nötige Schritte a| - 1. unregisteredUser drückt auf registieren in der Navigation bar
 - 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
@@ -220,15 +222,16 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |===
 |ID | **<<UC0210>>**
 |Name | HolidayHome reservieren
-|Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren
+|Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren und bestätigt das durch eine Überweisung
 |Akteure | Tenant
-|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren
+|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren und bekommt dann eine Zahlungsaufforderung zur Bestätigung.
 |Vorbedingung(en) | Tenant ist eingeloggt
 |Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
 - 2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
 - 3. Tenant wählte einen Zeitpunkt aus
 - 4. Tenant kann eventuelle Events dazubuchen (UC0220)
 - 5. Tenant klickt auf buchen/reservieren
+- 6. Tenant bezahlt die Voranzahlung
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -274,7 +277,7 @@ image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einseh
 |===
 |ID | **<<UC0310>>**
 |Name | Buchung bestätigen
-|Beschreibung | Host soll die Möglichkeiten haben, nach der Anzahlung von Tenant, die Buchungen zu bestätigen
+|Beschreibung | Host soll die Möglichkeiten haben die Buchungen zu bestätigen/abzuschließen.
 |Akteure | Host
 |Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung kann dann ins Buchungsmenü gehen und diese per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host angekommen
@@ -310,7 +313,7 @@ image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornier
 |===
 |ID | **<<UC0330>>**
 |Name | Buchungshistorie ansehen
-|Beschreibung | Host soll die Möglichkeiten haben, die schon fertig sind, anzuschauen
+|Beschreibung | Host soll die Möglichkeiten haben die schon fertigen Buchungen gesammelt anschauen zu können.
 |Akteure | Host
 |Trigger | Host wählt im Buchungsmenü den Button Historie aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
 |Vorbedingung(en) | Host ist eingeloggt
@@ -807,12 +810,49 @@ Anforderungen die das Programm leisten können soll, aber für den korrekten Bet
 
 === 8.1 Qualitätsziele
 
-Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
+Die folgende Tabelle zeigt welche Qualitätsansprüche, zu welchem Grad erfüllt sein sollten.
+Die Zeile steht für einen bestimmten Qualitätsanspruch und die Spalte beschreibt die Wichtung
+
+1 = Nicht wichtig
+5 = Sehr wichtig
+
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanspruch        | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit              |   |   | x |   |
+|Benutzbarkeit            |   |   |   | x |
+|Sicherheit               |   |   |   | x |
+|===
+
+Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähliches
+Benutzbarkeit beschreibt die Nutzerfreundlichkieit, vor allem für Tenant und Host.
+Wartbarkeit beschreibt den Aufwand und die schwierigkeit der Accountverwaltung und ähnlichem.
 
 === Konkrete Nicht-Funktionale Anforderungen
 
-Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
-Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
+:desired-uptime: 99,5%
+
+[options="header", cols="2h, 1, 3, 12"]
+|===
+|ID
+|Version
+|Name
+|Description
+
+|[NF0010]
+|v0.1
+|Erreichbarkeit
+a|
+Das System sollte mindestens für **{desired-uptime}** aktiv sein.
+
+|[[NF0020]]<<NF0020>>
+|v0.1
+|Sicherheit
+a|
+Passwörter der benutzer sollten ausschließlich als Hash-Werte übergeben/gespeichert werden
+
+|===
+
 
 == 9. GUI Prototyp
 
@@ -867,28 +907,28 @@ image::./../resources/static/resources/img/pflichtenheft/manageusers_page.png[La
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_tenant.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Kunde/Mieter", align=center]
 
-Als Kunde oder Mieter, kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort), oder, falls noch kein Nutzeraccount besteht, ein neues Konto unter "Registrierung" erstellt werden. Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der (eingeloggte) Nutzer das Ferienhausangebot durchstöbern. Jede Auflistung eines Hauses hat einen "Details" Kopf, den der Kunde tätigen kann, um auf eine ausführliche Beschreibung des Angebots zu gelangen. Sowohl in der Liste der Angebote, als auch auf der Detailsseite eines Ferienhauses, kann ein eingeloggter Kunde eine Buchung vornehmen, sofern gewählte Anreise- und Abreisezeitpunkte nicht bereits belegt sind.Alle vergangenen und aktuell getätigten Buchungen sind ebenfalls nach erfolgreichem einloggen über einen Knopf in der Kopfzeile erreichbar. Von dort aus können mit einem Klick auf die jeweilige Buchung weitere Details eingesehen werden und, falls möglich, die Buchung über den entsprechenden Knopf stornieren.
+Als Kunde oder Mieter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort), oder, falls noch kein Nutzeraccount besteht, ein neues Konto unter "Registrierung" erstellt werden. Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der (eingeloggte) Nutzer das Ferienhausangebot durchstöbern. Jede Auflistung eines Hauses hat einen "Details" Kopf, den der Kunde tätigen kann, um auf eine ausführliche Beschreibung des Angebots zu gelangen. Sowohl in der Liste der Angebote, als auch auf der Detailsseite eines Ferienhauses, kann ein eingeloggter Kunde eine Buchung vornehmen, sofern gewählte Anreise- und Abreisezeitpunkte nicht bereits belegt sind.Alle vergangenen und aktuell getätigten Buchungen sind ebenfalls nach erfolgreichem einloggen über einen Knopf in der Kopfzeile erreichbar. Von dort aus können mit einem Klick auf die jeweilige Buchung weitere Details eingesehen werden und, falls möglich, die Buchung über den entsprechenden Knopf stornieren.
 
 == Dialoglandkarte als Vermieter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_renter.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Vermieter", align=center]
 
-Als Vermieter, kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der Vermieter ebenfalls das Ferienhausangebot durchstöbern. Nachdem sich der Vermieter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Ferienhausverwaltung aufrufen oder ein neues Ferienhaus auf der Platform anbieten. Die Ferienhausverwaltung stellt alle eigenen Angebote in einer Liste dar und über die Liste kann jedes Haus über entsprechende Buttons bearbeitet, gelöscht, Events dafür bestätigt oder dessen Mietvergangenheit eingesehen werden.
+Als Vermieter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der Vermieter ebenfalls das Ferienhausangebot durchstöbern. Nachdem sich der Vermieter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Ferienhausverwaltung aufrufen oder ein neues Ferienhaus auf der Platform anbieten. Die Ferienhausverwaltung stellt alle eigenen Angebote in einer Liste dar und über die Liste kann jedes Haus über entsprechende Buttons bearbeitet, gelöscht, Events dafür bestätigt oder dessen Mietvergangenheit eingesehen werden.
 
 == Dialoglandkarte als Eventmitarbeiter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_eventuser.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
 
-Als Eventmitarbeiter, kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Platform bekanntgeben. Die Eventverwaltung stellt alle Verantstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
+Als Eventmitarbeiter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Platform bekanntgeben. Die Eventverwaltung stellt alle Verantstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
 
 == Dialoglandkarte als Admin
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_admin.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
 
-Als Eventmitarbeiter, kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Platform bekanntgeben. Die Eventverwaltung stellt alle Verantstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
+Als Admin kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Administrator das Ferienhausangebot durchstöbern. Nachdem sich der Admin eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile die Nutzeraccountverwaltung aufrufen oder einen neuen Account auf der Platform erstellen.
 
 
 == 11. Datenmodell
@@ -907,28 +947,27 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung
-|FeWoMi             |
-|UserAccount        |
-|Admin              |
-|Tanent             |
-|Host               |
-|EventEmployee      |
-|Booking            |
-|HolydayHome        |
-|Event              |
-|SmallEvent         |
-|LargeEvent         |
-|Place              |
-|BookingStatus      |
-|Reserved           |
-|Confirmed          |
-|Cancelled          |
-|Completed          |
-|EventManager       |
-|AccountManager     |
-|BookingManager     |
-|HolidayHomeManager |
-|Place              |
+|FeWoMi             | Die zentrale Klasse des Systems, stellt die Ferienwohnungsverwaltung an sich dar.
+|UserAccount        | Die zentrale Klasse aller Accounts.
+|Admin              | Die Klasse des Accounts für den Admin.
+|Tanent             | Die Klasse des Accounts für Mieter.
+|Host               | Die Klasse des Accounts für Vermieter.
+|EventEmployee      | Die Klasse des Accounts für Eventmitarbeiter.
+|Booking            | Die Klasse stellt eine buchung dar.
+|HolydayHome        | Die Klasse stellt ein Ferienhaus dar.
+|Event              | Die Klasse stellt ein Event dar.
+|SmallEvent         | Die Klasse stellt ein spezielles kleines Event dar.
+|LargeEvent         | Die Klasse stellt ein spezielles großes Event dar.
+|Place              | Diese Klasse stellt einen Ort dar.
+|BookingStatus      | Diese Klasse stellt den Fortschritt einer Buchung dar.
+|Reserved           | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Confirmed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Cancelled          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Completed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|EventManager       | Die Klasse verwaltet alle Events.
+|AccountManager     | Die Klasse verwaltet alle Accounts.
+|BookingManager     | Die Klasse verwaltet alle Buchungen.
+|HolidayHomeManager | Die Klasse verwaltet alle Ferienwohnungen.
 |===
 
 == 12.Akzeptanztestfälle
