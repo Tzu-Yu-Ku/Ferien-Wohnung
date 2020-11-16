@@ -212,7 +212,7 @@ image::./models/analysis/Sequenzdiagramm/UserAccount editieren.png[UserAccount e
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0400]
 |===
 
-[[holidayHome ansehen]]
+[[holidayHome_ansehen]]
 image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ansehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome ansehen", align=center]
 
 [cols="1h, 3"]
@@ -237,7 +237,7 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 [[UC0220]]
 |===
 |ID | **<<UC0220>>**
-|Name | Events dazubuchen
+|Name | Event dazubuchen
 |Beschreibung | Tenant soll die Möglichkeiten haben, Events, die angebot sind, dazubuchen
 |Akteure | Tenant
 |Trigger | Tenant bekommt während der Buchung ein Auswahlfeld und wählt per klick dazubuchbare Events aus.
@@ -248,6 +248,9 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0202],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
+
+[[event_dazubuchen]]
+image::./models/analysis/Sequenzdiagramm/Event dazubuchen.png[Event dazubuchen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event dazubuchen", align=center]
 
 [cols="1h, 3"]
 [[UC0300]]
