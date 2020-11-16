@@ -125,8 +125,10 @@ image::./models/analysis/Anwendungsfalldiagramm_v1.3.png[Anwendungsfall-Diagramm
 === 6.3 Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 
+[cols="1h, 3"]
+[[UC0100]]
 |===
-|ID | [UC0100]
+|ID | **<<UC0100>>**
 |Name | Login
 |Beschreibung | UserAccount soll die Möglichkeit haben sich anzumelden, um die besondere Rechte ihres Accounts wahrzunehmen.
 |Akteure | UserAccount
@@ -142,8 +144,10 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 [[login]]
 image::./models/analysis/Sequenzdiagramm/Login.png[Login, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Login", align=center]
 
+[cols="1h, 3"]
+[[UC0110]]
 |===
-|ID | [UC0110]
+|ID | **<<UC0110>>**
 |Name | Logout
 |Beschreibung | UserAccount soll die Möglichkeit haben sich abzumelden, um die besonderen Rechte ihres Accounts abzugeben.
 |Akteure | UserAccount
@@ -157,8 +161,10 @@ image::./models/analysis/Sequenzdiagramm/Login.png[Login, 100%, 100%, pdfwidth=1
 [[logout]]
 image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Logout", align=center]
 
+[cols="1h, 3"]
+[[UC0120]]
 |===
-|ID | [UC0120]
+|ID | **<<UC0120>>**
 |Name | Registrierung
 |Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter registrieren zu können.
 |Akteure | unregisteredUserAccount
@@ -174,8 +180,10 @@ image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth
 [[registierung]]
 image::./models/analysis/Sequenzdiagramm/Registierung.png[Registierung, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Registierung", align=center]
 
+[cols="1h, 3"]
+[[UC0130]]
 |===
-|ID | [UC0130]
+|ID | **<<UC0130>>**
 |Name | UserAccount editieren
 |Beschreibung | UserAccount soll die Möglichkeit haben sich seine Daten ändern zu können.
 |Akteure | UserAccount
@@ -190,8 +198,10 @@ image::./models/analysis/Sequenzdiagramm/Registierung.png[Registierung, 100%, 10
 [[userAccount_editieren]]
 image::./models/analysis/Sequenzdiagramm/UserAccount editieren.png[UserAccount editieren, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: UserAccount editieren", align=center]
 
+[cols="1h, 3"]
+[[UC0200]]
 |===
-|ID | [UC0200]
+|ID | **<<UC0200>>**
 |Name | HolidayHome  ansehen
 |Beschreibung | UserAccount soll die Möglichkeit haben mehre Deteile über die HolidayHome anzuschauen 
 |Akteure | UserAccount und unregisteredUser
@@ -205,8 +215,10 @@ image::./models/analysis/Sequenzdiagramm/UserAccount editieren.png[UserAccount e
 [[holidayHome ansehen]]
 image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ansehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome ansehen", align=center]
 
+[cols="1h, 3"]
+[[UC0210]]
 |===
-|ID | [UC0210]
+|ID | **<<UC0210>>**
 |Name | HolidayHome reservieren
 |Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren
 |Akteure | Tenant
@@ -221,8 +233,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
+[cols="1h, 3"]
+[[UC0220]]
 |===
-|ID | [UC0220]
+|ID | **<<UC0220>>**
 |Name | Events dazubuchen
 |Beschreibung | Tenant soll die Möglichkeiten haben, Events, die angebot sind, dazubuchen
 |Akteure | Tenant
@@ -235,8 +249,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0202],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
 
+[cols="1h, 3"]
+[[UC0300]]
 |===
-|ID | [UC0300]
+|ID | **<<UC0300>>**
 |Name | Buchungen einsehen
 |Beschreibung | Host und Tenant sollen die Möglichkeiten haben, die Buchungen anzuschauen
 |Akteure | Host und Tenant
@@ -250,8 +266,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 [[buchungen_einsehen]]
 image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einsehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchungen einsehen", align=center]
 
+[cols="1h, 3"]
+[[UC0310]]
 |===
-|ID | [UC0310]
+|ID | **<<UC0310>>**
 |Name | Buchung bestätigen
 |Beschreibung | Host soll die Möglichkeiten haben, nach der Anzahlung von Tenant, die Buchungen zu bestätigen
 |Akteure | Host
@@ -266,8 +284,10 @@ image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einseh
 [[buchung_bestaetigen]]
 image::./models/analysis/Sequenzdiagramm/Buchungen bestaetigen.png[Buchung bestätigen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchung bestätigen", align=center]
 
+[cols="1h, 3"]
+[[UC0320]]
 |===
-|ID | [UC0320]
+|ID | **<<UC0320>>**
 |Name | Buchung stornieren
 |Beschreibung | Tenant soll die Möglichkeit haben, die Buchungen zu stornieren und die Anzahlung soll zurückgezahlt werden
 |Akteure | Tenant
@@ -282,8 +302,10 @@ image::./models/analysis/Sequenzdiagramm/Buchungen bestaetigen.png[Buchung best�
 [[buchung_stornieren]]
 image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornieren, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchung stornieren", align=center]
 
+[cols="1h, 3"]
+[[UC0330]]
 |===
-|ID | [UC0330]
+|ID | **<<UC0330>>**
 |Name | Buchungshistorie ansehen
 |Beschreibung | Host soll die Möglichkeiten haben, die schon fertig sind, anzuschauen
 |Akteure | Host
@@ -298,8 +320,10 @@ image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornier
 [[buchungshistorie_ansehen]]
 image::./models/analysis/Sequenzdiagramm/Buchungshistorie ansehen.png[Buchungshistorie ansehen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Buchungshistorie ansehen", align=center]
 
+[cols="1h, 3"]
+[[UC0400]]
 |===
-|ID | [UC0400]
+|ID | **<<UC0400>>**
 |Name | HolidayHome hinzufügen
 |Beschreibung | Host soll die Möglichkeiten haben, neue HolidayHome zu erstellen
 |Akteure | Host
@@ -316,8 +340,10 @@ image::./models/analysis/Sequenzdiagramm/Buchungshistorie ansehen.png[Buchungshi
 [[holidayHome_hinzufügen]]
 image::./models/analysis/Sequenzdiagramm/HolidayHome hinzufügen.png[HolidayHome hinzufügen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome hinzufügen", align=center]
 
+[cols="1h, 3"]
+[[UC0410]]
 |===
-|ID | [UC0410]
+|ID | **<<UC0410>>**
 |Name | HolidayHome bearbeiten
 |Beschreibung | Host soll die Möglichkeiten haben, die Details der erstellten HolidayHome zu bearbeiten
 |Akteure | Host
@@ -334,8 +360,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome hinzufügen.png[HolidayHome
 [[holidayHome_bearbeiten]]
 image::./models/analysis/Sequenzdiagramm/HolidayHome bearbeiten.png[HolidayHome bearbeiten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome bearbeiten", align=center]
 
+[cols="1h, 3"]
+[[UC0420]]
 |===
-|ID | [UC0420]
+|ID | **<<UC0420>>**
 |Name | HolidayHome löschen
 |Beschreibung | Host soll die Möglichkeiten haben, die gewählte HolidayHome von der List des Hosts zu löschen
 |Akteure | Host
@@ -350,8 +378,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome bearbeiten.png[HolidayHome 
 [[holidayHome_löschen]]
 image::./models/analysis/Sequenzdiagramm/HolidayHome löschen.png[HolidayHome löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: HolidayHome löschen", align=center]
 
+[cols="1h, 3"]
+[[UC0500]]
 |===
-|ID | [UC0500]
+|ID | **<<UC0500>>**
 |Name | Host erstellen
 |Beschreibung | Admin soll die Möglichkeit haben einen Host zu erstellen.
 |Akteure | Admin
@@ -368,8 +398,10 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome löschen.png[HolidayHome l�
 [[host_erstellen]]
 image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host erstellen", align=center]
 
+[cols="1h, 3"]
+[[UC0510]]
 |===
-|ID | [UC0510]
+|ID | **<<UC0510>>**
 |Name | Host löschen
 |Beschreibung | Admin soll die Möglichkeit haben einen bereits existierenden Host zu löschen
 |Akteure | Admin
@@ -386,8 +418,10 @@ image::./models/analysis/Sequenzdiagramm/Host erstellen.png[Host erstellen, 100%
 [[host_löschen]]
 image::./models/analysis/Sequenzdiagramm/Host löschen.png[Host löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Host löschen", align=center]
 
+[cols="1h, 3"]
+[[UC0520]]
 |===
-|ID | [UC0520]
+|ID | **<<UC0520>>**
 |Name | Tenant freischalten
 |Beschreibung | Admin soll die Möglichkeit haben einen Tanent freizuschalten, wenn dieser sich registriert hatte.
 |Akteure | Admin
@@ -404,8 +438,10 @@ image::./models/analysis/Sequenzdiagramm/Host löschen.png[Host löschen, 100%, 
 [[tenant_freischalten]]
 image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischalten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant freischalten", align=center]
 
+[cols="1h, 3"]
+[[UC0530]]
 |===
-|ID | [UC0530]
+|ID | **<<UC0530>>**
 |Name | Tenant löschen
 |Beschreibung | Admin soll die Möglichkeit haben einen Tanent UserAccoutn zu löschen.
 |Akteure | Admin
@@ -422,8 +458,10 @@ image::./models/analysis/Sequenzdiagramm/Tenant freischalten.png[Tenant freischa
 [[tenant_löschen]]
 image::./models/analysis/Sequenzdiagramm/Tenant löschen.png[Tenant löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Tenant löschen", align=center]
 
+[cols="1h, 3"]
+[[UC0540]]
 |===
-|ID | [UC0540]
+|ID | **<<UC0540>>**
 |Name | EventCompany erstellen
 |Beschreibung | Admin soll die Möglichkeit haben eine EventCompany zu erstellen
 |Akteure | Admin
@@ -440,8 +478,10 @@ image::./models/analysis/Sequenzdiagramm/Tenant löschen.png[Tenant löschen, 10
 [[eventCompany_erstellen]]
 image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany erstellen", align=center]
 
+[cols="1h, 3"]
+[[UC0550]]
 |===
-|ID | [UC0550]
+|ID | **<<UC0550>>**
 |Name | EventCompany löschen
 |Beschreibung | Admin soll die Möglichkeit haben eine existierenden EventCompany zu löschen.
 |Akteure | Admin
@@ -458,8 +498,10 @@ image::./models/analysis/Sequenzdiagramm/EventCompany erstellen.png[EventCompany
 [[eventCompany_löschen]]
 image::./models/analysis/Sequenzdiagramm/EventCompany löschen.png[EventCompany löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventCompany löschen", align=center]
 
+[cols="1h, 3"]
+[[UC0560]]
 |===
-|ID | [UC0560]
+|ID | **<<UC0560>>**
 |Name | EventEmployee erstellen
 |Beschreibung | Admin hat soll die Möglichkeit haben ein EventEmployee zu erstellen
 |Akteure | Admin
@@ -476,8 +518,10 @@ image::./models/analysis/Sequenzdiagramm/EventCompany löschen.png[EventCompany 
 [[eventEmployee_erstellen]]
 image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmployee erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee erstellen", align=center]
 
+[cols="1h, 3"]
+[[UC0570]]
 |===
-|ID | [UC0570]
+|ID | **<<UC0570>>**
 |Name | EventEmployee löschen
 |Beschreibung | ...
 |Akteure | Admin
@@ -494,8 +538,10 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee erstellen.png[EventEmploy
 [[eventEmployee_löschen]]
 image::./models/analysis/Sequenzdiagramm/EventEmployee löschen.png[EventEmployee löschen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: EventEmployee löschen", align=center]
 
+[cols="1h, 3"]
+[[UC0600]]
 |===
-|ID | [UC0600]
+|ID | **<<UC0600>>**
 |Name | Events für Häuser bestätigen
 |Beschreibung | Host soll die Möglichkeit haben zu entscheiden welche Events welchem HolidayHome bei einer Buchung zugeordnet sind und angezeigt werden.
 |Akteure | Host
@@ -511,8 +557,10 @@ image::./models/analysis/Sequenzdiagramm/EventEmployee löschen.png[EventEmploye
 [[events_für_Häuser_bestätigen]]
 image::./models/analysis/Sequenzdiagramm/Events für Häuser bestätigen.png[Events für Häuser bestätigen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Events für Häuser bestätigen", align=center]
 
+[cols="1h, 3"]
+[[UC0610]]
 |===
-|ID | [UC0610]
+|ID | **<<UC0610>>**
 |Name | Events anschauen
 |Beschreibung | Es sollen Eventübersichten für die EventEmployees oder beim Buchen, mit den entsprechenden Events, angezeigt werden
 |Akteure | Alle
@@ -526,8 +574,10 @@ image::./models/analysis/Sequenzdiagramm/Events für Häuser bestätigen.png[Eve
 [[events_anschauen]]
 image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Events anschauen", align=center]
 
+[cols="1h, 3"]
+[[UC0620]]
 |===
-|ID | [UC0620]
+|ID | **<<UC0620>>**
 |Name | Event bearbeiten
 |Beschreibung | EventEmployee soll die Möglichkeit haben, schon erstellte Events zu bearbeiten.
 |Akteure | EventEmployee
@@ -546,8 +596,10 @@ image::./models/analysis/Sequenzdiagramm/Events anschauen.png[Events anschauen, 
 [[event_bearbeiten]]
 image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event bearbeiten", align=center]
 
+[cols="1h, 3"]
+[[UC0630]]
 |===
-|ID | [UC0630]
+|ID | **<<UC0630>>**
 |Name | Event erstellen
 |Beschreibung | EventEmployee soll die Möglichkeit haben neue Events zu erstellen.
 |Akteure | EventEmployee
@@ -564,8 +616,10 @@ image::./models/analysis/Sequenzdiagramm/Event bearbeiten.png[Event bearbeiten, 
 [[event_erstellen]]
 image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 100%, 100%, pdfwidth=100%, title= "Sequence diagram: Event erstellen", align=center]
 
+[cols="1h, 3"]
+[[UC0640]]
 |===
-|ID | [UC0640]
+|ID | **<<UC0640>>**
 |Name | Event löschen
 |Beschreibung | EventEmployee soll die Möglichkeit haben schon erstellte Events zu löschen
 |Akteure | EventEmployee
@@ -579,8 +633,10 @@ image::./models/analysis/Sequenzdiagramm/Event erstellen.png[Event erstellen, 10
 |benötigte Funktionen | [F0202],[F0520],[F0540]
 |===
 
+[cols="1h, 3"]
+[[UC0650]]
 |===
-|ID | [UC0650]
+|ID | **<<UC0650>>**
 |Name | Event absagen
 |Beschreibung | EventEmployee soll die Möglichkeit haben Events abzusagen.
 |Akteure | EventEmployee, EventCompany
