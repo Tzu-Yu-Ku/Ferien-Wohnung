@@ -180,7 +180,7 @@ image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth
 |Name | Registrierung
 |Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter registrieren zu können.
 |Akteure | unregisteredUserAccount
-|Trigger | unregisteredUser will sich registrieren um ein Haus mieten zu können, indem er das Formular ausfüllt und sendet.
+|Trigger | unregisteredUser will sich registrieren um Tenant zu werden und Häuser mieten zu können, indem er das Formular ausfüllt und sendet.
 |Vorbedingung(en) | unregisteredUser hat noch keinen Account
 |Nötige Schritte a| - 1. unregisteredUser drückt auf registieren in der Navigation bar
 - 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
@@ -232,15 +232,16 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |===
 |ID | **<<UC0210>>**
 |Name | HolidayHome reservieren
-|Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren
+|Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren und bestätigt das durch eine Überweisung
 |Akteure | Tenant
-|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren
+|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren und bekommt dann eine Zahlungsaufforderung zur Bestätigung.
 |Vorbedingung(en) | Tenant ist eingeloggt
 |Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
 - 2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
 - 3. Tenant wählte einen Zeitpunkt aus
 - 4. Tenant kann eventuelle Events dazubuchen (UC0220)
 - 5. Tenant klickt auf buchen/reservieren
+- 6. Tenant bezahlt die Voranzahlung
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -286,7 +287,7 @@ image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einseh
 |===
 |ID | **<<UC0310>>**
 |Name | Buchung bestätigen
-|Beschreibung | Host soll die Möglichkeiten haben, nach der Anzahlung von Tenant, die Buchungen zu bestätigen
+|Beschreibung | Host soll die Möglichkeiten haben die Buchungen zu bestätigen/abzuschließen.
 |Akteure | Host
 |Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung kann dann ins Buchungsmenü gehen und diese per klick auf "bestätigen" bestätigen.
 |Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host angekommen
@@ -322,7 +323,7 @@ image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornier
 |===
 |ID | **<<UC0330>>**
 |Name | Buchungshistorie ansehen
-|Beschreibung | Host soll die Möglichkeiten haben, die schon fertig sind, anzuschauen
+|Beschreibung | Host soll die Möglichkeiten haben die schon fertigen Buchungen gesammelt anschauen zu können.
 |Akteure | Host
 |Trigger | Host wählt im Buchungsmenü den Button Historie aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
 |Vorbedingung(en) | Host ist eingeloggt
@@ -819,9 +820,49 @@ Anforderungen die das Programm leisten können soll, aber für den korrekten Bet
 
 === 8.1 Qualitätsziele
 
-Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
+Die folgende Tabelle zeigt welche Qualitätsansprüche, zu welchem Grad erfüllt sein sollten.
+Die Zeile steht für einen bestimmten Qualitätsanspruch und die Spalte beschreibt die Wichtung
+
+1 = Nicht wichtig
+5 = Sehr wichtig
+
+[options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
+|===
+|Qualitätsanspruch        | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit              |   |   | x |   |
+|Benutzbarkeit            |   |   |   | x |
+|Sicherheit               |   |   |   | x |
+|===
+
+Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähliches
+Benutzbarkeit beschreibt die Nutzerfreundlichkieit, vor allem für Tenant und Host.
+Wartbarkeit beschreibt den Aufwand und die schwierigkeit der Accountverwaltung und ähnlichem.
 
 === Konkrete Nicht-Funktionale Anforderungen
+
+:desired-uptime: 99,5%
+
+[options="header", cols="2h, 1, 3, 12"]
+|===
+|ID
+|Version
+|Name
+|Description
+
+|[NF0010]
+|v0.1
+|Erreichbarkeit
+a|
+Das System sollte mindestens für **{desired-uptime}** aktiv sein.
+
+|[[NF0020]]<<NF0020>>
+|v0.1
+|Sicherheit
+a|
+Passwörter der benutzer sollten ausschließlich als Hash-Werte übergeben werden
+
+|===
+
 
 Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
 Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
