@@ -132,7 +132,7 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt.
 
 [[Anwendungsfall-Diagramm]]
-image::./models/analysis/Anwendungsfalldiagramm_v1.3.png[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
+image::./models/analysis/Anwendungsfalldiagramm_v1.4.png[Anwendungsfall-Diagramm, 100%, 100%, pdfwidth=100%, title= "Anwendungsfall-Diagramm", align=center]
 
 === 6.3 Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle.
@@ -859,13 +859,10 @@ Das System sollte mindestens für **{desired-uptime}** aktiv sein.
 |v0.1
 |Sicherheit
 a|
-Passwörter der benutzer sollten ausschließlich als Hash-Werte übergeben werden
+Passwörter der benutzer sollten ausschließlich als Hash-Werte übergeben/gespeichert werden
 
 |===
 
-
-Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
-Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
 
 == 9. GUI Prototyp
 
