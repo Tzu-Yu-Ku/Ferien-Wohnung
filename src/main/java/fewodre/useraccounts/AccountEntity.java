@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.zip.DataFormatException;
 
 @Entity
-public class UserAccountEntity {
+public class AccountEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
