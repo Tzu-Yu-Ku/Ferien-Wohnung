@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.zip.DataFormatException;
 
 @Entity
 public class AccountEntity {
@@ -47,7 +46,43 @@ public class AccountEntity {
 	private String city;
 
 	@OneToOne
-	private UserAccount userAccount;
+	private UserAccount account;
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+	
+	public String getPostalCode() {
+		return postalCode;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public UserAccount getAccount() {
+		return account;
+	}
 
 	public String getId() {
 		return id;
