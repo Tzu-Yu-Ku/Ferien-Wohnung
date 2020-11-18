@@ -1095,10 +1095,33 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0140
-|Anwendungfall        |
-|Vorbedingung         |
-|Event                |
+|Anwendungfall        |UC0320
+|Vorbedingung         |Tanent ist eingeloggt und hat ein HolidayHome gebucht
+|Event                |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die erstornieren will. Dann wählt er "Stornieren" aus.
 |Erwartete Resultate a|
+- Die Buchung wurde storniert.
+- Der Tanent ist nun wieder auf auf der ausgewählten Buchungsseite.
+|===
+
+|===
+|ID                   |AT0150
+|Anwendungfall        |UC0650
+|Vorbedingung         |Event wurde von Eventemployee erstellt.
+|Event                |Eventemployee wählt ein Event aus. Nun drückt er auf "Absagen" und bestätigt dann nochmal mit "Ja".
+|Erwartete Resultate a|
+- Die Buchung wurde abgesagt.
+- Wenn das Event gebucht wurde, dann werden diejenigen informiert, die dieses Event gebucht hatten. 
+- Das Geld wird zurück überwiesen.
+|===
+
+|===
+|ID                   |AT0140
+|Anwendungfall        |UC0320
+|Vorbedingung         |Tanent ist eingeloggt und hat ein HolidayHome gebucht
+|Event                |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die erstornieren will. Dann wählt er "Stornieren" aus.
+|Erwartete Resultate a|
+- Die Buchung wurde storniert.
+- Der Tanent ist nun wieder auf auf der ausgewählten Buchungsseite.
 |===
 
 
