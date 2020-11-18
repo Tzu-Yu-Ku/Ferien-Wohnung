@@ -1115,7 +1115,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 |===
 
 |===
-|ID                   |AT0140
+|ID                   |AT0160
 |Anwendungfall        |UC0320
 |Vorbedingung         |Tanent ist eingeloggt und hat ein HolidayHome gebucht
 |Event                |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die erstornieren will. Dann wählt er "Stornieren" aus.
