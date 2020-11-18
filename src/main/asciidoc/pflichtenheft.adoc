@@ -1093,6 +1093,15 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 - Tanent ist nun wieder bei der ansicht "Ferienhäuser"
 |===
 
+|===
+|ID                   |AT0140
+|Anwendungfall        |
+|Vorbedingung         |
+|Event                |
+|Erwartete Resultate a|
+|===
+
+
 == 13.Glossar
 Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
 Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
