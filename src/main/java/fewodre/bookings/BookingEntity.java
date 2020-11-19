@@ -1,5 +1,7 @@
 package fewodre.bookings;
 
+import org.salespointframework.order.Order;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,13 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class BookingEntity {
+public class BookingEntity extends Order {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
 
-	public long getId() {
-		return id;
-	}
 }

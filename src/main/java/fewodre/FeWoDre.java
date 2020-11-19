@@ -22,10 +22,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @EnableSalespoint
-public class Application {
+public class FeWoDre {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(FeWoDre.class, args);
 	}
 
 	@Configuration
