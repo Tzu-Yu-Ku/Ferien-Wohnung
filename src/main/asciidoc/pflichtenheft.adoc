@@ -890,21 +890,21 @@ image::./models/analysis/dialoglandkarte_tenant.png[Landing page, 100%, 100%, pd
 
 Als Kunde oder Mieter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail-Adresse und Passwort), oder, falls noch kein Nutzeraccount besteht, ein neues Konto unter "Registrierung" erstellt werden. Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der (eingeloggte) Nutzer das Ferienhausangebot durchstöbern. Jede Auflistung eines Hauses hat einen "Details" Kopf, den der Kunde tätigen kann, um auf eine ausführliche Beschreibung des Angebots zu gelangen. Sowohl in der Liste der Angebote, als auch auf der Detailseite eines Ferienhauses, kann ein eingeloggter Kunde eine Buchung vornehmen, sofern gewählte Anreise- und Abreisezeitpunkte nicht bereits belegt sind. Alle vergangenen und aktuell getätigten Buchungen sind ebenfalls nach erfolgreichem einloggen über einen Knopf in der Kopfzeile erreichbar. Von dort aus können mit einem Klick auf die jeweilige Buchung weitere Details eingesehen werden und, falls möglich, die Buchung über den entsprechenden Knopf stornieren.
 
-== Dialoglandkarte als Vermieter
+=== Dialoglandkarte als Vermieter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_renter.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Vermieter", align=center]
 
 Als Vermieter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail-Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der Vermieter ebenfalls das Ferienhausangebot durchstöbern. Nachdem sich der Vermieter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Ferienhausverwaltung aufrufen oder ein neues Ferienhaus auf der Plattform anbieten. Die Ferienhausverwaltung stellt alle eigenen Angebote in einer Liste dar und über die Liste kann jedes Haus über entsprechende Buttons bearbeitet, gelöscht, Events dafür bestätigt oder dessen Mietvergangenheit eingesehen werden.
 
-== Dialoglandkarte als Eventmitarbeiter
+=== Dialoglandkarte als Eventmitarbeiter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_eventuser.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
 
 Als Eventmitarbeiter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Plattform bekannt geben. Die Eventverwaltung stellt alle Veranstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
 
-== Dialoglandkarte als Admin
+=== Dialoglandkarte als Admin
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_admin.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
