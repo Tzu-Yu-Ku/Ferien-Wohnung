@@ -31,16 +31,18 @@
                 <form role="form" id="registrationForm" th:action="@{/register}" th:object="${registrationForm}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="firstname" name="firstname" th:field="*{firstName}"
-                                   th:class="${#fields.hasErrors('firstName') ? 'form-control is-invalid' : 'form-control'}"
+                            <input type="text" id="firstname" name="firstname" th:field="*{firstName}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('firstName') ? ' is-invalid' : ''}"
                                    placeholder="Vorname" style="width: 33%;" aria-label="Vorname">
-                            <input type="text" id="lastname" name="lastname" th:field="*{lastName}"
-                                   class="form-control mr-0 ml-auto" placeholder="Nachname"
+                            <input type="text" id="lastname" name="lastname" th:field="*{lastName}" class="form-control mr-0 ml-auto"
+                                   th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+                                   placeholder="Nachname"
                                    style="width: 65%;" aria-label="Nachname">
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="email" id="email" name="email" th:field="*{email}" class="form-control"
+                               th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
                                placeholder="E-Mail Adresse eingeben" aria-label="E-Mail Adresse">
                     </div>
                     <div class="form-group">

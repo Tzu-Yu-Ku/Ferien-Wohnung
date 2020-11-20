@@ -10,7 +10,6 @@ import java.util.Date;
 class RegistrationForm {
 
 	@NotBlank(message = "{RegistrationForm.firstname.NotEmpty}")
-	@NotEmpty(message = "{RegistrationForm.firstname.NotEmpty}")
 	private final String firstName;
 
 	@NotBlank(message = "{RegistrationForm.lastname.NotEmpty}")
