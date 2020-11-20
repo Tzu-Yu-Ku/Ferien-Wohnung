@@ -14,16 +14,16 @@ toc::[]
 == 1. Zusammenfassung
 Dieses Dokument repräsentiert das Pflichtenheft des Projekts *FewoDre*. Ziel ist es, eine Übersicht über die zu entwerfende Software zu gewährleisten, welche als Grundlage für die Kommunikation zwischen den Interessenvertretern des Projekts und dem Entwicklerteam dient. Zielstellung ist es, dieses Dokument als Grundlage des Vertrags zwischen dem Auftraggeber und den Entwicklern anzunehmen, weshalb es hinsichtlich seiner Korrektheit und Konsistenz zu überprüfen ist. Folgendes Pflichtenheft beschreit die Anforderungen an das gewünschte System und, in Ansätzen, deren Implementierung durch die Entwickler.
 
-Generell besteht der Anspruch, dass das Pflichtenheft *korrekt*, *komplett* und *konsistent* ist. Da dieses Pflichtenheft bei Abgabe als Maßstab für die Software dient, sollten sämtliche definierten Ziele *erfüllbar* sein. Eine *Rückfervolgung* ist wichtig, da das Pfilchtenheft während des gesamten Entwicklungsprozesses verwendet und als Referenz herangezogen wird. Ferner besteht der Anspruch der einfachen Erweiterbarkait, obgleich Änderungen nach Zustimmung durch die Interessenvertreter auf ein Minumum begrenzt werden sollten.  Da Anforderungen und Umstände konstanten Änderungen unterliegen, sind Anpassungen erwartbar und müssen entsprechend dokumentiert werden.
+Generell besteht der Anspruch, dass das Pflichtenheft *korrekt*, *komplett* und *konsistent* ist. Da dieses Pflichtenheft bei Abgabe als Maßstab für die Software dient, sollten sämtliche definierten Ziele *erfüllbar* sein. Eine *Rückverfolgung* ist wichtig, da das Pflichtenheft während des gesamten Entwicklungsprozesses verwendet und als Referenz herangezogen wird. Ferner besteht der Anspruch der einfachen Erweiterbarkeit, obgleich Änderungen nach Zustimmung durch die Interessenvertreter auf ein Minimum begrenzt werden sollten. Da Anforderungen und Umstände konstanten Änderungen unterliegen, sind Anpassungen erwartbar und müssen entsprechend dokumentiert werden.
 
 
 == 2. Aufgabenstellung & Zielsetzung
-Urlaub im eigenen Land liegt im Trend. und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als urlaubswilliger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWOhnungenDresden) geschlossen. Und nicht nur das, darüberhinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mitdazu buchen zu können.
+Urlaub im eigenen Land liegt im Trend. und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als Urlaubs-williger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWohnungenDresden) geschlossen. Und nicht nur das, darüber hinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mit dazu buchen zu können.
 
-Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potentiellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen. 
-In Abhängigkeit von der Lage (Place) der Ferienwohung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
+Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potentiellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen.
+In Abhängigkeit von der Lage (Place) der Ferienwohnung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
 
-Hauptverantwortlich für einen reibungslosen Ablauf, im Besonderen für die Integrität der Website, ist der Administrator (Admin), wecher die Vermieter, Eventfirmen und deren Mitarbeiter erstellt und löscht sowie die Mieter freischaltet oder gegebenenfalls löscht.
+Hauptverantwortlich für einen reibungslosen Ablauf, im Besonderen für die Integrität der Website, ist der Administrator (Admin), welcher die Vermieter, Eventfirmen und deren Mitarbeiter erstellt und löscht sowie die Mieter freischaltet oder gegebenenfalls löscht.
 
 == 3. Produktnutzung
 Dieser Abschnitt wird im Folgenden einen Überblick über die geplante Nutzung der Software und dessen Einbettung geben.
@@ -32,10 +32,10 @@ Ziel der Software ist es als Web-Shop Kunden der Firma FeWoDre das digitale Buch
 
 Eine Optimierung für folgende Webbrowser steht im Vordergrund:
 
-- Mozilla Firefox, version 55.0.3+
-- Google Chrome, version 61.0.3163+
+- Mozilla Firefox, Version 55.0.3+
+- Google Chrome, Version 61.0.3163+
 
-Eine einfache Bedienung des webshops sollte ohne vertieftes technisches Verständnis möglich sein, um eine möglichst breite Zielgruppe anzusprechen. Sämtliche Daten sollen in einer Datenbank persistiert werden und durch den Webshop abfragbar sein.
+Eine einfache Bedienung des Webshops sollte ohne vertieftes technisches Verständnis möglich sein, um eine möglichst breite Zielgruppe anzusprechen. Sämtliche Daten sollen in einer Datenbank persistiert werden und durch den Webshop abfragbar sein.
 
 == 4. Interessenvertreter (Stakeholders)
 
@@ -43,10 +43,10 @@ Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, we
 
 |===
 |*Name* |*Priorität* |*Beschreibung* |*Ziele*
-|FeWoDre GmbH |5 |Der primäre Auftraggeber des Projekts. a| - möglichst viele Ferienwohnungen vermieten 
-- dabei mögichst wenig eigenen (Wartungs-)Aufwand haben 
-- aufgrund starker Kompetation intuitiv benutzbare und ansprechende Benutzeroberfläche darbieten
-- mögichst nahtlose Integration der Veranstalltungsfirma
+|FeWoDre GmbH |5 |Der primäre Auftraggeber des Projekts. a| - möglichst viele Ferienwohnungen vermieten
+- dabei möglichst wenig eigenen (Wartungs-)Aufwand haben
+- aufgrund starker Konkurrenz intuitiv benutzbare und ansprechende Benutzeroberfläche darbieten
+- möglichst nahtlose Integration der Veranstaltungsfirma
 |Mieter |4 |Hauptsächlicher Nutzer der Plattform, mit dem Ziel, Umsatz zu erzeugen a|
 - möglichst einfache und intuitive Bedienbarkeit
 - schnelle Abwicklung des Mietens einer Ferienwohnung
@@ -54,9 +54,9 @@ Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, we
 |Vermieter |3 |Bietet seine freien Ferienwohnungen über unsere Plattform zur Miete an a|
 - möglichst einfache und intuitive Bedienbarkeit
 - Übersicht über vergangene, aktuelle und anstehende Vermietungen der eigenen Ferienwohnung(en)
-- Einfache Integration von Verstalltungen auf der Detailseite der jeweiligen Ferienwohnung
-|Veranstalltungsmitarbeiter |3 |Erstellt und verwaltet Veranstalltungen für seine Firma, erhöht dadurch die Attraktivität der Ferienwohnungen und somit unserer Plattform a|
-- intuitive Übersicht über seine Veranstalltungen und deren Bearbeitungsmöglichkeiten
+- Einfache Integration von Veranstaltungen auf der Detailseite der jeweiligen Ferienwohnung
+|Veranstaltungsmitarbeiter |3 |Erstellt und verwaltet Veranstaltungen für seine Firma, erhöht dadurch die Attraktivität der Ferienwohnungen und somit unserer Plattform a|
+- intuitive Übersicht über seine Veranstaltungen und deren Bearbeitungsmöglichkeiten
 |Administrator |2 |Erstellt und löscht Vermieter und Eventfirmen, schaltet Mieter frei und kann diese auch wieder löschen a|
 - Überblick über alle Benutzer der Plattform
 - datenschutzkonformer Umgang mit den ihm gegebenen Möglichkeiten
@@ -71,7 +71,7 @@ Nachfolgend sind sämtliche juristische und natürliche Personen aufgelistet, we
 
 === 5.1 Kontextdiagramm
 
-Das Kontextdiagramm beschreibt die Integration das geplante Systems. Berücksichtigt werden alle Nutzergruppen und deren Zugriff auf das System sowie jegliche Software Dritter, welche auf das System zugreift oder auf die durch unser System zugegriffen wird.
+Das Kontextdiagramm beschreibt die Integration des geplanten Systems. Berücksichtigt werden alle Nutzergruppen und deren Zugriff auf das System sowie jegliche Software Dritter, welche auf das System zugreift oder auf die durch unser System zugegriffen wird.
 
 [[Top-Level-Architektur]]
 image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidth=100%, title= "Top-Level-Architektur", align=center]
@@ -88,14 +88,13 @@ image:models/analysis/Top-Level-Architektur.png[top-level-architektur]
 Der folgende Abschnitt gewährt einen Überblick über die durch das System erwartbar zu handhabenden Anwendungsfälle. Die Anwendungsfälle beschreiben die Funktionalität, die das System besitzen muss sowie die involvierten Akteure, wobei die Beschreibung hauptsächlich aus Sicht des Klienten erfolgt. 
 
 === 6.1 Akteure
-
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Die nachfolgende Tabelle listet alle Akteure der Software und deren Beschreibung auf. Lassen sich Akteure zu einer Gruppe zusammenfassen, wird diese _kurisv_ dargestellt.
+Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Die nachfolgende Tabelle listet alle Akteure der Software und deren Beschreibung auf. Lassen sich Akteure zu einer Gruppe zusammenfassen, wird diese _kursiv_ dargestellt.
 
 [options="header"]
 [cols="1,4"]
 |===
 |Name |Beschreibung
-|unregisteredUser | Stellt einen nicht registrieten Besucher der Seite dar, der mit dem System interagiert.
+|unregisteredUser | Stellt einen nicht registrieren Besucher der Seite dar, der mit dem System interagiert.
 |UserAccount | Stellt einen registrierten Account/Benutzer der Seite dar, der mit dem System interagiert.
 |Tenant | Stellt einen Benutzer mit der Rolle "TENANT" dar. Dieser entspricht einem Mieter.
 |Host | Stellt einen Benutzer mit der Rolle "HOST" dar. Dieser entspricht einem Vermieter.
