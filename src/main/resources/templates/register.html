@@ -28,55 +28,55 @@
                 <h1>Neu bei uns?</h1>
                 <p class="mb-3" contenteditable="true">Dann erstellen Sie sich ganz bequem und schnell ein neues
                     Benutzerkonto auf unserer Plattform:</p>
-                <form role="form" th:action="@{/register}" method="post">
+                <form role="form" id="registrationForm" th:action="@{/register}" th:object="${registrationForm}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="firstname" name="firstname" class="form-control"
-                                   placeholder="Vorname"
-                                   required="required" style="width: 33%;" aria-label="Vorname">
-                            <input type="text" id="lastname" name="lastname" class="form-control mr-0 ml-auto"
-                                   placeholder="Nachname" required="required" style="width: 65%;" aria-label="Nachname">
+                            <input type="text" id="firstname" name="firstname" th:field="*{firstName}"
+                                   th:class="${#fields.hasErrors('firstName') ? 'form-control is-invalid' : 'form-control'}"
+                                   placeholder="Vorname" style="width: 33%;" aria-label="Vorname">
+                            <input type="text" id="lastname" name="lastname" th:field="*{lastName}"
+                                   class="form-control mr-0 ml-auto" placeholder="Nachname"
+                                   style="width: 65%;" aria-label="Nachname">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-control"
-                               placeholder="E-Mail Adresse eingeben"
-                               required="required" aria-label="E-Mail Adresse">
+                        <input type="email" id="email" name="email" th:field="*{email}" class="form-control"
+                               placeholder="E-Mail Adresse eingeben" aria-label="E-Mail Adresse">
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password" name="password" class="form-control"
-                               placeholder="Passwort eingeben"
-                               required="required" aria-label="Passwort">
+                        <input type="password" id="password" name="password" th:field="*{password}" class="form-control"
+                               placeholder="Passwort eingeben" aria-label="Passwort">
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password-confirm" name="password-confirm" class="form-control"
-                               placeholder="Passwort wiederholen" required="required" aria-label="Passwort wiederholen">
+                        <input type="password" id="password-confirm" name="password-confirm"
+                               th:field="*{passwordConfirm}" class="form-control" placeholder="Passwort wiederholen"
+                               aria-label="Passwort wiederholen">
                     </div>
                     <div class="form-group">
-                        <input type="date" id="birthdate" name="birthdate" class="form-control"
-                               placeholder="Geburtsdatum"
-                               required="required" aria-label="Geburtsdatum">
+                        <input type="date" id="birthdate" name="birthdate" class="form-control" th:field="*{birthDate}"
+                               placeholder="Geburtsdatum" aria-label="Geburtsdatum">
                     </div>
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="street" name="street" class="form-control" placeholder="Straße"
-                                   required="required" style="width: 83%" aria-label="Straße">
+                            <input type="text" id="street" name="street" th:field="*{street}" class="form-control"
+                                   placeholder="Straße" style="width: 83%" aria-label="Straße">
                             <input type="text" id="houseNumber" name="houseNumber" class="form-control mr-0 ml-auto"
-                                   placeholder="Nr." required="required" style="width: 15%;" aria-label="Hausnummer">
+                                   th:field="*{houseNumber}" placeholder="Nr."
+                                   style="width: 15%;" aria-label="Hausnummer">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="postcode" name="postcode" class="form-control" placeholder="PLZ"
-                                   required="required" style="width: 23%" aria-label="Postleitzahl">
-                            <input type="text" id="city" name="city" class="form-control mr-0 ml-auto"
-                                   placeholder="Ortschaft"
-                                   required="required" style="width: 75%;" aria-label="Ortschaft">
+                            <input type="text" id="postcode" name="postcode" th:field="*{postcode}" class="form-control"
+                                   placeholder="PLZ" style="width: 23%" aria-label="Postleitzahl">
+                            <input type="text" id="city" name="city" th:field="*{city}"
+                                   class="form-control mr-0 ml-auto" placeholder="Ortschaft"
+                                   style="width: 75%;" aria-label="Ortschaft">
                         </div>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" id="terms" name="terms" class="form-check-input" placeholder="AGB"
-                               required="required">
+                        <input type="checkbox" id="terms" name="terms" th:field="*{terms}" class="form-check-input"
+                               placeholder="AGB">
                         <label class="form-check-label" for="terms">
                             Ich akzeptiere die <a href="#">allgemeinen Geschäftsbedingungen</a>.
                         </label>
@@ -88,11 +88,11 @@
     </div>
 </div>
 <div class="container p-0 w-100 mt-5 bg-white">
-  <div class="row">
-    <div class="w-100">
-      <nav th:include="footer :: footer"></nav>
+    <div class="row">
+        <div class="w-100">
+            <nav th:include="footer :: footer"></nav>
+        </div>
     </div>
-  </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
