@@ -35,13 +35,19 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default catalog entries.");
 		HolidayHome test = new HolidayHome();
+		HolidayHome test2 = new HolidayHome();
 		test.setName("Anus");
 		test.setDescription("Haha");
 		test.setPlace(new Place("straße", "nr", "plz", "dresden", 1, 1));
 		test.setBookable(true);
 		test.setHostUuid("abcd-efgh-jkli");
 		test.setImage("house2.png");
-		HolidayHome test2 = test;
+		test2.setName("Anusa");
+		test2.setDescription("Hahaaaa");
+		test2.setPlace(new Place("straße", "nr", "plz", "dresden", 1, 1));
+		test2.setBookable(true);
+		test2.setHostUuid("abcd-efgh-jkli");
+		test2.setImage("house2.png");
 		holidayHomeEventCatalog.save(test);
 		holidayHomeEventCatalog.save(test2);
 

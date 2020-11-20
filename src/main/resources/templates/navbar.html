@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 
 <head>
   <meta charset="utf-8">
@@ -11,9 +11,9 @@
 </head>
 
 <body>
-  <!-- jquery (needed for bootstrap)-->
-  <nav class="navbar navbar-expand-md navbar-light bg-light" style="">
-    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
+  <nav class="navbar navbar-expand-md navbar-light bg-light" th:fragment="navbar">
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="index.html">
@@ -21,13 +21,13 @@
           <b> FeWoMi 2020<br></b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="itemlist.html">Ferienhäuser</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser</a> </li>
           <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
           <li class="nav-item"> <a class="nav-link" href="#">Buchungen<br></a> </li>
           <li class="nav-item"><a class="nav-link" href="#">Impressum<br></a></li>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item"> <a class="nav-link" href="login.html">Log in</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="login.html" th:href="@{/login}">Log in</a> </li>
           <li class="nav-item"> <a class="nav-link text-primary" href="register.html">Registrieren</a> </li>
         </ul>
       </div>
