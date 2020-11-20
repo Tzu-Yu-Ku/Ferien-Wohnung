@@ -46,7 +46,7 @@ public class FeWoDre {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable();  // for lab purposes, that's ok!
+			http.csrf().disable();
 			http.authorizeRequests().antMatchers("/**").permitAll().and()
 					.formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");

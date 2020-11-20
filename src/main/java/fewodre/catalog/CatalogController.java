@@ -22,7 +22,7 @@ public class CatalogController {
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 
-		model.addAttribute("holidayhomeCatalog", catalog.findAll());
+		model.addAttribute("holidayhomeCatalog", catalog.findByCategory("home"));
 
 		return "itemlist";
 	}
