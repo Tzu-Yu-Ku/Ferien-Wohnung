@@ -118,11 +118,11 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle.
 |Name | Login
 |Beschreibung | UserAccount soll die Möglichkeit haben sich anzumelden, um die besondere Rechte ihres Accounts wahrzunehmen.
 |Akteure | UserAccount
-|Trigger | unregisteredUser drückt auf einloggen in der Navigation bar um mehr Funktionen zu erhalten
+|Trigger | unregisteredUser drückt auf "Einloggen" in der Navigationsleiste, um mehr Funktionen zu erhalten
 |Vorbedingung(en) | UserAccount ist registriert und noch nicht eingeloggt
-|Nötige Schritte a| - 1. unregisteredUser drückt auf einloggen in der Navigation bar
+|Nötige Schritte a| - 1. unregisteredUser drückt auf "Einloggen" in der Navigationsleiste
 - 2. unregisteredUser gibt seine Anmeldedaten ein
-- 3. unregisteredUser  drückt auf “Log in”
+- 3. unregisteredUser  drückt auf “Einloggen” Button
 |Erweiterung | ...
 |benötigte Funktionen | [F0010]
 |===
@@ -137,9 +137,9 @@ image::./models/analysis/Sequenzdiagramm/Login.png[Login, 100%, 100%, pdfwidth=1
 |Name | Logout
 |Beschreibung | UserAccount soll die Möglichkeit haben sich abzumelden, um die besonderen Rechte ihres Accounts abzugeben.
 |Akteure | UserAccount
-|Trigger | UserAccount will das Portal verlassen und drückt deswegen auf "logout"
+|Trigger | UserAccount will das Portal verlassen und drückt deswegen auf "Ausloggen"
 |Vorbedingung(en) | UserAccount ist eingeloggt
-|Nötige Schritte | UserAccount drückt auf “logout” in der Navigation bar 
+|Nötige Schritte | UserAccount drückt auf “Ausloggen” in der Navigationsleiste 
 |Erweiterung | ...
 |benötigte Funktionen | [F0010]
 |===
@@ -152,13 +152,13 @@ image::./models/analysis/Sequenzdiagramm/Logout.png[Logout, 100%, 100%, pdfwidth
 |===
 |ID | **<<UC0120>>**
 |Name | Registrierung
-|Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter registrieren zu können.
+|Beschreibung | unregisteredUser soll die Möglichkeit haben sich als Mieter/Tenant registrieren zu können.
 |Akteure | unregisteredUserAccount
-|Trigger | unregisteredUser will sich registrieren um Tenant zu werden und Häuser mieten zu können, indem er das Formular ausfüllt und sendet.
+|Trigger | unregisteredUser will sich registrieren, um Tenant zu werden und Häuser mieten zu können, indem er das Formular ausfüllt und sendet.
 |Vorbedingung(en) | unregisteredUser hat noch keinen Account
-|Nötige Schritte a| - 1. unregisteredUser drückt auf registieren in der Navigation bar
+|Nötige Schritte a| - 1. unregisteredUser drückt auf registrieren in der Navigation bar
 - 2. unregisteredUser gibt die geforderten Daten ein und akzeptiert die Bedingungen
-- 3. unregisteredUser  drückt auf registieren
+- 3. unregisteredUser drückt auf registrieren
 |Erweiterung | ...
 |benötigte Funktionen | [F0020],[F0021]
 |===
@@ -173,9 +173,9 @@ image::./models/analysis/Sequenzdiagramm/Registierung.png[Registierung, 100%, 10
 |Name | UserAccount editieren
 |Beschreibung | UserAccount soll die Möglichkeit haben sich seine Daten ändern zu können.
 |Akteure | UserAccount
-|Trigger | UserAccount ändert seine personlichen Daten, indem er auf sein Konto geht, die Änderungen festlegt und bestätigt.
+|Trigger | UserAccount ändert seine persönlichen Daten, indem er auf sein Konto geht, die Änderungen festlegt und bestätigt.
 |Vorbedingung(en) | eingeloggt als UserAccount
-|Nötige Schritte a| - 1. Auf Konto drücken um zur Accountübersicht zu kommen
+|Nötige Schritte a| - 1. Auf Konto drücken, um zur Account-Übersicht zu kommen
 - 2. Auf bearbeiten drücken, dann neue Daten eingeben und auf bestätigen drücken
 |Erweiterung | ...
 |benötigte Funktionen | [K0100]
@@ -189,11 +189,11 @@ image::./models/analysis/Sequenzdiagramm/UserAccount editieren.png[UserAccount e
 |===
 |ID | **<<UC0200>>**
 |Name | HolidayHome  ansehen
-|Beschreibung | UserAccount soll die Möglichkeit haben mehre Deteile über die HolidayHome anzuschauen 
+|Beschreibung | UserAccount soll die Möglichkeit haben weitere Details über ein HolidayHome einzusehen
 |Akteure | UserAccount und unregisteredUser
-|Trigger | Jeder Besucher der Seite soll zugriff auf eine Liste aller angebotenen Häuser bekommen 
+|Trigger | Jeder Besucher der Seite soll zugriff auf eine Liste aller angebotenen Häuser bekommen
 |Vorbedingung(en) | Webseite wurde geöffnet
-|Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt 
+|Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigationsleiste gedrückt
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0400]
 |===
@@ -208,14 +208,14 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |Name | HolidayHome reservieren
 |Beschreibung | Tenant soll die Möglichkeiten haben die gewählte HolidayHome an den gewählte Zeiträume reservieren und bestätigt das durch eine Überweisung
 |Akteure | Tenant
-|Trigger | Ein Tenant klickt bei einem Haus auf buchen, um dieses vorerst zu reservieren und bekommt dann eine Zahlungsaufforderung zur Bestätigung.
+|Trigger | Ein Tenant klickt bei einem Haus auf "Buchen", um dieses vorerst zu reservieren und bekommt dann eine Zahlungsaufforderung zur Bestätigung.
 |Vorbedingung(en) | Tenant ist eingeloggt
 |Nötige Schritte a| - 1. Es wird auf Ferienhäuser in der Navigation bar gedrückt
 - 2. Tenant wählt ein Haus aus (optional Detailansicht möglich)
-- 3. Tenant wählte einen Zeitpunkt aus
-- 4. Tenant kann eventuelle Events dazubuchen (UC0220)
-- 5. Tenant klickt auf buchen/reservieren
-- 6. Tenant bezahlt die Voranzahlung
+- 3. Tenant wählt einen Zeitpunkt aus
+- 4. Tenant kann optional verfügbare Events dazubuchen (UC0220)
+- 5. Tenant klickt auf "Buchen"/"Reservieren"
+- 6. Tenant bezahlt die Anzahlung
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -225,12 +225,12 @@ image::./models/analysis/Sequenzdiagramm/HolidayHome ansehen.png[HolidayHome ans
 |===
 |ID | **<<UC0220>>**
 |Name | Event dazubuchen
-|Beschreibung | Tenant soll die Möglichkeiten haben, Events, die angebot sind, dazubuchen
+|Beschreibung | Tenant soll die Möglichkeiten haben, Events, die angeboten werden, dazubuchen
 |Akteure | Tenant
 |Trigger | Tenant bekommt während der Buchung ein Auswahlfeld und wählt per klick dazubuchbare Events aus.
 |Vorbedingung(en) | Tenant ist eingeloggt und bucht/reserviert gerade ein HolidayHome
 |Nötige Schritte a| - 1. Tenant führt UC0210, Schritt 1-3, aus
-- 2. Tenant erhält eine Liste möglicher Events und kann davon durch klicken welche dazubuchen
+- 2. Tenant erhält eine Liste möglicher Events und kann diese durch Klicken dazubuchen
 - 3. Buchung läuft wie in UC0210 weiter (Schritt 5)
 |Erweiterung | ...
 |benötigte Funktionen | [F0110],[F0100],[F0111],[F0120],[F0200],[F0202],[F0220],[F0230],[F0240],[F0241],[F0400]
@@ -248,7 +248,7 @@ image::./models/analysis/Sequenzdiagramm/Event dazubuchen.png[Event dazubuchen, 
 |Akteure | Host und Tenant
 |Trigger | Tenant oder Host klicken auf den Button "Buchungen".
 |Vorbedingung(en) | Tanent hat ein HolidayHome reserviert/gebucht
-|Nötige Schritte a| - 1. Man klick in der Navigation bar auf den Reiter Buchungen. 
+|Nötige Schritte a| - 1. Man klick in der Navigationsleiste auf den Reiter "Buchungen".
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0400]
 |===
@@ -263,10 +263,10 @@ image::./models/analysis/Sequenzdiagramm/buchungen einsehen.png[Buchungen einseh
 |Name | Buchung bestätigen
 |Beschreibung | Host soll die Möglichkeiten haben die Buchungen zu bestätigen/abzuschließen.
 |Akteure | Host
-|Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung kann dann ins Buchungsmenü gehen und diese per klick auf "bestätigen" bestätigen.
-|Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host angekommen
-|Nötige Schritte a| - 1. Der Host klick in der Navigation bar auf den Reiter Buchungen.
-- 2. Host bestätigt Häuser/Buchungen durch drücken auf Bestätigen aus. 
+|Trigger | Host bekommt eine Benachrichtigung über eine offene Buchung. Dieser kann dann ins Buchungsmenü gehen und diese per Klick auf "Bestätigen" bestätigen.
+|Vorbedingung(en) | Anzahlung für eine Reservierung ist bei dem Host eingegangen
+|Nötige Schritte a| - 1. Der Host klick in der Navigationsleiste auf den Reiter "Buchungen".
+- 2. Host bestätigt Häuser/Buchungen durch Drücken auf "Bestätigen" aus.
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0400]
 |===
@@ -279,12 +279,12 @@ image::./models/analysis/Sequenzdiagramm/Buchungen bestaetigen.png[Buchung best�
 |===
 |ID | **<<UC0320>>**
 |Name | Buchung stornieren
-|Beschreibung | Tenant soll die Möglichkeit haben, die Buchungen zu stornieren und die Anzahlung soll zurückgezahlt werden
+|Beschreibung | Tenant soll die Möglichkeit haben, Buchungen zu stornieren. Die erfolgte Anzahlung soll erstattet werden.
 |Akteure | Tenant
-|Trigger | Tenant klick in der Buchungsübersicht auf den Button "stornieren"
+|Trigger | Tenant klickt in der Buchungsübersicht auf den Button "Stornieren"
 |Vorbedingung(en) | Tenant hat ein HolidayHome reserviert/gebucht
-|Nötige Schritte a| - 1. Tenant klick in der Navigation bar auf den Reiter Buchungen.
-- 2. Wählt eine Buchung aus und klick bei dieser auf den “stonieren” Knopf
+|Nötige Schritte a| - 1. Tenant klickt in der Navigationsleiste auf den Reiter "Buchungen".
+- 2. Wählt eine Buchung aus und klickt bei dieser auf den “Stornieren” Knopf
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0244],[F0400]
 |===
@@ -297,12 +297,12 @@ image::./models/analysis/Sequenzdiagramm/Buchung stornieren.png[Buchung stornier
 |===
 |ID | **<<UC0330>>**
 |Name | Buchungshistorie ansehen
-|Beschreibung | Host soll die Möglichkeiten haben die schon fertigen Buchungen gesammelt anschauen zu können.
+|Beschreibung | Host soll die Möglichkeiten haben die schon abgeschlossenen Buchungen gesammelt einsehen zu können.
 |Akteure | Host
-|Trigger | Host wählt im Buchungsmenü den Button Historie aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
+|Trigger | Host wählt im Buchungsmenü den Button "Historie" aus und kann dann für entsprechende Häuser eine Buchungshistorie einsehen.
 |Vorbedingung(en) | Host ist eingeloggt
-|Nötige Schritte a| - 1. Host klick in der Navigation bar auf den Reiter Buchungen
-- 2. Host wählt ein Haus und klick auf Buchungshistorie ansehen 
+|Nötige Schritte a| - 1. Host klickt in der Navigationsleiste auf den Reiter "Buchungen"
+- 2. Host wählt ein Haus und klickt auf "Buchungshistorie ansehen"
 |Erweiterung | ...
 |benötigte Funktionen | [F0200],[F0210],[F0220],[F0230],[F0240],[F0241],[F0242],[F0243],[F0244],[F0245],[F0246],[F0400]
 |===
@@ -315,14 +315,14 @@ image::./models/analysis/Sequenzdiagramm/Buchungshistorie ansehen.png[Buchungshi
 |===
 |ID | **<<UC0400>>**
 |Name | HolidayHome hinzufügen
-|Beschreibung | Host soll die Möglichkeiten haben, neue HolidayHome zu erstellen
+|Beschreibung | Host soll die Möglichkeiten haben, neue HolidayHome auf der Plattform anzubieten
 |Akteure | Host
-|Trigger | Host geht im Ferienhausbereich auf "neue Wohnung hinzufügen" gibt die Daten dieser ein und bestätigt die per klick auf den Button "bestätigen".
+|Trigger | Host geht im Ferienhausbereich auf "neue Wohnung hinzufügen", gibt die Daten zur Wohnung ein und bestätigt alles per Klick auf den Button "Angebot erstellen".
 |Vorbedingung(en) | Host ist eingeloggt
-|Nötige Schritte a| - 1. Host klick auf Ferienhäuser in der navigation bar
-- 2. Host klick auf Ferienhaushinzufügen
+|Nötige Schritte a| - 1. Host klickt auf Ferienhäuser in der Navigationsleiste
+- 2. Host klickt auf "neues Ferienhaus hinzufügen"
 - 3. Host gibt Daten des Ferienhauses ein
-- 4. Host bestätigt alles durch klicken auf den Knopf hinzufügen 
+- 4. Host bestätigt alles durch Klicken auf den Knopf "Angebot erstellen"
 |Erweiterung | ...
 |benötigte Funktionen | [F0400],[F0410]
 |===
@@ -645,7 +645,6 @@ image::./models/analysis/Sequenzdiagramm/Event absagen und löschen.png[Event ab
 
 
 == 7. Funktionale Anforderungen
-
 === 7.1 Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
@@ -657,27 +656,27 @@ Ist der Nutzer bereits im System Registriert so soll es ihm möglich sein, sich 
 * Nutzername
 * Passwort
 
-|[F0020]|v0.1|Registrieren a|Das System soll es dem unregistrierten Nutzer ermöglichen sich zu registrieren bzw eine Registrierung zu beantragen.
-Je nach dem welche Zugangsrechte der jeweilligen Nutzer erlangen will müssen folgende Informationen zur verfügung gestellt werden:
+|[F0020]|v0.1|Registrieren a|Das System soll es dem unregistrierten Nutzer ermöglichen sich zu registrieren bzw. eine Registrierung zu beantragen.
+Je nachdem welche Zugangsrechte der jeweiligen Nutzer erlangen will, müssen folgende Informationen zur Verfügung gestellt werden:
 
 * Mieter-Rechte:
 ** Vorname
 ** Nachname
-** Email-Adresse
+** E-Mail-Adresse
 ** Geburtsdatum
 ** Adresse
 ** Passwort
 
 * Vermieter-Rechte:
-** Alle Angaben die auch Mieter angeben müssen 
+** Alle Angaben die auch Mieter angeben müssen
 ** Angaben zur Bank
 
 * Event-Mitarbeiter:
-** Alle Angaben die auch Mieter angeben müssen 
+** Alle Angaben die auch Mieter angeben müssen
 ** Arbeitgeber
 
 * Admin-Rechte:
-** Alle Angaben die auch Mieter angeben müssen 
+** Alle Angaben die auch Mieter angeben müssen
 Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
 
 |[F0021]|v0.1|Angaben überprüfen a|Das System soll in der Lage sein die angegebenen Daten aus der Registrierung auf deren Korrektheit zu überprüfen.
@@ -686,42 +685,41 @@ Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System a
 
 |[F0101]|v0.1|Verfügbarkeit einschränken a|Das System soll in der Lage sein einzelne Buchungsdaten von Häusern, für mögliche Mieter, zu blockieren.
 
-|[F0110]|v0.1|Katalog a|Das System soll Lesezugriff auf eingetragene Häuser, durch eine Katalog, gewähren.
+|[F0110]|v0.1|Katalog a|Das System soll Lesezugriff auf eingetragene Häuser, durch einen Katalog, gewähren.
 
-|[F0111]|v0.1|Authentifizierung a|Das System soll jedem Nutzer die Möglichkeit gewähren alle eingetragenen Häuser anzuschauen. 
+|[F0111]|v0.1|Authentifizierung a|Das System soll jedem Nutzer die Möglichkeit gewähren alle eingetragenen Häuser anzuschauen.
 
-|[F0120]|v0.1|Haus Informationen anzeigen a|Das System soll in der Lage sein Details zu den Häusern anzuzeigen nach dem der Nutzer auf diese drückt.
-Diese sollen beinhlaten:
-
+|[F0120]|v0.1|Haus Informationen anzeigen a|Das System soll in der Lage sein Details zu den Häusern anzuzeigen, nach dem der Nutzer auf diese drückt.
+Diese sollen beinhalten:
 * Name
 * Adresse
 * Bilder
-* Beschreibung 
+* Beschreibung
 * Preis
 
-|[F0200]|v0.1|Buchung a|Das System soll es dem Nutzer ermöglichen Buchungen wie Einkauswägen zu benutzen in dem diese, vorübergehend das für den Mieter in frage 
+|[F0200]|v0.1|Buchung a|Das System soll es dem Nutzer ermöglichen Buchungen wie Einkaufswagen zu benutzen in dem diese, vorübergehend das für den Mieter in Frage
 kommende Haus speichern, während dieser noch nach Alternativen bzw. zusätzlichen Events für das Haus suchen kann.
 
 |[F0201]|v0.1|Buchung bearbeiten a|Das System soll es dem Mieter ermöglichen das ausgewählte Haus in der Buchung zu entfernen bzw. den Buchungszeitraum zu verändern.
 
 |[F0202]|v0.1|Event hinzufügen a|Das System soll es ermöglichen der Buchung Events in der Nähe des Hauses hinzuzufügen.
 
-|[F0210]|v0.1|Buchung anzeigen a|Das System soll es dem Mieter erlauben seine Buchung azuschauen, was diesem folgende Daten zurückgeben soll:
+|[F0210]|v0.1|Buchung anzeigen a|Das System soll es dem Mieter erlauben seine Buchung anzuschauen, was ihm folgende Daten zurückgeben soll:
 
 * Haus Name
 * Buchungszeitraum
-* Liste mit zusätzlichen Events jedes mit einzel Preis aufgelistet 
+* Liste mit zusätzlichen Events jedes mit Einzelpreis aufgelistet
 * Gesamtpreis der kompletten Buchung
 
-|[F0220]|v0.1|Buchung buchen a|Das System soll es dem Mieter ermöglichen seine Buchung zu reservieren. 
+|[F0220]|v0.1|Buchung buchen a|Das System soll es dem Mieter ermöglichen seine Buchung zu reservieren.
 Das System wird darauffolgend die Buchung überprüfen und bei Korrektheit eine Bestellung erstellen.
 
-|[F0230]|v0.1|Buchung prüfen a|Das System soll in der Lage sein den Buchungszeitraum einer Buchung auf dessen Verfügbarkeit zu überprüfen. 
+|[F0230]|v0.1|Buchung prüfen a|Das System soll in der Lage sein den Buchungszeitraum einer Buchung auf dessen Verfügbarkeit zu überprüfen.
 Zusätzlich soll auch die Verfügbar von den zugebuchten Events, einer Buchung, überprüft werden.
 
-|[F0240]|v0.1|Bestellungen a|Das System soll in der Lage sein Bestellungen dauehaft zu speichern.
+|[F0240]|v0.1|Bestellungen a|Das System soll in der Lage sein Bestellungen dauerhaft zu speichern.
 
-|[F0241]|v0.1|Bestellungen erstellen a|Das System soll in der Lage sein Bestellunge aus den Angaben zur Buchung hinaus zuerstellen.
+|[F0241]|v0.1|Bestellungen erstellen a|Das System soll in der Lage sein Bestellungen aus den Angaben zur Buchung hinaus zu erstellen.
 Bestellungen werden mit dem Status "Reserviert" erzeugt.
 
 |[F0242]|v0.1|Zustellen a|Das System soll dem Nutzer die Rechnung für seine Bestellung zustellen können und dem Vermieter über die Bestellung zu seinem Haus informieren.
@@ -738,8 +736,8 @@ Bestellungen werden mit dem Status "Reserviert" erzeugt.
 
 |[F0301]|v0.1|Mitglieder löschen/erstellen/bestätigen a|Das System soll es dem Admin ermöglichen Nutzer zu erstellen und registrierte Nutzer zu löschen, sowie Tenants zu bestätigen.
 
-|[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen die über das Systeme erstellt wurden, anzeigen zulassen.
-Die folgeden Daten sollen jeder Bestellung hierbei zugeordnet werden:
+|[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen, die über das Systeme erstellt wurden, anzeigen zu lassen.
+Die folgenden Daten sollen jeder Bestellung hierbei zugeordnet werden:
 
 * Erstellungszeitpunkt
 * Mieter der die Bestellung aufgab
@@ -802,18 +800,17 @@ Die Zeile steht für einen bestimmten Qualitätsanspruch und die Spalte beschrei
 
 [options="header", cols="3h, ^1, ^1, ^1, ^1, ^1"]
 |===
-|Qualitätsanspruch        | 1 | 2 | 3 | 4 | 5
-|Wartbarkeit              |   |   | x |   |
-|Benutzbarkeit            |   |   |   | x |
-|Sicherheit               |   |   |   | x |
+|Qualitätsanspruch | 1 | 2 | 3 | 4 | 5
+|Wartbarkeit | | | x | |
+|Benutzbarkeit | | | | x |
+|Sicherheit | | | | x |
 |===
 
-Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähliches
-Benutzbarkeit beschreibt die Nutzerfreundlichkieit, vor allem für Tenant und Host.
-Wartbarkeit beschreibt den Aufwand und die schwierigkeit der Accountverwaltung und ähnlichem.
+Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähnliches
+Benutzbarkeit beschreibt die Benutzerfreundlichkeit, vor allem für Tenant und Host.
+Wartbarkeit beschreibt den Aufwand und die Schwierigkeit der Accountverwaltung und ähnlichem.
 
 === Konkrete Nicht-Funktionale Anforderungen
-
 :desired-uptime: 99,5%
 
 [options="header", cols="2h, 1, 3, 12"]
@@ -891,28 +888,28 @@ image::./../resources/static/resources/img/pflichtenheft/manageusers_page.png[La
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_tenant.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Kunde/Mieter", align=center]
 
-Als Kunde oder Mieter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort), oder, falls noch kein Nutzeraccount besteht, ein neues Konto unter "Registrierung" erstellt werden. Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der (eingeloggte) Nutzer das Ferienhausangebot durchstöbern. Jede Auflistung eines Hauses hat einen "Details" Kopf, den der Kunde tätigen kann, um auf eine ausführliche Beschreibung des Angebots zu gelangen. Sowohl in der Liste der Angebote, als auch auf der Detailsseite eines Ferienhauses, kann ein eingeloggter Kunde eine Buchung vornehmen, sofern gewählte Anreise- und Abreisezeitpunkte nicht bereits belegt sind.Alle vergangenen und aktuell getätigten Buchungen sind ebenfalls nach erfolgreichem einloggen über einen Knopf in der Kopfzeile erreichbar. Von dort aus können mit einem Klick auf die jeweilige Buchung weitere Details eingesehen werden und, falls möglich, die Buchung über den entsprechenden Knopf stornieren.
+Als Kunde oder Mieter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail-Adresse und Passwort), oder, falls noch kein Nutzeraccount besteht, ein neues Konto unter "Registrierung" erstellt werden. Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der (eingeloggte) Nutzer das Ferienhausangebot durchstöbern. Jede Auflistung eines Hauses hat einen "Details" Kopf, den der Kunde tätigen kann, um auf eine ausführliche Beschreibung des Angebots zu gelangen. Sowohl in der Liste der Angebote, als auch auf der Detailseite eines Ferienhauses, kann ein eingeloggter Kunde eine Buchung vornehmen, sofern gewählte Anreise- und Abreisezeitpunkte nicht bereits belegt sind. Alle vergangenen und aktuell getätigten Buchungen sind ebenfalls nach erfolgreichem einloggen über einen Knopf in der Kopfzeile erreichbar. Von dort aus können mit einem Klick auf die jeweilige Buchung weitere Details eingesehen werden und, falls möglich, die Buchung über den entsprechenden Knopf stornieren.
 
 == Dialoglandkarte als Vermieter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_renter.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Vermieter", align=center]
 
-Als Vermieter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der Vermieter ebenfalls das Ferienhausangebot durchstöbern. Nachdem sich der Vermieter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Ferienhausverwaltung aufrufen oder ein neues Ferienhaus auf der Platform anbieten. Die Ferienhausverwaltung stellt alle eigenen Angebote in einer Liste dar und über die Liste kann jedes Haus über entsprechende Buttons bearbeitet, gelöscht, Events dafür bestätigt oder dessen Mietvergangenheit eingesehen werden.
+Als Vermieter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail-Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann der Vermieter ebenfalls das Ferienhausangebot durchstöbern. Nachdem sich der Vermieter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Ferienhausverwaltung aufrufen oder ein neues Ferienhaus auf der Plattform anbieten. Die Ferienhausverwaltung stellt alle eigenen Angebote in einer Liste dar und über die Liste kann jedes Haus über entsprechende Buttons bearbeitet, gelöscht, Events dafür bestätigt oder dessen Mietvergangenheit eingesehen werden.
 
 == Dialoglandkarte als Eventmitarbeiter
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_eventuser.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
 
-Als Eventmitarbeiter kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Platform bekanntgeben. Die Eventverwaltung stellt alle Verantstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
+Als Eventmitarbeiter kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Eventmitarbeiter das Ferienhausangebot durchstöbern. Nachdem sich der Eventmitarbeiter eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile seine Eventverwaltung aufrufen oder ein neues Event auf der Plattform bekannt geben. Die Eventverwaltung stellt alle Veranstaltungen der Eventfirma, für die der Eventmitarbeiter arbeitet, in einer Liste dar und über die Liste kann jedes Event über entsprechende Buttons bearbeitet, gelöscht und/oder abgesagt werden.
 
 == Dialoglandkarte als Admin
 
 [[dialog_tenant]]
 image::./models/analysis/dialoglandkarte_admin.png[Landing page, 100%, 100%, pdfwidth=100%, title= "Dialoglandkarte der Platform als Eventmitarbeiter", align=center]
 
-Als Admin kann man sich stets über den "Log In" Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Administrator das Ferienhausangebot durchstöbern. Nachdem sich der Admin eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile die Nutzeraccountverwaltung aufrufen oder einen neuen Account auf der Platform erstellen.
+Als Admin kann man sich stets über den "Einloggen"-Knopf in der Kopfzeile der Benutzeroberfläche einloggen (per E-Mail Adresse und Passwort). Über die Startseite oder den Knopf "Ferienhäuser" in der Kopfzeile, kann auch ein Administrator das Ferienhausangebot durchstöbern. Nachdem sich der Admin eingeloggt hat, kann er über neue Knöpfe in der Kopfzeile die Nutzeraccountverwaltung aufrufen oder einen neuen Account auf der Plattform erstellen.
 
 
 == 11. Datenmodell
@@ -931,37 +928,37 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung
-|FeWoMi             | Die zentrale Klasse des Systems, stellt die Ferienwohnungsverwaltung an sich dar.
-|UserAccount        | Die zentrale Klasse aller Accounts.
-|Admin              | Die Klasse des Accounts für den Admin.
-|Tanent             | Die Klasse des Accounts für Mieter.
-|Host               | Die Klasse des Accounts für Vermieter.
-|EventEmployee      | Die Klasse des Accounts für Eventmitarbeiter.
-|Booking            | Die Klasse stellt eine buchung dar.
-|HolydayHome        | Die Klasse stellt ein Ferienhaus dar.
-|Event              | Die Klasse stellt ein Event dar.
-|SmallEvent         | Die Klasse stellt ein spezielles kleines Event dar.
-|LargeEvent         | Die Klasse stellt ein spezielles großes Event dar.
-|Place              | Diese Klasse stellt einen Ort dar.
-|BookingStatus      | Diese Klasse stellt den Fortschritt einer Buchung dar.
-|Reserved           | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
-|Confirmed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
-|Cancelled          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
-|Completed          | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
-|EventManager       | Die Klasse verwaltet alle Events.
-|AccountManager     | Die Klasse verwaltet alle Accounts.
-|BookingManager     | Die Klasse verwaltet alle Buchungen.
+|FeWoMi | Die zentrale Klasse des Systems, stellt die Ferienwohnungsverwaltung an sich dar.
+|UserAccount | Die zentrale Klasse aller Accounts.
+|Admin | Die Klasse des Accounts für den Admin.
+|Tanent | Die Klasse des Accounts für Mieter.
+|Host | Die Klasse des Accounts für Vermieter.
+|EventEmployee | Die Klasse des Accounts für Eventmitarbeiter.
+|Booking | Die Klasse stellt eine Buchung dar.
+|HolydayHome | Die Klasse stellt ein Ferienhaus dar.
+|Event | Die Klasse stellt ein Event dar.
+|SmallEvent | Die Klasse stellt ein spezielles kleines Event dar.
+|LargeEvent | Die Klasse stellt ein spezielles großes Event dar.
+|Place | Diese Klasse stellt einen Ort dar.
+|BookingStatus | Diese Klasse stellt den Fortschritt einer Buchung dar.
+|Reserved | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Confirmed | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Cancelled | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|Completed | Diese Klasse stellt den konkreten Fortschritt einer Buchung dar.
+|EventManager | Die Klasse verwaltet alle Events.
+|AccountManager | Die Klasse verwaltet alle Accounts.
+|BookingManager | Die Klasse verwaltet alle Buchungen.
 |HolidayHomeManager | Die Klasse verwaltet alle Ferienwohnungen.
 |===
 
 == 12.Akzeptanztestfälle
-Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
-Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
+Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D. h. pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
+Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z. B. im Test-Plan) referenzieren zu können.
 
 
 |===
 |ID                   |AT0010
-|Anwendungfall        |UC0120
+|Anwendungsfall        |UC0120
 |Vorbedingung         |unregisteredUser benutzt das System.
 |Ereignis             |unregistertUser drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, 12345) aus und klickt auf "Registrieren".
 |Erwartete Resultate a|
@@ -971,7 +968,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0020
-|Anwendungfall        |UC0520
+|Anwendungsfall        |UC0520
 |Vorbedingung         |Admin ist eingeloggt und eine Registrierung wurde durchgeführt.
 |Ereignis             |Admin klickt auf "Mieter verwalten" dann auf "Neue Registrierungen". Nun wählt er den entsprechenden Antragstellers(Max Musterman) aus und dann auf "Registrierung bestätigen"
 |Erwartete Resultate a|
@@ -981,7 +978,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0030
-|Anwendungfall        |UC0120
+|Anwendungsfall        |UC0120
 |Vorbedingung         |unregisteredPerson benutzt das System.
 |Ereignis             |unregisteredPerson drückt auf "Registrieren" in der Navigation. Er füllt die geforderten Registrierungsdaten(Musterman, Max, 01.01.2000, maxmusterman@gmail.com, ...) aus und klickt anschließend erneut auf "Registrieren".
 |Erwartete Resultate a|
@@ -990,7 +987,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0040
-|Anwendungfall        |UC0100
+|Anwendungsfall        |UC0100
 |Vorbedingung         |UserAccount exsistiert.
 |Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 11111) ein und drückt auf "Login"
 |Erwartete Resultate a|
@@ -1000,7 +997,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT050
-|Anwendungfall        |UC0100
+|Anwendungsfall        |UC0100
 |Vorbedingung         |Das System hat mind. ein existierenden UserAccount(Max Musterman).
 |Ereignis             |UserAccount klickt auf "Login" und gibt seine Anmeldedaten(maxmusterman@gmail.com, 12345) ein und drückt auf "Login".
 |Erwartete Resultate a| 
@@ -1010,7 +1007,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0060
-|Anwendungfall        |UC0100
+|Anwendungsfall        |UC0100
 |Vorbedingung         |UserAccount(Max Musterman) ist eingeloggt.
 |Ereignis             |UserAccount klickt auf "Ausloggen".
 |Erwartete Resultate a|
@@ -1020,7 +1017,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0070
-|Anwendungfall        |UC0500
+|Anwendungsfall        |UC0500
 |Vorbedingung         |Admin ist eingeloggt und ein Vermieter mochte einen Host UserAccount in dem System haben. Dazu hat der dem Admin die benötigten Registrierungsdaten(Schwarz, Thomas, 01.01.2000, thomasschwarz@gmail.com, 13579) von sich gegeben.
 |Ereignis             |Admin klickt auf "Vermieter verwalten" und dann auf "Vermieter hinzufügen". Er gibt die benötigten Daten(Schwarz, Thomas, 01.01.2000, thomasschwarz@gmail.com, 13579) ein und drückt dann auf "Vermieter erstellen".
 |Erwartete Resultate a|
@@ -1031,7 +1028,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0080
-|Anwendungfall        |UC0400
+|Anwendungsfall        |UC0400
 |Vorbedingung         |Host(Thomas Schwarz) ist eingeloggt.
 |Ereignis             |Host klickt auf "Ferienhäuser verwalten" und dann auf "Ferienhaus hinzufügen". Er gibt die benötigten Daten(Villa Kunterbund, An der Goldgrube 1, ...)  ein und klickt dann auf "Ferienhaus erstellen".
 |Erwartete Resultate a|
@@ -1041,7 +1038,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0090
-|Anwendungfall        |UC0540
+|Anwendungsfall        |UC0540
 |Vorbedingung         |Admin ist eingeloggt und eine Eventfirma möchte einen EventCompany UserAccount in dem System haben. Dazu hat sie dem Admin die benötigten Registrierungsdaten(BestEventfima, ...) von sich gegeben.
 |Event                |Admin glickt auf "Eventfrima verwalten" und dann auf "Eventfirma hinzufügen". Er gibt die benötigten Daten(BesteEventfimar,...) ein und drückt dann auf "Eventfirma erstelen".
 |Erwartete Resultate a|
@@ -1053,7 +1050,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0100
-|Anwendungfall        |UC0560
+|Anwendungsfall        |UC0560
 |Vorbedingung         |Admin ist eingeloggt und eine Eventmitarbeiter einer Eventfirma möchte einen EventEmployee UserAccount in dem System haben. Dazu hat er dem Admin die benötigten Registrierungsdaten(Möller, Peter, petermöller@gmail.com, mölleristhebest) von sich gegeben.
 |Event                |Admin klickt auf "Eventfrima verwalten" und dann auf die entsprechende Eventfirma in der der Eventmitarbeiter arbeitet. Der Admin klickt nun auf "Mitarbeiter hinzufügen". Er gibt die benötigten Daten(Möller, Peter, petermöller@gmail.com, mölleristhebest) ein und drückt auf "Mitatbeiter erstellen".
 |Erwartete Resultate a|
@@ -1064,7 +1061,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0110
-|Anwendungfall        |UC0630
+|Anwendungsfall        |UC0630
 |Vorbedingung         |EventEmployee ist eingeloggt.
 |Event                |EventEmployee klickt auf "Events verwalten" und dann auf "Event hinzufügen". Er wählt "regelmäßiges Event" aus gibt die benötigten Daten(Stadtführung, Mo. 15:30Uhr, Stadtführung durch die Altstadt Dresdens.) aus und drückt dann auf "Event erstellen".
 |Erwartete Resultate a|
@@ -1074,7 +1071,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0120
-|Anwendungfall        |UC0600
+|Anwendungsfall        |UC0600
 |Vorbedingung         |Host ist eingeloggt.
 |Event                |Host klickt auf "Ferienhäuser verwalten" und wählt dann ein Ferienhaus aus. Nun drückt er "Events zuordnen" und wählt alle Events aus, die bei der Buchung dieses HolidayHomes zu Verfügung stehen sollen. Wenn er alle gewünschten Events ausgewählt hat drückt er auf "Feritg".
 |Erwartete Resultate  |
@@ -1084,7 +1081,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0130
-|Anwendungfall        |UC0210 und UC0220
+|Anwendungsfall        |UC0210 und UC0220
 |Vorbedingung         |Tanent ist eingeloggt.
 |Event                |Tanent klickt "Ferienhäuser" und wählt sich ein HolidayHome(Villa Kunterbund) aus. Dann wählt er einen Zeitraum aus und bucht eventuall noch ein Event dazu und klickt auf "Jetzt Reservieren".
 |Erwartete Resultate a|
@@ -1094,7 +1091,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 |===
 |ID                   |AT0140
-|Anwendungfall        |UC0320
+|Anwendungsfall        |UC0320
 |Vorbedingung         |Tanent ist eingeloggt und hat ein HolidayHome gebucht
 |Event                |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die erstornieren will. Dann wählt er "Stornieren" aus.
 |Erwartete Resultate a|
@@ -1103,28 +1100,26 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 |===
 
 |===
-|ID                   |AT0150
-|Anwendungfall        |UC0650
-|Vorbedingung         |Event wurde von Eventemployee erstellt.
-|Event                |Eventemployee wählt ein Event aus. Nun drückt er auf "Absagen" und bestätigt dann nochmal mit "Ja".
+|ID |AT0150
+|Anwendungsfall |UC0650
+|Vorbedingung |Event wurde von Eventemployee erstellt.
+|Event |Eventemployee wählt ein Event aus. Nun drückt er auf "Absagen" und bestätigt dann nochmal mit "Ja".
 |Erwartete Resultate a|
 - Die Buchung wurde abgesagt.
-- Wenn das Event gebucht wurde, dann werden diejenigen informiert, die dieses Event gebucht hatten. 
+- Wenn das Event gebucht wurde, dann werden diejenigen informiert, die dieses Event gebucht hatten.
 - Das Geld wird zurück überwiesen.
 |===
 
 |===
-|ID                   |AT0160
-|Anwendungfall        |UC0320
-|Vorbedingung         |Tanent ist eingeloggt und hat ein HolidayHome gebucht
-|Event                |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die erstornieren will. Dann wählt er "Stornieren" aus.
+|ID |AT0160
+|Anwendungsfall |UC0320
+|Vorbedingung |Tanent ist eingeloggt und hat ein HolidayHome gebucht
+|Event |Tanent klickt auf "Buchungen". Er wählt die Buchung aus, die er stornieren will. Dann wählt er "Stornieren" aus.
 |Erwartete Resultate a|
 - Die Buchung wurde storniert.
-- Der Tanent ist nun wieder auf auf der ausgewählten Buchungsseite.
+- Der Tanent ist nun wieder auf der ausgewählten Buchungsseite.
 |===
 
-
 == 13.Glossar
-Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
+Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essenziell ist, sollten hier aufgeführt werden.
 Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
-Beispiel: Was bedeutet "Kunde"? Ein Nutzer des Systems? Der Kunde des Projektes (Auftraggeber)?
