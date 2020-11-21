@@ -22,7 +22,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WelcomeController {
 
 	@GetMapping("/")
+	public String mainPage() {
+		return "index";
+	}
+
+	@GetMapping("/index")
 	public String index() {
-		return "welcome";
+		return "index";
 	}
 }

@@ -5,9 +5,7 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.quantity.Metric;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import java.util.List;
 
 /**
  * This class represents Holisay
@@ -30,7 +28,7 @@ public class HolidayHome extends Product {
 	}
 
 	public HolidayHome() {
-		super("HAUS", Money.parse("EUR 1"), Metric.UNIT);
+		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
 		this.addCategory("home");
 	}
 
