@@ -32,7 +32,7 @@ public class AccountController {
 	}
 
 	@PostMapping("/register")
-	public String registerNewAccount(@Valid @ModelAttribute("registrationForm") TenantRegistrationForm tenantRegistrationForm,
+	public String registerNewAccount(@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
 	                                 BindingResult result, Model model) {
 		LOG.info(tenantRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {

@@ -16,7 +16,8 @@
       <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="index.html">
+      <div class="collapse navbar-collapse" id="navbar6">
+        <a class="navbar-brand text-primary d-none d-md-block" href="index.html" th:href="@{/}">
           <b> FeWoMi 2020<br></b>
         </a>
         <ul class="navbar-nav mx-auto">
@@ -37,7 +38,7 @@
           <li class="nav-item">
             <a class="nav-link" href="login.html" th:href="@{/login}">Log in</a>
           </li>
-          <li class="nav-item" sec:authorize="hasAnyRole('HOST')">
+          <li class="nav-item">
             <a class="nav-link text-primary" href="register.html" th:href="@{/register}">Registrieren</a>
           </li>
         </ul>

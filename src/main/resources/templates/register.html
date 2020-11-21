@@ -47,38 +47,44 @@
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" th:field="*{password}" class="form-control"
+                               th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
                                placeholder="Passwort eingeben" aria-label="Passwort">
                     </div>
                     <div class="form-group">
                         <input type="password" id="password-confirm" name="password-confirm"
-                               th:field="*{passwordConfirm}" class="form-control" placeholder="Passwort wiederholen"
-                               aria-label="Passwort wiederholen">
+                               th:field="*{passwordConfirm}" class="form-control"
+                               th:classappend="${#fields.hasErrors('passwordConfirm') ? 'is-invalid' : ''}"
+                               placeholder="Passwort wiederholen" aria-label="Passwort wiederholen">
                     </div>
                     <div class="form-group">
-                        <input type="date" id="birthdate" name="birthdate" class="form-control" th:field="*{birthDate}"
-                               placeholder="Geburtsdatum" aria-label="Geburtsdatum">
+                        <input type="date" id="birthdate" name="birthdate" class="form-control"
+                               th:classappend="${#fields.hasErrors('birthDate') ? 'is-invalid' : ''}"
+                               th:field="*{birthDate}" placeholder="Geburtsdatum" aria-label="Geburtsdatum">
                     </div>
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="street" name="street" th:field="*{street}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('street') ? 'is-invalid' : ''}"
                                    placeholder="Straße" style="width: 83%" aria-label="Straße">
                             <input type="text" id="houseNumber" name="houseNumber" class="form-control mr-0 ml-auto"
-                                   th:field="*{houseNumber}" placeholder="Nr."
-                                   style="width: 15%;" aria-label="Hausnummer">
+                                   th:classappend="${#fields.hasErrors('houseNumber') ? 'is-invalid' : ''}"
+                                   th:field="*{houseNumber}" placeholder="Nr." style="width: 15%;" aria-label="Hausnummer">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="postcode" name="postcode" th:field="*{postcode}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('postcode') ? 'is-invalid' : ''}"
                                    placeholder="PLZ" style="width: 23%" aria-label="Postleitzahl">
                             <input type="text" id="city" name="city" th:field="*{city}"
-                                   class="form-control mr-0 ml-auto" placeholder="Ortschaft"
-                                   style="width: 75%;" aria-label="Ortschaft">
+                                   class="form-control mr-0 ml-auto"
+                                   th:classappend="${#fields.hasErrors('city') ? 'is-invalid' : ''}"
+                                   placeholder="Ortschaft" style="width: 75%;" aria-label="Ortschaft">
                         </div>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" id="terms" name="terms" th:field="*{terms}" class="form-check-input"
-                               placeholder="AGB">
+                               th:classappend="${#fields.hasErrors('terms') ? 'is-invalid' : ''}" placeholder="AGB">
                         <label class="form-check-label" for="terms">
                             Ich akzeptiere die <a href="#">allgemeinen Geschäftsbedingungen</a>.
                         </label>
