@@ -1,6 +1,4 @@
-package fewodre.bookings;
-
-import org.salespointframework.time.BusinessTime;
+package fewodre.utils;
 
 /**
  * Proxy welcher es erlauben soll das, dass die komplette Systemzeit, per {@link DefaultBusinessTime} , auf einmal

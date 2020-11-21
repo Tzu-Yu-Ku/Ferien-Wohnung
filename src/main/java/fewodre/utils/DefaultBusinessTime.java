@@ -1,4 +1,4 @@
-package fewodre.bookings;
+package fewodre.utils;
 
 import org.salespointframework.time.BusinessTime;
 
