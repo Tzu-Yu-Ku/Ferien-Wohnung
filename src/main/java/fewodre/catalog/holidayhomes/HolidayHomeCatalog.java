@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.holidayhomes;
 
 import org.salespointframework.catalog.Catalog;
 import org.salespointframework.catalog.Product;

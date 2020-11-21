@@ -1,6 +1,8 @@
 package fewodre.catalog;
 
-import fewodre.catalog.Event.EventType;
+import fewodre.catalog.events.*;
+import fewodre.catalog.holidayhomes.*;
+import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;

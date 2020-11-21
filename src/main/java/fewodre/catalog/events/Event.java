@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.events;
 
 import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
