@@ -28,7 +28,7 @@ public class CatalogController {
 
 		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
 
-		return "itemlist";
+		return "holidayhomes";
 	}
 
 	@GetMapping("/events")
@@ -36,7 +36,6 @@ public class CatalogController {
 
 		model.addAttribute("eventCatalog", Ecatalog.findAll());
 
-		return "itemlist";
+		return "events";
 	}
-
 }
