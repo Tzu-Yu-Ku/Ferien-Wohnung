@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
 
 <head>
   <meta charset="utf-8">
@@ -33,12 +33,16 @@
             <a class="nav-link" href="#">Impressum<br></a>
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" sec:authorize="!hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
           <li class="nav-item">
             <a class="nav-link" href="login.html" th:href="@{/login}">Log in</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-primary" href="register.html" th:href="@{/register}">Registrieren</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" sec:authorize="hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
+          <li sec:authentication="name">
           </li>
         </ul>
       </div>

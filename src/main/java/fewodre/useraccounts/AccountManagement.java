@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.sql.Date;
 import java.util.UUID;
 
 @Service
@@ -38,26 +37,27 @@ public class AccountManagement {
 		this.userAccounts = userAccounts;
 	}
 
-	public AccountEntity createTenantAccount(RegistrationForm registrationForm) {
+	public AccountEntity createTenantAccount(TenantRegistrationForm tenantRegistrationForm) {
 
-		Assert.notNull(registrationForm, "registrationForm should not be null!");
+		Assert.notNull(tenantRegistrationForm, "registrationForm should not be null!");
 
-		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(registrationForm.getPassword());
-		if(userAccounts.findByUsername(registrationForm.getEmail()).isEmpty()) {
-			UserAccount newUserAccount = userAccounts.create(registrationForm.getEmail(), password,
-					registrationForm.getEmail(), TENANT_ROLE);
-			newUserAccount.setFirstname(registrationForm.getFirstName());
-			newUserAccount.setLastname(registrationForm.getLastName());
+		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword());
+		if(userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
+			UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
+					tenantRegistrationForm.getEmail(), TENANT_ROLE);
+			newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
+			newUserAccount.setLastname(tenantRegistrationForm.getLastName());
 			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-					.setBirthDate(registrationForm.getBirthDate())
-					.setStreet(registrationForm.getStreet())
-					.setHouseNumber(registrationForm.getHouseNumber())
-					.setPostCode(registrationForm.getPostcode())
-					.setCity(registrationForm.getCity())
+					.setBirthDate(tenantRegistrationForm.getBirthDate())
+					.setStreet(tenantRegistrationForm.getStreet())
+					.setHouseNumber(tenantRegistrationForm.getHouseNumber())
+					.setPostCode(tenantRegistrationForm.getPostcode())
+					.setCity(tenantRegistrationForm.getCity())
 					.setAccount(newUserAccount);
 			LOG.info(newAccount.getUuid());
 			return accounts.save(newAccount);
 		}
+
 		else {
 			return null;
 		}
