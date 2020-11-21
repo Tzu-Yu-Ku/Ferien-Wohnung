@@ -43,5 +43,6 @@ public class CatalogDataInitializer implements DataInitializer {
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
 
+		
 	}
 }
