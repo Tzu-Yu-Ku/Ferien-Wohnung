@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Event extends Product {
 
-	public static enum EventType {
+	public enum EventType {
 		LARGE, SMALL
 	}
 
@@ -23,8 +23,12 @@ public class Event extends Product {
 	private boolean eventStatus;
 	private EventType eventType;
 
-	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType) {
+	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventtype) {
 		
+	}
+
+	public Event() {
+		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
 	}
 
 	public EventType getEventType() {

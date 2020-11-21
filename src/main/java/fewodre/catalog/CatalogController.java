@@ -24,8 +24,7 @@ public class CatalogController {
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 
-		//model.addAttribute("holidayhomeCatalog", Hcatalog.findByCategory("home"));
-		model.addAttribute("holidayhomeCatalog", Hcatalog);
+		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
 
 		return "itemlist";
 	}
@@ -33,7 +32,7 @@ public class CatalogController {
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 
-		model.addAttribute("eventCatalog", Ecatalog);
+		model.addAttribute("eventCatalog", Ecatalog.findAll());
 
 		return "itemlist";
 	}
