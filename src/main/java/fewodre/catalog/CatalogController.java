@@ -25,6 +25,11 @@ public class CatalogController {
 	String holidayHomeCatalog(Model model) {
 
 		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
+<<<<<<< HEAD
+=======
+		//model.addAttribute("holidayhomeCatalog", Hcatalog.findByCategory("home"));
+		//model.addAttribute("holidayhomeCatalog", Hcatalog);
+>>>>>>> 647cb9bb6093fadff7d6ba4507ed6e9af00be585
 
 		return "itemlist";
 	}

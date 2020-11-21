@@ -43,10 +43,14 @@ public class CatalogDataInitializer implements DataInitializer {
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
 
+<<<<<<< HEAD
 		Event eventTest = new Event();
 		eventTest.setName("Villa Kunterbund");
 		eventTest.setDescription("Einfach nice.");
 		eventTest.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
 		EventCatalog.save(eventTest);
+=======
+		
+>>>>>>> 647cb9bb6093fadff7d6ba4507ed6e9af00be585
 	}
 }
