@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import static fewodre.useraccounts.AccountManagement.ADMIN_ROLE;
+import static fewodre.useraccounts.AccountManagement.*;
 
 @Component
 public class AccountDataInitializer implements DataInitializer {
@@ -37,7 +37,10 @@ public class AccountDataInitializer implements DataInitializer {
 
 		LOG.info("Creating mock accounts to populate our database and test our prototype.");
 
-		userAccountManagement.create("janu@log.in", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
+		userAccountManagement.create("admin", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
+		userAccountManagement.create("host", Password.UnencryptedPassword.of("host"), HOST_ROLE);
+		userAccountManagement.create("tenant", Password.UnencryptedPassword.of("tenant"), TENANT_ROLE);
+		userAccountManagement.create("event", Password.UnencryptedPassword.of("event"), EVENTEMPLOYEE_ROLE);
 
 	}
 }
