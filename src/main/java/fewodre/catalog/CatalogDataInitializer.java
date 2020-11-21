@@ -24,7 +24,7 @@ public class CatalogDataInitializer implements DataInitializer {
 
 	@Override
 	public void initialize() {
-/*
+
 		if (holidayHomeCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
@@ -47,7 +47,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		test2.setImage("house2.png");
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
-*/
+
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
