@@ -1,26 +1,31 @@
 package fewodre.catalog;
 
 import fewodre.utils.Place;
+import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
+import org.salespointframework.quantity.Metric;
 
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Event extends Product {
 
 	public static enum EventType {
 		LARGE, SMALL
 	}
 
-	private EventType eventType;
-	private String description, eventCompanyUuid;
+	private String eventCompanyUuid;
+	private String description;
+	private String image;
 	private Place place;
 	private boolean eventStatus;
+	private EventType eventtype;
 
-	public Event() {
-		Event test = new Event();
+	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventtype) {
+		
 	}
-
 
 	public EventType getEventType() {
 		return eventType;

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.HashSet;
 
 
-public interface HolidayHomeEventCatalog extends Catalog<HolidayHome> {
+public interface HolidayHomeCatalog extends Catalog<HolidayHome> {
 
 	static final Sort DEFAULT_SORT = Sort.by("productIdentifier").descending();
 

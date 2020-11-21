@@ -15,13 +15,13 @@ import java.util.List;
 @Entity
 public class HolidayHome extends Product {
 
-	private String description, hostUuid;
-	//@ElementCollection
+	private String hostUuid;
+	private String description;
 	private String image;
 	private Place place;
 	private boolean isBookable;
 
-	public HolidayHome(String description, String hostUuid, String image, Place place, boolean isBookable) {
+	public HolidayHome(String hostUuid, String description, String image, Place place, boolean isBookable) {
 		this.description = description;
 		this.hostUuid = hostUuid;
 		this.image = image;
