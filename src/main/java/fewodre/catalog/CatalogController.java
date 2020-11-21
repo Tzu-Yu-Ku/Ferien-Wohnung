@@ -11,7 +11,8 @@ public class CatalogController {
 
 	private static final Quantity NONE = Quantity.of(0);
 
-	private final HolidayHomeEventCatalog catalog;
+	private final HolidayHomeCatalog Hcatalog;
+	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 
 	CatalogController(HolidayHomeEventCatalog catalog, BusinessTime businessTime) {
