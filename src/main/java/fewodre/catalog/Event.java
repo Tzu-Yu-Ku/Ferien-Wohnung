@@ -21,9 +21,9 @@ public class Event extends Product {
 	private String image;
 	private Place place;
 	private boolean eventStatus;
-	private EventType eventtype;
+	private EventType eventType;
 
-	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventtype) {
+	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType) {
 		
 	}
 

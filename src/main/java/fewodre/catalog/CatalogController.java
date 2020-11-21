@@ -15,15 +15,25 @@ public class CatalogController {
 	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 
-	CatalogController(HolidayHomeEventCatalog catalog, BusinessTime businessTime) {
-		this.catalog = catalog;
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime) {
+		this.Hcatalog = Hcatalog;
+		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
 	}
 
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 
-		model.addAttribute("holidayhomeCatalog", catalog.findByCategory("home"));
+		//model.addAttribute("holidayhomeCatalog", Hcatalog.findByCategory("home"));
+		model.addAttribute("holidayhomeCatalog", Hcatalog);
+
+		return "itemlist";
+	}
+
+	@GetMapping("/events")
+	String EventCatalog(Model model) {
+
+		model.addAttribute("eventCatalog", Ecatalog);
 
 		return "itemlist";
 	}

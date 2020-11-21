@@ -29,7 +29,7 @@ public class HolidayHome extends Product {
 
 	public HolidayHome() {
 		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
-		this.addCategory("home");
+		//this.addCategory("home");
 	}
 
 	public String getDescription() {

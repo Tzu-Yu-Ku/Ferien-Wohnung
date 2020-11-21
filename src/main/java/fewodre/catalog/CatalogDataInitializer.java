@@ -11,37 +11,37 @@ import org.springframework.stereotype.Component;
 public class CatalogDataInitializer implements DataInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
-	private final HolidayHomeEventCatalog holidayHomeEventCatalog;
+	private final HolidayHomeCatalog holidayHomeCatalog;
 
-	CatalogDataInitializer(HolidayHomeEventCatalog holidayHomeEventCatalog) {
-		this.holidayHomeEventCatalog = holidayHomeEventCatalog;
+	CatalogDataInitializer(HolidayHomeCatalog holidayHomeCatalog) {
+		this.holidayHomeCatalog = holidayHomeCatalog;
 	}
 
 	@Override
 	public void initialize() {
 
-		if (holidayHomeEventCatalog.findAll().iterator().hasNext()) {
+		if (holidayHomeCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
 
 		LOG.info("Creating default catalog entries.");
 		HolidayHome test = new HolidayHome();
 		HolidayHome test2 = new HolidayHome();
-		test.setName("Anus");
-		test.setDescription("Haha");
-		test.setPlace(new Place("straße", "nr", "plz", "dresden", 1, 1));
+		test.setName("Villa Kunterbund");
+		test.setDescription("Einfach nice.");
+		test.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
 		test.setBookable(true);
 		test.setHostUuid("abcd-efgh-jkli");
 		test.setImage("house2.png");
 
-		test2.setName("Anusa");
-		test2.setDescription("Hahaaaa");
-		test2.setPlace(new Place("straße", "nr", "plz", "dresden", 1, 1));
+		test2.setName("Schloss am Wasserfall");
+		test2.setDescription("Geiles plätschern");
+		test2.setPlace(new Place("Am Wasserfall", "1", "01099", "Dresden", 1, 1));
 		test2.setBookable(true);
 		test2.setHostUuid("abcd-efgh-jkli");
 		test2.setImage("house2.png");
-		holidayHomeEventCatalog.save(test);
-		holidayHomeEventCatalog.save(test2);
+		holidayHomeCatalog.save(test);
+		holidayHomeCatalog.save(test2);
 
 	}
 }
