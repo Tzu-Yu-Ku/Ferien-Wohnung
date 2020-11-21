@@ -1,0 +1,7 @@
+package fewodre.bookings;
+
+public class test2 {
+	public void writeCurrentTime(){
+		System.out.println("That's what I measure: "+ProxyBusinessTime.getBusinessTime().getTime().toString());
+	}
+}

@@ -1,0 +1,15 @@
+package fewodre.bookings;
+
+import java.time.Duration;
+
+public class test {
+	public static void main(String[] args) {
+		DefaultBusinessTime time = ProxyBusinessTime.getBusinessTime();
+		test2 writer = new test2();
+		System.out.println(time.getTime().toString());
+		writer.writeCurrentTime();
+		time.forward(Duration.parse("P2D"));
+		System.out.println(time.getTime().toString());
+		writer.writeCurrentTime();
+	}
+}

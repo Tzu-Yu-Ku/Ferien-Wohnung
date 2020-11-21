@@ -107,6 +107,7 @@ public class BookingEntity extends Order {
 
 	private Money checkPrice(){ //!!
 		// int deltaTime = departureDay - arrivalDay
+		//?? departureDay.getTime().getDayOfYear()
 		// Money marketPrice = deltaTime * getHome.getPrice();
 		// for event in uuidEvents{ marketPrice += EventManager.getByUUID(event).price();
 		// return marketPrice
