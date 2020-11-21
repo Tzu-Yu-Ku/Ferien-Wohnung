@@ -11,16 +11,13 @@ public class AccountEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	@NotBlank
 	private String uuid;
 
-	@Temporal(TemporalType.DATE)
-	private Date birthDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastLogin;
+	@NotBlank
+	private String birthDate;
 
 	@NotBlank
 	private String street;
@@ -70,13 +67,8 @@ public class AccountEntity {
 		return this;
 	}
 
-	public AccountEntity setBirthDate(Date birthDate) {
+	public AccountEntity setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
-		return this;
-	}
-
-	public AccountEntity setLastLogin(Date lastLogin) {
-		this.lastLogin = lastLogin;
 		return this;
 	}
 
@@ -103,5 +95,19 @@ public class AccountEntity {
 	public AccountEntity setAccount(UserAccount account) {
 		this.account = account;
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountEntity{" +
+				"id=" + id +
+				", uuid='" + uuid + '\'' +
+				", birthDate='" + birthDate + '\'' +
+				", street='" + street + '\'' +
+				", houseNumber='" + houseNumber + '\'' +
+				", postCode='" + postCode + '\'' +
+				", city='" + city + '\'' +
+				", account=" + account +
+				'}';
 	}
 }

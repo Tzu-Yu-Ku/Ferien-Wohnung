@@ -7,4 +7,5 @@ public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
 	AccountEntity findByUuid(String uuid);
 	AccountEntity findById(String id);
+	AccountEntity findByAccount_Email(String email);
 }

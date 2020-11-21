@@ -19,11 +19,13 @@ import javax.validation.Valid;
 public class AccountController {
 
 	private final AccountManagement accountManagement;
+	private final AccountRepository accountRepository;
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
-	AccountController(AccountManagement accountManagement) {
+	AccountController(AccountManagement accountManagement, AccountRepository accountRepository) {
 		Assert.notNull(accountManagement, "CustomerManagement must not be null!");
 		this.accountManagement = accountManagement;
+		this.accountRepository = accountRepository;
 	}
 
 	@GetMapping("/register")
@@ -40,6 +42,16 @@ public class AccountController {
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
+
+		AccountEntity accountEntity = accountManagement.createTenantAccount(registrationForm);
+		if(accountEntity == null) {
+			result.reject("RegistrationForm.username.Taken");
+			LOG.info(result.getAllErrors().toString());
+			return "register";
+		}
+
+		AccountEntity test = accountRepository.findByAccount_Email(registrationForm.getEmail());
+		LOG.info(test.toString());
 
 		return "redirect:/login";
 	}
