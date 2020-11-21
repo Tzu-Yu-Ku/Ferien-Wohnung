@@ -1,24 +1,15 @@
 package fewodre.bookings;
 
-import fewodre.catalog.Event;
-import fewodre.catalog.HolidayHome;
-import fewodre.events.EventController;
-import fewodre.holidayhomes.HolidayHomeController;
-import org.javamoney.moneta.Money;
+import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.payment.PaymentMethod;
-import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
-import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

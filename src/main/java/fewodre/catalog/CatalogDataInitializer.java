@@ -1,5 +1,6 @@
 package fewodre.catalog;
 
+import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.utils.Place;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;

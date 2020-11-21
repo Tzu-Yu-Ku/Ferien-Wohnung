@@ -1,10 +1,7 @@
-package fewodre.events;
+package fewodre.catalog.holidayhomes;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class EventController {
-
-
-
+public class HolidayHomeController {
 }

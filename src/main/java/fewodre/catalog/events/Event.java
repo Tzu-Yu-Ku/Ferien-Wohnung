@@ -1,10 +1,7 @@
-package fewodre.catalog;
+package fewodre.catalog.events;
 
 import fewodre.utils.Place;
 import org.salespointframework.catalog.Product;
-
-import javax.persistence.ElementCollection;
-import java.util.List;
 
 public class Event extends Product {
 

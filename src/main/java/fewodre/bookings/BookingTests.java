@@ -1,13 +1,10 @@
 package fewodre.bookings;
 
 
-import fewodre.catalog.HolidayHome;
+import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.utils.Place;
 import org.junit.Test;
-import org.salespointframework.payment.Cash;
-import org.salespointframework.payment.PaymentMethod;
-import org.salespointframework.useraccount.UserAccount;
 
 public class BookingTests {
 	@Test

@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.holidayhomes;
 
 import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
