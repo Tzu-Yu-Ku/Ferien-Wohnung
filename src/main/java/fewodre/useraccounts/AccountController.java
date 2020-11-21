@@ -27,7 +27,7 @@ public class AccountController {
 	}
 
 	@GetMapping("/register")
-	public String register(Model model, RegistrationForm registrationForm) {
+	public String registerAdmin(Model model, RegistrationForm registrationForm) {
 		model.addAttribute("registrationForm", registrationForm);
 		return "register";
 	}

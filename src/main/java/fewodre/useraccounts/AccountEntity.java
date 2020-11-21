@@ -60,6 +60,10 @@ public class AccountEntity {
 		return city;
 	}
 
+	public UserAccount getAccount() {
+		return this.account;
+	}
+
 
 	public AccountEntity setUuid(String uuid) {
 		this.uuid = uuid;
