@@ -18,8 +18,10 @@ package fewodre;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -48,8 +50,15 @@ public class FeWoDre {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable();
 			http.authorizeRequests().antMatchers("/**").permitAll().and()
-					.formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).and()
-					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
+					.formLogin()
+					.loginPage(LOGIN_ROUTE)
+					.loginProcessingUrl(LOGIN_ROUTE)
+					.defaultSuccessUrl("/holidayhomes")
+					.and()
+					.logout()
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/holidayhomes");
 		}
 	}
+
 }
