@@ -7,7 +7,11 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	Iterable<BookingEntity> findBookingsByHost(String host){};
 
-	Iterable<BookingEntity> findBookingsBy
+	Iterable<BookingEntity> findBookingsByTenant(String tenant){};
+
+	Iterable<BookingEntity> findBookingsByHolidayHome(String holidayHome){};
+
+	Iterable<BookingEntity> findBookingsByEvent(String event){};
 
 
 
