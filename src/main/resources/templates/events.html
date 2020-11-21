@@ -28,26 +28,27 @@
         </div>
       </div>
 
-        <div class="col-md-4 col-6 p-1" th:each="event : ${eventCatalog}">
-          <div class="card">
-            <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
-              <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
-              <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
-              <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; test</li>
-            </ul>
-            <div class="card-footer p-2 w-100">
-              <div class="d-flex flex-row-reverse">
-                <a href="#" class="btn btn-primary btn-outline-light">Jetzt buchen</a>
-                <a href="housedetails.html" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+        <div class="row" th:remove="all-but-first"></div>
+          <div class="col-md-4 col-6 p-1" th:each="event : ${eventCatalog}">
+            <div class="card">
+              <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
+                <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
+                <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
+                <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; test</li>
+              </ul>
+              <div class="card-footer p-2 w-100">
+                <div class="d-flex flex-row-reverse">
+                  <a href="#" class="btn btn-primary btn-outline-light">Jetzt buchen</a>
+                  <a href="housedetails.html" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <div class="col-md-4 col-6 p-1"></div>
       </div>
     </div>
