@@ -22,13 +22,36 @@ public class Event extends Product {
 	private Place place;
 	private boolean eventStatus;
 	private EventType eventType;
+	private int capacity;
 
-	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventtype) {
-		
+	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity) {
+		this.description = description;
+		this.eventCompanyUuid = eventCompanyUuid;
+		this.eventStatus = eventStatus;
+		this.eventType = eventType;
+		this.image = image;
+		this.place = place;
+		this.capacity = capacity;
 	}
 
 	public Event() {
 		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
+	}
+
+	public String getImage(){
+		return image;
+	}
+
+	public void setImage(String image){
+		this.image = image;
+	}
+
+	public int getCapacity(){
+		return capacity;
+	}
+
+	public void setCapacity(int capacity){
+		this.capacity = capacity;
 	}
 
 	public EventType getEventType() {

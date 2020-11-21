@@ -1,5 +1,6 @@
 package fewodre.catalog;
 
+import fewodre.catalog.Event.EventType;
 import fewodre.utils.Place;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;
@@ -11,15 +12,17 @@ import org.springframework.stereotype.Component;
 public class CatalogDataInitializer implements DataInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
+	private final EventCatalog eventCatalog;
 	private final HolidayHomeCatalog holidayHomeCatalog;
 
-	CatalogDataInitializer(HolidayHomeCatalog holidayHomeCatalog) {
+	CatalogDataInitializer(EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+		this.eventCatalog = eventCatalog;
 		this.holidayHomeCatalog = holidayHomeCatalog;
 	}
 
 	@Override
 	public void initialize() {
-
+/*
 		if (holidayHomeCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
@@ -42,15 +45,20 @@ public class CatalogDataInitializer implements DataInitializer {
 		test2.setImage("house2.png");
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
+*/
+		if (eventCatalog.findAll().iterator().hasNext()) {
+			return;
+		}
 
-<<<<<<< HEAD
 		Event eventTest = new Event();
-		eventTest.setName("Villa Kunterbund");
-		eventTest.setDescription("Einfach nice.");
-		eventTest.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
-		EventCatalog.save(eventTest);
-=======
-		
->>>>>>> 647cb9bb6093fadff7d6ba4507ed6e9af00be585
+		eventTest.setName("Villaparty am Wasserfall neben den Satanisten");
+		eventTest.setDescription("Einfach teuflisches plätschern.");
+		eventTest.setPlace(new Place("An der Goldgrube", "1", "01234", "Dresden", 1, 1));
+		eventTest.setCapacity(123456);
+		eventTest.setEventCompanyUuid("eventCompanyUuid");
+		eventTest.setEventStatus(true);
+		eventTest.setEventType(EventType.SMALL);
+		eventTest.setImage("house2.png");
+		eventCatalog.save(eventTest);
 	}
 }
