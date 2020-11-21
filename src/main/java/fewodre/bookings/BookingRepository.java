@@ -5,9 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
-	//Iterable<BookingEntity> findBookingsByUuidHome(String host);
+	Iterable<BookingEntity> findBookingsByUuidHostEquals(String host);
 
-	//Iterable<BookingEntity> findBookingsByUuidTenant(String tenant);
+	Iterable<BookingEntity> findBookingsByUuidTenant(String tenant);
 
 	Iterable<BookingEntity> findBookingsByUuidHome(String holidayHome);
 

@@ -27,6 +27,12 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHome;
 
+	@NotBlank
+	private String uuidTenant; //? For Filtering in Repository
+
+	@NotBlank
+	private String uuidHost; //? For Filtering in Repository
+
 	@ElementCollection
 	private List<String> uuidEvents;
 
@@ -53,5 +59,12 @@ public class BookingEntity extends Order {
 	public OrderLine addEvent(Event event){
 		return addOrderLine(event, Quantity.of(1));
 	}
+
+	@Deprecated
+	public  HolidayHome getHome(){
+		//!! from HollidayHomeManager
+		return null;
+	}
+
 
 }
