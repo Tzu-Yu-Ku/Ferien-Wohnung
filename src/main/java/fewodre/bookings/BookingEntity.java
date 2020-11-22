@@ -43,7 +43,6 @@ public class BookingEntity extends Order {
 	@ElementCollection
 	private List<String> uuidEvents;
 
-
 	/* Attribute für extra Logik */
 
 	private LocalDate arrivalDate;
