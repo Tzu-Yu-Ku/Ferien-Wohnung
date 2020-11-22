@@ -2,6 +2,7 @@ package fewodre.catalog;
 
 import org.salespointframework.catalog.Catalog;
 import org.salespointframework.catalog.Product;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.util.Streamable;
@@ -15,4 +16,6 @@ public interface HolidayHomeEventCatalog extends Catalog<HolidayHome> {
 
 	@Override
 	Streamable<HolidayHome> findAll();
+
+	HolidayHome findFirstByProductIdentifier(ProductIdentifier productIdentifier);
 }

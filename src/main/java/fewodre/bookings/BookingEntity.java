@@ -2,9 +2,11 @@ package fewodre.bookings;
 
 import fewodre.catalog.Event;
 import fewodre.catalog.HolidayHome;
+import fewodre.catalog.HolidayHomeEventCatalog;
 import fewodre.events.EventController;
 import fewodre.holidayhomes.HolidayHomeController;
 import org.javamoney.moneta.Money;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.payment.PaymentMethod;
@@ -12,19 +14,18 @@ import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class BookingEntity extends Order {
@@ -40,26 +41,39 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHost; //? For Filtering in Repository
 
-	@ElementCollection
-	private List<String> uuidEvents;
+	//@ElementCollection
+	//private List<ProductIdentifier> uuidEvents;
 
 	/* Attribute für extra Logik */
-
+	@NotBlank
 	private LocalDate arrivalDate;
+	@NotBlank
 	private LocalDate departureDay;
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome, PaymentMethod paymentMethod) {
+	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
+						 LocalDate arrivalDate, LocalDate departureDay ,
+						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
-		this.uuidHome = uuidHome;
+		this.uuidHome = home.getId().getIdentifier();
+		this.uuidHost = home.getHostUuid();
+		this.uuidTenant = userAccount.getId().getIdentifier();
+		this.arrivalDate = arrivalDate;
+		this.departureDay = departureDay;
+		addOrderLine(home, nights);
+		Iterator<Event> iter = events.keySet().iterator();
+		while(iter.hasNext()){
+			Event event = iter.next();
+			addOrderLine(event, Quantity.of(events.get(event)));
+		}
 		// hollidayHome home = GetBy(uuidHome)
 		//addOrderLine(home, arrivalDate.);
-		//ChronoUnit.DAYS.between(arrivalDate, departureDay);
+		//HolidayHomeEventCatalog catalog = new
 	}
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome) {
+	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
-		this.uuidHome = uuidHome;
+		this.uuidHome = uuidHome.getIdentifier();
 	}
 
 	@Deprecated
@@ -96,7 +110,7 @@ public class BookingEntity extends Order {
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
-	public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+	private LocalDate convertToLocalDate(Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();

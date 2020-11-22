@@ -1,6 +1,7 @@
 package fewodre.bookings;
 
 import fewodre.useraccounts.AccountEntity;
+import org.salespointframework.order.OrderIdentifier;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
@@ -11,6 +12,8 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	Iterable<BookingEntity> findBookingsByUuidHome(String holidayHome);
 
-	Iterable<BookingEntity> findBookingsByUuidEvents(String event);
+	//Iterable<BookingEntity> findBookingsByUuidEvents(String event);
+
+	//Iterable<BookingEntity> findById(OrderIdentifier id);
 
 }
