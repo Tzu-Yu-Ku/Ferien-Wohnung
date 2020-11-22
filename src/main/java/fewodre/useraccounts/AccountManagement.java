@@ -64,4 +64,31 @@ public class AccountManagement {
 
 	}
 
+	public AccountEntity createHostAccount(HostRegistrationForm hostRegistrationForm) {
+
+		Assert.notNull(hostRegistrationForm, "registrationForm should not be null!");
+
+		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(hostRegistrationForm.getPassword());
+		if(userAccounts.findByUsername(hostRegistrationForm.getEmail()).isEmpty()) {
+			UserAccount newUserAccount = userAccounts.create(hostRegistrationForm.getEmail(), password,
+					hostRegistrationForm.getEmail(), HOST_ROLE);
+			newUserAccount.setFirstname(hostRegistrationForm.getFirstName());
+			newUserAccount.setLastname(hostRegistrationForm.getLastName());
+			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+					.setBirthDate(hostRegistrationForm.getBirthDate())
+					.setStreet(hostRegistrationForm.getStreet())
+					.setHouseNumber(hostRegistrationForm.getHouseNumber())
+					.setPostCode(hostRegistrationForm.getPostcode())
+					.setCity(hostRegistrationForm.getCity())
+					.setAccount(newUserAccount);
+			LOG.info(newAccount.getUuid());
+			return accounts.save(newAccount);
+		}
+
+		else {
+			return null;
+		}
+
+	}
+
 }
