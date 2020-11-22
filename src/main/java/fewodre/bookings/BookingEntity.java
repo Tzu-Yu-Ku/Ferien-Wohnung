@@ -10,6 +10,7 @@ import org.salespointframework.useraccount.UserAccount;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,10 @@ public class BookingEntity extends Order {
 
 	@ElementCollection
 	private List<String> uuidEvents;
+
+
+	private Date arrivalDate;
+	private Date departureDay;
 
 	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
@@ -55,6 +60,21 @@ public class BookingEntity extends Order {
 	public  HolidayHome getHome(){
 		//!! from HollidayHomeManager
 		return null;
+	}
+
+	/**
+	 * Überprüft ob der übergebene Zeitraum sich nicht mit dem Zeitraum dieser Buchung überlappt
+	 * Wenn nicht gibt wahr zurück ansonsten falsch.
+	 * Sollte sich nur Anreise des neuen Mieters und Abreise des alten Mieters überlappen
+	 * wird dennoch wahr zurückgegeben denn es wird angenommen (der Norm entsprechen) das es einen genauen
+	 * Auscheckzeit gibt die immer vor der Eincheckzeit liegt.
+	 *
+	 * @param arrival
+	 * @param departure
+	 * @return
+	 */
+	public boolean isNotOverlapping(Date arrival, Date departure){
+		return !(arrival.before(departureDay) && departure.after(arrivalDate));
 	}
 
 
