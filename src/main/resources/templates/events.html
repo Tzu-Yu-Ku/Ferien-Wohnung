@@ -20,34 +20,62 @@
     <div class="container" style="">
       <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
         <div class="col-md-6 d-flex flex-column justify-content-center">
-          <h1 class="mb-3">Entdecken Sie unser Ferienhausangebot.</h1>
-          <p class="lead mb-4">Hier sehen Sie eine Liste aller Ferienhäuser, die aktuell bei uns reservierbar sind.</p>
+          <h1 class="mb-3">Entdecken Sie unser Eventangebote.</h1>
+          <p class="lead mb-4">Hier sehen Sie eine Liste aller Events, die aktuell bei uns registriert sind.</p>
         </div>
         <div class="col-md-6 p-lg-5 p-3">
           <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
         </div>
       </div>
+      <br/>
 
-        <div class="col-md-4 col-6 p-1" th:each="event : ${eventCatalog}">
-          <div class="card">
-            <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
-              <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
-              <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
-              <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; test</li>
-            </ul>
-            <div class="card-footer p-2 w-100">
-              <div class="d-flex flex-row-reverse">
-                <a href="#" class="btn btn-primary btn-outline-light">Jetzt buchen</a>
-                <a href="housedetails.html" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+      <span>
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Art des Events
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Alle</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Wöchentliche Events</a>
+          <a class="dropdown-item" href="#">Besondere Events</a>
+        </div>
+      </span>
+      <span>
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Ort
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Alle</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Altstadt</a>
+          <a class="dropdown-item" href="#">Innenstadt</a>
+          <a class="dropdown-item" href="#">Neustadt</a>
+          <a class="dropdown-item" href="#">Löbtau</a>
+        </div>
+      </span>
+      <br/>
+
+        <div class="row" th:remove="all-but-first"></div>
+          <div class="col-md-4 col-6 p-1" th:each="event : ${eventCatalog}">
+            <div class="card">
+              <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
+                <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
+                <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
+                <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; Plätze frei</li>
+              </ul>
+              <div class="card-footer p-2 w-100">
+                <div class="d-flex flex-row-reverse">
+                  <a href="#" class="btn btn-primary btn-outline-light">Jetzt buchen</a>
+                  <a href="housedetails.html" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <div class="col-md-4 col-6 p-1"></div>
       </div>
     </div>
