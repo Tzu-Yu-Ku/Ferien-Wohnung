@@ -55,7 +55,7 @@ public class BookingEntity extends Order {
 		this.uuidHome = uuidHome;
 		// hollidayHome home = GetBy(uuidHome)
 		//addOrderLine(home, arrivalDate.);
-		//ChronoUnit.DAYS.between(arrivalDate, departureDay);
+		ChronoUnit.DAYS.between(arrivalDate, departureDay);
 	}
 
 	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome) {
@@ -97,7 +97,7 @@ public class BookingEntity extends Order {
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
-	public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+	private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();
