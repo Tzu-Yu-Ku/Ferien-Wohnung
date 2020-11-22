@@ -25,7 +25,8 @@ public class Event extends Product {
 	private int capacity;
 	private Money price;
 
-	public Event(String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, Money price) {
+	public Event(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, Number price) {
+		super(title, Money.of(price, "EUR"), Metric.UNIT);
 		this.description = description;
 		this.eventCompanyUuid = eventCompanyUuid;
 		this.eventStatus = eventStatus;
@@ -33,7 +34,6 @@ public class Event extends Product {
 		this.image = image;
 		this.place = place;
 		this.capacity = capacity;
-		this.price = price;
 	}
 
 	public Event() {
