@@ -16,17 +16,14 @@ import org.salespointframework.useraccount.UserAccount;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-<<<<<<< Updated upstream
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-=======
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
->>>>>>> Stashed changes
 import java.util.List;
 
 @Entity
@@ -46,22 +43,19 @@ public class BookingEntity extends Order {
 	@ElementCollection
 	private List<String> uuidEvents;
 
-<<<<<<< Updated upstream
-=======
 
 	/* Attribute für extra Logik */
 
 	private LocalDate arrivalDate;
 	private LocalDate departureDay;
 
->>>>>>> Stashed changes
 	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
 		this.uuidHome = uuidHome;
 		// hollidayHome home = GetBy(uuidHome)
-		addOrderLine(home, arrivalDate.);
-		ChronoUnit.DAYS.between(arrivalDate, departureDay);
+		//addOrderLine(home, arrivalDate.);
+		//ChronoUnit.DAYS.between(arrivalDate, departureDay);
 	}
 
 	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome) {
@@ -88,8 +82,6 @@ public class BookingEntity extends Order {
 		return null;
 	}
 
-<<<<<<< Updated upstream
-=======
 	/**
 	 * Überprüft ob der übergebene Zeitraum sich nicht mit dem Zeitraum dieser Buchung überlappt
 	 * Wenn nicht gibt wahr zurück ansonsten falsch.
@@ -111,6 +103,5 @@ public class BookingEntity extends Order {
 				.toLocalDate();
 	}
 
->>>>>>> Stashed changes
 
 }
