@@ -16,6 +16,7 @@ import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountIdentifier;
 
+import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -51,6 +52,8 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private LocalDate departureDay;
 
+	private transient MonetaryAmount price;
+
 	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
 						 LocalDate arrivalDate, LocalDate departureDay ,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
@@ -67,6 +70,7 @@ public class BookingEntity extends Order {
 			Event event = iter.next();
 			addOrderLine(event, Quantity.of(events.get(event)));
 		}
+		price = getTotal();
 		// hollidayHome home = GetBy(uuidHome)
 		//addOrderLine(home, arrivalDate.);
 		//HolidayHomeEventCatalog catalog = new
@@ -94,6 +98,14 @@ public class BookingEntity extends Order {
 	public  HolidayHome getHome(){
 		//!! from HollidayHomeManager
 		return null;
+	}
+
+	public MonetaryAmount getPrice() {
+		if(price == null){price = getTotal();}
+		if(getTotal().isLessThan(price)){
+			price = getTotal();
+		}
+		return  getTotal();
 	}
 
 	/**

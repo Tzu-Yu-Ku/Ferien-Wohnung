@@ -11,6 +11,7 @@ import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
@@ -47,4 +48,5 @@ public class BookingManagement {
 		return  bookings.save(new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, paymentMethod));
 	}
 
+	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
 }
