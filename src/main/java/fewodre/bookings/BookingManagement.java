@@ -1,7 +1,9 @@
 package fewodre.bookings;
 
+import fewodre.catalog.Event;
 import fewodre.catalog.HolidayHome;
 import fewodre.catalog.HolidayHomeEventCatalog;
+import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.PaymentMethod;
@@ -37,12 +39,12 @@ public class BookingManagement {
 		this.catalog = catalog;
 	}
 
-	public BookingEntity createBookingEntity(UserAccount userAccount, ProductIdentifier uuidHome,
+	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home,
 											 PaymentMethod paymentMethod, LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<ProductIdentifier, Integer> events){
+											 LocalDate departureDate, HashMap<Event, Integer> events){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
-		HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		return  bookings.save(new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, paymentMethod));
+		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
+		return  bookings.save(new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, paymentMethod));
 	}
 
 }
