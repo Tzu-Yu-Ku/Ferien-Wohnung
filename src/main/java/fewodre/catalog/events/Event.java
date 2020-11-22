@@ -5,6 +5,7 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.quantity.Metric;
 
+import javax.money.MonetaryAmount;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.List;
@@ -23,10 +24,10 @@ public class Event extends Product {
 	private boolean eventStatus;
 	private EventType eventType;
 	private int capacity;
-	private Money price;
+	private MonetaryAmount price;
 
-	public Event(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, Number price) {
-		super(title, Money.of(price, "EUR"), Metric.UNIT);
+	public Event(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
+		super(title, Money.parse("EUR 1"), Metric.UNIT);
 		this.description = description;
 		this.eventCompanyUuid = eventCompanyUuid;
 		this.eventStatus = eventStatus;
@@ -38,14 +39,6 @@ public class Event extends Product {
 
 	public Event() {
 		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
-	}
-
-	public Money getPrice(){
-		return price;
-	}
-
-	public void setPrice(Money price){
-		this.price = price;
 	}
 
 	public String getImage(){
@@ -102,5 +95,9 @@ public class Event extends Product {
 
 	public void setEventStatus(boolean eventStatus) {
 		this.eventStatus = eventStatus;
+	}
+
+	public Event createEvent(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
+		return new Event(title, eventCompanyUuid, description, image, place, eventStatus, eventType, capacity, price);
 	}
 }
