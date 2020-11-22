@@ -2,9 +2,11 @@ package fewodre.bookings;
 
 import fewodre.catalog.Event;
 import fewodre.catalog.HolidayHome;
+import fewodre.catalog.HolidayHomeEventCatalog;
 import fewodre.events.EventController;
 import fewodre.holidayhomes.HolidayHomeController;
 import org.javamoney.moneta.Money;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.payment.PaymentMethod;
@@ -32,7 +34,7 @@ public class BookingEntity extends Order {
 	/* Attribute für Datenbankeinträge */
 
 	@NotBlank
-	private String uuidHome;
+	private ProductIdentifier uuidHome;
 
 	@NotBlank
 	private String uuidTenant; //? For Filtering in Repository
@@ -41,7 +43,7 @@ public class BookingEntity extends Order {
 	private String uuidHost; //? For Filtering in Repository
 
 	@ElementCollection
-	private List<String> uuidEvents;
+	private List<ProductIdentifier> uuidEvents;
 
 
 	/* Attribute für extra Logik */
@@ -49,16 +51,20 @@ public class BookingEntity extends Order {
 	private LocalDate arrivalDate;
 	private LocalDate departureDay;
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome, PaymentMethod paymentMethod) {
+	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
+						 LocalDate arrivalDate, LocalDate departureDay , PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
-		this.uuidHome = uuidHome;
+		this.uuidHome = home.getId();
+		this.arrivalDate = arrivalDate;
+		this.departureDay = departureDay;
+		addOrderLine(home, nights);
 		// hollidayHome home = GetBy(uuidHome)
 		//addOrderLine(home, arrivalDate.);
-		ChronoUnit.DAYS.between(arrivalDate, departureDay);
+		//HolidayHomeEventCatalog catalog = new
 	}
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome) {
+	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome;
 	}
@@ -97,7 +103,7 @@ public class BookingEntity extends Order {
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
-	private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+	private LocalDate convertToLocalDate(Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();
