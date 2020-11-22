@@ -13,8 +13,4 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	Iterable<BookingEntity> findBookingsByUuidEvents(String event);
 
-
-
-
-
 }
