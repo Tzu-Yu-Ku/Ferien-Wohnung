@@ -45,7 +45,6 @@ public class BookingEntity extends Order {
 	//@ElementCollection
 	//private List<ProductIdentifier> uuidEvents;
 
-
 	/* Attribute für extra Logik */
 	@NotBlank
 	private LocalDate arrivalDate;
