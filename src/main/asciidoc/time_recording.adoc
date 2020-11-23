@@ -9,7 +9,7 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |Woche|Tzu-Yu Ku|Jesko Kloß |Marten Freese|Julian Böhm|Jimmy Pöhlmann |Janujan Thanabalasingham |Meeting(s)
 |1    |600min   |525min     |120min       |360min     |240min         |240min                   |150min    
 |2    |750min   |645min     |510min       |630min     |1350min        |630min                   |210min   
-|3    |1085min  |735min     |840min       |720          |630min         |180min                   |150min    
+|3    |1085min  |735min     |840min       |720min     |630min         |180min                   |150min    
 |4    |210min   |480min     |690min       |510min     |900min         |600min                   |150min    
 |5    |…        |…          |…            |…          |…              |…                        |…    
 |6    |…        |…          |…            |…          |…              |…                        |…    
