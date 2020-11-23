@@ -1,5 +1,6 @@
 package fewodre.bookings;
 
+import fewodre.catalog.Event;
 import fewodre.catalog.HolidayHome;
 import fewodre.events.EventEntity;
 import fewodre.holidayhomes.HolidayHomeEntity;
@@ -45,7 +46,7 @@ public class CartController {
 	}
 
 	@PostMapping("/homecart")
-	public String addHolidayHome(@RequestParam("hid") HolidayHomeEntity holidayHome, @RequestParam LocalDate startDate,
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam LocalDate startDate,
 								 @RequestParam LocalDate endDate, Cart cart){
 		if(!cart.isEmpty()){
 			Iterator it = cart.iterator();
@@ -73,7 +74,7 @@ public class CartController {
 	// how to check if there
 
 	@PostMapping("/eventcart")
-	public String addEvent(@RequestParam("eid") EventEntity event, LocalDate bookDate, Quantity anzahl, Cart cart){
+	public String addEvent(@RequestParam("eid") Event event, LocalDate bookDate, Quantity anzahl, Cart cart){
 		if(bookDate.isBefore(LocalDate.now())){
 			//send to customer "Please choose the right day"
 			return "error";
@@ -83,7 +84,7 @@ public class CartController {
 		//                updated Capacity
 		if(anzahl > event.getCapacity()|| anzahl < 0){
 			//"Please give in a correct nummber"
-			return"error"
+			return"error";
 		}
 		// check if it's already full or anzahl > updated capacity
 		else{
