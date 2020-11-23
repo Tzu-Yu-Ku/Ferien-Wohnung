@@ -59,10 +59,14 @@
                     <h1>Eine neue Veranstalltungsfirma anlegen</h1>
                     <form role="form" id="eventEmployeeRegistrationForm" th:action="@{/neweventemployee}" th:object="${eventEmployeeRegistrationForm}" method="post">
                         <div class="form-group">
-                            <div class="form-group">
-                                <input type="text" id="companyname" name="companyname" th:field="*{eventCompany}" class="form-control"
-                                       th:classappend="${#fields.hasErrors('eventCompany') ? ' is-invalid' : ''}"
-                                       placeholder="Name der Firma" aria-label="Name der Firma">
+                            <div class="form-inline">
+                                <input type="text" id="firstname" name="firstname" th:field="*{firstName}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('firstName') ? ' is-invalid' : ''}"
+                                       placeholder="Vorname" style="width: 33%;" aria-label="Vorname">
+                                <input type="text" id="lastname" name="lastname" th:field="*{lastName}" class="form-control mr-0 ml-auto"
+                                       th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+                                       placeholder="Nachname"
+                                       style="width: 65%;" aria-label="Nachname">
                             </div>
                         </div>
                         <div class="form-group">
@@ -80,6 +84,11 @@
                                    th:field="*{passwordConfirm}" class="form-control"
                                    th:classappend="${#fields.hasErrors('passwordConfirm') ? 'is-invalid' : ''}"
                                    placeholder="Passwort wiederholen" aria-label="Passwort wiederholen">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="eventcompany" name="eventcompany" th:field="*{eventCompany}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('eventCompany') ? 'is-invalid' : ''}"
+                                   placeholder="Arbeitgeber eingeben" aria-label="Arbeitgeber">
                         </div>
                         <button type="submit" class="btn btn-primary mt-2">Jetzt Registrieren<br></button>
                     </form>

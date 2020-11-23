@@ -62,6 +62,7 @@ public class AccountController {
 	@PostMapping("/map")
 	public String postmap(@RequestParam(value = "size") String size, @Valid @ModelAttribute("coordinates") Coordinates coordinates) {
 		System.out.println(size);
+		Coordinates test = new Coordinates(size);
 			return "map";
 	}
 

@@ -25,6 +25,7 @@ public class Coordinates {
 		System.out.println(y_ratio);
 
 	}
+	public Coordinates(){}
 
 }
 

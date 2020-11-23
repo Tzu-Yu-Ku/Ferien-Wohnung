@@ -85,6 +85,7 @@ public class AccountManagement {
 					.setCity(hostRegistrationForm.getCity())
 					.setIban(hostRegistrationForm.getIban())
 					.setBic(hostRegistrationForm.getBic())
+					.setEventCompany("NO_COMPANY")
 					.setAccount(newUserAccount);
 			LOG.info(newAccount.getUuid());
 			return accounts.save(newAccount);
@@ -104,7 +105,16 @@ public class AccountManagement {
 		if(userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
 			UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
 					eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
+			newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
+			newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
 			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+					.setBirthDate("NO_BIRTHDATE")
+					.setStreet("NO_STREET")
+					.setHouseNumber("NO_HOUSE_NUMBER")
+					.setPostCode("NO_POSTCODE")
+					.setCity("NO_CITY")
+					.setIban("NO_IBAN")
+					.setBic("NO_BIC")
 					.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
 					.setAccount(newUserAccount);
 			LOG.info(newAccount.getUuid());
