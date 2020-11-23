@@ -91,4 +91,8 @@ public class HolidayHome extends Product {
 	public void setBookable(boolean bookable) {
 		isBookable = bookable;
 	}
+
+	public HolidayHome createHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
+		return new HolidayHome(hostUuid, description, image, place, isBookable, capacity, price);
+	}
 }
