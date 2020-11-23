@@ -53,7 +53,10 @@ public class AccountManagement {
 					.setHouseNumber(tenantRegistrationForm.getHouseNumber())
 					.setPostCode(tenantRegistrationForm.getPostcode())
 					.setCity(tenantRegistrationForm.getCity())
-					.setAccount(newUserAccount);
+					.setAccount(newUserAccount)
+					.setIban("NO_IBAN")
+					.setBic("NO_BIC")
+					.setEventCompany("NO_COMPANY");
 			LOG.info(newAccount.getUuid());
 			return accounts.save(newAccount);
 		}
@@ -80,6 +83,29 @@ public class AccountManagement {
 					.setHouseNumber(hostRegistrationForm.getHouseNumber())
 					.setPostCode(hostRegistrationForm.getPostcode())
 					.setCity(hostRegistrationForm.getCity())
+					.setIban(hostRegistrationForm.getIban())
+					.setBic(hostRegistrationForm.getBic())
+					.setAccount(newUserAccount);
+			LOG.info(newAccount.getUuid());
+			return accounts.save(newAccount);
+		}
+
+		else {
+			return null;
+		}
+
+	}
+
+	public AccountEntity createEventEmployeeAccount(EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
+
+		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
+
+		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
+		if(userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
+			UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
+					eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
+			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+					.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
 					.setAccount(newUserAccount);
 			LOG.info(newAccount.getUuid());
 			return accounts.save(newAccount);
