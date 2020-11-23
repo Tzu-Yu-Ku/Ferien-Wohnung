@@ -806,8 +806,10 @@ Die Zeile steht für einen bestimmten Qualitätsanspruch und die Spalte beschrei
 |Sicherheit | | | | x |
 |===
 
-Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähnliches
+Sicherheit beschreibt den Umgang mit personenbezogenen Daten und ähnliches.
+
 Benutzbarkeit beschreibt die Benutzerfreundlichkeit, vor allem für Tenant und Host.
+
 Wartbarkeit beschreibt den Aufwand und die Schwierigkeit der Accountverwaltung und ähnlichem.
 
 === Konkrete Nicht-Funktionale Anforderungen
