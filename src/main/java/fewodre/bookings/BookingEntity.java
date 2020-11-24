@@ -127,7 +127,7 @@ public class BookingEntity extends Order {
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
-	private LocalDate convertToLocalDate(Date dateToConvert) {
+	private LocalDate convertToLocalDate(java.util.Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())
 				.toLocalDate();
