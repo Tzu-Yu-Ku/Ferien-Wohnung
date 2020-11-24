@@ -3,8 +3,8 @@ package fewodre.bookings;
 import fewodre.catalog.events.Event;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
-import fewodre.events.EventController;
-import fewodre.holidayhomes.HolidayHomeController;
+//import fewodre.events.EventController;
+//import fewodre.holidayhomes.HolidayHomeController;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
 

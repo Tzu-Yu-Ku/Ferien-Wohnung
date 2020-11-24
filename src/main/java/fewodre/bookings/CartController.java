@@ -1,9 +1,9 @@
 package fewodre.bookings;
 
-import fewodre.catalog.Event;
-import fewodre.catalog.HolidayHome;
-import fewodre.events.EventEntity;
-import fewodre.holidayhomes.HolidayHomeEntity;
+import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
+//import fewodre.events.EventEntity;
+//import fewodre.holidayhomes.HolidayHomeEntity;
 import fewodre.useraccounts.AccountManagement;
 import org.aspectj.weaver.ast.Or;
 import org.salespointframework.catalog.Product;
@@ -82,7 +82,7 @@ public class CartController {
 
 		//check if the date is exclusive from the booked HoolidayHome date
 		//                updated Capacity
-		if(anzahl > event.getCapacity()|| anzahl < 0){
+		if(anzahl.isGreaterThan(Quantity.of(event.getCapacity())) || anzahl.isLessThan(Quantity.of(0))){
 			//"Please give in a correct nummber"
 			return"error";
 		}

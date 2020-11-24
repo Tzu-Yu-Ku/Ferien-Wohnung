@@ -1,8 +1,9 @@
 package fewodre.bookings;
 
-import fewodre.catalog.Event;
-import fewodre.catalog.HolidayHome;
-import fewodre.catalog.HolidayHomeEventCatalog;
+import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
+import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+import fewodre.catalog.events.EventCatalog;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.OrderManagement;
@@ -26,18 +27,22 @@ public class BookingManagement {
 
 	private final BookingRepository bookings;
 	private final OrderManagement orderManagement;
-	private final HolidayHomeEventCatalog catalog;
+	private final HolidayHomeCatalog homeCatalog;
+	private final EventCatalog eventCatalog;
 
 	@Autowired
-	BookingManagement(BookingRepository bookings, OrderManagement orderManagement, HolidayHomeEventCatalog catalog){
+	BookingManagement(BookingRepository bookings, OrderManagement orderManagement,
+					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog){
 
 		Assert.notNull(bookings, "BookingRepository must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
-		Assert.notNull(catalog, "Catalog Must not be Null!");
+		Assert.notNull(homeCatalog, "HomeCatalog Must not be Null!");
+		Assert.notNull(eventCatalog, "EventCatalog Must not be Null!");
 
 		this.bookings = bookings;
 		this.orderManagement = orderManagement;
-		this.catalog = catalog;
+		this.homeCatalog = homeCatalog;
+		this.eventCatalog = eventCatalog;
 	}
 
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home,
