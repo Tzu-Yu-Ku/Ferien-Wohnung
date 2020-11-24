@@ -96,8 +96,6 @@ public class Event extends Product {
 	public void setEventStatus(boolean eventStatus) {
 		this.eventStatus = eventStatus;
 	}
-
-	public Event createEvent(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
-		return new Event(title, eventCompanyUuid, description, image, place, eventStatus, eventType, capacity, price);
-	}
 }
+
+

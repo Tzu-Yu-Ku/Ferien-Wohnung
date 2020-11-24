@@ -56,18 +56,11 @@ public class CatalogController {
 		return "addevent";
 	}
 
-	// fügt ein Event hinzu --> in arbeit...
-	@PostMapping(path = "/addEvent")
-	String addEvent(@RequestParam(value = "name", required = true) String name, @RequestParam(value = "description", required = true) String description, @RequestParam(value = "eventCompanyUuid", required = true) String eventCompanyUuid, Model model) {
+	@PostMapping(path = "/addEvent2")
+	String addEvent(@ModelAttribute("form") EventForm form, Model model) {
 
-		Ecatalog.save(createEvent(name, eventCompanyUuid, description, "event1.png", new Place("An der Frauenkirche", "1", "01234", "Dresden", 1, 1), true, EventType.SMALL, 5, Money.parse("EUR 3")));
+		Ecatalog.save(form.toNewEvent());
 
 		return "redirect:/events";
-	}
-
-	// erschafft ein Event
-	// steht eigentlich schon genauso in der Event.java, aber muss warum auch immer damit es funktioniert hier stehen... 
-	public Event createEvent(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
-		return new Event(title, eventCompanyUuid, description, image, place, eventStatus, eventType, capacity, price);
 	}
 }

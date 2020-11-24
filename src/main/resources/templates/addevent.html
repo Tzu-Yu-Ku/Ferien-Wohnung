@@ -35,13 +35,13 @@
           </div>
         </div>
 
-        <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent}" th:object="${form}">
+        <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent2}" th:object="${form}">
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
               <h4 class="p-1">Name</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-              <input type="text" class="w-100" th:name="name"/>
+              <input type="text" class="w-100" th:name="name" required="required"/>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
@@ -57,7 +57,7 @@
               <h4 class="p-1">Beschreibung</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-              <textarea class="w-100" th:name="description"></textarea>
+              <textarea class="w-100" th:name="description" required="required"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
@@ -65,7 +65,7 @@
               <h4 class="p-1">EventcompanyUuid</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-              <textarea class="w-100" th:name="eventCompanyUuid"></textarea>
+              <textarea class="w-100" th:name="eventCompanyUuid" required="required"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
