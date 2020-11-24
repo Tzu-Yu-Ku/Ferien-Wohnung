@@ -101,7 +101,6 @@ public class AccountManagement {
 
 		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
 
-		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
 			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
 			if(userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
@@ -126,8 +125,5 @@ public class AccountManagement {
 				return null;
 			}
 		}
-		else{return null;}
-
 	}
 
-}
