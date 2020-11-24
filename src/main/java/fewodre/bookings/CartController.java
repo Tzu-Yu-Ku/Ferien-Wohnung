@@ -62,7 +62,7 @@ public class CartController {
 				return "redirect:/housedetails";
 			}
 		}
-		//check if it's availble
+		//check if it's available
 
 		long interval = startDate.until(endDate, ChronoUnit.DAYS);
 		cart.addOrUpdateItem(holidayHome, interval);
@@ -80,10 +80,10 @@ public class CartController {
 			return "error";
 		}
 
-		//check if the date is exclusive from the booked HoolidayHome date
+		//check if the date is exclusive from the booked HolidayHome date
 		//                updated Capacity
 		if(anzahl.isGreaterThan(Quantity.of(event.getCapacity())) || anzahl.isLessThan(Quantity.of(0))){
-			//"Please give in a correct nummber"
+			//"Please give in a correct number"
 			return"error";
 		}
 		// check if it's already full or anzahl > updated capacity

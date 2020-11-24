@@ -1,0 +1,53 @@
+package fewodre.bookings;
+
+import org.salespointframework.order.OrderStatus;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
+
+public class Date {
+	private LocalDate date;
+	private Month month;
+	private int dayOfMonth;
+	private DayOfWeek dayOfWeek;
+
+	private OrderStatus state;
+
+	public Date(LocalDate date){
+		this.date = date;
+		this.month = date.getMonth();
+		this.dayOfMonth = date.getDayOfMonth();
+		this.dayOfWeek = date.getDayOfWeek();
+		this.state = OrderStatus.CANCELLED; // Cancelled wenn noch frei
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public Month getMonth() {
+		return month;
+	}
+
+	public int getDayOfMonth() {
+		return dayOfMonth;
+	}
+
+	public DayOfWeek getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public OrderStatus getState() {
+		return state;
+	}
+
+	@Override
+	public String toString(){
+		return dayOfWeek.toString().substring(0,2) + dayOfMonth;
+	}
+}

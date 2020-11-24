@@ -29,3 +29,12 @@
 //
 //	}
 //}
+
+import fewodre.bookings.Year;
+
+public class BookingTests{
+	public static void main(String[] args) {
+		Year year = new Year(2020);
+		System.out.println(year);
+	}
+}
