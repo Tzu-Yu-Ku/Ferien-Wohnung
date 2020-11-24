@@ -1,5 +1,6 @@
 package fewodre.bookings;
 
+<<<<<<< HEAD
 import fewodre.catalog.Event;
 import fewodre.catalog.HolidayHome;
 import fewodre.catalog.HolidayHomeEventCatalog;
@@ -7,19 +8,21 @@ import fewodre.events.EventController;
 import fewodre.holidayhomes.HolidayHomeController;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
+=======
+import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
+>>>>>>> origin/prototype-ood
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.payment.PaymentMethod;
-import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
-import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountIdentifier;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -27,6 +30,9 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+=======
+import java.util.List;
+>>>>>>> origin/prototype-ood
 
 @Entity
 public class BookingEntity extends Order {

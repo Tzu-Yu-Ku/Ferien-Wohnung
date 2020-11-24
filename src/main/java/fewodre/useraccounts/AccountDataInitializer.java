@@ -31,7 +31,7 @@ public class AccountDataInitializer implements DataInitializer {
 	@Override
 	public void initialize() {
 		// Skip creation if database was already populated
-		if (userAccountManagement.findByUsername("janu@log.in").isPresent()) {
+		if (userAccountManagement.findByUsername("admin").isPresent()) {
 			return;
 		}
 

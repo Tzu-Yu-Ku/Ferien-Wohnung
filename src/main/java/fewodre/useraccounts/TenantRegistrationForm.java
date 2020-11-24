@@ -2,12 +2,12 @@ package fewodre.useraccounts;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.*;
-import java.util.Date;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-class RegistrationForm {
+class TenantRegistrationForm {
 
 	@NotBlank(message = "{RegistrationForm.firstname.NotEmpty}")
 	private final String firstName;
@@ -45,8 +45,8 @@ class RegistrationForm {
 	@AssertTrue(message = "{RegistrationForm.terms.NotAgreed}")
 	private final Boolean terms;
 
-	public RegistrationForm(String firstName, String lastName, String email, String password, String passwordConfirm,
-	                        String birthDate, String street, String houseNumber, String postcode, String city, Boolean terms) {
+	public TenantRegistrationForm(String firstName, String lastName, String email, String password, String passwordConfirm,
+	                              String birthDate, String street, String houseNumber, String postcode, String city, Boolean terms) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

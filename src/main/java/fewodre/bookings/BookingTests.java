@@ -2,6 +2,7 @@ package fewodre.bookings;
 
 import static org.hamcrest.CoreMatchers.*;
 
+<<<<<<< HEAD
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -17,6 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class BookingTests{
 	@Autowired MockMvc mvc;
+=======
+import fewodre.catalog.holidayhomes.HolidayHome;
+import fewodre.useraccounts.AccountEntity;
+import fewodre.utils.Place;
+import org.junit.Test;
+>>>>>>> origin/prototype-ood
 
 	@Test
 	void preventsUnauthorizedAccess() throws Exception{

@@ -28,7 +28,7 @@
                 <h1>Neu bei uns?</h1>
                 <p class="mb-3" contenteditable="true">Dann erstellen Sie sich ganz bequem und schnell ein neues
                     Benutzerkonto auf unserer Plattform:</p>
-                <form role="form" id="registrationForm" th:action="@{/register}" th:object="${registrationForm}" method="post">
+                <form role="form" id="tenantRegistrationForm" th:action="@{/register}" th:object="${tenantRegistrationForm}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="firstname" name="firstname" th:field="*{firstName}" class="form-control"

@@ -1,5 +1,7 @@
 package fewodre.catalog;
 
+import fewodre.catalog.events.*;
+import fewodre.catalog.holidayhomes.*;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
@@ -11,18 +13,28 @@ public class CatalogController {
 
 	private static final Quantity NONE = Quantity.of(0);
 
-	private final HolidayHomeEventCatalog catalog;
+	private final HolidayHomeCatalog Hcatalog;
+	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 
-	CatalogController(HolidayHomeEventCatalog catalog, BusinessTime businessTime) {
-		this.catalog = catalog;
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime) {
+		this.Hcatalog = Hcatalog;
+		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
 	}
 
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 
-		model.addAttribute("holidayhomeCatalog", catalog.findByCategory("home"));
+		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
+
+		return "itemlist";
+	}
+
+	@GetMapping("/events")
+	String EventCatalog(Model model) {
+
+		model.addAttribute("eventCatalog", Ecatalog.findAll());
 
 		return "itemlist";
 	}
