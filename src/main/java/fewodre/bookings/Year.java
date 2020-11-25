@@ -2,6 +2,8 @@ package fewodre.bookings;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Year {
 	private int yearNumber;
@@ -36,5 +38,15 @@ public class Year {
 			result += months.get(i).toString();
 		}
 		return result;
+	}
+
+	public Year SetUpBookedDates(LinkedList<Integer> bookedDates){
+		Iterator<Integer> iter = bookedDates.iterator();
+		while(iter.hasNext()){
+			Integer dateNumber = iter.next();  // date of Year
+			LocalDate date = LocalDate.ofYearDay(yearNumber, dateNumber); // to LocalDate
+			months.get(date.getMonth().getValue()).BookDate(date.getDayOfMonth()); // Set This day booked
+		}
+		return this;
 	}
 }

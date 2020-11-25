@@ -34,4 +34,8 @@ public class Month {
 		result += "\n";
 		return result;
 	}
+
+	public void BookDate(int day){
+		dates.get(day).setBooked();
+	}
 }

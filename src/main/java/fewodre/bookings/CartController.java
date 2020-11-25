@@ -38,6 +38,8 @@ public class CartController {
 
 	CartController(AccountManagement userManagement, BookingManagement bookingManagement) {
 		Assert.notNull(userManagement, "UserManagement must not be null!");
+		Assert.notNull(bookingManagement);
+
 		this.userManagement = userManagement;
 		this.bookingManagement = bookingManagement;
 	}
@@ -74,7 +76,7 @@ public class CartController {
 			if(endDate.isAfter(b.getArrivalDate())||startDate.isBefore(b.getDepartureDay())||
 					startDate.isBefore(b.getArrivalDate()) && endDate.isAfter(b.getDepartureDay())){
 				//send message "the chosed duration is not avalible"
-				return "redirect:/housedetails"
+				return "redirect:/housedetails";
 			}
 		}
 		Quantity interval = Quantity.of(ChronoUnit.DAYS.between(startDate, endDate));
@@ -138,6 +140,7 @@ public class CartController {
 	@PostMapping("/purchase")
 	public String buy(@ModelAttribute Cart cart, @LoggedIn Optional<AccountEntity> userAccount){
 
+		return "default"; //!!
 	}
 
 }

@@ -42,6 +42,14 @@ public class Date {
 		return dayOfWeek;
 	}
 
+	public void setState(OrderStatus state) {
+		this.state = state;
+	}
+
+	public void setBooked(){
+		this.state = OrderStatus.PAID;
+	}
+
 	public OrderStatus getState() {
 		return state;
 	}
@@ -49,5 +57,9 @@ public class Date {
 	@Override
 	public String toString(){
 		return dayOfWeek.toString().substring(0,2) + dayOfMonth;
+	}
+
+	public  boolean isBooked(){
+		return !(this.state == OrderStatus.CANCELLED);
 	}
 }

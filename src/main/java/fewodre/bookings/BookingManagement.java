@@ -13,6 +13,8 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
@@ -23,6 +25,8 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+@Service
+@Transactional
 public class BookingManagement {
 
 	private final BookingRepository bookings;
