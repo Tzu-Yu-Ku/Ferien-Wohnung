@@ -3,9 +3,11 @@
 
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
@@ -72,24 +74,27 @@
 
         <div class="row" th:remove="all-but-first"></div>
           <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
-            <div class="card">
-              <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
-                <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
-                <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
-                <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; test</li>
-              </ul>
-              <div class="card-footer p-2 w-100">
-                <div class="d-flex flex-row-reverse">
-                  <a href="#" class="btn btn-primary btn-outline-light">Jetzt buchen</a>
-                  <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+            <form role="form" th:action="@{/homecart}" method="post">
+              <div class="card">
+                <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
+                  <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><i class="fa fa-users"></i>&nbsp; bis zu 4 Personen</li>
+                  <li class="list-group-item"><i class="fa fa-money"></i>&nbsp; 79€,- / Tag</li>
+                  <li class="list-group-item"><i class="fa fa-info"></i>&nbsp; test</li>
+                </ul>
+                <div class="card-footer p-2 w-100">
+                  <div class="d-flex flex-row-reverse">
+                    <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
+                    <button type="submit" class="ui labeled icon button">Jetzt buchen</button> <!--Verlinkung zum Cart-->
+                    <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         <div class="col-md-4 col-6 p-1"></div>
       </div>
