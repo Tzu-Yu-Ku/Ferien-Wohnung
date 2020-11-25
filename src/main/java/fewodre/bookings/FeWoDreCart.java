@@ -12,7 +12,7 @@ public class FeWoDreCart extends Cart {
 	private HolidayHome holidayHome;
 	private LinkedHashMap<Integer, Year> calender;
 
-	public FeWoDreCart(HolidayHome holidayHome){
+	public void CreateFeWoDreCart(HolidayHome holidayHome){
 		this.holidayHome = holidayHome;
 		calender = new LinkedHashMap<Integer, Year>();
 		for(int i = 0; i <= 3; i++){
@@ -21,7 +21,8 @@ public class FeWoDreCart extends Cart {
 		}
 	}
 
-	public void SetUpCalender(LinkedHashMap<Integer, LinkedList<Integer>> bookedDates){// Map<YearNumber, bookedDates>
+	public void SetUpCalender(HolidayHome holidayHome, LinkedHashMap<Integer, LinkedList<Integer>> bookedDates){// Map<YearNumber, bookedDates>
+		if(this.holidayHome == null){CreateFeWoDreCart(holidayHome);}
 		for(Map.Entry<Integer, LinkedList<Integer>> entry : bookedDates.entrySet()){
 			LinkedList<Integer> bookedDatesOfTheYear = entry.getValue();
 			calender.put(entry.getKey(), calender.get(entry.getKey()).SetUpBookedDates(bookedDatesOfTheYear));
