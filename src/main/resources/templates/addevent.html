@@ -23,7 +23,7 @@
           <div class="w-100"><iframe width="100%" scrolling="no" frameborder="0" src="navbar.html" style="height:56px"></iframe></div>
         </div>
       </div>
-      <div class="container" style="">
+      <div class="container" style="background-color: #EEEEEE;">
         <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.03));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
           <div class="p-lg-2 w-100">
             <h1 class="text-center" style="	text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">Neues Event hinzufügen</h1>
@@ -34,56 +34,44 @@
             <h5 class="p-2">Füllen Sie die benötigten Daten Ihres Events aus.</h5>
           </div>
         </div>
-
-        <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent2}" th:object="${form}">
+        <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent}" th:object="${form}">
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">Name</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">Name</h4>
               <input type="text" class="w-100" th:name="name" required="required"/>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">Preis</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">Preis</h4>
               <input class="w-100" type="text"/>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">Beschreibung</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
-              <textarea class="w-100" th:name="description" required="required"></textarea>
+              <h4 class="p-1">Beschreibung</h4>
+              <textarea type="text" class="w-100" th:name="description" required="required"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">EventcompanyUuid</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">EventcompanyUuid</h4>
               <textarea class="w-100" th:name="eventCompanyUuid" required="required"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">EventStatus</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">EventStatus</h4>
               <textarea class="w-100"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">EventType</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">EventType</h4>
               <textarea class="w-100"></textarea>
             </div>
           </div>
+
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
               <h4 class="p-1">Bilder</h4>
@@ -96,19 +84,33 @@
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">Place</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
-              <textarea class="w-100"></textarea>
+              <h4 class="p-1">Straße</h4>
+              <textarea class="w-100" th:name="street" required="required"></textarea>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-              <h4 class="p-1">Capacity</h4>
-            </div>
             <div class="p-1 col-8 col-md-8">
-              <textarea class="w-100"></textarea>
+              <h4 class="p-1">Hausnummer</h4>
+              <textarea class="w-100" th:name="number" required="required"></textarea>
+            </div>
+          </div>
+          <div class="form-group" style="background-color: #EEEEEE;">
+            <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">Ort</h4>
+              <textarea class="w-100" th:name="city" required="required"></textarea>
+            </div>
+          </div>
+          <div class="form-group" style="background-color: #EEEEEE;">
+            <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">Postleitzahl</h4>
+              <textarea class="w-100" th:name="postalnumber" required="required"></textarea>
+            </div>
+          </div>
+          <div class="form-group" style="background-color: #EEEEEE;">
+            <div class="p-1 col-8 col-md-8">
+              <h4 class="p-1">Capacity</h4>
+              <textarea class="w-100" th:name="capacity" required="required"></textarea>
             </div>
           </div>
           <div class="row border-top p-3" style="background-color: #EEEEEE;">

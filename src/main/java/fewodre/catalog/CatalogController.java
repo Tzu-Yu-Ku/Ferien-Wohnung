@@ -56,7 +56,7 @@ public class CatalogController {
 		return "addevent";
 	}
 
-	@PostMapping(path = "/addEvent2")
+	@PostMapping(path = "/addEvent")
 	String addEvent(@ModelAttribute("form") EventForm form, Model model) {
 
 		Ecatalog.save(form.toNewEvent());
