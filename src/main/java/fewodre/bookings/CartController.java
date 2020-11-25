@@ -19,6 +19,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.money.MonetaryAmount;
 import javax.persistence.OneToOne;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -52,41 +53,44 @@ public class CartController {
 	public String basket(){ return "cart"; }
 
 	@PostMapping("/homecart")
-	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam LocalDate startDate,
-								 @RequestParam LocalDate endDate, Cart cart){
-
-		if(!cart.isEmpty()){
-			Iterator it = cart.iterator();
-			while(it.hasNext()) {
-				CartItem cartItem = (CartItem) it.next();
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam(required = false) LocalDate startDate,
+								 @RequestParam(required = false) LocalDate endDate, @ModelAttribute Cart cart){
+		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
+		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
+			Iterator<CartItem> iter = cart.iterator();
+			while(iter.hasNext()) {
+				CartItem cartItem = iter.next();
 				if (cartItem.getProduct().getClass() == HolidayHome.class) {
 					return "redirect:/cart";
 				}
 			}
-		}else{
+		}
+		if(startDate != null && endDate != null) {
 			if(startDate.isBefore(LocalDate.now()) || endDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate)) {
-
 				//send message "Please choose the correct day"
 				return "redirect:/housedetails";
 			}
-		}
-		//check if it's available
-		ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>();
-		bookingManagement.findAll().filter(booking -> booking.getHome().equals(holidayHome)).forEach(item ->bookedList.add(item));
-		for(BookingEntity b: bookedList){
-			//!!!!!!help!!!
-			if(endDate.isAfter(b.getArrivalDate())||startDate.isBefore(b.getDepartureDay())||
-					startDate.isBefore(b.getArrivalDate()) && endDate.isAfter(b.getDepartureDay())){
-				//send message "the chosed duration is not avalible"
-				return "redirect:/housedetails";
-			}
-		}
-		Quantity interval = Quantity.of(ChronoUnit.DAYS.between(startDate, endDate));
-		this.arrivalDate = startDate;
-		this.depatureDate = endDate;
-		cart.addOrUpdateItem(holidayHome, interval);
 
-		return "cart";
+			//check if it's available
+			ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>();
+			bookingManagement.findAll().filter(booking -> booking.getHome().equals(holidayHome)).forEach(item -> bookedList.add(item));
+			for (BookingEntity b : bookedList) {
+				//!!!!!!help!!!
+				if(startDate.isBefore(b.getDepartureDay()) && endDate.isAfter(b.getArrivalDate())){
+					//send message "the chosed duration is not avalible"
+					return "redirect:/housedetails";
+				}
+			}
+			this.arrivalDate = startDate;
+			this.depatureDate = endDate;
+			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.depatureDate));
+			cart.addOrUpdateItem(holidayHome, interval);
+
+			return "/cart";
+		} else { // Es wurde kein Zeitraum angegeben
+			cart.addOrUpdateItem(holidayHome, Quantity.of(1));
+			return "redirect:/cart";
+		}
 	}
 
 
@@ -121,8 +125,7 @@ public class CartController {
 			return "rediect:/events";
 		}
 	}
-
-
+	
 
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {

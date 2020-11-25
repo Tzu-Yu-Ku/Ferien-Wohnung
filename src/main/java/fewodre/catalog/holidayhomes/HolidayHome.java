@@ -19,7 +19,6 @@ public class HolidayHome extends Product {
 	private Place place;
 	private boolean isBookable;
 	private int capacity;
-	private Money price;
 
 	public HolidayHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
 		this.description = description;
@@ -28,20 +27,11 @@ public class HolidayHome extends Product {
 		this.place = place;
 		this.isBookable = isBookable;
 		this.capacity = capacity;
-		this.price = price;
 	}
 
 	public HolidayHome() {
 		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
 		//this.addCategory("home");
-	}
-
-	public Money getPrice(){
-		return price;
-	}
-
-	public void setPrice(Money price){
-		this.price = price;
 	}
 
 	public int getCapacity(){
