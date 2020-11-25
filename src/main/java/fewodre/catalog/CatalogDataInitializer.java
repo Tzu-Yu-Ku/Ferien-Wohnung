@@ -32,19 +32,19 @@ public class CatalogDataInitializer implements DataInitializer {
 		LOG.info("Creating default catalog entries.");
 		HolidayHome test = new HolidayHome();
 		HolidayHome test2 = new HolidayHome();
-		test.setName("Villa Kunterbund");
-		test.setDescription("Einfach nice.");
+		test.setName("Nette Wohnung in der Innenstadt");
+		test.setDescription("Dicht an der bekannten Barszene in Neustadt.");
 		test.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
 		test.setBookable(true);
 		test.setHostUuid("abcd-efgh-jkli");
-		test.setImage("house2.png");
+		test.setImage("house4.png");
 
-		test2.setName("Schloss am Wasserfall");
-		test2.setDescription("Geiles plätschern");
-		test2.setPlace(new Place("Am Wasserfall", "1", "01099", "Dresden", 1, 1));
+		test2.setName("Gemühtliches Haus an der Elbe");
+		test2.setDescription("Für einen entspannten Urlaub in Dresden");
+		test2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
 		test2.setBookable(true);
 		test2.setHostUuid("abcd-efgh-jkli");
-		test2.setImage("house2.png");
+		test2.setImage("house3.png");
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
 
@@ -53,14 +53,14 @@ public class CatalogDataInitializer implements DataInitializer {
 		}
 
 		Event eventTest = new Event();
-		eventTest.setName("Villaparty am Wasserfall neben den Satanisten");
-		eventTest.setDescription("Einfach teuflisches plätschern.");
-		eventTest.setPlace(new Place("An der Goldgrube", "1", "01234", "Dresden", 1, 1));
-		eventTest.setCapacity(123456);
+		eventTest.setName("Stadtführung im abendlichen Dresden");
+		eventTest.setDescription("Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
+		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 1, 1));
+		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid("eventCompanyUuid");
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);
-		eventTest.setImage("house2.png");
+		eventTest.setImage("event1.png");
 		eventCatalog.save(eventTest);
 	}
 }
