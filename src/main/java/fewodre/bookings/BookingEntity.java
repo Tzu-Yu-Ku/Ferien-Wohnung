@@ -112,6 +112,15 @@ public class BookingEntity extends Order {
 		return  getTotal();
 	}
 
+	//What i added for checking if it's availible
+	public LocalDate getArrivalDate(){
+		return arrivalDate;
+	}
+	//What i added for checking if it's availible
+	public LocalDate getDepartureDay(){
+		return departureDay;
+	}
+
 	/**
 	 * Überprüft ob der übergebene Zeitraum sich nicht mit dem Zeitraum dieser Buchung überlappt
 	 * Wenn nicht gibt wahr zurück ansonsten falsch.
