@@ -29,7 +29,6 @@ import java.util.Date;
 
 @Controller
 @SessionAttributes("cart")
-@PreAuthorize("isAuthenticated()")
 public class CartController {
 
 	private final AccountManagement userManagement;
@@ -48,6 +47,9 @@ public class CartController {
 	Cart initializeCart() {
 		return new Cart();
 	}
+
+	@GetMapping("/cart")
+	public String basket(){ return "cart"; }
 
 	@PostMapping("/homecart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam LocalDate startDate,
@@ -116,12 +118,11 @@ public class CartController {
 		// check if it's already full or anzahl > updated capacity
 		else{
 			cart.addOrUpdateItem(event, anzahl);
-			return "rediect:/cart";
+			return "rediect:/events";
 		}
 	}
 
-	@GetMapping("/cart")
-	public String basket(){ return "cart"; }
+
 
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {

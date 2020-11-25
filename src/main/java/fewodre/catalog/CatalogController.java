@@ -63,4 +63,9 @@ public class CatalogController {
 
 		return "redirect:/events";
 	}
+
+	@GetMapping("/housedetails")
+	String detail(){
+		return "housedetails";
+	}
 }

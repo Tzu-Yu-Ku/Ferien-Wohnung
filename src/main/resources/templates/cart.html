@@ -22,12 +22,12 @@
 <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
     <header>
         <div class="container">
-            <nav th:replace="navigation :: navigation"></nav>
             <h1 align="center" class="p-4">My Booking</h1>
         </div>
     </header></br>
-    <p th:if="${cart.empty}">Ihr Warenkorb ist leer</p>
-    <div th:unless="${cart.empty}">
+    <div>
+        <p align="center">Ihr Warenkorb ist leer</p>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 bd-content">
@@ -35,10 +35,11 @@
                     <div class="row justify-content-start">
 
                         <div class="card">
-                            <img src="../static/resources/img/house2.png" class="card-img-top" alt="...">
+                            <img class="card-img-top" src="../static/resources/img/house_1.png" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Saesische Schweiz Führung</h5>
-                                <div class="card-text p-1">Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.    </div>
+                                <h5 class="card-title" th:text="${event.title}">Saesische Schweiz Führung</h5>
+                                <div class="card-text p-1" value="Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.">
+                                    Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.    </div>
                                 <div class="card-text p-1">
                                     <div class="grid-container ">
                                         <div class="grid-child">Preis pro Person</div>
@@ -48,11 +49,11 @@
                                 <div class="card-text p-1">
                                     <div class="grid-container ">
                                         <div class="grid-child">Datum</div>
-                                        <input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy" th:value="03.01.2021">
+                                        <input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">
                                     </div>
                                 </div>
                                 <div class="input-group col">
-                                    <input class="form-control col-sm-4" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Anzahl">
+                                    <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Anzahl">
                                     <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                 </div>
                             </div>
@@ -125,15 +126,7 @@
                             <th class="col-2">2</th>
                             <th class="col-4">10€</th>
                             <th class="col-1">
-                                <a class="link" th:href="@{/removeItem/{id}(id=${item.id})}">x</a>
-                            </th>
-                        </tr>
-                        <tr class="d">
-                            <th class="col-5">Säsische Schweiz Führung</th>
-                            <th class="col-2">2</th>
-                            <th class="col-4">10€</th>
-                            <th class="col-1">
-                                <a class="link" th:href="@{/removeItem/{id}(id=${item.id})}">x</a>
+                                <a class="link" href="">x</a>
                             </th>
                         </tr>
                         </tbody>
