@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
-
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css">
-    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
 <body>
-<div class="container p-0 w-100" style="height:56px">
+  <div class="container p-0 w-100" style="height:56px">
     <div class="row">
-        <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
-        </div>
+      <div class="w-100">
+        <nav th:include="navbar" style="width: 100%"></nav>
+      </div>
     </div>
-</div>
-<div class="py-3"
-     style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+  </div>
+  <div class="py-3" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;">
     <div class="container" style="background-color: #EEEEEE;">
-        <div class="row"
-             style="background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)); background-position: left top; background-size: 100%; background-repeat: repeat;">
-            <div class="col-md-6 d-flex flex-column justify-content-center">
-                <h1 class="mb-3">Entdecken Sie unser Eventangebote.</h1>
-                <p class="lead mb-4">Hier sehen Sie eine Liste aller Events, die aktuell bei uns registriert sind.</p>
-            </div>
-            <div class="col-md-6 p-lg-5 p-3">
-                <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
-            </div>
+      <div class="row" style="background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1)); background-position: left top; background-size: 100%; background-repeat: repeat;">
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+          <h1 class="mb-3">Entdecken Sie unser Eventangebote.</h1>
+          <p class="lead mb-4">Hier sehen Sie eine Liste aller Events, die aktuell bei uns registriert sind.</p>
         </div>
-        <br style="">
-        <span style="">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"> Art des Events </button>
+        <div class="col-md-6 p-lg-5 p-3">
+          <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
+        </div>
+      </div>
+      <br style="">
+      <span style="">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Art des Events </button>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Alle</a>
           <div class="dropdown-divider"></div>
@@ -42,9 +37,8 @@
           <a class="dropdown-item" href="#">Besondere Events</a>
         </div>
       </span>
-        <span style="">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"> Ort </button>
+      <span style="">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ort </button>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Alle</a>
           <div class="dropdown-divider"></div>
@@ -54,65 +48,54 @@
           <a class="dropdown-item" href="#">Löbtau</a>
         </div>
       </span>
-        <br style="">
-        <div class="row">
-            <div class="col-md-12"><a th:href="@{/addevents}" class="btn btn-primary btn-outline-light" style="">Event
-                erstellen<br></a></div>
-        </div>
-        <div class="col-md-12 col-6 p-1" th:each="event : ${eventCatalog}" style="">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row" style="">
-                        <div class="col-md-6" style=""><img class="card-img-top w-100 h-100"
-                                                            th:src="@{/resources/img/{image}(image=${event.image})}"
-                                                            alt="Card image cap"></div>
-                        <div class="col-md-6" style="">
-                            <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
-                            <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
-                            <li class="list-group-item"><i class="fa fa-users"></i>
-                                <h5 class="card-title" th:text="${event.capacity}"><b>----capacity----</b></h5>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-money"></i>
-                                <h5 class="card-title" th:text="${event.price}"><b>----price----</b></h5>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-info"></i>
-                                <h5 class="card-title" th:text="${event.place}"><b>----place----</b></h5>
-                            </li>
-                            <div class="d-flex flex-row-reverse">
-                            </div>
-                        </div>
-                    </div>
+      <br style="">
+      <div class="row">
+        <div class="col-md-12"><a th:href="@{/addevents}" class="btn btn-primary btn-outline-light" style="">Event erstellen<br></a></div>
+      </div>
+      <div class="col-md-12 col-6 p-1" th:each="event : ${eventCatalog}" style="">
+        <div class="card">
+          <div class="card-body">
+            <div class="row" style="">
+              <div class="col-md-6" style=""><img class="card-img-top w-100 h-100" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap"></div>
+              <div class="col-md-6" style="">
+                <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
+                <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
+                <li class="list-group-item"><i class="fa fa-users"></i>
+                  <h5 class="card-title" th:text="${event.capacity}"><b>----capacity----</b></h5>
+                </li>
+                <li class="list-group-item"><i class="fa fa-money"></i>
+                  <h5 class="card-title" th:text="${event.price}"><b>----price----</b></h5>
+                </li>
+                <li class="list-group-item"><i class="fa fa-info"></i>
+                  <h5 class="card-title" th:text="${event.place.postalCode + ' ' + event.place.city + ', ' + event.place.street + ' ' + event.place.houseNumber}"><b>----place----</b></h5>
+                </li>
+                <div class="d-flex flex-row-reverse">
                 </div>
-                <ul class="list-group list-group-flush">
-                </ul>
-                <div class="card-footer p-2 w-100">
-                    <div class="row">
-                        <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event
-                            löschen<br></a></div>
-                        <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event
-                            bearbeiten<br></a></div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
+          <ul class="list-group list-group-flush">
+          </ul>
+          <div class="card-footer p-2 w-100">
+            <div class="row">
+              <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event löschen<br></a></div>
+              <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event bearbeiten<br></a></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="container p-0 w-100 mt-5 bg-white">
+  </div>
+  <div class="container p-0 w-100 mt-5 bg-white">
     <div class="row">
-        <div class="w-100">
-            <nav th:include="footer"></nav>
-        </div>
+      <div class="w-100">
+        <nav th:include="footer"></nav>
+      </div>
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
