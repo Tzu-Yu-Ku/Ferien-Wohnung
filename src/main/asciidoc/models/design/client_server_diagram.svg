@@ -1,0 +1,135 @@
+<svg id="Server" xmlns="http://www.w3.org/2000/svg" width="1788.93" height="769.89" viewBox="0 0 5421 2333">
+  <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""/>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?></metadata>
+<defs>
+    <style>
+      .cls-1 {
+        fill: #ea9999;
+      }
+
+      .cls-1, .cls-10, .cls-2 {
+        stroke: #000;
+      }
+
+      .cls-1, .cls-10, .cls-11, .cls-2, .cls-3, .cls-6, .cls-8, .cls-9 {
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #93c47d;
+      }
+
+      .cls-3 {
+        fill: #cfe2f3;
+      }
+
+      .cls-11, .cls-3, .cls-6, .cls-8, .cls-9 {
+        stroke: #474747;
+      }
+
+      .cls-12, .cls-4 {
+        font-size: 66.667px;
+      }
+
+      .cls-4, .cls-7 {
+        text-anchor: middle;
+      }
+
+      .cls-4, .cls-5, .cls-7 {
+        font-family: Arial;
+      }
+
+      .cls-5 {
+        font-size: 100px;
+      }
+
+      .cls-10, .cls-6 {
+        fill: none;
+      }
+
+      .cls-6 {
+        stroke-dasharray: 20 10;
+      }
+
+      .cls-7 {
+        font-size: 75px;
+      }
+
+      .cls-8, .cls-9 {
+        fill-rule: evenodd;
+      }
+
+      .cls-9 {
+        fill: #474747;
+      }
+
+      .cls-11 {
+        fill: #76a5af;
+      }
+    </style>
+  </defs>
+  <rect id="Background" class="cls-1" x="1084" y="389" width="3930" height="1461"/>
+  <rect id="Background_copy" data-name="Background copy" class="cls-2" x="284" y="389" width="666" height="1461"/>
+  <rect id="Rectangle_1_copy_7" data-name="Rectangle 1 copy 7" class="cls-3" x="377" y="827" width="480" height="293"/>
+  <text id="HTML" class="cls-4" x="614.72" y="997.316"><tspan x="614.72">HTML</tspan></text>
+  <rect id="Rectangle_1_copy_8" data-name="Rectangle 1 copy 8" class="cls-3" x="377" y="1151" width="480" height="293"/>
+  <text id="CSS" class="cls-4" x="614.72" y="1321.316"><tspan x="614.72">CSS</tspan></text>
+  <rect id="Rectangle_1_copy_9" data-name="Rectangle 1 copy 9" class="cls-3" x="377" y="1475" width="480" height="293"/>
+  <text id="JavaScript" class="cls-4" x="614.72" y="1645.316"><tspan x="614.72">JavaScript</tspan></text>
+  <text id="Server-2" data-name="Server" class="cls-5" x="2910.627" y="510.899">Server</text>
+  <text id="Client" class="cls-5" x="484.626" y="512.898">Client</text>
+  <g id="App_Logic" data-name="App Logic">
+    <rect id="gestrichelter_Rahmen" data-name="gestrichelter Rahmen" class="cls-6" x="1797" y="577" width="2420" height="1136"/>
+    <text id="Anwendungslogik" class="cls-7" x="3049.426" y="683.319"><tspan x="3049.426">Anwendungslogik</tspan></text>
+    <rect class="cls-3" x="2944" y="733" width="480" height="293"/>
+    <text id="HolidayHome_Catalog" data-name="HolidayHome Catalog" class="cls-4" x="3182.718" y="856.316"><tspan x="3182.718">HolidayHome</tspan><tspan x="3182.718" dy="80">Catalog</tspan></text>
+    <rect id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-3" x="2944" y="1060" width="480" height="293"/>
+    <text id="Event_Catalog" data-name="Event Catalog" class="cls-4" x="3182.718" y="1183.316"><tspan x="3182.718">Event</tspan><tspan x="3182.718" dy="80">Catalog</tspan></text>
+    <rect id="Rectangle_1_copy_2" data-name="Rectangle 1 copy 2" class="cls-3" x="3491" y="733" width="480" height="293"/>
+    <text id="Accounts" class="cls-4" x="3729.718" y="903.317"><tspan x="3729.718">Accounts</tspan></text>
+    <rect id="Rectangle_1_copy_3" data-name="Rectangle 1 copy 3" class="cls-3" x="3488" y="1060" width="480" height="293"/>
+    <text id="Bookings" class="cls-4" x="3726.715" y="1230.317"><tspan x="3726.715">Bookings</tspan></text>
+    <rect id="Rectangle_1_copy_4" data-name="Rectangle 1 copy 4" class="cls-3" x="3184" y="1387" width="480" height="293"/>
+    <text id="Events" class="cls-4" x="3422.716" y="1557.315"><tspan x="3422.716">Events</tspan></text>
+    <rect id="Rectangle_1_copy_6" data-name="Rectangle 1 copy 6" class="cls-3" x="1208" y="1020" width="480" height="293"/>
+    <text id="Thymeleaf" class="cls-4" x="1446.719" y="1190.315"><tspan x="1446.719">Thymeleaf</tspan></text>
+    <path class="cls-8" d="M1853,1168.97H1730.74c5.9,8.28,8.83,13.67,9.13,21.03-13.4-12.68-30.82-19.29-51.87-25.5,21.05-5.94,37.7-13.2,51.87-25.5-0.91,8-3.35,12.82-9.31,21.62H1853v8.35Z"/>
+    <path id="Shape_1_copy_3" data-name="Shape 1 copy 3" class="cls-9" d="M1013,1292.97H890.745c5.891,8.28,8.823,13.67,9.124,21.03-13.4-12.68-30.816-19.29-51.864-25.5,21.048-5.94,37.7-13.2,51.864-25.5-0.9,8-3.347,12.82-9.307,21.62H1013v8.35Z"/>
+    <path class="cls-9" d="M994.288,1061.05l3.424-6.1,214,120-3.42,6.1Z"/>
+    <path class="cls-9" d="M1012.3,1293.01l-3.3-6.13,199.7-111.89,3.3,6.13Z"/>
+    <rect class="cls-10" x="88" y="169" width="5183" height="1981"/>
+    <path class="cls-9" d="M1002.01,1555.99l-6.017-3.49,212-375.49,6.02,3.49Z"/>
+    <path id="Shape_1_copy" data-name="Shape 1 copy" class="cls-8" d="M997.613,1063.6l-106.271-60.43c1.031,10.1.912,16.24-2.462,22.78-5.378-17.64-17.255-31.993-32.483-47.8,21.237,5.234,39.3,7.154,57.691,3.467-4.737,6.5-9.247,9.491-18.777,14.194l106.429,60.514Z"/>
+    <path id="Shape_1_copy_2" data-name="Shape 1 copy 2" class="cls-8" d="M997.872,1549l-106.019,60.12c1.028-10.05.91-16.16-2.456-22.67-5.366,17.55-17.215,31.83-32.406,47.55,21.186-5.21,39.206-7.12,57.555-3.45-4.726-6.47-9.226-9.44-18.733-14.12l106.177-60.21Z"/>
+    <rect id="Rectangle_1_copy_5" data-name="Rectangle 1 copy 5" class="cls-3" x="4388" y="1009" width="480" height="293"/>
+    <text id="H2_Datenbank" data-name="H2 Datenbank" class="cls-4" x="4631.719" y="1139.316"><tspan x="4631.719">H2</tspan><tspan x="4631.719" dy="80">Datenbank</tspan></text>
+    <rect class="cls-11" x="1853" y="730" width="923" height="888"/>
+    <text id="Controller:_-_CatalogController_-_AccountController_-_BookingCo" data-name="Controller: - CatalogController - AccountController - BookingCo" class="cls-5" x="1931.535" y="929.106">Controller:<tspan class="cls-12" x="1931.535" dy="80">- CatalogController</tspan><tspan class="cls-12" x="1931.535" dy="80">- AccountController</tspan><tspan class="cls-12" x="1931.535" dy="80">- BookingController</tspan><tspan class="cls-12" x="1931.535" dy="80">- EventController</tspan></text>
+  </g>
+</svg>
