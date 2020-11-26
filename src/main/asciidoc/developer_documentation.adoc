@@ -14,24 +14,24 @@ toc::[]
 
 == Einführung und Ziele
 === Aufgabenstellung
-Urlaub im eigenen Land liegt im Trend. und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als Urlaubs-williger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWohnungenDresden) geschlossen. Und nicht nur das, darüber hinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mit dazu buchen zu können.
+Urlaub im eigenen Land liegt im Trend. Und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als Urlaubs-williger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWohnungenDresden) geschlossen. Und nicht nur das, darüber hinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mit dazu buchen zu können.
 
-Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potentiellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen. In Abhängigkeit von der Lage (Place) der Ferienwohnung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
+Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potenziellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen. In Abhängigkeit von der Lage (Place) der Ferienwohnung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
 
 Hauptverantwortlich für einen reibungslosen Ablauf, im Besonderen für die Integrität der Website, ist der Administrator (Admin), welcher die Vermieter, Eventfirmen und deren Mitarbeiter erstellt und löscht sowie die Mieter freischaltet oder gegebenenfalls löscht.
 
 === Qualitätsanforderungen
-Um die Qualität des Programms emprisch bewertbar zu machen bedarf es der Definition von Qualitätsanforderungen, welche es zu erfüllen gibt.
+Um die Qualität des Programms empirisch bewertbar zu machen bedarf es der Definition von Qualitätsanforderungen, welche es zu erfüllen gibt.
 
 Wartbarkeit::
-  Hierbei wird bestimmt wie Effektivität und Effizienzes möglich ist die Software zu modifizieren, mit dem Ziel diese zu verbessern, zu korrigieren oder an geänderte 
-  Umgebungsverhältnisse anzupassen.
-  
+Hierbei wird bestimmt wie effektiv und effizient es möglich ist die Software zu modifizieren, mit dem Ziel diese zu verbessern, zu korrigieren oder an geänderte
+Umgebungsverhältnisse anzupassen.
+
 Nutzbarkeit::
 Maß, inwieweit die Software von einem konkreten Benutzer zum Erreichen konkreter Ziele verwendet werden kann, unter Berücksichtigung von Effektivität, Effizienz und Zufriedenstellung in der konkreten Situation.
 
 Sicherheit::
-Maß, inwieweit Daten und Informationen durch das System geschützt werden, im Besonderen, dass allen ensprechenden (humanen und technischen) Komponenten stets nur die ihm/ihr zustehenden Daten und Informationen zugänglich gemacht werden.
+Maß, inwieweit Daten und Informationen durch das System geschützt werden, im Besonderen, dass allen entsprechenden (humanen und technischen) Komponenten stets nur die ihm/ihr zustehenden Daten und Informationen zugänglich gemacht werden.
 
 Nachfolgende Tabelle gibt die zu erfüllenden Qualitätsanforderungen sowie deren Wichtigkeit an.
 
@@ -50,12 +50,12 @@ Nachfolgende Tabelle gibt die zu erfüllenden Qualitätsanforderungen sowie dere
 === Hardware-Vorgaben
 Eine Liste notwendiger Geräte / Hardware, um die Anwendung auszuführen.
 * Server
-* (mobiles) Endgerät (Computer / Handy / Tablet etc)
-* Eingabegerät ( Tastatur / Touch etc)
+* (mobiles) Endgerät (Computer / Handy / Tablet etc.)
+* Eingabegerät ( Tastatur / Touch etc.)
 * Maus / Touch
 
 === Software-Vorgaben
-Ein Liste notwenidger Software, um die Anwednung auszuführen.
+Ein Liste notwendiger Software, um die Anwendung auszuführen.
 Die folgende Javaversion ist mindestens erforderlich, um die Anwendung auszuführen:
 * Java 11
 Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um die Anwendung auszuführen:
@@ -65,11 +65,11 @@ Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um die
 * Opera 9.6
 
 === Vorgaben zum Betrieb des Software
-Im Folgenden wird ein Überblick darüber gebenen wie und unter welchen Umständen die Verwendung der fertigen Software intendiert ist.
+Im Folgenden wird ein Überblick darüber gegeben wie und unter welchen Umständen die Verwendung der fertigen Software intendiert ist.
 
-Das System wird als Onlineshop durch die Firma FeWoDre GmbH zur Vermietung ihrer Ferienhäuser sowie damit assoziierter Veranstalltungen verwendet. Hierzu wird die Software auf einem Server laufen und global mithilfe eines Browsers durch das Internet für interessierte Kunden 24/7 auf- und abrufbar sein.
+Das System wird als Onlineshop durch die Firma FeWoDre GmbH zur Vermietung ihrer Ferienhäuser sowie damit assoziierter Veranstaltungen verwendet. Hierzu wird die Software auf einem Server laufen und global mithilfe eines Browsers durch das Internet für interessierte Kunden 24/7 auf- und abrufbar sein.
 
-Die primäre Zielgruppe sind Personen zwischen 18 und 80 Jahren (Tenants), deren Wissen über das Internet dahingehen ausreichte, dass sie es bis auf unsere Ebsite geschafft haben. Ab da soll es dank einer intuitiven Benutzeroberfläche problemlos bis zum Abschluss eines Kaufs weitergehen können. Ferner gibt es Vermieter (Hosts), welche über geringfügig tiefere technische Kenntnisse verfügen müssen, etwa, um Bilder ihrer Ferienwohnung(en) hochzuladen sowie Angestellte einer Eventfirma (EventEmployee), für die selbige Anforderungen gelten. Abschließend gibt es noch einen Administrator, welcher wiederum leicht höherer technische Anforderungen erfüllen muss als die bisherigen Gruppen, um sicherzustellen, dass er nicht versehentlich alle Konten löscht.
+Die primäre Zielgruppe sind Personen zwischen 18 und 80 Jahren (Tenants), deren Wissen über das Internet dahingehen ausreichte, dass sie es bis auf unsere Website geschafft haben. Ab da soll es dank einer intuitiven Benutzeroberfläche problemlos bis zum Abschluss eines Kaufs weitergehen können. Ferner gibt es Vermieter (Hosts), welche über geringfügig tiefere technische Kenntnisse verfügen müssen, etwa, um Bilder ihrer Ferienwohnung(en) hochzuladen sowie Angestellte einer Eventfirma (EventEmployee), für die selbige Anforderungen gelten. Abschließend gibt es noch einen Administrator, welcher wiederum leicht höherer technische Anforderungen erfüllen muss als die bisherigen Gruppen, um sicherzustellen, dass er nicht versehentlich alle Konten löscht.
 
 Es ist nicht angedacht, dass das System regelmäßiger Wartung bedarf. Alle Daten werden in einer Datenbank persistiert und können durch die Anwendung aufgerufen werden, sodass keine Kenntnisse im Umgang mit Datenbanken von irgendeiner der zuvor genannten Entitäten erwartet werden müssen.
 
@@ -79,21 +79,21 @@ image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidt
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
 [options="header"]
-|=== 
+|===
 |Qualitätsanforderung |Lösungsansatz
-|Wartbarkeit a| 
-* *Modularität* Die Anwednung wird aus klar abgegrenzten Einzelbausteinen zusammengesetzt, womit Änderungen in einem Block minimale Auswirkungen auf die anderen Blöcke haben. 
-* *Wiederverwertbarkeit* Es wird sichergestellt, dass Komponenten des Sytsmes an anderer Stelle und durch andere Komponenten oder Systeme wiederverwendet werden können. 
-* *Modifizierbarkeit* Es wird sichergestellt, dass die Anwendung mofifiziert und erweitert werden kann, ohne, dass dies zu Fehlern oder einer sonstigen Minderung der Qualität des Produktes führt.
+|Wartbarkeit a|
+* *Modularität* Die Anwendung wird aus klar abgegrenzten Einzelbausteinen zusammengesetzt, womit Änderungen in einem Block minimale Auswirkungen auf die anderen Blöcke haben.
+* *Wiederverwertbarkeit* Es wird sichergestellt, dass Komponenten des Systems an anderer Stelle und durch andere Komponenten oder Systeme wiederverwendet werden können.
+* *Modifizierbarkeit* Es wird sichergestellt, dass die Anwendung modifiziert und erweitert werden kann, ohne, dass dies zu Fehlern oder einer sonstigen Minderung der Qualität des Produktes führt.
 |Nutzbarkeit a|
-* *Erlernbarkeit* Es wird sichergestellt, dass das Systeme eifach und intuitiv durch den Nutzer erlern- und bedienbar ist. Dies wird etwa durch geeignete Hinweise bei Eingabefeldern realisiert
+* *Erlernbarkeit* Es wird sichergestellt, dass das Systeme einfach und intuitiv durch den Nutzer erlern- und bedienbar ist. Dies wird etwa durch geeignete Hinweise bei Eingabefeldern realisiert
 * *Verhinderung / Umgang mit Fehlern durch den Benutzer* Benutzer sollten davor bewahrt werden, fehlerhafte Eingaben zu tätigen, etwa durch geeignete Hinweise. In keinem Fall sollten solche Fehler jedoch zu einem invaliden Systemzustand führen.
-* *Ansprechende Benutzeroberfläche* Dies wird durch das Engagement des renomierten Designers Janujan Thanabalasingham sichergestellt, welcher sich um die ansprechende Gestalltung der Benutzeroberfläche kümmert.
-* *Barrierefreiheit* Es wird sichergestellt, dass eine möglicht große Spanne an unterschiedlichen Personen die Website nutzen kann, etwa durch entsprechende Schiriftarten oder ausrechenden Konrast.
+* *Ansprechende Benutzeroberfläche* Dies wird durch das Engagement des renommierten Designers Janujan Thanabalasingham sichergestellt, welcher sich um die ansprechende Gestaltung der Benutzeroberfläche kümmert.
+* *Barrierefreiheit* Es wird sichergestellt, dass eine möglichst große Spanne an unterschiedlichen Personen die Website nutzen kann, etwa durch entsprechende Schriftarten oder ausreichenden Kontrast.
 |Sicherheit a|
-* *Vertraulichkeit* Es wird sichergestellt, dass Daten nur bei entsprechender Authorisierung eingesehen wrden können, etwa durch _Spring Security_ und _Thymeleaf_(`sec:authorize`)
-* *Integrität* Daten werden gegen unauthorisierte Manipulation geschützt, etwa durch _Spring Security_ (`@PreAuthorize`)
-* *Zuordenbarkeit* Nachverfolgbarkeit von Handlungen und Ereignissen zu einer konkreten Entität oder Person. Hierzu sollte etwa jede `Order` mit einem `Customer` verknüpft sein.
+* *Vertraulichkeit* Es wird sichergestellt, dass Daten nur bei entsprechender Autorisierung eingesehen werden können, etwa durch _Spring Security_ und _Thymeleaf_('sec:authorize')
+* *Integrität* Daten werden gegen unautorisierte Manipulation geschützt, etwa durch _Spring Security_ ('@PreAuthorize')
+* *Zuordenbarkeit* Nachverfolgbarkeit von Handlungen und Ereignissen zu einer konkreten Entität oder Person. Hierzu sollte etwa jede 'Order' mit einem 'Customer' verknüpft sein.
 |===
 
 === Softwarearchitektur
