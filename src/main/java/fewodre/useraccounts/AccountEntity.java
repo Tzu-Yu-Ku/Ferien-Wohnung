@@ -4,7 +4,6 @@ import org.salespointframework.useraccount.UserAccount;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Entity
 public class AccountEntity {
@@ -15,6 +14,9 @@ public class AccountEntity {
 
 	@NotBlank
 	private String uuid;
+
+	@NotBlank
+	private String eventCompany;
 
 	@NotBlank
 	private String birthDate;
@@ -31,6 +33,12 @@ public class AccountEntity {
 	@NotBlank
 	private String city;
 
+	@NotBlank
+	private String iban;
+
+	@NotBlank
+	private String bic;
+
 	@OneToOne
 	private UserAccount account;
 
@@ -39,6 +47,10 @@ public class AccountEntity {
 
 	public String getUuid() {
 		return uuid;
+	}
+
+	public String getEventCompany() {
+		return eventCompany;
 	}
 
 	public String getStreet() {
@@ -57,6 +69,14 @@ public class AccountEntity {
 		return city;
 	}
 
+	public String getIban() {
+		return iban;
+	}
+
+	public String getBic() {
+		return bic;
+	}
+
 	public UserAccount getAccount() {
 		return this.account;
 	}
@@ -64,6 +84,11 @@ public class AccountEntity {
 
 	public AccountEntity setUuid(String uuid) {
 		this.uuid = uuid;
+		return this;
+	}
+
+	public AccountEntity setEventCompany(String companyName) {
+		this.eventCompany = companyName;
 		return this;
 	}
 
@@ -92,6 +117,15 @@ public class AccountEntity {
 		return this;
 	}
 
+	public AccountEntity setIban(String iban) {
+		this.iban = iban;
+		return this;
+	}
+	public AccountEntity setBic(String bic) {
+		this.bic = bic;
+		return this;
+	}
+
 	public AccountEntity setAccount(UserAccount account) {
 		this.account = account;
 		return this;
@@ -102,11 +136,14 @@ public class AccountEntity {
 		return "AccountEntity{" +
 				"id=" + id +
 				", uuid='" + uuid + '\'' +
+				", companyName='" + eventCompany + '\'' +
 				", birthDate='" + birthDate + '\'' +
 				", street='" + street + '\'' +
 				", houseNumber='" + houseNumber + '\'' +
 				", postCode='" + postCode + '\'' +
 				", city='" + city + '\'' +
+				", iban='" + iban + '\'' +
+				", bic='" + bic + '\'' +
 				", account=" + account +
 				'}';
 	}

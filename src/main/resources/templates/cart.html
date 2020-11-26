@@ -22,7 +22,7 @@
 <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
     <header>
         <div class="container">
-            <h1 class="p-4">My Booking</h1>
+            <h1 class="p-4" th:text="${holidayHome.name}">My Booking</h1>
         </div>
     </header><br/>
 
@@ -70,22 +70,32 @@
                             <tbody>
                             <tr>
                                 <th>Vorname</th>
+
                                 <td class="text-right" th:text="${user.Account.firstname}">Harry</td>
                             </tr>
                             <tr>
                                 <th>Nachname</th>
                                 <td class="text-right" th:text="${user.Account.lastname}">Potter</td>
 
+
                             </tr>
                             <tr>
                                 <th>Auftragsdatum</th>
+<<<<<<< HEAD
                                 <td class="text-right" th:text="${#temporals.format(date, 'dd.MM.yyyy')}">01.01.2021</td>
+=======
+                                <td class="text-right", th:text="${arrivalDate.toString().replace('-', ' ')}">01.01.2021</td><!--!Fancy++!-->
+                            </tr>
+                            <tr>
+                                <th>Abreise Datum</th>
+                                <td class="text-right", th:text="${departureDate.toString().replace('-',' ')}">07.01.2021</td><!--!Fancy++!-->
+>>>>>>> f9e20c98d790ced7608972d1c220c50ec176cbcf
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th>Gesamtpreise</th>
-                                <th class="text-right">640 €</th>
+                                <th class="text-right" th:text="${cart.price}">640 €</th>
                             </tr>
                             </tfoot>
                         </table>

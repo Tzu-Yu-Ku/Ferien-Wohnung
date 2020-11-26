@@ -57,14 +57,16 @@ public class BookingEntity extends Order {
 	@NotNull
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate;
+
 	@NotNull
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate departureDay;
 
+
 	private transient MonetaryAmount price;
 
 	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
-						 LocalDate arrivalDate, LocalDate departureDay ,
+						 LocalDate arrivalDate, LocalDate departureDate ,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
@@ -72,7 +74,7 @@ public class BookingEntity extends Order {
 		this.uuidHost = home.getHostUuid();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
-		this.departureDay = departureDay;
+		this.departureDay = departureDate;
 		addOrderLine(home, nights);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -85,6 +87,7 @@ public class BookingEntity extends Order {
 		//HolidayHomeEventCatalog catalog = new
 	}
 
+	@Deprecated
 	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome.getIdentifier();
@@ -122,7 +125,7 @@ public class BookingEntity extends Order {
 		return arrivalDate;
 	}
 	//What i added for checking if it's availible
-	public LocalDate getDepartureDay(){
+	public LocalDate getDepartureDate(){
 		return departureDay;
 	}
 
@@ -137,10 +140,12 @@ public class BookingEntity extends Order {
 	 * @param departure
 	 * @return
 	 */
+	@Deprecated
 	public boolean isNotOverlapping(LocalDate arrival, LocalDate departure){
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
+	@Deprecated
 	private LocalDate convertToLocalDate(java.util.Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())

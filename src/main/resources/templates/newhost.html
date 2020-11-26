@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
 
 
 <head>
@@ -19,16 +19,45 @@
         </div>
     </div>
 </div>
-<div class="py-5"
+<div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
+    <div style="background-image: url('/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="p-5 col-lg-6 mt-5 mb-5"
+                     style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1)); background-position: top left; background-size: 100%; background-repeat: repeat; box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
+                    <h1>Sie scheinen noch nicht eingeloggt zu sein.</h1>
+                    <p class="mb-3">Bitte loggen Sie sich ein, um einen neuen Vermieter hinzufügen zu können.</p>
+                    <form role="form" th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" class="form-control"
+                                   placeholder="E-Mail Adresse eingeben" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Passwort eingeben" required="required">
+                            <small class="form-text text-muted text-right">
+                                <a href="#">Passwort vergessen?</a>
+                            </small>
+                            <small class="form-text text-muted text-right">
+                                <a href="register.html">Noch kein Benutzerkonto?</a>
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Einloggen<br></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <div class="py-5"
      style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="p-5 col-lg-6"
                  style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
-                <h1>Neu bei uns?</h1>
-                <p class="mb-3" contenteditable="true">Dann erstellen Sie sich ganz bequem und schnell ein neues
-                    Benutzerkonto auf unserer Plattform:</p>
-                <form role="form" id="tenantRegistrationForm" th:action="@{/register}" th:object="${tenantRegistrationForm}" method="post">
+                <h1>Einen neuen Vermieter anlegen</h1>
+                <form role="form" id="hostRegistrationForm" th:action="@{/newhost}" th:object="${hostRegistrationForm}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="firstname" name="firstname" th:field="*{firstName}" class="form-control"
@@ -91,18 +120,23 @@
                                    placeholder="Ortschaft" style="width: 75%;" aria-label="Ortschaft">
                         </div>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="terms" name="terms" th:field="*{terms}" class="form-check-input"
-                               th:classappend="${#fields.hasErrors('terms') ? 'is-invalid' : ''}" placeholder="AGB">
-                        <label class="form-check-label" for="terms">
-                            Ich akzeptiere die <a href="#">allgemeinen Geschäftsbedingungen</a>.
-                        </label>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <input type="text" id="iban" name="iban" pattern="^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$" th:field="*{iban}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('iban') ? 'is-invalid' : ''}"
+                                   placeholder="IBAN" style="width: 50%" aria-label="IBAN">
+                            <input type="text" id="bic" name="bic" pattern="^([a-zA-Z]){6}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$" th:field="*{bic}"
+                                   class="form-control mr-0 ml-auto"
+                                   th:classappend="${#fields.hasErrors('bic') ? 'is-invalid' : ''}"
+                                   placeholder="BIC" style="width: 50%;" aria-label="BIC">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Jetzt Registrieren<br></button>
                 </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div class="container p-0 w-100 mt-5 bg-white">
     <div class="row">

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -32,8 +33,8 @@ public class AccountController {
 	}
 
 	@PostMapping("/register")
-	public String registerNewAccount(@Valid @ModelAttribute("registrationForm") TenantRegistrationForm tenantRegistrationForm,
-	                                 BindingResult result, Model model) {
+	public String registerNewAccount(@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
+									 BindingResult result, Model model) {
 		LOG.info(tenantRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
@@ -53,4 +54,66 @@ public class AccountController {
 		return "redirect:/login";
 	}
 
+	@GetMapping("/map")
+	public String map(@Valid @ModelAttribute("coordinates")Coordinates coordinates){
+		return "map";
+	}
+
+	@PostMapping("/map")
+	public String postmap(@RequestParam(value = "size") String size, @Valid @ModelAttribute("coordinates") Coordinates coordinates) {
+		System.out.println(size);
+		Coordinates test = new Coordinates(size);
+			return "map";
+	}
+
+	@GetMapping("/newhost")
+	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
+		model.addAttribute("registrationForm", hostRegistrationForm);
+		return "newhost";
+	}
+
+	@PostMapping("/newhost")
+	public String registerNewHost(@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
+									 BindingResult result, Model model) {
+		LOG.info(hostRegistrationForm.getBirthDate());
+		if (result.hasErrors()) {
+			LOG.info(result.getAllErrors().toString());
+			return "newhost";
+		}
+
+		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
+		if(accountEntity == null) {
+			result.reject("RegistrationForm.username.Taken");
+			LOG.info(result.getAllErrors().toString());
+			return "newhost";
+		}
+
+		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
+		LOG.info(test.toString());
+
+		return "redirect:/newhost";
+	}
+
+	@GetMapping("/neweventemployee")
+	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
+		model.addAttribute("registrationForm", eventEmployeeRegistrationForm);
+		return "neweventemployee";
+	}
+
+	@PostMapping("/neweventemployee")
+	public String registerNewEventEmployee(@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
+								  BindingResult result, Model model) {
+
+		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
+		if(accountEntity == null) {
+			result.reject("RegistrationForm.username.Taken");
+			LOG.info(result.getAllErrors().toString());
+			return "neweventemployee";
+		}
+
+		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeRegistrationForm.getEmail());
+		LOG.info(test.toString());
+
+		return "redirect:/neweventemployee";
+	}
 }
