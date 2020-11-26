@@ -25,8 +25,7 @@
             <h1 class="p-4">My Booking</h1>
         </div>
     </header><br/>
-    <p th:if="${cart.isEmpty()}">Ihr Warenkorb ist leer.</p>
-        <div  th:unless="${cart.isEmpty()}">
+
             <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 bd-content">
@@ -71,20 +70,16 @@
                             <tbody>
                             <tr>
                                 <th>Vorname</th>
-                                <td class="text-right">Harry</td>
+                                <td class="text-right" th:text="${user.Account.firstname}">Harry</td>
                             </tr>
                             <tr>
                                 <th>Nachname</th>
-                                <td class="text-right" >Potter</td>
+                                <td class="text-right" th:text="${user.Account.lastname}">Potter</td>
 
                             </tr>
                             <tr>
                                 <th>Auftragsdatum</th>
-                                <td class="text-right">01.01.2021</td>
-                            </tr>
-                            <tr>
-                                <th>Abreise Datum</th>
-                                <td class="text-right">07.01.2021</td>
+                                <td class="text-right" th:text="${#temporals.format(date, 'dd.MM.yyyy')}">01.01.2021</td>
                             </tr>
                             </tbody>
                             <tfoot>

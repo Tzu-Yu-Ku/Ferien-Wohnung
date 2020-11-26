@@ -51,11 +51,13 @@ public class BookingManagement {
 
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home,
 											 PaymentMethod paymentMethod, LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<Event, Integer> events){
+											 LocalDate departureDate){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
+		HashMap<Event, Integer> events = new HashMap<Event, Integer>();
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
 		return  bookings.save(new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, paymentMethod));
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
+
 }

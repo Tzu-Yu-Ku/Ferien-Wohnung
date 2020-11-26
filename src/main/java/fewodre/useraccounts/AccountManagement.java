@@ -64,4 +64,13 @@ public class AccountManagement {
 
 	}
 
+	public AccountEntity findUserByAccount(UserAccount account){
+		for (AccountEntity user : accounts.findAll()) {
+			if (user.getAccount().getUsername().equals(account.getUsername())) {
+				return user;
+			}
+		}
+		return null;
+	}
+
 }

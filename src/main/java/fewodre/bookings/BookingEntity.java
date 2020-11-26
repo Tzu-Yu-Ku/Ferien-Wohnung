@@ -5,6 +5,7 @@ import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 //import fewodre.events.EventController;
 //import fewodre.holidayhomes.HolidayHomeController;
+import fewodre.useraccounts.AccountEntity;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
 
@@ -17,10 +18,12 @@ import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountIdentifier;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -51,9 +54,11 @@ public class BookingEntity extends Order {
 	//private List<ProductIdentifier> uuidEvents;
 
 	/* Attribute für extra Logik */
-	@NotBlank
+	@NotNull
+	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate;
-	@NotBlank
+	@NotNull
+	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate departureDay;
 
 	private transient MonetaryAmount price;
@@ -86,7 +91,7 @@ public class BookingEntity extends Order {
 	}
 
 	@Deprecated
-	public BookingEntity() {
+	public BookingEntity(AccountEntity userAccount, HolidayHome holidayHome, Quantity nights, LocalDate arrivalDate, LocalDate depatureDate, PaymentMethod paymentMethod) {
 		super();
 	}
 

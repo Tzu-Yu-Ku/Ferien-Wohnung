@@ -1,3 +1,4 @@
+/*
 package fewodre.bookings;
 
 import fewodre.catalog.events.Event;
@@ -162,3 +163,6 @@ public class CartController {
 	}
 
 }
+
+
+ */
