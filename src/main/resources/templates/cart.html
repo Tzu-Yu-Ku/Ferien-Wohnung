@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,121 +22,118 @@
 <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
     <header>
         <div class="container">
-            <h1 align="center" class="p-4">My Booking</h1>
+            <h1 class="p-4">My Booking</h1>
         </div>
-    </header></br>
-    <div>
-        <p align="center">Ihr Warenkorb ist leer</p>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 bd-content">
-                <div class="container">
-                    <div class="row justify-content-start">
+    </header><br/>
+    <p th:if="${cart.isEmpty()}">Ihr Warenkorb ist leer.</p>
+        <div  th:unless="${cart.isEmpty()}">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 bd-content">
+                    <div class="container">
+                        <div class="row justify-content-start">
 
-                        <div class="card">
-                            <img class="card-img-top" src="../static/resources/img/house_1.png" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${event.title}">Saesische Schweiz Führung</h5>
-                                <div class="card-text p-1" value="Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.">
-                                    Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.    </div>
-                                <div class="card-text p-1">
-                                    <div class="grid-container ">
-                                        <div class="grid-child">Preis pro Person</div>
-                                        <div class="grid-child" align="right">10 €</div>
+                            <div class="card" th:each="event: ${eventCatalog}">
+
+                                <img class="card-img-top" th:src="@{/resources/img/{name}.png(name=${event.image})}" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
+                                    <div class="card-text p-1" th:text="${event.description}">
+                                        Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.    </div>
+                                    <div class="card-text p-1">
+                                        <div class="grid-container ">
+                                            <div class="grid-child">Preis pro Person</div>
+                                            <div class="grid-child" align="right">10 €</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-text p-1">
-                                    <div class="grid-container ">
-                                        <div class="grid-child">Datum</div>
-                                        <input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">
-                                    </div>
-                                </div>
-                                <div class="input-group col">
-                                    <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Anzahl">
-                                    <button type="submit" class="btn btn-primary">Event dazubuchen</button>
+                                    <form class="col" method="post" th:action="@{/eventcart}">
+                                        <input type="hidden" name="eid" value="0"  th:value="${event.id}">
+                                        <div class="card-text p-1">
+                                            <div class="grid-container ">
+                                                <div class="grid-child">Datum</div>
+                                                <input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">
+                                            </div>
+                                        </div>
+                                        <div class="input-group col">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Anzahl">
+                                            <button type="submit" class="btn btn-primary">Event dazubuchen</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="d-none d-lg-block col-lg-4 bd-sidebar">
+                    <div class="container justify-content-start">
+                        <h3>Ihre Bestellung</h3><br/>
+                        <table style="line-height: 30px">
+                            <tbody>
+                            <tr>
+                                <th>Vorname</th>
+                                <td class="text-right">Harry</td>
+                            </tr>
+                            <tr>
+                                <th>Nachname</th>
+                                <td class="text-right" >Potter</td>
+
+                            </tr>
+                            <tr>
+                                <th>Auftragsdatum</th>
+                                <td class="text-right">01.01.2021</td>
+                            </tr>
+                            <tr>
+                                <th>Abreise Datum</th>
+                                <td class="text-right">07.01.2021</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Gesamtpreise</th>
+                                <th class="text-right">640 €</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <br/>
+
+                        <form  method="POST">
+                            <button class="btn btn-primary" type="submit">Bestellen</button>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr class="d">
+                                <th class="col-3"></th>
+                                <th class="col-1"></th>
+                                <th class="col-3"></th>
+                                <th class="col-1"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="d">
+                                <th class="col-5">
+                                    <h5>Säsische Schweiz Führungs</h5>
+                                    <div class="row">
+                                        <div class="col-6">From: 01.12.2021</div>
+                                        <div class="col-6">To: 05.12.2021</div>
+                                    </div>
+                                </th>
+                                <th class="col-2">2</th>
+                                <th class="col-4">10€</th>
+                                <th class="col-1">
+                                    <a class="link" href="">x</a>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="d-none d-lg-block col-lg-4 bd-sidebar">
-                <div class="container justify-content-start">
-                    <h3>Ihre Bestellung</h3><br>
-                    <table style="line-height: 30px">
-                        <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <td class="text-right">Harry Potter</td>
-                        </tr>
-                        <tr>
-                            <th>Ferienhaus Name</th>
-                            <td class="text-right">Ferienhaus</td>
-
-                        </tr>
-                        <tr>
-                            <th>Anreise Datum</th>
-                            <td class="text-right">01.01.2021</td>
-                        </tr>
-                        <tr>
-                            <th>Abreise Datum</th>
-                            <td class="text-right">07.01.2021</td>
-                        </tr>
-                        <tr>
-                            <th>Übernachtungsanzahl</th>
-                            <td class="text-right">6</td>
-                        </tr>
-                        <tr>
-                            <th>Gesamtpreis für 6 Nächte  </th>
-                            <td class="text-right">600 €</td>
-                        </tr>
-                        <tr>
-                            <th>Gesamtpreis für Events</th>
-                            <td class="text-right">40 €</td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Gesamtpreise</th>
-                            <th class="text-right">640 €</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    </br>
-
-                    <form align="center" method="POST">
-                        <button class="btn btn-primary" type="submit">Bestellen</button>
-                    </form>
-                </div>
-
-                <div class="container">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr class="d">
-                            <th class="col-5"></th>
-                            <th class="col-2"></th>
-                            <th class="col-4"></th>
-                            <th class="col-1"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="d">
-                            <th class="col-5">Säsische Schweiz Führungs</th>
-                            <th class="col-2">2</th>
-                            <th class="col-4">10€</th>
-                            <th class="col-1">
-                                <a class="link" href="">x</a>
-                            </th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
-    </div>
-    </div>
-</div>
+        </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

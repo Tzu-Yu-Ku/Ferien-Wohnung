@@ -1,47 +1,51 @@
 package fewodre.bookings;
 
 import fewodre.catalog.events.Event;
+import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
+import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
-import org.aspectj.weaver.ast.Or;
-import org.salespointframework.catalog.Product;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
-import org.salespointframework.order.Order;
-import org.salespointframework.order.OrderManagement;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.web.LoggedIn;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.money.MonetaryAmount;
-import javax.persistence.OneToOne;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.Date;
 
 @Controller
 @SessionAttributes("cart")
 public class CartController {
 
-	private final AccountManagement userManagement;
+	private final AccountManagement accountManagement;
 	private final BookingManagement bookingManagement;
+	private final EventCatalog eventcatalog;
+	private final HolidayHomeCatalog holidayHomeCatalog;
+
+	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate, depatureDate;
 
-	CartController(AccountManagement userManagement, BookingManagement bookingManagement) {
-		Assert.notNull(userManagement, "UserManagement must not be null!");
-		Assert.notNull(bookingManagement);
 
-		this.userManagement = userManagement;
+	CartController(AccountManagement accountManagement, BookingManagement bookingManagement,
+				   EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+
+		Assert.notNull(accountManagement, "AccountManagement must not be null!");
+		Assert.notNull(bookingManagement, "BookingManagement must not be null!");
+		Assert.notNull(eventCatalog, "EventCatalog must not be null!");
+		Assert.notNull(holidayHomeCatalog, "HolidayHomeCatalog must not be null!");
+
+		this.accountManagement = accountManagement;
 		this.bookingManagement = bookingManagement;
+		this.eventcatalog = eventCatalog;
+		this.holidayHomeCatalog = holidayHomeCatalog;
 	}
 
 	@ModelAttribute("cart")
@@ -50,11 +54,14 @@ public class CartController {
 	}
 
 	@GetMapping("/cart")
-	public String basket(){ return "cart"; }
+	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn AccountEntity userAccount){
+		model.addAttribute("eventCatalog", eventcatalog.findAll());
+		//model.addAttribute("holidayHome", holidayHomeCatalog.findById(hid));
+		return "cart"; }
 
-	@PostMapping("/homecart")
-	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam(required = false) LocalDate startDate,
-								 @RequestParam(required = false) LocalDate endDate, @ModelAttribute Cart cart){
+	@PostMapping("/cart")
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")LocalDate startDate,
+								 @RequestParam("depaturedate")LocalDate endDate, @ModelAttribute Cart cart){
 		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
 		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
 			Iterator<CartItem> iter = cart.iterator();
@@ -65,7 +72,7 @@ public class CartController {
 				}
 			}
 		}
-		if(startDate != null && endDate != null) {
+		//if(startDate != null && endDate != null) {
 			if(startDate.isBefore(LocalDate.now()) || endDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate)) {
 				//send message "Please choose the correct day"
 				return "redirect:/housedetails";
@@ -86,19 +93,26 @@ public class CartController {
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.depatureDate));
 			cart.addOrUpdateItem(holidayHome, interval);
 
-			return "/cart";
-		} else { // Es wurde kein Zeitraum angegeben
-			cart.addOrUpdateItem(holidayHome, Quantity.of(1));
 			return "redirect:/cart";
-		}
+		//} else { // Es wurde kein Zeitraum angegeben
+		//	cart.addOrUpdateItem(holidayHome, Quantity.of(1));
+		//	return "redirect:/cart";
+		//}
+	}
+	@PostMapping("/defaultcart")
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
+		LocalDate arrivalDate = LocalDate.now();
+		LocalDate depatureDate = arrivalDate.plusDays(1);
+		return addHolidayHome(holidayHome, arrivalDate, depatureDate,cart);
 	}
 
 
 
 	@PostMapping("/eventcart")
-	public String addEvent(@RequestParam("eid") Event event, LocalDate bookDate, Quantity anzahl, Cart cart){
+	public String addEvent(@RequestParam("eid") Event event, @RequestAttribute("joinday") LocalDate bookedDate,
+						   @RequestParam("number") Quantity anzahl, Cart cart){
 		if(cart.isEmpty()){
-			return"redirect:/itemlist";
+			return"redirect:/holdayhomes";
 		}
 		HolidayHome home;
 		Iterator it = cart.iterator();
@@ -109,7 +123,7 @@ public class CartController {
 			}
 		}
 
-		if(bookDate.isBefore(LocalDate.now())|| bookDate.isBefore(arrivalDate)|| bookDate.isAfter(depatureDate)){
+		if(bookedDate.isBefore(LocalDate.now())|| bookedDate.isBefore(arrivalDate)|| bookedDate.isAfter(depatureDate)){
 			//send to customer "Please choose the right day"
 			return "error";
 		}
@@ -122,10 +136,10 @@ public class CartController {
 		// check if it's already full or anzahl > updated capacity
 		else{
 			cart.addOrUpdateItem(event, anzahl);
-			return "rediect:/events";
+			return "rediect:/cart";
 		}
 	}
-	
+
 
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {

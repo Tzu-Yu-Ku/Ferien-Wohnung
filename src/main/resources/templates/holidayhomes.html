@@ -74,7 +74,7 @@
 
         <div class="row" th:remove="all-but-first"></div>
           <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
-            <form role="form" th:action="@{/homecart}" method="post">
+            <form role="form" th:action="@{/defaultcart}" method="post">
               <div class="card">
                 <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
                 <div class="card-body">
