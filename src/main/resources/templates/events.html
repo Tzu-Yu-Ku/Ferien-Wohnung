@@ -67,7 +67,7 @@
                   <h5 class="card-title" th:text="${event.price}"><b>----price----</b></h5>
                 </li>
                 <li class="list-group-item"><i class="fa fa-info"></i>
-                  <h5 class="card-title" th:text="${event.place}"><b>----place----</b></h5>
+                  <h5 class="card-title" th:text="${event.place.postalCode + ' ' + event.place.city + ', ' + event.place.street + ' ' + event.place.houseNumber}"><b>----place----</b></h5>
                 </li>
                 <div class="d-flex flex-row-reverse">
                 </div>

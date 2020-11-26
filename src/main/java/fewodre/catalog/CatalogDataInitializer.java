@@ -53,7 +53,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
-
+/*
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription("Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
@@ -65,5 +65,6 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
 		eventCatalog.save(eventTest);
+		*/
 	}
 }
