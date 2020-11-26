@@ -27,18 +27,18 @@
                     <a class="nav-link" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link" href="events.html" th:href="@{/events}">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Buchungen<br></a>
+                    <a class="nav-link" href="bookings.html" th:href="@{/bookings}">Buchungen<br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Konto<br></a>
+                    <a class="nav-link" href="#" th:href="@{/account}">Konto<br></a>
                 </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('HOST')">
                 <li class="nav-item">
-                    <a class="nav-link" href="itemlist.html">Angebotsverwaltung</a>
+                    <a class="nav-link" href="#">Angebotsverwaltung</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Buchungsübersicht<br></a>
@@ -49,16 +49,16 @@
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('ADMIN')">
                 <li class="nav-item">
-                    <a class="nav-link" href="itemlist.html">Accountverwaltung</a>
+                    <a class="nav-link" href="manageaccounts.html">Accountverwaltung</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="newhost">Neuer Host<br></a>
+                    <a class="nav-link" href="newhost.html" th:href="@{/newhost}">Neuer Host<br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="neweventemployee">Neuer Veranstalltungsmitarbeiter<br></a>
+                    <a class="nav-link" href="neweventemployee.html" th:href="@{/neweventemployee}">Neuer Veranstaltungsmitarbeiter<br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Konto<br></a>
+                    <a class="nav-link" href="account.html" th:href="@{/account}">Konto<br></a>
                 </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('EVENT_EMPLOYEE')">
@@ -74,13 +74,13 @@
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="!hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
                 <li class="nav-item">
-                    <a class="nav-link" href="itemlist.html">Startseite</a>
+                    <a class="nav-link" href="index.html" th:href="@{/}">Startseite</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Events<br></a>
+                    <a class="nav-link" href="events.html" th:href="@{/events}">Events<br></a>
                 </li>
             </ul>
             <ul class="navbar-nav" sec:authorize="!hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">

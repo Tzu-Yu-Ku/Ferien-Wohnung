@@ -1,7 +1,9 @@
 package fewodre.bookings;
 
 import fewodre.useraccounts.AccountEntity;
+import org.salespointframework.order.OrderIdentifier;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.util.Streamable;
 
 public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
@@ -11,10 +13,11 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	Iterable<BookingEntity> findBookingsByUuidHome(String holidayHome);
 
-	Iterable<BookingEntity> findBookingsByUuidEvents(String event);
+	@Override
+	Streamable<BookingEntity> findAll();
 
+	//Iterable<BookingEntity> findBookingsByUuidEvents(String event);
 
-
-
+	//Iterable<BookingEntity> findById(OrderIdentifier id);
 
 }

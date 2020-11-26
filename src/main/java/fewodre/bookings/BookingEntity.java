@@ -2,18 +2,41 @@ package fewodre.bookings;
 
 import fewodre.catalog.events.Event;
 import fewodre.catalog.holidayhomes.HolidayHome;
+import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+//import fewodre.events.EventController;
+//import fewodre.holidayhomes.HolidayHomeController;
+import org.javamoney.moneta.Money;
+import org.salespointframework.catalog.ProductIdentifier;
+
+import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
+
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 
+import javax.money.MonetaryAmount;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+
 import java.util.List;
+
 
 @Entity
 public class BookingEntity extends Order {
+
+	/* Attribute für Datenbankeinträge */
 
 	@NotBlank
 	private String uuidHome;
@@ -24,18 +47,42 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHost; //? For Filtering in Repository
 
-	@ElementCollection
-	private List<String> uuidEvents;
+	//@ElementCollection
+	//private List<ProductIdentifier> uuidEvents;
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome, PaymentMethod paymentMethod) {
+	/* Attribute für extra Logik */
+	@NotBlank
+	private LocalDate arrivalDate;
+	@NotBlank
+	private LocalDate departureDay;
+
+	private transient MonetaryAmount price;
+
+	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
+						 LocalDate arrivalDate, LocalDate departureDay ,
+						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
-		this.uuidHome = uuidHome;
+		this.uuidHome = home.getId().getIdentifier();
+		this.uuidHost = home.getHostUuid();
+		this.uuidTenant = userAccount.getId().getIdentifier();
+		this.arrivalDate = arrivalDate;
+		this.departureDay = departureDay;
+		addOrderLine(home, nights);
+		Iterator<Event> iter = events.keySet().iterator();
+		while(iter.hasNext()){
+			Event event = iter.next();
+			addOrderLine(event, Quantity.of(events.get(event)));
+		}
+		price = getTotal();
+		// hollidayHome home = GetBy(uuidHome)
+		//addOrderLine(home, arrivalDate.);
+		//HolidayHomeEventCatalog catalog = new
 	}
 
-	public BookingEntity(UserAccount userAccount, @NotBlank String uuidHome) {
+	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
-		this.uuidHome = uuidHome;
+		this.uuidHome = uuidHome.getIdentifier();
 	}
 
 	@Deprecated
@@ -55,6 +102,44 @@ public class BookingEntity extends Order {
 	public  HolidayHome getHome(){
 		//!! from HollidayHomeManager
 		return null;
+	}
+
+	public MonetaryAmount getPrice() {
+		if(price == null){price = getTotal();}
+		if(getTotal().isLessThan(price)){
+			price = getTotal();
+		}
+		return  getTotal();
+	}
+
+	//What i added for checking if it's availible
+	public LocalDate getArrivalDate(){
+		return arrivalDate;
+	}
+	//What i added for checking if it's availible
+	public LocalDate getDepartureDay(){
+		return departureDay;
+	}
+
+	/**
+	 * Überprüft ob der übergebene Zeitraum sich nicht mit dem Zeitraum dieser Buchung überlappt
+	 * Wenn nicht gibt wahr zurück ansonsten falsch.
+	 * Sollte sich nur Anreise des neuen Mieters und Abreise des alten Mieters überlappen
+	 * wird dennoch wahr zurückgegeben denn es wird angenommen (der Norm entsprechen) das es einen genauen
+	 * Auscheckzeit gibt die immer vor der Eincheckzeit liegt.
+	 *
+	 * @param arrival
+	 * @param departure
+	 * @return
+	 */
+	public boolean isNotOverlapping(LocalDate arrival, LocalDate departure){
+		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
+	}
+
+	private LocalDate convertToLocalDate(java.util.Date dateToConvert) {
+		return dateToConvert.toInstant()
+				.atZone(ZoneId.systemDefault())
+				.toLocalDate();
 	}
 
 
