@@ -97,7 +97,7 @@ image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidt
 |===
 
 === Softwarearchitektur
-* Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
+image:models/design/client_server_diagram.svg[Softwarearchitektur als Client-Server-Diagramm]
 
 === Entwurfsentscheidungen
 
