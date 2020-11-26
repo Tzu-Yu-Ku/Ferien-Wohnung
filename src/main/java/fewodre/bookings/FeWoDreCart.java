@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+@Deprecated
 public class FeWoDreCart extends Cart {
 	private HolidayHome holidayHome;
 	private LinkedHashMap<Integer, Year> calender;

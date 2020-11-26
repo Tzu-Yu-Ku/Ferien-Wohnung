@@ -54,12 +54,12 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private LocalDate arrivalDate;
 	@NotBlank
-	private LocalDate departureDay;
+	private LocalDate departureDate;
 
 	private transient MonetaryAmount price;
 
 	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
-						 LocalDate arrivalDate, LocalDate departureDay ,
+						 LocalDate arrivalDate, LocalDate departureDate ,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
@@ -67,7 +67,7 @@ public class BookingEntity extends Order {
 		this.uuidHost = home.getHostUuid();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
-		this.departureDay = departureDay;
+		this.departureDate = departureDate;
 		addOrderLine(home, nights);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -80,6 +80,7 @@ public class BookingEntity extends Order {
 		//HolidayHomeEventCatalog catalog = new
 	}
 
+	@Deprecated
 	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome.getIdentifier();
@@ -117,8 +118,8 @@ public class BookingEntity extends Order {
 		return arrivalDate;
 	}
 	//What i added for checking if it's availible
-	public LocalDate getDepartureDay(){
-		return departureDay;
+	public LocalDate getDepartureDate(){
+		return departureDate;
 	}
 
 	/**
@@ -132,10 +133,12 @@ public class BookingEntity extends Order {
 	 * @param departure
 	 * @return
 	 */
+	@Deprecated
 	public boolean isNotOverlapping(LocalDate arrival, LocalDate departure){
-		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
+		return !(arrival.isBefore(departureDate) && departure.isAfter(arrivalDate));
 	}
 
+	@Deprecated
 	private LocalDate convertToLocalDate(java.util.Date dateToConvert) {
 		return dateToConvert.toInstant()
 				.atZone(ZoneId.systemDefault())

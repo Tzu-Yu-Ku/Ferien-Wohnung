@@ -83,7 +83,7 @@ public class CartController {
 			bookingManagement.findAll().filter(booking -> booking.getHome().equals(holidayHome)).forEach(item -> bookedList.add(item));
 			for (BookingEntity b : bookedList) {
 				//!!!!!!help!!!
-				if(startDate.isBefore(b.getDepartureDay()) && endDate.isAfter(b.getArrivalDate())){
+				if(startDate.isBefore(b.getDepartureDate()) && endDate.isAfter(b.getArrivalDate())){
 					//send message "the chosed duration is not avalible"
 					return "redirect:/housedetails";
 				}
