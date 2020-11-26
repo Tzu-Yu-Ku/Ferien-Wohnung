@@ -9,8 +9,10 @@ import fewodre.useraccounts.AccountManagement;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -22,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Controller
+@PreAuthorize("isAuthenticated()")
 @SessionAttributes("cart")
 public class CartController {
 
@@ -29,6 +32,9 @@ public class CartController {
 	private final BookingManagement bookingManagement;
 	private final EventCatalog eventcatalog;
 	private final HolidayHomeCatalog holidayHomeCatalog;
+
+	private HolidayHome holidayHome;
+	private AccountEntity userAccount;
 
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate, depatureDate;
@@ -54,14 +60,22 @@ public class CartController {
 	}
 
 	@GetMapping("/cart")
+	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn AccountEntity userAccount){
 		model.addAttribute("eventCatalog", eventcatalog.findAll());
-		//model.addAttribute("holidayHome", holidayHomeCatalog.findById(hid));
+		model.addAttribute("holidayHome", holidayHome);
+		model.addAttribute("arrivalDate", arrivalDate);
+		model.addAttribute("departureDate", depatureDate);
+		this.userAccount = userAccount;
+		//if(userAccount.getAccount().getFirstname().isBlank()){this.userAccount.getAccount().setFirstname("Mr.");}
+		if(userAccount.getAccount()==null){System.out.println("!!!!");}
+		model.addAttribute("account", this.userAccount);
 		return "cart"; }
 
 	@PostMapping("/cart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")LocalDate startDate,
 								 @RequestParam("depaturedate")LocalDate endDate, @ModelAttribute Cart cart){
+		this.holidayHome = holidayHome;
 		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
 		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
 			Iterator<CartItem> iter = cart.iterator();
@@ -102,7 +116,7 @@ public class CartController {
 	@PostMapping("/defaultcart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
-		LocalDate depatureDate = arrivalDate.plusDays(1);
+		LocalDate depatureDate = arrivalDate.plusDays(2);
 		return addHolidayHome(holidayHome, arrivalDate, depatureDate,cart);
 	}
 
