@@ -1,22 +1,26 @@
-= Test-Plan
-
-Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+= Test-Plan FeWoDre
 
 == Einführung
-Wozu dient das Dokument? Zielgruppe?
+Dieser Test-Plan dient der Sicherstellung, dass alle für das Projekt FeWoDre geplanten Komponenten ordnungsgemäß implementiert und den Erwartungen des Kunden entpsrechend funktionieren. Dies wird erreicht durch die Absicherung und Auswertung einer Reihe von unterschiedlichen Tests, wie Integrations- und Unit-Tests.
 
 == Aufbau der Testbezeichner
-Nach welchem Schema sind die Tests benannt?
+Die Testbezeichner in diesem Test-Plan sind folgendermaßen zu verstehen:
 
-*Bsp.*
+Der Präfix gibt Auskunft die Art des Tests. Präfix *U* steht für Unit-Tests, Präfix *I* für Integrationstests. Die verschiedenen Testbezeichner sind außerdem einer bestimmten Komponente zugehörig. Die erste Ziffer nach dem Präfix gibt Auskunft darüber. Dabei steht der Präfix *0* für die Komponente *Catalog*, der Präfix *1* für Komponente *Bookings* und der Präfix *2* für Komponente *Accounts*.
+Anschließend inkrementiert sich der Bezeichner je nach Anzahl der Tests zur jeweiligen Komponente.
 
-*U - Unit Test, I - Integrationstest*
-
-*U-1, U-2, I-1*
+*Bsp.*: *U1001* ist Unit-Test Nr.1 der Komponente Bookings.
 
 == Test Gegenstände
+Gegenstand sämtlicher Tests sind sowohl einzelnde Methoden aller Komponenten, als auch das Zusammenspiel jeder Komponente untereinander. Folgende Komponenten sind zu testen:
+
+* Catalog
+* Bookings
+* Accounts
+* Integrität
 
 == Zu testende Funktionalitäten
+
 
 == Nicht zu testende Funktionalitäten
 z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
@@ -29,9 +33,31 @@ z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnitt
 *Integrationstest nach Bottom-Up Prinzip*
 
 == Umgebungsvoraussetzungen
+
 * Wird spezielle Hardware benötigt?
+Um die Tests durchführen zu können wird ein Endgerät (Computer / Handy / Tablet / etc. ) benötigt, inklusive der zur Operation benötigten Peripheriegeräte (z.B. Maus, Tastatur zur Eingabe, Bildschirm zur Ausgabe, etc.). Außerdem wird idealerweise eine Internetverbindung benötigt um die Tests problemlos vor Ort und lokal ausführen zu können.
+
 * Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
+Der Kunde muss keine weiteren Daten zur Testausführung bereitstellen.
+Zur Testausführung liegen die Integrations- und Unit-Tests im Repository der Anwendung vor. Das Repository kann entweder physikalisch per Datenträger oder übers Internet bereitgestellt werden.
+
 * Wird zusätzliche Software für das Testen benötigt?
+Eine Liste notwendiger Software, um die Anwendung testen zu können.
+Die folgende Java-Version ist mindestens erforderlich, um die Tests auszuführen:
+
+* Java 11
+
+Zur Ausführung müssen die Unit- und Integrationstests kompiliert und ausgeführt werden, oder eine beliebige IDE wird herangezogen:
+
+* IDE Software (z.B. IntelliJ IDEA, Eclipse, VS Code, etc.)
+
+Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um Integrationstests bei ausgeführter Anwendung durchzuführen:
+
+* Internet Explorer / Edge 10.0
+* Firefox 4.0
+* Google Chrome 4.0
+* Opera 9.6
+
 * Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
 
 == Testfälle und Verantwortlichkeit
