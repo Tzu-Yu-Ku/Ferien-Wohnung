@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prototype GUI Ferienhausvermietung 2020</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container p-0 w-100" style="height:56px">
+    <div class="row">
+        <div class="w-100">
+            <nav th:include="navbar" style="width: 100%"></nav>
+        </div>
+    </div>
+</div>
+<div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
+    <div style="background-image: url('/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="p-5 col-lg-6 mt-5 mb-5"
+                     style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1)); background-position: top left; background-size: 100%; background-repeat: repeat; box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
+                    <h1>Sie scheinen noch nicht eingeloggt zu sein.</h1>
+                    <p class="mb-3">Bitte loggen Sie sich ein, um eine neue Veranstalltungsfirma hinzufügen zu können.</p>
+                    <form role="form" th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" class="form-control"
+                                   placeholder="E-Mail Adresse eingeben" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Passwort eingeben" required="required">
+                            <small class="form-text text-muted text-right">
+                                <a href="#">Passwort vergessen?</a>
+                            </small>
+                            <small class="form-text text-muted text-right">
+                                <a href="register.html">Noch kein Benutzerkonto?</a>
+                            </small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Einloggen<br></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <div class="py-5"
+         style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
+        <div class="container" >
+            <div class="row">
+                <div class="p-5 col-lg-6"
+                     style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
+                    <h1>Eine neue Veranstalltungsfirma anlegen</h1>
+                    <form role="form" id="eventEmployeeRegistrationForm" th:action="@{/neweventemployee}" th:object="${eventEmployeeRegistrationForm}" method="post">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <input type="text" id="firstname" name="firstname" th:field="*{firstName}" class="form-control"
+                                       th:classappend="${#fields.hasErrors('firstName') ? ' is-invalid' : ''}"
+                                       placeholder="Vorname" style="width: 33%;" aria-label="Vorname">
+                                <input type="text" id="lastname" name="lastname" th:field="*{lastName}" class="form-control mr-0 ml-auto"
+                                       th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+                                       placeholder="Nachname"
+                                       style="width: 65%;" aria-label="Nachname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" th:field="*{email}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                   placeholder="E-Mail Adresse eingeben" aria-label="E-Mail Adresse">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" th:field="*{password}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                   placeholder="Passwort eingeben" aria-label="Passwort" oninput="checkpasswords(this)">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password-confirm" name="password-confirm"
+                                   th:field="*{passwordConfirm}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('passwordConfirm') ? 'is-invalid' : ''}"
+                                   placeholder="Passwort wiederholen" aria-label="Passwort wiederholen" oninput="checkpasswords(this)">
+                        </div>
+                        <script type='text/javascript'>
+                            function checkpasswords(input) {
+                                if (document.getElementById('password-confirm').value !== document.getElementById('password').value) {
+                                    input.setCustomValidity('Die Passwörter stimmen nicht überein');
+                                } else {
+                                    input.setCustomValidity('');
+                                }
+                            }
+                        </script>
+                        <div class="form-group">
+                            <input type="text" id="eventcompany" name="eventcompany" th:field="*{eventCompany}" class="form-control"
+                                   th:classappend="${#fields.hasErrors('eventCompany') ? 'is-invalid' : ''}"
+                                   placeholder="Arbeitgeber eingeben" aria-label="Arbeitgeber">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Jetzt Registrieren<br></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-0 w-100 mt-5 bg-white">
+    <div class="row">
+        <div class="w-100">
+            <footer th:include="footer :: footer"></footer>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
