@@ -1,14 +1,12 @@
 package fewodre.catalog.events;
 
 import fewodre.utils.Place;
+
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-import org.salespointframework.quantity.Metric;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import java.util.List;
 
 @Entity
 public class Event extends Product {
@@ -24,10 +22,9 @@ public class Event extends Product {
 	private boolean eventStatus;
 	private EventType eventType;
 	private int capacity;
-	private MonetaryAmount price;
 
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
-		super(title, Money.parse("EUR 1"), Metric.UNIT);
+		super(title, price);
 		this.description = description;
 		this.eventCompanyUuid = eventCompanyUuid;
 		this.eventStatus = eventStatus;
@@ -37,8 +34,8 @@ public class Event extends Product {
 		this.capacity = capacity;
 	}
 
-	public Event() {
-		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
+	private Event() {
+	//	super("template_title", Money.parse("EUR 5"), Metric.UNIT);
 	}
 
 	public String getImage(){

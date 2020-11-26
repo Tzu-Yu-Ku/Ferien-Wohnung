@@ -14,6 +14,8 @@ public class EventForm {
     private String postalnumber;
     private String city;
     private int capacity;
+    private String eventType;
+    private int price;
 
     public EventForm(){
         this.name = name;
@@ -24,6 +26,8 @@ public class EventForm {
         this.postalnumber = postalnumber;
         this.city = city;
         this.capacity = capacity;
+        this.eventType = eventType;
+        this.price = price;
     }
 
     public String getName() {
@@ -90,8 +94,32 @@ public class EventForm {
         this.capacity = capacity;
     }
 
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public EventType stringToEvent(String eType){
+        System.out.println(eType);
+        if(eType.equals("big")){
+            return EventType.LARGE;
+        }
+        return EventType.SMALL;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public Event toNewEvent() {
-		return new Event(getName(),getEventCompanyUuid(),getDescription(),"event1.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, EventType.SMALL,getCapacity(),Money.parse("EUR 5"));
+        return new Event(getName(),getEventCompanyUuid(),getDescription(),"event1.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, stringToEvent(getEventType()),getCapacity(),Money.of(getPrice(), "EUR"));
 	}
 
 
