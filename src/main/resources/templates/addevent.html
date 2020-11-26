@@ -44,7 +44,7 @@
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-8">
               <h4 class="p-1">Preis</h4>
-              <input class="w-100" type="text"/>
+              <input class="w-100" type="number"/>
             </div>
           </div>
           <div class="form-group" style="background-color: #EEEEEE;">
@@ -59,19 +59,24 @@
               <textarea class="w-100" th:name="eventCompanyUuid" required="required"></textarea>
             </div>
           </div>
+          <!-- 
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-8">
               <h4 class="p-1">EventStatus</h4>
               <textarea class="w-100"></textarea>
             </div>
           </div>
+           -->
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-8">
               <h4 class="p-1">EventType</h4>
-              <textarea class="w-100"></textarea>
+              <select th:name="EventType" required="required">
+                <option value="big">groß</option>
+                <option value="sml">klein</option>
+              </select>
             </div>
           </div>
-
+          <!--
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
               <h4 class="p-1">Bilder</h4>
@@ -83,6 +88,7 @@
               </div>
             </div>
           </div>
+          -->
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-8">
               <h4 class="p-1">Straße</h4>
@@ -110,7 +116,7 @@
           <div class="form-group" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-8">
               <h4 class="p-1">Capacity</h4>
-              <textarea class="w-100" th:name="capacity" required="required"></textarea>
+              <input class="w-100" type="number" min="0" th:name="capacity" required="required"></input>
             </div>
           </div>
           <div class="row border-top p-3" style="background-color: #EEEEEE;">

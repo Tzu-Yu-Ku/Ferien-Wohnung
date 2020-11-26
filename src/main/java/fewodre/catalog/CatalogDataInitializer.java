@@ -4,6 +4,8 @@ import fewodre.catalog.events.*;
 import fewodre.catalog.holidayhomes.*;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
+
+import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +60,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 1, 1));
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid("eventCompanyUuid");
+		eventTest.setPrice(Money.of(123, "EUR"));
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
