@@ -1,21 +1,26 @@
+:project_name: FeWoDre
+= Entwicklerdokumentation __{project_name}__
+:toc: macro
+:numbered:
+:toc-title: Inhaltverzeichnis
+
 [options="header"]
 [cols="1, 3, 3"]
 |===
 |Version | Bearbeitungsdatum   | Autor 
 |...	| ... | ...
 |===
-
-= Entwicklerdokumentation
+toc::[]
 
 == Einführung und Ziele
-1.1 Aufgabenstellung
+=== Aufgabenstellung
 Urlaub im eigenen Land liegt im Trend. und auch Sachsen, im Besonderen Dresden und dessen Umland, profitieren davon. Leider war es jedoch bisher sehr mühsam, als Urlaubs-williger Tourist ein geeignetes Ferienhaus zu finden. Bisher. Denn genau diese eklatante Lücke wird nun durch FeWoDre (FerienWohnungenDresden) geschlossen. Und nicht nur das, darüber hinaus bietet es auch noch die Möglichkeit, eine abwechslungsreiche Freizeitgestaltung gleich mit dazu buchen zu können.
 
 Unsere Website (FeWoDre) ermöglicht es einer beliebigen Anzahl an Vermietern (Host), eine gleichsam beliebige Anzahl an Ferienwohnungen (HolidayHome) zur Vermietung anzubieten. Diese können dann von einem (potentiellen) Mieter (Tenant) angesehen und gegebenenfalls gebucht (Booking) werden, sollte die Verfügbarkeit (BookingStatus) dies zulassen. In Abhängigkeit von der Lage (Place) der Ferienwohnung werden dem Mieter nun, so vorhanden, kleinere Veranstaltungen (SmallEvent) angezeigt, welche regelmäßig stattfinden (EventStatus) und ohne Aufpreis besuchbar sind. Neben diesen kleineren Veranstaltungen gibt es jedoch auch noch große (LargeEvent), welche aus Planungs- und Kapazitätsgründen einer vorherigen Anmeldung bedürfen (EventStatus) und auch nicht mehr (zwingend) kostenlos sind. Diese Veranstaltungen werden in enger Zusammenarbeit von einer in Dresden ansässigen Eventfirma (EventCompany) ausgerichtet und durch deren Mitarbeiter (EventEmployee) betreut. Wie viele Veranstaltungen ein Mieter während seines Aufenthalts besuchen möchte, ist allein ihm und seinen zeitlichen sowie finanziellen Möglichkeiten überlassen.
 
 Hauptverantwortlich für einen reibungslosen Ablauf, im Besonderen für die Integrität der Website, ist der Administrator (Admin), welcher die Vermieter, Eventfirmen und deren Mitarbeiter erstellt und löscht sowie die Mieter freischaltet oder gegebenenfalls löscht.
 
-1.2 Qualitätsanforderungen
+=== Qualitätsanforderungen
 Um die Qualität des Programms emprisch bewertbar zu machen bedarf es der Definition von Qualitätsanforderungen, welche es zu erfüllen gibt.
 
 Wartbarkeit::
@@ -42,14 +47,14 @@ Nachfolgende Tabelle gibt die zu erfüllenden Qualitätsanforderungen sowie dere
 
 
 == Randbedingungen
-2.1 Hardware-Vorgaben
+=== Hardware-Vorgaben
 Eine Liste notwendiger Geräte / Hardware, um die Anwendung auszuführen.
 * Server
 * (mobiles) Endgerät (Computer / Handy / Tablet etc)
 * Eingabegerät ( Tastatur / Touch etc)
 * Maus / Touch
 
-2.2 Software-Vorgaben
+=== Software-Vorgaben
 Ein Liste notwenidger Software, um die Anwednung auszuführen.
 Die folgende Javaversion ist mindestens erforderlich, um die Anwendung auszuführen:
 * Java 11
@@ -59,7 +64,7 @@ Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um die
 * Google Chrome 4.0
 * Opera 9.6
 
-2.3 Vorgaben zum Betrieb des Software
+=== Vorgaben zum Betrieb des Software
 Im Folgenden wird ein Überblick darüber gebenen wie und unter welchen Umständen die Verwendung der fertigen Software intendiert ist.
 
 Das System wird als Onlineshop durch die Firma FeWoDre GmbH zur Vermietung ihrer Ferienhäuser sowie damit assoziierter Veranstalltungen verwendet. Hierzu wird die Software auf einem Server laufen und global mithilfe eines Browsers durch das Internet für interessierte Kunden 24/7 auf- und abrufbar sein.
@@ -95,10 +100,21 @@ image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidt
 * Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
 
 === Entwurfsentscheidungen
-* Verwendete Muster
-* Persistenz
-* Benutzeroberfläche
-* Verwendung externer Frameworks
+
+==== Entwurfsmuster
+* Spring MVC
+
+==== Persistenz
+Die Anwendung verwendet *Hibernate annotationsbasiertes Mapping* um Java-Klassen und Datenbanktabellen zu verknüpfen. Dabei verwenden wir *H2* als grundlegende Datenbanktechnologie. Standardgemäß ist die Persistenzfunktion deaktiviert. Um dies zu ändern, müssen folgende zwei Zeilen in der Datei _application.properties_ entkommentiert werden: 
+....
+# spring.datasource.url=jdbc:h2:./db/videoshop
+# spring.jpa.hibernate.ddl-auto=update
+....
+
+==== Benutzeroberfläche
+image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
+
+=== Verwendung externer Frameworks
 
 [options="header", cols="1,2"]
 |===
