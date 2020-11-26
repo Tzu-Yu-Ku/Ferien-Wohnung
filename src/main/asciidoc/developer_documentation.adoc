@@ -49,6 +49,7 @@ Nachfolgende Tabelle gibt die zu erfüllenden Qualitätsanforderungen sowie dere
 == Randbedingungen
 === Hardware-Vorgaben
 Eine Liste notwendiger Geräte / Hardware, um die Anwendung auszuführen.
+
 * Server
 * (mobiles) Endgerät (Computer / Handy / Tablet etc.)
 * Eingabegerät ( Tastatur / Touch etc.)
@@ -57,8 +58,11 @@ Eine Liste notwendiger Geräte / Hardware, um die Anwendung auszuführen.
 === Software-Vorgaben
 Ein Liste notwendiger Software, um die Anwendung auszuführen.
 Die folgende Javaversion ist mindestens erforderlich, um die Anwendung auszuführen:
+
 * Java 11
+
 Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um die Anwendung auszuführen:
+
 * Internet Explorer / Edge 10.0
 * Firefox 4.0
 * Google Chrome 4.0
