@@ -56,7 +56,7 @@ Eine Liste notwendiger Geräte / Hardware, um die Anwendung auszuführen.
 * Maus / Touch
 
 === Software-Vorgaben
-Ein Liste notwendiger Software, um die Anwendung auszuführen.
+Eine Liste notwendiger Software, um die Anwendung auszuführen.
 Die folgende Javaversion ist mindestens erforderlich, um die Anwendung auszuführen:
 
 * Java 11
