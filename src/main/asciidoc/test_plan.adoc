@@ -34,20 +34,20 @@ z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnitt
 
 == Umgebungsvoraussetzungen
 
-* Wird spezielle Hardware benötigt?
+==== Wird spezielle Hardware benötigt?
 Um die Tests durchführen zu können wird ein Endgerät (Computer / Handy / Tablet / etc. ) benötigt, inklusive der zur Operation benötigten Peripheriegeräte (z.B. Maus, Tastatur zur Eingabe, Bildschirm zur Ausgabe, etc.). Außerdem wird idealerweise eine Internetverbindung benötigt um die Tests problemlos vor Ort und lokal ausführen zu können.
 
-* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
+==== Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
 Der Kunde muss keine weiteren Daten zur Testausführung bereitstellen.
 Zur Testausführung liegen die Integrations- und Unit-Tests im Repository der Anwendung vor. Das Repository kann entweder physikalisch per Datenträger oder übers Internet bereitgestellt werden.
 
-* Wird zusätzliche Software für das Testen benötigt?
+==== Wird zusätzliche Software für das Testen benötigt?
 Eine Liste notwendiger Software, um die Anwendung testen zu können.
 Die folgende Java-Version ist mindestens erforderlich, um die Tests auszuführen:
 
 * Java 11
 
-Zur Ausführung müssen die Unit- und Integrationstests kompiliert und ausgeführt werden, oder eine beliebige IDE wird herangezogen:
+Zur Ausführung müssen die Unit- und Integrationstests kompiliert und ausgeführt werden, oder eine beliebige Entwicklungsumgebung wird herangezogen:
 
 * IDE Software (z.B. IntelliJ IDEA, Eclipse, VS Code, etc.)
 
@@ -58,7 +58,8 @@ Die folgenden Versionen der Browser sind jeweils mindestens erforderlich, um Int
 * Google Chrome 4.0
 * Opera 9.6
 
-* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+==== Wie kommuniziert die Software während des Testens?
+Die Tests teilen über die Konsole der Entwicklungsumgebung oder des Betriebssystems die Ergebnisse mit.
 
 == Testfälle und Verantwortlichkeit
 Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
