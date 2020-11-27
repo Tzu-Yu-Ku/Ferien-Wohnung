@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                         <div class="input-group col">
-                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Anzahl">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Personenzahl">
                                             <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                         </div>
                                     </form>
@@ -70,39 +70,40 @@
                         </div>
                         <h3>Ihre Bestellung</h3><br/>
                         <table style="line-height: 30px">
-                            <tbody>
-                            <tr>
-                                <th>Vorname</th>
 
-                                <td class="text-right" th:text="${user.Account.firstname}">Harry</td>
-                            </tr>
-                            <tr>
-                                <th>Nachname</th>
-                                <td class="text-right" th:text="${user.Account.lastname}">Potter</td>
+                            <form  method="POST" th:action="@{/purchase}">
+                                <tbody>
+                                <tr>
+                                    <th>Vorname</th>
+                                    <td class="text-right" th:text="${account.getFirstname()}">Harry</td>
+                                </tr>
+                                <tr>
+                                    <th>Nachname</th>
+                                    <td class="text-right" th:text="${account.getLastname()}" >Potter</td>
 
-
-                            </tr>
-                            <tr>
-                                <th>Auftragsdatum</th>
-                                <td class="text-right", th:text="${formatter.formatDate(arrivalDate)}">01.01.2021</td><!--!Fancy++!-->
-                            </tr>
-                            <tr>
-                                <th>Abreise Datum</th>
-                                <td class="text-right", th:text="${formatter.formatDate(departureDate)}">07.01.2021</td><!--!Fancy++!-->
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Gesamtpreise</th>
-                                <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
-                            </tr>
-                            </tfoot>
+                                </tr>
+                                <tr>
+                                    <th>Auftragsdatum</th>
+                                    <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">01.01.2021</td><!--!Fancy++!-->
+                                </tr>
+                                <tr>
+                                    <th>Abreise Datum</th>
+                                    <td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td><!--!Fancy++!-->
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Gesamtpreise</th>
+                                    <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
+                                </tr>
+                                </tfoot>
+                                <tr>
+                                    <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
+                                </tr>
+                                <button class="btn btn-primary" type="submit" th:action="@{/purchase}">Bestellen</button>
+                            </form>
                         </table>
                         <br/>
-
-                        <form  method="POST">
-                            <button class="btn btn-primary" type="submit">Bestellen</button>
-                        </form>
                     </div>
 
                     <div class="container">

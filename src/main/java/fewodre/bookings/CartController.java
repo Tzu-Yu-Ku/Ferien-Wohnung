@@ -172,11 +172,16 @@ public class CartController {
 	}
 
 
-	// i am too tired to do this now!!! it's 2:30!!!!!!!
 	@PostMapping("/purchase")
-	public String buy(@ModelAttribute Cart cart, @LoggedIn Optional<AccountEntity> userAccount){
-
-		return "default"; //!!
+	public String buy(@ModelAttribute Cart cart, @ModelAttribute HolidayHome holidayHome,
+					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount){
+		System.out.println(cart.getPrice());
+		System.out.println("Buchungszeitraum0: ");
+		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
+		if (bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events) == null){
+			return "redirect:/cart"; //es gab Probleme
+		}
+		return "bookingdetails"; //!!
 	}
 
 	private class StringFormatter{

@@ -6,7 +6,10 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.catalog.events.EventCatalog;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.order.Cart;
+import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
+import org.salespointframework.payment.Cash;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
@@ -35,7 +38,7 @@ public class BookingManagement {
 	private final EventCatalog eventCatalog;
 
 	@Autowired
-	BookingManagement(BookingRepository bookings, OrderManagement orderManagement,
+	BookingManagement(BookingRepository bookings, OrderManagement<Order> orderManagement,
 					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog){
 
 		Assert.notNull(bookings, "BookingRepository must not be null!");
@@ -49,13 +52,25 @@ public class BookingManagement {
 		this.eventCatalog = eventCatalog;
 	}
 
-	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home,
-											 PaymentMethod paymentMethod, LocalDate arrivalDate,
-											 LocalDate departureDate){
+
+	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home, Cart cart,
+											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
+											 LocalDate departureDate, HashMap<Event, Integer> events){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
 		HashMap<Event, Integer> events = new HashMap<Event, Integer>();
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		return  bookings.save(new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, paymentMethod));
+		BookingEntity bookingEntity = new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, Cash.CASH);
+		cart.addItemsTo(bookingEntity);
+		orderManagement.payOrder(bookingEntity);
+		try {
+			orderManagement.completeOrder(bookingEntity);
+			cart.clear();
+		} catch (Exception e){
+			System.out.println("Buchungszeitraum: ");
+			System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
+			return null;
+		}
+		return  bookings.save(bookingEntity);
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
