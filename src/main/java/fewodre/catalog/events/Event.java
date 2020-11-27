@@ -7,6 +7,7 @@ import org.salespointframework.catalog.Product;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
+import java.time.LocalDate;
 
 @Entity
 public class Event extends Product {
@@ -22,6 +23,7 @@ public class Event extends Product {
 	private boolean eventStatus;
 	private EventType eventType;
 	private int capacity;
+	private LocalDate date = LocalDate.of(2000,2,2);
 
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place, boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price) {
 		super(title, price);
@@ -92,6 +94,10 @@ public class Event extends Product {
 
 	public void setEventStatus(boolean eventStatus) {
 		this.eventStatus = eventStatus;
+	}
+
+	public LocalDate getDate() {
+		return date;
 	}
 }
 
