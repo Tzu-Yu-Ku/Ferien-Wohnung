@@ -6,6 +6,7 @@ import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
+import org.javamoney.moneta.Money;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.quantity.Quantity;
@@ -19,6 +20,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.money.MonetaryAmount;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -35,6 +37,8 @@ public class CartController {
 
 	private HolidayHome holidayHome;
 	private UserAccount userAccount;
+
+	private StringFormatter formatter;
 
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate, departureDate;
@@ -67,16 +71,15 @@ public class CartController {
 		model.addAttribute("arrivalDate", arrivalDate);
 		model.addAttribute("departureDate", departureDate);
 		this.userAccount = userAccount;
-		//if(userAccount.getAccount().getFirstname().isBlank()){this.userAccount.getAccount().setFirstname("Mr.");}
-		//if(userAccount==null){System.out.println("!!!!");}
-		//else{System.out.println("??????");}
+		model.addAttribute("formatter", formatter);
 		model.addAttribute("account", this.userAccount);
 		return "cart"; }
 
 	@PostMapping("/cart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")LocalDate startDate,
-								 @RequestParam("depaturedate")LocalDate endDate, @ModelAttribute Cart cart){
+								 @RequestParam("departuredate")LocalDate endDate, @ModelAttribute Cart cart){
 		this.holidayHome = holidayHome;
+		this.formatter = new StringFormatter();
 		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
 		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
 			Iterator<CartItem> iter = cart.iterator();
@@ -138,7 +141,7 @@ public class CartController {
 			}
 		}
 
-		if(bookedDate.isBefore(LocalDate.now())|| bookedDate.isBefore(arrivalDate)|| bookedDate.isAfter(depatureDate)){
+		if(bookedDate.isBefore(LocalDate.now())|| bookedDate.isBefore(arrivalDate)|| bookedDate.isAfter(departureDate)){
 			//send to customer "Please choose the right day"
 			return "error";
 		}
@@ -176,8 +179,27 @@ public class CartController {
 		return "default"; //!!
 	}
 
-	//private class CartInformation{
-	//	public CartInformation()
-	//}
+	private class StringFormatter{
+		private Map<String, String> MonthTransDict = new HashMap<String, String>();
+		public StringFormatter(){
+			MonthTransDict.put("JANUARY", "Januar");
+			MonthTransDict.put("FEBRUARY", "Februar");
+			MonthTransDict.put("MARCH", "März");
+			MonthTransDict.put("APRIL", "April");
+			MonthTransDict.put("May", "Mai");
+			MonthTransDict.put("JUNE", "Juni");
+			MonthTransDict.put("JULY", "Juli");
+			MonthTransDict.put("AUGUST", "August");
+			MonthTransDict.put("SEPTEMBER", "September");
+			MonthTransDict.put("NOVEMBER", "November");
+			MonthTransDict.put("DECEMBER", "Dezember");
+		}
+		public String formatDate(LocalDate date){
+			return date.getDayOfMonth() + ". " + MonthTransDict.get(date.getMonth().toString()) + " " + date.getYear();
+		}
+		public String parsePrice(MonetaryAmount Price){
+			return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		}
+	}
 }
 
