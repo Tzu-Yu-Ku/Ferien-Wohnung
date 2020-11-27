@@ -40,6 +40,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		test.setBookable(true);
 		test.setHostUuid("abcd-efgh-jkli");
 		test.setImage("house4.png");
+		test.setCapacity(4);
+		test.setPrice(Money.of(250, "EUR"));
 
 		test2.setName("Gemühtliches Haus an der Elbe");
 		test2.setDescription("Für einen entspannten Urlaub in Dresden");
@@ -47,13 +49,15 @@ public class CatalogDataInitializer implements DataInitializer {
 		test2.setBookable(true);
 		test2.setHostUuid("abcd-efgh-jkli");
 		test2.setImage("house3.png");
+		test2.setCapacity(6);
+		test.setPrice(Money.of(75, "EUR"));
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
 
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
-/*
+
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription("Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
@@ -65,6 +69,5 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
 		eventCatalog.save(eventTest);
-		*/
 	}
 }

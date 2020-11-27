@@ -4,7 +4,7 @@ import fewodre.utils.Place;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-
+import org.salespointframework.quantity.Metric;
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 
@@ -34,8 +34,8 @@ public class Event extends Product {
 		this.capacity = capacity;
 	}
 
-	private Event() {
-	//	super("template_title", Money.parse("EUR 5"), Metric.UNIT);
+	public Event() {
+		super("template_title", Money.parse("EUR 5"), Metric.UNIT);
 	}
 
 	public String getImage(){

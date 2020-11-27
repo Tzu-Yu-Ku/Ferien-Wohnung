@@ -1,31 +1,28 @@
-package fewodre.catalog.events;
+package fewodre.catalog.holidayhomes;
 
 import org.javamoney.moneta.Money;
-import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
 
-public class EventForm {
+public class HolidayHomeForm {
     private String name;
     private String description;
-    private String eventCompanyUuid;
+    private String hostUuid;
     private String street;
     private String number;
     private String postalnumber;
     private String city;
     private int capacity;
-    private String eventType;
     private int price;
 
-    public EventForm(){
+    public HolidayHomeForm(){
         this.name = name;
         this.description = description;
-        this.eventCompanyUuid = eventCompanyUuid;
+        this.hostUuid = hostUuid;
         this.street = street;
         this.number = number;
         this.postalnumber = postalnumber;
         this.city = city;
         this.capacity = capacity;
-        this.eventType = eventType;
         this.price = price;
     }
 
@@ -45,12 +42,12 @@ public class EventForm {
         this.description = description;
     }
 
-    public String getEventCompanyUuid() {
-        return eventCompanyUuid;
+    public String getHostUuid() {
+        return hostUuid;
     }
 
-    public void setEventCompanyUuid(String eventCompanyUuid) {
-        this.eventCompanyUuid = eventCompanyUuid;
+    public void setHostUuid(String hostUuid) {
+        this.hostUuid = hostUuid;
     }
 
     public String getStreet() {
@@ -93,22 +90,6 @@ public class EventForm {
         this.capacity = capacity;
     }
 
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
-    public EventType stringToEvent(String eType){
-        System.out.println(eType);
-        if(eType.equals("big")){
-            return EventType.LARGE;
-        }
-        return EventType.SMALL;
-    }
-
     public int getPrice() {
         return price;
     }
@@ -117,8 +98,8 @@ public class EventForm {
         this.price = price;
     }
 
-    public Event toNewEvent() {
-        return new Event(getName(),getEventCompanyUuid(),getDescription(),"event1.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, stringToEvent(getEventType()),getCapacity(),Money.of(getPrice(), "EUR"));
+    public HolidayHome toNewHolidayHome() {
+        return new HolidayHome(getName(),getHostUuid(),getDescription(),"house2.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,getCapacity(),Money.of(getPrice(), "EUR"));
 	}
 
 

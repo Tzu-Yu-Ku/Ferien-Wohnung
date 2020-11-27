@@ -4,7 +4,7 @@ import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.quantity.Metric;
-
+import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 
 /**
@@ -20,7 +20,8 @@ public class HolidayHome extends Product {
 	private boolean isBookable;
 	private int capacity;
 
-	public HolidayHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
+	public HolidayHome(String title, String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, MonetaryAmount price) {
+		super(title, price);
 		this.description = description;
 		this.hostUuid = hostUuid;
 		this.image = image;
@@ -30,8 +31,7 @@ public class HolidayHome extends Product {
 	}
 
 	public HolidayHome() {
-		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
-		//this.addCategory("home");
+		super("template_title", Money.parse("EUR 5"), Metric.UNIT);
 	}
 
 	public int getCapacity(){
@@ -82,7 +82,4 @@ public class HolidayHome extends Product {
 		isBookable = bookable;
 	}
 
-	public HolidayHome createHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
-		return new HolidayHome(hostUuid, description, image, place, isBookable, capacity, price);
-	}
 }
