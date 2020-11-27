@@ -37,7 +37,7 @@ public class CartController {
 	private UserAccount userAccount;
 
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
-	private LocalDate arrivalDate, depatureDate;
+	private LocalDate arrivalDate, departureDate;
 
 
 	CartController(AccountManagement accountManagement, BookingManagement bookingManagement,
@@ -65,7 +65,7 @@ public class CartController {
 		model.addAttribute("eventCatalog", eventcatalog.findAll());
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
-		model.addAttribute("departureDate", depatureDate);
+		model.addAttribute("departureDate", departureDate);
 		this.userAccount = userAccount;
 		//if(userAccount.getAccount().getFirstname().isBlank()){this.userAccount.getAccount().setFirstname("Mr.");}
 		//if(userAccount==null){System.out.println("!!!!");}
@@ -104,8 +104,8 @@ public class CartController {
 				}
 			}
 			this.arrivalDate = startDate;
-			this.depatureDate = endDate;
-			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.depatureDate));
+			this.departureDate = endDate;
+			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
@@ -117,8 +117,8 @@ public class CartController {
 	@PostMapping("/defaultcart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
-		LocalDate depatureDate = arrivalDate.plusDays(2);
-		return addHolidayHome(holidayHome, arrivalDate, depatureDate,cart);
+		LocalDate departureDate = arrivalDate.plusDays(2);
+		return addHolidayHome(holidayHome, arrivalDate, departureDate,cart);
 	}
 
 

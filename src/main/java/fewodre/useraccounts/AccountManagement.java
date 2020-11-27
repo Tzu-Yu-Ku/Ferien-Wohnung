@@ -62,8 +62,9 @@ public class AccountManagement {
 			} else {
 				return null;
 			}
+		} else {
+			return null;
 		}
-		else{return null;}
 
 	}
 
@@ -92,8 +93,9 @@ public class AccountManagement {
 			} else {
 				return null;
 			}
+		} else {
+			return null;
 		}
-		else{return null;}
 
 	}
 
@@ -101,41 +103,31 @@ public class AccountManagement {
 
 		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
 
-			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
-			if(userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
-				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
-						eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
-				newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
-				newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
-				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-						.setBirthDate("NO_BIRTHDATE")
-						.setStreet("NO_STREET")
-						.setHouseNumber("NO_HOUSE_NUMBER")
-						.setPostCode("NO_POSTCODE")
-						.setCity("NO_CITY")
-						.setIban("NO_IBAN")
-						.setBic("NO_BIC")
-						.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
-						.setAccount(newUserAccount);
-				LOG.info(newAccount.getUuid());
-				return accounts.save(newAccount);
-			}
-
-			else {
-				return null;
-			}
+		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
+		if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
+			UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
+					eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
+			newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
+			newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
+			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+					.setBirthDate("NO_BIRTHDATE")
+					.setStreet("NO_STREET")
+					.setHouseNumber("NO_HOUSE_NUMBER")
+					.setPostCode("NO_POSTCODE")
+					.setCity("NO_CITY")
+					.setIban("NO_IBAN")
+					.setBic("NO_BIC")
+					.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
+					.setAccount(newUserAccount);
+			LOG.info(newAccount.getUuid());
+			return accounts.save(newAccount);
+		} else {
+			return null;
 		}
-	}
-
-
-	public AccountEntity findUserByAccount(UserAccount account){
-		for (AccountEntity user : accounts.findAll()) {
-			if (user.getAccount().getUsername().equals(account.getUsername())) {
-				return user;
-			}
-		}
-		return null;
 	}
 
 }
+
+
+
 
