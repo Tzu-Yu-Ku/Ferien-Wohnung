@@ -9,6 +9,7 @@ import fewodre.useraccounts.AccountManagement;
 import org.javamoney.moneta.Money;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
+import org.salespointframework.order.OrderLine;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.money.MonetaryAmount;
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -161,7 +163,7 @@ public class CartController {
 
 
 	@PostMapping("/purchase")
-	public String buy(@ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
+	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
 					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount){
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
@@ -182,10 +184,27 @@ public class CartController {
 				return "redirect:/cart";
 			}
 		}
-		if (bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events) == null){
+		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
+		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
-		return "bookingdetails"; //!!
+		details(model ,bookingEntity);
+		return "/bookingdetails"; //!!
+	}
+
+	@GetMapping("/bookingdetails")
+	public String details(Model model, BookingEntity bookingEntity){
+		model.addAttribute("booking", bookingEntity);
+		model.addAttribute("formatter", new StringFormatter());
+		Iterator<OrderLine> iter = bookingEntity.getOrderLines().iterator();
+		while(iter.hasNext()){
+			OrderLine line = iter.next();
+			if(holidayHomeCatalog.findFirstByProductIdentifier(line.getProductIdentifier()) != null){
+				HolidayHome home = holidayHomeCatalog.findFirstByProductIdentifier(line.getProductIdentifier());
+				model.addAttribute("holidayHome", home);
+			}
+		}
+		return "bookingdetails";
 	}
 
 	private class StringFormatter{

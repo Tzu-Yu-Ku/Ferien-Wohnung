@@ -5,7 +5,9 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.quantity.Metric;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents Holisay
@@ -85,4 +87,5 @@ public class HolidayHome extends Product {
 	public HolidayHome createHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
 		return new HolidayHome(hostUuid, description, image, place, isBookable, capacity, price);
 	}
+
 }

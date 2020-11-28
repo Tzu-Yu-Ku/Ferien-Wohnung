@@ -13,7 +13,7 @@
     <div class="container p-0 w-100" style="height:56px">
         <div class="row">
             <div class="w-100">
-                <iframe width="100%" scrolling="no" frameborder="0" src="navbar.html" style="height:56px"></iframe>
+                <nav th:include="navbar" style="width: 100%"></nav>
             </div>
         </div>
     </div>
@@ -24,13 +24,13 @@
                 <div class="carousel slide" data-ride="carousel" id="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active"><img class="d-block img-fluid w-100"
-                                                               src="../static/resources/img/house_1.png">
+                                                               th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
                         <div class="carousel-item"><img class="d-block img-fluid w-100"
-                                                        src="../static/resources/img/house_1.png">
+                                                        th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
                         <div class="carousel-item"><img class="d-block img-fluid w-100"
-                                                        src="../static/resources/img/house_1.png">
+                                                        th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev"> <span
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-md-6 p-lg-5 p-3">
-                <h1 class="">Buchung: Entspannte Hood in Dresden<br></h1>
+                <h1 class="" th:text="${holidayHome.name}">Buchung: Entspannte Hood in Dresden<br></h1>
             </div>
         </div>
         <div class="row">
@@ -51,7 +51,7 @@
                 <h4 class="p-1">Beschreibung</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">Sehen Sie hier Ihre Buchungsdetails ein.</h5>
+                <h5 class="p-1" th:text="${holidayHome.getDescription()}">Sehen Sie hier Ihre Buchungsdetails ein.</h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -59,7 +59,7 @@
                 <h4 class="p-1">Preis</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">5 Tage, 500€</h5>
+                <h5 class="p-1" th:text="${formatter.parsePrice(booking.getPrice())}">5 Tage, 500€</h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -67,15 +67,15 @@
                 <h4 class="p-1">Verkäufer</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">Herr Müller</h5>
+                <h5 class="p-1" th:text="${booking.hostName}">Herr Müller</h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Buchunsnummer</h4>
+                <h4 class="p-1">Buchungsnummer</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">0123789</h5>
+                <h5 class="p-1" th:text="${booking.id}">0123789</h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -83,10 +83,10 @@
                 stornieren.</a></div>
         </div>
     </div>
-    <div class="container p-0 w-100" style="height:56px">
+    <div class="container p-0 w-100 mt-5 bg-white">
         <div class="row">
             <div class="w-100">
-                <iframe width="100%" scrolling="no" frameborder="0" src="footer.html"></iframe>
+                <nav th:include="footer"></nav>
             </div>
         </div>
     </div>

@@ -65,6 +65,9 @@ public class BookingEntity extends Order {
 
 	private transient MonetaryAmount price;
 
+	//Handy Attributes for html
+	private String hostName;
+
 	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
 						 LocalDate arrivalDate, LocalDate departureDate ,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
@@ -85,6 +88,7 @@ public class BookingEntity extends Order {
 		// hollidayHome home = GetBy(uuidHome)
 		//addOrderLine(home, arrivalDate.);
 		//HolidayHomeEventCatalog catalog = new
+		this.hostName = "!!Mr. Test Name";
 	}
 
 	@Deprecated
@@ -121,7 +125,7 @@ public class BookingEntity extends Order {
 		if(getTotal().isLessThan(price)){
 			price = getTotal();
 		}
-		return  getTotal();
+		return  price;
 	}
 
 	//What i added for checking if it's availible
@@ -156,5 +160,15 @@ public class BookingEntity extends Order {
 				.toLocalDate();
 	}
 
+	public String getHostName() {
+		return hostName;
+	}
 
+	public String getUuidHost() {
+		return uuidHost;
+	}
+
+	public String getUuidHome() {
+		return uuidHome;
+	}
 }
