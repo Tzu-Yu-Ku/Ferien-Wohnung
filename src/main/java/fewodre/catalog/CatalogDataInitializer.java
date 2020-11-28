@@ -37,7 +37,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		test.setName("Nette Wohnung in der Innenstadt");
 		test.setDescription("Dicht an der bekannten Barszene in Neustadt.");
 		test.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
-		test.setBookable(true);
+		test.setIsBookable(true);
 		test.setHostUuid("abcd-efgh-jkli");
 		test.setImage("house4.png");
 		test.setCapacity(4);
@@ -46,7 +46,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		test2.setName("Gemühtliches Haus an der Elbe");
 		test2.setDescription("Für einen entspannten Urlaub in Dresden");
 		test2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
-		test2.setBookable(true);
+		test2.setIsBookable(true);
 		test2.setHostUuid("abcd-efgh-jkli");
 		test2.setImage("house3.png");
 		test2.setCapacity(6);

@@ -74,11 +74,11 @@ public class HolidayHome extends Product {
 		this.place = place;
 	}
 
-	public boolean isBookable() {
+	public boolean getIsBookable() {
 		return isBookable;
 	}
 
-	public void setBookable(boolean bookable) {
+	public void setIsBookable(boolean bookable) {
 		isBookable = bookable;
 	}
 

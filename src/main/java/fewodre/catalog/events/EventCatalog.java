@@ -1,6 +1,5 @@
 package fewodre.catalog.events;
 
-import fewodre.catalog.holidayhomes.HolidayHome;
 import org.salespointframework.catalog.Catalog;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.domain.Sort;
