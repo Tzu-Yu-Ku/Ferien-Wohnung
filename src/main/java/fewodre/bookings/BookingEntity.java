@@ -98,6 +98,10 @@ public class BookingEntity extends Order {
 		super();
 	}
 
+	public BookingEntity() {
+		super();
+	}
+
 	public OrderLine addEvent(Event event, Quantity quantity){
 		return addOrderLine(event, quantity);
 	}

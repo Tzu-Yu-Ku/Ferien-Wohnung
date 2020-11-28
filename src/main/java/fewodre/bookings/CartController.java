@@ -86,26 +86,13 @@ public class CartController {
 			while(iter.hasNext()) {
 				CartItem cartItem = iter.next();
 				if (cartItem.getProduct().getClass() == HolidayHome.class) {
+					System.out.println("the cart already has a holiday home");
 					return "redirect:/cart";
 				}
 			}
 		}
 		//if(startDate != null && endDate != null) {
-			if(startDate.isBefore(LocalDate.now()) || endDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate)) {
-				//send message "Please choose the correct day"
-				return "redirect:/housedetails";
-			}
 
-			//check if it's available
-			ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>();
-			bookingManagement.findAll().filter(booking -> booking.getHome().equals(holidayHome)).forEach(item -> bookedList.add(item));
-			for (BookingEntity b : bookedList) {
-				//!!!!!!help!!!
-				if(startDate.isBefore(b.getDepartureDate()) && endDate.isAfter(b.getArrivalDate())){
-					//send message "the chosed duration is not avalible"
-					return "redirect:/housedetails";
-				}
-			}
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
@@ -179,6 +166,22 @@ public class CartController {
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
 		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
+		if(arrivalDate.isBefore(LocalDate.now()) || departureDate.isBefore(LocalDate.now()) || departureDate.isBefore(arrivalDate)) {
+			//send message "Please choose the correct day"
+			return "redirect:/cart";
+		}
+
+		//check if it's available
+		ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
+		for (BookingEntity b : bookedList) {
+			//!!!!!!help!!!
+			if(arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())){
+				//send message "the chosed duration is not avalible"
+				System.out.println("redirect to Cart because its already booked");
+				//!! Message to customer is missing
+				return "redirect:/cart";
+			}
+		}
 		if (bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events) == null){
 			return "redirect:/cart"; //es gab Probleme
 		}

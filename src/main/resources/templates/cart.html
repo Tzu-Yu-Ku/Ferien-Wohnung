@@ -84,11 +84,17 @@
                                 </tr>
                                 <tr>
                                     <th>Anreisedatum</th>
-                                    <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">01.01.2021</td><!--!Fancy++!-->
+                                    <!--<td input class="p-1" th:type="date" th:value="${arrivalDate}">01.01.2021</td>!Fancy++!-->
+                                    <td>
+                                        <input class="p-1" type="date" th:value="${arrivalDate}" placeholder="dd.mm.yyyy" name="arrivaldate">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Abreisedatum</th>
-                                    <td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td><!--!Fancy++!-->
+                                    <!--<td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td>!Fancy++!-->
+                                    <td>
+                                        <input class="p-1" type="date" th:value="${departureDate}" placeholder="dd.mm.yyyy" name="arrivaldate">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Gesamtpreise</th>
@@ -109,7 +115,7 @@
 
                                     </td>
                                     <td>
-                                    <button class="btn btn-primary" type="submit" th:action="@{/purchase}">Bestellen</button>
+                                    <button class="btn btn-primary" type="submit" >Bestellen</button>
                                     </td>
                                 </tr>
                                 </tfoot>
