@@ -117,8 +117,9 @@ public class CartController {
 
 
 	@PostMapping("/eventcart")
-	public String addEvent(@RequestParam("eid") Event event, @RequestAttribute("joinday") LocalDate bookedDate,
-						   @RequestParam("number") Quantity anzahl, Cart cart){
+	public String addEvent(@RequestParam("eid") Event event,
+						   @RequestParam("number") Quantity anzahl, @ModelAttribute Cart cart){
+		LocalDate bookedDate = event.getDate();
 		if(cart.isEmpty()){
 			return"redirect:/holdayhomes";
 		}
@@ -144,7 +145,7 @@ public class CartController {
 		// check if it's already full or anzahl > updated capacity
 		else{
 			cart.addOrUpdateItem(event, anzahl);
-			return "rediect:/cart";
+			return "redirect:/cart";
 		}
 	}
 
