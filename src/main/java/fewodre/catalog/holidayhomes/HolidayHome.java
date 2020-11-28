@@ -3,7 +3,6 @@ package fewodre.catalog.holidayhomes;
 import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-import org.salespointframework.quantity.Metric;
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 
@@ -31,7 +30,7 @@ public class HolidayHome extends Product {
 	}
 
 	public HolidayHome() {
-		super("template_title", Money.parse("EUR 5"), Metric.UNIT);
+		super("template_title", Money.parse("EUR 5"));
 	}
 
 	public int getCapacity(){
