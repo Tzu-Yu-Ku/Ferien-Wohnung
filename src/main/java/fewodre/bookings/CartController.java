@@ -206,6 +206,7 @@ public class CartController {
 		public String parsePrice(MonetaryAmount Price){
 			return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 		}
+
 	}
 }
 
