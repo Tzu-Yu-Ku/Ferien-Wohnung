@@ -6,6 +6,8 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.catalog.events.EventCatalog;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
@@ -36,10 +38,11 @@ public class BookingManagement {
 	private final OrderManagement orderManagement;
 	private final HolidayHomeCatalog homeCatalog;
 	private final EventCatalog eventCatalog;
+	private final UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
 
 	@Autowired
 	BookingManagement(BookingRepository bookings, OrderManagement<Order> orderManagement,
-					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog){
+					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog, UniqueInventory<UniqueInventoryItem> holidayHomeStorage){
 
 		Assert.notNull(bookings, "BookingRepository must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
@@ -50,6 +53,7 @@ public class BookingManagement {
 		this.orderManagement = orderManagement;
 		this.homeCatalog = homeCatalog;
 		this.eventCatalog = eventCatalog;
+		this.holidayHomeStorage = holidayHomeStorage;
 	}
 
 
@@ -57,22 +61,32 @@ public class BookingManagement {
 											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
 											 LocalDate departureDate, HashMap<Event, Integer> events){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
-		HashMap<Event, Integer> events = new HashMap<Event, Integer>();
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
 		BookingEntity bookingEntity = new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, Cash.CASH);
 		cart.addItemsTo(bookingEntity);
+		//order open()
+		//will update quantity one time
+		//cart.getItem(home.getId().toString());
+		holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
+
 		orderManagement.payOrder(bookingEntity);
-		try {
+		//try {
+		//update quantity one more time here (don't understand what exactly in completeOrder do)
+		//but this should be at the other place (Host should aprrove)
 			orderManagement.completeOrder(bookingEntity);
 			cart.clear();
-		} catch (Exception e){
+		/*} catch (Exception e){
 			System.out.println("Buchungszeitraum: ");
 			System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
 			return null;
-		}
+		}*/
 		return  bookings.save(bookingEntity);
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
+
+	//after createBookingEntity, we can already save in bookingRepository
+	//need to create findByStatusPaid
+
 
 }

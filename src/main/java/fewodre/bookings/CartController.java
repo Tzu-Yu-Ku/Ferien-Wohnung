@@ -109,6 +109,7 @@ public class CartController {
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
+			System.out.println(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate)+ "Nights!!");
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
@@ -173,7 +174,7 @@ public class CartController {
 
 
 	@PostMapping("/purchase")
-	public String buy(@ModelAttribute Cart cart, @ModelAttribute HolidayHome holidayHome,
+	public String buy(@ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
 					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount){
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");

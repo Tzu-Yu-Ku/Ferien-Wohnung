@@ -7,6 +7,9 @@ import fewodre.utils.Place;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
+import org.salespointframework.quantity.Quantity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -18,10 +21,12 @@ public class CatalogDataInitializer implements DataInitializer {
 	private static final Logger LOG = LoggerFactory.getLogger(CatalogDataInitializer.class);
 	private final EventCatalog eventCatalog;
 	private final HolidayHomeCatalog holidayHomeCatalog;
+	private final UniqueInventory<UniqueInventoryItem> inventory;
 
-	CatalogDataInitializer(EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+	CatalogDataInitializer(EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog, UniqueInventory<UniqueInventoryItem> inventory) {
 		this.eventCatalog = eventCatalog;
 		this.holidayHomeCatalog = holidayHomeCatalog;
+		this.inventory = inventory;
 	}
 
 	@Override
@@ -49,6 +54,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		test2.setImage("house3.png");
 		holidayHomeCatalog.save(test);
 		holidayHomeCatalog.save(test2);
+
 
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;

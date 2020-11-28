@@ -83,24 +83,37 @@
 
                                 </tr>
                                 <tr>
-                                    <th>Auftragsdatum</th>
+                                    <th>Anreisedatum</th>
                                     <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">01.01.2021</td><!--!Fancy++!-->
                                 </tr>
                                 <tr>
-                                    <th>Abreise Datum</th>
+                                    <th>Abreisedatum</th>
                                     <td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td><!--!Fancy++!-->
                                 </tr>
-                                </tbody>
-                                <tfoot>
                                 <tr>
                                     <th>Gesamtpreise</th>
                                     <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
                                 </tr>
-                                </tfoot>
+                                </tbody>
+                                <tfoot>
                                 <tr>
                                     <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
+                                    <td>
+                                        <select name="paymethod">
+                                            <option value="" disabled selected hidden>Zahlungsmethode</option>
+                                            <option>Cash</option>
+                                            <option>Cheque</option>
+                                            <option>CreditCard</option>
+                                            <option>DebitCard</option>
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                    <button class="btn btn-primary" type="submit" th:action="@{/purchase}">Bestellen</button>
+                                    </td>
                                 </tr>
-                                <button class="btn btn-primary" type="submit" th:action="@{/purchase}">Bestellen</button>
+                                </tfoot>
+
                             </form>
                         </table>
                         <br/>
