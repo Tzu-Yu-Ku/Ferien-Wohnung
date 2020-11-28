@@ -11,7 +11,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	Iterable<BookingEntity> findBookingsByUuidTenant(String tenant);
 
-	Iterable<BookingEntity> findBookingsByUuidHome(String holidayHome);
+	Streamable<BookingEntity> findBookingsByUuidHome(String holidayHome);
 
 	@Override
 	Streamable<BookingEntity> findAll();

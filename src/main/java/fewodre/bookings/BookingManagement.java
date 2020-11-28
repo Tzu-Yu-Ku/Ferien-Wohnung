@@ -67,7 +67,11 @@ public class BookingManagement {
 		//order open()
 		//will update quantity one time
 		//cart.getItem(home.getId().toString());
-		holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
+		if(!holidayHomeStorage.findByProduct(home).isPresent()){
+			holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
+		}else{
+			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
+		}
 
 		orderManagement.payOrder(bookingEntity);
 		//try {
@@ -75,12 +79,15 @@ public class BookingManagement {
 		//but this should be at the other place (Host should aprrove)
 			orderManagement.completeOrder(bookingEntity);
 			cart.clear();
+			System.out.println("cart is empty: "+cart.isEmpty());
 		/*} catch (Exception e){
 			System.out.println("Buchungszeitraum: ");
 			System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
 			return null;
 		}*/
-		return  bookings.save(bookingEntity);
+		BookingEntity result = bookings.save(bookingEntity);
+		System.out.println(result == bookingEntity);
+		return result ;
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
@@ -88,5 +95,5 @@ public class BookingManagement {
 	//after createBookingEntity, we can already save in bookingRepository
 	//need to create findByStatusPaid
 
-
+	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
 }
