@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                         <div class="input-group col">
-                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" step="1" name="number" required="required" placeholder="Personenzahl">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="0" th:max="${event.capacity}" step="1" name="number" required="required" placeholder="Personenzahl">
                                             <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                         </div>
                                     </form>

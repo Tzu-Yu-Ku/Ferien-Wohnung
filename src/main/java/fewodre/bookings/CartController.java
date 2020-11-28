@@ -7,6 +7,7 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
 import org.javamoney.moneta.Money;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
@@ -68,6 +69,11 @@ public class CartController {
 	@GetMapping("/cart")
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
+		Iterator<Event> iter = eventcatalog.findAll().iterator();
+		while (iter.hasNext()){
+			Event event = iter.next();
+			event.setCapacity(bookingManagement.getStockCountOf(event));
+		}
 		model.addAttribute("eventCatalog", eventcatalog.findAll());
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
@@ -136,9 +142,23 @@ public class CartController {
 			//send to customer "Please choose the right day"
 			return "error";
 		}
-
+		System.out.println("anzahl0: " + anzahl.getAmount());
 		// check if still available
-		if(anzahl.isGreaterThan(Quantity.of(event.getCapacity())) || anzahl.isLessThan(Quantity.of(0))){
+		Quantity completeRequirements = Quantity.of(0);
+		Iterator<CartItem> iter = cart.stream().iterator();
+		while(iter.hasNext()){
+			System.out.println("1");
+			CartItem item = iter.next();
+			if(item.getProduct().getId().equals(event.getId())){
+				 completeRequirements = anzahl.add(item.getQuantity());
+				break;
+			}
+		}
+		System.out.println("anzahl: " + anzahl.getAmount());
+		System.out.println("complete Requirements:" + completeRequirements.getAmount());
+		if(anzahl.isGreaterThan(Quantity.of(event.getCapacity())) || anzahl.isLessThan(Quantity.of(0))
+				|| completeRequirements.isGreaterThan(Quantity.of(event.getCapacity()))){
+			System.out.println("please dont ask for that amount this is f*cking impossible");
 			//"Please give in a correct number"
 			return"error";
 		}

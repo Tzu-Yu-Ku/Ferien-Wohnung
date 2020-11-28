@@ -90,6 +90,13 @@ public class BookingManagement {
 		return result ;
 	}
 
+	public int getStockCountOf(Product product){
+		if(holidayHomeStorage.findByProduct(product).get()==null){
+			return 0;
+		}
+		return holidayHomeStorage.findByProduct(product).get().getQuantity().getAmount().intValue();
+	}
+
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
 
 	//after createBookingEntity, we can already save in bookingRepository
