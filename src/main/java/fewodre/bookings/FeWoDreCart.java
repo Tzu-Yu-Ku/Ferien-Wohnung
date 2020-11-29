@@ -3,7 +3,6 @@ package fewodre.bookings;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import org.salespointframework.order.Cart;
 
-import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;

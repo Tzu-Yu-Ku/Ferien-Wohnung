@@ -1,7 +1,5 @@
 package fewodre.bookings;
 
-import fewodre.useraccounts.AccountEntity;
-import org.salespointframework.order.OrderIdentifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
 

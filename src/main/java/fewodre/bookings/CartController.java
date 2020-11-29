@@ -5,18 +5,18 @@ import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
-import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
-import org.javamoney.moneta.Money;
-import org.salespointframework.catalog.ProductIdentifier;
+
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.money.MonetaryAmount;
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
