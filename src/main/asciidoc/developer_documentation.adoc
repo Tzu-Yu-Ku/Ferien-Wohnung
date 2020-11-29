@@ -213,9 +213,14 @@ image:models/design/useraccounts.svg[Entwurfs-Klasse-Diagramm - Booking]
 [options="header"]
 |=== 
 |Klasse/Enumeration |Beschreibung
-|CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
-|BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
-|BookingManagement|Eine Komponente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
+|AccountController|Ein Spring MVC Controller um die Nutzeraccounts zu verwalten.
+|AccountDataInitializer|Ein Salespoint DataInitializer, der zur Bereitstellung von (Test-)Accounts dient. 
+|AccountEntity|Eine Spring Entity welche die verschiedenen Nutzeraccounts der Platform darstellt. Sie trägt unter anderem ein UserAccount des Salespoint-Frameworks als Attribut.
+|AccountManagement|Ein Spring-Service, der die Erstellung und Verwaltung von Nutzeraccounts/AccountEntities der Platform als Aufgabe hat.
+|AccountRepository|Eine Schnittstelle, die das CrudRepository von Spring erweitert und Methoden zur Abfrage von Nutzeraccounts bereitstellt.
+|EventEmployeeRegistrationForm|Diese Klasse dient zur Übermittlung und Validierung des Formulars, welches ausgefüllt wird, um einen Eventmitarbeiter-Account zu erstellen.
+|HostRegistrationForm|Diese Klasse dient zur Übermittlung und Validierung des Formulars, welches ausgefüllt wird, um einen Vermieter-Account zu erstellen.
+|TenantRegistrationForm|Diese Klasse dient zur Übermittlung und Validierung des Formulars, welches ausgefüllt wird, um einen Mieter-Account zu erstellen.
 |===
 
 
