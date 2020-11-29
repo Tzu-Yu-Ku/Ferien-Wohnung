@@ -1,6 +1,7 @@
 package fewodre.useraccounts;
 
 
+import org.apache.catalina.Host;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
@@ -36,6 +37,19 @@ public class AccountDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating mock accounts to populate our database and test our prototype.");
+
+		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Janujan", "Jan",
+				"j@a.n", "123", "123", "1900-01-01", "Test Street",
+				"1", "12345", "Dresden", true);
+		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Janujan", "Jan",
+				"j@a.n", "123", "123", "1900-01-01", "Test Street",
+				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
+		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm("Janujan", "Jan",
+				"j@a.n", "123", "123", "EventBois Dresden GmbH");
+
+		accountManagement.createTenantAccount(tenantRegistrationForm);
+		accountManagement.createHostAccount(hostRegistrationForm);
+		accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 
 		userAccountManagement.create("admin", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
 		userAccountManagement.create("host", Password.UnencryptedPassword.of("host"), HOST_ROLE);
