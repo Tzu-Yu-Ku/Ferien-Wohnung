@@ -253,7 +253,6 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 [options="header"]
 |===
 |Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell) |Art der Verwendung
-|...|...|...
 |FeWoMi |fewodre.FeWoDre |
 |UserAccount a|- salespointframework.useraccount
 - useraccounts.AccountEnitity a|- Klassenattribute
