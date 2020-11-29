@@ -91,7 +91,7 @@ public class BookingManagement {
 	}
 
 	public int getStockCountOf(Product product){
-		if(holidayHomeStorage.findByProduct(product).get()==null){
+		if(holidayHomeStorage.findByProduct(product).isEmpty()){
 			return 0;
 		}
 		return holidayHomeStorage.findByProduct(product).get().getQuantity().getAmount().intValue();

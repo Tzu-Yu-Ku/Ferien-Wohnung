@@ -4,6 +4,7 @@ import fewodre.catalog.events.Event;
 import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+import fewodre.useraccounts.AccountController;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
 import org.javamoney.moneta.Money;
@@ -14,6 +15,8 @@ import org.salespointframework.order.OrderLine;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -42,6 +45,8 @@ public class CartController {
 	private UserAccount userAccount;
 
 	private StringFormatter formatter;
+
+	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate, departureDate;
@@ -72,6 +77,7 @@ public class CartController {
 		Iterator<Event> iter = eventcatalog.findAll().iterator();
 		while (iter.hasNext()){
 			Event event = iter.next();
+			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
 		model.addAttribute("eventCatalog", eventcatalog.findAll());

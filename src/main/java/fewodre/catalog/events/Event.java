@@ -33,10 +33,12 @@ public class Event extends Product {
 		this.image = image;
 		this.place = place;
 		this.capacity = capacity;
+		this.addCategory("Event");
 	}
 
 	public Event() {
 		super("template_title", Money.parse("EUR 5"));
+		this.addCategory("Event");
 	}
 
 	public String getImage(){
