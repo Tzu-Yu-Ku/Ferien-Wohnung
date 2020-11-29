@@ -24,7 +24,7 @@
             </a>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('TENANT')">
                 <li class="nav-item">
-                    <a class="nav-link" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser</a>
+                    <a class="nav-link" href="holidayhomes.html" th:href="@{/holidayhomes}">Ferienhäuser</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="events.html" th:href="@{/events}">Events</a>
@@ -38,7 +38,7 @@
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('HOST')">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Angebotsverwaltung</a>
+                    <a class="nav-link" href="holidayhomes.html" th:href="@{/holidayhomes}">Angebotsverwaltung</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Buchungsübersicht<br></a>
@@ -63,7 +63,7 @@
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('EVENT_EMPLOYEE')">
                 <li class="nav-item">
-                    <a class="nav-link" href="itemlist.html">Eventverwaltung</a>
+                    <a class="nav-link" href="events.html" th:href="@{/events}">Eventverwaltung</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Firmenübersicht<br></a>

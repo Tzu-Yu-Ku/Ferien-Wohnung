@@ -46,6 +46,21 @@ public class CatalogController {
 		return "holidayhomes";
 	}
 
+	@GetMapping("/addholidayhome")
+	String addHolidayhomePage() {
+		return "addholidayhome";
+	}
+
+	@PostMapping(path = "/addHolidayHome")
+	String addHolidayhomes(@ModelAttribute("form") HolidayHomeForm form, Model model) {
+
+		Hcatalog.save(form.toNewHolidayHome());
+
+		return "redirect:/holidayhomes";
+	}
+
+
+
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 
