@@ -9,6 +9,8 @@ import fewodre.utils.Place;
 import javax.money.MonetaryAmount;
 
 import org.javamoney.moneta.Money;
+import org.salespointframework.inventory.UniqueInventory;
+import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.springframework.stereotype.Controller;
@@ -27,11 +29,13 @@ public class CatalogController {
 	private final HolidayHomeCatalog Hcatalog;
 	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
+	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
 
-	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime) {
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
+		this.holidayHomeStorage = holidayHomeStorage;
 	}
 
 	@GetMapping("/holidayhomes")
@@ -59,7 +63,9 @@ public class CatalogController {
 	@PostMapping(path = "/addEvent")
 	String addEvent(@ModelAttribute("form") EventForm form, Model model) {
 
-		Ecatalog.save(form.toNewEvent());
+		Event event = form.toNewEvent();
+		Ecatalog.save(event);
+		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 
 		return "redirect:/events";
 	}

@@ -15,4 +15,5 @@ public interface HolidayHomeCatalog extends Catalog<HolidayHome> {
 	Streamable<HolidayHome> findAll();
 
 	HolidayHome findFirstByProductIdentifier(ProductIdentifier productIdentifier);
+
 }
