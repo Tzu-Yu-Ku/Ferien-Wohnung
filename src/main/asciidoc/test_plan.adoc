@@ -79,11 +79,9 @@ Integrität ist keine direkte Komponente der Software. Hierunter ist zu verstehe
 Dieses Softwareprojekt nutzt die Frameworks Salespoint und Spring. Es wird davon ausgegangen, dass diese Komponenten ausreichend getestet wurden und korrekt funktionieren. Daher werden diese nicht gesondert von uns getestet.
 
 == Herangehensweise
-*Bsp.:*
 
-*Klassen werden mit JUnit getestet.*
-
-*Integrationstest nach Bottom-Up Prinzip*
+Wir testen zuerst die einzelne kleinen grundsätzlichen Funktionen in den Klassen, sowie und auch einzelnen Klassen mit JUnit.
+Danach gehen wir nach dem Bottom-Up Prinzip vor und testen die die Zusammenhänge der komponenten mit Integrationstests.
 
 == Umgebungsvoraussetzungen
 
