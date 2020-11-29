@@ -29,10 +29,12 @@ public class HolidayHome extends Product {
 		this.place = place;
 		this.isBookable = isBookable;
 		this.capacity = capacity;
+		this.addCategory("HolidayHome");
 	}
 
 	public HolidayHome() {
 		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
+		this.addCategory("HolidayHome");
 		//this.addCategory("home");
 	}
 
