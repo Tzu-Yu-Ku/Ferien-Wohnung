@@ -37,29 +37,33 @@ public class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-		HolidayHome test = new HolidayHome();
-		HolidayHome test2 = new HolidayHome();
-		test.setName("Nette Wohnung in der Innenstadt");
-		test.setDescription("Dicht an der bekannten Barszene in Neustadt.");
-		test.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
-		test.setBookable(true);
-		test.setHostUuid("abcd-efgh-jkli");
-		test.setImage("house4.png");
+		HolidayHome dummyHome1 = new HolidayHome();
+		HolidayHome dummyHome2 = new HolidayHome();
+		dummyHome1.setName("Nette Wohnung in der Innenstadt");
+		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt.");
+		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
+		dummyHome1.setIsBookable(true);
+		dummyHome1.setHostUuid("abcd-efgh-jkli");
+		dummyHome1.setImage("house4.png");
+		dummyHome1.setCapacity(4);
+		dummyHome1.setPrice(Money.of(250, "EUR"));
 
-		test2.setName("Gemühtliches Haus an der Elbe");
-		test2.setDescription("Für einen entspannten Urlaub in Dresden");
-		test2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
-		test2.setBookable(true);
-		test2.setHostUuid("abcd-efgh-jkli");
-		test2.setImage("house3.png");
-		holidayHomeCatalog.save(test);
-		holidayHomeCatalog.save(test2);
+		dummyHome2.setName("Gemühtliches Haus an der Elbe");
+		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden");
+		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
+		dummyHome2.setIsBookable(true);
+		dummyHome2.setHostUuid("abcd-efgh-jkli");
+		dummyHome2.setImage("house3.png");
+		dummyHome2.setCapacity(6);
+		dummyHome2.setPrice(Money.of(75, "EUR"));
+		holidayHomeCatalog.save(dummyHome1);
+		holidayHomeCatalog.save(dummyHome2);
 
 
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
-/*
+
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription("Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
@@ -71,6 +75,5 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
 		eventCatalog.save(eventTest);
-		*/
 	}
 }

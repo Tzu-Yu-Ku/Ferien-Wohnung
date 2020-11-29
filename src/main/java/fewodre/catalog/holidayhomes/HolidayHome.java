@@ -3,11 +3,8 @@ package fewodre.catalog.holidayhomes;
 import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-import org.salespointframework.quantity.Metric;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.money.MonetaryAmount;
+import javax.persistence.Entity;
 
 /**
  * This class represents Holisay
@@ -22,18 +19,21 @@ public class HolidayHome extends Product {
 	private boolean isBookable;
 	private int capacity;
 
-	public HolidayHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
+	public HolidayHome(String title, String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, MonetaryAmount price) {
+		super(title, price);
 		this.description = description;
 		this.hostUuid = hostUuid;
 		this.image = image;
 		this.place = place;
 		this.isBookable = isBookable;
 		this.capacity = capacity;
+		this.addCategory("HolidayHome");
+
 	}
 
 	public HolidayHome() {
-		super("template_title", Money.parse("EUR 1"), Metric.UNIT);
-		//this.addCategory("home");
+		super("template_title", Money.parse("EUR 5"));
+		this.addCategory("HolidayHome");
 	}
 
 	public int getCapacity(){
@@ -76,16 +76,12 @@ public class HolidayHome extends Product {
 		this.place = place;
 	}
 
-	public boolean isBookable() {
+	public boolean getIsBookable() {
 		return isBookable;
 	}
 
-	public void setBookable(boolean bookable) {
+	public void setIsBookable(boolean bookable) {
 		isBookable = bookable;
-	}
-
-	public HolidayHome createHome(String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, Money price) {
-		return new HolidayHome(hostUuid, description, image, place, isBookable, capacity, price);
 	}
 
 }

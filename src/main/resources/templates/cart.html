@@ -150,12 +150,15 @@
                                         <button type="submit" class="btn">
                                             <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
                                         </button>
-                                        <div class="col-6">
-                                            <label for="startDate">Anreise Datum</label>
+                                        <div class="col-6" th:if="${item.getProduct().getCategories().iterator().next() == 'HolidayHome'}">
+                                            <label for="startDate" >Anreise Datum</label>
                                             <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}" ></div>
-                                        <div class="col-6">
+                                        <div class="col-6" th:if="${item.getProduct().getCategories().iterator().next() == 'HolidayHome'}">
                                             <label for="endDate">Abreise Datum</label>
                                             <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" ></div>
+                                        <div class="col-6" th:if="${item.getProduct().getCategories().iterator().next() == 'Event'}">
+                                            <label for="Anzahl">Personen Zahl:</label>
+                                            <input type="number" id="Anzahl" name="neueAnzahl" th:value="${item.getQuantity().getAmount().intValue()}" ></div>
                                     </div>
                                     </form>
                                 </td>
