@@ -1,45 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="container p-0 w-100" style="height:56px">
+<div class="container p-0 w-100" style="height:56px">
     <div class="row">
-      <div class="w-100">
-        <nav th:include="navbar" style="width: 100%"></nav>
-      </div>
+        <div class="w-100">
+            <nav th:include="navbar" style="width: 100%"></nav>
+        </div>
     </div>
-  </div>
-  <div class="py-3" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+</div>
+<div class="py-3"
+     style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
     <div class="container" style="">
-      <div class="row" style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
-        <div class="col-md-6 d-flex flex-column justify-content-center">
-          <h1 class="mb-3">Entdecken Sie unser Ferienhausangebot.</h1>
-          <p class="lead mb-4">Hier sehen Sie eine Liste aller Ferienhäuser, die aktuell bei uns reservierbar sind.</p>
+        <div class="row"
+             style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <h1 class="mb-3">Entdecken Sie unser Ferienhausangebot.</h1>
+                <p class="lead mb-4">Hier sehen Sie eine Liste aller Ferienhäuser, die aktuell bei uns reservierbar
+                    sind.</p>
+            </div>
+            <div class="col-md-6 p-lg-5 p-3">
+                <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
+            </div>
         </div>
-        <div class="col-md-6 p-lg-5 p-3">
-          <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
+        <br style="">
+
+        <!--Button für den Host zum erstellen von HolidayHomes-->
+        <div class="row" sec:authorize="hasRole('HOST')">
+            <div class="col-md-12"><a th:href="@{/addholidayhome}" class="btn btn-primary btn-outline-light" style="">Ferienhaus
+                erstellen<br></a></div>
         </div>
-      </div>
-      <br style="">
+        <br style="">
 
-      <!--Button für den Host zum erstellen von HolidayHomes-->
-      <div class="row" sec:authorize="hasRole('HOST')">
-        <div class="col-md-12"><a th:href="@{/addholidayhome}" class="btn btn-primary btn-outline-light" style="">Ferienhaus erstellen<br></a></div>
-      </div>
-      <br style="">
-
-      <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
-      <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
+        <span>
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
           Platz
         </button>
         <div class="dropdown-menu">
@@ -51,8 +57,9 @@
           <a class="dropdown-item" href="#">mind. 8</a>
         </div>
       </span>
-      <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
           Preis pro Nacht
         </button>
         <div class="dropdown-menu">
@@ -64,8 +71,9 @@
           <a class="dropdown-item" href="#">150 EUR u. mehr</a>
         </div>
       </span>
-      <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
           Ort
         </button>
         <div class="dropdown-menu">
@@ -77,81 +85,97 @@
           <a class="dropdown-item" href="#">Löbtau</a>
         </div>
       </span>
-      <br style=""/>
+        <br style=""/>
 
-        <div class="row" th:remove="all-but-first"></div>
-          <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
-            <form role="form" th:action="@{/defaultcart}" method="post">
+        <div class="row" th:remove="all-but-first">
+            <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
+                <form role="form" th:action="@{/defaultcart}" method="post">
 
-              <!--Cards für Host mit Buttons (bearbeiten, löschen)-->
-              <div class="card" sec:authorize="hasRole('HOST')">
-                <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
-                  <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><i class="fa fa-users"></i>
-                    <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
-                  </li>
-                  <li class="list-group-item"><i class="fa fa-money"></i>
-                    <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
-                  </li>
-                  <li class="list-group-item"><i class="fa fa-map"></i>
-                    <h8 class="card-title" th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}"><b>----place----</b></h8>
-                  </li>
-                </ul>
-                <div class="card-footer p-2 w-100">
-                  <div class="d-flex flex-row-reverse">
-                    <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus löschen<br></a></div>
-                    <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus bearbeiten<br></a></div>
-                  </div>
-                </div>
-              </div>
+                    <!--Cards für Host mit Buttons (bearbeiten, löschen)-->
+                    <div class="card" sec:authorize="hasRole('HOST')">
+                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
+                            <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-users"></i>
+                                <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-money"></i>
+                                <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-map"></i>
+                                <h8 class="card-title"
+                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                    <b>----place----</b></h8>
+                            </li>
+                        </ul>
+                        <div class="card-footer p-2 w-100">
+                            <div class="d-flex flex-row-reverse">
+                                <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus
+                                    löschen<br></a></div>
+                                <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus
+                                    bearbeiten<br></a></div>
+                            </div>
+                        </div>
+                    </div>
 
-              <!--Cards für alle, die kein Host sind mi"Details" und "Jetzt buchen" Option -->
-              <div class="card" sec:authorize="!hasAnyRole('HOST')">
-                <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
-                  <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><i class="fa fa-users"></i>
-                    <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
-                  </li>
-                  <li class="list-group-item"><i class="fa fa-money"></i>
-                    <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
-                  </li>
-                  <li class="list-group-item"><i class="fa fa-map"></i>
-                    <h8 class="card-title" th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}"><b>----place----</b></h8>
-                  </li>
-                </ul>
-                <div class="card-footer p-2 w-100">
-                  <div class="d-flex flex-row-reverse">
-                    <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
-                    <button type="submit" class="ui labeled icon button">Jetzt buchen</button> <!--Verlinkung zum Cart-->
-                    <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
-                  </div>
-                </div>
-              </div>
+                    <!--Cards für alle, die kein Host sind mi"Details" und "Jetzt buchen" Option -->
+                    <div class="card" sec:authorize="!hasAnyRole('HOST')">
+                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
+                             alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
+                            <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-users"></i>
+                                <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-money"></i>
+                                <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-map"></i>
+                                <h8 class="card-title"
+                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                    <b>----place----</b></h8>
+                            </li>
+                        </ul>
+                        <div class="card-footer p-2 w-100">
+                            <div class="d-flex flex-row-reverse">
+                                <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
+                                <button type="submit" class="ui labeled icon button">Jetzt buchen</button>
+                                <!--Verlinkung zum Cart-->
+                                <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+                            </div>
+                        </div>
+                    </div>
 
-            </form>
-          </div>
-        <div class="col-md-4 col-6 p-1"></div>
-      </div>
-    </div>
-    <div class="container p-0 w-100 mt-5 bg-white">
-      <div class="row">
-        <div class="w-100">
-          <nav th:include="footer"></nav>
+                </form>
+            </div>
         </div>
-      </div>
+        <div class="col-md-4 col-6 p-1"></div>
     </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</div>
+<div class="container p-0 w-100 mt-5 bg-white">
+    <div class="row">
+        <div class="w-100">
+            <nav th:include="footer"></nav>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
