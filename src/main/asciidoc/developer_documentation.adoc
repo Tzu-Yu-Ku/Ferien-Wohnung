@@ -157,59 +157,30 @@ image:models/design/catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
 
 [options="header"]
 |=== 
-|Klasse/Enumeration |Beschreibung
-|CatalogController|Ein Spring MVC Controller um den EventCatalog und den HolidayHomecatalog zu steuern.
+|Klasse/Enumeration | Beschreibung
+|CatalogController| Ein Spring Controller um den EventCatalog und den HolidayHomeCatalog zu steuern.
+|CatalogDataInitializer | Einen Salespoint DataInitializer, der zur Bereitstellung grundsätzliche (Test-)Daten dient. 
+|HolidayHome | Stellt ein Ferienhaus dar.
+|HolidayHomeCatalog| Dient zur verwaltung der Ferienhäuser
+|HolidayHomeForm| Dient zum erstellen eines Ferienhauses
+|Event| Stellt ein Event dar.
+|eventForm| Dient zum erstellen eines Events
+|EventCatalog| Dient zum erstellen von Events
+|EventType| Diese Enumeration beschreibt den Typ des Events
 |===
 
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
 
-* Vererbung/Schnittstellen-Implementation
-* Klassenattribute
-* Methodenparameter
+* Inheritance/Interface-Implementation
+* Class Attribute
+* Method Parameter
 
 [options="header"]
 |===
 |Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell) |Art der Verwendung
-|FeWoMi |fewodre.FeWoDre |
-|UserAccount a|- salespointframework.useraccount
-- useraccounts.AccountEnitity a|- Klassenattribute
-- Methodenparameter
-|Admin, Tenant, Host, EventEmployee a|- useraccounts.AccountEntity
-- salespointframework.useraccount.Role a|- Die einzelnen Klassen der unterschiedlichen Nutzergruppen wurden zu einer Account-Klasse zusammengefasst. Sie unterscheiden sich durch unterschiedliche Rollen.
-- Klassenattribute
-|Booking a|- bookings.BookingEntity
-- salespointframework.catalog
-- salespointframework.order
-- salespointframework.payment
-- salespointframework.quantity
-- salespointframework.useraccount a|- Klassenattribute
-- Methodenparameter
-|HolidayHome a|- catalog.holidayhomes
-- salespointframework.catalog a| - Klassenattribute
-- Methodenparameter
-|Event (SmallEvent, LargeEvent) a|- catalog.holidayhomes
-- salespointframework.catalog a| - Klassenattribute
-- Methodenparameter
-|Place (SmallEvent, LargeEvent) a|- utils.Place |
-|HolidayHomeManager, EventManager a| - catalog.CatalogController
-- salespointframework.inventory
-- salespointframework.quantity
-- salespointframework.time
-a| - Klassenattribute
-- Methodenparameter
-|BookingManager a|- booking.BookingManagement
-- booking.BookingController
-- salespointframework.order
-- salespointframework.quantity
-- salenpoint.framework.payment
-- salespointframework.useraccount a|- Vererbung/Schnittstellen-Implementation
-- Methodenparameter
-|AccountManager a|- useraccounts.AccountManagement
--useraccounts.AccountController
--salespointframework.useraccount a| - Klassenattribute
-- Methodenparameter
+|...|...|...
 |===
 
 == Laufzeitsicht
