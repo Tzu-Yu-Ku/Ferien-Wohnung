@@ -186,11 +186,13 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 == Laufzeitsicht
 * Darstellung der Komponenteninteraktion anhand eines Sequenzdiagramms, welches die relevantesten Interaktionen darstellt.
 
-=== Order
-
 === Catalog
 
 image:models/design/seq_catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
+
+=== Order
+
+image:models/design/FeWoDre_Booking.svg[Laufzeit-Ansicht - Booking/Order]
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues zum Zeitpunkt der Abgabe
