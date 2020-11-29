@@ -141,6 +141,16 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 |...|...
 |===
 
+=== Order
+
+image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung
+|CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
