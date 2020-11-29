@@ -66,6 +66,7 @@
                                             <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                         </div>
                                     </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -148,19 +149,19 @@
                                     <div class="row">
                                         <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
                                         <button type="submit" class="btn">
-                                            <img th:src="@{resources/images/refresh.svg}" src="../static/resources/images/refresh.svg" width="23px">
+                                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
                                         </button>
                                         <div class="col-6">
-                                            <label for="startDate">ArrivalDate</label>
+                                            <label for="startDate">Anreise Datum</label>
                                             <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}" ></div>
                                         <div class="col-6">
-                                            <label for="endDate">DepartureDate</label>
+                                            <label for="endDate">Abreise Datum</label>
                                             <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" ></div>
                                     </div>
                                     </form>
                                 </td>
                                 <th class="col-2" th:text="${item.quantity}">1</th>
-                                <th class="col-2" th:text="${item.price}">10€</th>
+                                <th class="col-2" th:text="${formatter.parsePrice(item.price)}">10€</th>
                                 <th class="col-1">
                                     <a class="link" th:href="@{/removeProduct/{id}(id=${item.id})}">x</a>
                                 </th>

@@ -78,7 +78,7 @@ public class BookingEntity extends Order {
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
-		addOrderLine(home, nights);
+		//addOrderLine(home, nights);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
 			Event event = iter.next();
@@ -122,10 +122,10 @@ public class BookingEntity extends Order {
 
 	public MonetaryAmount getPrice() {
 		if(price == null){price = getTotal();}
-		if(getTotal().isLessThan(price)){
-			price = getTotal();
-		}
-		return  price;
+		//if(getTotal().isLessThan(price)){
+		//	price = getTotal();
+		//}
+		return  getTotal();
 	}
 
 	//What i added for checking if it's availible
