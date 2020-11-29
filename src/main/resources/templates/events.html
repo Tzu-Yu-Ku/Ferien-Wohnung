@@ -28,6 +28,14 @@
         </div>
       </div>
       <br style="">
+      
+      <!--Button für den EventEmployee zum erstellen von Events-->
+      <div class="row" sec:authorize="hasRole('EVENT_EMPLOYEE')">
+        <div class="col-md-12"><a th:href="@{/addevents}" class="btn btn-primary btn-outline-light" style="">Event erstellen<br></a></div>
+      </div>
+      <br style="">
+
+      <!--Buttons zum sortieren von den Events nach bestimmten Kategorien-->
       <span style="">
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Art des Events </button>
         <div class="dropdown-menu">
@@ -49,11 +57,10 @@
         </div>
       </span>
       <br style="">
-      <div class="row">
-        <div class="col-md-12"><a th:href="@{/addevents}" class="btn btn-primary btn-outline-light" style="">Event erstellen<br></a></div>
-      </div>
+
       <div class="col-md-12 col-6 p-1" th:each="event : ${eventCatalog}" style="">
-        <div class="card">
+        <!--Cards für EventEmployee mit Buttons (bearbeiten, löschen)-->
+        <div class="card" sec:authorize="hasRole('EVENT_EMPLOYEE')">
           <div class="card-body">
             <div class="row" style="">
               <div class="col-md-6" style=""><img class="card-img-top w-100 h-100" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap"></div>
@@ -66,7 +73,7 @@
                 <li class="list-group-item"><i class="fa fa-money"></i>
                   <h5 class="card-title" th:text="${event.price}"><b>----price----</b></h5>
                 </li>
-                <li class="list-group-item"><i class="fa fa-info"></i>
+                <li class="list-group-item"><i class="fa fa-map"></i>
                   <h5 class="card-title" th:text="${event.place.postalCode + ' ' + event.place.city + ', ' + event.place.street + ' ' + event.place.houseNumber}"><b>----place----</b></h5>
                 </li>
                 <div class="d-flex flex-row-reverse">
@@ -77,12 +84,39 @@
           <ul class="list-group list-group-flush">
           </ul>
           <div class="card-footer p-2 w-100">
-            <div class="row">
+            <div class="d-flex flex-row-reverse">
               <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event löschen<br></a></div>
               <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Event bearbeiten<br></a></div>
             </div>
           </div>
         </div>
+
+        <!--Cards für alle die kein EventEmployee sind-->
+        <div class="card" sec:authorize="!hasAnyRole('EVENT_EMPLOYEE')">
+          <div class="card-body">
+            <div class="row" style="">
+              <div class="col-md-6" style=""><img class="card-img-top w-100 h-100" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap"></div>
+              <div class="col-md-6" style="">
+                <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
+                <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
+                <li class="list-group-item"><i class="fa fa-users"></i>
+                  <h5 class="card-title" th:text="${event.capacity}"><b>----capacity----</b></h5>
+                </li>
+                <li class="list-group-item"><i class="fa fa-money"></i>
+                  <h5 class="card-title" th:text="${event.price}"><b>----price----</b></h5>
+                </li>
+                <li class="list-group-item"><i class="fa fa-map"></i>
+                  <h5 class="card-title" th:text="${event.place.postalCode + ' ' + event.place.city + ', ' + event.place.street + ' ' + event.place.houseNumber}"><b>----place----</b></h5>
+                </li>
+                <div class="d-flex flex-row-reverse">
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+          </ul>
+        </div>
+
       </div>
     </div>
   </div>

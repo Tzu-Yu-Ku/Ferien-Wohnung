@@ -4,7 +4,6 @@ import fewodre.utils.Place;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
-
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 import java.time.LocalDate;
@@ -37,8 +36,8 @@ public class Event extends Product {
 		this.addCategory("Event");
 	}
 
-	private Event() {
-	//	super("template_title", Money.parse("EUR 5"), Metric.UNIT);
+	public Event() {
+		super("template_title", Money.parse("EUR 5"));
 		this.addCategory("Event");
 	}
 
