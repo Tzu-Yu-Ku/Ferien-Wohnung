@@ -177,8 +177,39 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 - useraccounts.AccountEnitity a|- Klassenattribute
 - Methodenparameter
 |Admin, Tenant, Host, EventEmployee a|- useraccounts.AccountEntity
-- salespointframework.useraccount.Role |Die einzelnen Klassen der unterschiedlichen Nutzergruppen wurden zu einer Account-Klasse zusammengefasst. Sie unterscheiden sich durch unterschiedliche Rollen.
-|
+- salespointframework.useraccount.Role a|- Die einzelnen Klassen der unterschiedlichen Nutzergruppen wurden zu einer Account-Klasse zusammengefasst. Sie unterscheiden sich durch unterschiedliche Rollen.
+- Klassenattribute
+|Booking a|- bookings.BookingEntity
+- salespointframework.catalog
+- salespointframework.order
+- salespointframework.payment
+- salespointframework.quantity
+- salespointframework.useraccount a|- Klassenattribute
+- Methodenparameter
+|HolidayHome a|- catalog.holidayhomes
+- salespointframework.catalog a| - Klassenattribute
+- Methodenparameter
+|Event (SmallEvent, LargeEvent) a|- catalog.holidayhomes
+- salespointframework.catalog a| - Klassenattribute
+- Methodenparameter
+|Place (SmallEvent, LargeEvent) a|- utils.Place |
+|HolidayHomeManager, EventManager a| - catalog.CatalogController
+- salespointframework.inventory
+- salespointframework.quantity
+- salespointframework.time
+a| - Klassenattribute
+- Methodenparameter
+|BookingManager a|- booking.BookingManagement
+- booking.BookingController
+- salespointframework.order
+- salespointframework.quantity
+- salenpoint.framework.payment
+- salespointframework.useraccount a|- Vererbung/Schnittstellen-Implementation
+- Methodenparameter
+|AccountManager a|- useraccounts.AccountManagement
+-useraccounts.AccountController
+-salespointframework.useraccount a| - Klassenattribute
+- Methodenparameter
 |===
 
 == Laufzeitsicht
