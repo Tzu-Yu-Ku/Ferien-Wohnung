@@ -149,5 +149,23 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |I2051 |Eventfirma hinzufügen |Admin ist eingeloggt | inkorrekte Daten eingegeben(Eventfirma existiert schon) | Es wird keine EventCompany erstellt, Fehlermeldung
 |I2060 |Eventmitarbeiter erstellen |Admin ist eingeloggt | korrekte Daten eingegeben | Es wird ein neuer Eventmitarbeiter erstellt
 |I2061 |Eventmitarbeiter erstellen |Admin ist eingeloggt | inkorrekte Daten eingegeben(Benutzer existiert schon) | Es wird kein EventEmployee erstellt, Fehlermeldung
-|…  |…              |…              |…       |…
+|U0010 |holidayHomeForm.toNewHolidayHome(HolidayHomeForm form) |  | korrektes Formelement | ein neues HolidayHome wurde erschaffen 
+|U0011 |holidayHomeForm.toNewHolidayHome(HolidayHomeForm form) |  | inkorrektes Formelement | kein HolidayHome wurde erschaffen, Fehlermeldung 
+|U0020 |eventForm.toNewEvent(EventForm form) |  | korrektes Formelement | ein neues Event wurde erschaffen 
+|U0021 |eventForm.toNewEvent(EventForm form) |  | inkorrektes Formelement | kein Event wurde erschaffen, Fehlermeldung 
+|U0030 |EventCatalog.findAll() |  | eventCatalog | Alle Element des Catalog werden aufgelistet/zurückgegeben  
+|U0040 |HolidayHomeCatalog.findAll() |  | holidayHomeCatalog | Alle Element des Catalog werden aufgelistet/zurückgegeben
+|U1010 |creatBookingEntry(UserAccount userAccount, HolidayHome home, PaymentMethod paymentMathod, LocalDate arrivalDate, LocalDate departureDate, HashMap<Event,Integer> events) | Tenant exitstiert, HolidayHome existiert | korrekte Eingaben | Es wird eine neue Buchung erstellt
+|U1011 |creatBookingEntry(UserAccount userAccount, HolidayHome home, PaymentMethod paymentMathod, LocalDate arrivalDate, LocalDate departureDate, HashMap<Event,Integer> events) | Tenant exitstiert, HolidayHome existiert | inkorrekte Eingaben | Es wird keine neue Buchung erstellt, Fehlermeldung
+|U1020 |CartController.addEvent(Event event, LocalDate bookedDate, Quantity anzahl, Cart cart) | Es muss eine Buchung existieren und ein hinzubuchbares Event |korrekte Eingabe | das Event wird zur Buchung hinzugefügt
+|U1021 |CartController.addEvent(Event event, LocalDate bookedDate, Quantity anzahl, Cart cart) | Es muss eine Buchung existieren und ein hinzubuchbares Event |inkorrekte Eingabe | das event wird nicht der Buchung hinzugefügt, Fehlermeldung
+|U1030 |CartController.clear() |  |  | Die Objekte aus dem Cart wurden entfernt
+|U1040 |CartController.basket() | es müssen Objekte im basket sein |  | Gibt die Objekte aus dem basket zurück
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) | Objekte im Cart | korrekte Eingabe | Das Objekt wird aus dem Cart entfernt
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) | Objekte im Cart | inkorrekte Eingabe(das item mit der id ist nicht im Cart) | Der Cart bleibt unverändert, Fehlermeldung
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) |  | inkorrekte Eingabe (es gibt keine Items im Cart) | Der Cart bleibt unverändert, Fehlermeldung
+|U1060 |CartController.buy(Cart cart, AccountEntity useraccount) | es sind Objekte im cart | korrekte Eingabe | der cart wird geleert und der Kunde bekommt eine Rechnung
+|U1060 |CartController.buy(Cart cart, AccountEntity useraccount) |  | leerer cart | Fehlermeldung
+|  |  |  |  |  
+|  |  |  |  |  
 |===
