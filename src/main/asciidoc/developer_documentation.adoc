@@ -129,7 +129,52 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 [options="header", cols="1,2"]
 |===
 |Externes Package |Verwendet von (Klasse der eigenen Anwendung)
-|... |... 
+|salespointframework.catalog a|
+* bookings.BookingEntity
+* bookings.BookingManagement
+|salespointframework.inventory a|
+* bookings.BookingManagement
+|salespointframework.order a|
+* bookings.BookingEntity
+* bookings.CartController
+* bookings.BookingManagement
+|salespointframework.payment a|
+* bookings.BookingEntity
+* bookings.BookingManagement
+|salespointframework.quantity a|
+* bookings.BookingEntity
+* bookings.CartController
+* bookings.BookingManagement
+|salespointframework.useraccount a|
+* bookings.BookingEntity
+* bookings.CartController
+|springframework.beans a|
+* bookings.BookingManagement
+|springframework.data a|
+* bookings.BookingRepository
+* bookings.BookingManagement
+|springframework.format a|
+* bookings.BookingEntity
+* bookings.CartController
+|springframework.security a|
+* bookings.CartController
+|springframework.stereotype a|
+* bookings.CartController
+* bookings.BookingManagement
+|springframework.transaction a|
+* bookings.BookingManagement
+|springframework.ui a|
+* bookings.CartController
+|springframework.util a|
+* bookings.BookingManagement
+* bookings.BookingManagement
+|springframework.web a|
+* bookings.CartController
+| slf4j.Logger a|
+* bookings.CartController
+|slf4j.LoggerFactory a|
+* bookings.CartController
+|
 |===
 
 == Bausteinsicht
@@ -150,7 +195,7 @@ image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
 |Klasse/Enumeration |Beschreibung
 |CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
 |BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
-|BookingManager|Eine Componente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
+|BookingManagement|Eine Komponente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
 |===
 
 === Catalog
