@@ -6,8 +6,8 @@ Dieser Test-Plan dient der Sicherstellung, dass alle für das Projekt FeWoDre ge
 == Aufbau der Testbezeichner
 Die Testbezeichner in diesem Test-Plan sind folgendermaßen zu verstehen:
 
-Der Präfix gibt Auskunft die Art des Tests. Präfix *U* steht für Unit-Tests, Präfix *I* für Integrationstests. Die verschiedenen Testbezeichner sind außerdem einer bestimmten Komponente zugehörig. Die erste Ziffer nach dem Präfix gibt Auskunft darüber. Dabei steht der Präfix *0* für die Komponente *Catalog*, der Präfix *1* für Komponente *Bookings* und der Präfix *2* für Komponente *Accounts*.
-Anschließend inkrementiert sich der Bezeichner je nach Anzahl der Tests zur jeweiligen Komponente.
+Der Präfix gibt Auskunft die Art des Tests. Präfix *U* steht für Unit-Tests, Präfix *I* für Integrationstests. Die verschiedenen Testbezeichner sind außerdem einer bestimmten Komponente zugehörig. Die erste Ziffer nach dem Präfix gibt Auskunft darüber. Dabei steht der Präfix *0* für die Komponente *Catalog*, der Präfix *1* für Komponente *Bookings* und der Präfix *2* für Komponente *Accounts*. Die zweite und dritte Ziffer sind die tatsächliche Testnummer und die vierte Ziffer ist für verschiedene Eingaben.
+Anschließend inkrementiert sich der Testnummer je nach Anzahl der Tests zur jeweiligen Komponente.
 
 *Bsp.*: *U1001* ist Unit-Test Nr.1 der Komponente Bookings.
 
@@ -132,7 +132,7 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 - Es existieren buchbare Ferienhäuser |korrekt abgeschlossene Buchung | Es existiert eine neue Buchung
 |I1001 |Ferienhaus buchen a| - Als Tenant eingeloggt  
 - Es existieren buchbare Ferienhäuser |inkorrekte Buchungsparameter (Haus zu dieser Zeit schon gebucht) | es wird keine Buchung erstellt, Fehlermeldung
-|I1001 |Ferienhaus buchen a| - Als Tenant eingeloggt  
+|I1002 |Ferienhaus buchen a| - Als Tenant eingeloggt  
 - Es existieren buchbare Ferienhäuser |inkorrekte Buchungsparameter (Start- und Enddatum in falscher Reihenfolge) | es wird keine Buchung erstellt, Fehlermeldung
 |I1010 |Tenant storniert Buchung a| - Als Tenant eingeloggt  
 - Es existiert eine Buchung für eine Ferienwohnung  |button auf Buchungsseite betätigen  | Die Buchung wird als storniert gesetzt, je nach Zeitpunkt wird Geld zurück gezahlt
