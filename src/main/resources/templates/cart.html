@@ -32,7 +32,6 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="card" th:each="event: ${eventCatalog}">
-
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
                                 <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
@@ -62,7 +61,7 @@
                                             </div>
                                         </div>
                                         <div class="input-group col">
-                                            <input class="form-control col-sm-5" id= "persons" type="number" min="0" th:max="${event.capacity}" step="1" name="number" required="required" placeholder="Personenzahl">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="0" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
                                             <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                         </div>
                                     </form>
