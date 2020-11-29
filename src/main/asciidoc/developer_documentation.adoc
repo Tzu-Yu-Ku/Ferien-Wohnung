@@ -132,6 +132,11 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 |salespointframework.catalog a|
 * bookings.BookingEntity
 * bookings.BookingManagement
+* catalog.HolidayHomeCatalog
+* catalog.EventCatalog
+* catalog.Event
+* catalog.EventCatalog
+* catalog.HolidayHomeCatalog
 |salespointframework.inventory a|
 * bookings.BookingManagement
 |salespointframework.order a|
@@ -145,6 +150,7 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 * bookings.BookingEntity
 * bookings.CartController
 * bookings.BookingManagement
+* catalog.CatalogController
 |salespointframework.useraccount a|
 * bookings.BookingEntity
 * bookings.CartController
@@ -153,6 +159,12 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 |springframework.data a|
 * bookings.BookingRepository
 * bookings.BookingManagement
+* catalog.HolidayHomeCatalog
+* catalog.EventCatalog
+|salespointframework.core a|
+* catalog.CatalogDataInitializer
+|salespointframework.time a|
+* catalog.CatalogController
 |springframework.format a|
 * bookings.BookingEntity
 * bookings.CartController
@@ -161,19 +173,33 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 |springframework.stereotype a|
 * bookings.CartController
 * bookings.BookingManagement
+* catalog.catalogDataInitializer
 |springframework.transaction a|
 * bookings.BookingManagement
 |springframework.ui a|
 * bookings.CartController
+* catalog.catalogcontroller
 |springframework.util a|
 * bookings.BookingManagement
 * bookings.BookingManagement
 |springframework.web a|
 * bookings.CartController
+* catalog.catalogController
+|javax.persistence.Entity a|
+* catalog.Event
+* catalog.HolidayHome
+|javamoney.moneta.Money a|
+* catalog.Event
+* catalog.HolidayHome
+* catalog.EventForm
+* catalog.HolidayHomeForm
+* catalog.CatalogDataInitializer
 | slf4j.Logger a|
 * bookings.CartController
+* catalog.catalogDataInitializer
 |slf4j.LoggerFactory a|
 * bookings.CartController
+* catalog.catalogDataInitializer
 |
 |===
 
