@@ -206,11 +206,18 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 == Bausteinsicht
 * Entwurfsklassendiagramme der einzelnen Packages
 
+=== Accounts
+
+image:models/design/useraccounts.svg[Entwurfs-Klasse-Diagramm - Booking]
+
 [options="header"]
 |=== 
-|Klasse/Enumeration |Description
-|...|...
+|Klasse/Enumeration |Beschreibung
+|CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
+|BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
+|BookingManagement|Eine Komponente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
 |===
+
 
 === Order
 
@@ -304,7 +311,7 @@ image:models/design/seq_catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
 
 image:models/design/seq_customer.svg[Laufzeit-Ansicht-Tenant - Tenant]
 
-=== Order
+=== Booking/Order
 
 image:models/design/FeWoDre_Booking.svg[Laufzeit-Ansicht - Booking/Order]
 
