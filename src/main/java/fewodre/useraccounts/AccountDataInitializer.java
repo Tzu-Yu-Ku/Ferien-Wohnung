@@ -39,13 +39,13 @@ public class AccountDataInitializer implements DataInitializer {
 		LOG.info("Creating mock accounts to populate our database and test our prototype.");
 
 		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Janujan", "Jan",
-				"j@a.n", "123", "123", "1900-01-01", "Test Street",
+				"tenant@tenant", "123", "123", "1900-01-01", "Test Street",
 				"1", "12345", "Dresden", true);
 		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Janujan", "Jan",
-				"j@a.n", "123", "123", "1900-01-01", "Test Street",
+				"host@host", "123", "123", "1900-01-01", "Test Street",
 				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
 		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm("Janujan", "Jan",
-				"j@a.n", "123", "123", "EventBois Dresden GmbH");
+				"event@employee", "123", "123", "EventBois Dresden GmbH");
 
 		accountManagement.createTenantAccount(tenantRegistrationForm);
 		accountManagement.createHostAccount(hostRegistrationForm);
