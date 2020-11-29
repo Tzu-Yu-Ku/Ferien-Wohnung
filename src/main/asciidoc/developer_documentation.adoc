@@ -165,14 +165,20 @@ image:models/design/catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
 
-* Inheritance/Interface-Implementation
-* Class Attribute
-* Method Parameter
+* Vererbung/Schnittstellen-Implementation
+* Klassenattribute
+* Methodenparameter
 
 [options="header"]
 |===
 |Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell) |Art der Verwendung
-|...|...|...
+|FeWoMi |fewodre.FeWoDre |
+|UserAccount a|- salespointframework.useraccount
+- useraccounts.AccountEnitity a|- Klassenattribute
+- Methodenparameter
+|Admin, Tenant, Host, EventEmployee a|- useraccounts.AccountEntity
+- salespointframework.useraccount.Role |Die einzelnen Klassen der unterschiedlichen Nutzergruppen wurden zu einer Account-Klasse zusammengefasst. Sie unterscheiden sich durch unterschiedliche Rollen.
+|
 |===
 
 == Laufzeitsicht
