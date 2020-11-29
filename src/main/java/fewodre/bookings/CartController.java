@@ -89,6 +89,7 @@ public class CartController {
 		this.holidayHome = holidayHome;
 		this.formatter = new StringFormatter();
 		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
+		/*
 		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
 			Iterator<CartItem> iter = cart.iterator();
 			while(iter.hasNext()) {
@@ -99,12 +100,13 @@ public class CartController {
 				}
 			}
 		}
+		 */
 		//if(startDate != null && endDate != null) {
 
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
-			System.out.println(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate)+ "Nights!!");
+			//System.out.println(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate)+ "Nights!!");
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
@@ -113,6 +115,30 @@ public class CartController {
 		//	return "redirect:/cart";
 		//}
 	}
+
+
+	@PostMapping("/updateDatum/{id}")
+	public String updateDatum(@ModelAttribute Cart cart,@RequestParam("newSDate")String newSDate,
+								@RequestParam("newEDate")String newEDate, @PathVariable("id") HolidayHome holidayHome){
+
+		this.arrivalDate = LocalDate.parse(newSDate);;
+		this.departureDate = LocalDate.parse(newEDate);;
+		Quantity newInterval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
+		Quantity oldInterval = Quantity.of(0);
+		Iterator<CartItem> it = cart.iterator();
+		while(it.hasNext()){
+			CartItem cartItem = it.next();
+			if(cartItem.getProduct().equals(holidayHome)){
+				oldInterval =cartItem.getQuantity();
+			}
+		}
+		Quantity differenz = newInterval.subtract(oldInterval);
+		cart.addOrUpdateItem(holidayHome, differenz);
+
+		return "redirect:/cart";
+	}
+
+
 	@PostMapping("/defaultcart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
@@ -249,6 +275,7 @@ public class CartController {
 		public String parsePrice(MonetaryAmount Price){
 			return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 		}
+
 	}
 }
 
