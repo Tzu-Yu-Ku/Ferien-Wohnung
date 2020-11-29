@@ -192,6 +192,10 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 
 image:models/design/seq_catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
 
+=== Tenant
+
+image:models/design/seq_customer.svg[Laufzeit-Ansicht-Tenant - Tenant]
+
 === Order
 
 image:models/design/FeWoDre_Booking.svg[Laufzeit-Ansicht - Booking/Order]
