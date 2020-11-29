@@ -1,7 +1,7 @@
 = Test-Plan FeWoDre
 
 == Einführung
-Dieser Test-Plan dient der Sicherstellung, dass alle für das Projekt FeWoDre geplanten Komponenten ordnungsgemäß implementiert und den Erwartungen des Kunden entpsrechend funktionieren. Dies wird erreicht durch die Absicherung und Auswertung einer Reihe von unterschiedlichen Tests, wie Integrations- und Unit-Tests.
+Dieser Test-Plan dient der Sicherstellung, dass alle für das Projekt FeWoDre geplanten Komponenten ordnungsgemäß implementiert und den Erwartungen des Kunden entpsrechend funktionieren. Dies wird erreicht durch die Absicherung und Auswertung einer Reihe von unterschiedlichen Tests, wie Integrations- und Unit-Tests. Zur Durchführung der unit und Integrationstests nutzen wir JUnit. Ein Unit-Test beschreiben das Überprüfen der einzelnen Funktionen und Methoden jeder Komponente auf richtige Funktionalität und korrekte Ausführung. Integrationstest beschreiben das korrekte Zusammenspiel der Komponenten untereinander, dazu zählen auch Komponenten wie Salespoint oder Spring.
 
 == Aufbau der Testbezeichner
 Die Testbezeichner in diesem Test-Plan sind folgendermaßen zu verstehen:
@@ -14,16 +14,69 @@ Anschließend inkrementiert sich der Bezeichner je nach Anzahl der Tests zur jew
 == Test Gegenstände
 Gegenstand sämtlicher Tests sind sowohl einzelnde Methoden aller Komponenten, als auch das Zusammenspiel jeder Komponente untereinander. Folgende Komponenten sind zu testen:
 
-* Catalog
-* Bookings
-* Accounts
-* Integrität
+==== Catalog
+Die Catalog-Komponente hält sowohl alle angebotenen Ferienhäuser als auch alle verfügbaren Events. Eine wichtige Rolle spielt hier das korrekte abspeichern alle Informationen der Ferienhäuser und der Events. Dies muss getestet werden.
+
+==== Bookings
+Die Booking-Komponente beinhaltet getätigte, stornierte und vergangene Buchungen von Mietern. Auch hier ist die korrekte Persistenz wichtig und muss entsprechend getestet werden.
+
+==== Accounts
+Die Account-Komponente trägt alle verschiedenen Nutzergruppen der Plattform. Sowohl Mieter, Vermieter,Eventmitarbeiter als auch Administratoren werden hier verwaltet und gespeichert. Auch diese Funktionalitäten sind zu überprüfen und zu testen.
+
+==== Integrität
+Integrität ist keine direkte Komponente der Software. Hierunter ist zu verstehen dass die korrekte Verzahnung der Softwarekomponenten gesichert ist.
 
 == Zu testende Funktionalitäten
-
+|===
+| Anwendungsfall | Funktionalität(en)| Beschreibung
+| Login & Logout a| 
+- Authentifizierung (F0010) | Alle Nutzergruppen sollen die Möglichkeit haben sich anzumelden, um die besonderen Rechte ihrer Accounts wahrzunehmen, und sich abzumelden.
+| Registrierung a| 
+- Registrieren (F0020)
+- Angaben überprüfen (F0021)
+| Nutzer der Platform sollen sich als Mieter registrieren können. Administratoren sollen neue Vermieter/Eventmitarbeiter-Accounts erstellen können.
+| Ferienhaus ansehen a| 
+- Haus Informationen anzeigen (F0120)
+- Katalog (F0110)
+- Häuser (F0400) | Alle Nutzergruppen sollen die Möglichkeit haben weitere Details über ein Ferienhaus einzusehen.
+| Aufenthalt buchen a| 
+- Authentifizierung (F0010)
+- Bestellungen (F0240)
+- Bestellungen erstellen (F0241)
+- Buchung (F0200)
+- Buchung buchen (F0220) | Mieter sollen die Möglichkeiten haben das gewählte Ferienahus an dem gewählten Zeitraum zu reservieren und durch eine Überweisung zu bestätigen.
+| Event dazubuchen a| 
+- Authentifizierung (F0010)
+- Events (F0500) 
+- Events ansehen (F0520) | Mieter sollen die Möglichkeiten haben, Events, die zum Ferienhaus angeboten werden, dazubuchen zu können.
+| Buchungen einsehen a| 
+- Authentifizierung (F0010) 
+- Buchung (F0200)
+- Buchung anzeigen (F0210) | Mieter und Vermieter sollen die Möglichkeiten haben, getätigte Buchungen einsehen zu können.
+| Buchung bestätigen a| 
+- Authentifizierung (F0010)
+- Buchung bestätigen (F0243) | Vermieter sollen in der Lage sein getätigte Buchungen von Mietern zu bestätigen.
+| Buchung stornieren a| 
+- Authentifizierung (F0010)
+- Buchung (F0200)
+- Buchung stornieren (F0244) | Mieter sollen die Möglichkeit haben, Buchungen zu stornieren. Die erfolgte Anzahlung soll erstattet werden.
+| HolidayHome bearbeiten/löschen a| 
+- Authentifizierung (F0010)
+- Häuser bearbeiten (F0411)
+- Häuser löschen (F0412) | Vermieter sollen  die Möglichkeiten haben, die Details der erstellten Ferienhäuser zu bearbeiten und auch löschen zu können.
+| Events erstellen/bearbeiten/löschen a| 
+- Authentifizierung (F0010)
+- Events (F0500)
+- Events bearbeiten (F0530)
+- Events löschen (F0540) | Eventmitarbeiter sollen  die Möglichkeiten haben, die Events auf der Platform erstellten, bearbeiten und auch löschen zu können.
+| Vermieter-/Eventmitarbeiteraccounts verwalten/löschen a| 
+- Authentifizierung (F0010)
+- Registrieren (F0020)
+- Mitglieder erstellen/bestätigen/löschen (F0301) | Administratoren müssen Vermieter- und Eventmitarbeiteraccounts erstellen, bestätigen, verwalten und löschen können.
+|===
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+Dieses Softwareprojekt nutzt die Frameworks Salespoint und Spring. Es wird davon ausgegangen, dass diese Komponenten ausreichend getestet wurden und korrekt funktionieren. Daher werden diese nicht gesondert von uns getestet.
 
 == Herangehensweise
 *Bsp.:*
