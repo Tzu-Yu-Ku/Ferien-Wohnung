@@ -1,0 +1,65 @@
+= Protokoll Gruppe 25
+
+Treffen am 23.11.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   17:00 Uhr +
+Ende:     19:30 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+(intern) 26.11.2020, 19:00 Uhr, Online via BigBlueButton +
+(offiziell) 30.11.2010, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Aktueller Stand
+
+- Tzu-Yu Ku Jimmy Pöhlmann
+
+- Jesko Kloß Marten Freese
+
+- Janujan Thanabalasingham Julian Böhm
+
+Bei unserem dritten Team-Meeting präsentierte zunächst jedes Teammitglied unserem Tutor und Kunden Fabian einzeln die Erweiterung, welche er/sie für den Videoshop entworfen und implementiert hat. Alle Team-Mitglieder, außer Marten (er hat seine Erweiterug am Do., den 19.11 nachgereicht), haben erfolgreich und erwartungsgemäß eine der Teilaufgaben, die uns zur Erweiterung des Videoshops gestellt wurden, erfüllt (Siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/2[#2]). Anschließend gingen wir gemeinsam unser pünktlich fertiggestelltes Pflichtenheft durch und erhielten bis auf sehr wenige kleine Verbesserungs- und Korrekturvorschläge äußerst positives Feedback von unserem Tutor. (Siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]) +
+
+Jedes Teammitglied hat seine Teilbereiche der OOA (wie im Protokoll der letzten Woche erläutert) fertiggestellt. Bei zwei weiteren internen Treffen trugen wir unsere gemeinsamen Fortschritte und Ergebnisse zusammen. So wurden auch Teilbereich-übergreifende Informationen untereinander ausgetauscht, Unklarheiten gemeinsam beseitigt und so die Objekt-orientierte Analyse in Form unseres fertigen Pflichtenhefts durchgeführt. Dementsprechend haben wir nach meinem Kentnissstand den ersten Meilenstein des SWT-Projekts 2020 erreicht. +
+
+Zum Schluss dieses Meetings setzten wir uns alle gemeinsam mit den Aufgaben des nächsten Meilensteins ausseinander und beschlossen für den Objekt-orientierten Entwurf erste Entscheidungen über den Grobentwurf unserer Software. Unsere Komponenten werden wir zunächst thematisch aufteilen (in z.B. Buchungen/Bookings, Nutzeraccounts/Accounts, Ferienhauskatalog, etc.) mit Blick auf die Funktionalität des SalesPoint-Frameworks und den Konventionen, die die Spring-Software-Entwicklung vorraussetzt. Dabei wurden die Komponenten zunächst folgendermaßen aufgeteilt (Siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]): +
+
+- UserAccounts & AccountManagement übernehmen Julian & Ich
+- HolidayHomes & HolidayHomeCatalog übernimmt Marten
+- Events & EventCatalog übernimmt Jesko
+- Bookings & Accountancy/Orders übernehmen Tzu-Yu & Jimmy
+
+Ob sich unsere ersten Überlegungen als sinnvoll erweisen wird sich bis zum nächsten Meeting zeigen. Wir werden uns diese Woche an zwei weiteren Terminen (Do 19.11, Sa 21.11 ganztägig) gemeinsam Treffen um diese Überlegungen weiter auszuarbeiten und auch mit der Entwickler-Dokumentation zu beginnen (Siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]).
+
+
+
+== Retrospektive des letzten Sprints
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/1[#1]     |OOA anfertigen      |Alle Teammitglieder haben gemeinsam das Pflichtenheft vervollständigt. Einige kleine Verbesserungen, die durch unseren Tutor aufgezeigt wurden, werden im Verlauf der kommenden Woche umgesetzt. Ansonsten ist das Pflichtenheft abgeschlossen und das Issue ist geclosed. | 
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/2[#2] |Videoshop erweitern |Jedes Teammitglied hat eine eigene Erweiterung des Videoshops während des Meetings dem Kunden/Tutor präsentiert. Damit ist dieses Issue ebenfalls abgehakt. | 
+|===
+
+
+== Planung des nächsten Sprints
+Anpassung des Analysemodells an das SalesPoint-Framework.  Grobentwurf (Architektur, Persistenz, GUI). Verteilung der Komponenten (Packages) an die Teammitglieder. Jedes Teammitglied beginnt für seine Komponente, einen Anwendungsprototypen zu implementieren.
+
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|===
