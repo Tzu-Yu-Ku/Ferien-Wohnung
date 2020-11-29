@@ -106,7 +106,7 @@ image:models/design/Top-Level-Architektur.png[Top-Level-Architektur der Anwendun
 
 _Top Level Architekur der Anwendung_
 
-image:models/design/client_server_diagram.svg[Softwarearchitektur als Client-Server-Diagramm]
+image:models/design/client_server_diagram.png[Softwarearchitektur als Client-Server-Diagramm]
 _Softwarearchitektur als Client-Server-Diagramm_
 
 === Entwurfsentscheidungen
