@@ -149,6 +149,8 @@ image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
 |=== 
 |Klasse/Enumeration |Beschreibung
 |CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
+|BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
+|BookingManager|Eine Componente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
 |===
 
 === Catalog
