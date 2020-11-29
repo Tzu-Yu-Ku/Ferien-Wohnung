@@ -94,20 +94,16 @@ public class CartController {
 								 @RequestParam("departuredate")LocalDate endDate, @ModelAttribute Cart cart){
 		this.holidayHome = holidayHome;
 		this.formatter = new StringFormatter();
-		//cart.addOrUpdateItem(holidayHome, Quantity.of(1));
-		/*
+
 		if(!cart.isEmpty()){ //checkt ob schon ein HolidayHome im WarenKorb liegt
 			Iterator<CartItem> iter = cart.iterator();
 			while(iter.hasNext()) {
 				CartItem cartItem = iter.next();
 				if (cartItem.getProduct().getClass() == HolidayHome.class) {
-					System.out.println("the cart already has a holiday home");
-					return "redirect:/cart";
+					cart.removeItem(cartItem.getId());
 				}
 			}
 		}
-		 */
-		//if(startDate != null && endDate != null) {
 
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
@@ -116,10 +112,6 @@ public class CartController {
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
-		//} else { // Es wurde kein Zeitraum angegeben
-		//	cart.addOrUpdateItem(holidayHome, Quantity.of(1));
-		//	return "redirect:/cart";
-		//}
 	}
 
 
