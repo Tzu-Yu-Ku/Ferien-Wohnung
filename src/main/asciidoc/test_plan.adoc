@@ -80,8 +80,8 @@ Dieses Softwareprojekt nutzt die Frameworks Salespoint und Spring. Es wird davon
 
 == Herangehensweise
 
-Wir testen zuerst die einzelne kleinen grundsätzlichen Funktionen in den Klassen, sowie und auch einzelnen Klassen mit JUnit.
-Danach gehen wir nach dem Bottom-Up Prinzip vor und testen die die Zusammenhänge der komponenten mit Integrationstests.
+Wir testen zuerst die einzelnen Klassen mit JUnit. Danach testen wir die einzelnen Zusammenhänge der Komponenten an Hand von Integrationstests.
+Es wird nach dem Bottom-Up Prinzip vorgegangen, also werden zuerst kleinere grundsätzliche Funktionen getestet, bevor dann immer größere Zusammenhänge getestet werden.
 
 == Umgebungsvoraussetzungen
 
