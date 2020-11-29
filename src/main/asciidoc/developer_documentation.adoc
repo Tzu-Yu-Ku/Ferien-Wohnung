@@ -151,6 +151,16 @@ image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
 |CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
 |===
 
+=== Catalog
+
+image:models/design/catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
+
+[options="header"]
+|=== 
+|Klasse/Enumeration |Beschreibung
+|CatalogController|Ein Spring MVC Controller um den EventCatalog und den HolidayHomecatalog zu steuern.
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 _Die folgende Tabelle zeigt die Rückverfolgbarkeit zwischen Entwurfs- und Analysemodell. Falls eine Klasse aus einem externen Framework im Entwurfsmodell eine Klasse des Analysemodells ersetzt,
 wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwendung* mithilfe der folgenden Begriffe definiert:_
@@ -167,6 +177,12 @@ wird die Art der Verwendung dieser externen Klasse in der Spalte *Art der Verwen
 
 == Laufzeitsicht
 * Darstellung der Komponenteninteraktion anhand eines Sequenzdiagramms, welches die relevantesten Interaktionen darstellt.
+
+=== Order
+
+=== Catalog
+
+image:models/design/seq_catalog.svg[Entwurfs-Klassen-Diagramm - Catalog]
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues zum Zeitpunkt der Abgabe
