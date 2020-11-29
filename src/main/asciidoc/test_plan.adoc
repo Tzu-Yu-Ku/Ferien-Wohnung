@@ -6,8 +6,8 @@ Dieser Test-Plan dient der Sicherstellung, dass alle für das Projekt FeWoDre ge
 == Aufbau der Testbezeichner
 Die Testbezeichner in diesem Test-Plan sind folgendermaßen zu verstehen:
 
-Der Präfix gibt Auskunft die Art des Tests. Präfix *U* steht für Unit-Tests, Präfix *I* für Integrationstests. Die verschiedenen Testbezeichner sind außerdem einer bestimmten Komponente zugehörig. Die erste Ziffer nach dem Präfix gibt Auskunft darüber. Dabei steht der Präfix *0* für die Komponente *Catalog*, der Präfix *1* für Komponente *Bookings* und der Präfix *2* für Komponente *Accounts*.
-Anschließend inkrementiert sich der Bezeichner je nach Anzahl der Tests zur jeweiligen Komponente.
+Der Präfix gibt Auskunft die Art des Tests. Präfix *U* steht für Unit-Tests, Präfix *I* für Integrationstests. Die verschiedenen Testbezeichner sind außerdem einer bestimmten Komponente zugehörig. Die erste Ziffer nach dem Präfix gibt Auskunft darüber. Dabei steht der Präfix *0* für die Komponente *Catalog*, der Präfix *1* für Komponente *Bookings* und der Präfix *2* für Komponente *Accounts*. Die zweite und dritte Ziffer sind die tatsächliche Testnummer und die vierte Ziffer ist für verschiedene Eingaben.
+Anschließend inkrementiert sich der Testnummer je nach Anzahl der Tests zur jeweiligen Komponente.
 
 *Bsp.*: *U1001* ist Unit-Test Nr.1 der Komponente Bookings.
 
@@ -80,8 +80,8 @@ Dieses Softwareprojekt nutzt die Frameworks Salespoint und Spring. Es wird davon
 
 == Herangehensweise
 
-Wir testen zuerst die einzelne kleinen grundsätzlichen Funktionen in den Klassen, sowie und auch einzelnen Klassen mit JUnit.
-Danach gehen wir nach dem Bottom-Up Prinzip vor und testen die die Zusammenhänge der komponenten mit Integrationstests.
+Wir testen zuerst die einzelnen Klassen mit JUnit. Danach testen wir die einzelnen Zusammenhänge der Komponenten an Hand von Integrationstests.
+Es wird nach dem Bottom-Up Prinzip vorgegangen, also werden zuerst kleinere grundsätzliche Funktionen getestet, bevor dann immer größere Zusammenhänge getestet werden.
 
 == Umgebungsvoraussetzungen
 
@@ -119,5 +119,53 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
+|I0010 |Event absagen a| - Als EventEmployee eingeloggt 
+- Es ist ein Event, der EventCompany, vorhanden | button auf Eventseite betätigen       |  Event ist nicht mehr buchbar, eventkosten von Buchungen zurückerstatten
+|I0020 |Event erstellen |Als EventEmployee eingeloggt | korrekte ausgefülltes Erstell-Form | es existiert ein neues Event
+|I0021 |Event erstellen |Als EventEmployee eingeloggt | inkorrekt ausgefülltes Erstell-Form (leerer String, negative Zahl) | es wird kein Event erstellt, Fehlermeldung
+|I0030 |Ferienhaus erstellen |Als Host eingeloggt  | korrekte ausgefülltes Erstell-Form | es existiert ein neues HolidayHome
+|I0031 |Ferienhaus erstellen |Als Host eingeloggt  | inkorrekt ausgefülltes Erstell-Form (leerer String, negative Zahl) | es wird kein HolidayHome erstellt, Fehlermeldung
+|I0040 |Events für Häuser bestätigen a| - Als Host eingeloggt  
+- Es muss ein Ferienhaus existieren  
+- Es muss ein noch nich bestätigtes Event in der Nähe des Ferienhauses existieren  | button auf Hausseite betätigen | Event ist nun für Buchungen des Hauses dazubuchbar
+|I1000 |Ferienhaus buchen a| - Als Tenant eingeloggt  
+- Es existieren buchbare Ferienhäuser |korrekt abgeschlossene Buchung | Es existiert eine neue Buchung
+|I1001 |Ferienhaus buchen a| - Als Tenant eingeloggt  
+- Es existieren buchbare Ferienhäuser |inkorrekte Buchungsparameter (Haus zu dieser Zeit schon gebucht) | es wird keine Buchung erstellt, Fehlermeldung
+|I1002 |Ferienhaus buchen a| - Als Tenant eingeloggt  
+- Es existieren buchbare Ferienhäuser |inkorrekte Buchungsparameter (Start- und Enddatum in falscher Reihenfolge) | es wird keine Buchung erstellt, Fehlermeldung
+|I1010 |Tenant storniert Buchung a| - Als Tenant eingeloggt  
+- Es existiert eine Buchung für eine Ferienwohnung  |button auf Buchungsseite betätigen  | Die Buchung wird als storniert gesetzt, je nach Zeitpunkt wird Geld zurück gezahlt
+|I2000 |Registrieren |System wird von unregisteredUser benutzt | korrekte Registierungsdaten eingegeben | es wird eine Registrierungsanfrage erstellt
+|I2001 |Registrieren |System wird von unregisteredUser benutzt | inkorrekte Registierungsdaten eingegeben (Account bereits vorhanden) | es wird keine Registrierungsanfrage erstellt, Fehlermeldung
+|I2010 |Registrierung bestätigen a| - Admin ist eingeloggt  
+- es liegt eine Registrieungsanfrage vor  | Button auf der Tenant-Bestätigungsseite betätigen | Die Registrieungsanfrage existiert nicht mehr
+|I2020 |Anmeldung |System wird von unregisteredUser benutzt | korrekte Logindaten eingegeben  | Der Bunutzer ist jetzt mit der ihm zugewiesenen Rolle(ROLE) eingeloggt
+|I2021 |Anmeldung |System wird von unregisteredUser benutzt | inkorrekte Logindaten eingegeben (email und password passen nicht zusammen)|…
+|I2030 |Ausloggen |System wird von einem angemeldeten User benutzt | in der Navbar auf loggout drücken | Benutzer kann nicht mehr auf erweiterte Rechte drauf zugreifen
+|I2040 |Vermieter erstellen |Admin ist eingeloggt | korrekte Daten eingegeben | Es wird ein neuer Host erstellt
+|I2041 |Vermieter erstellen |Admin ist eingeloggt | inkorrekte Daten eingegeben(Benutzer existiert schon) | Es wird kein Host erstellt, Fehlermeldung
+|I2050 |Eventfirma hinzufügen |Admin ist eingeloggt | korrekte Daten eingegeben | Es wird eine neue Eventfirma erstellt
+|I2051 |Eventfirma hinzufügen |Admin ist eingeloggt | inkorrekte Daten eingegeben(Eventfirma existiert schon) | Es wird keine EventCompany erstellt, Fehlermeldung
+|I2060 |Eventmitarbeiter erstellen |Admin ist eingeloggt | korrekte Daten eingegeben | Es wird ein neuer Eventmitarbeiter erstellt
+|I2061 |Eventmitarbeiter erstellen |Admin ist eingeloggt | inkorrekte Daten eingegeben(Benutzer existiert schon) | Es wird kein EventEmployee erstellt, Fehlermeldung
+|U0010 |holidayHomeForm.toNewHolidayHome(HolidayHomeForm form) |  | korrektes Formelement | ein neues HolidayHome wurde erschaffen 
+|U0011 |holidayHomeForm.toNewHolidayHome(HolidayHomeForm form) |  | inkorrektes Formelement | kein HolidayHome wurde erschaffen, Fehlermeldung 
+|U0020 |eventForm.toNewEvent(EventForm form) |  | korrektes Formelement | ein neues Event wurde erschaffen 
+|U0021 |eventForm.toNewEvent(EventForm form) |  | inkorrektes Formelement | kein Event wurde erschaffen, Fehlermeldung 
+|U0030 |EventCatalog.findAll() |  | eventCatalog | Alle Element des Catalog werden aufgelistet/zurückgegeben  
+|U0040 |HolidayHomeCatalog.findAll() |  | holidayHomeCatalog | Alle Element des Catalog werden aufgelistet/zurückgegeben
+|U1010 |creatBookingEntry(UserAccount userAccount, HolidayHome home, PaymentMethod paymentMathod, LocalDate arrivalDate, LocalDate departureDate, HashMap<Event,Integer> events) | Tenant exitstiert, HolidayHome existiert | korrekte Eingaben | Es wird eine neue Buchung erstellt
+|U1011 |creatBookingEntry(UserAccount userAccount, HolidayHome home, PaymentMethod paymentMathod, LocalDate arrivalDate, LocalDate departureDate, HashMap<Event,Integer> events) | Tenant exitstiert, HolidayHome existiert | inkorrekte Eingaben | Es wird keine neue Buchung erstellt, Fehlermeldung
+|U1020 |CartController.addEvent(Event event, LocalDate bookedDate, Quantity anzahl, Cart cart) | Es muss eine Buchung existieren und ein hinzubuchbares Event |korrekte Eingabe | das Event wird zur Buchung hinzugefügt
+|U1021 |CartController.addEvent(Event event, LocalDate bookedDate, Quantity anzahl, Cart cart) | Es muss eine Buchung existieren und ein hinzubuchbares Event |inkorrekte Eingabe | das event wird nicht der Buchung hinzugefügt, Fehlermeldung
+|U1030 |CartController.clear() |  |  | Die Objekte aus dem Cart wurden entfernt
+|U1040 |CartController.basket() | es müssen Objekte im basket sein |  | Gibt die Objekte aus dem basket zurück
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) | Objekte im Cart | korrekte Eingabe | Das Objekt wird aus dem Cart entfernt
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) | Objekte im Cart | inkorrekte Eingabe(das item mit der id ist nicht im Cart) | Der Cart bleibt unverändert, Fehlermeldung
+|U1050 |CartController.removeItem(Model model, String id, Cart cart) |  | inkorrekte Eingabe (es gibt keine Items im Cart) | Der Cart bleibt unverändert, Fehlermeldung
+|U1060 |CartController.buy(Cart cart, AccountEntity useraccount) | es sind Objekte im cart | korrekte Eingabe | der cart wird geleert und der Kunde bekommt eine Rechnung
+|U1060 |CartController.buy(Cart cart, AccountEntity useraccount) |  | leerer cart | Fehlermeldung
+|  |  |  |  |  
+|  |  |  |  |  
 |===
