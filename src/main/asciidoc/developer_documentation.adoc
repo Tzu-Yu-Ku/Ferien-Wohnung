@@ -8,7 +8,7 @@
 [cols="1, 3, 3"]
 |===
 |Version | Bearbeitungsdatum   | Autor 
-|0.1	| 30. ov 2020 | SWT-Gruppe 25
+|0.1	| 30. Nov 2020 | SWT-Gruppe 25
 |===
 toc::[]
 
