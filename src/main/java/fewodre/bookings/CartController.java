@@ -135,6 +135,31 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
+	@PostMapping("/updateTicketCount/{id}")
+	public String updateTicketCount(Model model, @ModelAttribute Cart cart, @RequestParam("count") int count,
+									@PathVariable("id") Event event){
+		System.out.println("Let's update the Ticket Amount");
+		System.out.println("Event: "+event.getName());
+		String id = "";
+		Iterator<CartItem> iter = cart.iterator();
+		while (iter.hasNext()){
+			CartItem item = iter.next();
+			if(item.getProduct().getId().equals(event.getId())){
+				id = item.getId();
+				break;
+			}
+		}
+		CartItem item = cart.getItem(id).get();
+
+		if(count <= 0){
+			cart.removeItem(id);
+		}
+		else{
+			cart.addOrUpdateItem(item.getProduct(), Quantity.of(count).subtract(item.getQuantity()));
+		}
+		return "redirect:/cart";
+	}
+
 
 	@PostMapping("/defaultcart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
@@ -271,6 +296,10 @@ public class CartController {
 		}
 		public String parsePrice(MonetaryAmount Price){
 			return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		}
+
+		public boolean DateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate){
+			return (date.isBefore(endDate) && date.isAfter(startDate)) || date.isEqual(startDate) || date.isEqual(endDate);
 		}
 
 	}
