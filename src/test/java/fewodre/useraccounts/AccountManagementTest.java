@@ -28,7 +28,7 @@ class AccountManagementTest {
 
 	public TenantRegistrationForm tenantRegistrationForm() {
 		return new TenantRegistrationForm("Sinthu", "Jan", "sinthu@jan.de", "mongo",
-				"mongo", "1993-11-07", "Reisewitzer Straße", "22", "0159",
+				"mongo", "1993-11-07", "Reisewitzer Straße", "22", "01159",
 				"Dresden", true);
 	}
 
@@ -37,7 +37,6 @@ class AccountManagementTest {
 		accounts.deleteAll();
 		accountManagement.createTenantAccount(tenantRegistrationForm());
 		assertEquals(1,accounts.count());
-		assertEquals(1, userAccounts.findAll().stream().count());
 	}
 
 	@Test
