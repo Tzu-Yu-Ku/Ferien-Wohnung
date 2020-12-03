@@ -24,10 +24,41 @@ __Teilnehmer:__
 
 == Aktueller Stand
 
-- Tzu-Yu Ku Jimmy Pöhlmann
+In unserem vierten Team-Meeting konnte jedes Teammitglied bereits erste Funktionalitäten ihres Prototyps vorstellen und unserem Tutor demonstrieren. Dabei haben die einzelnen Gruppenmitglieder die Aufgaben wie folgt aufgeteilt und dafür Verantwortung übernommen:
 
-- Jesko Kloß Marten Freese
+* _Tzu_: Erstellung cart.html & CartController für den "Warenkorb"/die Buchungsübersicht der Plattform. Hinzufügen diverser Eingabefelder im Frontend. Behebung einiger Merge-Konflikte. Zubuchbare Events einblenden bei Buchungsvorgang. Sequenzdiagramm für Booking-Komponente für unsere Entwicklerdokumentation, diese auch entsprechend erweitert und angepasst.
+* _Jimmy_: Erstellung BookingEntity. Bug-Fixing im CartController. Ebenfalls Behebung von Merge-Konflikten. Implementierung einfacher Bezahlmöglichkeit für getätigte Buchung. Funktionen des Hinzufügen/Entfernen von Events im „Warenkorb“ /in der Buchungsübersicht. BuildingBlock-Diagramm der Booking-Komponente für unsere Entwicklerdokumentation.
 
-- Janujan Thanabalasingham Julian Böhm
+==== Tzu und Jimmy haben als Zweier-Team die Implementierung der Booking-Komponente als Aufgabe in unserem Projekt. Sie haben im Prototypen die Buchung ermöglicht, warne stets von den Komponenten der anderen Teammitglieder abhängig und mussten deren Fortschritt regelmäßig mergen. Gemeinsam haben Sie die prototypische Buchungsfunktion unserer zukünftigen Plattform ausgearbeitet.
 
-(Work in Progress)
+* _Marten_: Erstellung des BuildingBlock-Diagramms für die Catalog-Komponente. Implementierung der „Ferienhaus erstellen“ Funktion als Vermieter auf der Plattform. Sichtbarkeit der Funktionalitäten bzw. der Schaltflächen angepasst (nur autorisierte Nutzer sollen Ferienhäuser erstellen können, etc.). Anpassungen und kleine Verbesserungen im CatalogController, HolidayHpome und betroffenen HTML-Templates.
+* _Jesko_: Erstellung des BuildingBlock-Diagramms und des Sequenzdiagramms für die Catalog-Komponente für die Entwicklerdokumentation. Implementierung von EventForm, der Funktionalität ein Event als Event-Mitarbeiter auf der Plattform zu erstellen. Entsprechende Anpassungen und Erweiterungen in den betroffenen HTML-Templates. Ausformulierung der Entwickler-Doku in den Passagen, die die Catalog-Komponente betreffen. Testfälle und Test-Plan ausformuliert.
+
+==== Marten und Jesko haben als Zweier-Team die Implementierung der Catalog-Komponente und das damit einhergehende Abspeichern und Abfragen der Angebote der Plattform (Ferienhäuser, Events) ermöglicht und im Prototypen vereinfacht implementiert.
+
+* _Julian_: Funktionalität zum Erstellen eines neuen Vermieter-Accounts unter Voraussetzung, dass ein autorisierter Zugriff dies tun möchte (ein Administrator). Ebenfalls Funktionalität zur Erstellung eines neuen Event-Mitarbeiter-Accounts mit analoger nötiger Autorisierung. Passwörter müssen nun tatsächlich übereinstimmen bei Registrierung. Erstellung einer anklickbaren Dresden-Karte zur späteren Ortsbestimmung angebotener Häuser/Events. (work in Progress.) Erstellung des Sequenzdiagramms unserer Accounts-Komponente für Entwickler-Doku. Ausformulierung eines Großteils der Entwickler-Doku.
+* _Janu_: Implementation von autorisierungsabhängiger Navigationsleiste/Navigationslinks. Ausprobieren von erstem einfachen jUnit Test. BuildingBlock-Diagramm der Accounts-Komponente, Server-Client-Diagramm und Benutzeroberflächen-Diagramm für Entwickler-Doku. Test-Plan Einleitung und zu testende Funktionalitäten ausformuliert. Implementation der Basis für die Klassen AccountEntity, AccountRepository, RegistrationForm, AccountManagement.
+
+==== Julian und Janu haben als Zweier-Team die Implementierung der Accounts-Komponente und die damit verbundenen unterschiedlichen Nutzergruppen, die die Plattform in Zukunft bedienen wird, im Groben implementiert.
+
+
+== Retrospektive des letzten Sprints
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|===
+
+
+== Planung des nächsten Sprints
+
+Prototypen so weit wie möglich ausimplementieren und zur Vorstellung vorbereiten. Entwickler-Dokumentation vervollständigen, vor allem die notwendingen Diagramme jeder Komponente entwerfen. Außerdem muss ein solider Test-Plan ausgearbeitet werden.
+
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]     |Test-Plan ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]  |alle Gruppenmitglieder                | work in progress
+|===
