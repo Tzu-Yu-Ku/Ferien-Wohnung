@@ -102,29 +102,33 @@ public class AccountManagement {
 	public AccountEntity createEventEmployeeAccount(EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 
 		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
-
-		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
-		if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
-			UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
-					eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
-			newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
-			newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
-			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-					.setBirthDate("NO_BIRTHDATE")
-					.setStreet("NO_STREET")
-					.setHouseNumber("NO_HOUSE_NUMBER")
-					.setPostCode("NO_POSTCODE")
-					.setCity("NO_CITY")
-					.setIban("NO_IBAN")
-					.setBic("NO_BIC")
-					.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
-					.setAccount(newUserAccount);
-			LOG.info(newAccount.getUuid());
-			return accounts.save(newAccount);
-		} else {
-			return null;
+		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
+			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
+			if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
+				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
+						eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
+				newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
+				newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
+				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+						.setBirthDate("NO_BIRTHDATE")
+						.setStreet("NO_STREET")
+						.setHouseNumber("NO_HOUSE_NUMBER")
+						.setPostCode("NO_POSTCODE")
+						.setCity("NO_CITY")
+						.setIban("NO_IBAN")
+						.setBic("NO_BIC")
+						.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
+						.setAccount(newUserAccount);
+				LOG.info(newAccount.getUuid());
+				return accounts.save(newAccount);
+			} else {
+				return null;
+			}
 		}
-	}
+		else {
+			return null;
+			}
+		}
 
 }
 
