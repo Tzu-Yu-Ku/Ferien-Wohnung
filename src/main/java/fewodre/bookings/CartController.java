@@ -245,7 +245,6 @@ public class CartController {
 		//check if it's available
 		ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
-			//!!!!!!help!!!
 			if(arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())){
 				//send message "the chosed duration is not avalible"
 				System.out.println("redirect to Cart because its already booked");

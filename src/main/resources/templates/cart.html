@@ -19,16 +19,17 @@
 
 </head>
 <body>
-<div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
-    <header>
-        <div class="container">
-            <h1 class="p-4" th:text="${holidayHome.name}">My Booking</h1>
+    <div class="container p-0 w-100" style="height:56px">
+        <div class="row">
+            <div class="w-100">
+                <nav th:include="navbar" style="width: 100%"></nav>
+            </div>
         </div>
-    </header><br/>
-
+    </div>
+    <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 bd-content">
+            <div class="col-6">
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="card" th:each="event: ${eventCatalog}">
@@ -55,7 +56,7 @@
                                             </div>
                                         </div>
                                         <div class="input-group col">
-                                            <input class="form-control col-sm-5" id= "persons" type="number" min="0" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
                                             <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                         </div>
                                     </form>
@@ -65,63 +66,66 @@
                     </div>
                 </div>
             </div>
-            <div class="d-none d-lg-block col-lg-6 bd-sidebar">
+            <div class="col-6">
                 <div class="container justify-content-start">
-                    <div class="card" >
-                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="p-4">Ihre Bestellung</h3><br/>
+                            <table style="line-height: 30px">
+                                <form method="POST" th:action="@{/purchase}">
+                                    <tbody>
+                                    <tr>
+                                        <th>Vorname</th>
+                                        <td class="text-right" th:text="${account.getFirstname()}">Harry</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nachname</th>
+                                        <td class="text-right" th:text="${account.getLastname()}" >Potter</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Anreisedatum</th>
+                                        <!--<td input class="p-1" th:type="date" th:value="${arrivalDate}">01.01.2021</td>!Fancy++!-->
+                                        <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">dd.mm.yyyy</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Abreisedatum</th>
+                                        <!--<td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td>!Fancy++!-->
+                                        <td class="text-right" th:text="${formatter.formatDate(departureDate)}">dd.mm.yyyy</td>
+                                        <!--<input class="p-1" type="date" th:value="${departureDate}" placeholder="dd.mm.yyyy" name="departuredate">!-->
+
+                                    </tr>
+                                    <tr>
+                                        <th>Gesamtpreise</th>
+                                        <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
+                                        <td>
+                                            <select name="paymethod">
+                                                <option value="" disabled selected hidden>Zahlungsmethode</option>
+                                                <option>Cash</option>
+                                                <option>Cheque</option>
+                                                <option>CreditCard</option>
+                                                <option>DebitCard</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" type="submit" >Bestellen</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </form>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="p-4" th:text="${holidayHome.name}">Ferienhaus Name</h4>
+                            <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
+                        </div>
                     </div>
-                    <h3>Ihre Bestellung</h3><br/>
-                    <table style="line-height: 30px">
-
-                        <form method="POST" th:action="@{/purchase}">
-                            <tbody>
-                            <tr>
-                                <th>Vorname</th>
-                                <td class="text-right" th:text="${account.getFirstname()}">Harry</td>
-                            </tr>
-                            <tr>
-                                <th>Nachname</th>
-                                <td class="text-right" th:text="${account.getLastname()}" >Potter</td>
-
-                            </tr>
-                                <tr>
-                                    <th>Anreisedatum</th>
-                                    <!--<td input class="p-1" th:type="date" th:value="${arrivalDate}">01.01.2021</td>!Fancy++!-->
-                                    <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">dd.mm.yyyy</td>
-                                </tr>
-                                <tr>
-                                    <th>Abreisedatum</th>
-                                    <!--<td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td>!Fancy++!-->
-                                    <td class="text-right" th:text="${formatter.formatDate(departureDate)}">dd.mm.yyyy</td>
-                                    <!--<input class="p-1" type="date" th:value="${departureDate}" placeholder="dd.mm.yyyy" name="departuredate">!-->
-
-                                </tr>
-                                <tr>
-                                    <th>Gesamtpreise</th>
-                                    <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
-                                <td>
-                                    <select name="paymethod">
-                                        <option value="" disabled selected hidden>Zahlungsmethode</option>
-                                        <option>Cash</option>
-                                        <option>Cheque</option>
-                                        <option>CreditCard</option>
-                                        <option>DebitCard</option>
-                                    </select>
-
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" type="submit" >Bestellen</button>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </form>
-                    </table>
-                    <br/>
                 </div>
 
                 <div class="container">
@@ -146,10 +150,40 @@
                                         </button>
                                         <div class="col-6">
                                             <label for="startDate" >Anreise Datum</label>
-                                            <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}" ></div>
+                                            <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}">
+                                            <script type='text/javascript'>
+                                                var today = new Date();
+                                                var dd = today.getDate();
+                                                var mm = today.getMonth()+1; //January is 0!
+                                                var yyyy = today.getFullYear();
+                                                if(dd<10){
+                                                    dd='0'+dd
+                                                }
+                                                if(mm<10){
+                                                    mm='0'+mm
+                                                }
+                                                today = yyyy+'-'+mm+'-'+dd;
+                                                document.getElementById("startDate").setAttribute("min", today);
+                                            </script>
+                                        </div>
                                         <div class="col-6">
                                             <label for="endDate">Abreise Datum</label>
-                                            <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" ></div>
+                                            <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" >
+                                            <script type='text/javascript'>
+                                                var today = new Date();
+                                                var dd = today.getDate();
+                                                var mm = today.getMonth()+1; //January is 0!
+                                                var yyyy = today.getFullYear();
+                                                if(dd<10){
+                                                    dd='0'+dd
+                                                }
+                                                if(mm<10){
+                                                    mm='0'+mm
+                                                }
+                                                today = yyyy+'-'+mm+'-'+dd;
+                                                document.getElementById("endDate").setAttribute("min",today);
+                                            </script>
+                                        </div>
                                     </div>
                                     </form>
                                 </td>
@@ -163,7 +197,8 @@
                                             </button>
                                             <div class="col-6" th:if="${item.getProduct().getCategories().iterator().next() == 'Event'}">
                                                 <label for="Anzahl">Personen Zahl:</label>
-                                                <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}"></div>
+                                                <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="1" th:max="${item.product.getCapacity()}">
+                                            </div>
                                         </div>
                                     </form>
                                 </td>
