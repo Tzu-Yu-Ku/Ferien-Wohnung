@@ -86,6 +86,7 @@ public class CartController {
 		this.userAccount = userAccount;
 		model.addAttribute("formatter", formatter);
 		model.addAttribute("account", this.userAccount);
+		model.addAttribute("today", LocalDate.now());
 		return "cart"; }
 
 	@PostMapping("/cart")
@@ -273,6 +274,10 @@ public class CartController {
 			}
 		}
 		return "bookingdetails";
+	}
+
+	public void print(String string){
+		System.out.println(string);
 	}
 
 	private class StringFormatter{
