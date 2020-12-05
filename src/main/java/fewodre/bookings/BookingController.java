@@ -23,6 +23,7 @@ public class BookingController {
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		this.accountManagement = accountManagement;
 		this.bookingRepository = bookingRepository;
+		this.formatter = new StringFormatter();
 	}
 
 	@GetMapping("/bookings")

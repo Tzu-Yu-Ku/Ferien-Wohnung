@@ -24,14 +24,14 @@
                 <div class="col-md-6">
                     <div class="card-body">
                         <h5 class="card-title">Home Name</h5>
-                        <p class="card-text" th:text="'Anreisedatum: '+ ${booking.arrivalDate}">Anreise Datum: 12.Dec 2020</p>
-                        <p class="card-text" th:text="'Abreisedatum: '+ ${booking.departureDate}">Abreise Datum: 20.Dec 2020</p>
+                        <p class="card-text" th:text="'Anreisedatum: '+ ${formatter.formatDate(booking.arrivalDate)}">Anreise Datum: 12.Dec 2020</p>
+                        <p class="card-text" th:text="'Abreisedatum: '+ ${formatter.formatDate(booking.departureDate)}">Abreise Datum: 20.Dec 2020</p>
                         <p class="card-text"><small class="text-muted" th:text="${booking.orderStatus}">Booking Status</small></p>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="card-body">
-                        <h3 th:text="${booking.getPrice()}">Price</h3>
+                        <h3 th:text="${formatter.formatDate(booking.getPrice())}">Price</h3>
                     </div>
                 </div>
             </div>
