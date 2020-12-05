@@ -69,7 +69,7 @@
             <div class="col-6">
                 <div class="container justify-content-start">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <h3 class="p-4">Ihre Bestellung</h3><br/>
                             <table style="line-height: 30px">
                                 <form method="POST" th:action="@{/purchase}">
@@ -121,8 +121,8 @@
                                 </form>
                             </table>
                         </div>
-                        <div class="col-6">
-                            <h4 class="p-4" th:text="${holidayHome.name}">Ferienhaus Name</h4>
+                        <div class="col-7">
+                            <div class="pl-1 h4" th:text="${holidayHome.name}">Ferienhaus Name</div>
                             <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
                         </div>
                     </div>
@@ -202,8 +202,13 @@
             </div>
         </div>
     </div>
-</div>
-</div>
+    <div class="container p-0 w-100 mt-5 bg-white">
+        <div class="row">
+            <div class="w-100">
+                <nav th:include="footer :: footer"></nav>
+            </div>
+        </div>
+    </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
