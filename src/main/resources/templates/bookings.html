@@ -19,11 +19,15 @@
         <div class="card mb-3" style="max-width: 800px; margin: 0 auto;float: none;margin-bottom: 10px;" th:each="booking: ${bookings}">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="..." class="card-img" alt="..." width="80px">
+                    <img th:src="@{/resources/img/{image}(image=${homeCatalog.findFirstByName(booking.getHomeName()).image})}" class="card-img" alt="..." width="80px">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
+<<<<<<< HEAD
                         <h5 class="card-title">Home Name</h5>
+=======
+                        <h5 class="card-title" th:text="${homeCatalog.findFirstByName(booking.getHomeName()).name}">Home Name</h5>
+>>>>>>> 2af137001d984da26fcc7e3492870eaf4ff71ea3
                         <p class="card-text" th:text="'Anreisedatum: '+ ${formatter.formatDate(booking.arrivalDate)}">Anreise Datum: 12.Dec 2020</p>
                         <p class="card-text" th:text="'Abreisedatum: '+ ${formatter.formatDate(booking.departureDate)}">Abreise Datum: 20.Dec 2020</p>
                         <p class="card-text"><small class="text-muted" th:text="${booking.orderStatus}">Booking Status</small></p>
@@ -31,7 +35,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="card-body">
-                        <h3 th:text="${formatter.formatDate(booking.getPrice())}">Price</h3>
+                        <h3 th:text="${formatter.parsePrice(booking.getPrice())}">Price</h3>
                     </div>
                 </div>
             </div>
