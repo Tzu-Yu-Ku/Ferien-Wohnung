@@ -30,6 +30,8 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHome;
 
+	//private ProductIdentifier homeIdentifier;
+
 	@NotBlank
 	private String homeName;
 
@@ -68,6 +70,7 @@ public class BookingEntity extends Order {
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
+		//this.homeIdentifier = home.getId();
 		//addOrderLine(home, nights);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -85,6 +88,7 @@ public class BookingEntity extends Order {
 	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome.getIdentifier();
+		//this.homeIdentifier = uuidHome;
 	}
 
 	@Deprecated
@@ -165,4 +169,9 @@ public class BookingEntity extends Order {
 	public String getHomeName() {
 		return homeName;
 	}
+
+	//public ProductIdentifier getHomeIdentifier() {
+	//	return homeIdentifier;
+	//}
+
 }
