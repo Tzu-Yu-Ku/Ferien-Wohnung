@@ -176,12 +176,12 @@
                                     <form th:action="@{/updateTicketCount/{id}(id=${item.product.id})}" method="post">
                                         <div class="row">
                                             <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                            <button type="submit" class="btn" th:if="${item.getProduct().getCategories().iterator().next() == 'Event'}" th:href="@{/addTicket/{id}(id=${item.id})}">
+                                            <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
                                                 <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
                                             </button>
-                                            <div class="col-6" th:if="${item.getProduct().getCategories().iterator().next() == 'Event'}">
+                                            <div class="col-6">
                                                 <label for="Anzahl">Personen Zahl:</label>
-                                                <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="1" th:max="${item.product.getCapacity()}">
+                                                <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}">
                                             </div>
                                         </div>
                                     </form>

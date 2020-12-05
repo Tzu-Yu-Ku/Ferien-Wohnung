@@ -1,5 +1,6 @@
 package fewodre.bookings;
 
+import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountManagement;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -17,12 +18,16 @@ public class BookingController {
 	private final AccountManagement accountManagement;
 	private UserAccount userAccount;
 	private StringFormatter formatter;
+	private HolidayHomeCatalog holidayHomeCatalog;
 
-	public BookingController(AccountManagement accountManagement,BookingRepository bookingRepository){
+	public BookingController(AccountManagement accountManagement,BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog){
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
+		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
 		this.accountManagement = accountManagement;
 		this.bookingRepository = bookingRepository;
+		this.formatter = new StringFormatter();
+		this.holidayHomeCatalog = holidayHomeCatalog;
 	}
 
 	@GetMapping("/bookings")
@@ -31,8 +36,9 @@ public class BookingController {
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
 		}else {
+			model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 			model.addAttribute("bookings", bookingRepository.findBookingEntityByUserAccount(userAccount));
-			model.addAttribute("formatter", formatter);
+			model.addAttribute("formatter", this.formatter);
 			return "bookings";
 		}
 	}

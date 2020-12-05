@@ -31,6 +31,9 @@ public class BookingEntity extends Order {
 	private String uuidHome;
 
 	@NotBlank
+	private String homeName;
+
+	@NotBlank
 	private String uuidTenant; //? For Filtering in Repository
 
 	@NotBlank
@@ -64,6 +67,7 @@ public class BookingEntity extends Order {
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
+		this.homeName = home.getName();
 		//addOrderLine(home, nights);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -156,5 +160,9 @@ public class BookingEntity extends Order {
 
 	public String getUuidHome() {
 		return uuidHome;
+	}
+
+	public String getHomeName() {
+		return homeName;
 	}
 }
