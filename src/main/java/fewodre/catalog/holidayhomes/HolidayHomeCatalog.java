@@ -15,6 +15,4 @@ public interface HolidayHomeCatalog extends Catalog<HolidayHome> {
 
 	HolidayHome findFirstByProductIdentifier(ProductIdentifier productIdentifier);
 
-	HolidayHome findFirstByName(String name);
-
 }
