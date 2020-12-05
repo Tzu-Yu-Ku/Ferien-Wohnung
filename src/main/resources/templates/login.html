@@ -23,9 +23,12 @@
         <div class="row">
             <div class="p-5 col-lg-6 mt-5 mb-5"
                  style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1)); background-position: top left; background-size: 100%; background-repeat: repeat; box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
-                <h1>Gleich geht's weiter...</h1>
-                <p class="mb-3">Loggen Sie sich mit Ihren Benutzerdaten ein, um Ihren nächsten Aufenthalt in Dresden und
-                    Umgebung zu buchen.</p>
+                <h1 th:if="${param.keySet().contains('error')}" th:text="${'Da hat etwas nicht funktioniert'}">Da hat etwas nicht funktioniert...</h1>
+                <h1 th:unless="${param.keySet().contains('error')}" th:text="${'Gleich gehts weiter...'}">Gleich geht's weiter...</h1>
+                <p class="mb-3" th:if="${param.keySet().contains('error')}" th:text="${'Bitte kontrolieren Sie ihren Beutzernamen und das Passwort. Bitte beachten Sie auch, dass sie ich erst anmelden können, nachdem Sie von uns freigeschalten wurden.'}" >
+                    Loggen Sie sich mit Ihren Benutzerdaten ein, um Ihren nächsten Aufenthalt in Dresden und Umgebung zu buchen.</p>
+                <p class="mb-3" th:unless="${param.keySet().contains('error')}" th:text="${'Loggen Sie sich mit Ihren Benutzerdaten ein, um Ihren nächsten Aufenthalt in Dresden und Umgebung zu buchen.'}">
+                Loggen Sie sich mit Ihren Benutzerdaten ein, um Ihren nächsten Aufenthalt in Dresden und Umgebung zu buchen.</p>
                 <form role="form" th:action="@{/login}" method="post">
                     <div class="form-group">
                         <input type="text" id="username" name="username" class="form-control"
