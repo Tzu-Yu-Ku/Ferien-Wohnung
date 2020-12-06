@@ -108,7 +108,6 @@ public class CartController {
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
-			//System.out.println(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate)+ "Nights!!");
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
@@ -265,6 +264,7 @@ public class CartController {
 	public String details(Model model, BookingEntity bookingEntity){
 		model.addAttribute("booking", bookingEntity);
 		model.addAttribute("formatter", new StringFormatter());
+		model.addAttribute("accountManager", accountManagement);
 		Iterator<OrderLine> iter = bookingEntity.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();
@@ -274,10 +274,6 @@ public class CartController {
 			}
 		}
 		return "bookingdetails";
-	}
-
-	public void print(String string){
-		System.out.println(string);
 	}
 
 }

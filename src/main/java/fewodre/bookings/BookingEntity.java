@@ -41,9 +41,6 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHost; //? For Filtering in Repository
 
-	//@ElementCollection
-	//private List<ProductIdentifier> uuidEvents;
-
 	/* Attribute für extra Logik */
 	@NotNull
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
@@ -78,9 +75,6 @@ public class BookingEntity extends Order {
 			addOrderLine(event, Quantity.of(events.get(event)));
 		}
 		price = getTotal();
-		// hollidayHome home = GetBy(uuidHome)
-		//addOrderLine(home, arrivalDate.);
-		//HolidayHomeEventCatalog catalog = new
 		this.hostName = "!!Mr. Test Name";
 	}
 
@@ -169,9 +163,5 @@ public class BookingEntity extends Order {
 	public String getHomeName() {
 		return homeName;
 	}
-
-	//public ProductIdentifier getHomeIdentifier() {
-	//	return homeIdentifier;
-	//}
 
 }
