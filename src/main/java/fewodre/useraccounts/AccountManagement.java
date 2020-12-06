@@ -7,7 +7,7 @@ import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -18,10 +18,13 @@ import java.util.UUID;
 @Transactional
 public class AccountManagement {
 
+	public static final Role UNACTIVATED_TENANT_ROLE = Role.of("UNACTIVATED_TENANT");
 	public static final Role TENANT_ROLE = Role.of("TENANT");
 	public static final Role HOST_ROLE = Role.of("HOST");
 	public static final Role EVENTEMPLOYEE_ROLE = Role.of("EVENT_EMPLOYEE");
 	public static final Role ADMIN_ROLE = Role.of("ADMIN");
+
+	public String tenant_username;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AccountDataInitializer.class);
 
@@ -45,9 +48,10 @@ public class AccountManagement {
 			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
-						tenantRegistrationForm.getEmail(), TENANT_ROLE);
+						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
 				newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
 				newUserAccount.setLastname(tenantRegistrationForm.getLastName());
+				newUserAccount.setEnabled(false);
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
 						.setBirthDate(tenantRegistrationForm.getBirthDate())
 						.setStreet(tenantRegistrationForm.getStreet())
@@ -100,36 +104,50 @@ public class AccountManagement {
 
 	}
 
-	/**
-	 * @param eventEmployeeRegistrationForm
-	 * @return
-	 */
 	public AccountEntity createEventEmployeeAccount(EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 
 		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
-
-		Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
-		if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
-			UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
-					eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
-			newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
-			newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
-			AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-					.setBirthDate("NO_BIRTHDATE")
-					.setStreet("NO_STREET")
-					.setHouseNumber("NO_HOUSE_NUMBER")
-					.setPostCode("NO_POSTCODE")
-					.setCity("NO_CITY")
-					.setIban("NO_IBAN")
-					.setBic("NO_BIC")
-					.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
-					.setAccount(newUserAccount);
-			LOG.info(newAccount.getUuid());
-			return accounts.save(newAccount);
-		} else {
-			return null;
+		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
+			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
+			if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
+				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
+						eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
+				newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
+				newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
+				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
+						.setBirthDate("NO_BIRTHDATE")
+						.setStreet("NO_STREET")
+						.setHouseNumber("NO_HOUSE_NUMBER")
+						.setPostCode("NO_POSTCODE")
+						.setCity("NO_CITY")
+						.setIban("NO_IBAN")
+						.setBic("NO_BIC")
+						.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
+						.setAccount(newUserAccount);
+				LOG.info(newAccount.getUuid());
+				return accounts.save(newAccount);
+			} else {
+				return null;
+			}
 		}
+		else {
+			return null;
+			}
+		}
+	public Streamable<UserAccount> findAllDisabled(){
+		return userAccounts.findDisabled();
 	}
+
+	public Boolean enable_tenant(String tenant_username){
+		System.out.println("Baum");
+		System.out.println(tenant_username);
+		userAccounts.enable(userAccounts.findByUsername(tenant_username).get().getId());
+		userAccounts.findByUsername(tenant_username).get().add(TENANT_ROLE);
+		userAccounts.findByUsername(tenant_username).get().remove(UNACTIVATED_TENANT_ROLE);
+		return userAccounts.findByUsername(tenant_username).get().isEnabled();
+	}
+
+
 
 }
 

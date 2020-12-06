@@ -5,18 +5,18 @@ import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
-import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
-import org.javamoney.moneta.Money;
-import org.salespointframework.catalog.ProductIdentifier;
+
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.money.MonetaryAmount;
-import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -87,6 +86,7 @@ public class CartController {
 		this.userAccount = userAccount;
 		model.addAttribute("formatter", formatter);
 		model.addAttribute("account", this.userAccount);
+		model.addAttribute("today", LocalDate.now());
 		return "cart"; }
 
 	@PostMapping("/cart")
@@ -108,7 +108,6 @@ public class CartController {
 			this.arrivalDate = startDate;
 			this.departureDate = endDate;
 			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
-			//System.out.println(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate)+ "Nights!!");
 			cart.addOrUpdateItem(holidayHome, interval);
 
 			return "redirect:/cart";
@@ -133,6 +132,31 @@ public class CartController {
 		Quantity differenz = newInterval.subtract(oldInterval);
 		cart.addOrUpdateItem(holidayHome, differenz);
 
+		return "redirect:/cart";
+	}
+
+	@PostMapping("/updateTicketCount/{id}")
+	public String updateTicketCount(Model model, @ModelAttribute Cart cart, @RequestParam("count") int count,
+									@PathVariable("id") Event event){
+		System.out.println("Let's update the Ticket Amount");
+		System.out.println("Event: "+event.getName());
+		String id = "";
+		Iterator<CartItem> iter = cart.iterator();
+		while (iter.hasNext()){
+			CartItem item = iter.next();
+			if(item.getProduct().getId().equals(event.getId())){
+				id = item.getId();
+				break;
+			}
+		}
+		CartItem item = cart.getItem(id).get();
+
+		if(count <= 0){
+			cart.removeItem(id);
+		}
+		else{
+			cart.addOrUpdateItem(item.getProduct(), Quantity.of(count).subtract(item.getQuantity()));
+		}
 		return "redirect:/cart";
 	}
 
@@ -221,7 +245,6 @@ public class CartController {
 		//check if it's available
 		ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
-			//!!!!!!help!!!
 			if(arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())){
 				//send message "the chosed duration is not avalible"
 				System.out.println("redirect to Cart because its already booked");
@@ -241,6 +264,7 @@ public class CartController {
 	public String details(Model model, BookingEntity bookingEntity){
 		model.addAttribute("booking", bookingEntity);
 		model.addAttribute("formatter", new StringFormatter());
+		model.addAttribute("accountManager", accountManagement);
 		Iterator<OrderLine> iter = bookingEntity.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();
@@ -252,28 +276,5 @@ public class CartController {
 		return "bookingdetails";
 	}
 
-	private class StringFormatter{
-		private Map<String, String> MonthTransDict = new HashMap<String, String>();
-		public StringFormatter(){
-			MonthTransDict.put("JANUARY", "Januar");
-			MonthTransDict.put("FEBRUARY", "Februar");
-			MonthTransDict.put("MARCH", "März");
-			MonthTransDict.put("APRIL", "April");
-			MonthTransDict.put("May", "Mai");
-			MonthTransDict.put("JUNE", "Juni");
-			MonthTransDict.put("JULY", "Juli");
-			MonthTransDict.put("AUGUST", "August");
-			MonthTransDict.put("SEPTEMBER", "September");
-			MonthTransDict.put("NOVEMBER", "November");
-			MonthTransDict.put("DECEMBER", "Dezember");
-		}
-		public String formatDate(LocalDate date){
-			return date.getDayOfMonth() + ". " + MonthTransDict.get(date.getMonth().toString()) + " " + date.getYear();
-		}
-		public String parsePrice(MonetaryAmount Price){
-			return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
-		}
-
-	}
 }
 

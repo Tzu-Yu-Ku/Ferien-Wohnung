@@ -26,7 +26,7 @@
             <div class="p-5 col-lg-6"
                  style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
                 <h1>Neu bei uns?</h1>
-                <p class="mb-3" contenteditable="true">Dann erstellen Sie sich ganz bequem und schnell ein neues
+                <p class="mb-3">Dann erstellen Sie sich ganz bequem und schnell ein neues
                     Benutzerkonto auf unserer Plattform:</p>
                 <form role="form" id="tenantRegistrationForm" th:action="@{/register}" th:object="${tenantRegistrationForm}" method="post">
                     <div class="form-group">
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <input type="password" id="password" name="password" th:field="*{password}" class="form-control"
                                th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
-                               placeholder="Passwort eingeben" aria-label="Passwort" oninput="checkpasswords(this)">
+                               placeholder="Passwort eingeben" aria-label="Passwort">
                     </div>
                     <div class="form-group">
                         <input type="password" id="password-confirm" name="password-confirm"
@@ -98,7 +98,7 @@
                             Ich akzeptiere die <a href="#">allgemeinen Geschäftsbedingungen</a>.
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Jetzt Registrieren<br></button>
+                    <button type="submit" class="btn btn-primary mt-2" oninput="checkpasswords(this)">Jetzt Registrieren<br></button>
                 </form>
             </div>
         </div>

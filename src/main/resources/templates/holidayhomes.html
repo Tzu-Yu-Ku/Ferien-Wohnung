@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           type="text/css">
-    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -15,12 +15,12 @@
 <div class="container p-0 w-100" style="height:56px">
     <div class="row">
         <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
+            <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
         </div>
     </div>
 </div>
 <div class="py-3"
-     style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+     style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
     <div class="container" style="">
         <div class="row"
              style="	background-image: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
@@ -33,61 +33,58 @@
                 <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png" alt="">
             </div>
         </div>
-        <br style="">
 
-        <!--Button für den Host zum erstellen von HolidayHomes-->
-        <div class="row" sec:authorize="hasRole('HOST')">
-            <div class="col-md-12"><a th:href="@{/addholidayhome}" class="btn btn-primary btn-outline-light" style="">Ferienhaus
-                erstellen<br></a></div>
+        <div class="row p-2">
+            <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
+            <div class="col-md-9">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Platz
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Alle</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">mind. 2</a>
+                    <a class="dropdown-item" href="#">mind. 4</a>
+                    <a class="dropdown-item" href="#">mind. 6</a>
+                    <a class="dropdown-item" href="#">mind. 8</a>
+                </div>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Preis pro Nacht
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Alle</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">0-50 EUR</a>
+                    <a class="dropdown-item" href="#">50-100 EUR</a>
+                    <a class="dropdown-item" href="#">100-150 EUR</a>
+                    <a class="dropdown-item" href="#">150 EUR u. mehr</a>
+                </div>
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                    Ort
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Alle</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Altstadt</a>
+                    <a class="dropdown-item" href="#">Innenstadt</a>
+                    <a class="dropdown-item" href="#">Neustadt</a>
+                    <a class="dropdown-item" href="#">Löbtau</a>
+                </div>
+            </div>
+            <!--Button für den Host zum erstellen von HolidayHomes-->
+            <div class="col-md-3">
+                <a th:href="@{/addholidayhome}" sec:authorize="hasRole('HOST')"
+                   class="btn btn-primary btn-outline-light">
+                    Ferienhaus erstellen
+                </a>
+            </div>
         </div>
-        <br style="">
 
-        <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
-        <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-          Platz
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Alle</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">mind. 2</a>
-          <a class="dropdown-item" href="#">mind. 4</a>
-          <a class="dropdown-item" href="#">mind. 6</a>
-          <a class="dropdown-item" href="#">mind. 8</a>
-        </div>
-      </span>
-        <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-          Preis pro Nacht
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Alle</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">0-50 EUR</a>
-          <a class="dropdown-item" href="#">50-100 EUR</a>
-          <a class="dropdown-item" href="#">100-150 EUR</a>
-          <a class="dropdown-item" href="#">150 EUR u. mehr</a>
-        </div>
-      </span>
-        <span>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-          Ort
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Alle</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Altstadt</a>
-          <a class="dropdown-item" href="#">Innenstadt</a>
-          <a class="dropdown-item" href="#">Neustadt</a>
-          <a class="dropdown-item" href="#">Löbtau</a>
-        </div>
-      </span>
-        <br style=""/>
 
-        <div class="row" th:remove="all-but-first">
+        <div class="row">
             <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
                 <form role="form" th:action="@{/defaultcart}" method="post">
 
@@ -146,7 +143,7 @@
                         <div class="card-footer p-2 w-100">
                             <div class="d-flex flex-row-reverse">
                                 <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
-                                <button type="submit" class="ui labeled icon button">Jetzt buchen</button>
+                                <button type="submit" class="btn btn-primary">Jetzt buchen</button>
                                 <!--Verlinkung zum Cart-->
                                 <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
                             </div>
@@ -162,10 +159,9 @@
 <div class="container p-0 w-100 mt-5 bg-white">
     <div class="row">
         <div class="w-100">
-            <nav th:include="footer"></nav>
+            <footer th:replace="footer"></footer>
         </div>
     </div>
-</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
