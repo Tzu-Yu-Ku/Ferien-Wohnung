@@ -71,7 +71,7 @@ public class FeWoDre {
 						@Override
 						public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 							System.out.println(httpServletRequest.getHeader("referer"));
-							if (httpServletRequest.getHeader("referer").equals("http://localhost:8080/newhost") || httpServletRequest.getHeader("referer").equals("http://localhost:8080/neweventemployee")) {
+							if (httpServletRequest.getHeader("referer").equals("http://localhost:8080/newhost") || httpServletRequest.getHeader("referer").equals("http://localhost:8080/neweventemployee") || httpServletRequest.getHeader("referer").equals("http://localhost:8080/activatetenants")) {
 							System.out.println("true");
 							httpServletResponse.sendRedirect(httpServletRequest.getHeader("referer"));
 							}

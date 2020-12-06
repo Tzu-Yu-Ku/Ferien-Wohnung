@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.awt.*;
 
 @Controller
 public class AccountController {
@@ -64,6 +65,19 @@ public class AccountController {
 		System.out.println(size);
 		Coordinates test = new Coordinates(size);
 			return "map";
+	}
+
+	@GetMapping("/activatetenants")
+	public String activatetenants(Model model){
+		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
+		return "activatetenants";
+	}
+
+	@PostMapping("/activatetenants")
+	public String postactivatetenants(Model model, String tenant_username) {
+		accountManagement.enable_tenant(tenant_username);
+		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
+		return "activatetenants";
 	}
 
 	@GetMapping("/newhost")
