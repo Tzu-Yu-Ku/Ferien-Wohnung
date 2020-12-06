@@ -1,12 +1,5 @@
-<!--
 <!DOCTYPE html>
-<html>
--->
-
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
 
 <head>
     <meta charset="utf-8">
@@ -14,129 +7,130 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           type="text/css">
     <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-    <title>FeWoDre - Neues Event hinzufügen.</title>
+    <title>FeWoDre - Neues Event erstellen</title>
 </head>
 
 <body>
 <div class="container p-0 w-100" style="height:56px">
-  <div class="row">
-    <div class="w-100">
-      <nav th:include="navbar" style="width: 100%"></nav>
+    <div class="row">
+        <div class="w-100">
+            <nav th:include="navbar" style="width: 100%"></nav>
+        </div>
     </div>
-  </div>
 </div>
-<div class="py-3"
-     style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
-    <div class="container" style="background-color: #EEEEEE;">
-        <div class="row"
-             style="	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.03));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
-            <div class="p-lg-2 w-100">
-                <h1 class="text-center" style="	text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">Neues Event
-                    hinzufügen</h1>
+<div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
+    <div class="container">
+        <div class="row" style="background-color: #EEEEEE;">
+            <div class="p-lg-3 w-100">
+                <h1 class="text-center">Neues Event hinzufügen</h1>
             </div>
         </div>
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-12">
-                <h5 class="p-2">Füllen Sie die benötigten Daten Ihres Events aus.</h5>
+                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Eventangebots aus und laden
+                    Sie passende Bilder hoch.</p>
             </div>
         </div>
         <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent}" th:object="${form}">
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Name</h4>
-                    <input type="text" class="w-100" th:name="name" required="required"/>
+            <div class="form-group">
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="name" class="px-2">Eventtitel:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input type="text" class="form-control" id="name" th:name="name" required="required"
+                               placeholder="Titel"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Preis</h4>
-                    <input class="w-100" th:name="price" type="number"/>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="description" class="px-2">Beschreibung:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <textarea type="text" class="form-control" id="description" th:name="description"
+                                  required="required" placeholder="Beschreibung"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Beschreibung</h4>
-                    <textarea type="text" class="w-100" th:name="description" required="required"></textarea>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="EventType" class="px-2">Eventtyp:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <select class="form-control" id="EventType" th:name="EventType">
+                            <option value="big">Groß</option>
+                            <option value="sml">Klein</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">EventcompanyUuid</h4>
-                    <textarea class="w-100" th:name="eventCompanyUuid" required="required"></textarea>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="price" class="px-2">Preis:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" id="price" th:name="price" type="number" placeholder="Preis"/>
+                    </div>
                 </div>
-            </div>
-            <!--
-            <div class="form-group" style="background-color: #EEEEEE;">
-              <div class="p-1 col-8 col-md-8">
-                <h4 class="p-1">EventStatus</h4>
-                <textarea class="w-100"></textarea>
-              </div>
-            </div>
-             -->
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">EventType</h4>
-                    <select th:name="EventType" required="required">
-                        <option value="big">groß</option>
-                        <option value="sml">klein</option>
-                    </select>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="inputGroupFile" class="px-2">Bilder:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile">
+                            <label class="custom-file-label" for="inputGroupFile"
+                                   aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!--
-            <div class="form-group" style="background-color: #EEEEEE;">
-              <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Bilder</h4>
-              </div>
-              <div class="p-1 col-8 col-md-8">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile02">
-                  <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="capacity" class="px-2">Maximale Teilnehmerzahl:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
+                               required="required" placeholder="Maximale Personenanzahl"
+                               aria-label="Maximale Personenanzahl"/>
+                    </div>
                 </div>
-              </div>
-            </div>
-            -->
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Straße</h4>
-                    <textarea class="w-100" th:name="street" required="required"></textarea>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right" style="">
+                        <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
+                    </div>
+                    <div class="p-1 col-7 col-md-7" style="">
+                        <input type="text" class="form-control" id="street" th:name="street" required="required"
+                               placeholder="Straße" aria-label="Straße">
+                    </div>
+                    <div class="p-1 col-1 col-md-1" style="">
+                        <input type="text" class="form-control" th:name="number" required="required"
+                               placeholder="Hausnr." aria-label="Hausnummer">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Hausnummer</h4>
-                    <textarea class="w-100" th:name="number" required="required"></textarea>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
+                    </div>
+                    <div class="p-1 col-6 col-md-6">
+                        <input type="text" class="form-control" name="city" id="city" th:name="city" required="required"
+                               placeholder="Ort">
+                    </div>
+                    <div class="p-1 col-2 col-md-2">
+                        <input type="number" class="form-control" th:name="postalnumber" required="required"
+                               placeholder="Postleitzahl" aria-label="Postleitzahl">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Ort</h4>
-                    <textarea class="w-100" th:name="city" required="required"></textarea>
+                <div class="row border-top p-3" style="background-color: #EEEEEE;">
+                    <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Event erstellen">
                 </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Postleitzahl</h4>
-                    <input class="w-100" type="number" th:name="postalnumber" required="required"></input>
-                </div>
-            </div>
-            <div class="form-group" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-8">
-                    <h4 class="p-1">Capacity</h4>
-                    <input class="w-100" type="number" min="0" th:name="capacity" required="required"></input>
-                </div>
-            </div>
-            <div class="row border-top p-3" style="background-color: #EEEEEE;">
-                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Senden"/>
             </div>
         </form>
     </div>
 </div>
 <div class="container p-0 w-100 mt-5 bg-white">
-  <div class="row">
-    <div class="w-100">
-      <nav th:include="footer"></nav>
+    <div class="row">
+        <div class="w-100">
+            <nav th:include="footer"></nav>
+        </div>
     </div>
-  </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

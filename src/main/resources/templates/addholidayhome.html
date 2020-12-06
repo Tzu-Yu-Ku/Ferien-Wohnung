@@ -28,79 +28,91 @@
         </div>
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-12">
-                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Angebots aus und laden Sie Bilder Ihres
+                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Angebots aus und laden Sie
+                    Bilder Ihres
                     Ferienhauses hoch.</p>
             </div>
         </div>
         <form method="post" role="form" id="form" class="gb-form" th:action="@{/addHolidayHome}" th:object="${form}">
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Name</h4>
-                </div>
-                <div class="p-1 col-8 col-md-8">
-                    <input type="text" class="w-100" th:name="name" required="required"/>
-                </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Beschreibung</h4>
-                </div>
-                <div class="p-1 col-8 col-md-8">
-                    <textarea type="text" class="w-100" th:name="description" required="required"></textarea>
-                </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Preis (pro Tag)</h4>
-                </div>
-                <div class="p-1 col-8 col-md-8">
-                    <input class="w-100" th:name="price" type="number"/>
-                </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Bilder</h4>
-                </div>
-                <div class="p-1 col-8 col-md-8">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile02">
-                        <label class="custom-file-label" for="inputGroupFile02"
-                               aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+            <div class="form-group">
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="name" class="px-2">Angebotstitel:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input type="text" class="form-control" id="name" th:name="name" required="required"
+                               placeholder="Titel" aria-label="Angebotstitel"/>
                     </div>
                 </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Max. Personenanzahl</h4>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="description" class="px-2">Beschreibung:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <textarea type="text" class="form-control" id="description" th:name="description"
+                                  required="required" placeholder="Beschreibung" aria-label="Beschreibung"></textarea>
+                    </div>
                 </div>
-                <div class="p-1 col-8 col-md-8">
-                    <input class="w-100" type="number" min="0" th:name="capacity" required="required"/>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="price" class="px-2">Preis (pro Nacht):</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" id="price" th:name="price" type="number" placeholder="Preis p. N."
+                               aria-label="Preis pro Nacht"/>
+                    </div>
                 </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right" style="">
-                    <h4 class="px-2">Straße &amp; Hausnummer</h4>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="inputGroupFile02" class="px-2">Bilder:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02"
+                                   aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1 col-7 col-md-7" style="">
-                    <input type="text" class="w-100" th:name="street" required="required">
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="capacity" class="px-2">Maximale Personenanzahl:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
+                               required="required" placeholder="Maximale Personenanzahl"
+                               aria-label="Maximale Personenanzahl"/>
+                    </div>
                 </div>
-                <div class="p-1 col-1 col-md-1" style="">
-                    <input type="text" class="w-100" th:name="number" required="required">
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right" style="">
+                        <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
+                    </div>
+                    <div class="p-1 col-7 col-md-7" style="">
+                        <input type="text" class="form-control" id="street" th:name="street" required="required"
+                               placeholder="Straße" aria-label="Straße">
+                    </div>
+                    <div class="p-1 col-1 col-md-1" style="">
+                        <input type="text" class="form-control" th:name="number" required="required"
+                               placeholder="Hausnr." aria-label="Hausnummer">
+                    </div>
                 </div>
-            </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="px-2">Ort &amp; Postleitzahl</h4>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
+                    </div>
+                    <div class="p-1 col-6 col-md-6">
+                        <input type="text" class="form-control" name="city" id="city" th:name="city" required="required"
+                               placeholder="Ort">
+                    </div>
+                    <div class="p-1 col-2 col-md-2">
+                        <input type="number" class="form-control" th:name="postalnumber" required="required"
+                               placeholder="Postleitzahl" aria-label="Postleitzahl">
+                    </div>
                 </div>
-                <div class="p-1 col-6 col-md-6">
-                    <input type="text" class="w-100" th:name="city" required="required">
+                <div class="row border-top p-3" style="background-color: #EEEEEE;">
+                    <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Angebot erstellen">
                 </div>
-                <div class="p-1 col-2 col-md-2">
-                    <input type="number" class="w-100" th:name="postalnumber" required="required">
-                </div>
-            </div>
-            <div class="row border-top p-3" style="background-color: #EEEEEE;">
-                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Angebot erstellen">
             </div>
         </form>
     </div>

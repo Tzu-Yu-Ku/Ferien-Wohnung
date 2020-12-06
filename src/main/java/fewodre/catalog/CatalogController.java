@@ -1,14 +1,8 @@
 package fewodre.catalog;
 
 import fewodre.catalog.events.*;
-import fewodre.catalog.events.Event.EventType;
-import fewodre.catalog.events.Event.*;
 import fewodre.catalog.holidayhomes.*;
-import fewodre.utils.Place;
 
-import javax.money.MonetaryAmount;
-
-import org.javamoney.moneta.Money;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -16,11 +10,9 @@ import org.salespointframework.time.BusinessTime;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CatalogController {

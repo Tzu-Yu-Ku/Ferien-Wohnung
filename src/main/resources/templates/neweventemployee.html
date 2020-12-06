@@ -26,7 +26,7 @@
                 <div class="p-5 col-lg-6 mt-5 mb-5"
                      style="background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1)); background-position: top left; background-size: 100%; background-repeat: repeat; box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
                     <h1>Sie scheinen noch nicht eingeloggt zu sein.</h1>
-                    <p class="mb-3">Bitte loggen Sie sich ein, um eine neue Veranstalltungsfirma hinzufügen zu können.</p>
+                    <p class="mb-3">Bitte loggen Sie sich ein, um einen neuen Eventmitarbeiter hinzufügen zu können.</p>
                     <form role="form" th:action="@{/login}" method="post">
                         <div class="form-group">
                             <input type="text" id="username" name="username" class="form-control"
@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="p-5 col-lg-6"
                      style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
-                    <h1>Eine neue Veranstalltungsfirma anlegen</h1>
+                    <h1>Einen neuen Eventmitarbeiter-Account anlegen</h1>
                     <form role="form" id="eventEmployeeRegistrationForm" th:action="@{/neweventemployee}" th:object="${eventEmployeeRegistrationForm}" method="post">
                         <div class="form-group">
                             <div class="form-inline">
