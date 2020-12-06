@@ -4,6 +4,7 @@ import fewodre.catalog.events.Event;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.catalog.events.EventCatalog;
+
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
@@ -12,8 +13,6 @@ import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
-import org.salespointframework.payment.PaymentMethod;
-import org.salespointframework.quantity.Metric;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
-import java.util.List;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 @Transactional
@@ -74,17 +70,9 @@ public class BookingManagement {
 		}
 
 		orderManagement.payOrder(bookingEntity);
-		//try {
-		//update quantity one more time here (don't understand what exactly in completeOrder do)
-		//but this should be at the other place (Host should aprrove)
 			orderManagement.completeOrder(bookingEntity);
 			cart.clear();
 			System.out.println("cart is empty: "+cart.isEmpty());
-		/*} catch (Exception e){
-			System.out.println("Buchungszeitraum: ");
-			System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
-			return null;
-		}*/
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
 		return result ;
