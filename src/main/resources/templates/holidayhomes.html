@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           type="text/css">
-    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -15,7 +15,7 @@
 <div class="container p-0 w-100" style="height:56px">
     <div class="row">
         <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
+            <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
         </div>
     </div>
 </div>
@@ -159,7 +159,7 @@
 <div class="container p-0 w-100 mt-5 bg-white">
     <div class="row">
         <div class="w-100">
-            <nav th:include="footer"></nav>
+            <footer th:replace="footer"></footer>
         </div>
     </div>
 </div>
