@@ -70,17 +70,9 @@ public class BookingManagement {
 		}
 
 		orderManagement.payOrder(bookingEntity);
-		//try {
-		//update quantity one more time here (don't understand what exactly in completeOrder do)
-		//but this should be at the other place (Host should aprrove)
 			orderManagement.completeOrder(bookingEntity);
 			cart.clear();
 			System.out.println("cart is empty: "+cart.isEmpty());
-		/*} catch (Exception e){
-			System.out.println("Buchungszeitraum: ");
-			System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
-			return null;
-		}*/
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
 		return result ;
