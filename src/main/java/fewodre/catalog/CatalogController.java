@@ -13,6 +13,7 @@ import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -70,6 +71,7 @@ public class CatalogController {
 	}
 
 	// Weg zur addEvent-Seite --> muss noch auf der Event-Seite eingefügt werden
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addevents")
 	String addEventPage() {
 		return "addevent";
