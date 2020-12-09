@@ -79,7 +79,11 @@ public class CartController {
 			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
-		model.addAttribute("eventCatalog", eventcatalog.findAll());
+		List<Event> bookable = new ArrayList<Event>();
+		bookable = eventcatalog.findAll().
+				filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
+						||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).toList();
+		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
 		model.addAttribute("departureDate", departureDate);
@@ -127,11 +131,16 @@ public class CartController {
 			CartItem cartItem = it.next();
 			if(cartItem.getProduct().equals(holidayHome)){
 				oldInterval =cartItem.getQuantity();
+			}else if(cartItem.getProduct().getClass() == Event.class){
+				Event event = (Event)cartItem.getProduct();
+				LocalDate eventDate = event.getDate();
+				if(eventDate.isBefore(arrivalDate)||eventDate.isAfter(departureDate)){
+					cart.removeItem(cartItem.getId());
+				}
 			}
 		}
 		Quantity differenz = newInterval.subtract(oldInterval);
 		cart.addOrUpdateItem(holidayHome, differenz);
-
 		return "redirect:/cart";
 	}
 
@@ -220,6 +229,10 @@ public class CartController {
 
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {
+		if(cart.getItem(id).get().getProduct().getCategories().iterator().next().equals("HolidayHome")){
+			cart.clear();
+			return "redirect:/holidayhomes";
+		}
 		cart.removeItem(id);
 		return "redirect:/cart";
 	}
