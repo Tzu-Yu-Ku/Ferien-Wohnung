@@ -33,7 +33,7 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="card" th:each="event: ${eventCatalog}">
-                            <div class="card-body" th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate)}">
+                            <div class="card-body" th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate) && !formatter.cartContainsProduct(cart, event)}">
                                 <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
                                 <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
                                 <div class="card-text p-1" th:text="${event.description}">
