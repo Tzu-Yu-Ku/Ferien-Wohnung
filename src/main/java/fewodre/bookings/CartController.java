@@ -80,6 +80,8 @@ public class CartController {
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
 		List<Event> bookable = new ArrayList<Event>();
+
+		//eventCatalog.findByHolidayHome()
 		bookable = eventcatalog.findAll().
 				filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
 						||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).toList();
