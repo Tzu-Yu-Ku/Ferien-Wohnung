@@ -129,6 +129,7 @@ public class CartController {
 		Quantity newInterval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
 		Quantity oldInterval = Quantity.of(0);
 		Iterator<CartItem> it = cart.iterator();
+		LinkedList<CartItem> itemsToRemove = new LinkedList<CartItem>();
 		while(it.hasNext()){
 			CartItem cartItem = it.next();
 			if(cartItem.getProduct().equals(holidayHome)){
@@ -137,9 +138,13 @@ public class CartController {
 				Event event = (Event)cartItem.getProduct();
 				LocalDate eventDate = event.getDate();
 				if(eventDate.isBefore(arrivalDate)||eventDate.isAfter(departureDate)){
-					cart.removeItem(cartItem.getId());
+					//fügt es Liste hinzu damit cartitems nicht gelöscht werden solange der Iterator sie noch braucht
+					itemsToRemove.add(cartItem);
 				}
 			}
+		}
+		for (int i = 0; i < itemsToRemove.size(); i++){
+			cart.removeItem(itemsToRemove.get(i).getId());
 		}
 		Quantity differenz = newInterval.subtract(oldInterval);
 		cart.addOrUpdateItem(holidayHome, differenz);
