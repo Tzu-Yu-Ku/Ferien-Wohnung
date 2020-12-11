@@ -50,6 +50,10 @@ public class BookingEntity extends Order {
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate departureDay;
 
+	private BookingStateEnum stateToSave;
+
+	private transient BookingState state;
+
 
 	private transient MonetaryAmount price;
 
@@ -67,8 +71,8 @@ public class BookingEntity extends Order {
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
-		//this.homeIdentifier = home.getId();
-		//addOrderLine(home, nights);
+		this.state = new BookingState();
+		this.stateToSave = state.toEnum();
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
 			Event event = iter.next();
@@ -164,4 +168,53 @@ public class BookingEntity extends Order {
 		return homeName;
 	}
 
+	public BookingStateEnum getState(){
+		if(state == null){state = new BookingState(stateToSave); }
+		return state.toEnum();
+	}
+
+	public boolean cancel(){
+		if(state == null){state = new BookingState(stateToSave); }
+		if(!state.cancel()){
+			throw new IllegalStateException();
+		}
+		else {
+			stateToSave = state.toEnum();
+			return true;
+		}
+	}
+
+	public boolean confirm(){
+		if(state == null){state = new BookingState(stateToSave); }
+		if(!state.confirm()){
+			throw new IllegalStateException();
+		}
+		else {
+			stateToSave = state.toEnum();
+			return true;
+		}
+	}
+
+	public boolean checkTime(){
+		if(state == null){state = new BookingState(stateToSave); }
+		if(!state.checkTime()){
+			//nothing changed
+			return false;
+		}
+		else {
+			stateToSave = state.toEnum();
+			return true;
+		}
+	}
+
+	public boolean pay(){
+		if(state == null){state = new BookingState(stateToSave); }
+		if(!state.pay()){
+			throw new IllegalStateException();
+		}
+		else {
+			stateToSave = state.toEnum();
+			return true;
+		}
+	}
 }
