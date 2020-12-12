@@ -72,7 +72,9 @@ public class BookingEntity extends Order {
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
 		this.state = new BookingState();
-		this.stateToSave = state.toEnum();
+		System.out.println("new State: "+this.state.toEnum());
+		this.stateToSave = this.state.toEnum();
+		System.out.println(stateToSave);
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
 			Event event = iter.next();
@@ -179,7 +181,8 @@ public class BookingEntity extends Order {
 			throw new IllegalStateException();
 		}
 		else {
-			stateToSave = state.toEnum();
+			System.out.println(state.toEnum());
+			this.stateToSave = state.toEnum();
 			return true;
 		}
 	}

@@ -1,5 +1,10 @@
 package fewodre.bookings;
 
+import fewodre.utils.ProxyBusinessTime;
+
+import java.time.LocalDate;
+import java.time.temporal.TemporalAmount;
+
 public class BookingState {
 	private State state;
 	private Ordered ordered;
@@ -9,6 +14,10 @@ public class BookingState {
 	private Completed completed;
 	private Canceled canceled;
 
+	private LocalDate payDeadline;
+	private LocalDate freeCancelDeadline;
+	private LocalDate arrivalDate;
+
 	public BookingState(){
 		this.state = new Ordered();
 		this.ordered = new Ordered();
@@ -17,6 +26,22 @@ public class BookingState {
 		this.acquired = new Acquired();
 		this.completed = new Completed();
 		this.canceled = new Canceled();
+		this.payDeadline = LocalDate.now();
+		this.freeCancelDeadline = LocalDate.now();
+		this.arrivalDate = LocalDate.now();
+	}
+
+	public BookingState(LocalDate payDeadline, LocalDate freeCancelDeadline, LocalDate arrivalDate){
+		this.state = new Ordered();
+		this.ordered = new Ordered();
+		this.paid = new Paid();
+		this.confirmed = new Confirmed();
+		this.acquired = new Acquired();
+		this.completed = new Completed();
+		this.canceled = new Canceled();
+		this.payDeadline = payDeadline;
+		this.freeCancelDeadline = freeCancelDeadline;
+		this.arrivalDate = arrivalDate;
 	}
 
 	public BookingState(BookingStateEnum startState){
@@ -26,6 +51,51 @@ public class BookingState {
 		this.acquired = new Acquired();
 		this.completed = new Completed();
 		this.canceled = new Canceled();
+		this.payDeadline = LocalDate.now();
+		this.freeCancelDeadline = LocalDate.now();
+		this.arrivalDate = LocalDate.now();
+		switch (startState){
+			case ORDERED:
+				this.state = this.ordered;
+				break;
+
+			case PAID:
+				this.state = this.paid;
+				break;
+
+			case CONFIRMED:
+				this.state = this.confirmed;
+				break;
+
+			case ACQUIRED:
+				this.state = this.acquired;
+				break;
+
+			case COMPLETED:
+				this.state = this.completed;
+				break;
+
+			case CANCELED:
+				this.state = this.canceled;
+				break;
+
+			default:
+				this.state = this.ordered;
+				break;
+		}
+	}
+
+	public BookingState(BookingStateEnum startState, LocalDate payDeadline,
+						LocalDate freeCancelDeadline, LocalDate arrivalDate){
+		this.ordered = new Ordered();
+		this.paid = new Paid();
+		this.confirmed = new Confirmed();
+		this.acquired = new Acquired();
+		this.completed = new Completed();
+		this.canceled = new Canceled();
+		this.payDeadline = payDeadline;
+		this.freeCancelDeadline = freeCancelDeadline;
+		this.arrivalDate = arrivalDate;
 		switch (startState){
 			case ORDERED:
 				this.state = this.ordered;
@@ -104,11 +174,16 @@ public class BookingState {
 
 		public boolean confirm(){return false;}
 
-		public boolean checkTime(){throw new IllegalStateException();}
+		public abstract boolean checkTime();
 
 		public boolean pay(){return false;}
 
 		public abstract BookingStateEnum toEnum();
+
+		@Override
+		public String toString() {
+			return toEnum().toString();
+		}
 	}
 
 	public class Ordered extends State{
@@ -125,7 +200,16 @@ public class BookingState {
 		}
 
 		@Override
+		public boolean checkTime() {
+			if(payDeadline.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
+				state = canceled;
+				return true;
+			}else {return false;}
+		}
+
+		@Override
 		public BookingStateEnum toEnum() {
+			checkTime();
 			return BookingStateEnum.ORDERED;
 		}
 	}
@@ -138,21 +222,48 @@ public class BookingState {
 		}
 
 		@Override
+		public boolean checkTime() {
+			if(payDeadline.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
+				state = canceled;
+				return true;
+			}else {return false;}
+		}
+
+		@Override
 		public BookingStateEnum toEnum() {
+			checkTime();
 			return BookingStateEnum.PAID;
 		}
 	}
 
 	public class Confirmed extends State{
 		@Override
+		public boolean checkTime() {
+			if(freeCancelDeadline.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
+				state = canceled;
+				return true;
+			}else {return false;}
+		}
+
+		@Override
 		public BookingStateEnum toEnum() {
+			checkTime();
 			return BookingStateEnum.CONFIRMED;
 		}
 	}
 
 	public class Acquired extends State{
 		@Override
+		public boolean checkTime() {
+			if(arrivalDate.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
+				state = canceled;
+				return true;
+			}else {return false;}
+		}
+
+		@Override
 		public BookingStateEnum toEnum() {
+			checkTime();
 			return BookingStateEnum.ACQUIRED;
 		}
 	}
@@ -160,6 +271,11 @@ public class BookingState {
 	public class Completed extends State{
 		@Override
 		public boolean cancel() {
+			return false;
+		}
+
+		@Override
+		public boolean checkTime() {
 			return false;
 		}
 
@@ -172,6 +288,11 @@ public class BookingState {
 	public class Canceled extends State{
 		@Override
 		public boolean cancel() {
+			return false;
+		}
+
+		@Override
+		public boolean checkTime() {
 			return false;
 		}
 

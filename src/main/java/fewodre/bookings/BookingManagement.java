@@ -11,6 +11,7 @@ import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
@@ -91,4 +92,8 @@ public class BookingManagement {
 	//need to create findByStatusPaid
 
 	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
+
+	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){return bookings.findBookingEntityByUserAccount(userAccount);}
+
+	public  BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier){return bookings.findFirstByOrderIdentifier(orderIdentifier);}
 }
