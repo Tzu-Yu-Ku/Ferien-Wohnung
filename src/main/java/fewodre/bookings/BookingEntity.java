@@ -71,7 +71,7 @@ public class BookingEntity extends Order {
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
-		this.state = new BookingState();
+		this.state = new BookingState(this.getDateCreated().toLocalDate(),this.arrivalDate);
 		System.out.println("new State: "+this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
 		System.out.println(stateToSave);
@@ -171,12 +171,12 @@ public class BookingEntity extends Order {
 	}
 
 	public BookingStateEnum getState(){
-		if(state == null){state = new BookingState(stateToSave); }
+		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		return state.toEnum();
 	}
 
 	public boolean cancel(){
-		if(state == null){state = new BookingState(stateToSave); }
+		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.cancel()){
 			throw new IllegalStateException();
 		}
@@ -189,7 +189,7 @@ public class BookingEntity extends Order {
 	}
 
 	public boolean confirm(){
-		if(state == null){state = new BookingState(stateToSave); }
+		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.confirm()){
 			throw new IllegalStateException();
 		}
@@ -200,7 +200,7 @@ public class BookingEntity extends Order {
 	}
 
 	public boolean checkTime(){
-		if(state == null){state = new BookingState(stateToSave); }
+		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.checkTime()){
 			//nothing changed
 			return false;
@@ -212,7 +212,7 @@ public class BookingEntity extends Order {
 	}
 
 	public boolean pay(){
-		if(state == null){state = new BookingState(stateToSave); }
+		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.pay()){
 			throw new IllegalStateException();
 		}

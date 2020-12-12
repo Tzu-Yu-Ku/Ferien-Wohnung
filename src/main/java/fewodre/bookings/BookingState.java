@@ -3,7 +3,9 @@ package fewodre.bookings;
 import fewodre.utils.ProxyBusinessTime;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 
 public class BookingState {
 	private State state;
@@ -27,11 +29,11 @@ public class BookingState {
 		this.completed = new Completed();
 		this.canceled = new Canceled();
 		this.payDeadline = LocalDate.now();
-		this.freeCancelDeadline = LocalDate.now();
 		this.arrivalDate = LocalDate.now();
+		this.freeCancelDeadline = this.arrivalDate.minus(7, ChronoUnit.DAYS);
 	}
 
-	public BookingState(LocalDate payDeadline, LocalDate freeCancelDeadline, LocalDate arrivalDate){
+	public BookingState(LocalDate bookingDate, LocalDate arrivalDate){
 		this.state = new Ordered();
 		this.ordered = new Ordered();
 		this.paid = new Paid();
@@ -39,8 +41,9 @@ public class BookingState {
 		this.acquired = new Acquired();
 		this.completed = new Completed();
 		this.canceled = new Canceled();
-		this.payDeadline = payDeadline;
-		this.freeCancelDeadline = freeCancelDeadline;
+		this.payDeadline = bookingDate.plus(14, ChronoUnit.DAYS).isBefore(arrivalDate) ?
+				bookingDate.plus(14, ChronoUnit.DAYS) : arrivalDate;
+		this.freeCancelDeadline = arrivalDate.minus(7, ChronoUnit.DAYS);
 		this.arrivalDate = arrivalDate;
 	}
 
@@ -85,17 +88,18 @@ public class BookingState {
 		}
 	}
 
-	public BookingState(BookingStateEnum startState, LocalDate payDeadline,
-						LocalDate freeCancelDeadline, LocalDate arrivalDate){
+	public BookingState(BookingStateEnum startState, LocalDate bookingDate,
+						/*LocalDate freeCancelDeadline,*/ LocalDate arrivalDate){
 		this.ordered = new Ordered();
 		this.paid = new Paid();
 		this.confirmed = new Confirmed();
 		this.acquired = new Acquired();
 		this.completed = new Completed();
 		this.canceled = new Canceled();
-		this.payDeadline = payDeadline;
-		this.freeCancelDeadline = freeCancelDeadline;
+		this.payDeadline = bookingDate.plus(14, ChronoUnit.DAYS).isBefore(arrivalDate) ?
+				bookingDate.plus(14, ChronoUnit.DAYS) : arrivalDate;
 		this.arrivalDate = arrivalDate;
+		this.freeCancelDeadline = arrivalDate.minus(7, ChronoUnit.DAYS);
 		switch (startState){
 			case ORDERED:
 				this.state = this.ordered;
