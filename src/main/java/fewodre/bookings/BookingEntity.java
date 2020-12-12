@@ -183,6 +183,7 @@ public class BookingEntity extends Order {
 		else {
 			System.out.println(state.toEnum());
 			this.stateToSave = state.toEnum();
+			//System.out.println(stateToSave);
 			return true;
 		}
 	}

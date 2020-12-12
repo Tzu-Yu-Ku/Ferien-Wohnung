@@ -299,7 +299,7 @@ public class CartController {
 		System.out.println(booking.getId());
 		if(bookingManagement.findFirstByOrderIdentifier(booking.getId()).cancel()){
 			//Work with Copy???
-			System.out.println(booking.getState());
+			System.out.println(bookingManagement.findFirstByOrderIdentifier(booking.getId()).getState());
 			return "redirect:/holidayhomes";
 		}
 		else {return "";}
