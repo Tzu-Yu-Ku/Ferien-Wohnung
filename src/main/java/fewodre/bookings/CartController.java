@@ -305,5 +305,15 @@ public class CartController {
 		else {return "";}
 	}
 
+	@GetMapping("/pay/{id}")
+	public String pay(Model model, @PathVariable("id") BookingEntity booking){
+		if(bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
+			//it's paid
+			return "redirect:/holidayhomes";
+		}
+		//it could't be paid maybe it already was or something like that
+		return "redirect:/holidayhomes";
+	}
+
 }
 

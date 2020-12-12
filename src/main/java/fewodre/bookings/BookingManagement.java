@@ -70,13 +70,19 @@ public class BookingManagement {
 			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
 		}
 
-		orderManagement.payOrder(bookingEntity);
-			orderManagement.completeOrder(bookingEntity);
 			cart.clear();
 			System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
 		return result ;
+	}
+
+	public boolean pay(BookingEntity bookingEntity){
+		if(orderManagement.payOrder(bookingEntity)){
+			orderManagement.completeOrder(bookingEntity);
+			return bookingEntity.pay();
+		}
+		return false;
 	}
 
 	public int getStockCountOf(Product product){
