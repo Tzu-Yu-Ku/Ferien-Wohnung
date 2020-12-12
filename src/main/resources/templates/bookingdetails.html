@@ -84,7 +84,8 @@
             </div>
         </div>
         <div class="row border-top text-center" style="background-color: #EEEEEE;">
-                <a class="btn btn-danger btn-lg" href="#">Buchung stornieren.</a>
+                <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
+                <a class="btn btn-danger btn-lg" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
                 <!--<a class="btn btn-info btn-lg" href="#">Buchung bezahlen.</a>//!!-->
         </div>
     </div>

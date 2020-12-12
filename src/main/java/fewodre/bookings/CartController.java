@@ -294,5 +294,16 @@ public class CartController {
 		return "bookingdetails";
 	}
 
+	@GetMapping("/cancel/{id}")
+	public String cancel(Model model, @PathVariable("id") BookingEntity booking){
+		System.out.println(booking.getId());
+		if(bookingManagement.findFirstByOrderIdentifier(booking.getId()).cancel()){
+			//Work with Copy???
+			System.out.println(booking.getState());
+			return "redirect:/holidayhomes";
+		}
+		else {return "";}
+	}
+
 }
 

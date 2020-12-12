@@ -11,6 +11,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Iterator;
+
 @Controller
 @PreAuthorize("isAuthenticated()")
 public class BookingController {
@@ -39,6 +41,11 @@ public class BookingController {
 		}else {
 			model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 			model.addAttribute("bookings", bookingRepository.findBookingEntityByUserAccount(userAccount));
+			Iterator<BookingEntity> iter = bookingRepository.findBookingEntityByUserAccount(userAccount).iterator();
+			while (iter.hasNext()){
+				BookingEntity bookingEntity = iter.next();
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+			}
 			model.addAttribute("formatter", this.formatter);
 			return "bookings";
 		}
