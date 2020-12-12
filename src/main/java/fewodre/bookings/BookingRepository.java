@@ -2,6 +2,7 @@ package fewodre.bookings;
 
 import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
 

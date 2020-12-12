@@ -126,6 +126,10 @@ public class AccountManagement {
 		}
 	}
 
+	public AccountRepository getRepository(){
+		return accounts;
+	}
+
 }
 
 

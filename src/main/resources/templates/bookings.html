@@ -19,7 +19,9 @@
         <div class="card mb-3" style="max-width: 800px; margin: 0 auto;float: none;margin-bottom: 10px;" th:each="booking: ${bookings}">
             <div class="row no-gutters">
                 <div class="col-md-4">
+                    <a th:href="@{/bookingdetails/{id}(id=${booking.id})}">
                     <img th:src="@{/resources/img/{image}(image=${homeCatalog.findFirstByProductIdentifier(booking.getUuidHome()).image})}" class="card-img" alt="..." width="80px">
+                    </a>
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">

@@ -1,6 +1,7 @@
 package fewodre.bookings;
 
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -49,6 +50,21 @@ public class BookingController {
 			model.addAttribute("formatter", this.formatter);
 			return "bookings";
 		}
+	}
+
+	@GetMapping("/bookingsFromHost")
+	@PreAuthorize("hasRole('HOST')")
+	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity){
+		//you have to give in the same HostUUID when you create the home, and they shouldn't let host give in HostUUID should be automatik filled in
+		model.addAttribute("bookings", bookingRepository.findBookingsByUuidHostEquals("123123"));
+		model.addAttribute("homeCatalog", this.holidayHomeCatalog);
+		Iterator<BookingEntity> iter = bookingRepository.findBookingsByUuidHostEquals(accountEntity.getUuid()).iterator();
+		while (iter.hasNext()){
+			BookingEntity bookingEntity = iter.next();
+			System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+		}
+		model.addAttribute("formatter", this.formatter);
+		return "bookings";
 	}
 
 }

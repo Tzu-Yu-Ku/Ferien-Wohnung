@@ -257,6 +257,7 @@ public class CartController {
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
 		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
+		System.out.println("Events = "+ events.toString());
 		if(arrivalDate.isBefore(LocalDate.now()) || departureDate.isBefore(LocalDate.now()) || departureDate.isBefore(arrivalDate)) {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
@@ -277,15 +278,15 @@ public class CartController {
 			return "redirect:/cart"; //es gab Probleme
 		}
 		details(model ,bookingEntity);
-		return "/bookingdetails"; //!!
+		return "bookingdetails"; //!!
 	}
 
-	@GetMapping("/bookingdetails")
-	public String details(Model model, BookingEntity bookingEntity){
-		model.addAttribute("booking", bookingEntity);
+	@GetMapping("/bookingdetails/{booking}")
+	public String details(Model model, @PathVariable BookingEntity booking){
+		model.addAttribute("booking", booking);
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
-		Iterator<OrderLine> iter = bookingEntity.getOrderLines().iterator();
+		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();
 			if(holidayHomeCatalog.findFirstByProductIdentifier(line.getProductIdentifier()) != null){
