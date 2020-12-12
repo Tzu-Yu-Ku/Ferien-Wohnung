@@ -139,8 +139,6 @@ public class AccountManagement {
 	}
 
 	public Boolean enable_tenant(String tenant_username){
-		System.out.println("Baum");
-		System.out.println(tenant_username);
 		userAccounts.enable(userAccounts.findByUsername(tenant_username).get().getId());
 		userAccounts.findByUsername(tenant_username).get().add(TENANT_ROLE);
 		userAccounts.findByUsername(tenant_username).get().remove(UNACTIVATED_TENANT_ROLE);
