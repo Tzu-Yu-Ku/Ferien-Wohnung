@@ -40,6 +40,7 @@ public class CartController {
 	private final BookingManagement bookingManagement;
 	private final EventCatalog eventcatalog;
 	private final HolidayHomeCatalog holidayHomeCatalog;
+	private final static Quantity one =Quantity.of(1);
 
 	private HolidayHome holidayHome;
 	private UserAccount userAccount;
@@ -287,6 +288,7 @@ public class CartController {
 		model.addAttribute("booking", bookingManagement.findFirstByOrderIdentifier(booking.getId()));
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
+		model.addAttribute("one", one);
 		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();

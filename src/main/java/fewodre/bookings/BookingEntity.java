@@ -82,6 +82,7 @@ public class BookingEntity extends Order {
 			addOrderLine(event, Quantity.of(events.get(event)));
 		}
 		price = getTotal();
+		//need to find out from Home
 		this.hostName = "!!Mr. Test Name";
 	}
 

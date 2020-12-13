@@ -84,7 +84,7 @@
                     <th scope="col">
                         <h4 class="p-1">Erstellungsdatum</h4></th>
                     <th scope="col">
-                        <h5 class="p-1">12.Dec 2020</h5></th>
+                        <h5 class="p-1" th:text="${formatter.formatDate(booking.getDateCreated())}">12.Dec 2020</h5></th>
 
                 </tr>
                 <tr>
@@ -95,10 +95,10 @@
 
                 </tr>
             </table>
-            <table class="table table-striped" th:if="${orderlines!=null} ">
+            <table class="table table-striped">
                 <tr>
                     <th scope="col" colspan="5">
-                        <h4 class="p-1">gebuchte Events</h4>
+                        <h4 class="p-1"th:if="${orderlines==null} ">gebuchte Events</h4>
                     </th>
                 </tr>
                 <tr th:each="orderline: ${orderlines}">
@@ -108,11 +108,12 @@
                     <th scope="col">
                         <h5 th:text="${eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPlace().toString()}">Tannenstraße 2, 01099 Dresden</h5>
                     </th>
-                    <th scope="col" th:text="${formatter.formatDate(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).date)}">
-                        <h5 >12. Dec 2020</h5>
+                    <th scope="col">
+                        <h5  th:text="${formatter.formatDate(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).date)}">12. Dec 2020</h5>
                     </th>
                     <th scope="col">
-                        <h5 th:text="${orderline.getQuantity()}">2 Menschen</h5>
+                        <h5 th:if="${orderline.getQuantity().isEqualTo(one)}" th:text="${orderline.getQuantity()+' Person'}">2 Menschen</h5>
+                        <h5 th:if="${!orderline.getQuantity().isEqualTo(one)}"th:text="${orderline.getQuantity()+' Personen'}">2 Menschen</h5>
                     </th>
                     <th scope="col">
                         <h5 th:text="${formatter.parsePrice(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPrice())}">200 €</h5>
