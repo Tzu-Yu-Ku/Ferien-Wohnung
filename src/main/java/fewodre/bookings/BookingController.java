@@ -37,6 +37,7 @@ public class BookingController {
 	@GetMapping("/bookings")
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
+			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
 		}else {
@@ -59,6 +60,7 @@ public class BookingController {
 		System.out.println("email: " +userAccount.getEmail());
 		model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));
 		model.addAttribute("homeCatalog", this.holidayHomeCatalog);
+		model.addAttribute("userAccount", userAccount);
 		Iterator<BookingEntity> iter = bookingRepository.findBookingsByUuidHostEquals(accountEntity.getUuid()).iterator();
 		while (iter.hasNext()){
 			BookingEntity bookingEntity = iter.next();

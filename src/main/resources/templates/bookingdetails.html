@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="de">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -119,18 +119,13 @@
                     </th>
                 </tr>
             </table>
-
-
-
         </div>
-
-
-
-
         <div class="row border-top text-center" style="background-color: #EEEEEE;">
                 <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
-                <a class="btn btn-danger btn-lg" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
-                <a class="btn btn-info btn-lg" th:href="@{/pay/{id}(id=${booking.id})}">Buchung bezahlen.</a>
+                <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('TENANT')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
+                <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('HOST')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren/abweisen.</a>
+                <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED'}" sec:authorize="hasRole('TENANT')" th:href="@{/pay/{id}(id=${booking.id})}">Buchung bezahlen.</a>
+                <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}" sec:authorize="hasRole('HOST')" th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a>
         </div>
     </div>
     <div class="container p-0 w-100 mt-5 bg-white">

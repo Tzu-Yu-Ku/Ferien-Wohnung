@@ -284,7 +284,7 @@ public class CartController {
 
 	@GetMapping("/bookingdetails/{booking}")
 	public String details(Model model, @PathVariable BookingEntity booking){
-		model.addAttribute("booking", booking);
+		model.addAttribute("booking", bookingManagement.findFirstByOrderIdentifier(booking.getId()));
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
 		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
@@ -317,7 +317,18 @@ public class CartController {
 			//it's paid
 			return "redirect:/holidayhomes";
 		}
-		//it could't be paid maybe it already was or something like that
+		//it couldn't be paid maybe it already was or something like that
+		return "redirect:/holidayhomes";
+	}
+
+	@GetMapping("/confirm/{id}")
+	public String confirm(Model model, @PathVariable("id") BookingEntity booking){
+		if(bookingManagement.findFirstByOrderIdentifier(booking.getId()).confirm()){
+			//it's now confirmed
+			System.out.println(bookingManagement.findFirstByOrderIdentifier(booking.getId()).getState());
+			return "redirect:/holidayhomes";
+		}
+		//it couldn't be confirmed maybe it already was or something like that
 		return "redirect:/holidayhomes";
 	}
 
