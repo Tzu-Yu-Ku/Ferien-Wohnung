@@ -244,7 +244,7 @@ public class BookingState {
 		@Override
 		public boolean checkTime() {
 			if(freeCancelDeadline.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
-				state = canceled;
+				state = acquired;
 				return true;
 			}else {return false;}
 		}
