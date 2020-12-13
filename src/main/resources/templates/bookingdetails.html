@@ -91,7 +91,7 @@
                     <th scope="col">
                         <h4 class="p-1">Buchungstatus</h4></th>
                     <th scope="col">
-                        <h5 class="p-1">Open</h5></th>
+                        <h5 class="p-1" th:text="${booking.getState()}">Open</h5></th>
 
                 </tr>
             </table>
@@ -106,10 +106,10 @@
                         <h5 class="p-1"th:text="${orderline.getProductName()}">Stadt Frühung</h5>
                     </th>
                     <th scope="col">
-                        <h5 th:text="${eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPlace()}">Tannenstraße 2, 01099 Dresden</h5>
+                        <h5 th:text="${eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPlace().toString()}">Tannenstraße 2, 01099 Dresden</h5>
                     </th>
-                    <th scope="col">
-                        <h5 >12.Dec 2020</h5>
+                    <th scope="col" th:text="${formatter.formatDate(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).date)}">
+                        <h5 >12. Dec 2020</h5>
                     </th>
                     <th scope="col">
                         <h5 th:text="${orderline.getQuantity()}">2 Menschen</h5>
