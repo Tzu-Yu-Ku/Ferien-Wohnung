@@ -20,7 +20,7 @@
     </div>
 </div>
 <div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
-    <div style="background-image: url('/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
+    <div style="background-image: url('/static/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
         <div class="container">
             <div class="row">
                 <div class="p-5 col-lg-6 mt-5 mb-5"
@@ -39,7 +39,7 @@
                                 <a href="#">Passwort vergessen?</a>
                             </small>
                             <small class="form-text text-muted text-right">
-                                <a href="register.html">Noch kein Benutzerkonto?</a>
+                                <a href="../register.html">Noch kein Benutzerkonto?</a>
                             </small>
                         </div>
                         <button type="submit" class="btn btn-primary">Einloggen<br></button>

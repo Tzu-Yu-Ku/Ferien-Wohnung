@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -134,20 +136,26 @@ public class AccountManagement {
 			return null;
 			}
 		}
+
 	public Streamable<UserAccount> findAllDisabled(){
 		return userAccounts.findDisabled();
+	}
+
+	public Streamable<AccountEntity> findActiveTenantAccounts() {
+		HashSet<Role> activeTenantRole = new HashSet<>();
+		activeTenantRole.add(TENANT_ROLE);
+//		return accounts.findByAccount_Roles(activeTenantRole);
+		return null;
 	}
 
 	public Boolean enable_tenant(String tenant_username){
 		System.out.println("Baum");
 		System.out.println(tenant_username);
-		userAccounts.enable(userAccounts.findByUsername(tenant_username).get().getId());
+		userAccounts.enable(Objects.requireNonNull(userAccounts.findByUsername(tenant_username).get().getId()));
 		userAccounts.findByUsername(tenant_username).get().add(TENANT_ROLE);
 		userAccounts.findByUsername(tenant_username).get().remove(UNACTIVATED_TENANT_ROLE);
 		return userAccounts.findByUsername(tenant_username).get().isEnabled();
 	}
-
-
 
 }
 

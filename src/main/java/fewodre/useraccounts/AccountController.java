@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.awt.*;
 
 @Controller
 public class AccountController {
@@ -52,7 +51,7 @@ public class AccountController {
 		AccountEntity test = accountRepository.findByAccount_Email(tenantRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:/login";
+		return "redirect:accounts/login";
 	}
 
 	@GetMapping("/map")
@@ -68,22 +67,22 @@ public class AccountController {
 	}
 
 	@GetMapping("/activatetenants")
-	public String activatetenants(Model model){
+	public String activateTenants(Model model){
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
-		return "activatetenants";
+		return "accounts/activatetenants";
 	}
 
 	@PostMapping("/activatetenants")
-	public String postactivatetenants(Model model, String tenant_username) {
+	public String postActivateTenants(Model model, String tenant_username) {
 		accountManagement.enable_tenant(tenant_username);
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
-		return "activatetenants";
+		return "accounts/activatetenants";
 	}
 
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
 		model.addAttribute("registrationForm", hostRegistrationForm);
-		return "newhost";
+		return "accounts/newhost.html";
 	}
 
 	@PostMapping("/newhost")
@@ -92,26 +91,26 @@ public class AccountController {
 		LOG.info(hostRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
-			return "newhost";
+			return "accounts/newhost.html";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
 		if(accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
-			return "newhost";
+			return "accounts/newhost.html";
 		}
 
 		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:/newhost";
+		return "redirect:accounts/newhost";
 	}
 
 	@GetMapping("/neweventemployee")
 	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 		model.addAttribute("registrationForm", eventEmployeeRegistrationForm);
-		return "neweventemployee";
+		return "accounts/neweventemployee";
 	}
 
 	@PostMapping("/neweventemployee")
@@ -122,12 +121,12 @@ public class AccountController {
 		if(accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
-			return "neweventemployee";
+			return "accounts/neweventemployee";
 		}
 
 		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:/neweventemployee";
+		return "redirect:accounts/neweventemployee";
 	}
 }

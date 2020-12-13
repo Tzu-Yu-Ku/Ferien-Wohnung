@@ -18,11 +18,9 @@ package fewodre;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -49,7 +47,7 @@ public class FeWoDre {
 
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
-			registry.addViewController(LOGIN_ROUTE).setViewName("login");
+			registry.addViewController(LOGIN_ROUTE).setViewName("accounts/login");
 		}
 	}
 
@@ -85,6 +83,4 @@ public class FeWoDre {
 					.logoutSuccessUrl("/holidayhomes");
 		}
 	}
-
-
 }
