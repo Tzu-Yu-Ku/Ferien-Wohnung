@@ -30,6 +30,8 @@ import javax.money.MonetaryAmount;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -266,13 +268,15 @@ public class CartController {
 		}
 
 		//check if it's available
-		ArrayList<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
+		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
-			if(arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())){
-				//send message "the chosed duration is not avalible"
-				System.out.println("redirect to Cart because its already booked");
-				//!! Message to customer is missing
-				return "redirect:/cart";
+			if(!b.getState().equals(BookingStateEnum.CANCELED)) {
+				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
+					//send message "the chosed duration is not avalible"
+					System.out.println("redirect to Cart because its already booked");
+					//!! Message to customer is missing
+					return "redirect:/cart";
+				}
 			}
 		}
 		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
