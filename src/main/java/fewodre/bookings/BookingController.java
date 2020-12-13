@@ -54,9 +54,10 @@ public class BookingController {
 
 	@GetMapping("/bookingsFromHost")
 	@PreAuthorize("hasRole('HOST')")
-	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity){
+	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity, @LoggedIn UserAccount userAccount){
 		//you have to give in the same HostUUID when you create the home, and they shouldn't let host give in HostUUID should be automatik filled in
-		model.addAttribute("bookings", bookingRepository.findBookingsByUuidHostEquals("123123"));
+		System.out.println("email: " +userAccount.getEmail());
+		model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));
 		model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 		Iterator<BookingEntity> iter = bookingRepository.findBookingsByUuidHostEquals(accountEntity.getUuid()).iterator();
 		while (iter.hasNext()){
