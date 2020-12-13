@@ -7,6 +7,7 @@ import fewodre.useraccounts.AccountEntity;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
+import org.salespointframework.order.Totalable;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
@@ -130,6 +131,7 @@ public class BookingEntity extends Order {
 	public LocalDate getDepartureDate(){
 		return departureDay;
 	}
+
 
 	/**
 	 * Überprüft ob der übergebene Zeitraum sich nicht mit dem Zeitraum dieser Buchung überlappt

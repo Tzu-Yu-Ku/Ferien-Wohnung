@@ -10,6 +10,7 @@ import fewodre.useraccounts.AccountManagement;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
+import org.salespointframework.order.Totalable;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -294,6 +295,8 @@ public class CartController {
 				model.addAttribute("holidayHome", home);
 			}
 		}
+		model.addAttribute("eventCatalog",eventcatalog);
+		model.addAttribute("orderlines",booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList());
 		return "bookingdetails";
 	}
 

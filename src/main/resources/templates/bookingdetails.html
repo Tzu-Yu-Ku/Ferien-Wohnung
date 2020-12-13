@@ -95,27 +95,27 @@
 
                 </tr>
             </table>
-            <table class="table table-striped">
+            <table class="table table-striped" th:if="${orderlines!=null} ">
                 <tr>
                     <th scope="col" colspan="5">
                         <h4 class="p-1">gebuchte Events</h4>
                     </th>
                 </tr>
-                <tr>
+                <tr th:each="orderline: ${orderlines}">
                     <th scope="col">
-                        <h5 class="p-1">Stadt Frühung</h5>
+                        <h5 class="p-1"th:text="${orderline.getProductName()}">Stadt Frühung</h5>
                     </th>
                     <th scope="col">
-                        <h5>Tannenstraße 2, 01099 Dresden</h5>
+                        <h5 th:text="${eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPlace()}">Tannenstraße 2, 01099 Dresden</h5>
                     </th>
                     <th scope="col">
-                        <h5>12.Dec 2020</h5>
+                        <h5 >12.Dec 2020</h5>
                     </th>
                     <th scope="col">
-                        <h5>2 Menschen</h5>
+                        <h5 th:text="${orderline.getQuantity()}">2 Menschen</h5>
                     </th>
                     <th scope="col">
-                        <h5>200 €</h5>
+                        <h5 th:text="${formatter.parsePrice(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPrice())}">200 €</h5>
                     </th>
                 </tr>
             </table>

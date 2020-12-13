@@ -70,8 +70,8 @@ public class BookingManagement {
 			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
 		}
 
-			cart.clear();
-			System.out.println("cart is empty: "+cart.isEmpty());
+		cart.clear();
+		System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
 		return result ;
