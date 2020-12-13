@@ -6,18 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
           type="text/css">
-    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
-    <title>FeWoDre - Neues Event erstellen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FeWoDre - Event erstellen</title>
 </head>
 
 <body>
-<div class="container p-0 w-100" style="height:56px">
-    <div class="row">
-        <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
-        </div>
-    </div>
-</div>
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
 <div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
     <div class="container">
         <div class="row" style="background-color: #EEEEEE;">
@@ -125,13 +122,9 @@
         </form>
     </div>
 </div>
-<div class="container p-0 w-100 mt-5 bg-white">
-    <div class="row">
-        <div class="w-100">
-            <nav th:include="footer"></nav>
-        </div>
-    </div>
-</div>
+
+<footer th:replace="footer :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

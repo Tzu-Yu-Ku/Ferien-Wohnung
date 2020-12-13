@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="de">
 
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prototype GUI Ferienhausvermietung 2020</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FeWoDre - Nutzer aktivieren</title>
 </head>
 
 <body>
-<div class="container p-0 w-100" style="height:56px">
-    <div class="row">
-        <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
-        </div>
-    </div>
-</div>
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
 <div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
     <div style="background-image: url('/static/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
         <div class="container">
@@ -52,42 +47,40 @@
 <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="py-5"
      style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
     <div class="container">
-    <div class="p-5 col-lg-6"
-         style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
-        <h1>Noch nicht aktivierte Mieterkonten</h1>
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th th:text="Vorname">Titel</th>
-                <th th:text="Nachname">Anzahl</th>
-                <th th:text="E-Mailadresse">Preis</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="p-5 col-lg-6"
+             style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
+            <h1>Noch nicht aktivierte Mieterkonten</h1>
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th th:text="Vorname">Titel</th>
+                    <th th:text="Nachname">Anzahl</th>
+                    <th th:text="E-Mailadresse">Preis</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <tr class="col-md-12 col-6 p-1" th:each="unactivatedtenants : ${unactivatedtenants}" style="">
-                <td th:text="${unactivatedtenants.firstname}">10</td>
-                <td th:text="${unactivatedtenants.lastname}">10 Euro</td>
-                <td th:text="${unactivatedtenants.email}">10 Euro</td>
-                <td>
-                    <form th:this="unactivatedtenants" class="ui form" method="post" th:action="@{/activatetenants}" >
-                        <input type="hidden" id="tenant_username" name="tenant_username" th:value="${unactivatedtenants.username}" class="form-control">
-                        <button type="submit" class="ui button" th:text="Aktivieren">Aktivieren</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
-<div class="container p-0 w-100 mt-5 bg-white">
-    <div class="row">
-        <div class="w-100">
-            <footer th:include="footer :: footer"></footer>
+                <tr class="col-md-12 col-6 p-1" th:each="unactivatedtenants : ${unactivatedtenants}" style="">
+                    <td th:text="${unactivatedtenants.firstname}">10</td>
+                    <td th:text="${unactivatedtenants.lastname}">10 Euro</td>
+                    <td th:text="${unactivatedtenants.email}">10 Euro</td>
+                    <td>
+                        <form th:this="unactivatedtenants" class="ui form" method="post"
+                              th:action="@{/activatetenants}">
+                            <input type="hidden" id="tenant_username" name="tenant_username"
+                                   th:value="${unactivatedtenants.username}" class="form-control">
+                            <button type="submit" class="ui button" th:text="Aktivieren">Aktivieren</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+<footer th:replace="footer :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
