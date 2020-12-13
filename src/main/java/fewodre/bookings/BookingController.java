@@ -47,6 +47,9 @@ public class BookingController {
 			while (iter.hasNext()){
 				BookingEntity bookingEntity = iter.next();
 				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
 			}
 			model.addAttribute("formatter", this.formatter);
 			return "bookings";

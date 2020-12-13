@@ -213,7 +213,7 @@ public class BookingState {
 
 		@Override
 		public BookingStateEnum toEnum() {
-			checkTime();
+			if(checkTime()){return BookingState.this.toEnum();}
 			return BookingStateEnum.ORDERED;
 		}
 	}
@@ -235,7 +235,7 @@ public class BookingState {
 
 		@Override
 		public BookingStateEnum toEnum() {
-			checkTime();
+			if(checkTime()){return BookingState.this.toEnum();}
 			return BookingStateEnum.PAID;
 		}
 	}
@@ -244,14 +244,14 @@ public class BookingState {
 		@Override
 		public boolean checkTime() {
 			if(freeCancelDeadline.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
-				state = canceled;
+				state = acquired;
 				return true;
 			}else {return false;}
 		}
 
 		@Override
 		public BookingStateEnum toEnum() {
-			checkTime();
+			if(checkTime()){return BookingState.this.toEnum();}
 			return BookingStateEnum.CONFIRMED;
 		}
 	}
@@ -267,7 +267,7 @@ public class BookingState {
 
 		@Override
 		public BookingStateEnum toEnum() {
-			checkTime();
+			if(checkTime()){return BookingState.this.toEnum();}
 			return BookingStateEnum.ACQUIRED;
 		}
 	}

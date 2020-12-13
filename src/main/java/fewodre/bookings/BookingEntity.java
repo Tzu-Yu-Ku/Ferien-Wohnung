@@ -175,7 +175,8 @@ public class BookingEntity extends Order {
 
 	public BookingStateEnum getState(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		return state.toEnum();
+		stateToSave = state.toEnum();
+		return stateToSave;
 	}
 
 	public boolean cancel(){
