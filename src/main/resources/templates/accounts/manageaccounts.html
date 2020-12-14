@@ -64,8 +64,13 @@
                     <input type="submit" value="Bestätigen" class="btn btn-success mx-auto mt-2"
                            style="width: 150px; height: 40px;">
                 </form>
-                <a class="btn btn-danger mx-auto mt-2" href="#" style="width: 150px; height: 40px;">Account
-                    löschen</a></div>
+                <form th:action="@{/deleteaccount}" method="post">
+                    <input type="hidden" name="account_username"
+                           th:value="${account.getUsername()}" class="form-control">
+                    <input type="submit" value="Account löschen" class="btn btn-danger mx-auto mt-2"
+                           style="width: 150px; height: 40px;">
+                </form>
+            </div>
         </div>
 
         <!-- AKTIVE MIETER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
@@ -105,8 +110,13 @@
                     schreiben</a>
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 200px; height: 40px;">Details zum
                     Account</a>
-                <a class="btn btn-danger mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Account
-                    löschen</a></div>
+                <form th:action="@{/deleteaccount}" method="post">
+                    <input type="hidden" name="account_username"
+                           th:value="${account.getAccount().getUsername()}" class="form-control">
+                    <input type="submit" value="Account löschen" class="btn btn-danger mx-auto mt-2"
+                           style="width: 150px; height: 40px;">
+                </form>
+            </div>
         </div>
 
         <!-- VERMIEtER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
@@ -146,8 +156,13 @@
                     schreiben</a>
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 200px; height: 40px;">Details zum
                     Account</a>
-                <a class="btn btn-danger mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Account
-                    löschen</a></div>
+                <form th:action="@{/deleteaccount}" method="post">
+                    <input type="hidden" name="account_username"
+                           th:value="${account.getAccount().getUsername()}" class="form-control">
+                    <input type="submit" value="Account löschen" class="btn btn-danger mx-auto mt-2"
+                           style="width: 150px; height: 40px;">
+                </form>
+            </div>
         </div>
 
         <!-- EVENTMITARBEITER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
@@ -157,7 +172,7 @@
             </div>
         </div>
         <div class="row border-top bg-white text-center" th:if="${eventAccounts.isEmpty()}">
-            <h6 class="col-12 text-black-50 font-italic p-3">Keine Vermieter vorhanden.</h6>
+            <h6 class="col-12 text-black-50 font-italic p-3 mb-2">Keine Vermieter vorhanden.</h6>
         </div>
         <div class="row border font-italic border-secondary text-center align-self-center"
              th:if="${!eventAccounts.isEmpty()}" style="background-color: #DEDEDE;">
@@ -187,8 +202,13 @@
                     schreiben</a>
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 200px; height: 40px;">Details zum
                     Account</a>
-                <a class="btn btn-danger mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Account
-                    löschen</a></div>
+                <form th:action="@{/deleteaccount}" method="post">
+                    <input type="hidden" name="account_username"
+                           th:value="${account.getAccount().getUsername()}" class="form-control">
+                    <input type="submit" value="Account löschen" class="btn btn-danger mx-auto mt-2"
+                           style="width: 150px; height: 40px;">
+                </form>
+            </div>
         </div>
     </div>
 </div>

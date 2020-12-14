@@ -156,13 +156,23 @@ public class AccountManagement {
 		return userAccounts.findDisabled();
 	}
 
-	public Boolean enable_tenant(String tenant_username) {
+	public Boolean enableTenant(String tenant_username) {
 		userAccounts.enable(userAccounts.findByUsername(tenant_username).get().getId());
 		userAccounts.findByUsername(tenant_username).get().add(TENANT_ROLE);
 		userAccounts.findByUsername(tenant_username).get().remove(UNACTIVATED_TENANT_ROLE);
 		return userAccounts.findByUsername(tenant_username).get().isEnabled();
 	}
 
+	public Boolean deleteAccount(String username) {
+		return deleteAccount(userAccounts.findByUsername(username).get());
+	}
+
+	public Boolean deleteAccount(UserAccount userAccount) {
+		accounts.deleteAccountEntityByAccount(userAccount);
+		UserAccount deletedUserAccount = userAccounts.delete(userAccount);
+		LOG.info(deletedUserAccount.toString());
+		return true;
+	}
 
 }
 

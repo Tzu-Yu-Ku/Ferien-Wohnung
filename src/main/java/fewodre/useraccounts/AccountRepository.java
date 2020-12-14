@@ -11,4 +11,6 @@ public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
 	AccountEntity findByAccount(UserAccount account);
 
+	void deleteAccountEntityByAccount(UserAccount account);
+
 }

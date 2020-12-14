@@ -1,6 +1,5 @@
 package fewodre.useraccounts;
 
-import org.salespointframework.useraccount.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -76,7 +75,7 @@ public class AccountController {
 
 	@PostMapping("/activatetenants")
 	public String postActivateTenants(Model model, String tenant_username) {
-		accountManagement.enable_tenant(tenant_username);
+		accountManagement.enableTenant(tenant_username);
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
 		return "accounts/activatetenants";
 	}
@@ -153,7 +152,14 @@ public class AccountController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/activatetenant")
 	public String activateTenant(String tenant_username) {
-		accountManagement.enable_tenant(tenant_username);
+		accountManagement.enableTenant(tenant_username);
+		return "redirect:/manageaccounts";
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/deleteaccount")
+	public String deleteAccount(String account_username) {
+		accountManagement.deleteAccount(account_username);
 		return "redirect:/manageaccounts";
 	}
 }
