@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prototype GUI Ferienhausvermietung 2020</title>
+    <title>FeWoDre - Navigation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <base target="_parent">
@@ -44,7 +44,7 @@
                     <a class="nav-link" href="holidayhomes.html" th:href="@{/addholidayhome}">Angebot erstellen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Buchungsübersicht<br></a>
+                    <a class="nav-link" href="bookings.html" th:href="@{/bookingsFromHost}">Buchungsübersicht<br></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Konto<br></a>
@@ -55,14 +55,14 @@
                     <a class="nav-link" href="activatetenants">Mieter bestätigen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="newhost.html" th:href="@{/newhost}">Neuer Host<br></a>
+                    <a class="nav-link" href="accounts/newhost.html" th:href="@{/newhost}">Neuer Host<br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="neweventemployee.html" th:href="@{/neweventemployee}">Neuer
+                    <a class="nav-link" href="accounts/neweventemployee.html" th:href="@{/neweventemployee}">Neuer
                         Veranstaltungsmitarbeiter<br></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="account.html" th:href="@{/account}">Konto<br></a>
+                    <a class="nav-link" href="account.html" th:href="@{/manageaccounts}">Accountverwaltung<br></a>
                 </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('EVENT_EMPLOYEE')">
@@ -89,7 +89,7 @@
             </ul>
             <ul class="navbar-nav" sec:authorize="!hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html" th:href="@{/login}">Log in</a>
+                    <a class="nav-link" href="accounts/login.html" th:href="@{/login}">Log in</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-primary" href="register.html" th:href="@{/register}">Registrieren</a>

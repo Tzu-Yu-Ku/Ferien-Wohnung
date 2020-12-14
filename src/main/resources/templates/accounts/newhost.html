@@ -6,19 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prototype GUI Ferienhausvermietung 2020</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FeWoDre - Vermieter-Account erstellen</title>
 </head>
 
 <body>
-<div class="container p-0 w-100" style="height:56px">
-    <div class="row">
-        <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
-        </div>
-    </div>
-</div>
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
 <div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
     <div style="background-image: url('/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
         <div class="container">
@@ -39,7 +35,7 @@
                                 <a href="#">Passwort vergessen?</a>
                             </small>
                             <small class="form-text text-muted text-right">
-                                <a href="register.html">Noch kein Benutzerkonto?</a>
+                                <a href="../register.html">Noch kein Benutzerkonto?</a>
                             </small>
                         </div>
                         <button type="submit" class="btn btn-primary">Einloggen<br></button>
@@ -49,6 +45,7 @@
         </div>
     </div>
 </div>
+
 <div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
     <div class="py-5"
      style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
@@ -138,13 +135,9 @@
     </div>
 </div>
 </div>
-<div class="container p-0 w-100 mt-5 bg-white">
-    <div class="row">
-        <div class="w-100">
-            <footer th:include="footer :: footer"></footer>
-        </div>
-    </div>
-</div>
+
+<footer th:replace="footer :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

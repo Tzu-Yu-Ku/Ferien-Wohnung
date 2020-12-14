@@ -7,6 +7,8 @@ import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +47,9 @@ public class CatalogController {
 	}
 
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayhomes(@ModelAttribute("form") HolidayHomeForm form, Model model) {
+	String addHolidayhomes(@ModelAttribute("form") HolidayHomeForm form, Model model, @LoggedIn UserAccount userAccount) {
 
-		Hcatalog.save(form.toNewHolidayHome());
+		Hcatalog.save(form.toNewHolidayHome(userAccount.getEmail()));
 
 		return "redirect:/holidayhomes";
 	}

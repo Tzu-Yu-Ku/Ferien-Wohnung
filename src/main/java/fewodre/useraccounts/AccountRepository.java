@@ -1,13 +1,16 @@
 package fewodre.useraccounts;
 
-import org.salespointframework.useraccount.UserAccountManagement;
+import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
 	AccountEntity findByUuid(String uuid);
-	AccountEntity findById(String id);
+
 	AccountEntity findByAccount_Email(String email);
-	AccountEntity findByAccount(AccountEntity account);
+
+	AccountEntity findByAccount(UserAccount account);
+
+	void deleteAccountEntityByAccount(UserAccount account);
 
 }

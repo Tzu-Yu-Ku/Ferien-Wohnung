@@ -11,6 +11,7 @@ import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
+import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderManagement;
 import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
@@ -69,13 +70,19 @@ public class BookingManagement {
 			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
 		}
 
-		orderManagement.payOrder(bookingEntity);
-			orderManagement.completeOrder(bookingEntity);
-			cart.clear();
-			System.out.println("cart is empty: "+cart.isEmpty());
+		cart.clear();
+		System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
 		return result ;
+	}
+
+	public boolean pay(BookingEntity bookingEntity){
+		if(orderManagement.payOrder(bookingEntity)){
+			orderManagement.completeOrder(bookingEntity);
+			return bookingEntity.pay();
+		}
+		return false;
 	}
 
 	public int getStockCountOf(Product product){
@@ -91,4 +98,8 @@ public class BookingManagement {
 	//need to create findByStatusPaid
 
 	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
+
+	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){return bookings.findBookingEntityByUserAccount(userAccount);}
+
+	public  BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier){return bookings.findFirstByOrderIdentifier(orderIdentifier);}
 }

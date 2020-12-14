@@ -49,6 +49,10 @@ public class AccountEntity {
 		return uuid;
 	}
 
+	public String getBirthDate(){
+		return birthDate;
+	}
+
 	public String getEventCompany() {
 		return eventCompany;
 	}

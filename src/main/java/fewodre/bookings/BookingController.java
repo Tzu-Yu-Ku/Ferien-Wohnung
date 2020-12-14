@@ -1,6 +1,7 @@
 package fewodre.bookings;
 
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Iterator;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -33,14 +37,40 @@ public class BookingController {
 	@GetMapping("/bookings")
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
+			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
 		}else {
 			model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 			model.addAttribute("bookings", bookingRepository.findBookingEntityByUserAccount(userAccount));
+			Iterator<BookingEntity> iter = bookingRepository.findBookingEntityByUserAccount(userAccount).iterator();
+			while (iter.hasNext()){
+				BookingEntity bookingEntity = iter.next();
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+			}
 			model.addAttribute("formatter", this.formatter);
 			return "bookings";
 		}
+	}
+
+	@GetMapping("/bookingsFromHost")
+	@PreAuthorize("hasRole('HOST')")
+	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity, @LoggedIn UserAccount userAccount){
+		//you have to give in the same HostUUID when you create the home, and they shouldn't let host give in HostUUID should be automatik filled in
+		System.out.println("email: " +userAccount.getEmail());
+		model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));
+		model.addAttribute("homeCatalog", this.holidayHomeCatalog);
+		model.addAttribute("userAccount", userAccount);
+		Iterator<BookingEntity> iter = bookingRepository.findBookingsByUuidHostEquals(accountEntity.getUuid()).iterator();
+		while (iter.hasNext()){
+			BookingEntity bookingEntity = iter.next();
+			System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
+		}
+		model.addAttribute("formatter", this.formatter);
+		return "bookings";
 	}
 
 }

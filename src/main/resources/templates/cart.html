@@ -2,8 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FeWoDre - Buchung</title>
+
     <style>
         .card {
             margin-left: 10px;
@@ -19,21 +23,17 @@
 
 </head>
 <body>
-    <div class="container p-0 w-100" style="height:56px">
-        <div class="row">
-            <div class="w-100">
-                <nav th:include="navbar" style="width: 100%"></nav>
-            </div>
-        </div>
-    </div>
-    <div class="" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;" >
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
+<div style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;">
     <div class="container">
         <div class="row">
             <div class="col-4">
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="card" th:each="event: ${eventCatalog}">
-                            <div class="card-body" th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate)}">
+                            <div class="card-body" th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate) && !formatter.cartContainsProduct(cart, event)}">
                                 <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
                                 <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
                                 <div class="card-text p-1" th:text="${event.description}">
