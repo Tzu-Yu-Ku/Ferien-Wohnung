@@ -3,6 +3,8 @@ package fewodre.useraccounts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -19,6 +21,7 @@ public class AccountController {
 
 	private final AccountManagement accountManagement;
 	private final AccountRepository accountRepository;
+
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	AccountController(AccountManagement accountManagement, AccountRepository accountRepository) {
@@ -78,6 +81,33 @@ public class AccountController {
 		accountManagement.enableTenant(tenant_username);
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
 		return "accounts/activatetenants";
+	}
+
+	@GetMapping("/managetenantaccount")
+	public String editUser(Model model, String firstname){
+		Authentication authentication;
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(accountRepository.findByAccount_Email(authentication.getName()).getCity());
+		model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		model.addAttribute("lastname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
+		model.addAttribute("email", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
+		model.addAttribute("password", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
+		model.addAttribute("birthdate", accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
+		model.addAttribute("street", accountRepository.findByAccount_Email(authentication.getName()).getStreet());
+		model.addAttribute("housenumber", accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
+		model.addAttribute("postcode", accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
+		model.addAttribute("city", accountRepository.findByAccount_Email(authentication.getName()).getCity());
+
+		return "accounts/managetenantaccount";
+	}
+
+	@PostMapping("/managetenantaccount")
+	public String postEditUser(Model model, String firstname) {
+		Authentication authentication;
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);
+		model.addAttribute("tenant", accountManagement.findAllDisabled());
+		return "accounts/managetenantaccount";
 	}
 
 	@GetMapping("/newhost")

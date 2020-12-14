@@ -54,7 +54,7 @@ public class AccountManagement {
 						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
 				newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
 				newUserAccount.setLastname(tenantRegistrationForm.getLastName());
-				newUserAccount.setEnabled(false);
+				newUserAccount.setEnabled(true);
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
 						.setBirthDate(tenantRegistrationForm.getBirthDate())
 						.setStreet(tenantRegistrationForm.getStreet())

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prototype GUI Ferienhausvermietung 2020</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
+<div class="py-5"
+     style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="p-5 col-lg-6"
+                 style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
+                <h1>Sie möchten Ihre Daten ändern?</h1>
+                <p class="mb-3">Das können Sie hier ganz einfach machen.</p>
+                <form role="form" id="tenantManageAccountForm" th:action="@{/managetenantaccount}" th:object="${tenant}" method="post">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <input type="text" id="firstname" name="firstname" th:value="${firstname}" th:placeholder="${firstname}" class="form-control"
+                                   style="width: 33%;" aria-label="Vorname">
+                            <input type="text" id="lastname" name="lastname" th:value="${lastname}" th:placeholder="${lastname}" class="form-control mr-0 ml-auto"
+                                   placeholder="Nachname"
+                                   style="width: 65%;" aria-label="Nachname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email"  class="form-control"
+                               th:placeholder="${email}" aria-label="E-Mail Adresse">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password"  class="form-control"
+                               placeholder="Neues Passwort eingeben" aria-label="Passwort">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password-confirm" name="password-confirm" class="form-control"
+                               placeholder="Neues Passwort wiederholen" aria-label="Passwort wiederholen" oninput="checkpasswords(this)">
+                    </div>
+                    <script type='text/javascript'>
+                        function checkpasswords(input) {
+                            if (document.getElementById('password-confirm').value !== document.getElementById('password').value) {
+                                input.setCustomValidity('Die Passwörter stimmen nicht überein');
+                            } else {
+                                input.setCustomValidity('');
+                            }
+                        }
+                    </script>
+                    <div class="form-group">
+                        <input type="date" id="birthdate" name="birthdate" class="form-control"
+                               th:placeholder="${birthdate}" aria-label="Geburtsdatum">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <input type="text" id="street" name="street" class="form-control"
+                                   th:placeholder="${street}" style="width: 83%" aria-label="Straße">
+                            <input type="text" id="houseNumber" name="houseNumber" class="form-control mr-0 ml-auto"
+                                   th:placeholder="${housenumber}" style="width: 15%;" aria-label="Hausnummer">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <input type="text" id="postcode" name="postcode" class="form-control"
+                                   th:placeholder="${postcode}" style="width: 23%" aria-label="Postleitzahl">
+                            <input type="text" id="city" name="city"
+                                   class="form-control mr-0 ml-auto"
+                                   th:placeholder="${city}" style="width: 75%;" aria-label="Ortschaft">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2" oninput="checkpasswords(this)">Änderungen abschicken<br></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="footer :: footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
