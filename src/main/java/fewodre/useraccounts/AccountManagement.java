@@ -22,6 +22,7 @@ import java.util.UUID;
 public class AccountManagement {
 
 	public static final Role TENANT_ROLE = Role.of("TENANT");
+	public static final Role UNACTIVATED_TENANT_ROLE = Role.of("UNACTIVATED_TENANT");
 	public static final Role HOST_ROLE = Role.of("HOST");
 	public static final Role EVENTEMPLOYEE_ROLE = Role.of("EVENT_EMPLOYEE");
 	public static final Role ADMIN_ROLE = Role.of("ADMIN");
@@ -53,7 +54,7 @@ public class AccountManagement {
 						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
 				newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
 				newUserAccount.setLastname(tenantRegistrationForm.getLastName());
-				newUserAccount.setEnabled(true);
+				newUserAccount.setEnabled(false);
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
 						.setBirthDate(tenantRegistrationForm.getBirthDate())
 						.setStreet(tenantRegistrationForm.getStreet())
@@ -169,7 +170,7 @@ public class AccountManagement {
 	public Boolean deleteAccount(UserAccount userAccount) {
 		accounts.deleteAccountEntityByAccount(userAccount);
 		UserAccount deletedUserAccount = userAccounts.delete(userAccount);
-		LOG.info(deletedUserAccount.toString());
+//		LOG.info(deletedUserAccount.toString());
 		return true;
 	}
 
