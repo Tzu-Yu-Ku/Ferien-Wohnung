@@ -1,0 +1,47 @@
+= Protokoll Gruppe 25
+
+Treffen am 07.12.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   17:00 Uhr +
+Ende:     19:30 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+(offiziell) 14.12.2010, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Aktueller Stand
+
+Work in Progress
+
+== Retrospektive des letzten Sprints
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|===
+
+
+== Planung des nächsten Sprints
+
+Prototypen so weit wie möglich ausimplementieren und zur Vorstellung vorbereiten. Entwickler-Dokumentation vervollständigen, vor allem die notwendingen Diagramme jeder Komponente entwerfen. Außerdem muss ein solider Test-Plan ausgearbeitet werden.
+
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]     |Test-Plan ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]  |alle Gruppenmitglieder                | work in progress
+|===
