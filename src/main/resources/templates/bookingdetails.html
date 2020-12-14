@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="de">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,44 +47,84 @@
             <div class="col-md-6 p-lg-5 p-3">
                 <h1 class="" th:text="${holidayHome.name}">Buchung: Entspannte Hood in Dresden<br></h1>
             </div>
-        </div>
-        <br/>
+        </div><br/>
+        <div class="row border-top" style="background-color: #EEEEEE;">
+            <table class="table table-bordered">
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Beschreibung</h4></th>
+                    <th scope="col">
+                        <h5 class="p-1"  th:text="${holidayHome.getDescription()}">Sehen Sie hier Ihre Buchungsdetails ein.</h5></th>
 
-        <div class="row border-top" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Beschreibung</h4>
-            </div>
-            <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${holidayHome.getDescription()}">Sehen Sie hier Ihre Buchungsdetails ein.</h5>
-            </div>
-        </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Preis</h4>
-            </div>
-            <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${formatter.parsePrice(booking.getPrice())}">5 Tage, 500€</h5>
-            </div>
-        </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Verkäufer</h4>
-            </div>
-            <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${booking.hostName}">Herr Müller</h5>
-            </div>
-        </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
-            <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Buchungsnummer</h4>
-            </div>
-            <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${booking.id}">0123789</h5>
-            </div>
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Preis</h4></th>
+                    <th scope="col">
+                    <h5 class="p-1" th:text="${formatter.parsePrice(booking.getPrice())}">5 Tage, 500€</h5></th>
+
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Vermieter</h4></th>
+                    <th scope="col">
+                        <h5 class="p-1" th:text="${booking.hostName}">Herr Müller</h5></th>
+
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Buchungsnummer</h4></th>
+                    <th scope="col">
+                        <h5 class="p-1" th:text="${booking.id}">0123789</h5></th>
+
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Erstellungsdatum</h4></th>
+                    <th scope="col">
+                        <h5 class="p-1" th:text="${formatter.formatDate(booking.getDateCreated())}">12.Dec 2020</h5></th>
+
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <h4 class="p-1">Buchungstatus</h4></th>
+                    <th scope="col">
+                        <h5 class="p-1" th:text="${booking.getState()}">Open</h5></th>
+
+                </tr>
+            </table>
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col" colspan="5">
+                        <h4 class="p-1"th:if="${orderlines==null} ">gebuchte Events</h4>
+                    </th>
+                </tr>
+                <tr th:each="orderline: ${orderlines}">
+                    <th scope="col">
+                        <h5 class="p-1"th:text="${orderline.getProductName()}">Stadt Frühung</h5>
+                    </th>
+                    <th scope="col">
+                        <h5 th:text="${eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPlace().toString()}">Tannenstraße 2, 01099 Dresden</h5>
+                    </th>
+                    <th scope="col">
+                        <h5  th:text="${formatter.formatDate(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).date)}">12. Dec 2020</h5>
+                    </th>
+                    <th scope="col">
+                        <h5 th:if="${orderline.getQuantity().isEqualTo(one)}" th:text="${orderline.getQuantity()+' Person'}">2 Menschen</h5>
+                        <h5 th:if="${!orderline.getQuantity().isEqualTo(one)}"th:text="${orderline.getQuantity()+' Personen'}">2 Menschen</h5>
+                    </th>
+                    <th scope="col">
+                        <h5 th:text="${formatter.parsePrice(eventCatalog.findFirstByProductIdentifier(orderline.getProductIdentifier()).getPrice())}">200 €</h5>
+                    </th>
+                </tr>
+            </table>
         </div>
         <div class="row border-top text-center" style="background-color: #EEEEEE;">
-            <a class="btn btn-danger btn-lg" href="#">Buchung stornieren.</a>
-            <!--<a class="btn btn-info btn-lg" href="#">Buchung bezahlen.</a>//!!-->
+                <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
+                <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('TENANT')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
+                <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('HOST')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren/abweisen.</a>
+                <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED'}" sec:authorize="hasRole('TENANT')" th:href="@{/pay/{id}(id=${booking.id})}">Buchung bezahlen.</a>
+                <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}" sec:authorize="hasRole('HOST')" th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a>
         </div>
     </div>
 </div>

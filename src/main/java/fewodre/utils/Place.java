@@ -63,4 +63,9 @@ public class Place implements Serializable {
 	public void setCoordY(int coordY) {
 		this.coordY = coordY;
 	}
+
+	@Override
+	public String toString() {
+		return street + " " + houseNumber + ", " + city;
+	}
 }

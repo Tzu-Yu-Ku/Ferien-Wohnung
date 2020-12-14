@@ -14,7 +14,6 @@
             margin-bottom: 10px;
             max-width: 350px;
         }
-
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -30,179 +29,186 @@
 <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)); background-position: left top; background-size: 100%; background-repeat: repeat;">
     <div class="container">
         <div class="row">
-            <header>
+            <div class="col-4">
                 <div class="container">
-                    <h1 class="p-4" th:text="${holidayHome.name}">My Booking</h1>
-                </div>
-            </header>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="container justify-content-start">
-                    <div class="card">
-                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
-                             alt="Card image cap">
-                    </div>
-                    <h3>Ihre Bestellung</h3><br/>
-                    <table style="line-height: 30px">
-
-                        <form method="POST" th:action="@{/purchase}">
-                            <tbody>
-                            <tr>
-                                <th>Vorname</th>
-                                <td class="text-right" th:text="${account.getFirstname()}">Harry</td>
-                            </tr>
-                            <tr>
-                                <th>Nachname</th>
-                                <td class="text-right" th:text="${account.getLastname()}">Potter</td>
-
-                            </tr>
-                            <tr>
-                                <th>Anreisedatum</th>
-                                <!--<td input class="p-1" th:type="date" th:value="${arrivalDate}">01.01.2021</td>!Fancy++!-->
-                                <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">dd.mm.yyyy</td>
-                            </tr>
-                            <tr>
-                                <th>Abreisedatum</th>
-                                <!--<td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td>!Fancy++!-->
-                                <td class="text-right" th:text="${formatter.formatDate(departureDate)}">dd.mm.yyyy</td>
-                                <!--<input class="p-1" type="date" th:value="${departureDate}" placeholder="dd.mm.yyyy" name="departuredate">!-->
-
-                            </tr>
-                            <tr>
-                                <th>Gesamtpreise</th>
-                                <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
-                                <td>
-                                    <select name="paymethod">
-                                        <option value="" disabled selected hidden>Zahlungsmethode</option>
-                                        <option>Cash</option>
-                                        <option>Cheque</option>
-                                        <option>CreditCard</option>
-                                        <option>DebitCard</option>
-                                    </select>
-
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary" type="submit">Bestellen</button>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </form>
-                    </table>
-                    <br/>
-                </div>
-            </div>
-            <div class="col">
-                <table class="table table-striped">
-                    <thead>
-                    <tr class="d">
-                        <th class="col-3">Artikelname</th>
-                        <th class="col-1">Anzahl</th>
-                        <th class="col-3">Preis</th>
-                        <th class="col-1"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="item : ${cart}" class="d">
-                        <td class="col-7">
-                            <form th:action="@{/updateDatum/{id}(id=${item.product.id})}" method="post">
-                                <div class="row">
-                                    <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                    <button type="submit" class="btn">
-                                        <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                                    </button>
-                                    <div class="col-6">
-                                        <label for="startDate">Anreise Datum</label>
-                                        <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="endDate">Abreise Datum</label>
-                                        <input type="date" id="endDate" name="newEDate" th:value="${departureDate}">
-                                    </div>
-                                </div>
-                            </form>
-                        </td>
-                        <th class="col-2" th:text="${item.quantity}">1</th>
-                        <th class="col-2" th:text="${formatter.parsePrice(item.price)}">10€</th>
-                        <th class="col-1">
-                            <a class="link" th:href="@{/removeProduct/{id}(id=${item.id})}">x</a>
-                        </th>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card" th:each="event: ${eventCatalog}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
-                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}"
-                             alt="Card image cap">
-                        <div class="card-text p-1" th:text="${event.description}">
-                            Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark.
-                            Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des
-                            Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz
-                            seltener Tier- und Pflanzenarten.
-                        </div>
-                        <div class="card-text p-1">
-                            <div class="grid-container ">
-                                <div class="grid-child">Preis pro Person</div>
-                                <div class="grid-child" align="right"
-                                     th:text="${formatter.parsePrice(event.price)}">10 €
-                                </div>
-                            </div>
-                        </div>
-                        <form class="col" method="post" th:action="@{/eventcart}">
-                            <input type="hidden" name="eid" value="0" th:value="${event.id}">
-                            <div class="card-text p-1">
-                                <div class="grid-container ">
-                                    <div class="grid-child">Datum</div>
-                                    <!--<input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">-->
-                                    <div class="grid-child" th:text="${formatter.formatDate(event.date)}"
-                                         align="right">1.1.1
-                                    </div>
-                                </div>
-                            </div>
-                            <form class="col" method="post" th:action="@{/eventcart}">
-                                <input type="hidden" name="eid" value="0" th:value="${event.id}">
+                    <div class="row justify-content-start">
+                        <div class="card" th:each="event: ${eventCatalog}">
+                            <div class="card-body" th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate) && !formatter.cartContainsProduct(cart, event)}">
+                                <h5 class="card-title" th:text="${event.name}">Saesische Schweiz Führung</h5>
+                                <img class="card-img-top" th:src="@{/resources/img/{image}(image=${event.image})}" alt="Card image cap">
+                                <div class="card-text p-1" th:text="${event.description}">
+                                    Der Nationalpark Sächsische Schweiz ist Deutschlands einziger Felsennationalpark. Die malerisch zerklüftete, kreidezeitliche Erosionslandschaft des Elbsandsteingebirges mit ihrem faszinierenden Mikroklima birgt einen wahren Schatz seltener Tier- und Pflanzenarten.    </div>
                                 <div class="card-text p-1">
                                     <div class="grid-container ">
-                                        <div class="grid-child">Datum</div>
-                                        <div class="grid-child" th:text="${formatter.formatDate(event.date)}"
-                                             align="right">1.1.1
-                                        </div>
+                                        <div class="grid-child" >Preis pro Person</div>
+                                        <div class="grid-child" align="right" th:text="${formatter.parsePrice(event.price)}">10 €</div>
                                     </div>
                                 </div>
-                                <div class="input-group col">
-                                    <input class="form-control col-sm-5" id="persons" type="number" min="0"
-                                           th:max="${event.capacity}" step="1" name="number" required="required"
-                                           placeholder="Personenzahl">
-                                    <button type="submit" class="btn btn-primary">Event dazubuchen</button>
+                                <form class="col" method="post" th:action="@{/eventcart}">
+                                    <input type="hidden" name="eid" value="0"  th:value="${event.id}">
+                                    <form class="col" method="post" th:action="@{/eventcart}">
+                                        <input type="hidden" name="eid" value="0"  th:value="${event.id}">
+                                        <div class="card-text p-1">
+                                            <div class="grid-container ">
+                                                <div class="grid-child">Datum</div>
+                                            <!--<input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">-->
+                                                <div class="grid-child" th:text="${formatter.formatDate(event.date)}" align="right">1.1.1</div>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col">
+                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
+                                            <button type="submit" class="btn btn-primary">Event dazubuchen</button>
+                                        </div>
+                                    </form>
+                                    </form>
                                 </div>
-                            </form>
-                        </form>
+                            </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-8">
+                <div class="container justify-content-start">
+                    <div class="row">
+                        <div class="col-5">
+                            <h3 class="p-4">Ihre Bestellung</h3><br/>
+                            <table style="line-height: 30px">
+                                <form method="POST" th:action="@{/purchase}">
+                                    <tbody>
+                                    <tr>
+                                        <th>Vorname</th>
+                                        <td class="text-right" th:text="${account.getFirstname()}">Harry</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nachname</th>
+                                        <td class="text-right" th:text="${account.getLastname()}" >Potter</td>
 
+                                    </tr>
+                                    <tr>
+                                        <th>Anreisedatum</th>
+                                        <!--<td input class="p-1" th:type="date" th:value="${arrivalDate}">01.01.2021</td>!Fancy++!-->
+                                        <td class="text-right" th:text="${formatter.formatDate(arrivalDate)}">dd.mm.yyyy</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Abreisedatum</th>
+                                        <!--<td class="text-right" th:text="${formatter.formatDate(departureDate)}">07.01.2021</td>!Fancy++!-->
+                                        <td class="text-right" th:text="${formatter.formatDate(departureDate)}">dd.mm.yyyy</td>
+                                        <!--<input class="p-1" type="date" th:value="${departureDate}" placeholder="dd.mm.yyyy" name="departuredate">!-->
+
+                                    </tr>
+                                    <tr>
+                                        <th>Gesamtpreise</th>
+                                        <th class="text-right" th:text="${formatter.parsePrice(cart.price)}">640 €</th>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
+                                        <td>
+                                            <select name="paymethod" required="required">
+                                                <option value="" disabled selected hidden>Zahlungsmethode</option>
+                                                <option>Cash</option>
+                                                <option>Cheque</option>
+                                                <option>CreditCard</option>
+                                                <option>DebitCard</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" type="submit" >Bestellen</button>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </form>
+                            </table>
+                        </div>
+                        <div class="col-7">
+                            <div class="pl-1 h4" th:text="${holidayHome.name}">Ferienhaus Name</div>
+                            <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr class="d">
+                            <th class="col-3">Artikelname</th>
+                            <th class="col-1">Anzahl</th>
+                            <th class="col-3">Preis</th>
+                            <th class="col-1"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${cart}" class="d">
+                            <div th:switch="${item.getProduct().getCategories().iterator().next()}">
+                                <td class="col-7" th:case="'HolidayHome'">
+                                    <form th:action="@{/updateDatum/{id}(id=${item.product.id})}" method="post">
+                                    <div class="row">
+                                        <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                        <button type="submit" class="btn">
+                                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                        </button>
+                                        <div class="col-6">
+                                            <label for="startDate" >Anreise Datum</label>
+                                            <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}"
+                                             th:oninput="setMinOfDeparture()" th:min="${today}">
+                                            <script>
+                                                function setMinOfDeparture() {
+                                                    document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
+                                                }
+                                            </script>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="endDate">Abreise Datum</label>
+                                            <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" th:min="${arrivalDate}"
+                                                   th:oninput="setMaxOfArrival()">
+                                            <script>
+                                                function setMaxOfArrival() {
+                                                    document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
+                                                }
+                                                </script>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </td>
+
+                                <td class="col-7" th:case="'Event'">
+                                    <form th:action="@{/updateTicketCount/{id}(id=${item.product.id})}" method="post">
+                                        <div class="row">
+                                            <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                            <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
+                                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                            </button>
+                                            <div class="col-6">
+                                                <label for="Anzahl">Personen Zahl:</label>
+                                                <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+
+                                </div>
+
+                                <th class="col-2" th:text="${item.quantity}">1</th>
+                                <th class="col-2" th:text="${formatter.parsePrice(item.price)}">10€</th>
+                                <th class="col-1">
+                                    <a class="link" th:href="@{/removeProduct/{id}(id=${item.id})}">x</a>
+                                </th>
+                         </tr>
+                         </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container p-0 w-100 mt-5 bg-white">
-    <div class="row">
-        <div class="w-100">
-            <footer th:replace="footer :: footer"></footer>
+    <div class="container p-0 w-100 mt-5 bg-white">
+        <div class="row">
+            <div class="w-100">
+                <nav th:include="footer :: footer"></nav>
+            </div>
         </div>
     </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

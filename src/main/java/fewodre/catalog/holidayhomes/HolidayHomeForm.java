@@ -98,8 +98,8 @@ public class HolidayHomeForm {
         this.price = price;
     }
 
-    public HolidayHome toNewHolidayHome() {
-        return new HolidayHome(getName(),getHostUuid(),getDescription(),"house2.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,getCapacity(),Money.of(getPrice(), "EUR"));
+    public HolidayHome toNewHolidayHome(String hostMail) {
+        return new HolidayHome(getName(),hostMail,getDescription(),"house2.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,getCapacity(),Money.of(getPrice(), "EUR"));
 	}
 
 

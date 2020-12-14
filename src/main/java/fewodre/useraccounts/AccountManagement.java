@@ -21,7 +21,6 @@ import java.util.UUID;
 @Transactional
 public class AccountManagement {
 
-	public static final Role UNACTIVATED_TENANT_ROLE = Role.of("UNACTIVATED_TENANT");
 	public static final Role TENANT_ROLE = Role.of("TENANT");
 	public static final Role HOST_ROLE = Role.of("HOST");
 	public static final Role EVENTEMPLOYEE_ROLE = Role.of("EVENT_EMPLOYEE");
@@ -172,6 +171,10 @@ public class AccountManagement {
 		UserAccount deletedUserAccount = userAccounts.delete(userAccount);
 		LOG.info(deletedUserAccount.toString());
 		return true;
+	}
+
+	public AccountRepository getRepository(){
+		return accounts;
 	}
 
 }

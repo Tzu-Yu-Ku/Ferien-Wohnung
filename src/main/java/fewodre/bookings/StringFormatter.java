@@ -1,8 +1,13 @@
 package fewodre.bookings;
 
+import org.salespointframework.catalog.Product;
+import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
+
 import javax.money.MonetaryAmount;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class StringFormatter{
@@ -29,6 +34,18 @@ public class StringFormatter{
 
 	public boolean DateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate){
 		return (date.isBefore(endDate) && date.isAfter(startDate)) || date.isEqual(startDate) || date.isEqual(endDate);
+	}
+
+	public boolean cartContainsProduct(Cart cart, Product product){
+		Iterator<CartItem> iter = cart.stream().iterator();
+		while(iter.hasNext()){
+			System.out.println("1");
+			CartItem item = iter.next();
+			if(item.getProduct().getId().equals(product.getId())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
