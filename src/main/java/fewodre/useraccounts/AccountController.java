@@ -2,6 +2,9 @@ package fewodre.useraccounts;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -12,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.awt.*;
 
 @Controller
 public class AccountController {
 
 	private final AccountManagement accountManagement;
 	private final AccountRepository accountRepository;
+
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	AccountController(AccountManagement accountManagement, AccountRepository accountRepository) {
@@ -35,7 +38,7 @@ public class AccountController {
 
 	@PostMapping("/register")
 	public String registerNewAccount(@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
-									 BindingResult result, Model model) {
+	                                 BindingResult result, Model model) {
 		LOG.info(tenantRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
@@ -43,7 +46,7 @@ public class AccountController {
 		}
 
 		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantRegistrationForm);
-		if(accountEntity == null) {
+		if (accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
 			return "register";
@@ -56,7 +59,7 @@ public class AccountController {
 	}
 
 	@GetMapping("/map")
-	public String map(@Valid @ModelAttribute("coordinates")Coordinates coordinates){
+	public String map(@Valid @ModelAttribute("coordinates") Coordinates coordinates) {
 		return "map";
 	}
 
@@ -64,70 +67,129 @@ public class AccountController {
 	public String postmap(@RequestParam(value = "size") String size, @Valid @ModelAttribute("coordinates") Coordinates coordinates) {
 		System.out.println(size);
 		Coordinates test = new Coordinates(size);
-			return "map";
+		return "map";
 	}
 
 	@GetMapping("/activatetenants")
-	public String activatetenants(Model model){
+	public String activateTenants(Model model) {
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
-		return "activatetenants";
+		return "accounts/activatetenants";
 	}
 
 	@PostMapping("/activatetenants")
-	public String postactivatetenants(Model model, String tenant_username) {
-		accountManagement.enable_tenant(tenant_username);
+	public String postActivateTenants(Model model, String tenant_username) {
+		accountManagement.enableTenant(tenant_username);
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
-		return "activatetenants";
+		return "accounts/activatetenants";
+	}
+
+	@GetMapping("/managetenantaccount")
+	public String editUser(Model model, String firstname){
+		Authentication authentication;
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(accountRepository.findByAccount_Email(authentication.getName()).getCity());
+		model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		model.addAttribute("lastname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
+		model.addAttribute("email", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
+		model.addAttribute("password", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
+		model.addAttribute("birthdate", accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
+		model.addAttribute("street", accountRepository.findByAccount_Email(authentication.getName()).getStreet());
+		model.addAttribute("housenumber", accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
+		model.addAttribute("postcode", accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
+		model.addAttribute("city", accountRepository.findByAccount_Email(authentication.getName()).getCity());
+
+		return "accounts/managetenantaccount";
+	}
+
+	@PostMapping("/managetenantaccount")
+	public String postEditUser(Model model, String firstname) {
+		Authentication authentication;
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);
+		model.addAttribute("tenant", accountManagement.findAllDisabled());
+		return "accounts/managetenantaccount";
 	}
 
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
 		model.addAttribute("registrationForm", hostRegistrationForm);
-		return "newhost";
+		return "accounts/newhost";
 	}
 
 	@PostMapping("/newhost")
 	public String registerNewHost(@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
-									 BindingResult result, Model model) {
+	                              BindingResult result, Model model) {
 		LOG.info(hostRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
-			return "newhost";
+			return "accounts/newhost";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
-		if(accountEntity == null) {
+		if (accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
-			return "newhost";
+			return "accounts/newhost";
 		}
 
 		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:/newhost";
+		return "redirect:accounts/newhost";
 	}
 
 	@GetMapping("/neweventemployee")
 	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 		model.addAttribute("registrationForm", eventEmployeeRegistrationForm);
-		return "neweventemployee";
+		return "accounts/neweventemployee";
 	}
 
 	@PostMapping("/neweventemployee")
 	public String registerNewEventEmployee(@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
-								  BindingResult result, Model model) {
+	                                       BindingResult result, Model model) {
 
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
-		if(accountEntity == null) {
+		if (accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
-			return "neweventemployee";
+			return "accounts/neweventemployee";
 		}
 
 		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:/neweventemployee";
+		return "redirect:accounts/neweventemployee";
+	}
+
+//	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/manageaccounts")
+	public String manageAccounts(Model model) {
+		model.addAttribute("unactivatedTenants", accountManagement.findAllDisabled());
+		model.addAttribute("activatedTenants", accountManagement.findByRole(AccountManagement.TENANT_ROLE));
+		model.addAttribute("hostAccounts", accountManagement.findByRole(AccountManagement.HOST_ROLE));
+		model.addAttribute("eventAccounts", accountManagement.findByRole(AccountManagement.EVENTEMPLOYEE_ROLE));
+		return "accounts/manageaccounts";
+	}
+
+
+	/**
+	 * POST-request-mapping to enable a tenant account. This is usually done after a new tenant has successfully created
+	 * a new account.
+	 *
+	 * @param tenant_username   specifies the account that will be enabled (username == e-mail adress in our case).
+	 * @return                  redirects the admin to the account management page.
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/activatetenant")
+	public String activateTenant(String tenant_username) {
+		accountManagement.enableTenant(tenant_username);
+		return "redirect:/manageaccounts";
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/deleteaccount")
+	public String deleteAccount(String account_username) {
+		accountManagement.deleteAccount(account_username);
+		return "redirect:/manageaccounts";
 	}
 }

@@ -12,13 +12,9 @@
 </head>
 
 <body>
-<div class="container p-0 w-100" style="height:56px">
-    <div class="row">
-        <div class="w-100">
-            <nav th:include="navbar" style="width: 100%"></nav>
-        </div>
-    </div>
-</div>
+
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+
 <div class="py-5"
      style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
     <div class="container">
@@ -104,13 +100,9 @@
         </div>
     </div>
 </div>
-<div class="container p-0 w-100 mt-5 bg-white">
-    <div class="row">
-        <div class="w-100">
-            <footer th:include="footer :: footer"></footer>
-        </div>
-    </div>
-</div>
+
+<footer th:replace="footer :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
