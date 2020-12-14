@@ -131,7 +131,7 @@ public class AccountController {
 		return "redirect:accounts/neweventemployee";
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/manageaccounts")
 	public String manageAccounts(Model model) {
 		model.addAttribute("unactivatedTenants", accountManagement.findAllDisabled());
