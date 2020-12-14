@@ -7,11 +7,14 @@ import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -26,7 +29,7 @@ public class AccountManagement {
 
 	public String tenant_username;
 
-	private static final Logger LOG = LoggerFactory.getLogger(AccountDataInitializer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AccountManagement.class);
 
 	private final AccountRepository accounts;
 	private final UserAccountManagement userAccounts;
@@ -129,22 +132,36 @@ public class AccountManagement {
 			} else {
 				return null;
 			}
-		}
-		else {
+		} else {
 			return null;
+		}
+	}
+
+	public ArrayList<AccountEntity> findByRole(Role role) {
+		Streamable<UserAccount> allUserAccounts = userAccounts.findAll();
+		ArrayList<AccountEntity> accountEntitiesByRole = new ArrayList<>();
+		for (UserAccount userAccount : allUserAccounts.toList()) {
+			if (userAccount.getRoles().toList().contains(role)) {
+				AccountEntity accountEntity = accounts.findByAccount(userAccount);
+				if (accountEntity != null) {
+					accountEntitiesByRole.add(accountEntity);
+				}
 			}
 		}
-	public Streamable<UserAccount> findAllDisabled(){
+		LOG.info(accountEntitiesByRole.toString());
+		return accountEntitiesByRole;
+	}
+
+	public Streamable<UserAccount> findAllDisabled() {
 		return userAccounts.findDisabled();
 	}
 
-	public Boolean enable_tenant(String tenant_username){
+	public Boolean enable_tenant(String tenant_username) {
 		userAccounts.enable(userAccounts.findByUsername(tenant_username).get().getId());
 		userAccounts.findByUsername(tenant_username).get().add(TENANT_ROLE);
 		userAccounts.findByUsername(tenant_username).get().remove(UNACTIVATED_TENANT_ROLE);
 		return userAccounts.findByUsername(tenant_username).get().isEnabled();
 	}
-
 
 
 }

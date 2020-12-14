@@ -25,12 +25,16 @@
             </div>
         </div>
         <!-- INAKTIVE MIETER-ACCOUNTS WERDEN HIER ZUR BESTÄTIGUNG & VERWALTUNG AUFGELISTET -->
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top mt-2" style="background-color: #EEEEEE;">
             <div class="p-1 border-right col-12 col-md-12">
-                <h2 class="p-1 text-center">Inaktive Mieteraccounts</h2>
+                <h3 class="p-1 text-center">Inaktive Mieteraccounts</h3>
             </div>
         </div>
-        <div class="row border font-italic border-secondary text-center" style="background-color: #DEDEDE;">
+        <div class="row border-top bg-white text-center" th:if="${unactivatedTenants.isEmpty()}">
+            <h6 class="col-12 text-black-50 font-italic p-3">Alle Mieter sind bestätigt.</h6>
+        </div>
+        <div class="row border font-italic border-secondary text-center align-self-center"
+             th:if="${!unactivatedTenants.isEmpty()}" style="background-color: #DEDEDE;">
             <div class="p-1 col-2 col-md-2 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
@@ -41,31 +45,40 @@
                 <h6>Aktionen</h6>
             </div>
         </div>
-        <div class="row border-top bg-white">
-            <div class="p-1 border-right col-2 col-md-2">
-                <h6 class="p-1">Nachname, Vorname</h6>
+        <div class="row border-top bg-white" th:each="account : ${unactivatedTenants}">
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1" th:text="${account.getLastname() + ', ' + account.getFirstname()}">Nachname,
+                    Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right">
-                <h6 class="p-1">test@test.de</h6>
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1" th:text="${account.getEmail()}">e@mail.de</h6>
             </div>
             <div class="p-1 col-8 col-md-8 d-flex">
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Daten
                     bearbeiten</a>
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">E-Mail
                     schreiben</a>
-                <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 200px; height: 40px;">Details zum
-                    Account</a>
-                <a class="btn btn-danger mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Account
+                <form th:action="@{/activatetenant}" method="post">
+                    <input type="hidden" name="tenant_username"
+                           th:value="${account.getUsername()}" class="form-control">
+                    <input type="submit" value="Bestätigen" class="btn btn-success mx-auto mt-2"
+                           style="width: 150px; height: 40px;">
+                </form>
+                <a class="btn btn-danger mx-auto mt-2" href="#" style="width: 150px; height: 40px;">Account
                     löschen</a></div>
         </div>
 
         <!-- AKTIVE MIETER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top mt-2" style="background-color: #EEEEEE;">
             <div class="p-1 border-right col-12 col-md-12">
-                <h2 class="p-1 text-center">Aktivierte Mieteraccounts</h2>
+                <h3 class="p-1 text-center">Aktivierte Mieteraccounts</h3>
             </div>
         </div>
-        <div class="row border font-italic border-secondary text-center" style="background-color: #DEDEDE;">
+        <div class="row border-top bg-white text-center" th:if="${activatedTenants.isEmpty()}">
+            <h6 class="col-12 text-black-50 font-italic p-3">Keine (bestätigten) Mieter vorhanden.</h6>
+        </div>
+        <div class="row border font-italic border-secondary text-center align-self-center"
+             th:if="${!activatedTenants.isEmpty()}" style="background-color: #DEDEDE;">
             <div class="p-1 col-2 col-md-2 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
@@ -76,12 +89,14 @@
                 <h6>Aktionen</h6>
             </div>
         </div>
-        <div class="row border-top bg-white">
-            <div class="p-1 border-right col-2 col-md-2">
-                <h6 class="p-1">Nachname, Vorname</h6>
+        <div class="row border-top bg-white" th:each="account : ${activatedTenants}">
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1"
+                    th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
+                    Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right">
-                <h6 class="p-1">test@test.de</h6>
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
             <div class="p-1 col-8 col-md-8 d-flex">
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Daten
@@ -95,12 +110,16 @@
         </div>
 
         <!-- VERMIEtER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top mt-2" style="background-color: #EEEEEE;">
             <div class="p-1 border-right col-12 col-md-12">
-                <h2 class="p-1 text-center">Vermieteraccounts</h2>
+                <h3 class="p-1 text-center">Vermieteraccounts</h3>
             </div>
         </div>
-        <div class="row border font-italic border-secondary text-center" style="background-color: #DEDEDE;">
+        <div class="row border-top bg-white text-center" th:if="${hostAccounts.isEmpty()}">
+            <h6 class="col-12 text-black-50 font-italic p-3">Keine Vermieter vorhanden.</h6>
+        </div>
+        <div class="row border font-italic border-secondary text-center align-self-center"
+             th:if="${!hostAccounts.isEmpty()}" style="background-color: #DEDEDE;">
             <div class="p-1 col-2 col-md-2 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
@@ -111,12 +130,14 @@
                 <h6>Aktionen</h6>
             </div>
         </div>
-        <div class="row border-top bg-white">
-            <div class="p-1 border-right col-2 col-md-2">
-                <h6 class="p-1">Nachname, Vorname</h6>
+        <div class="row border-top bg-white" th:each="account : ${hostAccounts}">
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1"
+                    th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
+                    Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right">
-                <h6 class="p-1">test@test.de</h6>
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
             <div class="p-1 col-8 col-md-8 d-flex">
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Daten
@@ -130,12 +151,16 @@
         </div>
 
         <!-- EVENTMITARBEITER-ACCOUNTS WERDEN HIER ZUR VERWALTUNG AUFGELISTET -->
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top mt-2" style="background-color: #EEEEEE;">
             <div class="p-1 border-right col-12 col-md-12">
-                <h2 class="p-1 text-center">Eventmitarbeiteraccounts</h2>
+                <h3 class="p-1 text-center">Eventmitarbeiteraccounts</h3>
             </div>
         </div>
-        <div class="row border font-italic border-secondary text-center" style="background-color: #DEDEDE;">
+        <div class="row border-top bg-white text-center" th:if="${eventAccounts.isEmpty()}">
+            <h6 class="col-12 text-black-50 font-italic p-3">Keine Vermieter vorhanden.</h6>
+        </div>
+        <div class="row border font-italic border-secondary text-center align-self-center"
+             th:if="${!eventAccounts.isEmpty()}" style="background-color: #DEDEDE;">
             <div class="p-1 col-2 col-md-2 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
@@ -146,12 +171,14 @@
                 <h6>Aktionen</h6>
             </div>
         </div>
-        <div class="row border-top bg-white">
-            <div class="p-1 border-right col-2 col-md-2">
-                <h6 class="p-1">Nachname, Vorname</h6>
+        <div class="row border-top bg-white" th:each="account : ${eventAccounts}">
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1"
+                    th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
+                    Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right">
-                <h6 class="p-1">test@test.de</h6>
+            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+                <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
             <div class="p-1 col-8 col-md-8 d-flex">
                 <a class="btn btn-light mx-auto mt-2" href="#" style="	width: 150px; height: 40px;">Daten

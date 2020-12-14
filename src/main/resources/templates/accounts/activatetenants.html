@@ -15,7 +15,7 @@
 <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
 
 <div th:if="!${#authorization.expression('hasRole(''ADMIN'')')}">
-    <div style="background-image: url('/static/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
+    <div style="background-image: url('/resources/img/landingpage_bg.png');	background-position: left center;	background-size: cover;	background-repeat: repeat;">
         <div class="container">
             <div class="row">
                 <div class="p-5 col-lg-6 mt-5 mb-5"
