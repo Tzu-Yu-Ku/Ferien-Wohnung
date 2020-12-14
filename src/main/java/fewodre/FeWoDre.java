@@ -55,8 +55,7 @@ public class FeWoDre {
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 		public String doSomething(final HttpServletRequest request) {
-			final String referer = request.getHeader("referer");
-			return referer;
+			return request.getHeader("referer");
 		}
 
 		@Override

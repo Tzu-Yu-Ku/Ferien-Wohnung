@@ -52,7 +52,7 @@ public class AccountController {
 		AccountEntity test = accountRepository.findByAccount_Email(tenantRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:accounts/login";
+		return "redirect:/login";
 	}
 
 	@GetMapping("/map")
@@ -83,7 +83,7 @@ public class AccountController {
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
 		model.addAttribute("registrationForm", hostRegistrationForm);
-		return "accounts/newhost.html";
+		return "accounts/newhost";
 	}
 
 	@PostMapping("/newhost")
@@ -92,14 +92,14 @@ public class AccountController {
 		LOG.info(hostRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
-			return "accounts/newhost.html";
+			return "accounts/newhost";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
 		if(accountEntity == null) {
 			result.reject("RegistrationForm.username.Taken");
 			LOG.info(result.getAllErrors().toString());
-			return "accounts/newhost.html";
+			return "accounts/newhost";
 		}
 
 		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
