@@ -97,6 +97,7 @@ public class CartController {
 		model.addAttribute("formatter", formatter);
 		model.addAttribute("account", this.userAccount);
 		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("check", checkIfBooked());
 		return "cart"; }
 
 	@PostMapping("/cart")
@@ -128,8 +129,11 @@ public class CartController {
 	public String updateDatum(@ModelAttribute Cart cart,@RequestParam("newSDate")String newSDate,
 								@RequestParam("newEDate")String newEDate, @PathVariable("id") HolidayHome holidayHome){
 
-		this.arrivalDate = LocalDate.parse(newSDate);;
-		this.departureDate = LocalDate.parse(newEDate);;
+		this.arrivalDate = LocalDate.parse(newSDate);
+		this.departureDate = LocalDate.parse(newEDate);
+		if(checkIfBooked()){
+			return "redirect:/cart";
+		}
 		Quantity newInterval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
 		Quantity oldInterval = Quantity.of(0);
 		Iterator<CartItem> it = cart.iterator();
@@ -266,7 +270,7 @@ public class CartController {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
 		}
-
+/*
 		//check if it's available
 		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
@@ -279,12 +283,29 @@ public class CartController {
 				}
 			}
 		}
+ */
+		if(checkIfBooked()){ return "redirect:/cart";}
 		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
 		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!
+	}
+
+	public boolean checkIfBooked(){
+		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
+		for (BookingEntity b : bookedList) {
+			if(!b.getState().equals(BookingStateEnum.CANCELED)) {
+				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
+					//send message "the chosed duration is not avalible"
+					System.out.println("redirect to Cart because its already booked");
+					//!! Message to customer is missing
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@GetMapping("/bookingdetails/{booking}")

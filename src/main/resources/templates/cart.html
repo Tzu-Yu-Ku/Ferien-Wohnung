@@ -143,30 +143,38 @@
                             <div th:switch="${item.getProduct().getCategories().iterator().next()}">
                                 <td class="col-7" th:case="'HolidayHome'">
                                     <form th:action="@{/updateDatum/{id}(id=${item.product.id})}" method="post">
-                                    <div class="row">
-                                        <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                        <button type="submit" class="btn">
-                                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                                        </button>
-                                        <div class="col-6">
-                                            <label for="startDate" >Anreise Datum</label>
-                                            <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}"
-                                             th:oninput="setMinOfDeparture()" th:min="${today}">
-                                            <script>
-                                                function setMinOfDeparture() {
-                                                    document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
-                                                }
-                                            </script>
+                                    <div class="container">
+                                        <div class="row">
+                                            <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                            <button type="submit" class="btn">
+                                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                            </button>
+
                                         </div>
-                                        <div class="col-6">
-                                            <label for="endDate">Abreise Datum</label>
-                                            <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" th:min="${arrivalDate}"
-                                                   th:oninput="setMaxOfArrival()">
-                                            <script>
-                                                function setMaxOfArrival() {
-                                                    document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
-                                                }
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="startDate" >Anreise Datum</label>
+                                                <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}"
+                                                       th:oninput="setMinOfDeparture()" th:min="${today}">
+                                                <script>
+                                                    function setMinOfDeparture() {
+                                                        document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
+                                                    }
                                                 </script>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="endDate">Abreise Datum</label>
+                                                <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" th:min="${arrivalDate}"
+                                                       th:oninput="setMaxOfArrival()">
+                                                <script>
+                                                    function setMaxOfArrival() {
+                                                        document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
+                                                    }
+                                                </script>
+                                            </div><br/>
+                                            <div class="alert alert-danger" th:if="${check}">
+                                                <strong>Dieser Zeitraum ist schon gebucht!!</strong>
+                                            </div>
                                         </div>
                                     </div>
                                     </form>
@@ -174,12 +182,14 @@
 
                                 <td class="col-7" th:case="'Event'">
                                     <form th:action="@{/updateTicketCount/{id}(id=${item.product.id})}" method="post">
-                                        <div class="row">
-                                            <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                            <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
-                                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                                            </button>
-                                            <div class="col-6">
+                                        <div class="container">
+                                            <div class="row">
+                                                <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                                <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
+                                                    <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                                </button>
+                                            </div>
+                                            <div class="row">
                                                 <label for="Anzahl">Personen Zahl:</label>
                                                 <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}">
                                             </div>
