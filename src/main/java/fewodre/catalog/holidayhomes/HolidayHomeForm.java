@@ -102,5 +102,4 @@ public class HolidayHomeForm {
         return new HolidayHome(getName(),hostMail,getDescription(),"house2.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,getCapacity(),Money.of(getPrice(), "EUR"));
 	}
 
-
 }

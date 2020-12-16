@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.salespointframework.catalog.ProductIdentifier;
 
 @Controller
 public class CatalogController {
@@ -46,16 +47,22 @@ public class CatalogController {
 		return "addholidayhome";
 	}
 
+	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayhomes(@ModelAttribute("form") HolidayHomeForm form, Model model, @LoggedIn UserAccount userAccount) {
+	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model, @LoggedIn UserAccount userAccount) {
 
 		Hcatalog.save(form.toNewHolidayHome(userAccount.getEmail()));
 
 		return "redirect:/holidayhomes";
 	}
 
-
-
+	@PreAuthorize("hasRole('HOST')")
+	@PostMapping("/deleteholidayhome")
+	String deleteHolidayHome(ProductIdentifier holidayHomeId) {
+		Hcatalog.deleteById(holidayHomeId);
+		return "redirect:/holidayhomes";
+	}
+	
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 
@@ -64,6 +71,8 @@ public class CatalogController {
 		return "events";
 	}
 
+
+	
 	// Weg zur addEvent-Seite --> muss noch auf der Event-Seite eingefügt werden
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addevents")
