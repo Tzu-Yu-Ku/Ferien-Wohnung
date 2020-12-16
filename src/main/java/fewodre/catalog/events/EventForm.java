@@ -1,5 +1,8 @@
 package fewodre.catalog.events;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.javamoney.moneta.Money;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
@@ -15,8 +18,12 @@ public class EventForm {
     private int capacity;
     private String eventType;
     private int price;
+    private LocalDate date;
+    private LocalTime time;
+    private int repeats;
+    private int repeateRate;
 
-    public EventForm(){
+    public EventForm() {
         this.name = name;
         this.description = description;
         this.eventCompanyUuid = eventCompanyUuid;
@@ -27,6 +34,10 @@ public class EventForm {
         this.capacity = capacity;
         this.eventType = eventType;
         this.price = price;
+        this.date = date;
+        this.time = time;
+        this.repeats = repeats;
+        this.repeateRate = repeateRate;
     }
 
     public String getName() {
@@ -101,9 +112,9 @@ public class EventForm {
         this.eventType = eventType;
     }
 
-    public EventType stringToEvent(String eType){
+    public EventType stringToEvent(String eType) {
         System.out.println(eType);
-        if(eType.equals("big")){
+        if (eType.equals("big")) {
             return EventType.LARGE;
         }
         return EventType.SMALL;
@@ -117,9 +128,43 @@ public class EventForm {
         this.price = price;
     }
 
-    public Event toNewEvent() {
-        return new Event(getName(),getEventCompanyUuid(),getDescription(),"event1.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, stringToEvent(getEventType()),getCapacity(),Money.of(getPrice(), "EUR"));
-	}
+    public LocalDate getDate() {
+        return date;
+    }
 
+    public void setDate(String dateString) {
+        this.date = date.parse(dateString);
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public void setRepeats(int repeats) {
+        this.repeats = repeats;
+    }
+
+    public int getRepeats() {
+        return repeats;
+    }
+
+    public void setRepeateRate(int repeateRate) {
+        this.repeateRate = repeateRate;
+    }
+
+    public int getRepeateRate() {
+        return repeateRate;
+    }
+
+    public Event toNewEvent() {
+        return new Event(getName(), getEventCompanyUuid(), getDescription(), "event1.png",
+                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,
+                stringToEvent(getEventType()), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(),
+                getRepeats(), getRepeateRate());
+    }
 
 }
