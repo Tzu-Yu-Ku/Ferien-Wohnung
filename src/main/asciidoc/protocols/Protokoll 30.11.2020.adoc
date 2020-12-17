@@ -24,25 +24,31 @@ __Teilnehmer:__
 
 == Aktueller Stand
 
-Work in Progress
+Beim fünften Team-Meeting musste der Anwendungsprototyp, der Testplan und das Grundgerüst für die fortlaufende Entwicklerdokumentation unseres Projekts vorgestellt werden, um den https://github.com/st-tu-dresden-praktikum/swt20w25/milestone/2[zweiten Meilenstein] zu erreichen. Dieses Ziel wurde durch die aus der vorherigen Woche getroffene Aufgabeneinteilung und Bearbeitung aller Teammitglieder erreicht:
+
+==== Tzu und Jimmy haben als Zweier-Team die Implementierung der Booking-Komponente als Aufgabe in unserem Projekt. Sie haben im Prototypen die Buchung ermöglicht, waren stets von den Komponenten der anderen Teammitglieder abhängig und mussten deren Fortschritt regelmäßig mergen. Gemeinsam haben Sie die prototypische Buchungsfunktion unserer zukünftigen Plattform ausgearbeitet und um einige weitere Funtkionen im Vergleich zur letzten Woche erweitert.
+
+==== Marten und Jesko haben als Zweier-Team die Implementierung der Catalog-Komponente und das damit einhergehende Abspeichern und Abfragen der Angebote der Plattform (Ferienhäuser, Events) ermöglicht und im Prototypen vereinfacht implementiert. Angebotene Ferienhäuser und Events können eingesehen werden und auch von den dazu berechtigten Nutzergruppen auf der Platform angeboten/erstellt werden.
+
+==== Julian und Janu haben als Zweier-Team die Implementierung der Accounts-Komponente und die damit verbundenen unterschiedlichen Nutzergruppen, die die Plattform in Zukunft bedienen wird, im Groben implementiert. Jede Nutzergruppe ist mit ihren Zugriffsrechten implementiert. Mieter können sich registrieren, Vermieter/Eventmitarbeiter können von einem Administrator angelegt werden. Neue Mieter-Accounts müssen ebenfalls von einem Admin bestätigt werden.
 
 == Retrospektive des letzten Sprints
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | Issue closed.
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | Issue closed.
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]     |Test-Plan ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]  |alle Gruppenmitglieder                | Issue closed.
 |===
+
 
 
 == Planung des nächsten Sprints
 
-Prototypen so weit wie möglich ausimplementieren und zur Vorstellung vorbereiten. Entwickler-Dokumentation vervollständigen, vor allem die notwendingen Diagramme jeder Komponente entwerfen. Außerdem muss ein solider Test-Plan ausgearbeitet werden.
+Die nächste Woche wird genutzt um den Prototypen zu verbessern und als Grundlage für die endgültige Anwendung des Projekts zu nutzen. Außerdem überlegen und entwerfen wir alle gemeinsam die Zwischenpräsentation, die am 07.12 von uns vorgetragen wird.
 
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]     |Prototyp-Teile/OOD anfertigen OOD |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/3[#3]  |alle Gruppenmitglieder                | work in progress
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]     |Developer-Dokumentation verfassen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/4[#4]  |alle Gruppenmitglieder                | work in progress
-|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]     |Test-Plan ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/5[#5]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/34[#34]     |Zwischen-/Abschlusspräsentation |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/34[#34]  |alle Gruppenmitglieder                | work in progress
 |===
