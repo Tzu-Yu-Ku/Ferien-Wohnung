@@ -112,11 +112,16 @@
                                     <a th:href="@{/deleteholidayhome}" sec:authorize="hasRole('HOST')"
                                         class="btn btn-danger btn-outline-light">
                                         Ferienhaus löschen<br>
-                                        <input type="ProductIdentifier" name="holidayHomeId" th:value="${holidayHome.id}"/>
+                                        <input type="String" name="holidayHomeId" th:value="${holidayHome.id}"/>
                                     </a>
                                 </div>
-                                <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus
-                                    bearbeiten<br></a></div>
+                                <div class="flex-column">
+                                    <a th:href="@{/editholidayhome}" sec:authorize="hasRole('HOST')"
+                                        class="btn btn-primary btn-outline-light">
+                                        Ferienhaus erstellen
+                                        <br>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
