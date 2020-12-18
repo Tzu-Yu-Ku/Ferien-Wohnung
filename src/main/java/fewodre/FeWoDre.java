@@ -51,7 +51,6 @@ public class FeWoDre {
 		}
 	}
 
-
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 		public String doSomething(final HttpServletRequest request) {
@@ -61,24 +60,25 @@ public class FeWoDre {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable();
-			http.authorizeRequests().antMatchers("/**").permitAll().and()
-					.formLogin()
-					.loginPage(LOGIN_ROUTE)
+			http.authorizeRequests().antMatchers("/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE)
 					.successHandler(new AuthenticationSuccessHandler() {
 						@Override
-						public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+						public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
+								HttpServletResponse httpServletResponse, Authentication authentication)
+								throws IOException, ServletException {
 							System.out.println(httpServletRequest.getHeader("referer"));
-							if (httpServletRequest.getHeader("referer").equals("http://localhost:8080/newhost") || httpServletRequest.getHeader("referer").equals("http://localhost:8080/neweventemployee") || httpServletRequest.getHeader("referer").equals("http://localhost:8080/activatetenants")) {
-							System.out.println("true");
-							httpServletResponse.sendRedirect(httpServletRequest.getHeader("referer"));
+							if (httpServletRequest.getHeader("referer").equals("http://localhost:8080/newhost")
+									|| httpServletRequest.getHeader("referer")
+											.equals("http://localhost:8080/neweventemployee")
+									|| httpServletRequest.getHeader("referer")
+											.equals("http://localhost:8080/activatetenants")) {
+								System.out.println("true");
+								httpServletResponse.sendRedirect(httpServletRequest.getHeader("referer"));
+							} else {
+								httpServletResponse.sendRedirect("http://localhost:8080/holidayhomes");
 							}
-							else {httpServletResponse.sendRedirect("http://localhost:8080/holidayhomes");}
 						}
-					})
-					.loginProcessingUrl(LOGIN_ROUTE)
-					.and()
-					.logout()
-					.logoutUrl("/logout")
+					}).loginProcessingUrl(LOGIN_ROUTE).and().logout().logoutUrl("/logout")
 					.logoutSuccessUrl("/holidayhomes");
 		}
 	}

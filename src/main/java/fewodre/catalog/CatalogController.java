@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.salespointframework.catalog.ProductIdentifier;
 
 @Controller
@@ -27,7 +28,8 @@ public class CatalogController {
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
 
-	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
+			UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
@@ -49,7 +51,8 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model, @LoggedIn UserAccount userAccount) {
+	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
+			@LoggedIn UserAccount userAccount) {
 
 		Hcatalog.save(form.toNewHolidayHome(userAccount.getEmail()));
 
@@ -62,7 +65,7 @@ public class CatalogController {
 		Hcatalog.deleteById(holidayHomeId);
 		return "redirect:/holidayhomes";
 	}
-	
+
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 
@@ -71,9 +74,17 @@ public class CatalogController {
 		return "events";
 	}
 
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/deleteevent")
+	String deleteEvent(@RequestParam("event") Event event) {
+		System.out.println(event);
+		if (holidayHomeStorage.findByProduct(event).isPresent()) {
+			holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
+			Ecatalog.delete(event);
+		}
+		return "redirect:/events";
+	}
 
-	
-	// Weg zur addEvent-Seite --> muss noch auf der Event-Seite eingefügt werden
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addevents")
 	String addEventPage() {
@@ -82,16 +93,14 @@ public class CatalogController {
 
 	@PostMapping(path = "/addEvent")
 	String addEvent(@ModelAttribute("form") EventForm form, Model model) {
-
 		Event event = form.toNewEvent();
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
-
 		return "redirect:/events";
 	}
 
 	@GetMapping("/housedetails")
-	String detail(){
+	String detail() {
 		return "housedetails";
 	}
 }
