@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.salespointframework.catalog.ProductIdentifier;
+import java.util.ArrayList;
 
 @Controller
 public class CatalogController {
@@ -27,6 +28,7 @@ public class CatalogController {
 	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
+	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 			UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
@@ -59,10 +61,16 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
+	@GetMapping("/editholidayhome")
+	String editHolidayhomePage() {
+		return "editholidayhome";
+	}
+	
 	@PreAuthorize("hasRole('HOST')")
-	@PostMapping("/deleteholidayhome")
+	@GetMapping("/deleteholidayhome")
 	String deleteHolidayHome(ProductIdentifier holidayHomeId) {
-		Hcatalog.deleteById(holidayHomeId);
+		holidayHomeIdList.add(holidayHomeId);
+
 		return "redirect:/holidayhomes";
 	}
 
