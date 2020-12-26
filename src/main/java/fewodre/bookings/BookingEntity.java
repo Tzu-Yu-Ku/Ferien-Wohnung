@@ -61,13 +61,13 @@ public class BookingEntity extends Order {
 	//Handy Attributes for html
 	private String hostName;
 
-	public BookingEntity(UserAccount userAccount, HolidayHome home, Quantity nights,
+	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
 						 LocalDate arrivalDate, LocalDate departureDate ,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
 		this.uuidHome = home.getId().getIdentifier();
-		this.uuidHost = home.getHostUuid();
+		this.uuidHost = (host==null || host.getAccount() == null|| host.getAccount().getEmail() == null) ? home.getHostUuid() : host.getAccount().getEmail();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
@@ -83,7 +83,7 @@ public class BookingEntity extends Order {
 		}
 		price = getTotal();
 		//need to find out from Home
-		this.hostName = "!!Mr. Test Name";
+		this.hostName = (host==null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
 	}
 
 	@Deprecated
