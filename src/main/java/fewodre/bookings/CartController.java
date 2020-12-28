@@ -261,7 +261,8 @@ public class CartController {
 
 	@PostMapping("/purchase")
 	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
-					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount){
+					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
+	   				  @RequestParam("paymethod") String paymethod){
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
 		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
@@ -289,6 +290,7 @@ public class CartController {
 		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
+		if(paymethod.equalsIgnoreCase("cash")){bookingEntity.pay();} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!
 	}
