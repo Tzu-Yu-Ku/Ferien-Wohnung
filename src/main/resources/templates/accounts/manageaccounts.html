@@ -119,13 +119,10 @@
             <div class="p-1 col-8 col-md-8 d-flex">
                 <form th:action="@{/manageaccount}" method="get" class="mx-auto">
                    <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
+                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
                 </form>
                 <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
-                </a>
-                <a class="btn btn-outline-info mr-3 mx-auto" >
-                    Details zum Account
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">
                     <input type="hidden" name="account_username"
@@ -168,13 +165,10 @@
             <div class="p-1 col-8 col-md-8 d-flex">
                 <form th:action="@{/manageaccount}" method="get" class="mx-auto">
                     <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
+                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
                 </form>
                 <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
-                </a>
-                <a class="btn btn-outline-info mr-3" href="#">
-                    Details zum Account
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">
                     <input type="hidden" name="account_username"
@@ -217,13 +211,10 @@
             <div class="p-1 col-8 col-md-8 d-flex">
                 <form th:action="@{/manageaccount}" method="get" class="mx-auto">
                     <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
+                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
                 </form>
                 <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
-                </a>
-                <a class="btn btn-outline-info mr-3" href="#">
-                    Details zum Account
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">
                     <input type="hidden" name="account_username"
