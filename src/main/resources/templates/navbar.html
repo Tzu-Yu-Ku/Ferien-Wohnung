@@ -43,21 +43,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="bookings.html" th:href="@{/bookingsFromHost}">Buchungsübersicht<br></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Konto<br></a>
-                </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('ADMIN')">
-                <li class="nav-item">
-                    <a class="nav-link" href="activatetenants">Mieter bestätigen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="accounts/newhost.html" th:href="@{/newhost}">Neuer Host<br></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="accounts/neweventemployee.html" th:href="@{/neweventemployee}">Neuer
-                        Veranstaltungsmitarbeiter<br></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="account.html" th:href="@{/manageaccounts}">Accountverwaltung<br></a>
                 </li>
@@ -68,9 +55,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Firmenübersicht<br></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Konto<br></a>
                 </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="!hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
@@ -92,9 +76,18 @@
                     <a class="nav-link text-primary" href="register.html" th:href="@{/register}">Registrieren</a>
                 </li>
             </ul>
-            <ul class="navbar-nav" sec:authorize="hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
+            <ul class="navbar-nav" sec:authorize="hasAnyRole('TENANT','HOST','EVENT_EMPLOYEE')">
                 <li class="nav-item">
-                    <a class="nav-link text-black-50" href="managetenantaccount" th:ref="@{/managetenantaccount}" th:text="${firstname}"
+                    <a class="nav-link text-black-50" href="manageaccount" th:ref="@{/manageaccount}" th:text="${firstname}"
+                    >Nutzer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" th:href="@{/logout}">Ausloggen</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link text-black-50" href="manageaccount" th:ref="@{/manageaccount}" th:text="admin"
                     >Nutzer</a>
                 </li>
                 <li class="nav-item">

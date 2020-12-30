@@ -43,7 +43,7 @@ public class AccountController {
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
-			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname_user", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
 
@@ -103,13 +103,136 @@ public class AccountController {
 		return "accounts/activatetenants";
 	}
 
-	@GetMapping("/managetenantaccount")
-	public String editUser(Model model, String firstname){
+	@GetMapping("/manageaccount")
+	public String editUser(Model model, String tenant_username){
 		firstname(model);
 		System.out.println(authentication.getPrincipal());
-		if (! authentication.getPrincipal().toString().contains("TENANT")){
+		if (! (authentication.getPrincipal().toString().contains("TENANT") ||authentication.getPrincipal().toString().contains("ADMIN")
+				|| authentication.getPrincipal().toString().contains("HOST")
+				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE"))){
 			return "/login";
 		}
+		if (authentication.getPrincipal().toString().contains("TENANT") || authentication.getPrincipal().toString().contains("HOST")
+				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+
+			return getString(model, authentication);
+		}
+		if (authentication.getPrincipal().toString().contains("ADMIN")) {
+			return getString(model, tenant_username);
+		}
+
+		return "/login";
+	}
+
+	@PostMapping("/manageaccount")
+	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate, String street,
+							   String housenumber, String postcode, String city, String iban, String bic, String eventcompany, String tenant_username) {
+		Authentication authentication;
+		authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal().toString().contains("TENANT") || authentication.getPrincipal().toString().contains("HOST")
+				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+			if (!firstname.isEmpty()) {
+				accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);
+			}
+			if (!lastname.isEmpty()) {
+				accountRepository.findByAccount_Email(authentication.getName()).getAccount().setLastname(lastname);
+			}
+			if(authentication.getPrincipal().toString().contains("HOST") || authentication.getPrincipal().toString().contains("TENANT")) {
+				if (!birthdate.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setBirthDate(birthdate);
+				}
+				if (!street.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);
+				}
+				if (!housenumber.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setHouseNumber(housenumber);
+				}
+				if (!street.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);
+				}
+				if (!postcode.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setPostCode(postcode);
+				}
+				if (!city.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setCity(city);
+				}
+			}
+			if(authentication.getPrincipal().toString().contains("HOST")) {
+				if (!iban.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setIban(iban);
+				}
+				if (!bic.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setBic(bic);
+				}
+			}
+			if(authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+				if (!eventcompany.isEmpty()) {
+					accountRepository.findByAccount_Email(authentication.getName()).setEventCompany(eventcompany);
+				}
+			}
+			if (!password.isEmpty()) {
+				UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(authentication.getName()).getAccount().getUsername()).get();
+				userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
+			}
+			model.addAttribute("tenant", accountManagement.findAllDisabled());
+
+			return getString(model, authentication);
+		}
+		if (authentication.getPrincipal().toString().contains("ADMIN")) {
+			System.out.println(tenant_username);
+			if (!firstname.isEmpty()) {
+				accountRepository.findByAccount_Email(tenant_username).getAccount().setFirstname(firstname);
+			}
+			if (!lastname.isEmpty()) {
+				accountRepository.findByAccount_Email(tenant_username).getAccount().setLastname(lastname);
+			}
+			if(accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("HOST")
+					|| accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("TENANT")) {
+				if (!birthdate.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setBirthDate(birthdate);
+				}
+				if (!street.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setStreet(street);
+				}
+				if (!housenumber.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setHouseNumber(housenumber);
+				}
+				if (!street.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setStreet(street);
+				}
+				if (!postcode.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setPostCode(postcode);
+				}
+				if (!city.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setCity(city);
+				}
+			}
+			if(accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("HOST")) {
+				if (!bic.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setBic(bic);
+				}
+				if (!iban.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setIban(iban);
+				}
+			}
+			if(accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("EVENT_EMPLOYEE")) {
+				if (!eventcompany.isEmpty()) {
+					accountRepository.findByAccount_Email(tenant_username).setEventCompany(eventcompany);
+				}
+			}
+			if (!password.isEmpty()) {
+				UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(tenant_username).getAccount().getUsername()).get();
+				userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
+			}
+
+			model.addAttribute("tenant", accountManagement.findAllDisabled());
+			return getString(model, tenant_username);
+		}
+
+		return "/login";
+	}
+
+	private String getString(Model model, Authentication authentication) {
 		model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		model.addAttribute("lastname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
 		model.addAttribute("email", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
@@ -118,29 +241,27 @@ public class AccountController {
 		model.addAttribute("housenumber", accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
 		model.addAttribute("postcode", accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
 		model.addAttribute("city", accountRepository.findByAccount_Email(authentication.getName()).getCity());
+		model.addAttribute("iban", accountRepository.findByAccount_Email(authentication.getName()).getIban());
+		model.addAttribute("bic", accountRepository.findByAccount_Email(authentication.getName()).getBic());
+		model.addAttribute("eventcompany", accountRepository.findByAccount_Email(authentication.getName()).getEventCompany());
 
-		return "accounts/managetenantaccount";
+		return "accounts/manageaccount";
 	}
 
-	@PostMapping("/managetenantaccount")
-	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate, String street, String housenumber, String postcode, String city) {
-		Authentication authentication;
-		authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(!firstname.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);}
-		if(!lastname.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).getAccount().setLastname(lastname);}
-		if(!birthdate.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setBirthDate(birthdate);}
-		if(!street.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);}
-		if(!housenumber.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setHouseNumber(housenumber);}
-		if(!street.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);}
-		if(!postcode.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setPostCode(postcode);}
-		if(!city.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setCity(city);}
-		if(!password.isEmpty()) {
-			UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(authentication.getName()).getAccount().getUsername()).get();
-			userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
-		}
-		model.addAttribute("tenant", accountManagement.findAllDisabled());
-
-		return "accounts/managetenantaccount";
+	private String getString(Model model, String tenant_username) {
+		model.addAttribute("firstname", accountRepository.findByAccount_Email(tenant_username).getAccount().getFirstname());
+		model.addAttribute("lastname", accountRepository.findByAccount_Email(tenant_username).getAccount().getLastname());
+		model.addAttribute("email", accountRepository.findByAccount_Email(tenant_username).getAccount().getEmail());
+		model.addAttribute("birthdate", accountRepository.findByAccount_Email(tenant_username).getBirthDate());
+		model.addAttribute("street", accountRepository.findByAccount_Email(tenant_username).getStreet());
+		model.addAttribute("housenumber", accountRepository.findByAccount_Email(tenant_username).getHouseNumber());
+		model.addAttribute("postcode", accountRepository.findByAccount_Email(tenant_username).getPostCode());
+		model.addAttribute("city", accountRepository.findByAccount_Email(tenant_username).getCity());
+		model.addAttribute("iban", accountRepository.findByAccount_Email(tenant_username).getIban());
+		model.addAttribute("bic", accountRepository.findByAccount_Email(tenant_username).getBic());
+		model.addAttribute("eventcompany", accountRepository.findByAccount_Email(tenant_username).getEventCompany());
+		model.addAttribute("role", accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get());
+		return "accounts/manageaccount";
 	}
 
 	@GetMapping("/newhost")
