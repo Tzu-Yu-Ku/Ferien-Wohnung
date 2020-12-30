@@ -32,9 +32,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="bookings.html" th:href="@{/bookings}">Buchungen<br></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/account}">Konto<br></a>
-                </li>
             </ul>
             <ul class="navbar-nav mx-auto" sec:authorize="hasRole('HOST')">
                 <li class="nav-item">
@@ -97,8 +94,8 @@
             </ul>
             <ul class="navbar-nav" sec:authorize="hasAnyRole('ADMIN','TENANT','HOST','EVENT_EMPLOYEE')">
                 <li class="nav-item">
-                    <a class="nav-link text-black-50" href="" th:text="${#authentication.getName()}"
-                       style="pointer-events: none; cursor: default;">Nutzer</a>
+                    <a class="nav-link text-black-50" href="managetenantaccount" th:ref="@{/managetenantaccount}" th:text="${firstname}"
+                    >Nutzer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout" th:href="@{/logout}">Ausloggen</a>

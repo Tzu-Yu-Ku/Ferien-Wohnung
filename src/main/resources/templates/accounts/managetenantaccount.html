@@ -23,27 +23,28 @@
                  style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
                 <h1>Sie möchten Ihre Daten ändern?</h1>
                 <p class="mb-3">Das können Sie hier ganz einfach machen.</p>
-                <form role="form" id="tenantManageAccountForm" th:action="@{/managetenantaccount}" th:object="${tenant}" method="post">
+                <form role="form" id="tenantManageAccountForm" th:action="@{/managetenantaccount}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="firstname" name="firstname" th:value="${firstname}" th:placeholder="${firstname}" class="form-control"
+                            <input type="text" id="firstname" name="firstname" th:placeholder="${firstname}" class="form-control"
                                    style="width: 33%;" aria-label="Vorname">
-                            <input type="text" id="lastname" name="lastname" th:value="${lastname}" th:placeholder="${lastname}" class="form-control mr-0 ml-auto"
-                                   placeholder="Nachname"
+                            <input type="text" id="lastname" name="lastname" th:placeholder="${lastname}" class="form-control mr-0 ml-auto"
+                                   th:if(this.
                                    style="width: 65%;" aria-label="Nachname">
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="email" id="email" name="email"  class="form-control"
-                               th:placeholder="${email}" aria-label="E-Mail Adresse">
+                               placeholder="Leider kannst du deine E-Mail nicht ändern." aria-label="E-Mail Adresse" disabled>
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password" name="password"  class="form-control"
-                               placeholder="Neues Passwort eingeben" aria-label="Passwort">
+                        <input type="password" id="password" name="password" class="form-control"
+                               placeholder="Passwort eingeben" aria-label="Passwort">
                     </div>
                     <div class="form-group">
-                        <input type="password" id="password-confirm" name="password-confirm" class="form-control"
-                               placeholder="Neues Passwort wiederholen" aria-label="Passwort wiederholen" oninput="checkpasswords(this)">
+                        <input type="password" id="password-confirm" name="password-confirm"
+                               class="form-control" placeholder="Passwort wiederholen" aria-label="Passwort wiederholen"
+                               oninput="checkpasswords(this)">
                     </div>
                     <script type='text/javascript'>
                         function checkpasswords(input) {
@@ -55,14 +56,13 @@
                         }
                     </script>
                     <div class="form-group">
-                        <input type="date" id="birthdate" name="birthdate" class="form-control"
-                               th:placeholder="${birthdate}" aria-label="Geburtsdatum">
+                        <input id="birthdate" name="birthdate" th:placeholder="${birthdate}" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" />
                     </div>
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="street" name="street" class="form-control"
                                    th:placeholder="${street}" style="width: 83%" aria-label="Straße">
-                            <input type="text" id="houseNumber" name="houseNumber" class="form-control mr-0 ml-auto"
+                            <input type="text" id="housenumber" name="housenumber" class="form-control mr-0 ml-auto"
                                    th:placeholder="${housenumber}" style="width: 15%;" aria-label="Hausnummer">
                         </div>
                     </div>

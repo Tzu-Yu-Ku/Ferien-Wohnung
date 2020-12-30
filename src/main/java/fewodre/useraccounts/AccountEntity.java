@@ -1,6 +1,7 @@
 package fewodre.useraccounts;
 
 import org.salespointframework.useraccount.UserAccount;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

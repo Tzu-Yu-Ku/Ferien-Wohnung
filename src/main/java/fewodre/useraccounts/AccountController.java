@@ -1,10 +1,17 @@
 package fewodre.useraccounts;
 
+import org.salespointframework.useraccount.Password;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsPasswordService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -21,18 +28,29 @@ public class AccountController {
 
 	private final AccountManagement accountManagement;
 	private final AccountRepository accountRepository;
+	private final UserAccountManagement userAccounts;
+	private Authentication authentication;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
-	AccountController(AccountManagement accountManagement, AccountRepository accountRepository) {
+	AccountController(AccountManagement accountManagement, AccountRepository accountRepository, UserAccountManagement userAccounts) {
 		Assert.notNull(accountManagement, "CustomerManagement must not be null!");
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
+		this.userAccounts = userAccounts;
+	}
+
+	private void firstname(Model model) {
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		}
 	}
 
 	@GetMapping("/register")
 	public String registerAdmin(Model model, TenantRegistrationForm tenantRegistrationForm) {
 		model.addAttribute("registrationForm", tenantRegistrationForm);
+		firstname(model);
 		return "register";
 	}
 
@@ -59,7 +77,8 @@ public class AccountController {
 	}
 
 	@GetMapping("/map")
-	public String map(@Valid @ModelAttribute("coordinates") Coordinates coordinates) {
+	public String map(@Valid @ModelAttribute("coordinates") Coordinates coordinates, Model model) {
+		firstname(model);
 		return "map";
 	}
 
@@ -73,6 +92,7 @@ public class AccountController {
 	@GetMapping("/activatetenants")
 	public String activateTenants(Model model) {
 		model.addAttribute("unactivatedtenants", accountManagement.findAllDisabled());
+		firstname(model);
 		return "accounts/activatetenants";
 	}
 
@@ -85,13 +105,14 @@ public class AccountController {
 
 	@GetMapping("/managetenantaccount")
 	public String editUser(Model model, String firstname){
-		Authentication authentication;
-		authentication = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(accountRepository.findByAccount_Email(authentication.getName()).getCity());
+		firstname(model);
+		System.out.println(authentication.getPrincipal());
+		if (! authentication.getPrincipal().toString().contains("TENANT")){
+			return "/login";
+		}
 		model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		model.addAttribute("lastname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
 		model.addAttribute("email", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
-		model.addAttribute("password", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
 		model.addAttribute("birthdate", accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
 		model.addAttribute("street", accountRepository.findByAccount_Email(authentication.getName()).getStreet());
 		model.addAttribute("housenumber", accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
@@ -102,16 +123,29 @@ public class AccountController {
 	}
 
 	@PostMapping("/managetenantaccount")
-	public String postEditUser(Model model, String firstname) {
+	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate, String street, String housenumber, String postcode, String city) {
 		Authentication authentication;
 		authentication = SecurityContextHolder.getContext().getAuthentication();
-		accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);
+		if(!firstname.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);}
+		if(!lastname.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).getAccount().setLastname(lastname);}
+		if(!birthdate.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setBirthDate(birthdate);}
+		if(!street.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);}
+		if(!housenumber.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setHouseNumber(housenumber);}
+		if(!street.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setStreet(street);}
+		if(!postcode.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setPostCode(postcode);}
+		if(!city.isEmpty()){accountRepository.findByAccount_Email(authentication.getName()).setCity(city);}
+		if(!password.isEmpty()) {
+			UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(authentication.getName()).getAccount().getUsername()).get();
+			userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
+		}
 		model.addAttribute("tenant", accountManagement.findAllDisabled());
+
 		return "accounts/managetenantaccount";
 	}
 
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
+		firstname(model);
 		model.addAttribute("registrationForm", hostRegistrationForm);
 		return "accounts/newhost";
 	}
@@ -140,6 +174,7 @@ public class AccountController {
 
 	@GetMapping("/neweventemployee")
 	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
+		firstname(model);
 		model.addAttribute("registrationForm", eventEmployeeRegistrationForm);
 		return "accounts/neweventemployee";
 	}
@@ -164,6 +199,7 @@ public class AccountController {
 //	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/manageaccounts")
 	public String manageAccounts(Model model) {
+		firstname(model);
 		model.addAttribute("unactivatedTenants", accountManagement.findAllDisabled());
 		model.addAttribute("activatedTenants", accountManagement.findByRole(AccountManagement.TENANT_ROLE));
 		model.addAttribute("hostAccounts", accountManagement.findByRole(AccountManagement.HOST_ROLE));
@@ -192,4 +228,5 @@ public class AccountController {
 		accountManagement.deleteAccount(account_username);
 		return "redirect:/manageaccounts";
 	}
+
 }

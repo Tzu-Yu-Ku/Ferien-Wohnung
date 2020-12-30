@@ -7,6 +7,7 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
 import fewodre.useraccounts.AccountManagement;
 
+import fewodre.useraccounts.AccountRepository;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
@@ -20,6 +21,8 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -39,10 +42,12 @@ import java.util.stream.Collectors;
 public class CartController {
 
 	private final AccountManagement accountManagement;
+	private final AccountRepository accountRepository;
 	private final BookingManagement bookingManagement;
 	private final EventCatalog eventcatalog;
 	private final HolidayHomeCatalog holidayHomeCatalog;
 	private final static Quantity one =Quantity.of(1);
+	private Authentication authentication;
 
 	private HolidayHome holidayHome;
 	private UserAccount userAccount;
@@ -55,7 +60,7 @@ public class CartController {
 	private LocalDate arrivalDate, departureDate;
 
 
-	CartController(AccountManagement accountManagement, BookingManagement bookingManagement,
+	CartController(AccountManagement accountManagement, AccountRepository accountRepository, BookingManagement bookingManagement,
 				   EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
 
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
@@ -67,6 +72,15 @@ public class CartController {
 		this.bookingManagement = bookingManagement;
 		this.eventcatalog = eventCatalog;
 		this.holidayHomeCatalog = holidayHomeCatalog;
+		this.accountRepository = accountRepository;
+	}
+	private void firstname(Model model) {
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+			System.out.println("authentication: ");
+			System.out.println(authentication.getPrincipal());
+			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		}
 	}
 
 	@ModelAttribute("cart")
@@ -77,6 +91,7 @@ public class CartController {
 	@GetMapping("/cart")
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
+		firstname(model);
 		Iterator<Event> iter = eventcatalog.findAll().iterator();
 		while (iter.hasNext()){
 			Event event = iter.next();
@@ -240,6 +255,7 @@ public class CartController {
 
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {
+		firstname(model);
 		if(cart.getItem(id).get().getProduct().getCategories().iterator().next().equals("HolidayHome")){
 			cart.clear();
 			return "redirect:/holidayhomes";
@@ -250,6 +266,7 @@ public class CartController {
 
 	@GetMapping("/clear")
 	public String clear(Model model, @ModelAttribute Cart cart) {
+		firstname(model);
 		cart.clear();
 		return "redirect:/cart";
 	}
@@ -289,6 +306,7 @@ public class CartController {
 
 	@GetMapping("/bookingdetails/{booking}")
 	public String details(Model model, @PathVariable BookingEntity booking){
+		firstname(model);
 		model.addAttribute("booking", bookingManagement.findFirstByOrderIdentifier(booking.getId()));
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
@@ -308,6 +326,7 @@ public class CartController {
 
 	@GetMapping("/cancel/{id}")
 	public String cancel(Model model, @PathVariable("id") BookingEntity booking){
+		firstname(model);
 		System.out.println(booking.getId());
 		if(bookingManagement.findFirstByOrderIdentifier(booking.getId()).cancel()){
 			//Work with Copy???
@@ -319,6 +338,7 @@ public class CartController {
 
 	@GetMapping("/pay/{id}")
 	public String pay(Model model, @PathVariable("id") BookingEntity booking){
+		firstname(model);
 		if(bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
 			//it's paid
 			return "redirect:/holidayhomes";
@@ -329,6 +349,7 @@ public class CartController {
 
 	@GetMapping("/confirm/{id}")
 	public String confirm(Model model, @PathVariable("id") BookingEntity booking){
+		firstname(model);
 		if(bookingManagement.findFirstByOrderIdentifier(booking.getId()).confirm()){
 			//it's now confirmed
 			System.out.println(bookingManagement.findFirstByOrderIdentifier(booking.getId()).getState());
