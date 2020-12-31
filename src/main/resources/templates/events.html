@@ -102,9 +102,11 @@
                                 <input type="hidden" name="event" th:value="${event.id}" />
                                 <input class="btn btn-danger btn-outline-light" type="submit" value="Event löschen" />
                             </form>
-                            <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light"
-                                    style="">Event
-                                    bearbeiten<br></a></div>
+                            <form role="form" th:method="post" th:action="@{/editeventpage}">
+                                <input type="hidden" name="event" th:value="${event.id}" />
+                                <input class="btn btn-primary btn-outline-light" type="submit"
+                                    value="Event bearbeiten" />
+                            </form>
                         </div>
                     </div>
                 </div>

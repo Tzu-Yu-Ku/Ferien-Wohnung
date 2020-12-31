@@ -24,20 +24,20 @@ public class EventForm {
     private int repeateRate;
 
     public EventForm() {
-        this.name = name;
-        this.description = description;
-        this.eventCompanyUuid = eventCompanyUuid;
-        this.street = street;
-        this.number = number;
-        this.postalnumber = postalnumber;
-        this.city = city;
-        this.capacity = capacity;
-        this.eventType = eventType;
-        this.price = price;
-        this.date = date;
-        this.time = time;
-        this.repeats = repeats;
-        this.repeateRate = repeateRate;
+        // this.name = name;
+        // this.description = description;
+        // this.eventCompanyUuid = eventCompanyUuid;
+        // this.street = street;
+        // this.number = number;
+        // this.postalnumber = postalnumber;
+        // this.city = city;
+        // this.capacity = capacity;
+        // this.eventType = eventType;
+        // this.price = price;
+        // this.date = date;
+        // this.time = time;
+        // this.repeats = repeats;
+        // this.repeateRate = repeateRate;
     }
 
     public String getName() {
@@ -133,7 +133,7 @@ public class EventForm {
     }
 
     public void setDate(String dateString) {
-        this.date = date.parse(dateString);
+        this.date = LocalDate.parse(dateString);
     }
 
     public LocalTime getTime() {
@@ -165,6 +165,11 @@ public class EventForm {
                 new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,
                 stringToEvent(getEventType()), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(),
                 getRepeats(), getRepeateRate());
+    }
+
+    public void editEvent(Event event) {
+        event.setName(getName());
+        event.setPrice(Money.of(getPrice(), "EUR"));
     }
 
 }

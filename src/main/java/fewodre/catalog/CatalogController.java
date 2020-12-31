@@ -65,7 +65,7 @@ public class CatalogController {
 	String editHolidayhomePage() {
 		return "editholidayhome";
 	}
-	
+
 	@PreAuthorize("hasRole('HOST')")
 	@GetMapping("/deleteholidayhome")
 	String deleteHolidayHome(ProductIdentifier holidayHomeId) {
@@ -90,6 +90,20 @@ public class CatalogController {
 			holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
 			Ecatalog.delete(event);
 		}
+		return "redirect:/events";
+	}
+
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/editeventpage")
+	String editEventPage(@RequestParam("event") Event event) {
+		System.out.println(event);
+		return "editevent";
+	}
+
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/editEvent")
+	String editEvent(@RequestParam("event") Event event, @ModelAttribute("form") EventForm form, Model model) {
+		form.editEvent(event);
 		return "redirect:/events";
 	}
 
