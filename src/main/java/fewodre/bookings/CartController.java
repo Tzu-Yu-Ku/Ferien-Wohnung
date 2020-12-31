@@ -324,6 +324,7 @@ public class CartController {
 				model.addAttribute("holidayHome", home);
 			}
 		}
+		model.addAttribute("holidayHomeOrderLine",booking.getOrderLines().filter(orderLine -> holidayHomeCatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null).toList().listIterator().next());
 		model.addAttribute("eventCatalog",eventcatalog);
 		model.addAttribute("orderlines",booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList());
 		return "bookingdetails";
