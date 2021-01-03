@@ -47,9 +47,6 @@ public class Event extends Product {
 		this.time = time;
 		this.repeats = repeats;
 		this.repeateRate = repeateRate;
-		// System.out.println(getAllDates());
-		// System.out.println(getPossibleDates(LocalDate.of(2020, 11, 30),
-		// LocalDate.of(2020, 12, 31)));
 	}
 
 	public Event() {

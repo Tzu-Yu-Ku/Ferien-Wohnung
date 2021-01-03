@@ -5,6 +5,9 @@ import fewodre.catalog.holidayhomes.*;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.UniqueInventory;
@@ -75,6 +78,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
+		eventTest.setDate(LocalDate.now().plusDays(2));
+		eventTest.setTime(LocalTime.now());
 		eventCatalog.save(eventTest);
 		inventory.save(new UniqueInventoryItem(eventTest, Quantity.of(eventTest.getCapacity())));
 

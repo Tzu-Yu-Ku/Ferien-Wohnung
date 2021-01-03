@@ -153,7 +153,6 @@ public class EventForm {
     }
 
     public Event toNewEvent(String userAccount) {
-        System.out.println(getEventCompanyUuid());
         return new Event(getName(), userAccount, getDescription(), "event1.png",
                 new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, getEventType(),
                 getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(), getRepeateRate());

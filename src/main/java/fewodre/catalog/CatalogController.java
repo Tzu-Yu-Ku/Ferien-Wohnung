@@ -30,7 +30,6 @@ public class CatalogController {
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
 
-
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 			UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
 		this.Hcatalog = Hcatalog;
@@ -71,7 +70,7 @@ public class CatalogController {
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
 		System.out.println(holidayHome);
-		//Hcatalog.delete(holidayHome);
+		// Hcatalog.delete(holidayHome);
 		return "redirect:/holidayhomes";
 	}
 
