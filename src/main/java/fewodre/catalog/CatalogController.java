@@ -28,7 +28,7 @@ public class CatalogController {
 	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
-	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
+
 
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 			UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
@@ -67,10 +67,10 @@ public class CatalogController {
 	}
 
 	@PreAuthorize("hasRole('HOST')")
-	@GetMapping("/deleteholidayhome")
-	String deleteHolidayHome(ProductIdentifier holidayHomeId) {
-		holidayHomeIdList.add(holidayHomeId);
-
+	@PostMapping("/deleteholidayhome")
+	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
+		System.out.println(holidayHome);
+		//Hcatalog.delete(holidayHome);
 		return "redirect:/holidayhomes";
 	}
 
