@@ -108,20 +108,15 @@
                         </ul>
                         <div class="card-footer p-2 w-100">
                             <div class="d-flex flex-row-reverse">
-                                <div class="flex-column"> 
-                                    <a th:href="@{/deleteholidayhome}" sec:authorize="hasRole('HOST')"
-                                        class="btn btn-danger btn-outline-light">
-                                        Ferienhaus löschen<br>
-                                        <input type="String" name="holidayHomeId" th:value="${holidayHome.id}"/>
-                                    </a>
-                                </div>
-                                <div class="flex-column">
-                                    <a th:href="@{/editholidayhome}" sec:authorize="hasRole('HOST')"
-                                        class="btn btn-primary btn-outline-light">
-                                        Ferienhaus erstellen
-                                        <br>
-                                    </a>
-                                </div>
+                                <form role="form" th:method="post" th:action="@{/deleteholidayhome}">
+                                    <input type="hidden" name="holidayHome" th:value="${holidayHome.id}" />
+                                    <input class="btn btn-danger btn-outline-light" type="submit" value="Ferienhaus löschen" />
+                                </form>
+                                <form role="form" th:method="post" th:action="@{/editholidayhome}">
+                                    <input type="hidden" name="holidayHome" th:value="${holidayHome.id}" />
+                                    <input class="btn btn-primary btn-outline-light" type="submit"
+                                        value="Ferienhaus bearbeiten" />
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -61,8 +61,10 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
-	@GetMapping("/editholidayhome")
-	String editHolidayhomePage() {
+	@PreAuthorize("hasRole('HOST')")
+	@PostMapping("/editholidayhome")
+	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome) {
+		System.out.println(holidayHome);
 		return "editholidayhome";
 	}
 
@@ -70,7 +72,7 @@ public class CatalogController {
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
 		System.out.println(holidayHome);
-		//Hcatalog.delete(holidayHome);
+		Hcatalog.delete(holidayHome);
 		return "redirect:/holidayhomes";
 	}
 
