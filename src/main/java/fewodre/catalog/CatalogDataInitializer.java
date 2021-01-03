@@ -10,10 +10,10 @@ import org.salespointframework.core.DataInitializer;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
+import org.salespointframework.useraccount.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class CatalogDataInitializer implements DataInitializer {
@@ -23,7 +23,8 @@ public class CatalogDataInitializer implements DataInitializer {
 	private final HolidayHomeCatalog holidayHomeCatalog;
 	private final UniqueInventory<UniqueInventoryItem> inventory;
 
-	CatalogDataInitializer(EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog, UniqueInventory<UniqueInventoryItem> inventory) {
+	CatalogDataInitializer(EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog,
+			UniqueInventory<UniqueInventoryItem> inventory) {
 		this.eventCatalog = eventCatalog;
 		this.holidayHomeCatalog = holidayHomeCatalog;
 		this.inventory = inventory;
@@ -59,17 +60,17 @@ public class CatalogDataInitializer implements DataInitializer {
 		holidayHomeCatalog.save(dummyHome1);
 		holidayHomeCatalog.save(dummyHome2);
 
-
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
 		}
 
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
-		eventTest.setDescription("Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
+		eventTest.setDescription(
+				"Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
 		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 1, 1));
 		eventTest.setCapacity(10);
-		eventTest.setEventCompanyUuid("eventCompanyUuid");
+		eventTest.setEventCompanyUuid(("event"));
 		eventTest.setPrice(Money.of(123, "EUR"));
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);

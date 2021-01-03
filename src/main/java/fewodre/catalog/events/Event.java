@@ -4,6 +4,8 @@ import fewodre.utils.Place;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
+import org.salespointframework.useraccount.UserAccount;
+
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 import java.time.LocalDate;
