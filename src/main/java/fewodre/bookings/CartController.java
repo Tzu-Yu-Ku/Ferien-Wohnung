@@ -7,6 +7,7 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
 import fewodre.useraccounts.AccountManagement;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
@@ -324,9 +325,15 @@ public class CartController {
 				model.addAttribute("holidayHome", home);
 			}
 		}
-		model.addAttribute("holidayHomeOrderLine",booking.getOrderLines().filter(orderLine -> holidayHomeCatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null).toList().listIterator().next());
+		OrderLine home = booking.getOrderLines().filter(orderLine -> holidayHomeCatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null).toList().listIterator().next();
+		model.addAttribute("holidayHomeOrderLine", home);
 		model.addAttribute("eventCatalog",eventcatalog);
-		model.addAttribute("orderlines",booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList());
+		List<OrderLine> events = booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList();
+		MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
+		model.addAttribute("orderlines",events);
+		model.addAttribute("deposit",deposit);
+		MonetaryAmount rest = Money.of(0,"EUR").add(home.getPrice().multiply(0.9));
+		model.addAttribute("rest",rest);
 		return "bookingdetails";
 	}
 

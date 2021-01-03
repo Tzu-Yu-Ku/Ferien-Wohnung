@@ -121,12 +121,23 @@
 
             </table>
         </div>
-        <div class="row border-top text-center" style="background-color: #EEEEEE;">
-            <table class="table table-striped">
-                <tr>
-                    <th><h4>10% der Gesamtkosten</h4></th>
-                    <td>123 €</td>
-                </tr>
+        <div class="row border-top">
+            <table class="table" style="background-color: #EEEEEE;">
+                <thead>
+                    <tr>
+                        <th><h3>Ihre Zahlungsplan</h3></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><h5>Sie bezahlen 10% der gesamten Ferienwohnungspreis und die gesamten Kosten der Events,um zu reservieren</h5></th>
+                        <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                    </tr>
+                    <tr>
+                        <th><h5>Sie bezahlen in der Unterkunft</h5></th>
+                        <td><h6 th:text="${formatter.parsePrice(rest)}">456</h6></td>
+                    </tr>
+                </tbody>
             </table>
             <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
             <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('TENANT')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
