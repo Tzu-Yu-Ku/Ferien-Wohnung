@@ -2,6 +2,7 @@ package fewodre.catalog;
 
 import fewodre.catalog.events.*;
 import fewodre.catalog.holidayhomes.*;
+import fewodre.useraccounts.*;
 
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
@@ -114,8 +115,9 @@ public class CatalogController {
 	}
 
 	@PostMapping(path = "/addEvent")
-	String addEvent(@ModelAttribute("form") EventForm form, Model model) {
-		Event event = form.toNewEvent();
+	String addEvent(@LoggedIn UserAccount userAccount, @ModelAttribute("form") EventForm form, Model model) {
+		System.out.println(userAccount.getId().getIdentifier());
+		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 		return "redirect:/events";
