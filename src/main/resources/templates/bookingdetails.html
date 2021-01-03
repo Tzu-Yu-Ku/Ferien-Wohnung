@@ -129,9 +129,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th><h5>Sie bezahlen 10% der gesamten Ferienwohnungspreis und die gesamten Kosten der Events,um zu reservieren</h5></th>
+                    <tr th:if="${booking.getState().toString() == 'ORDERED'}" sec:authorize="hasRole('TENANT')">
+                        <th><h5>Sie bezahlen 10% der gesamten Übernachtungskosten und den Gesamtpreis der Events,um zu reservieren</h5></th>
                         <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                    </tr>
+                    <tr th:if="${booking.getState().toString() != 'ORDERED'}" sec:authorize="hasRole('TENANT')">
+                        <th><h5 style="color:blue">Schon bezahlt</h5></th>
+                        <td><h6 style="color:blue" th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
                     </tr>
                     <tr>
                         <th><h5>Sie bezahlen in der Unterkunft</h5></th>
