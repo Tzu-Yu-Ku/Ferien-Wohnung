@@ -84,8 +84,8 @@ public class BookingManagement {
 	}
 
 	public boolean pay(BookingEntity bookingEntity){
-		if(orderManagement.payOrder(bookingEntity)){
-			orderManagement.completeOrder(bookingEntity);
+		if(getMoney()){   //orderManagement.payOrder(bookingEntity)
+			//orderManagement.completeOrder(bookingEntity);
 			return bookingEntity.pay();
 		}
 		return false;
@@ -96,6 +96,16 @@ public class BookingManagement {
 			return 0;
 		}
 		return holidayHomeStorage.findByProduct(product).get().getQuantity().getAmount().intValue();
+	}
+
+	/**
+	 * Interface for the Paying-Framework of the customer.
+	 * Shall return true when the transaction of the money from
+	 * the tenant to the host or us was succesfull
+	 * @return
+	 */
+	public boolean getMoney(){
+		return true;
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
