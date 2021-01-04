@@ -5,6 +5,8 @@ import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.catalog.events.EventCatalog;
 
+import fewodre.useraccounts.AccountManagement;
+import fewodre.useraccounts.AccountRepository;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.inventory.UniqueInventory;
@@ -36,21 +38,25 @@ public class BookingManagement {
 	private final HolidayHomeCatalog homeCatalog;
 	private final EventCatalog eventCatalog;
 	private final UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
+	private final AccountRepository accounts;
 
 	@Autowired
 	BookingManagement(BookingRepository bookings, OrderManagement<Order> orderManagement,
-					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog, UniqueInventory<UniqueInventoryItem> holidayHomeStorage){
+					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog,
+					  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement){
 
 		Assert.notNull(bookings, "BookingRepository must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
 		Assert.notNull(homeCatalog, "HomeCatalog Must not be Null!");
 		Assert.notNull(eventCatalog, "EventCatalog Must not be Null!");
+		Assert.notNull(accountManagement, "accountManager Must not be Null!");
 
 		this.bookings = bookings;
 		this.orderManagement = orderManagement;
 		this.homeCatalog = homeCatalog;
 		this.eventCatalog = eventCatalog;
 		this.holidayHomeStorage = holidayHomeStorage;
+		this.accounts = accountManagement.getRepository();
 	}
 
 
@@ -59,7 +65,7 @@ public class BookingManagement {
 											 LocalDate departureDate, HashMap<Event, Integer> events){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, home, nights, arrivalDate, departureDate, events, Cash.CASH);
+		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostUuid()),home, nights, arrivalDate, departureDate, events, Cash.CASH);
 		cart.addItemsTo(bookingEntity);
 		//order open()
 		//will update quantity one time
@@ -78,8 +84,8 @@ public class BookingManagement {
 	}
 
 	public boolean pay(BookingEntity bookingEntity){
-		if(orderManagement.payOrder(bookingEntity)){
-			orderManagement.completeOrder(bookingEntity);
+		if(getMoney()){   //orderManagement.payOrder(bookingEntity)
+			//orderManagement.completeOrder(bookingEntity);
 			return bookingEntity.pay();
 		}
 		return false;
@@ -90,6 +96,16 @@ public class BookingManagement {
 			return 0;
 		}
 		return holidayHomeStorage.findByProduct(product).get().getQuantity().getAmount().intValue();
+	}
+
+	/**
+	 * Interface for the Paying-Framework of the customer.
+	 * Shall return true when the transaction of the money from
+	 * the tenant to the host or us was succesfull
+	 * @return
+	 */
+	public boolean getMoney(){
+		return true;
 	}
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}

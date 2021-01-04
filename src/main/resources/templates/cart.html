@@ -19,6 +19,10 @@
             grid-template-columns: 1fr 1fr;
             grid-gap: 20px;
         }
+        .home-img {
+            width: 90%;
+            object-fit: cover;
+        }
     </style>
 
 </head>
@@ -43,34 +47,30 @@
                                         <div class="grid-child" >Preis pro Person</div>
                                         <div class="grid-child" align="right" th:text="${formatter.parsePrice(event.price)}">10 €</div>
                                     </div>
-                                </div>
-                                <form class="col" method="post" th:action="@{/eventcart}">
-                                    <input type="hidden" name="eid" value="0"  th:value="${event.id}">
-                                    <form class="col" method="post" th:action="@{/eventcart}">
+                                    <div class="grid-container ">
+                                        <div class="grid-child">Datum</div>
+                                        <div class="grid-child" th:text="${formatter.formatDate(event.date)}" align="right">1.1.1</div>
+                                    </div>
+                                    <form method="post" th:action="@{/eventcart}">
                                         <input type="hidden" name="eid" value="0"  th:value="${event.id}">
-                                        <div class="card-text p-1">
-                                            <div class="grid-container ">
-                                                <div class="grid-child">Datum</div>
-                                            <!--<input class="grid-child form-control" type="date" name="joinday" placeholder="dd.mm.yyyy">-->
-                                                <div class="grid-child" th:text="${formatter.formatDate(event.date)}" align="right">1.1.1</div>
+                                        <div class="input-group">
+                                            <input class="form-control" id= "persons" type="number" min="1" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
+                                            <div class="input-group-prepend">
+                                            <button type="submit" class="btn btn-primary">Event dazubuchen</button>
                                             </div>
                                         </div>
-                                        <div class="input-group col">
-                                            <input class="form-control col-sm-5" id= "persons" type="number" min="1" th:max="${event.getCapacity()}" step="1" name="number" required="required" placeholder="Personenzahl">
-                                            <button type="submit" class="btn btn-primary">Event dazubuchen</button>
-                                        </div>
-                                    </form>
                                     </form>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="container justify-content-start">
+                    <h3 class="p-4">Ihre Bestellung</h3>
                     <div class="row">
                         <div class="col-5">
-                            <h3 class="p-4">Ihre Bestellung</h3><br/>
                             <table style="line-height: 30px">
                                 <form method="POST" th:action="@{/purchase}">
                                     <tbody>
@@ -122,8 +122,8 @@
                             </table>
                         </div>
                         <div class="col-7">
-                            <div class="pl-1 h4" th:text="${holidayHome.name}">Ferienhaus Name</div>
-                            <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
+                            <div class="pl-1 h5" th:text="${holidayHome.name}">Ferienhaus Name</div>
+                            <img class="home-img" th:src="@{/resources/img/{image}(image=${holidayHome.image})}" alt="Card image cap">
                         </div>
                     </div>
                 </div>
@@ -143,30 +143,38 @@
                             <div th:switch="${item.getProduct().getCategories().iterator().next()}">
                                 <td class="col-7" th:case="'HolidayHome'">
                                     <form th:action="@{/updateDatum/{id}(id=${item.product.id})}" method="post">
-                                    <div class="row">
-                                        <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                        <button type="submit" class="btn">
-                                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                                        </button>
-                                        <div class="col-6">
-                                            <label for="startDate" >Anreise Datum</label>
-                                            <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}"
-                                             th:oninput="setMinOfDeparture()" th:min="${today}">
-                                            <script>
-                                                function setMinOfDeparture() {
-                                                    document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
-                                                }
-                                            </script>
+                                    <div class="container">
+                                        <div class="row">
+                                            <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                            <button type="submit" class="btn">
+                                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                            </button>
+
                                         </div>
-                                        <div class="col-6">
-                                            <label for="endDate">Abreise Datum</label>
-                                            <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" th:min="${arrivalDate}"
-                                                   th:oninput="setMaxOfArrival()">
-                                            <script>
-                                                function setMaxOfArrival() {
-                                                    document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
-                                                }
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="startDate" >Anreise Datum</label>
+                                                <input type="date" id="startDate" name="newSDate" th:value="${arrivalDate}"
+                                                       th:oninput="setMinOfDeparture()" th:min="${today}">
+                                                <script>
+                                                    function setMinOfDeparture() {
+                                                        document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
+                                                    }
                                                 </script>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="endDate">Abreise Datum</label>
+                                                <input type="date" id="endDate" name="newEDate" th:value="${departureDate}" th:min="${arrivalDate}"
+                                                       th:oninput="setMaxOfArrival()">
+                                                <script>
+                                                    function setMaxOfArrival() {
+                                                        document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
+                                                    }
+                                                </script>
+                                            </div><br/>
+                                            <div class="alert alert-danger" th:if="${check}">
+                                                <strong>Dieser Zeitraum ist schon gebucht!!</strong>
+                                            </div>
                                         </div>
                                     </div>
                                     </form>
@@ -174,12 +182,14 @@
 
                                 <td class="col-7" th:case="'Event'">
                                     <form th:action="@{/updateTicketCount/{id}(id=${item.product.id})}" method="post">
-                                        <div class="row">
-                                            <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
-                                            <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
-                                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                                            </button>
-                                            <div class="col-6">
+                                        <div class="container">
+                                            <div class="row">
+                                                <h5 th:text="${item.productName}">Säsische Schweiz Führungs</h5>
+                                                <button type="submit" class="btn" th:href="@{/addTicket/{id}(id=${item.id})}">
+                                                    <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                                                </button>
+                                            </div>
+                                            <div class="row">
                                                 <label for="Anzahl">Personen Zahl:</label>
                                                 <input type="number" id="Anzahl" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}">
                                             </div>

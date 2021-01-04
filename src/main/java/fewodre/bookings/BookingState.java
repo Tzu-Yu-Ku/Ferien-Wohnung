@@ -1,6 +1,7 @@
 package fewodre.bookings;
 
 import fewodre.utils.ProxyBusinessTime;
+import org.salespointframework.order.Order;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -131,8 +132,8 @@ public class BookingState {
 		}
 	}
 
-	public boolean cancel(){
-		if(!state.cancel()){
+	public boolean cancel(Order order){
+		if(!state.cancel(order)){
 			throw new IllegalStateException();
 		}
 		else {return true;}
@@ -171,7 +172,10 @@ public class BookingState {
 	Inner Classes
 	 */
 	private abstract class State{
-		public boolean cancel(){
+		public boolean cancel(Order order){
+			System.out.println("Old Price: "+order.getTotal());
+			order.addChargeLine(order.getTotal().multiply(-1), "Storniert");
+			System.out.println("New Price: "+order.getTotal());
 			state = canceled;
 			return true;
 		}
@@ -200,6 +204,12 @@ public class BookingState {
 		@Override
 		public boolean pay() {
 			state = paid;
+			return true;
+		}
+
+		@Override
+		public boolean cancel(Order order){
+			state = canceled;
 			return true;
 		}
 
@@ -257,6 +267,14 @@ public class BookingState {
 	}
 
 	public class Acquired extends State{
+
+		public boolean cancel(Order order){
+			System.out.println("Old Price: "+order.getTotal());
+			System.out.println("New Price: "+order.getTotal());
+			state = canceled;
+			return true;
+		}
+
 		@Override
 		public boolean checkTime() {
 			if(arrivalDate.isBefore(ProxyBusinessTime.getBusinessTime().getTime().toLocalDate())){
@@ -274,7 +292,7 @@ public class BookingState {
 
 	public class Completed extends State{
 		@Override
-		public boolean cancel() {
+		public boolean cancel(Order order) {
 			return false;
 		}
 
@@ -291,7 +309,7 @@ public class BookingState {
 
 	public class Canceled extends State{
 		@Override
-		public boolean cancel() {
+		public boolean cancel(Order order) {
 			return false;
 		}
 

@@ -7,6 +7,7 @@ import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
 import fewodre.useraccounts.AccountManagement;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
@@ -97,6 +98,7 @@ public class CartController {
 		model.addAttribute("formatter", formatter);
 		model.addAttribute("account", this.userAccount);
 		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("check", checkIfBooked());
 		return "cart"; }
 
 	@PostMapping("/cart")
@@ -128,8 +130,11 @@ public class CartController {
 	public String updateDatum(@ModelAttribute Cart cart,@RequestParam("newSDate")String newSDate,
 								@RequestParam("newEDate")String newEDate, @PathVariable("id") HolidayHome holidayHome){
 
-		this.arrivalDate = LocalDate.parse(newSDate);;
-		this.departureDate = LocalDate.parse(newEDate);;
+		this.arrivalDate = LocalDate.parse(newSDate);
+		this.departureDate = LocalDate.parse(newEDate);
+		if(checkIfBooked()){
+			return "redirect:/cart";
+		}
 		Quantity newInterval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
 		Quantity oldInterval = Quantity.of(0);
 		Iterator<CartItem> it = cart.iterator();
@@ -257,7 +262,8 @@ public class CartController {
 
 	@PostMapping("/purchase")
 	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
-					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount){
+					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
+	   				  @RequestParam("paymethod") String paymethod){
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
 		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
@@ -266,7 +272,7 @@ public class CartController {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
 		}
-
+/*
 		//check if it's available
 		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
@@ -279,12 +285,30 @@ public class CartController {
 				}
 			}
 		}
+ */
+		if(checkIfBooked()){ return "redirect:/cart";}
 		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
 		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
+		if(paymethod.equalsIgnoreCase("cash")){bookingEntity.pay();} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!
+	}
+
+	public boolean checkIfBooked(){
+		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
+		for (BookingEntity b : bookedList) {
+			if(!b.getState().equals(BookingStateEnum.CANCELED)) {
+				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
+					//send message "the chosed duration is not avalible"
+					System.out.println("redirect to Cart because its already booked");
+					//!! Message to customer is missing
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@GetMapping("/bookingdetails/{booking}")
@@ -301,8 +325,15 @@ public class CartController {
 				model.addAttribute("holidayHome", home);
 			}
 		}
+		OrderLine home = booking.getOrderLines().filter(orderLine -> holidayHomeCatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null).toList().listIterator().next();
+		model.addAttribute("holidayHomeOrderLine", home);
 		model.addAttribute("eventCatalog",eventcatalog);
-		model.addAttribute("orderlines",booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList());
+		List<OrderLine> events = booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList();
+		MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
+		model.addAttribute("orderlines",events);
+		model.addAttribute("deposit",deposit);
+		MonetaryAmount rest = Money.of(0,"EUR").add(home.getPrice().multiply(0.9));
+		model.addAttribute("rest",rest);
 		return "bookingdetails";
 	}
 
@@ -321,10 +352,10 @@ public class CartController {
 	public String pay(Model model, @PathVariable("id") BookingEntity booking){
 		if(bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
 			//it's paid
-			return "redirect:/holidayhomes";
+			return "redirect:/bookings";
 		}
 		//it couldn't be paid maybe it already was or something like that
-		return "redirect:/holidayhomes";
+		return "redirect:/bookingdetails/" + booking.getId();
 	}
 
 	@GetMapping("/confirm/{id}")
