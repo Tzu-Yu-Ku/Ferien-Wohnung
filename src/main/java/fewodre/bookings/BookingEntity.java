@@ -181,7 +181,7 @@ public class BookingEntity extends Order {
 
 	public boolean cancel(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.cancel()){
+		if(!state.cancel(this)){
 			throw new IllegalStateException();
 		}
 		else {
