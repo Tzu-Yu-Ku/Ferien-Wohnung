@@ -1,0 +1,46 @@
+= Protokoll Gruppe 25
+
+Treffen am 07.12.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   17:00 Uhr +
+Ende:     19:30 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+(offiziell) 14.12.2010, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Aktueller Stand
+
+Beim sechsten Team-Meeting wurde es erst, es war Zeit für die Zwischenpräsentation! Damit diese gelingen konnte, trafen wir uns alle (digital) um darüber zu entscheiden, wie wir die Präsentation gestalten. Wir entschieden uns gemeinsam für eine kurze Google Slides-Präsentation, um den ersten Teil über Analyse, Entwurf, Probleme und Lösungsansätze unseres Projektes zu begleiten. Damit jedes Gruppenmitglied möglichst gleich viel zur Präsentation beitragen kann, teilten wir die Präsentation untereinander auf. Jedes Teammitglied hat anschließend im Verlauf der Woche seinen Teil der Präsentation verinnerlicht, ergänzt, eingeübt und so für die Präsentation vorbereitet.
+
+- **Marten** übernahm die Begrüßung, Vorstellung und Einleitung zu unserer Aufgabenstellung
+- **Janu** stellte unsere erste Analyse vor, welche zunächst per CRC-Karten-Methode erfolgte
+- **Jimmy** erläuterte unsere Entwurfsentscheidungen
+- **Tzu** erzählte über Probleme, die während der Zusammenarbeit aufgetreten sind und unsere Lösungsansätze
+- **Julian** & **Jesko** präsentierten gemeinsam den Anwendungsprototypen
+
+Die Rückmeldung fiel überwiegend positiv aus, allerdings war die Präsentation nicht perfekt. Zwei Gasttutoren gaben uns gemeinsam mit unserem Tutor Fabian wertvolles https://github.com/st-tu-dresden-praktikum/swt20w25/issues/34[Feedback], welches wir uns für die entscheidende Abschlusspräsentation gut gemerkt haben.
+
+== Retrospektive des letzten Sprints
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/34[#34]     |Zwischen-/Abschlusspräsentation |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/34[#34]  |alle Gruppenmitglieder                | ZP done
+|===
+
+
+== Planung des nächsten Sprints
+
+Die Entwicklung unserer Anwendung nimmt nun Fahrt auf! Damit wir wissen, was zu tun ist und welche Funktionen noch Fehlen und welche Fehler ausgebügelt werden müssen, formulieren wir im Verlauf der nächsten Woche entsprechende Issues.

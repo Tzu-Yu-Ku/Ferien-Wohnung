@@ -3,9 +3,12 @@ package fewodre.bookings;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
+import fewodre.useraccounts.AccountRepository;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -23,8 +26,19 @@ public class BookingController {
 	private UserAccount userAccount;
 	private StringFormatter formatter;
 	private HolidayHomeCatalog holidayHomeCatalog;
+	private final AccountRepository accountRepository;
+	private Authentication authentication;
 
-	public BookingController(AccountManagement accountManagement,BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog){
+	private void firstname(Model model) {
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+			System.out.println("authentication: ");
+			System.out.println(authentication.getPrincipal());
+			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		}
+	}
+
+	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository, BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog){
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
@@ -32,11 +46,13 @@ public class BookingController {
 		this.bookingRepository = bookingRepository;
 		this.formatter = new StringFormatter();
 		this.holidayHomeCatalog = holidayHomeCatalog;
+		this.accountRepository = accountRepository;
 	}
 
 	@GetMapping("/bookings")
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
+		firstname(model);
 			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
@@ -59,6 +75,7 @@ public class BookingController {
 	@GetMapping("/bookingsFromHost")
 	@PreAuthorize("hasRole('HOST')")
 	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity, @LoggedIn UserAccount userAccount){
+		firstname(model);
 		//you have to give in the same HostUUID when you create the home, and they shouldn't let host give in HostUUID should be automatik filled in
 		System.out.println("email: " +userAccount.getEmail());
 		model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));

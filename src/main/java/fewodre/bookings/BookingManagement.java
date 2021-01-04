@@ -65,7 +65,7 @@ public class BookingManagement {
 											 LocalDate departureDate, HashMap<Event, Integer> events){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostUuid()),home, nights, arrivalDate, departureDate, events, Cash.CASH);
+		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, Cash.CASH);
 		cart.addItemsTo(bookingEntity);
 		//order open()
 		//will update quantity one time
