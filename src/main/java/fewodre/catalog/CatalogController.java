@@ -4,6 +4,8 @@ import fewodre.catalog.events.*;
 import fewodre.catalog.holidayhomes.*;
 import fewodre.useraccounts.*;
 
+import fewodre.useraccounts.AccountManagement;
+import fewodre.useraccounts.AccountRepository;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -11,6 +13,8 @@ import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,17 +33,31 @@ public class CatalogController {
 	private final EventCatalog Ecatalog;
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
+	private final AccountManagement accountManagement;
+	private final AccountRepository accountRepository;
+	private Authentication authentication;
+	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 
-	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
-			UniqueInventory<UniqueInventoryItem> holidayHomeStorage) {
+
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement, AccountRepository accountRepository) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
 		this.holidayHomeStorage = holidayHomeStorage;
+		this.accountManagement = accountManagement;
+		this.accountRepository = accountRepository;
 	}
-
+	private void firstname(Model model) {
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+			System.out.println("authentication: ");
+			System.out.println(authentication.getPrincipal());
+			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		}
+	}
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
+		firstname(model);
 
 		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
 
@@ -47,7 +65,8 @@ public class CatalogController {
 	}
 
 	@GetMapping("/addholidayhome")
-	String addHolidayhomePage() {
+	String addHolidayhomePage(Model model) {
+		firstname(model);
 		return "addholidayhome";
 	}
 
@@ -78,7 +97,7 @@ public class CatalogController {
 
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
-
+		firstname(model);
 		model.addAttribute("eventCatalog", Ecatalog.findAll());
 
 		return "events";
@@ -111,7 +130,8 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addevents")
-	String addEventPage() {
+	String addEventPage(Model model) {
+		firstname(model);
 		return "addevent";
 	}
 
@@ -125,7 +145,9 @@ public class CatalogController {
 	}
 
 	@GetMapping("/housedetails")
-	String detail() {
+	String detail(Model model){
+		firstname(model
+		);
 		return "housedetails";
 	}
 }

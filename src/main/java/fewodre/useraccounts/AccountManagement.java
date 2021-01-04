@@ -51,10 +51,10 @@ public class AccountManagement {
 			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
-						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
+						tenantRegistrationForm.getEmail(), TENANT_ROLE);
 				newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
 				newUserAccount.setLastname(tenantRegistrationForm.getLastName());
-				newUserAccount.setEnabled(false);
+				newUserAccount.setEnabled(true);
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
 						.setBirthDate(tenantRegistrationForm.getBirthDate())
 						.setStreet(tenantRegistrationForm.getStreet())
