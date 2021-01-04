@@ -18,6 +18,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -58,11 +59,13 @@ public class BookingEntity extends Order {
 
 	private transient MonetaryAmount price;
 
+	private int depositInCent;
+
 	//Handy Attributes for html
 	private String hostName;
 
 	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
-						 LocalDate arrivalDate, LocalDate departureDate ,
+						 LocalDate arrivalDate, LocalDate departureDate,
 						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
 		super(userAccount, paymentMethod);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
@@ -72,6 +75,7 @@ public class BookingEntity extends Order {
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
+		this.depositInCent = home.getPrice().multiply(ChronoUnit.DAYS.between(arrivalDate, departureDate)).multiply(0.1*100).getNumber().intValue();
 		this.state = new BookingState(this.getDateCreated().toLocalDate(),this.arrivalDate);
 		System.out.println("new State: "+this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
@@ -80,6 +84,7 @@ public class BookingEntity extends Order {
 		while(iter.hasNext()){
 			Event event = iter.next();
 			addOrderLine(event, Quantity.of(events.get(event)));
+			depositInCent += event.getPrice().multiply(events.get(event)).multiply(100).getNumber().intValue();
 		}
 		price = getTotal();
 		//need to find out from Home
@@ -224,5 +229,9 @@ public class BookingEntity extends Order {
 			stateToSave = state.toEnum();
 			return true;
 		}
+	}
+
+	public int getDepositInCent() {
+		return depositInCent;
 	}
 }

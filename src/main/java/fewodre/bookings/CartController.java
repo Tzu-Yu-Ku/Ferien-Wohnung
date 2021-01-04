@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.money.MonetaryAmount;
+import javax.money.MonetaryAmountFactory;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -329,9 +330,9 @@ public class CartController {
 		model.addAttribute("holidayHomeOrderLine", home);
 		model.addAttribute("eventCatalog",eventcatalog);
 		List<OrderLine> events = booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList();
-		MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
+		//MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
 		model.addAttribute("orderlines",events);
-		model.addAttribute("deposit",deposit);
+		model.addAttribute("deposit",  Money.of(booking.getDepositInCent()*0.01f,"EUR"));
 		MonetaryAmount rest = Money.of(0,"EUR").add(home.getPrice().multiply(0.9));
 		model.addAttribute("rest",rest);
 		return "bookingdetails";
