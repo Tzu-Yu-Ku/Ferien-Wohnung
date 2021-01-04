@@ -23,7 +23,7 @@
                     <img th:src="@{/resources/img/{image}(image=${homeCatalog.findFirstByProductIdentifier(booking.getUuidHome()).image})}" class="card-img" alt="..." width="80px">
                     </a>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${homeCatalog.findFirstByProductIdentifier(booking.getUuidHome()).name}">Home Name</h5>
                         <p class="card-text" th:text="'Anreisedatum: '+ ${formatter.formatDate(booking.arrivalDate)}">Anreise Datum: 12.Dec 2020</p>
@@ -31,8 +31,9 @@
                         <p class="card-text"><small class="text-muted" th:text="${booking.getState()}">Booking Status</small></p>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="card-body">
+                        <small class="text-muted">gesamte Kosten</small>
                         <h3 th:text="${formatter.parsePrice(booking.getPrice())}">Price</h3>
                     </div>
                 </div>

@@ -80,6 +80,7 @@ public class BookingEntity extends Order {
 		System.out.println("new State: "+this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
 		System.out.println(stateToSave);
+		/*
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
 			Event event = iter.next();
@@ -87,6 +88,7 @@ public class BookingEntity extends Order {
 			depositInCent += event.getPrice().multiply(events.get(event)).multiply(100).getNumber().intValue();
 		}
 		price = getTotal();
+		 */
 		//need to find out from Home
 		this.hostName = (host==null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
 	}
@@ -232,6 +234,9 @@ public class BookingEntity extends Order {
 	}
 
 	public int getDepositInCent() {
+		List<OrderLine> events = this.getOrderLines().filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
+		events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
 		return depositInCent;
 	}
+
 }
