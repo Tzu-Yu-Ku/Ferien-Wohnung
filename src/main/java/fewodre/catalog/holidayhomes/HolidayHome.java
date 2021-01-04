@@ -12,17 +12,17 @@ import javax.persistence.Entity;
 @Entity
 public class HolidayHome extends Product {
 
-	private String hostUuid;
+	private String hostMail;
 	private String description;
 	private String image;
 	private Place place;
 	private boolean isBookable;
 	private int capacity;
 
-	public HolidayHome(String title, String hostUuid, String description, String image, Place place, boolean isBookable, int capacity, MonetaryAmount price) {
+	public HolidayHome(String title, String hostMail, String description, String image, Place place, boolean isBookable, int capacity, MonetaryAmount price) {
 		super(title, price);
 		this.description = description;
-		this.hostUuid = hostUuid;
+		this.hostMail = hostMail;
 		this.image = image;
 		this.place = place;
 		this.isBookable = isBookable;
@@ -52,12 +52,12 @@ public class HolidayHome extends Product {
 		this.description = description;
 	}
 
-	public String getHostUuid() {
-		return hostUuid;
+	public String getHostMail() {
+		return hostMail;
 	}
 
-	public void setHostUuid(String hostUuid) {
-		this.hostUuid = hostUuid;
+	public void setHostMail(String hostMail) {
+		this.hostMail = hostMail;
 	}
 
 	public String getImage() {

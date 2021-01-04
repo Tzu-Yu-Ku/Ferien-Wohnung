@@ -83,71 +83,73 @@
 
         <div class="row">
             <div class="col-md-4 col-6 p-1" th:each="holidayHome : ${holidayhomeCatalog}">
-                <form role="form" th:action="@{/defaultcart}" method="post">
-
-                    <!--Cards für Host mit Buttons (bearbeiten, löschen)-->
-                    <div class="card" sec:authorize="hasRole('HOST')">
-                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
-                            <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><i class="fa fa-users"></i>
-                                <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-money"></i>
-                                <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-map"></i>
-                                <h8 class="card-title"
-                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
-                                    <b>----place----</b></h8>
-                            </li>
-                        </ul>
-                        <div class="card-footer p-2 w-100">
-                            <div class="d-flex flex-row-reverse">
-                                <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus
-                                    löschen<br></a></div>
-                                <div class="flex-column"><a href="#" class="btn btn-primary btn-outline-light" style="">Ferienhaus
-                                    bearbeiten<br></a></div>
-                            </div>
+                <!--Cards für Host mit Buttons (bearbeiten, löschen)-->
+                <div class="card" sec:authorize="hasRole('HOST')">
+                    <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
+                        <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-users"></i>
+                            <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-money"></i>
+                            <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-map"></i>
+                            <h8 class="card-title"
+                                th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                <b>----place----</b></h8>
+                        </li>
+                    </ul>
+                    <div class="card-footer p-2 w-100">
+                        <div class="d-flex flex-row-reverse">
+                            <form role="form" th:method="post" th:action="@{/deleteholidayhome}">
+                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
+                                <input class="btn btn-danger btn-outline-light" type="submit"
+                                       value="Ferienhaus löschen"/>
+                            </form>
+                            <form role="form" th:method="post" th:action="@{/editholidayhome}">
+                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
+                                <input class="btn btn-primary btn-outline-light" type="submit"
+                                       value="Ferienhaus bearbeiten"/>
+                            </form>
                         </div>
                     </div>
+                </div>
 
-                    <!--Cards für alle, die kein Host sind mi"Details" und "Jetzt buchen" Option -->
-                    <div class="card" sec:authorize="!hasAnyRole('HOST')">
-                        <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
-                             alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
-                            <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><i class="fa fa-users"></i>
-                                <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-money"></i>
-                                <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
-                            </li>
-                            <li class="list-group-item"><i class="fa fa-map"></i>
-                                <h8 class="card-title"
-                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
-                                    <b>----place----</b></h8>
-                            </li>
-                        </ul>
-                        <div class="card-footer p-2 w-100">
-                            <div class="d-flex flex-row-reverse">
-                                <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
-                                <button type="submit" class="btn btn-primary">Jetzt buchen</button>
-                                <!--Verlinkung zum Cart-->
-                                <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
-                            </div>
+                <!--Cards für alle, die kein Host sind mi"Details" und "Jetzt buchen" Option -->
+                <div class="card" sec:authorize="!hasAnyRole('HOST')">
+                    <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${holidayHome.name}"><b>----title----</b></h5>
+                        <p class="card-text" th:text="${holidayHome.description}">-----beschreibung-----<br></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-users"></i>
+                            <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-money"></i>
+                            <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-map"></i>
+                            <h8 class="card-title"
+                                th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                <b>----place----</b></h8>
+                        </li>
+                    </ul>
+                    <div class="card-footer p-2 w-100">
+                        <div class="d-flex flex-row-reverse">
+                            <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
+                            <button type="submit" class="btn btn-primary">Jetzt buchen</button>
+                            <!--Verlinkung zum Cart-->
+                            <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
                         </div>
                     </div>
-
-                </form>
+                </div>
             </div>
         </div>
         <div class="col-md-4 col-6 p-1"></div>
