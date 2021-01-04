@@ -47,7 +47,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt.");
 		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
 		dummyHome1.setIsBookable(true);
-		dummyHome1.setHostUuid("abcd-efgh-jkli");
+		dummyHome1.setHostMail("abcd-efgh-jkli");
 		dummyHome1.setImage("house4.png");
 		dummyHome1.setCapacity(4);
 		dummyHome1.setPrice(Money.of(250, "EUR"));
@@ -56,7 +56,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden");
 		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
 		dummyHome2.setIsBookable(true);
-		dummyHome2.setHostUuid("abcd-efgh-jkli");
+		dummyHome2.setHostMail("abcd-efgh-jkli");
 		dummyHome2.setImage("house3.png");
 		dummyHome2.setCapacity(6);
 		dummyHome2.setPrice(Money.of(75, "EUR"));
