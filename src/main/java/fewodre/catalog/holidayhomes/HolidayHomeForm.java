@@ -6,7 +6,7 @@ import fewodre.utils.Place;
 public class HolidayHomeForm {
     private String name;
     private String description;
-    private String hostUuid;
+    private String hostMail;
     private String street;
     private String number;
     private String postalnumber;
@@ -17,7 +17,7 @@ public class HolidayHomeForm {
     public HolidayHomeForm(){
         this.name = name;
         this.description = description;
-        this.hostUuid = hostUuid;
+        this.hostMail = hostMail;
         this.street = street;
         this.number = number;
         this.postalnumber = postalnumber;
@@ -42,12 +42,12 @@ public class HolidayHomeForm {
         this.description = description;
     }
 
-    public String getHostUuid() {
-        return hostUuid;
+    public String getHostMail() {
+        return hostMail;
     }
 
-    public void setHostUuid(String hostUuid) {
-        this.hostUuid = hostUuid;
+    public void setHostMail(String hostMail) {
+        this.hostMail = hostMail;
     }
 
     public String getStreet() {
@@ -101,5 +101,4 @@ public class HolidayHomeForm {
     public HolidayHome toNewHolidayHome(String hostMail) {
         return new HolidayHome(getName(),hostMail,getDescription(),"house2.png",new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true,getCapacity(),Money.of(getPrice(), "EUR"));
 	}
-
 }
