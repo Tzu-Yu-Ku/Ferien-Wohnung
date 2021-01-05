@@ -29,7 +29,7 @@ Notizen:
 Julian hat an der Karte gebastelt. Zoom function. Stadtteil-Unterscheidung bei Auswahl von Koordinaten auf der Karte. Karte zur Bestimmung des Ortes der Ferienwohnung/des Events.
 Janu hat Accountverwaltung für Admins erstellt (work in Progress). Man kann jedem Nutzer per E-Mail kontaktieren, unbestätigte Mieteraccounts bestätigen, und jeden Account-Typen löschen.
 Jimmy hat die Verwaltung einer zu tätigenden Buchung erweitert. Buchungen können abgebrochen werden. Wenn vorgeschlagene zubuchbare Events dazugebucht werden, verschwinden nach dem Hinzufügen. Vermieter haben Buchungsübersicht mit verschiedenen Buchungsstati. Buchungsverlauf ist ebenfalls vorhanden. Buchungen können storniert werden. 
-Jesko und Marten haben jeweils Issues erstellt im Bezug auf ihren Aufgabenbereich der Events und deren Verwaltung.
+Jesko hat jeweils Issues erstellt im Bezug auf seinen Aufgabenbereich der Events und deren Verwaltung. Marten hat zu seinem Aufgabenbereich ebenfalls Issues erstellt und hat damit begonnen einige von diesen zu bearbeiten.
 
 == Retrospektive des letzten Sprints
 [option="headers"]
