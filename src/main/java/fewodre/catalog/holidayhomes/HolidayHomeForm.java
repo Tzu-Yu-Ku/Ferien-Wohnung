@@ -104,14 +104,4 @@ public class HolidayHomeForm {
 				getCapacity(), Money.of(getPrice(), "EUR"));
 	}
 
-	public void editHolidayHome(HolidayHome holidayHome) {
-		holidayHome.setName(getName());
-		holidayHome.setHostMail(getHostMail());
-		holidayHome.setDescription(getDescription());
-		//image
-		holidayHome.setPlace(new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1));
-		holidayHome.setIsBookable(true);
-		holidayHome.setCapacity(getCapacity());
-		holidayHome.setPrice(Money.of(getPrice(), "EUR"));
-	}
 }
