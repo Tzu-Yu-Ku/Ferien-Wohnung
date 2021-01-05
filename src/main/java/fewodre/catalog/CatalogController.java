@@ -87,6 +87,14 @@ public class CatalogController {
 	}
 
 	@PreAuthorize("hasRole('HOST')")
+	@PostMapping(path = "/editHolidayHome")
+	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, @ModelAttribute("form") HolidayHomeForm form, Model model) {
+		form.editHolidayHome(holidayHome);
+
+		return "redirect:/holidayhomes";
+	}
+
+	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
 		System.out.println(holidayHome);
