@@ -38,7 +38,6 @@ public class CatalogController {
 	private Authentication authentication;
 	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 
-
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement, AccountRepository accountRepository) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
@@ -55,6 +54,7 @@ public class CatalogController {
 			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
+//HolidayHomes------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
@@ -63,6 +63,7 @@ public class CatalogController {
 		return "holidayhomes";
 	}
 
+	// add HolidayHome-----------------
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {
 		firstname(model);
@@ -79,29 +80,45 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
+	// edit HolidayHome----------------
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome) {
-		System.out.println(holidayHome);
+		System.out.println("HolidayHome welches editiert werden soll: " + holidayHome);
+
 		return "editholidayhome";
 	}
 
 	@PreAuthorize("hasRole('HOST')")
-	@PostMapping(path = "/editHolidayHome")
-	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, @ModelAttribute("form") HolidayHomeForm form, Model model) {
-		form.editHolidayHome(holidayHome);
+	@PostMapping("/editHolidayHome")
+	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, Model model, String name, String description, String price, String capacity, String street, String number, String city, String postalnumber) {
+		System.out.println("Name der neu eingefügt werden soll '" + name + "'");
+		holidayHome.setDescription(name);
 
+		//System.out.println(versuch.getName());
 		return "redirect:/holidayhomes";
 	}
 
+	// delete HolidayHome--------------
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
-		System.out.println(holidayHome);
+		System.out.println("Zu löschende HolidayHome: " + holidayHome);
 		holidayHome.setIsBookable(false);
+		System.out.println("isBookable ist nun auf '" + holidayHome.getIsBookable() + "' gesetzt");
 		return "redirect:/holidayhomes";
 	}
 
+	// HolidayHome housedetails---------
+	@GetMapping("/housedetails")
+	String detail(Model model){
+		firstname(model);
+		return "housedetails";
+	}
+
+
+
+// Events------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 		firstname(model);
@@ -149,12 +166,5 @@ public class CatalogController {
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 		return "redirect:/events";
-	}
-
-	@GetMapping("/housedetails")
-	String detail(Model model){
-		firstname(model
-		);
-		return "housedetails";
 	}
 }
