@@ -59,8 +59,7 @@ public class CatalogController {
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
 
-		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll());
-
+		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
 		return "holidayhomes";
 	}
 
@@ -91,7 +90,7 @@ public class CatalogController {
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
 		System.out.println(holidayHome);
-		// Hcatalog.delete(holidayHome);
+		holidayHome.setIsBookable(false);
 		return "redirect:/holidayhomes";
 	}
 
