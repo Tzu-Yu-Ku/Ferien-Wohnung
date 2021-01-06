@@ -1,0 +1,52 @@
+= Protokoll Gruppe 25
+
+Treffen am 14.12.2020
+
+Ort:      Online via BigBlueButton +
+Beginn:   17:00 Uhr +
+Ende:     19:30 Uhr
+
+__Schriftführer: Janujan Thanabalasingham__
+
+*Nächstes Treffen:* +
+(offiziell) 04.01.2021, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scum Master)
+- Fabian Wolf (Tutor und Rolle des Kunden)
+
+== Aktueller Stand
+
+Beim siebten Team-Meeting stellten alle Gruppenmitglieder ihren Fortschritt des ersten Entwicklungssprints vor. Da unser Prototyp eine gute Grundlage für das Projekt darstellt, sind bereits viele der wichtigen und fundamentalen Funktionen implementiert. Dabei wurden folgende Aufgaben von den jeweiligen Gruppenmitgliedern umgesetzt bzw. in Angriff genommen:
+
+- **Julian** hat an der Karte zur Abstandsbestimmung von Ferienhäusern und Events gearbeitet. Die Karte besitzt nun eine Zoom-Funktion, um einen Standort genauer bestimmen zu können. Außerdem gibt es nun eine Stadtteil-Unterscheidung bei Auswahl von Koordinaten auf der Karte.
+- **Janu** hat angefangen die Accountverwaltung für Admins umzusetzen, allerdings ist dies noch nicht fertig. Man wird jeden Nutzer per E-Mail kontaktieren, unbestätigte Mieteraccounts bestätigen, und jeden Account-Typen löschen können.
+- **Jimmy und Tzu** haben die Verwaltung einer zu tätigenden Buchung erweitert. Buchungen können nun auch abgebrochen werden. Wenn vorgeschlagene zubuchbare Events dazugebucht werden, werden diese nach dem Hinzufügen nicht erneut präsentiert. Vermieter haben nun eine Buchungsübersicht mit verschiedenen Buchungsstati. Der Buchungsverlauf ist ebenfalls vorhanden und Buchungen können storniert werden. 
+- **Jesko** hat Issues im Bezug auf seinen Aufgabenbereich der Events und deren Verwaltung erstellt.
+- **Marten** hat zu seinem Aufgabenbereich ebenfalls Issues erstellt und hat damit begonnen einige von diesen zu bearbeiten.
+
+
+== Planung des nächsten Sprints
+
+
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/24[#24]     |Admins sollten alle Accounts verwalten können |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/24[#24]  |Julian & Janu                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/23[#23]     |Bearbeiten von Kontodaten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/23[#23]  |Julian & Janu                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/6[#6]     |Kontoübersichtsseite |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/6[#6]  |Julian & Janu                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]     |JavaDoc stets ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/11[#11]     |Buchungsdetails |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/11[#11]  |Tzu & Jimmy | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/9[#9]     |Buchung abbrechen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/9[#9]  |Tzu & Jimmy | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/8[#8]     |Events entfernen bei Buchungszeitraumänderung |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/8[#8]  |Tzu & Jimmy | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]     |Event löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/32[#32]     |Event bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]     |HolidayHome löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]  |Marten | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]     |HolidayHome bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]  |Marten | work in progress
+|===
