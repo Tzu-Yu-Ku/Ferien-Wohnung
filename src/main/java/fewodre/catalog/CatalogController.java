@@ -1,6 +1,7 @@
 package fewodre.catalog;
 
 import fewodre.catalog.events.*;
+import fewodre.catalog.events.Event.EventType;
 import fewodre.catalog.holidayhomes.*;
 import fewodre.useraccounts.*;
 
@@ -159,14 +160,16 @@ public class CatalogController {
 		return "editevent";
 	}
 
+	// überarbeiten...
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/editEvent")
 	String editEvent(Model model, @RequestParam("eventId") ProductIdentifier eventId, @RequestParam("name") String name,
-			@RequestParam("description") String description, @RequestParam("price") int price,
-			@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("repeats") int repeats,
-			@RequestParam("repeateRate") int repeateRate, @RequestParam("capacity") int capacity,
-			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
-			@RequestParam("postalCode") String postalCode, @RequestParam("city") String city) {
+			@RequestParam("description") String description, @RequestParam("price") String price,
+			@RequestParam("date") String date, @RequestParam("time") String time,
+			@RequestParam("repeats") String repeats, @RequestParam("repeateRate") String repeateRate,
+			@RequestParam("capacity") String capacity, @RequestParam("street") String street,
+			@RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
+			@RequestParam("city") String city) {
 		System.out.println(eventId);
 		Ecatalog.findById(eventId);
 		if (Ecatalog.findById(eventId).isPresent()) {
@@ -177,8 +180,9 @@ public class CatalogController {
 			if (!description.isBlank()) {
 				EventToChange.setDescription(description);
 			}
-			if ((int) price >= 0) {
-				EventToChange.setPrice(Money.of(price, "EUR"));
+			if (!price.isBlank()) {
+				int price2 = Integer.parseInt(price);
+				EventToChange.setPrice(Money.of(price2, "EUR"));
 			}
 			if (!date.isBlank()) {
 				EventToChange.setDate(LocalDate.parse(date));
@@ -186,28 +190,34 @@ public class CatalogController {
 			if (!time.isBlank()) {
 				EventToChange.setTime(LocalTime.parse(time));
 			}
-			if (repeats >= 0) {
-				EventToChange.setRepeats(repeats);
+			if (!repeats.isBlank()) {
+				int repeats2 = Integer.parseInt(repeats);
+				EventToChange.setRepeats(repeats2);
+				if (repeats2 > 0) {
+					EventToChange.setEventType(EventType.SMALL);
+				}
 			}
-			if (repeateRate >= 0) {
-				EventToChange.setRepeateRate(repeateRate);
+			if (!repeateRate.isBlank()) {
+				int repeateRate2 = Integer.parseInt(repeateRate);
+				EventToChange.setRepeateRate(repeateRate2);
 			}
-			if (capacity >= 0) {
-				EventToChange.setCapacity(capacity);
+			if (!capacity.isBlank()) {
+				int capacity2 = Integer.parseInt(capacity);
+				EventToChange.setCapacity(capacity2);
 			}
 			Place changedPlace = EventToChange.getPlace();
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
 			}
-			// if (!houseNumber.isEmpty()) {
-			// changedPlace.setHouseNumber(houseNumber);
-			// }
-			// if (!postalCode.isBlank()) {
-			// changedPlace.setPostalCode(postalCode);
-			// }
-			// if (!city.isBlank()) {
-			// changedPlace.setCity(city);
-			// }
+			if (!houseNumber.isBlank()) {
+				changedPlace.setHouseNumber(houseNumber);
+			}
+			if (!postalCode.isBlank()) {
+				changedPlace.setPostalCode(postalCode);
+			}
+			if (!city.isBlank()) {
+				changedPlace.setCity(city);
+			}
 			EventToChange.setPlace(changedPlace);
 			System.out.println(EventToChange);
 			Ecatalog.save(EventToChange);
