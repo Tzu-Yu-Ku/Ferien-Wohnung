@@ -6,6 +6,8 @@ import fewodre.useraccounts.*;
 
 import fewodre.useraccounts.AccountManagement;
 import fewodre.useraccounts.AccountRepository;
+import fewodre.utils.Place;
+
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -21,8 +23,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Optional;
+
+import javax.money.MonetaryAmount;
 
 @Controller
 public class CatalogController {
@@ -38,7 +47,9 @@ public class CatalogController {
 	private Authentication authentication;
 	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 
-	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime, UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement, AccountRepository accountRepository) {
+	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
+			UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
+			AccountRepository accountRepository) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
@@ -46,15 +57,18 @@ public class CatalogController {
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
 	}
+
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
-			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname",
+					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
-//HolidayHomes------------------------------------------------------------------------------------------------------------------------
+
+	// HolidayHomes------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
@@ -91,11 +105,13 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editHolidayHome")
-	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, Model model, String name, String description, String price, String capacity, String street, String number, String city, String postalnumber) {
+	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, Model model, String name,
+			String description, String price, String capacity, String street, String number, String city,
+			String postalnumber) {
 		System.out.println("Name der neu eingefügt werden soll '" + name + "'");
 		holidayHome.setDescription(name);
 
-		//System.out.println(versuch.getName());
+		// System.out.println(versuch.getName());
 		return "redirect:/holidayhomes";
 	}
 
@@ -111,14 +127,12 @@ public class CatalogController {
 
 	// HolidayHome housedetails---------
 	@GetMapping("/housedetails")
-	String detail(Model model){
+	String detail(Model model) {
 		firstname(model);
 		return "housedetails";
 	}
 
-
-
-// Events------------------------------------------------------------------------------------------------------------------------------
+	// Events------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 		firstname(model);
@@ -140,15 +154,66 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/editeventpage")
-	String editEventPage(@RequestParam("event") Event event) {
-		System.out.println(event);
+	String editEventPage(@RequestParam("event") Event event, Model model) {
+		model.addAttribute("event", event);
 		return "editevent";
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/editEvent")
-	String editEvent(@RequestParam("event") Event event, @ModelAttribute("form") EventForm form, Model model) {
-		form.editEvent(event);
+	String editEvent(Model model, @RequestParam("eventId") ProductIdentifier eventId, @RequestParam("name") String name,
+			@RequestParam("description") String description, @RequestParam("price") int price,
+			@RequestParam("date") String date, @RequestParam("time") String time, @RequestParam("repeats") int repeats,
+			@RequestParam("repeateRate") int repeateRate, @RequestParam("capacity") int capacity,
+			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
+			@RequestParam("postalCode") String postalCode, @RequestParam("city") String city) {
+		System.out.println(eventId);
+		Ecatalog.findById(eventId);
+		if (Ecatalog.findById(eventId).isPresent()) {
+			Event EventToChange = Ecatalog.findById(eventId).get();
+			if (!name.isBlank()) {
+				EventToChange.setName(name);
+			}
+			if (!description.isBlank()) {
+				EventToChange.setDescription(description);
+			}
+			if ((int) price >= 0) {
+				EventToChange.setPrice(Money.of(price, "EUR"));
+			}
+			if (!date.isBlank()) {
+				EventToChange.setDate(LocalDate.parse(date));
+			}
+			if (!time.isBlank()) {
+				EventToChange.setTime(LocalTime.parse(time));
+			}
+			if (repeats >= 0) {
+				EventToChange.setRepeats(repeats);
+			}
+			if (repeateRate >= 0) {
+				EventToChange.setRepeateRate(repeateRate);
+			}
+			if (capacity >= 0) {
+				EventToChange.setCapacity(capacity);
+			}
+			Place changedPlace = EventToChange.getPlace();
+			if (!street.isBlank()) {
+				changedPlace.setStreet(street);
+			}
+			// if (!houseNumber.isEmpty()) {
+			// changedPlace.setHouseNumber(houseNumber);
+			// }
+			// if (!postalCode.isBlank()) {
+			// changedPlace.setPostalCode(postalCode);
+			// }
+			// if (!city.isBlank()) {
+			// changedPlace.setCity(city);
+			// }
+			EventToChange.setPlace(changedPlace);
+			System.out.println(EventToChange);
+			Ecatalog.save(EventToChange);
+			// holidayHomeStorage.save(UniqueInventoryItem(EventToChange,
+			// EventToChange.getCapacity()));
+		}
 		return "redirect:/events";
 	}
 
