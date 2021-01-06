@@ -33,7 +33,7 @@
                                     <label for="name" class="px-2">Angebotstitel:</label>
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
-                                    <input type="text" id="name" name="name" placeholder="Titel" class="form-control" aria-label="Angebotstitel"/>
+                                    <input type="text" id="name" name="name" th:placeholder="${holidayHome.name}" class="form-control" aria-label="Angebotstitel"/>
 
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
                                     <textarea type="text" class="form-control" id="description" name="description"
-                                        placeholder="Beschreibung" aria-label="Beschreibung"></textarea>
+                                        th:placeholder="${holidayHome.description}" aria-label="Beschreibung"></textarea>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@
                                     <label for="price" class="px-2">Preis (pro Nacht):</label>
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
-                                    <input class="form-control" id="price" name="price" type="number" placeholder="Preis p. N."
+                                    <input class="form-control" id="price" name="price" type="number" th:placeholder="${holidayHome.price}"
                                        aria-label="Preis pro Nacht"/>
                                 </div>
                             </div>
@@ -68,6 +68,9 @@
                                         <label class="custom-file-label" for="inputGroupFile02"
                                            aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
                                     </div>
+                                    <br>
+                                    <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
+                                        alt="Card image cap">
                                 </div>
                             </div>
 
@@ -77,7 +80,7 @@
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
                                     <input class="form-control" type="number" id="capacity" min="0" name="capacity"
-                                        placeholder="Maximale Personenanzahl" aria-label="Maximale Personenanzahl"/>
+                                        th:placeholder="${holidayHome.capacity}" aria-label="Maximale Personenanzahl"/>
                                 </div>
                             </div>
 
@@ -87,11 +90,11 @@
                                 </div>
                                 <div class="p-1 col-7 col-md-7" style="">
                                     <input type="text" class="form-control" id="street" name="street"
-                                       placeholder="Straße" aria-label="Straße">
+                                        th:placeholder="${holidayHome.place.street}" aria-label="Straße">
                                 </div>
                                 <div class="p-1 col-1 col-md-1" style="">
-                                    <input type="text" class="form-control" name="number" id="number"
-                                       placeholder="Hausnr." aria-label="Hausnummer">
+                                    <input type="text" class="form-control" name="houseNumber" id="houseNumber"
+                                        th:placeholder="${holidayHome.place.houseNumber}" aria-label="Hausnummer">
                                 </div>
                             </div>
 
@@ -101,22 +104,19 @@
                                 </div>
                                 <div class="p-1 col-6 col-md-6">
                                     <input type="text" class="form-control" name="city" id="city"
-                                       placeholder="Ort">
+                                        th:placeholder="${holidayHome.place.city}">
                                 </div>
                                 <div class="p-1 col-2 col-md-2">
-                                    <input type="number" class="form-control" name="postalnumber" id="postalnumber"
-                                       placeholder="Postleitzahl" aria-label="Postleitzahl">
+                                    <input type="number" class="form-control" name="postalCode" id="postalCode"
+                                        th:placeholder="${holidayHome.place.postalCode}" aria-label="Postleitzahl">
                                 </div>
                             </div>
 
                             <div class="row border-top p-8" style="background-color: #EEEEEE;">
-                                
-                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
+                                <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}"/>
                                 <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Ferienhaus speichern ">
-                                <!--<button type="submit" tvalue="Test" name="holidayHome" class="btn btn-primary w-25 ml-auto mr-auto">Änderungen speichern<br></button>
-                                -->
                             </div>
-                        
+                            
                         </div>
                     </form>
                 </div>
