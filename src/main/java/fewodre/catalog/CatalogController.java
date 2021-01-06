@@ -97,21 +97,54 @@ public class CatalogController {
 	// edit HolidayHome----------------
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
-	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome) {
+	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		System.out.println("HolidayHome welches editiert werden soll: " + holidayHome);
-
+		model.addAttribute("holidayHome", holidayHome);
 		return "editholidayhome";
 	}
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editHolidayHome")
-	String editHolidayHomes(@RequestParam("holidayHome") HolidayHome holidayHome, Model model, String name,
-			String description, String price, String capacity, String street, String number, String city,
-			String postalnumber) {
-		System.out.println("Name der neu eingefügt werden soll '" + name + "'");
-		holidayHome.setDescription(name);
+	String editHolidayHomes(Model model, @RequestParam("holidayHomeId") ProductIdentifier holidayHomeId, @RequestParam("name") String name,
+			@RequestParam("description") String description, @RequestParam("price") int price, @RequestParam("capacity") int capacity, 
+			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber, @RequestParam("city") String city,
+			@RequestParam("postalCode") String postalCode) {
+		System.out.println(holidayHomeId);
+		Hcatalog.findById(holidayHomeId);
 
-		// System.out.println(versuch.getName());
+		if (Hcatalog.findById(holidayHomeId).isPresent()) {
+			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
+			if (!name.isBlank()) {
+				holidayHomeToChange.setName(name);
+			}
+			
+			if (!description.isBlank()) {
+				holidayHomeToChange.setDescription(description);
+			}
+			if ((int) price >= 0) {
+				holidayHomeToChange.setPrice(Money.of(price, "EUR"));
+			}
+			if (capacity >= 0) {
+				holidayHomeToChange.setCapacity(capacity);
+			}
+			Place changedPlace = holidayHomeToChange.getPlace();
+			if (!street.isBlank()) {
+				changedPlace.setStreet(street);
+			}
+			
+			if (!houseNumber.isEmpty()) {
+				changedPlace.setHouseNumber(houseNumber);
+			}
+			/*
+			if (!postalCode.isBlank()) {
+				changedPlace.setPostalCode(postalCode);
+			}
+			*/
+			holidayHomeToChange.setPlace(changedPlace);
+			System.out.println(holidayHomeToChange);
+			Hcatalog.save(holidayHomeToChange);
+
+		}
 		return "redirect:/holidayhomes";
 	}
 
