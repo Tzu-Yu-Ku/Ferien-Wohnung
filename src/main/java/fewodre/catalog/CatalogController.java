@@ -135,13 +135,14 @@ public class CatalogController {
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
 			}
-
 			if (!houseNumber.isBlank()) {
 				changedPlace.setHouseNumber(houseNumber);
-			}
-			
+			}			
 			if (!postalCode.isBlank()) { 
 				changedPlace.setPostalCode(postalCode);
+			}
+			if (!city.isBlank()) {
+				changedPlace.setCity(city);
 			}
 			
 			holidayHomeToChange.setPlace(changedPlace);
@@ -155,16 +156,24 @@ public class CatalogController {
 	// delete HolidayHome--------------
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/deleteholidayhome")
-	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome) {
-		System.out.println("Zu löschende HolidayHome: " + holidayHome);
-		holidayHome.setIsBookable(false);
-		System.out.println("isBookable ist nun auf '" + holidayHome.getIsBookable() + "' gesetzt");
+	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
+		
+		ProductIdentifier holidayHomeId = holidayHome.getId();
+		System.out.println(holidayHomeId);
+		Hcatalog.findById(holidayHomeId);
+
+		if (Hcatalog.findById(holidayHomeId).isPresent()) {
+			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
+			holidayHomeToChange.setIsBookable(false);
+			Hcatalog.save(holidayHomeToChange);
+		}
+		
 		return "redirect:/holidayhomes";
 	}
 
 	// HolidayHome housedetails---------
 	@GetMapping("/housedetails")
-	String detail(Model model) {
+	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		firstname(model);
 		return "housedetails";
 	}
