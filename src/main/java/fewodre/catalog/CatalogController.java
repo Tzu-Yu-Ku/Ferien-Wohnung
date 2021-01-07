@@ -175,12 +175,31 @@ public class CatalogController {
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/cancelevent")
+	String cancelEvent(@RequestParam("event") Event event) {
+		event.setEventStatus(false);
+		Ecatalog.save(event);
+		return "redirect:/events";
+	}
+
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/activateevent")
+	String activateEvent(@RequestParam("event") Event event) {
+		event.setEventStatus(true);
+		Ecatalog.save(event);
+		return "redirect:/events";
+	}
+
+	// es muss noch kontrolliert werden ob das Event in einer Buchung ist
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/deleteevent")
 	String deleteEvent(@RequestParam("event") Event event) {
-		System.out.println(event);
+		System.out.println("zu löschendes Event " + event);
 		if (holidayHomeStorage.findByProduct(event).isPresent()) {
-			holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
-			Ecatalog.delete(event);
+			if (!event.isEventStatus()) {
+				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
+				Ecatalog.delete(event);
+			}
 		}
 		return "redirect:/events";
 	}
