@@ -172,9 +172,9 @@ public class CatalogController {
 	}
 
 	// HolidayHome housedetails---------
-	@GetMapping("/housedetails")
+	@PostMapping("/housedetails")
 	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
-		firstname(model);
+		model.addAttribute("holidayHome", holidayHome);
 		return "housedetails";
 	}
 
