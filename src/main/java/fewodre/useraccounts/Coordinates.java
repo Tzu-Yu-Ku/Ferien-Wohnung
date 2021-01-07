@@ -56,7 +56,7 @@ public class Coordinates {
 	final Polygon mobschatz = new Polygon(new int[]{137, 150, 164, 163, 174, 171, 179, 189, 198, 199, 202, 208, 214, 215, 222, 231, 237, 237, 245, 251, 257, 260, 257, 260, 263, 263, 257, 250, 240, 238, 228, 222, 221, 208, 199, 190, 195, 190, 184, 177, 168, 160, 160, 160, 160, 157, 147, 141, 141, 139, 137},
 			new int[]{558, 556, 552, 564, 581, 607, 611, 623, 623, 615, 605, 597, 587, 583, 578, 583, 574, 562, 554, 554, 550, 538, 519, 511, 503, 495, 491, 487, 477, 471, 473, 483, 479, 471, 468, 471, 495, 503, 489, 487, 483, 487, 493, 503, 509, 515, 517, 523, 536, 544, 558}, 51);
 
-	final Polygon baum = new Polygon(new int[]{0, 0, 100, 100}, new int[]{0, 100, 100, 0}, 4);
+	//final Polygon baum = new Polygon(new int[]{0, 0, 100, 100}, new int[]{0, 100, 100, 0}, 4);
 	public Coordinates(String size){
 		String[] parts = size.split("-");
 		x = Float.parseFloat(parts[0]);
@@ -67,10 +67,10 @@ public class Coordinates {
 		y_ratio=Math.round(y/y_ref*1000);
 		Xvalue.add(x_ratio);
 		Yvalue.add(y_ratio);
-		System.out.println(x_ratio + ",");
-		System.out.println(y_ratio + ",");
-		System.out.println("X:" + Xvalue + "Länge:" + Xvalue.size());
-		System.out.println("Y:" + Yvalue);
+		//System.out.println(x_ratio + ",");
+		//System.out.println(y_ratio + ",");
+		//System.out.println("X:" + Xvalue + "Länge:" + Xvalue.size());
+		//System.out.println("Y:" + Yvalue);
 		if(weixdorf.contains(x_ratio, y_ratio)){
 			System.out.println("Weixdorf");
 		}
