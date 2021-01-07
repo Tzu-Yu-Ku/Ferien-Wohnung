@@ -12,7 +12,6 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 import org.salespointframework.order.OrderLine;
-import org.salespointframework.order.Totalable;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -34,8 +33,6 @@ import javax.money.MonetaryAmount;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -228,7 +225,7 @@ public class CartController {
 
 		if(bookedDate.isBefore(LocalDate.now())|| bookedDate.isBefore(arrivalDate)|| bookedDate.isAfter(departureDate)){
 			//send to customer "Please choose the right day"
-			return "error";
+			return "error_page";
 		}
 		System.out.println("anzahl0: " + anzahl.getAmount());
 		// check if still available
@@ -248,7 +245,7 @@ public class CartController {
 				|| completeRequirements.isGreaterThan(Quantity.of(event.getCapacity()))){
 			System.out.println("please dont ask for that amount this is f*cking impossible");
 			//"Please give in a correct number"
-			return"error";
+			return "error_page";
 		}
 		// check if it's already full or anzahl > updated capacity
 		else{
