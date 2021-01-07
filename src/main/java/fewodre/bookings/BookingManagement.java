@@ -62,10 +62,10 @@ public class BookingManagement {
 
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home, Cart cart,
 											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<Event, Integer> events){
+											 LocalDate departureDate, HashMap<Event, Integer> events, String paymethod){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, Cash.CASH);
+		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, paymethod);
 		cart.addItemsTo(bookingEntity);
 		//order open()
 		//will update quantity one time
@@ -83,11 +83,28 @@ public class BookingManagement {
 		return result ;
 	}
 
-	public boolean pay(BookingEntity bookingEntity){
-		if(getMoney()){   //orderManagement.payOrder(bookingEntity)
+	public boolean payDeposit(BookingEntity bookingEntity){
+
+		if(getMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod())){
+			//orderManagement.payOrder(bookingEntity)
 			//orderManagement.completeOrder(bookingEntity);
-			return bookingEntity.pay();
+			if(bookingEntity.pay()){return true;}
+			else {
+				System.out.println("etwas ist bei der Bezahlung schiefgelaufen whr. falscher State");
+				giveMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod()); //return Money
+				return false;
+			}
+
 		}
+		return false;
+	}
+	public boolean payRest(BookingEntity bookingEntity){
+	if(orderManagement.payOrder(bookingEntity)) {
+		if (getMoney(bookingEntity.getTotal().getNumber().floatValue(), bookingEntity.getPaymethod())) {
+			orderManagement.completeOrder(bookingEntity);
+			return true;
+		}
+	}
 		return false;
 	}
 
@@ -104,7 +121,19 @@ public class BookingManagement {
 	 * the tenant to the host or us was succesfull
 	 * @return
 	 */
-	public boolean getMoney(){
+	public boolean getMoney(float bill, Paymethod choosenPaymethod){
+		System.out.println("paid: " + bill + "€");
+		return true;
+	}
+
+	/**
+	 * Interface for the Paying-Framework of the customer.
+	 * Shall return true when the transaction of the money from
+	 * the host or us to the tenant was succesfull
+	 * @return
+	 */
+	public boolean giveMoney(float bill, Paymethod choosenPaymethod){
+		System.out.println("depaid: " + bill + "€");
 		return true;
 	}
 

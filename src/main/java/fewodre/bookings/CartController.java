@@ -305,11 +305,13 @@ public class CartController {
 		}
  */
 		if(checkIfBooked()){ return "redirect:/cart";}
-		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
+		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events, paymethod);
 		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
+		// if the Tenant wants to pay independent from us
 		if(paymethod.equalsIgnoreCase("cash")){bookingEntity.pay();} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
+
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!
 	}
@@ -371,7 +373,17 @@ public class CartController {
 	@GetMapping("/pay/{id}")
 	public String pay(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);
-		if(bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
+		if(bookingManagement.payDeposit(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
+			//it's paid
+			return "redirect:/bookings";
+		}
+		//it couldn't be paid maybe it already was or something like that
+		return "redirect:/bookingdetails/" + booking.getId();
+	}
+	@GetMapping("/payRest/{id}")
+	public String payRest(Model model, @PathVariable("id") BookingEntity booking){
+		firstname(model);
+		if(bookingManagement.payRest(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
 			//it's paid
 			return "redirect:/bookings";
 		}
