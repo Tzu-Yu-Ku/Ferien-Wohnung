@@ -108,7 +108,7 @@ public class CatalogController {
 	@PostMapping("/editHolidayHome")
 	String editHolidayHomes(Model model, @RequestParam("holidayHomeId") ProductIdentifier holidayHomeId,
 			@RequestParam("name") String name, @RequestParam("description") String description,
-			@RequestParam("price") int price, @RequestParam("capacity") int capacity,
+			@RequestParam("price") String price, @RequestParam("capacity") String capacity,
 			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
 			@RequestParam("city") String city, @RequestParam("postalCode") String postalCode) {
 		System.out.println(holidayHomeId);
@@ -123,23 +123,27 @@ public class CatalogController {
 			if (!description.isBlank()) {
 				holidayHomeToChange.setDescription(description);
 			}
-			if ((int) price >= 0) {
-				holidayHomeToChange.setPrice(Money.of(price, "EUR"));
+			if (!price.isBlank()) {
+				int price2 = Integer.parseInt(price);
+				holidayHomeToChange.setPrice(Money.of(price2, "EUR"));
 			}
-			if (capacity >= 0) {
-				holidayHomeToChange.setCapacity(capacity);
+			if (!capacity.isBlank()) {
+				int capacityHH = Integer.parseInt(capacity);
+				holidayHomeToChange.setCapacity(capacityHH);
 			}
 			Place changedPlace = holidayHomeToChange.getPlace();
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
 			}
 
-			if (!houseNumber.isEmpty()) {
+			if (!houseNumber.isBlank()) {
 				changedPlace.setHouseNumber(houseNumber);
 			}
-			/*
-			 * if (!postalCode.isBlank()) { changedPlace.setPostalCode(postalCode); }
-			 */
+			
+			if (!postalCode.isBlank()) { 
+				changedPlace.setPostalCode(postalCode);
+			}
+			
 			holidayHomeToChange.setPlace(changedPlace);
 			System.out.println(holidayHomeToChange);
 			Hcatalog.save(holidayHomeToChange);
