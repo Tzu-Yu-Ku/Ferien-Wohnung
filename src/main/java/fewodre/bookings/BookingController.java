@@ -12,8 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 
@@ -28,6 +27,7 @@ public class BookingController {
 	private HolidayHomeCatalog holidayHomeCatalog;
 	private final AccountRepository accountRepository;
 	private Authentication authentication;
+	private final BookingManagement bookingManagement;
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -38,19 +38,21 @@ public class BookingController {
 		}
 	}
 
-	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository, BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog){
+	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository, BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog, BookingManagement bookingManagement){
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
+		Assert.notNull(bookingManagement, "BookingManagement must not be null!");
 		this.accountManagement = accountManagement;
 		this.bookingRepository = bookingRepository;
 		this.formatter = new StringFormatter();
 		this.holidayHomeCatalog = holidayHomeCatalog;
 		this.accountRepository = accountRepository;
+		this.bookingManagement = bookingManagement;
 	}
 
 	@GetMapping("/bookings")
-	@PreAuthorize("hasRole('TENANT')")
+	@PreAuthorize("hasAnyRole('TENANT','HOST')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
 		firstname(model);
 			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
@@ -86,6 +88,33 @@ public class BookingController {
 			BookingEntity bookingEntity = iter.next();
 			System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
 		}
+		model.addAttribute("formatter", this.formatter);
+		return "bookings";
+	}
+
+	@PostMapping("/bookingsFiltered")
+	@PreAuthorize("hasRole('HOST')")
+	public String sortByState(Model model,@LoggedIn UserAccount userAccount, @RequestParam("state") String state){
+		firstname(model);
+		model.addAttribute("bookings", bookingManagement.findByState(state));
+		model.addAttribute("formatter", this.formatter);
+		return "bookings";
+	}
+
+	@PostMapping("/searchByName")
+	@PreAuthorize("hasRole('HOST')")
+	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount, @RequestParam("lastname")String tenantName){
+		firstname(model);
+		model.addAttribute("bookings", bookingManagement.findByTenantName(tenantName));
+		model.addAttribute("formatter", this.formatter);
+		return "bookings";
+	}
+
+	@PostMapping("/searchByHomeName")
+	@PreAuthorize("hasRole('HOST')")
+	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount, @RequestParam("homename")String homeName){
+		firstname(model);
+		model.addAttribute("bookings", bookingManagement.findByHomeName(homeName));
 		model.addAttribute("formatter", this.formatter);
 		return "bookings";
 	}

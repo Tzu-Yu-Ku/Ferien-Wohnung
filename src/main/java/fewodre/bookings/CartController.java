@@ -336,6 +336,7 @@ public class CartController {
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
 		model.addAttribute("one", one);
+		model.addAttribute("customer", booking.getUserAccount());
 		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();
@@ -350,8 +351,9 @@ public class CartController {
 		List<OrderLine> events = booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList();
 		//MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
 		model.addAttribute("orderlines",events);
-		model.addAttribute("deposit",  Money.of(booking.getDepositInCent()*0.01f,"EUR"));
-		MonetaryAmount rest = Money.of(0,"EUR").add(home.getPrice().multiply(0.9));
+		MonetaryAmount deposit =  Money.of(booking.getDepositInCent()*0.01f,"EUR");
+		model.addAttribute("deposit", deposit);
+		MonetaryAmount rest = booking.getTotal().subtract(deposit);
 		model.addAttribute("rest",rest);
 		return "bookingdetails";
 	}

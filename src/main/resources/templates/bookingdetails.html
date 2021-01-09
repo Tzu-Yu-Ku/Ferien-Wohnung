@@ -65,10 +65,15 @@
                     <td colspan="4">
                         <h5 class="p-1" th:text="${booking.id}" align="right">0123789</h5></td>
                 </tr>
-                <tr>
+                <tr sec:authorize="hasRole('TENANT')">
                     <th><h4 class="p-1">Vermieter</h4></th>
                     <td colspan="4">
                         <h5 class="p-1" th:text="${booking.hostName}" align="right">Herr Müller</h5></td>
+                </tr>
+                <tr sec:authorize="hasRole('HOST')">
+                    <th><h4 class="p-1">Mieter</h4></th>
+                    <td colspan="4">
+                        <h5 class="p-1" th:text="${customer.getFirstname() + ', ' + customer.getLastname()}" align="right">Herr Müller</h5></td>
                 </tr>
                 <tr>
                     <th><h4 class="p-1">Erstellungsdatum</h4></th>
@@ -79,6 +84,11 @@
                     <th><h4 class="p-1">Buchungstatus</h4></th>
                     <td colspan="4">
                         <h5 class="p-1" th:text="${booking.getState()}" align="right">Open</h5></td>
+                </tr>
+                <tr>
+                    <th><h4 class="p-1">Zeitraum der Buchung</h4></th>
+                    <td colspan="4">
+                        <h5 class="p-1" th:text="${formatter.formatDate(booking.getArrivalDate()) + ' ~ ' + formatter.formatDate(booking.getDepartureDate())}" align="right">12 Dec, 2020 ~ 14 Dec, 2020</h5></td>
                 </tr>
                 <tr>
                     <th><h4 class="p-1">Nächte</h4></th>
@@ -121,19 +131,19 @@
 
             </table>
         </div>
-        <div class="row border-top">
-            <table class="table" style="background-color: #EEEEEE;">
+        <div class="row border-top" sec:authorize="hasRole('TENANT')">
+            <table class="table" style="background-color: #EEEEEE;" th:if="${booking.getState().toString()!='CANCELED'}">
                 <thead>
                     <tr>
                         <th><h3>Ihre Zahlungsplan</h3></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:if="${booking.getState().toString() == 'ORDERED'}" sec:authorize="hasRole('TENANT')">
+                    <tr th:if="${booking.getState().toString() == 'ORDERED'}">
                         <th><h5>Sie bezahlen 10% der gesamten Übernachtungskosten und den Gesamtpreis der Events,um zu reservieren</h5></th>
                         <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
                     </tr>
-                    <tr th:if="${booking.getState().toString() != 'ORDERED'}" sec:authorize="hasRole('TENANT')">
+                    <tr th:if="${booking.getState().toString() != 'ORDERED'}">
                         <th><h5 style="color:blue">Schon bezahlt</h5></th>
                         <td><h6 style="color:blue" th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
                     </tr>
@@ -144,12 +154,37 @@
                 </tbody>
             </table>
             <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
-            <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('TENANT')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
+            <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren.</a>
+            <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED'}" th:href="@{/pay/{id}(id=${booking.id})}">Buchung bezahlen.</a>
+        </div>
+        <div class="row border-top" sec:authorize="hasRole('HOST')" th:if="${booking.getState().toString()!='CANCELED'}">
+            <table class="table" style="background-color: #EEEEEE;">
+                <thead>
+                <tr>
+                    <th><h3>Rechnung</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${booking.getState().toString() == 'ORDERED'}">
+                    <th><h5>Die Kunden müssen noch die Anzahlung bezahlen</h5></th>
+                    <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                </tr>
+                <tr th:if="${booking.getState().toString() != 'ORDERED'}">
+                    <th><h5 style="color:blue">Schon bezahlt</h5></th>
+                    <td><h6 style="color:blue" th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                </tr>
+                <tr>
+                    <th><h5>Die Kunden müssen in der Unterkunft noch bezahlen</h5></th>
+                    <td><h6 th:text="${formatter.parsePrice(rest)}">456</h6></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="bookingid" value="0" th:value="${booking.id}">
             <a class="btn btn-danger btn-lg" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}" sec:authorize="hasRole('HOST')" th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren/abweisen.</a>
-            <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED'}" sec:authorize="hasRole('TENANT')" th:href="@{/pay/{id}(id=${booking.id})}">Buchung bezahlen.</a>
             <a class="btn btn-info btn-lg" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}" sec:authorize="hasRole('HOST')" th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a>
         </div>
     </div>
+</div>
 </div>
 
 <footer th:replace="footer :: footer"></footer>

@@ -87,8 +87,9 @@ public class BookingEntity extends Order {
 			addOrderLine(event, Quantity.of(events.get(event)));
 			depositInCent += event.getPrice().multiply(events.get(event)).multiply(100).getNumber().intValue();
 		}
-		price = getTotal();
+
 		 */
+		price = getTotal();
 		//need to find out from Home
 		this.hostName = (host==null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
 	}

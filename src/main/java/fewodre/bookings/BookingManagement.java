@@ -26,7 +26,10 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -118,4 +121,29 @@ public class BookingManagement {
 	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){return bookings.findBookingEntityByUserAccount(userAccount);}
 
 	public  BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier){return bookings.findFirstByOrderIdentifier(orderIdentifier);}
+
+	public Streamable<BookingEntity> findByState(String state){
+		if(state.equals("ALL")){
+			return bookings.findAll();
+		}
+		List<BookingEntity> all = bookings.findAll().toList();
+		List<BookingEntity> stream = new ArrayList<>();
+		all.stream().filter(bookingEntity -> bookingEntity.getState().toString().equals(state))
+				.forEach(bookingEntity -> stream.add(bookingEntity));
+		return Streamable.of(stream);
+	}
+
+	public List<BookingEntity> findByTenantName(String name){
+		List<BookingEntity> bookingsFromTenant = bookings.findAll().filter(bookingEntity ->
+				bookingEntity.getUserAccount().getLastname().equals(name)).toList();
+		return bookingsFromTenant;
+	}
+
+	public List<BookingEntity> findByHomeName(String home){
+		List<BookingEntity> bookingsFromHome = bookings.findAll().filter(bookingEntity ->
+				bookingEntity.getHomeName().equals(home)).toList();
+		return bookingsFromHome;
+	}
+
+
 }

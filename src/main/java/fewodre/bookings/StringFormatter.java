@@ -29,7 +29,7 @@ public class StringFormatter{
 		return date.getDayOfMonth() + ". " + MonthTransDict.get(date.getMonth().toString()) + " " + date.getYear();
 	}
 	public String parsePrice(MonetaryAmount Price){
-		return Price.getNumber().longValue() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		return Price.getNumber().doubleValue() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 	}
 
 	public boolean DateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate){
