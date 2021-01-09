@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
-<body scroll="no" style="overflow: hidden" >
+<body scroll="no" style="overflow: hidden">
 <script>
     $(function() {
 var zoom_container_size = $( '.zoom_container').height();
@@ -58,49 +58,55 @@ $container.addClass( 'hidden' );
 </script>
 
 <style>
-.main_container div {
-display: inline-block;
-}
-.thumbnail{
-    cursor: crosshair;
-height: 60vh;
-}
-.original{
-height: 200vh;
-}
-div.zoom_container {
-    position: fixed;
-    box-shadow: 0 0 0 8000px #0005;
-    border: 2px solid #444;
-    border-radius: 50%;
-    z-index: 100;
-    pointer-events: none;
-    width: 180px;
-height: 180px;
-overflow: hidden;
-    display: none;
-}
-.zoom_container.hidden {
-    cursor: crosshair;
-}
-.crosshair {
-    position: absolute;
-    left: 50px;
-    top: 50px;
-    width: 4px;
-    height: 4px;
-    margin-left: -2px;
-    margin-top: -2px;
-    z-index: 101;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: red;
-}
-.thumbnail:hover + .zoom_container {
-    display:block;
-}
+    .main_container div {
+        display: inline-block;
+    }
+
+    .thumbnail {
+        cursor: crosshair;
+        height: 60vh;
+    }
+
+    .original {
+        height: 200vh;
+    }
+
+    div.zoom_container {
+        position: fixed;
+        box-shadow: 0 0 0 8000px #0005;
+        border: 2px solid #444;
+        border-radius: 50%;
+        z-index: 100;
+        pointer-events: none;
+        width: 180px;
+        height: 180px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .zoom_container.hidden {
+        cursor: crosshair;
+    }
+
+    .crosshair {
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        width: 4px;
+        height: 4px;
+        margin-left: -2px;
+        margin-top: -2px;
+        z-index: 101;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: red;
+    }
+
+    .thumbnail:hover + .zoom_container {
+        display: block;
+    }
 </style>
 <div class="container p-0 w-100" style="height:56px">
     <div class="row">
@@ -118,18 +124,28 @@ overflow: hidden;
                     Klicken Sie auf den Ort</h1>
                 <div class="main_container" onclick="myFunction(event)">
                     <form role="form" id="map" th:action="@{/map}" th:object="${coordinates}" method="post">
-                            <div class="form-inline">
-                                <input type="hidden" id="size" name="size" class="form-control">
+                        <div class="form-inline">
+                            <input type="hidden" id="size" name="size" class="form-control">
                         </div>
                         <script th:value="*{size}">
                             function myFunction(event) {
-                                var x = event.clientX;
+                                var boundingRect = document.getElementById('forest').getBoundingClientRect();
+                                var mouseX = event.clientX - boundingRect.x;
+                                var mouseY = event.clientY - boundingRect.y;
+                                var width = boundingRect.width;
+                                var height = boundingRect.height;
+                                var relativeMouseX = mouseX / width;
+                                var relativeMouseY = mouseY / height;
+/*                                var x = event.clientX;
                                 var y = event.clientY;
                                 var height = window.screen.height;
                                 var width = window.screen.width;
-                                var coords = x + "-" + width + "-" + y + "-" + height;
-                                document.getElementById("size").value = coords;
-                                document.getElementById('map').submit();
+                                var coords = x + "-" + width + "-" + y + "-" + height;*/
+                                var coords = "mouseX:" + mouseX + "; mouseY:" + mouseY + "; width:" + width + "; height:" + height;
+                                var relativeCoords = "X:" + relativeMouseX + "; Y:" + relativeMouseY;
+                                console.log(coords);
+                                // document.getElementById("size").value = coords;
+                                // document.getElementById('map').submit();
                             }
                         </script>
                     </form>
@@ -139,10 +155,10 @@ overflow: hidden;
                         <img id="forest_original" class="original" src="/resources/img/karte.jpg">
                     </div>
                 </div>
-                </div>
             </div>
         </div>
     </div>
+</div>
 <div class="container p-0 w-100 bg-white">
     <div class="row">
         <div class="w-100">

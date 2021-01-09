@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
 
     <div
@@ -25,132 +24,163 @@
             </div>
             <div class="row" style="background-color: #EEEEEE;">
                 <div class="p-1 col-8 col-md-12">
-                    <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Eventangebots aus und
-                        laden
-                        Sie passende Bilder hoch.</p>
+                    <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Eventangebots aus.</p>
                 </div>
             </div>
             <form method="post" role="form" id="form" class="gb-form" th:action="@{/editEvent}" th:object="${form}">
-                <div class="form-group">
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="name" class="px-2">Eventtitel:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input type="text" class="form-control" id="name" th:name="name" required="required"
-                                placeholder="Name" />
-                        </div>
+                <input class="form-group" type="hidden" th:name="eventId" th:value="${event.getId()}" />
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="name" class="px-2">Eventtitel:</label>
                     </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="description" class="px-2">Beschreibung:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <textarea type="text" class="form-control" id="description" th:name="description"
-                                required="required" placeholder="Beschreibung"></textarea>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="EventType" class="px-2">Eventtyp:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <select class="form-control" id="EventType" th:name="EventType">
-                                <option value="big">einmaliges Event</option>
-                                <option value="sml">sich wiederholendes Event</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="price" class="px-2">Preis:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="price" th:name="price" type="number" placeholder="Preis" />
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="date" class="px-2">Datum:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="date" th:name="date" type="date" placeholder="Datum" />
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="time" class="px-2">Zeitpunkt:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="time" th:name="time" type="time" placeholder="Zeitpunkt" />
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="repeats" class="px-2">Wiederholungsanzahl &amp; Wiederholungsrate:</label>
-                        </div>
-                        <div class="p-1 col-4 col-md-4">
-                            <input class="form-control" id="repeats" th:name="repeats" type="number" min=0
-                                placeholder="Anzahl an Wiederholungen" />
-                        </div>
-                        <div class="p-1 col-4 col-md-4">
-                            <input class="form-control" id="repeateRate" th:name="repeateRate" type="number" min=1
-                                placeholder="Wiederholungsrate" />
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="inputGroupFile" class="px-2">Bilder:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile">
-                                <label class="custom-file-label" for="inputGroupFile"
-                                    aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="capacity" class="px-2">Maximale Teilnehmerzahl:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
-                                required="required" placeholder="Maximale Personenanzahl"
-                                aria-label="Maximale Personenanzahl" />
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right" style="">
-                            <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
-                        </div>
-                        <div class="p-1 col-7 col-md-7" style="">
-                            <input type="text" class="form-control" id="street" th:name="street" required="required"
-                                placeholder="Straße" aria-label="Straße">
-                        </div>
-                        <div class="p-1 col-1 col-md-1" style="">
-                            <input type="text" class="form-control" th:name="number" required="required"
-                                placeholder="Hausnr." aria-label="Hausnummer">
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
-                        </div>
-                        <div class="p-1 col-6 col-md-6">
-                            <input type="text" class="form-control" name="city" id="city" th:name="city"
-                                required="required" placeholder="Ort">
-                        </div>
-                        <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="postalnumber" required="required"
-                                placeholder="Postleitzahl" aria-label="Postleitzahl">
-                        </div>
-                    </div>
-                    <div class="row border-top p-3" style="background-color: #EEEEEE;">
-                        <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Event erstellen">
+                    <div class="p-1 col-8 col-md-8">
+                        <input type="text" class="form-control" id="name" th:name="name"
+                            th:placeholder="${event.name}" />
                     </div>
                 </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="description" class="px-2">Beschreibung:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <textarea type="text" class="form-control" id="description" th:name="description"
+                            th:placeholder="${event.description}"></textarea>
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="price" class="px-2">Preis:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" id="price" th:name="price" type="number"
+                            th:placeholder="${event.price}" />
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="date" class="px-2">Datum:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" id="date" th:name="date" type="date"
+                            th:placeholder="${event.date}" />
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="time" class="px-2">Zeitpunkt:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" id="time" th:name="time" type="time"
+                            th:placeholder="${event.time}" />
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="repeats" class="px-2">Wiederholungsanzahl &amp; Wiederholungsrate:</label>
+                    </div>
+                    <div class="p-1 col-4 col-md-4">
+                        <input class="form-control" id="repeats" th:name="repeats" type="number" min=0
+                            th:placeholder="${event.repeats}" />
+                    </div>
+                    <div class="p-1 col-4 col-md-4">
+                        <input class="form-control" id="repeateRate" th:name="repeateRate" type="number" min=1
+                            th:placeholder="${event.repeateRate}" />
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="inputGroupFile" class="px-2">Bilder:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile">
+                            <label class="custom-file-label" for="inputGroupFile"
+                                aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="capacity" class="px-2">Maximale Teilnehmerzahl:</label>
+                    </div>
+                    <div class="p-1 col-8 col-md-8">
+                        <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
+                            th:placeholder="${event.capacity}" aria-label="Maximale Personenanzahl" />
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right" style="">
+                        <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
+                    </div>
+                    <div class="p-1 col-7 col-md-7" style="">
+                        <input type="text" class="form-control" id="street" th:name="street"
+                            th:placeholder="${event.place.street}" aria-label="Straße">
+                    </div>
+                    <div class="p-1 col-1 col-md-1" style="">
+                        <input type="text" class="form-control" th:name="houseNumber"
+                            th:placeholder="${event.place.houseNumber}" aria-label="Hausnummer">
+                    </div>
+                </div>
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
+                    </div>
+                    <div class="p-1 col-6 col-md-6">
+                        <input type="text" class="form-control" name="city" id="city" th:name="city"
+                            th:placeholder="${event.place.city}">
+                    </div>
+                    <div class="p-1 col-2 col-md-2">
+                        <input type="number" class="form-control" th:name="postalCode"
+                            th:placeholder="${event.place.postalCode}" aria-label="Postleitzahl">
+                    </div>
+                </div>
+
+
+                <div class="row border-top" style="background-color: #EEEEEE;">
+                    <div class="p-1 col-4 col-md-4 border-right">
+                        <label for="coordinates" class="px-2">Koordinaten:</label>
+                    </div>
+                    <div class="p-1 col-3 col-md-3">
+                        <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="number"
+                            th:placeholder="${event.place.coordX}" min=0 max=10000 />
+                    </div>
+                    <div class="p-1 col-3 col-md-3">
+                        <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="number"
+                            th:placeholder="${event.place.coordY}" min=0 max=10000 />
+                    </div>
+
+                    <div onclick="myFunction(event)">
+                        <script>
+                            function myFunction(event) {
+                                const coordx = document.getElementById("coordinates_x");
+                                const coordy = document.getElementById("coordinates_y");
+
+                                let boundingRect = document.getElementById('forest').getBoundingClientRect();
+                                let mouseX = event.clientX - boundingRect.x;
+                                let mouseY = event.clientY - boundingRect.y;
+                                let relativeMouseX = Math.round((mouseX / boundingRect.width) * 10000);
+                                let relativeMouseY = Math.round((mouseY / boundingRect.height) * 10000);
+
+                                coordx.value = relativeMouseX;
+                                coordy.value = relativeMouseY;
+
+                                let relativeCoords = "X:" + relativeMouseX + "; Y:" + relativeMouseY;
+                                console.log(relativeCoords);
+                            }
+                        </script>
+                        <img id="forest" style="width: 100%;" src="/resources/img/karte.jpg">
+                    </div>
+
+                </div>
+
+                <div class="row border-top p-3" style="background-color: #EEEEEE;">
+                    <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Event bearbeiten" />
+                </div>
             </form>
+
+
+
+
         </div>
     </div>
 

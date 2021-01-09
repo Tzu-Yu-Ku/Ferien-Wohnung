@@ -25,7 +25,7 @@
                 <div class="carousel slide" data-ride="carousel" id="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active"><img class="d-block img-fluid w-100"
-                                                               src="../resources/img/house_1.png">
+                            th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
                         <div class="carousel-item"><img class="d-block img-fluid w-100"
                                                         src="../resources/img/house_1.png">
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-6 p-lg-5 p-3">
-                <h1 class="">Entspannte Hood in Dresden<br></h1>
+                <h1 class="card-title" th:text="${holidayHome.name}"><br></h1>
             </div>
         </div>
         <div class="row">
@@ -52,8 +52,7 @@
                 <h4 class="p-1">Beschreibung</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">Das Traumhaus Dresden liegt direkt an der Elbe und bietet eine entzückende
-                    Möbelausstattung und Platz für bis zu vier Gäste.</h5>
+                <h5 class="p-1" th:text="${holidayHome.description}"></h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -61,7 +60,7 @@
                 <h4 class="p-1" style="">Preis (pro Nacht)</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" name="price">100€</h5>
+                <h5 class="p-1" th:text="${holidayHome.price}"></h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -69,7 +68,7 @@
                 <h4 class="p-1">Vermieter</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">Herr Müller</h5>
+                <h5 class="p-1" th:text="${holidayHome.hostMail}"></h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
@@ -77,7 +76,7 @@
                 <h4 class="p-1">Max. Gästeanzahl</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1">4</h5>
+                <h5 class="p-1" th:text="${holidayHome.capacity}"></h5>
             </div>
         </div>
         <div class="row border-top" style="background-color: #EEEEEE;">
