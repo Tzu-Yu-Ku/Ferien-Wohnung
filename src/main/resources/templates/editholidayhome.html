@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css">
+        type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>FeWoDre - Ferienhausangebot bearbeiten</title>
 </head>
 
@@ -15,7 +15,8 @@
 
     <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
 
-    <div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
+    <div
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
         <div class="container">
             <div class="row" style="background-color: #EEEEEE;">
                 <div class="p-lg-3 w-100">
@@ -24,7 +25,8 @@
             </div>
             <div class="row" style="background-color: #EEEEEE;">
                 <div class="p-1 col-8 col-md-12">
-                    <p class="lead mb-4 p-1 text-center">Bearbeiten sie ihr bestehendes Ferienhaus und speichern sie die Änderungen</p>
+                    <p class="lead mb-4 p-1 text-center">Bearbeiten sie ihr bestehendes Ferienhaus und speichern sie die
+                        Änderungen</p>
                     <form role="form" id="form" th:action="@{/editHolidayHome}" method="post">
                         <div class="form-group">
 
@@ -33,7 +35,8 @@
                                     <label for="name" class="px-2">Angebotstitel:</label>
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
-                                    <input type="text" id="name" name="name" th:placeholder="${holidayHome.name}" class="form-control" aria-label="Angebotstitel"/>
+                                    <input type="text" id="name" name="name" th:placeholder="${holidayHome.name}"
+                                        class="form-control" aria-label="Angebotstitel" />
 
                                 </div>
                             </div>
@@ -44,7 +47,8 @@
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
                                     <textarea type="text" class="form-control" id="description" name="description"
-                                        th:placeholder="${holidayHome.description}" aria-label="Beschreibung"></textarea>
+                                        th:placeholder="${holidayHome.description}"
+                                        aria-label="Beschreibung"></textarea>
                                 </div>
                             </div>
 
@@ -53,8 +57,8 @@
                                     <label for="price" class="px-2">Preis (pro Nacht):</label>
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
-                                    <input class="form-control" id="price" name="price" type="number" th:placeholder="${holidayHome.price}"
-                                       aria-label="Preis pro Nacht"/>
+                                    <input class="form-control" id="price" name="price" type="number"
+                                        th:placeholder="${holidayHome.price}" aria-label="Preis pro Nacht" />
                                 </div>
                             </div>
 
@@ -66,7 +70,8 @@
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="inputGroupFile02">
                                         <label class="custom-file-label" for="inputGroupFile02"
-                                           aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
+                                            aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG,
+                                            JPEG)</label>
                                     </div>
                                     <br>
                                     <!--
@@ -82,7 +87,7 @@
                                 </div>
                                 <div class="p-1 col-8 col-md-8">
                                     <input class="form-control" type="number" id="capacity" min="0" name="capacity"
-                                        th:placeholder="${holidayHome.capacity}" aria-label="Maximale Personenanzahl"/>
+                                        th:placeholder="${holidayHome.capacity}" aria-label="Maximale Personenanzahl" />
                                 </div>
                             </div>
 
@@ -114,11 +119,48 @@
                                 </div>
                             </div>
 
-                            <div class="row border-top p-8" style="background-color: #EEEEEE;">
-                                <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}"/>
-                                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Ferienhaus speichern ">
+                            <div class="row border-top" style="background-color: #EEEEEE;">
+                                <div class="p-1 col-4 col-md-4 border-right">
+                                    <label for="coordinates" class="px-2">Koordinaten:</label>
+                                </div>
+                                <div class="p-1 col-3 col-md-3">
+                                    <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="number"
+                                        th:placeholder="${holidayHome.place.coordX}" min=0 max=10000 />
+                                </div>
+                                <div class="p-1 col-3 col-md-3">
+                                    <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="number"
+                                        th:placeholder="${holidayHome.place.coordY}" min=0 max=10000 />
+                                </div>
+
+                                <div onclick="myFunction(event)">
+                                    <script>
+                                        function myFunction(event) {
+                                            const coordx = document.getElementById("coordinates_x");
+                                            const coordy = document.getElementById("coordinates_y");
+
+                                            let boundingRect = document.getElementById('forest').getBoundingClientRect();
+                                            let mouseX = event.clientX - boundingRect.x;
+                                            let mouseY = event.clientY - boundingRect.y;
+                                            let relativeMouseX = Math.round((mouseX / boundingRect.width) * 10000);
+                                            let relativeMouseY = Math.round((mouseY / boundingRect.height) * 10000);
+
+                                            coordx.value = relativeMouseX;
+                                            coordy.value = relativeMouseY;
+
+                                            let relativeCoords = "X:" + relativeMouseX + "; Y:" + relativeMouseY;
+                                            console.log(relativeCoords);
+                                        }
+                                    </script>
+                                    <img id="forest" style="width: 100%;" src="/resources/img/karte.jpg">
+                                </div>
+
                             </div>
-                            
+
+                            <div class="row border-top p-8" style="background-color: #EEEEEE;">
+                                <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}" />
+                                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit"
+                                    value="Ferienhaus speichern ">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -127,7 +169,7 @@
     </div>
 
 
-<!--
+    <!--
     <div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
         <div class="container">
             <div class="row" style="background-color: #EEEEEE;">

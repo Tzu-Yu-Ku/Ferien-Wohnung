@@ -110,7 +110,8 @@ public class CatalogController {
 			@RequestParam("name") String name, @RequestParam("description") String description,
 			@RequestParam("price") String price, @RequestParam("capacity") String capacity,
 			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
-			@RequestParam("city") String city, @RequestParam("postalCode") String postalCode) {
+			@RequestParam("city") String city, @RequestParam("postalCode") String postalCode,
+			@RequestParam("coordinates_x") String coordinates_x, @RequestParam("coordinates_y") String coordinates_y) {
 		System.out.println(holidayHomeId);
 		Hcatalog.findById(holidayHomeId);
 
@@ -143,6 +144,14 @@ public class CatalogController {
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
+			}
+			if (!coordinates_x.isBlank()) {
+				int coordinates_x2 = Integer.parseInt(coordinates_x);
+				changedPlace.setCoordX(coordinates_x2);
+			}
+			if (!coordinates_y.isBlank()) {
+				int coordinates_y2 = Integer.parseInt(coordinates_y);
+				changedPlace.setCoordY(coordinates_y2);
 			}
 
 			holidayHomeToChange.setPlace(changedPlace);

@@ -158,7 +158,8 @@ public class EventForm {
 
     public Event toNewEvent(String userAccount) {
         return new Event(getName(), userAccount, getDescription(), "event1.png",
-                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, getEventType(),
-                getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(), getRepeateRate());
+                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordX(), getCoordY()), true,
+                getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(),
+                getRepeateRate());
     }
 }
