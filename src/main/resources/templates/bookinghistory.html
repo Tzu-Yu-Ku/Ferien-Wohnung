@@ -88,11 +88,11 @@
             <td th:text="${formatter.parsePrice(booking.getTotal())}">123 €</td>
             <td th:text="${booking.getState()}"> Ordered</td>
             <td>
-                <p><a class="btn btn-danger mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
+                <p><a class="btn btn-danger btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
                       th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren</a></p>
-                <p><a class="btn btn-success mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"
+                <p><a class="btn btn-success btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"
                       th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a></p>
-                <p><a class="btn btn-outline-info mr-3 mx-auto" style="color:#17a2b8" th:href="@{/bookingdetails/} + ${booking.id}">Details</a></p>
+                <p><a class="btn btn-outline-info btn-sm mr-3 mx-auto" style="color:#17a2b8" th:href="@{/bookingdetails/} + ${booking.id}">Details</a></p>
             </td>
         </tr>
         </tbody>
