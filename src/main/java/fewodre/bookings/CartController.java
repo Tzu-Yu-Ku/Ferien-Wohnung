@@ -118,8 +118,8 @@ public class CartController {
 		return "cart"; }
 
 	@PostMapping("/cart")
-	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")LocalDate startDate,
-								 @RequestParam("departuredate")LocalDate endDate, @ModelAttribute Cart cart){
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")String startDate,
+								 @RequestParam("departuredate")String endDate, @ModelAttribute Cart cart){
 		this.holidayHome = holidayHome;
 		this.formatter = new StringFormatter();
 
@@ -133,12 +133,11 @@ public class CartController {
 			}
 		}
 
-			this.arrivalDate = startDate;
-			this.departureDate = endDate;
-			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
-			cart.addOrUpdateItem(holidayHome, interval);
-
-			return "redirect:/cart";
+		this.arrivalDate = LocalDate.parse(startDate);
+		this.departureDate = LocalDate.parse(endDate);
+		Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
+		cart.addOrUpdateItem(holidayHome, interval);
+		return "redirect:/cart";
 	}
 
 
@@ -206,7 +205,7 @@ public class CartController {
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
 		LocalDate departureDate = arrivalDate.plusDays(2);
-		return addHolidayHome(holidayHome, arrivalDate, departureDate,cart);
+		return addHolidayHome(holidayHome, arrivalDate.toString(), departureDate.toString(),cart);
 	}
 
 
@@ -290,20 +289,7 @@ public class CartController {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
 		}
-/*
-		//check if it's available
-		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
-		for (BookingEntity b : bookedList) {
-			if(!b.getState().equals(BookingStateEnum.CANCELED)) {
-				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
-					//send message "the chosed duration is not avalible"
-					System.out.println("redirect to Cart because its already booked");
-					//!! Message to customer is missing
-					return "redirect:/cart";
-				}
-			}
-		}
- */
+
 		if(checkIfBooked()){ return "redirect:/cart";}
 		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events, paymethod);
 		if ( bookingEntity == null){

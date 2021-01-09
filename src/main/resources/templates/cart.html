@@ -200,7 +200,7 @@
                                 </div>
 
                                 <th class="col-2" th:text="${item.quantity}">1</th>
-                                <th class="col-2" th:text="${formatter.parsePrice(item.price.getNumber())}">10€</th>
+                                <th class="col-2" th:text="${formatter.parsePrice(item.price)}">10€</th>
                                 <th class="col-1">
                                     <a class="link" th:href="@{/removeProduct/{id}(id=${item.id})}">x</a>
                                 </th>

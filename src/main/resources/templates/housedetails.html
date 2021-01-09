@@ -79,11 +79,40 @@
                 <h5 class="p-1" th:text="${holidayHome.capacity}"></h5>
             </div>
         </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
-            <div class="col-md-12 text-center p-1">
-                <a class="btn mx-auto btn-primary text-center" href="#">Jetzt buchen!</a>
+        <form th:action="@{/cart}" method="post">
+            <input type="hidden" name="hid" value="0"  th:value="${holidayHome.id}">
+            <div class="row border-top" style="background-color: #EEEEEE;">
+                <div class="p-1 col-4 col-md-4 border-right">
+                    <h4 class="p-1">Anreisedatum</h4>
+                </div>
+                <div class="p-1 col-8 col-md-8">
+                    <input type="date" id="startDate" name="arrivaldate" th:oninput="setMinOfDeparture()" th:min="${today}">
+                    <script>
+                        function setMinOfDeparture() {
+                            document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
+                        }
+                    </script>
+                </div>
             </div>
-        </div>
+            <div class="row border-top" style="background-color: #EEEEEE;">
+                <div class="p-1 col-4 col-md-4 border-right">
+                    <h4 class="p-1">Abreisedatum</h4>
+                </div>
+                <div class="p-1 col-8 col-md-8">
+                    <input type="date" id="endDate" name="departuredate" th:min="${arrivalDate}" th:oninput="setMaxOfArrival()">
+                    <script>
+                        function setMaxOfArrival() {
+                            document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="row border-top" style="background-color: #EEEEEE;">
+                <div class="col-md-12 text-center p-1">
+                    <button class="btn mx-auto btn-primary text-center" type="submit">Jetzt buchen!</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
