@@ -137,14 +137,14 @@ public class CatalogController {
 			}
 			if (!houseNumber.isBlank()) {
 				changedPlace.setHouseNumber(houseNumber);
-			}			
-			if (!postalCode.isBlank()) { 
+			}
+			if (!postalCode.isBlank()) {
 				changedPlace.setPostalCode(postalCode);
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
 			}
-			
+
 			holidayHomeToChange.setPlace(changedPlace);
 			System.out.println(holidayHomeToChange);
 			Hcatalog.save(holidayHomeToChange);
@@ -157,7 +157,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
-		
+
 		ProductIdentifier holidayHomeId = holidayHome.getId();
 		System.out.println(holidayHomeId);
 		Hcatalog.findById(holidayHomeId);
@@ -167,7 +167,7 @@ public class CatalogController {
 			holidayHomeToChange.setIsBookable(false);
 			Hcatalog.save(holidayHomeToChange);
 		}
-		
+
 		return "redirect:/holidayhomes";
 	}
 
