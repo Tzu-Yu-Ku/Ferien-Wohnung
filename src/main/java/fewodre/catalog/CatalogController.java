@@ -89,9 +89,12 @@ public class CatalogController {
 	@PostMapping(path = "/addHolidayHome")
 	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
 			@LoggedIn UserAccount userAccount) {
-
-		Hcatalog.save(form.toNewHolidayHome(userAccount.getEmail()));
-
+		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
+		Hcatalog.save(myHolidayHome);
+		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+			System.out.println(
+					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
+		}
 		return "redirect:/holidayhomes";
 	}
 
@@ -99,7 +102,6 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
-		System.out.println("HolidayHome welches editiert werden soll: " + holidayHome);
 		model.addAttribute("holidayHome", holidayHome);
 		return "editholidayhome";
 	}
@@ -322,6 +324,9 @@ public class CatalogController {
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
+		for (int i = 0; i < Hcatalog.findAll().toList().size(); i++) {
+			System.out.println(Hcatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(event.getPlace()));
+		}
 		return "redirect:/events";
 	}
 }

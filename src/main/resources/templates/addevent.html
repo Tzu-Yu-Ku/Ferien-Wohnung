@@ -142,18 +142,18 @@
                             <label for="city" class="px-2">Koordinaten:</label>
                         </div>
                         <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="coordinates_x" id="coordinates_x" min=0
+                            <input type="number" class="form-control" th:name="coordinateX" id="coordinateX" min=0
                                 max=10000 required="required" placeholder="Koordinate X">
                         </div>
                         <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="coordinates_y" id="coordinates_y" min=0
+                            <input type="number" class="form-control" th:name="coordinateY" id="coordinateY" min=0
                                 max=10000 required="required" placeholder="Koordinate Y">
                         </div>
                         <div class="p-2" onclick="myFunction(event)">
                             <script>
                                 function myFunction(event) {
-                                    const coordx = document.getElementById("coordinates_x");
-                                    const coordy = document.getElementById("coordinates_y");
+                                    const coordx = document.getElementById("coordinateX");
+                                    const coordy = document.getElementById("coordinateY");
 
                                     let boundingRect = document.getElementById('forest').getBoundingClientRect();
                                     let mouseX = event.clientX - boundingRect.x;

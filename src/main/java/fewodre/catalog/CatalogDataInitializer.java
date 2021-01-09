@@ -45,7 +45,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		HolidayHome dummyHome2 = new HolidayHome();
 		dummyHome1.setName("Nette Wohnung in der Innenstadt");
 		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt.");
-		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 1, 1));
+		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 500, 500));
 		dummyHome1.setIsBookable(true);
 		dummyHome1.setHostMail("abcd-efgh-jkli");
 		dummyHome1.setImage("house4.png");
@@ -54,7 +54,7 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		dummyHome2.setName("Gemühtliches Haus an der Elbe");
 		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden");
-		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 1, 1));
+		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 800, 800));
 		dummyHome2.setIsBookable(true);
 		dummyHome2.setHostMail("abcd-efgh-jkli");
 		dummyHome2.setImage("house3.png");
@@ -71,7 +71,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription(
 				"Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
-		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 1, 1));
+		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 200, 200));
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid(("event"));
 		eventTest.setPrice(Money.of(123, "EUR"));

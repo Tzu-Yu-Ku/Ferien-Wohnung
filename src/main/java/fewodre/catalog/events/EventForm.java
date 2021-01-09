@@ -23,8 +23,8 @@ public class EventForm {
     private LocalTime time;
     private int repeats;
     private int repeateRate;
-    private int coordX;
-    private int coordY;
+    private int coordinateX;
+    private int coordinateY;
 
     public EventForm() {
     }
@@ -140,26 +140,26 @@ public class EventForm {
         return repeateRate;
     }
 
-    public int getCoordX() {
-        return coordX;
+    public int getCoordinateX() {
+        return coordinateX;
     }
 
-    public void setCoordX(int coordX) {
-        this.coordX = coordX;
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
     }
 
-    public int getCoordY() {
-        return coordY;
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
-    public void setCoordY(int coordY) {
-        this.coordY = coordY;
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
     }
 
     public Event toNewEvent(String userAccount) {
         return new Event(getName(), userAccount, getDescription(), "event1.png",
-                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordX(), getCoordY()), true,
-                getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(),
+                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),
+                true, getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(),
                 getRepeateRate());
     }
 }
