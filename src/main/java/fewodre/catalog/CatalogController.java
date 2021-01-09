@@ -1,5 +1,6 @@
 package fewodre.catalog;
 
+import fewodre.bookings.BookingManagement;
 import fewodre.catalog.events.*;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.catalog.holidayhomes.*;
@@ -48,15 +49,18 @@ public class CatalogController {
 	private Authentication authentication;
 	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 
+	private BookingManagement bookingManagement;
+
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 			UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
-			AccountRepository accountRepository) {
+			AccountRepository accountRepository, BookingManagement bookingManagement) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
 		this.holidayHomeStorage = holidayHomeStorage;
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
+		this.bookingManagement = bookingManagement;
 	}
 
 	private void firstname(Model model) {
@@ -219,6 +223,7 @@ public class CatalogController {
 		System.out.println("zu löschendes Event " + event);
 		if (holidayHomeStorage.findByProduct(event).isPresent()) {
 			if (!event.isEventStatus()) {
+				bookingManagement.cancelEvent(event);
 				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
 				Ecatalog.delete(event);
 			}
