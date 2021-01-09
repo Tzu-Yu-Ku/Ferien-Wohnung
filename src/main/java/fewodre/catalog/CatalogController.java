@@ -203,6 +203,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/cancelevent")
 	String cancelEvent(@RequestParam("event") Event event) {
+		bookingManagement.cancelEvent(event);
 		event.setEventStatus(false);
 		Ecatalog.save(event);
 		return "redirect:/events";
@@ -223,7 +224,6 @@ public class CatalogController {
 		System.out.println("zu löschendes Event " + event);
 		if (holidayHomeStorage.findByProduct(event).isPresent()) {
 			if (!event.isEventStatus()) {
-				bookingManagement.cancelEvent(event);
 				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
 				Ecatalog.delete(event);
 			}

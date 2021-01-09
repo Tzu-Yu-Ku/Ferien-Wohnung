@@ -310,7 +310,7 @@ public class CartController {
 			return "redirect:/cart"; //es gab Probleme
 		}
 		// if the Tenant wants to pay independent from us
-		if(paymethod.equalsIgnoreCase("cash")){bookingEntity.pay();} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
+		if(paymethod.equalsIgnoreCase("cash")){bookingManagement.payDeposit(bookingEntity);} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
 
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!

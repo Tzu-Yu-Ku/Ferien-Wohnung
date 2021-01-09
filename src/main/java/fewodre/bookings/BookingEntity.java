@@ -266,9 +266,9 @@ public class BookingEntity extends Order {
 		Iterator<ChargeLine> iter =	this.getChargeLines().iterator();
 		while (iter.hasNext()){
 			ChargeLine charge = iter.next();;
-			if(charge.getPrice().getNumber().floatValue() < (depositInCent * 0.01 + 10) &&
-				charge.getPrice().getNumber().floatValue() > (depositInCent * 0.01 - 10) ){
-				remove(charge);
+			if(charge.getPrice().isEqualTo(Money.of(BigDecimal.valueOf(0.01*depositInCent),"EUR").multiply(-1))){
+				System.out.println("Tried to remove Charge");
+				this.remove(charge);
 				break;
 			}
 		}
