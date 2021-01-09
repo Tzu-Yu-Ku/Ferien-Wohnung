@@ -4,10 +4,12 @@ import fewodre.catalog.events.Event;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.useraccounts.AccountEntity;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderLine;
 import org.salespointframework.order.Totalable;
+import org.salespointframework.payment.Cash;
 import org.salespointframework.payment.PaymentMethod;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
@@ -18,6 +20,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.time.LocalDate;
@@ -56,6 +59,8 @@ public class BookingEntity extends Order {
 
 	private transient BookingState state;
 
+	@NotNull
+	private Paymethod paymethod;
 
 	private transient MonetaryAmount price;
 
@@ -66,8 +71,8 @@ public class BookingEntity extends Order {
 
 	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
 						 LocalDate arrivalDate, LocalDate departureDate,
-						 HashMap<Event, Integer> events, PaymentMethod paymentMethod) {
-		super(userAccount, paymentMethod);
+						 HashMap<Event, Integer> events, String paymentMethod) {
+		super(userAccount, Cash.CASH);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
 		this.uuidHome = home.getId().getIdentifier();
 		this.uuidHost = (host==null || host.getAccount() == null|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
@@ -80,6 +85,8 @@ public class BookingEntity extends Order {
 		System.out.println("new State: "+this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
 		System.out.println(stateToSave);
+		this.paymethod = Paymethod.valueOf(paymentMethod.toUpperCase());
+		System.out.println("payment method is:"+ paymethod.toString().toLowerCase());
 		/*
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -230,8 +237,14 @@ public class BookingEntity extends Order {
 		}
 		else {
 			stateToSave = state.toEnum();
+			super.addChargeLine(Money.of(BigDecimal.valueOf(0.01*depositInCent),"EUR").multiply(-1),
+					"Anzahlung");
 			return true;
 		}
+	}
+
+	public Paymethod getPaymethod() {
+		return paymethod;
 	}
 
 	public int getDepositInCent() {
