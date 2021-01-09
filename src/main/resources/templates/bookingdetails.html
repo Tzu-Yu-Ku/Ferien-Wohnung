@@ -108,9 +108,9 @@
 
                 <div th:if="${orderlines.size()>0}">
                     <tr>
-                        <th scope="col" colspan="5">
-                            <h4 class="p-1">gebuchte Events</h4>
-                        </th>
+                        <th><h4 class="p-1">Gebuchte Events Total</h4></th>
+                        <td colspan="4">
+                            <h5 class="p-1" th:text="${formatter.parsePrice(booking.getEventTotalPrice(eventCatalog))}" align="right">200 €</h5></td>
                     </tr>
                     <tr>
                         <th>Name</th>
@@ -154,7 +154,7 @@
                     </tr>
                     <tr>
                         <th><h5>Sie bezahlen in der Unterkunft</h5></th>
-                        <td><h6 th:text="${formatter.parsePrice(rest)}">456</h6></td>
+                        <td><h6 th:text="${formatter.parsePrice(booking.getTotal())}">456</h6></td>
                     </tr>
                 </tbody>
             </table>

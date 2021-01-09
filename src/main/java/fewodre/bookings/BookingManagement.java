@@ -26,9 +26,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -78,7 +76,10 @@ public class BookingManagement {
 		}else{
 			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
 		}
-
+		Iterator<Event> eventIterator = bookingEntity.getEvents(eventCatalog).iterator();
+		while (eventIterator.hasNext()){
+			eventCatalog.findFirstByProductIdentifier(eventIterator.next().getId()).addSubscriber(bookingEntity);
+		}
 		cart.clear();
 		System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
@@ -88,22 +89,45 @@ public class BookingManagement {
 
 	public boolean payDeposit(BookingEntity bookingEntity){
 
-		if(getMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod())){
+		if(getMoney(bookingEntity.getDepositInCent()*0.01f,
+				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())){
 			//orderManagement.payOrder(bookingEntity)
 			//orderManagement.completeOrder(bookingEntity);
 			if(bookingEntity.pay()){return true;}
 			else {
 				System.out.println("etwas ist bei der Bezahlung schiefgelaufen whr. falscher State");
-				giveMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod()); //return Money
+				giveMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod(),
+						bookingEntity.getUuidTenant()); //return Money
 				return false;
 			}
 
 		}
 		return false;
 	}
+
+	public boolean cancelEvent(Event event){
+		Iterator<OrderIdentifier> bookingIdentifier = event.getSubscriber().iterator();
+		List<BookingEntity> bookingEntities = new LinkedList<BookingEntity>();
+		while (bookingIdentifier.hasNext()){
+			bookingEntities.add(this.bookings.findFirstByOrderIdentifier(bookingIdentifier.next()));
+		}
+		Iterator<BookingEntity> bookingIter = bookingEntities.iterator();
+		while (bookingIter.hasNext()){
+			BookingEntity booking = bookingIter.next();
+			if(booking.getState().compareTo(BookingStateEnum.PAID) == 0 ||
+			   booking.getState().compareTo(BookingStateEnum.ACQUIRED) == 0 ||
+				booking.getState().compareTo(BookingStateEnum.CONFIRMED) == 0){
+					giveMoney(booking.getPriceOf(event), booking.getPaymethod(), booking.getUuidTenant());
+			}
+			booking.cancelEvent(event);
+		}
+		return true;
+	}
+
 	public boolean payRest(BookingEntity bookingEntity){
 	if(orderManagement.payOrder(bookingEntity)) {
-		if (getMoney(bookingEntity.getTotal().getNumber().floatValue(), bookingEntity.getPaymethod())) {
+		if (getMoney(bookingEntity.getTotal().getNumber().floatValue(),
+				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
 			orderManagement.completeOrder(bookingEntity);
 			return true;
 		}
@@ -124,8 +148,8 @@ public class BookingManagement {
 	 * the tenant to the host or us was succesfull
 	 * @return
 	 */
-	public boolean getMoney(float bill, Paymethod choosenPaymethod){
-		System.out.println("paid: " + bill + "€");
+	public boolean getMoney(float bill, Paymethod choosenPaymethod, String uuidTenant){
+		System.out.println(uuidTenant + " paid: " + bill + "€");
 		return true;
 	}
 
@@ -135,8 +159,8 @@ public class BookingManagement {
 	 * the host or us to the tenant was succesfull
 	 * @return
 	 */
-	public boolean giveMoney(float bill, Paymethod choosenPaymethod){
-		System.out.println("depaid: " + bill + "€");
+	public boolean giveMoney(float bill, Paymethod choosenPaymethod, String uuidTenant){
+		System.out.println("depaid: " + bill + "€ to: " + uuidTenant);
 		return true;
 	}
 
