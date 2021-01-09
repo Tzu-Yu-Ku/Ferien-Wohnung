@@ -233,7 +233,8 @@ public class CatalogController {
 			@RequestParam("repeats") String repeats, @RequestParam("repeateRate") String repeateRate,
 			@RequestParam("capacity") String capacity, @RequestParam("street") String street,
 			@RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
-			@RequestParam("city") String city) {
+			@RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
+			@RequestParam("coordinates_y") String coordinates_y) {
 		System.out.println(eventId);
 		Ecatalog.findById(eventId);
 		if (Ecatalog.findById(eventId).isPresent()) {
@@ -281,6 +282,14 @@ public class CatalogController {
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
+			}
+			if (!coordinates_x.isBlank()) {
+				int coordinates_x2 = Integer.parseInt(coordinates_x);
+				changedPlace.setCoordX(coordinates_x2);
+			}
+			if (!coordinates_y.isBlank()) {
+				int coordinates_y2 = Integer.parseInt(coordinates_y);
+				changedPlace.setCoordY(coordinates_y2);
 			}
 			EventToChange.setPlace(changedPlace);
 			System.out.println(EventToChange);

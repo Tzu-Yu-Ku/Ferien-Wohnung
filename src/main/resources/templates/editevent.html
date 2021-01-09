@@ -142,11 +142,11 @@
                     </div>
                     <div class="p-1 col-3 col-md-3">
                         <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="number"
-                            th:placeholder="${event.place.coordX}" min=0 max=1 step=0.00001 />
+                            th:placeholder="${event.place.coordX}" min=0 max=10000 />
                     </div>
                     <div class="p-1 col-3 col-md-3">
                         <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="number"
-                            th:placeholder="${event.place.coordY}" min=0 max=1 step=0.00001 />
+                            th:placeholder="${event.place.coordY}" min=0 max=10000 />
                     </div>
 
                     <div onclick="myFunction(event)">
@@ -158,8 +158,8 @@
                                 let boundingRect = document.getElementById('forest').getBoundingClientRect();
                                 let mouseX = event.clientX - boundingRect.x;
                                 let mouseY = event.clientY - boundingRect.y;
-                                let relativeMouseX = (mouseX / boundingRect.width) * 100000;
-                                let relativeMouseY = (mouseY / boundingRect.height) * 100000;
+                                let relativeMouseX = Math.round((mouseX / boundingRect.width) * 10000);
+                                let relativeMouseY = Math.round((mouseY / boundingRect.height) * 10000);
 
                                 coordx.value = relativeMouseX;
                                 coordy.value = relativeMouseY;

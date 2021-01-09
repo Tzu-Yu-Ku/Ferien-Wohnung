@@ -23,6 +23,8 @@ public class EventForm {
     private LocalTime time;
     private int repeats;
     private int repeateRate;
+    private int coordX;
+    private int coordY;
 
     public EventForm() {
     }
@@ -136,6 +138,22 @@ public class EventForm {
 
     public int getRepeateRate() {
         return repeateRate;
+    }
+
+    public int getCoordX() {
+        return coordX;
+    }
+
+    public void setCoordX(int coordX) {
+        this.coordX = coordX;
+    }
+
+    public int getCoordY() {
+        return coordY;
+    }
+
+    public void setCoordY(int coordY) {
+        this.coordY = coordY;
     }
 
     public Event toNewEvent(String userAccount) {
