@@ -52,7 +52,7 @@ public class BookingController {
 	}
 
 	@GetMapping("/bookings")
-	@PreAuthorize("hasAnyRole('TENANT','HOST')")
+	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
 		firstname(model);
 			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
@@ -74,22 +74,13 @@ public class BookingController {
 		}
 	}
 
-	@GetMapping("/bookingsFromHost")
+	@GetMapping("/bookinghistory")
 	@PreAuthorize("hasRole('HOST')")
-	public String bookingsByHost(Model model, @LoggedIn AccountEntity accountEntity, @LoggedIn UserAccount userAccount){
+	public String bookingsByHost(Model model, @LoggedIn UserAccount userAccount){
 		firstname(model);
-		//you have to give in the same HostUUID when you create the home, and they shouldn't let host give in HostUUID should be automatik filled in
-		System.out.println("email: " +userAccount.getEmail());
 		model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));
-		model.addAttribute("homeCatalog", this.holidayHomeCatalog);
-		model.addAttribute("userAccount", userAccount);
-		Iterator<BookingEntity> iter = bookingRepository.findBookingsByUuidHostEquals(accountEntity.getUuid()).iterator();
-		while (iter.hasNext()){
-			BookingEntity bookingEntity = iter.next();
-			System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
-		}
 		model.addAttribute("formatter", this.formatter);
-		return "bookings";
+		return "bookinghistory";
 	}
 
 	@PostMapping("/bookingsFiltered")
@@ -98,7 +89,7 @@ public class BookingController {
 		firstname(model);
 		model.addAttribute("bookings", bookingManagement.findByState(state));
 		model.addAttribute("formatter", this.formatter);
-		return "bookings";
+		return "bookinghistory";
 	}
 
 	@PostMapping("/searchByName")
@@ -107,7 +98,7 @@ public class BookingController {
 		firstname(model);
 		model.addAttribute("bookings", bookingManagement.findByTenantName(tenantName));
 		model.addAttribute("formatter", this.formatter);
-		return "bookings";
+		return "bookinghistory";
 	}
 
 	@PostMapping("/searchByHomeName")
@@ -116,7 +107,7 @@ public class BookingController {
 		firstname(model);
 		model.addAttribute("bookings", bookingManagement.findByHomeName(homeName));
 		model.addAttribute("formatter", this.formatter);
-		return "bookings";
+		return "bookinghistory";
 	}
 
 }

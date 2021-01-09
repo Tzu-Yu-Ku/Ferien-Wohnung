@@ -19,7 +19,7 @@
 </div>
 <div class="py-3" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
 <br/>
-    <div class="container" sec:authorize="hasRole('TENANT')">
+    <div class="container">
         <div class="card mb-3" style="max-width: 800px; margin: 0 auto;float: none;margin-bottom: 10px;" th:each="booking: ${bookings}">
             <div class="row no-gutters">
                 <div class="col-md-4">
@@ -45,85 +45,6 @@
         </div>
     </div>
 
-    <div class="container" sec:authorize="hasRole('HOST')">
-        <div class="row">
-            <div class="col">
-                <form  method="post" th:action="@{/searchByName}"><br>
-                    <div class="input-group">
-                        <input id = "searchbygastname" min="1" name ="lastname" type="text" class=" form-control" value="" role= "search"  placeholder="Nach Nachnamen suchen" required="required">
-                        <div class="input-group-prepend">
-                            <button class="input-group-text" type="submit">Suche</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col">
-                <form  method="post" th:action="@{/searchByHomeName}"><br>
-                    <div class="input-group">
-                        <input id = "searchname" min="1" name ="homename" type="text" class=" form-control" value="" role= "search"  placeholder="Nach Hausnamen suchen" required="required">
-                        <div class="input-group-prepend">
-                            <button class="input-group-text" type="submit">Suche</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div><br>
-        <div class="container">
-            <div class="row justify-content-between">
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="ALLE">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="ORDERED">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="PAID">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="CONFIRMED">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="COMPLETED">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="ACQUIRED">
-                </form>
-                <form th:action="@{/bookingsFiltered}" th:object="${bookings}" method="post">
-                    <input class="btn btn-info" type="submit" name="state" value="CANCELED">
-                </form>
-            </div>
-        </div>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <th>Datum</th>
-            <th>Hausname</th>
-            <th>Kunden</th>
-            <th>Zeitraum</th>
-            <th>Preis</th>
-            <th>Status</th>
-            <th>Aktionen</th>
-            </thead>
-            <tbody>
-            <tr th:each="booking : ${bookings}">
-                <td th:text="${formatter.formatDate(booking.getDateCreated())}">20.11.2019</td>
-                <td th:text="${booking.getHomeName()}">Nette Wohnung in der Innenstadt</td>
-                <td th:text="${booking.getUserAccount().getFirstname() + ', ' + booking.getUserAccount().getLastname()}">Mustermann, Max</td>
-                <td>
-                    <p th:text="${formatter.formatDate(booking.getArrivalDate())}">10 Dec, 2020</p>
-                    <p th:text="${'~ '+ formatter.formatDate(booking.getDepartureDate())}">12 Dec, 2020</p></td>
-                <td th:text="${formatter.parsePrice(booking.getTotal())}">123 €</td>
-                <td th:text="${booking.getState()}"> Ordered</td>
-                <td>
-                    <p><a class="btn btn-danger mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
-                          th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren</a></p>
-                    <p><a class="btn btn-success mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"
-                          th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a></p>
-                    <p><a class="btn btn-outline-info mr-3 mx-auto" style="color:#17a2b8" th:href="@{/bookingdetails/} + ${booking.id}">Details</a></p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
 <div class="container p-0 w-100 mt-5 bg-white">
     <div class="row">
