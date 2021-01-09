@@ -13,17 +13,10 @@ public class HolidayHomeForm {
 	private String city;
 	private int capacity;
 	private int price;
+	private int coordX;
+	private int coordY;
 
 	public HolidayHomeForm() {
-		this.name = name;
-		this.description = description;
-		this.hostMail = hostMail;
-		this.street = street;
-		this.number = number;
-		this.postalnumber = postalnumber;
-		this.city = city;
-		this.capacity = capacity;
-		this.price = price;
 	}
 
 	public String getName() {
@@ -98,9 +91,26 @@ public class HolidayHomeForm {
 		this.price = price;
 	}
 
-	public HolidayHome toNewHolidayHome(String hostMail) {
-		return new HolidayHome(getName(), hostMail, getDescription(), "house2.png", new Place(getStreet(),
-				getNumber(), getPostalnumber(), getCity(), 1, 1), true,
-				getCapacity(), Money.of(getPrice(), "EUR"));
+	public int getCoordX() {
+		return coordX;
 	}
+
+	public void setCoordX(int coordX) {
+		this.coordX = coordX;
+	}
+
+	public int getCoordY() {
+		return coordY;
+	}
+
+	public void setCoordY(int coordY) {
+		this.coordY = coordY;
+	}
+
+	public HolidayHome toNewHolidayHome(String hostMail) {
+		return new HolidayHome(getName(), hostMail, getDescription(), "house2.png",
+				new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), 1, 1), true, getCapacity(),
+				Money.of(getPrice(), "EUR"));
+	}
+
 }

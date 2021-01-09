@@ -147,8 +147,12 @@
                                 <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
                                 <button type="submit" class="btn btn-primary">Jetzt buchen</button>
                             </form>
-                            <!--Verlinkung zum Cart-->
-                            <a href="housedetails" class="btn btn-secondary btn-outline-light mr-auto">Details</a>
+
+                            <form role="form" th:method="post" th:action="@{/housedetails}">
+                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
+                                <input class="btn btn-secondary btn-outline-light mr-auto" type="submit"
+                                       value="Details"/>
+                            </form>
                         </div>
                     </div>
                 </div>

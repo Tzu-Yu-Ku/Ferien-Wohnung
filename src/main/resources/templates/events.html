@@ -97,8 +97,18 @@
                     </ul>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-
-                            <form role="form" th:method="post" th:action="@{/deleteevent}">
+                            <form th:if="${event.eventStatus}" role="form" th:method="post" th:action="@{/cancelevent}">
+                                <input type="hidden" name="event" th:value="${event.id}" />
+                                <input class="btn btn-warning btn-outline-light" type="submit" value="Event absagen" />
+                            </form>
+                            <form th:unless="${event.eventStatus}" role="form" th:method="post"
+                                th:action="@{/activateevent}">
+                                <input type="hidden" name="event" th:value="${event.id}" />
+                                <input class="btn btn-warning btn-outline-light" type="submit"
+                                    value="Event aktivieren" />
+                            </form>
+                            <form th:unless="${event.eventStatus}" role="form" th:method="post"
+                                th:action="@{/deleteevent}">
                                 <input type="hidden" name="event" th:value="${event.id}" />
                                 <input class="btn btn-danger btn-outline-light" type="submit" value="Event löschen" />
                             </form>
