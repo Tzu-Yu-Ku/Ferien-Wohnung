@@ -11,9 +11,15 @@ import javax.xml.bind.annotation.XmlType;
 
 public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
+	static final Sort DEFAULT_SORT = Sort.by("arrivalDate").ascending();
+
 	Iterable<BookingEntity> findBookingsByUuidHostEquals(String host);
 
-	Streamable<BookingEntity> findAllByUuidHost(String host);
+	Streamable<BookingEntity> findAllByUuidHost(String host, Sort sort);
+
+	default Streamable<BookingEntity> findAllByUuidHost(String host){
+		return findAllByUuidHost(host,DEFAULT_SORT);
+	}
 
 	Iterable<BookingEntity> findBookingsByUuidTenant(String tenant);
 

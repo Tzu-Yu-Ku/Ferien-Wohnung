@@ -87,7 +87,7 @@ public class BookingController {
 	@PreAuthorize("hasRole('HOST')")
 	public String sortByState(Model model,@LoggedIn UserAccount userAccount, @RequestParam("state") String state){
 		firstname(model);
-		model.addAttribute("bookings", bookingManagement.findByState(state));
+		model.addAttribute("bookings", bookingManagement.findByState(state,userAccount.getEmail()));
 		model.addAttribute("formatter", this.formatter);
 		return "bookinghistory";
 	}
@@ -96,7 +96,7 @@ public class BookingController {
 	@PreAuthorize("hasRole('HOST')")
 	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount, @RequestParam("lastname")String tenantName){
 		firstname(model);
-		model.addAttribute("bookings", bookingManagement.findByTenantName(tenantName));
+		model.addAttribute("bookings", bookingManagement.findByTenantName(tenantName,userAccount.getEmail()));
 		model.addAttribute("formatter", this.formatter);
 		return "bookinghistory";
 	}
@@ -105,7 +105,7 @@ public class BookingController {
 	@PreAuthorize("hasRole('HOST')")
 	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount, @RequestParam("homename")String homeName){
 		firstname(model);
-		model.addAttribute("bookings", bookingManagement.findByHomeName(homeName));
+		model.addAttribute("bookings", bookingManagement.findByHomeName(homeName,userAccount.getEmail()));
 		model.addAttribute("formatter", this.formatter);
 		return "bookinghistory";
 	}

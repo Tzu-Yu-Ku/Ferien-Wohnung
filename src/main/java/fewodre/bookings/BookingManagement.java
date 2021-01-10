@@ -175,25 +175,25 @@ public class BookingManagement {
 
 	public  BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier){return bookings.findFirstByOrderIdentifier(orderIdentifier);}
 
-	public Streamable<BookingEntity> findByState(String state){
+	public Streamable<BookingEntity> findByState(String state,String host){
 		if(state.equals("ALL")){
-			return bookings.findAll();
+			return bookings.findAllByUuidHost(host);
 		}
-		List<BookingEntity> all = bookings.findAll().toList();
+		List<BookingEntity> all = bookings.findAllByUuidHost(host).toList();
 		List<BookingEntity> stream = new ArrayList<>();
 		all.stream().filter(bookingEntity -> bookingEntity.getState().toString().equals(state))
 				.forEach(bookingEntity -> stream.add(bookingEntity));
 		return Streamable.of(stream);
 	}
 
-	public List<BookingEntity> findByTenantName(String name){
-		List<BookingEntity> bookingsFromTenant = bookings.findAll().filter(bookingEntity ->
+	public List<BookingEntity> findByTenantName(String name, String host){
+		List<BookingEntity> bookingsFromTenant = bookings.findAllByUuidHost(host).filter(bookingEntity ->
 				bookingEntity.getUserAccount().getLastname().equals(name)).toList();
 		return bookingsFromTenant;
 	}
 
-	public List<BookingEntity> findByHomeName(String home){
-		List<BookingEntity> bookingsFromHome = bookings.findAll().filter(bookingEntity ->
+	public List<BookingEntity> findByHomeName(String home,String host){
+		List<BookingEntity> bookingsFromHome = bookings.findAllByUuidHost(host).filter(bookingEntity ->
 				bookingEntity.getHomeName().equals(home)).toList();
 		return bookingsFromHome;
 	}
