@@ -94,7 +94,8 @@ public class CartController {
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
 		firstname(model);
-		Iterator<Event> iter = eventcatalog.findAll().iterator();
+		System.out.println("AcceptedEvent are :" + holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents);
+		Iterator<Event> iter = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.iterator();
 		while (iter.hasNext()){
 			Event event = iter.next();
 			LOG.info(event.getName());
@@ -103,9 +104,9 @@ public class CartController {
 		List<Event> bookable = new ArrayList<Event>();
 
 		//eventCatalog.findByHolidayHome()
-		bookable = eventcatalog.findAll().
-				filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
-						||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).toList();
+		bookable = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.stream()
+				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
+				||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).collect(Collectors.toList());
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
