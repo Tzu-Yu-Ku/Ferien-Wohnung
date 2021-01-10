@@ -116,45 +116,13 @@
                                 <div class="p-1 col-2 col-md-2">
                                     <input type="number" class="form-control" name="postalCode" id="postalCode"
                                         th:placeholder="${holidayHome.place.postalCode}" aria-label="Postleitzahl">
+                                    <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="hidden"
+                                           th:value="${holidayHome.place.coordX}" min=0 max=10000 />
+                                    <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="hidden"
+                                           th:value="${holidayHome.place.coordY}" min=0 max=10000 />
                                 </div>
                             </div>
 
-                            <div class="row border-top" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right">
-                                    <label for="coordinates" class="px-2">Koordinaten:</label>
-                                </div>
-                                <div class="p-1 col-3 col-md-3">
-                                    <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="number"
-                                        th:placeholder="${holidayHome.place.coordX}" min=0 max=10000 />
-                                </div>
-                                <div class="p-1 col-3 col-md-3">
-                                    <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="number"
-                                        th:placeholder="${holidayHome.place.coordY}" min=0 max=10000 />
-                                </div>
-
-                                <div onclick="myFunction(event)">
-                                    <script>
-                                        function myFunction(event) {
-                                            const coordx = document.getElementById("coordinates_x");
-                                            const coordy = document.getElementById("coordinates_y");
-
-                                            let boundingRect = document.getElementById('forest').getBoundingClientRect();
-                                            let mouseX = event.clientX - boundingRect.x;
-                                            let mouseY = event.clientY - boundingRect.y;
-                                            let relativeMouseX = Math.round((mouseX / boundingRect.width) * 10000);
-                                            let relativeMouseY = Math.round((mouseY / boundingRect.height) * 10000);
-
-                                            coordx.value = relativeMouseX;
-                                            coordy.value = relativeMouseY;
-
-                                            let relativeCoords = "X:" + relativeMouseX + "; Y:" + relativeMouseY;
-                                            console.log(relativeCoords);
-                                        }
-                                    </script>
-                                    <img id="forest" style="width: 100%;" src="/resources/img/karte.jpg">
-                                </div>
-
-                            </div>
 
                             <div class="row border-top p-8" style="background-color: #EEEEEE;">
                                 <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}" />

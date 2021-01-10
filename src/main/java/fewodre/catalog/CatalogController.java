@@ -10,6 +10,7 @@ import fewodre.useraccounts.AccountManagement;
 import fewodre.useraccounts.AccountRepository;
 import fewodre.utils.Place;
 
+import org.salespointframework.catalog.Catalog;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -31,8 +32,11 @@ import org.salespointframework.catalog.ProductIdentifier;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Logger;
 
 import javax.money.MonetaryAmount;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 public class CatalogController {
@@ -76,7 +80,6 @@ public class CatalogController {
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
-
 		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
 		return "holidayhomes";
 	}
@@ -98,7 +101,8 @@ public class CatalogController {
 			System.out.println(
 					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
 		}
-		return "redirect:/holidayhomes";
+		ProductIdentifier productIdentifier = myHolidayHome.getId();
+		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
 
 	// edit HolidayHome----------------
@@ -366,14 +370,73 @@ public class CatalogController {
 
 	@PostMapping(path = "/addEvent")
 	String addEvent(@LoggedIn UserAccount userAccount, @ModelAttribute("form") EventForm form, Model model) {
+
 		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
+
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
-		// for (int i = 0; i < Hcatalog.findAll().toList().size(); i++) {
-		// System.out.println(Hcatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(event.getPlace()));
-		// }
-		return "redirect:/events";
+
+		ProductIdentifier productIdentifier = event.getId();
+		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
+	}
+
+	@GetMapping("/map")
+	public String map(@Valid @ModelAttribute("coordinates") Coordinates coordinates, Model model) {
+		firstname(model);
+		return "map";
+	}
+
+	@PostMapping("/map")
+	public String postmap(@RequestParam(value = "size") String size,
+	                      @RequestParam("productIdentifier") ProductIdentifier productIdentifier,
+	                      @Valid @ModelAttribute("coordinates") Coordinates coordinates, HttpServletRequest httpServletRequest) {
+
+		Coordinates productCoordinates = new Coordinates(size);
+		String returnPage = "/";
+
+		if(httpServletRequest.getHeader("referer").contains("editEventLocation")) {
+			Event event = Ecatalog.findById(productIdentifier).get();
+			Place eventPlace = event.getPlace();
+			eventPlace.setCoordX(productCoordinates.x_ratio);
+			eventPlace.setCoordY(productCoordinates.y_ratio);
+			eventPlace.setDistrict(productCoordinates.getDistrict());
+			event.setPlace(eventPlace);
+			Ecatalog.save(event);
+			Event eventtest = Ecatalog.findById(productIdentifier).get();
+
+			returnPage = "/events";
+		}
+		if(httpServletRequest.getHeader("referer").contains("editHolidayHomeLocation")) {
+			HolidayHome holidayHome = Hcatalog.findById(productIdentifier).get();
+			System.out.println("PLACE VORHER:" + holidayHome.getPlace().toString());
+			Place holidayHomePlace = holidayHome.getPlace();
+			holidayHomePlace.setCoordX(productCoordinates.x_ratio);
+			holidayHomePlace.setCoordY(productCoordinates.y_ratio);
+			holidayHomePlace.setDistrict(productCoordinates.getDistrict());
+			holidayHome.setPlace(holidayHomePlace);
+			Hcatalog.save(holidayHome);
+			HolidayHome holidayHometest = Hcatalog.findById(productIdentifier).get();
+			System.out.println("PLACE NACHER:" + holidayHometest.getPlace().toString());
+			returnPage =  "/holidayhomes";
+		}
+		return "redirect:" + returnPage;
+	}
+
+	@GetMapping("/editEventLocation")
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	public String editEventLocation(@RequestParam("event") ProductIdentifier productIdentifier, @ModelAttribute("coordinates")
+			Coordinates coordinates, Model model) {
+		model.addAttribute("productIdentifier", productIdentifier);
+		return "map";
+	}
+
+	@GetMapping("/editHolidayHomeLocation")
+	@PreAuthorize("hasRole('HOST')")
+	public String editHolidayHomeLocation(@RequestParam("holidayhome") ProductIdentifier productIdentifier, @ModelAttribute("coordinates")
+			Coordinates coordinates, Model model) {
+		model.addAttribute("productIdentifier", productIdentifier);
+		return "map";
 	}
 
 }

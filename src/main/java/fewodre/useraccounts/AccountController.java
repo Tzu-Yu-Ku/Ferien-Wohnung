@@ -1,5 +1,8 @@
 package fewodre.useraccounts;
 
+import fewodre.catalog.events.Event;
+import org.salespointframework.catalog.Product;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
@@ -34,7 +37,7 @@ public class AccountController {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	AccountController(AccountManagement accountManagement, AccountRepository accountRepository,
-			UserAccountManagement userAccounts) {
+	                  UserAccountManagement userAccounts) {
 		Assert.notNull(accountManagement, "CustomerManagement must not be null!");
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
@@ -79,19 +82,6 @@ public class AccountController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/map")
-	public String map(@Valid @ModelAttribute("coordinates") Coordinates coordinates, Model model) {
-		firstname(model);
-		return "map";
-	}
-
-	@PostMapping("/map")
-	public String postmap(@RequestParam(value = "size") String size,
-			@Valid @ModelAttribute("coordinates") Coordinates coordinates) {
-		System.out.println(size);
-		// Coordinates test = new Coordinates(size);
-		return "map";
-	}
 
 	@GetMapping("/activatetenants")
 	public String activateTenants(Model model) {
@@ -132,8 +122,8 @@ public class AccountController {
 
 	@PostMapping("/manageaccount")
 	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate,
-			String street, String housenumber, String postcode, String city, String iban, String bic,
-			String eventcompany, String tenant_username) {
+	                           String street, String housenumber, String postcode, String city, String iban, String bic,
+	                           String eventcompany, String tenant_username) {
 		Authentication authentication;
 		authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().contains("TENANT")
@@ -200,7 +190,7 @@ public class AccountController {
 			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get()
 					.toString().equals("HOST")
 					|| accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny()
-							.get().toString().equals("TENANT")) {
+					.get().toString().equals("TENANT")) {
 				if (!birthdate.isEmpty()) {
 					accountRepository.findByAccount_Email(tenant_username).setBirthDate(birthdate);
 				}

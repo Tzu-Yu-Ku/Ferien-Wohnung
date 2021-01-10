@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Place implements Serializable {
 
-	private String street, houseNumber, postalCode, city;
+	private String street, houseNumber, postalCode, city, district;
 	private int coordX, coordY;
 
 	public Place(String street, String houseNumber, String postalCode, String city, int coordX, int coordY) {
@@ -12,6 +12,7 @@ public class Place implements Serializable {
 		this.houseNumber = houseNumber;
 		this.postalCode = postalCode;
 		this.city = city;
+		this.district = "Stadt";
 		this.coordX = coordX;
 		this.coordY = coordY;
 	}
@@ -64,9 +65,17 @@ public class Place implements Serializable {
 		this.coordY = coordY;
 	}
 
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
 	@Override
 	public String toString() {
-		return street + " " + houseNumber + ", " + city + ", " + coordX + ", " + coordY;
+		return street + " " + houseNumber + ", " + city + ", " + coordX + ", " + coordY + ", D: " + district;
 	}
 
 	// --------------------------------------- Distanz-Berechnung

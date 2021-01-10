@@ -108,40 +108,10 @@
                         <div class="p-1 col-2 col-md-2">
                             <input type="number" class="form-control" th:name="postalnumber" required="required"
                                 placeholder="Postleitzahl" aria-label="Postleitzahl">
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="city" class="px-2">Koordinaten:</label>
-                        </div>
-                        <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="coordinateX" id="coordinateX" min=0
-                                max=10000 required="required" placeholder="Koordinate X">
-                        </div>
-                        <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="coordinateY" id="coordinateY" min=0
-                                max=10000 required="required" placeholder="Koordinate Y">
-                        </div>
-                        <div class="p-2" onclick="myFunction(event)">
-                            <script>
-                                function myFunction(event) {
-                                    const coordx = document.getElementById("coordinateX");
-                                    const coordy = document.getElementById("coordinateY");
-
-                                    let boundingRect = document.getElementById('forest').getBoundingClientRect();
-                                    let mouseX = event.clientX - boundingRect.x;
-                                    let mouseY = event.clientY - boundingRect.y;
-                                    let relativeMouseX = Math.round((mouseX / boundingRect.width) * 10000);
-                                    let relativeMouseY = Math.round((mouseY / boundingRect.height) * 10000);
-
-                                    coordx.value = relativeMouseX;
-                                    coordy.value = relativeMouseY;
-
-                                    let relativeCoords = "X:" + relativeMouseX + "; Y:" + relativeMouseY;
-                                    console.log(relativeCoords);
-                                }
-                            </script>
-                            <img id="forest" style="width: 100%;" src="/resources/img/karte.jpg">
+                            <input type="hidden" class="form-control" th:name="coordinateX" id="coordinateX" min=0
+                                   max=10000 value="111" required="required" placeholder="Koordinate X">
+                            <input type="hidden" class="form-control" th:name="coordinateY" id="coordinateY" min=0
+                                   max=10000 value="111" required="required" placeholder="Koordinate Y">
                         </div>
                     </div>
                     <div class="row border-top p-3" style="background-color: #EEEEEE;">

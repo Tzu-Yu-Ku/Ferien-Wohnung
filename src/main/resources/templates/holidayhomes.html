@@ -101,7 +101,7 @@
                             </li>
                             <li class="list-group-item"><i class="fa fa-map"></i>
                                 <h8 class="card-title"
-                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + '), ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
                                     <b>----place----</b>
                                 </h8>
                             </li>
@@ -127,6 +127,11 @@
                                     <input class="btn btn-primary btn-outline-light" type="submit"
                                         value="Events aktivieren" />
                                 </form>
+                                <form role="form" th:method="get" th:action="@{/editHolidayHomeLocation}">
+                                    <input type="hidden" name="holidayhome" th:value="${holidayHome.id}" />
+                                    <input class="btn btn-danger btn-outline-light" type="submit"
+                                           value="Ort bearbeiten" />
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -148,7 +153,7 @@
                             </li>
                             <li class="list-group-item"><i class="fa fa-map"></i>
                                 <h8 class="card-title"
-                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ', ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
+                                    th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + '), ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
                                     <b>----place----</b>
                                 </h8>
                             </li>

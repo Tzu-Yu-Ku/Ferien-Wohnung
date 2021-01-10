@@ -1,4 +1,5 @@
 package fewodre.useraccounts;
+
 import com.mysema.commons.lang.Pair;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +17,7 @@ public class Coordinates {
 	public int y_ratio;
 	public static ArrayList<Integer> Xvalue = new ArrayList<>();
 	private static ArrayList<Integer> Yvalue = new ArrayList<>();
+	private String district;
 
 	final Polygon pieschen = new Polygon(new int[]{359, 380, 401, 402, 398, 404, 412, 412, 418, 427, 433, 441, 433, 430, 436, 436, 434, 428, 418, 404, 395, 386, 375, 357, 351, 334, 314, 306, 299, 292, 286, 276, 259, 296, 346, 360, 362},
 			new int[]{338, 381, 377, 385, 395, 399, 405, 397, 397, 416, 424, 438, 448, 458, 477, 501, 519, 517, 528, 534, 517, 501, 503, 515, 542, 554, 556, 552, 532, 503, 477, 438, 401, 342, 304, 310, 342}, 37);
@@ -57,88 +59,112 @@ public class Coordinates {
 			new int[]{558, 556, 552, 564, 581, 607, 611, 623, 623, 615, 605, 597, 587, 583, 578, 583, 574, 562, 554, 554, 550, 538, 519, 511, 503, 495, 491, 487, 477, 471, 473, 483, 479, 471, 468, 471, 495, 503, 489, 487, 483, 487, 493, 503, 509, 515, 517, 523, 536, 544, 558}, 51);
 
 	//final Polygon baum = new Polygon(new int[]{0, 0, 100, 100}, new int[]{0, 100, 100, 0}, 4);
-	public Coordinates(String size){
+	public Coordinates(String size) {
 		String[] parts = size.split("-");
 		x = Float.parseFloat(parts[0]);
 		x_ref = Float.parseFloat(parts[1]);
 		y = Float.parseFloat(parts[2]);
 		y_ref = Float.parseFloat(parts[3]);
-		x_ratio=Math.round(x/x_ref*1000);
-		y_ratio=Math.round(y/y_ref*1000);
+		x_ratio = Math.round(x / x_ref * 1000);
+		y_ratio = Math.round(y / y_ref * 1000);
 		Xvalue.add(x_ratio);
 		Yvalue.add(y_ratio);
+		district = "Stadt";
 		//System.out.println(x_ratio + ",");
 		//System.out.println(y_ratio + ",");
 		//System.out.println("X:" + Xvalue + "Länge:" + Xvalue.size());
 		//System.out.println("Y:" + Yvalue);
-		if(weixdorf.contains(x_ratio, y_ratio)){
+		if (weixdorf.contains(x_ratio, y_ratio)) {
 			System.out.println("Weixdorf");
+			this.district = "Weixdorf";
 		}
-		if(klotsche.contains(x_ratio, y_ratio)){
+		else if (klotsche.contains(x_ratio, y_ratio)) {
 			System.out.println("Klotsche");
+			this.district = "Klotsche";
 		}
-		if(pieschen.contains(x_ratio, y_ratio)){
+		else if (pieschen.contains(x_ratio, y_ratio)) {
 			System.out.println("Pieschen");
+			this.district = "Pieschen";
 		}
-		if(cossebaude.contains(x_ratio, y_ratio)){
+		else if (cossebaude.contains(x_ratio, y_ratio)) {
 			System.out.println("Cossebaude");
+			this.district = "Cossebaude";
 		}
-		if(oberwartha.contains(x_ratio, y_ratio)){
+		else if (oberwartha.contains(x_ratio, y_ratio)) {
 			System.out.println("Cossebaude");
+			this.district = "Cossebaude";
 		}
-		if(gompitz.contains(x_ratio, y_ratio)){
+		else if (gompitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Gompitz");
+			this.district = "Gompitz";
 		}
-		if(altfranken.contains(x_ratio, y_ratio)){
+		else if (altfranken.contains(x_ratio, y_ratio)) {
 			System.out.println("Altfranken");
+			this.district = "Altfranken";
 		}
-
-		if(cotta.contains(x_ratio, y_ratio)){
+		else if (cotta.contains(x_ratio, y_ratio)) {
 			System.out.println("Cotta");
+			this.district = "Cotta";
 		}
-
-		if(plauen.contains(x_ratio, y_ratio)){
+		else if (plauen.contains(x_ratio, y_ratio)) {
 			System.out.println("Plauen");
+			this.district = "Plauen";
 		}
-		if(prohlis.contains(x_ratio, y_ratio)){
+		else if (prohlis.contains(x_ratio, y_ratio)) {
 			System.out.println("Prohlis");
+			this.district = "Prohlis";
 		}
-
-		if(leuben.contains(x_ratio, y_ratio)){
+		else if (leuben.contains(x_ratio, y_ratio)) {
 			System.out.println("Leuben");
+			this.district = "Leuben";
 		}
-
-		if(loschwitz.contains(x_ratio, y_ratio)){
+		else if (loschwitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Loschwitz");
+			this.district = "Loschwitz";
 		}
-		if(schoenefeld_weissig.contains(x_ratio, y_ratio)){
+		else if (schoenefeld_weissig.contains(x_ratio, y_ratio)) {
 			System.out.println("Schönefeld-Weißig");
+			this.district = "Schönefeld-Weißig";
 		}
-
-		if(langebrueck.contains(x_ratio, y_ratio)){
+		else if (langebrueck.contains(x_ratio, y_ratio)) {
 			System.out.println("Langebrück");
+			this.district = "Langebrück";
 		}
-
-		if(schoenborn.contains(x_ratio, y_ratio)){
+		else if (schoenborn.contains(x_ratio, y_ratio)) {
 			System.out.println("Schönborn");
+			this.district = "Schönborn";
 		}
-
-		if(neustadt.contains(x_ratio, y_ratio)){
+		else if (neustadt.contains(x_ratio, y_ratio)) {
 			System.out.println("Neustadt");
+			this.district = "Neustadt";
 		}
-		if(altstadt.contains(x_ratio, y_ratio)){
+		else if (altstadt.contains(x_ratio, y_ratio)) {
 			System.out.println("Altstadt");
+			this.district = "Altstadt";
 		}
-
-		if(blasewitz.contains(x_ratio, y_ratio)){
-				System.out.println("Blasewitz");
+		else if (blasewitz.contains(x_ratio, y_ratio)) {
+			System.out.println("Blasewitz");
+			this.district = "Blasewitz";
 		}
-
-		if(mobschatz.contains(x_ratio, y_ratio)){
+		else if (mobschatz.contains(x_ratio, y_ratio)) {
 			System.out.println("Mobschatz");
+			this.district = "Mobschatz";
 		}
 	}
-	public Coordinates(){}
 
+	public Coordinates() {
+	}
+
+	@Override
+	public String toString() {
+		return "Coordinates{" +
+				"x=" + x +
+				", y=" + y +
+				'}';
+	}
+
+	public String getDistrict() {
+		return district;
+	}
 }
 
