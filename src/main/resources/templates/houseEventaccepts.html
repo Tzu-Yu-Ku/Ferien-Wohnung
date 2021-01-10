@@ -107,6 +107,14 @@
                                         <b>----place----</b>
                                     </h5>
                                 </li>
+
+                                <li class="list-group-item"><i class="fa fa-map"></i>
+                                    <h5 class="card-title"
+                                        th:text="${holidayHome.Place.distanceToOtherPlaces(event.Place)}">
+                                        <b>----Distance----</b>
+                                    </h5>
+                                </li>
+
                                 <div class="d-flex flex-row-reverse">
                                 </div>
                                 <form th:action="@{/activateEventForHouse}" method="post">
