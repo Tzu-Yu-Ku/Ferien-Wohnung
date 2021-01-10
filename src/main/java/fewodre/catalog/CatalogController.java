@@ -193,6 +193,8 @@ public class CatalogController {
 	@PostMapping("/housedetails")
 	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		model.addAttribute("holidayHome", holidayHome);
+		model.addAttribute("currentDay", LocalDate.now());
+		model.addAttribute("endDay", LocalDate.now().plusDays(2));
 		return "housedetails";
 	}
 

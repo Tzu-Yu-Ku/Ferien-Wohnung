@@ -86,7 +86,7 @@
                     <h4 class="p-1">Anreisedatum</h4>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input type="date" id="startDate" name="arrivaldate" th:oninput="setMinOfDeparture()" th:min="${today}">
+                    <input type="date" id="startDate" th:value="${currentDay}" value="2021-01-11" name="arrivaldate" th:oninput="setMinOfDeparture()" th:min="${today}">
                     <script>
                         function setMinOfDeparture() {
                             document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
@@ -99,7 +99,7 @@
                     <h4 class="p-1">Abreisedatum</h4>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input type="date" id="endDate" name="departuredate" th:min="${arrivalDate}" th:oninput="setMaxOfArrival()">
+                    <input type="date" id="endDate" th:value="${endDay}" value="2021-01-12" name="departuredate" th:min="${arrivalDate}" th:oninput="setMaxOfArrival()">
                     <script>
                         function setMaxOfArrival() {
                             document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
