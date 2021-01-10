@@ -280,6 +280,7 @@ public class AccountController {
 		return "accounts/manageaccount";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
 		firstname(model);
@@ -287,6 +288,7 @@ public class AccountController {
 		return "accounts/newhost";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/newhost")
 	public String registerNewHost(
 			@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
@@ -307,9 +309,10 @@ public class AccountController {
 		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:accounts/newhost";
+		return "redirect:/manageaccounts";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/neweventemployee")
 	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 		firstname(model);
@@ -317,6 +320,7 @@ public class AccountController {
 		return "accounts/neweventemployee";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/neweventemployee")
 	public String registerNewEventEmployee(
 			@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
@@ -332,10 +336,10 @@ public class AccountController {
 		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeRegistrationForm.getEmail());
 		LOG.info(test.toString());
 
-		return "redirect:accounts/neweventemployee";
+		return "redirect:/manageaccounts";
 	}
 
-	// @PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/manageaccounts")
 	public String manageAccounts(Model model) {
 		firstname(model);

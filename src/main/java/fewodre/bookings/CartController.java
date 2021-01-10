@@ -229,7 +229,7 @@ public class CartController {
 
 		if(bookedDate.isBefore(LocalDate.now())|| bookedDate.isBefore(arrivalDate)|| bookedDate.isAfter(departureDate)){
 			//send to customer "Please choose the right day"
-			return "error";
+			return "error_";
 		}
 		System.out.println("anzahl0: " + anzahl.getAmount());
 		// check if still available
@@ -249,7 +249,7 @@ public class CartController {
 				|| completeRequirements.isGreaterThan(Quantity.of(event.getCapacity()))){
 			System.out.println("please dont ask for that amount this is f*cking impossible");
 			//"Please give in a correct number"
-			return "error";
+			return "error_";
 		}
 		// check if it's already full or anzahl > updated capacity
 		else{
