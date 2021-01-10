@@ -1,16 +1,22 @@
 package fewodre.catalog.events;
 
+import fewodre.bookings.BookingEntity;
 import fewodre.utils.Place;
 
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
+import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 
 import javax.money.MonetaryAmount;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Event extends Product {
@@ -31,6 +37,9 @@ public class Event extends Product {
 	private int repeats;
 	private int repeateRate;
 
+	@ElementCollection
+	private List<OrderIdentifier> subscriber;
+
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place,
 			boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price, LocalDate date,
 			LocalTime time, int repeats, int repeateRate) {
@@ -47,11 +56,13 @@ public class Event extends Product {
 		this.time = time;
 		this.repeats = repeats;
 		this.repeateRate = repeateRate;
+		subscriber = new ArrayList<OrderIdentifier>();
 	}
 
 	public Event() {
 		super("template_title", Money.parse("EUR 5"));
 		this.addCategory("Event");
+		subscriber = new ArrayList<OrderIdentifier>();
 	}
 
 	public String getImage() {
@@ -169,5 +180,13 @@ public class Event extends Product {
 			}
 		}
 		return AllPossDates;
+	}
+
+	public void addSubscriber(BookingEntity booking){
+		this.subscriber.add(booking.getId());
+	}
+
+	public List<OrderIdentifier> getSubscriber() {
+		return subscriber;
 	}
 }

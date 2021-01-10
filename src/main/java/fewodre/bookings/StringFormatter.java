@@ -5,6 +5,8 @@ import org.salespointframework.order.Cart;
 import org.salespointframework.order.CartItem;
 
 import javax.money.MonetaryAmount;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +31,15 @@ public class StringFormatter{
 		return date.getDayOfMonth() + ". " + MonthTransDict.get(date.getMonth().toString()) + " " + date.getYear();
 	}
 	public String parsePrice(MonetaryAmount Price){
-		return Price.getNumber() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		return Price.getNumber().doubleValue()+ (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+	}
+	public String parsePrice(double Price){
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.HALF_UP);
+		if(Price < 0){
+			return "- " + df.format((-1)*Price) + " €";
+		}
+			return df.format(Price) + " €";
 	}
 
 	public boolean DateIsBetween(LocalDate date, LocalDate startDate, LocalDate endDate){

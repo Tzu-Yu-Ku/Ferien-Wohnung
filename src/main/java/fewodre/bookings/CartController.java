@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.money.MonetaryAmount;
+import javax.money.MonetaryAmountFactory;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -90,7 +91,8 @@ public class CartController {
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
 		firstname(model);
-		Iterator<Event> iter = eventcatalog.findAll().iterator();
+		System.out.println("AcceptedEvent are :" + holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents);
+		Iterator<Event> iter = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.iterator();
 		while (iter.hasNext()){
 			Event event = iter.next();
 			LOG.info(event.getName());
@@ -99,9 +101,9 @@ public class CartController {
 		List<Event> bookable = new ArrayList<Event>();
 
 		//eventCatalog.findByHolidayHome()
-		bookable = eventcatalog.findAll().
-				filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
-						||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).toList();
+		bookable = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.stream()
+				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
+				||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).collect(Collectors.toList());
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
@@ -114,8 +116,8 @@ public class CartController {
 		return "cart"; }
 
 	@PostMapping("/cart")
-	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")LocalDate startDate,
-								 @RequestParam("departuredate")LocalDate endDate, @ModelAttribute Cart cart){
+	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")String startDate,
+								 @RequestParam("departuredate")String endDate, @ModelAttribute Cart cart){
 		this.holidayHome = holidayHome;
 		this.formatter = new StringFormatter();
 
@@ -129,12 +131,11 @@ public class CartController {
 			}
 		}
 
-			this.arrivalDate = startDate;
-			this.departureDate = endDate;
-			Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
-			cart.addOrUpdateItem(holidayHome, interval);
-
-			return "redirect:/cart";
+		this.arrivalDate = LocalDate.parse(startDate);
+		this.departureDate = LocalDate.parse(endDate);
+		Quantity interval = Quantity.of(ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate));
+		cart.addOrUpdateItem(holidayHome, interval);
+		return "redirect:/cart";
 	}
 
 
@@ -202,7 +203,7 @@ public class CartController {
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
 		LocalDate departureDate = arrivalDate.plusDays(2);
-		return addHolidayHome(holidayHome, arrivalDate, departureDate,cart);
+		return addHolidayHome(holidayHome, arrivalDate.toString(), departureDate.toString(),cart);
 	}
 
 
@@ -286,26 +287,15 @@ public class CartController {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
 		}
-/*
-		//check if it's available
-		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
-		for (BookingEntity b : bookedList) {
-			if(!b.getState().equals(BookingStateEnum.CANCELED)) {
-				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
-					//send message "the chosed duration is not avalible"
-					System.out.println("redirect to Cart because its already booked");
-					//!! Message to customer is missing
-					return "redirect:/cart";
-				}
-			}
-		}
- */
+
 		if(checkIfBooked()){ return "redirect:/cart";}
-		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events);
+		BookingEntity bookingEntity = bookingManagement.createBookingEntity(userAccount, holidayHome, cart, arrivalDate, departureDate, events, paymethod);
 		if ( bookingEntity == null){
 			return "redirect:/cart"; //es gab Probleme
 		}
-		if(paymethod.equalsIgnoreCase("cash")){bookingEntity.pay();} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
+		// if the Tenant wants to pay independent from us
+		if(paymethod.equalsIgnoreCase("cash")){bookingManagement.payDeposit(bookingEntity);} // !! other option:  bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))
+
 		details(model ,bookingEntity);
 		return "bookingdetails"; //!!
 	}
@@ -332,6 +322,7 @@ public class CartController {
 		model.addAttribute("formatter", new StringFormatter());
 		model.addAttribute("accountManager", accountManagement);
 		model.addAttribute("one", one);
+		model.addAttribute("customer", booking.getUserAccount());
 		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
 		while(iter.hasNext()){
 			OrderLine line = iter.next();
@@ -344,10 +335,11 @@ public class CartController {
 		model.addAttribute("holidayHomeOrderLine", home);
 		model.addAttribute("eventCatalog",eventcatalog);
 		List<OrderLine> events = booking.getOrderLines().filter(orderLine ->eventcatalog.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null ).toList();
-		MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
+		//MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
 		model.addAttribute("orderlines",events);
-		model.addAttribute("deposit",deposit);
-		MonetaryAmount rest = Money.of(0,"EUR").add(home.getPrice().multiply(0.9));
+		MonetaryAmount deposit =  Money.of(booking.getDepositInCent()*0.01f,"EUR");
+		model.addAttribute("deposit", deposit);
+		MonetaryAmount rest = booking.getTotal().subtract(deposit);
 		model.addAttribute("rest",rest);
 		return "bookingdetails";
 	}
@@ -367,7 +359,17 @@ public class CartController {
 	@GetMapping("/pay/{id}")
 	public String pay(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);
-		if(bookingManagement.pay(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
+		if(bookingManagement.payDeposit(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
+			//it's paid
+			return "redirect:/bookings";
+		}
+		//it couldn't be paid maybe it already was or something like that
+		return "redirect:/bookingdetails/" + booking.getId();
+	}
+	@GetMapping("/payRest/{id}")
+	public String payRest(Model model, @PathVariable("id") BookingEntity booking){
+		firstname(model);
+		if(bookingManagement.payRest(bookingManagement.findFirstByOrderIdentifier(booking.getId()))){
 			//it's paid
 			return "redirect:/bookings";
 		}

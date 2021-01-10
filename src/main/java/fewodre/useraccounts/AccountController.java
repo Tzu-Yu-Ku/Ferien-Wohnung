@@ -34,7 +34,7 @@ public class AccountController {
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	AccountController(AccountManagement accountManagement, AccountRepository accountRepository,
-	                  UserAccountManagement userAccounts) {
+			UserAccountManagement userAccounts) {
 		Assert.notNull(accountManagement, "CustomerManagement must not be null!");
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
@@ -44,8 +44,8 @@ public class AccountController {
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
-			model.addAttribute("firstname_user", accountRepository
-					.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname_user",
+					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
 
@@ -57,8 +57,9 @@ public class AccountController {
 	}
 
 	@PostMapping("/register")
-	public String registerNewAccount(@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm
-			                                 tenantRegistrationForm, BindingResult result, Model model) {
+	public String registerNewAccount(
+			@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
+			BindingResult result, Model model) {
 		LOG.info(tenantRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
@@ -85,9 +86,10 @@ public class AccountController {
 	}
 
 	@PostMapping("/map")
-	public String postmap(@RequestParam(value = "size") String size, @Valid @ModelAttribute("coordinates") Coordinates coordinates) {
+	public String postmap(@RequestParam(value = "size") String size,
+			@Valid @ModelAttribute("coordinates") Coordinates coordinates) {
 		System.out.println(size);
-		Coordinates test = new Coordinates(size);
+		// Coordinates test = new Coordinates(size);
 		return "map";
 	}
 
@@ -109,12 +111,14 @@ public class AccountController {
 	public String editUser(Model model, String tenant_username) {
 		firstname(model);
 		System.out.println(authentication.getPrincipal());
-		if (!(authentication.getPrincipal().toString().contains("TENANT") || authentication.getPrincipal().toString().contains("ADMIN")
+		if (!(authentication.getPrincipal().toString().contains("TENANT")
+				|| authentication.getPrincipal().toString().contains("ADMIN")
 				|| authentication.getPrincipal().toString().contains("HOST")
 				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE"))) {
 			return "/login";
 		}
-		if (authentication.getPrincipal().toString().contains("TENANT") || authentication.getPrincipal().toString().contains("HOST")
+		if (authentication.getPrincipal().toString().contains("TENANT")
+				|| authentication.getPrincipal().toString().contains("HOST")
 				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
 
 			return getString(model, authentication);
@@ -127,11 +131,13 @@ public class AccountController {
 	}
 
 	@PostMapping("/manageaccount")
-	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate, String street,
-	                           String housenumber, String postcode, String city, String iban, String bic, String eventcompany, String tenant_username) {
+	public String postEditUser(Model model, String firstname, String lastname, String password, String birthdate,
+			String street, String housenumber, String postcode, String city, String iban, String bic,
+			String eventcompany, String tenant_username) {
 		Authentication authentication;
 		authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication.getPrincipal().toString().contains("TENANT") || authentication.getPrincipal().toString().contains("HOST")
+		if (authentication.getPrincipal().toString().contains("TENANT")
+				|| authentication.getPrincipal().toString().contains("HOST")
 				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
 			if (!firstname.isEmpty()) {
 				accountRepository.findByAccount_Email(authentication.getName()).getAccount().setFirstname(firstname);
@@ -139,7 +145,8 @@ public class AccountController {
 			if (!lastname.isEmpty()) {
 				accountRepository.findByAccount_Email(authentication.getName()).getAccount().setLastname(lastname);
 			}
-			if (authentication.getPrincipal().toString().contains("HOST") || authentication.getPrincipal().toString().contains("TENANT")) {
+			if (authentication.getPrincipal().toString().contains("HOST")
+					|| authentication.getPrincipal().toString().contains("TENANT")) {
 				if (!birthdate.isEmpty()) {
 					accountRepository.findByAccount_Email(authentication.getName()).setBirthDate(birthdate);
 				}
@@ -173,7 +180,9 @@ public class AccountController {
 				}
 			}
 			if (!password.isEmpty()) {
-				UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(authentication.getName()).getAccount().getUsername()).get();
+				UserAccount baum = userAccounts.findByUsername(
+						accountRepository.findByAccount_Email(authentication.getName()).getAccount().getUsername())
+						.get();
 				userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
 			}
 			model.addAttribute("tenant", accountManagement.findAllDisabled());
@@ -188,8 +197,10 @@ public class AccountController {
 			if (!lastname.isEmpty()) {
 				accountRepository.findByAccount_Email(tenant_username).getAccount().setLastname(lastname);
 			}
-			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("HOST")
-					|| accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("TENANT")) {
+			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get()
+					.toString().equals("HOST")
+					|| accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny()
+							.get().toString().equals("TENANT")) {
 				if (!birthdate.isEmpty()) {
 					accountRepository.findByAccount_Email(tenant_username).setBirthDate(birthdate);
 				}
@@ -209,7 +220,8 @@ public class AccountController {
 					accountRepository.findByAccount_Email(tenant_username).setCity(city);
 				}
 			}
-			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("HOST")) {
+			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get()
+					.toString().equals("HOST")) {
 				if (!bic.isEmpty()) {
 					accountRepository.findByAccount_Email(tenant_username).setBic(bic);
 				}
@@ -217,13 +229,17 @@ public class AccountController {
 					accountRepository.findByAccount_Email(tenant_username).setIban(iban);
 				}
 			}
-			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get().toString().equals("EVENT_EMPLOYEE")) {
+			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get()
+					.toString().equals("EVENT_EMPLOYEE")) {
 				if (!eventcompany.isEmpty()) {
 					accountRepository.findByAccount_Email(tenant_username).setEventCompany(eventcompany);
 				}
 			}
 			if (!password.isEmpty()) {
-				UserAccount baum = userAccounts.findByUsername(accountRepository.findByAccount_Email(tenant_username).getAccount().getUsername()).get();
+				UserAccount baum = userAccounts
+						.findByUsername(
+								accountRepository.findByAccount_Email(tenant_username).getAccount().getUsername())
+						.get();
 				userAccounts.changePassword(baum, Password.UnencryptedPassword.of(password));
 			}
 
@@ -235,24 +251,31 @@ public class AccountController {
 	}
 
 	private String getString(Model model, Authentication authentication) {
-		model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
-		model.addAttribute("lastname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
-		model.addAttribute("email", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
+		model.addAttribute("firstname",
+				accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+		model.addAttribute("lastname",
+				accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
+		model.addAttribute("email",
+				accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
 		model.addAttribute("birthdate", accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
 		model.addAttribute("street", accountRepository.findByAccount_Email(authentication.getName()).getStreet());
-		model.addAttribute("housenumber", accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
+		model.addAttribute("housenumber",
+				accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
 		model.addAttribute("postcode", accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
 		model.addAttribute("city", accountRepository.findByAccount_Email(authentication.getName()).getCity());
 		model.addAttribute("iban", accountRepository.findByAccount_Email(authentication.getName()).getIban());
 		model.addAttribute("bic", accountRepository.findByAccount_Email(authentication.getName()).getBic());
-		model.addAttribute("eventcompany", accountRepository.findByAccount_Email(authentication.getName()).getEventCompany());
+		model.addAttribute("eventcompany",
+				accountRepository.findByAccount_Email(authentication.getName()).getEventCompany());
 
 		return "accounts/manageaccount";
 	}
 
 	private String getString(Model model, String tenant_username) {
-		model.addAttribute("firstname", accountRepository.findByAccount_Email(tenant_username).getAccount().getFirstname());
-		model.addAttribute("lastname", accountRepository.findByAccount_Email(tenant_username).getAccount().getLastname());
+		model.addAttribute("firstname",
+				accountRepository.findByAccount_Email(tenant_username).getAccount().getFirstname());
+		model.addAttribute("lastname",
+				accountRepository.findByAccount_Email(tenant_username).getAccount().getLastname());
 		model.addAttribute("email", accountRepository.findByAccount_Email(tenant_username).getAccount().getEmail());
 		model.addAttribute("birthdate", accountRepository.findByAccount_Email(tenant_username).getBirthDate());
 		model.addAttribute("street", accountRepository.findByAccount_Email(tenant_username).getStreet());
@@ -262,7 +285,8 @@ public class AccountController {
 		model.addAttribute("iban", accountRepository.findByAccount_Email(tenant_username).getIban());
 		model.addAttribute("bic", accountRepository.findByAccount_Email(tenant_username).getBic());
 		model.addAttribute("eventcompany", accountRepository.findByAccount_Email(tenant_username).getEventCompany());
-		model.addAttribute("role", accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get());
+		model.addAttribute("role", accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles()
+				.stream().findAny().get());
 		return "accounts/manageaccount";
 	}
 
@@ -274,8 +298,9 @@ public class AccountController {
 	}
 
 	@PostMapping("/newhost")
-	public String registerNewHost(@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
-	                              BindingResult result, Model model) {
+	public String registerNewHost(
+			@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
+			BindingResult result, Model model) {
 		LOG.info(hostRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
@@ -303,8 +328,9 @@ public class AccountController {
 	}
 
 	@PostMapping("/neweventemployee")
-	public String registerNewEventEmployee(@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
-	                                       BindingResult result, Model model) {
+	public String registerNewEventEmployee(
+			@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
+			BindingResult result, Model model) {
 
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 		if (accountEntity == null) {
@@ -319,7 +345,7 @@ public class AccountController {
 		return "redirect:accounts/neweventemployee";
 	}
 
-	//	@PreAuthorize("hasRole('ADMIN')")
+	// @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/manageaccounts")
 	public String manageAccounts(Model model) {
 		firstname(model);
@@ -330,12 +356,12 @@ public class AccountController {
 		return "accounts/manageaccounts";
 	}
 
-
 	/**
-	 * POST-request-mapping to enable a tenant account. This is usually done after a new tenant has successfully created
-	 * a new account.
+	 * POST-request-mapping to enable a tenant account. This is usually done after a
+	 * new tenant has successfully created a new account.
 	 *
-	 * @param tenant_username specifies the account that will be enabled (username == e-mail adress in our case).
+	 * @param tenant_username specifies the account that will be enabled (username
+	 *                        == e-mail adress in our case).
 	 * @return redirects the admin to the account management page.
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
