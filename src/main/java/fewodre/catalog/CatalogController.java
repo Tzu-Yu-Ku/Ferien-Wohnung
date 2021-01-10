@@ -31,6 +31,10 @@ import org.salespointframework.catalog.ProductIdentifier;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.money.MonetaryAmount;
@@ -93,9 +97,12 @@ public class CatalogController {
 	@PostMapping(path = "/addHolidayHome")
 	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
 			@LoggedIn UserAccount userAccount) {
-
-		Hcatalog.save(form.toNewHolidayHome(userAccount.getEmail()));
-
+		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
+		Hcatalog.save(myHolidayHome);
+		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+			System.out.println(
+					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
+		}
 		return "redirect:/holidayhomes";
 	}
 
@@ -103,7 +110,6 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
-		System.out.println("HolidayHome welches editiert werden soll: " + holidayHome);
 		model.addAttribute("holidayHome", holidayHome);
 		return "editholidayhome";
 	}
@@ -189,6 +195,46 @@ public class CatalogController {
 	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		model.addAttribute("holidayHome", holidayHome);
 		return "housedetails";
+	}
+
+	@PreAuthorize("hasRole('HOST')")
+	@PostMapping(path = "/activateEventPage")
+	String activateEventPage(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
+		System.out.println("BEREITS AKTIVE EVENTS: " + Hcatalog.findById(holidayHomeId).get().acceptedEvents);
+		List<Event> nonActivtedEvents = new LinkedList<Event>();
+		List<Event> allEvents = Ecatalog.findAll().toList();
+		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))) {
+				nonActivtedEvents.add(allEvents.get(i));
+			}
+		}
+		model.addAttribute("nonActivatedEventCatalog", nonActivtedEvents);
+		model.addAttribute("holidayHome", Hcatalog.findById(holidayHomeId).get());
+		return "houseEventaccepts";
+	}
+
+	@PreAuthorize("hasRole('HOST')")
+	@PostMapping(path = "/activateEventForHouse")
+	String activateEventForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId,
+			@RequestParam("event") ProductIdentifier eventId) {
+		Hcatalog.findById(holidayHomeId).get().acceptEvent(Ecatalog.findById(eventId).get());
+		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
+		return "redirect:/holidayhomes";
+	}
+
+	@PreAuthorize("hasRole('HOST')")
+	@PostMapping(path = "/activateAllEventsForHouse")
+	String activateAllEventsForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
+		List<Event> nonActivtedEvents = new LinkedList<Event>();
+		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents()
+					.contains(Ecatalog.findAll().toList().get(i))) {
+				nonActivtedEvents.add(Ecatalog.findAll().toList().get(i));
+			}
+		}
+		Hcatalog.findById(holidayHomeId).get().acceptedEvents.addAll(nonActivtedEvents);
+		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
+		return "redirect:/holidayhomes";
 	}
 
 	// Events------------------------------------------------------------------------------------------------------------------------------
@@ -327,6 +373,10 @@ public class CatalogController {
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
+		// for (int i = 0; i < Hcatalog.findAll().toList().size(); i++) {
+		// System.out.println(Hcatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(event.getPlace()));
+		// }
 		return "redirect:/events";
 	}
+
 }
