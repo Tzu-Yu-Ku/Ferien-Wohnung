@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -19,7 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class HolidayHome extends Product {
 
-	@OneToMany
+	@ManyToMany
 	public List<Event> acceptedEvents;
 
 	private String hostMail;
