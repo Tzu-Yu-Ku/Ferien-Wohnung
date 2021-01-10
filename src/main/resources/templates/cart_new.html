@@ -23,18 +23,8 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img class="d-block img-fluid w-100"
-                                 src="../static/resources/img/house_1.png">
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-fluid w-100"
-                                 src="https://static.pingendo.com/cover-bubble-light.svg">
-                            <div class="carousel-caption">
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-fluid w-100" src="https://static.pingendo.com/cover-moon.svg">
+                                 src="../static/resources/img/house_1.png"
+                                 th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                             <div class="carousel-caption">
                             </div>
                         </div>
@@ -46,145 +36,173 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <h1 class="">Ihre Buchung</h1>
-                <h3 class="">Nette Wohnung in der Innenstadt</h3>
+                <h1>Ihre Buchung</h1>
+                <h3 th:text="${holidayHome.name}">Nette Wohnung in der Innenstadt</h3>
             </div>
         </div>
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-12"></div>
         </div>
-        <form method="post" role="form" id="form">
-            <div class="row border-top" style="background-color: #ffffff;">
-                <div class="p-1 border-right col-8 col-md-8">
-                    <h5 class="text-center pt-2 px-2">Zeitraum Ihrer Buchung</h5>
-                </div>
-                <div class="p-1 border-right col-2 col-md-2">
-                    <h5 class="text-center pt-2 px-2">Tage</h5>
-                </div>
-                <div class="p-1 col-2 col-md-2">
-                    <h5 class="text-center pt-2 px-2">Kosten</h5>
-                </div>
+        <div class="row border-top" style="background-color: #ffffff;">
+            <div class="p-1 border-right col-8 col-md-8">
+                <h5 class="text-center pt-2 px-2">Zeitraum Ihrer Buchung</h5>
             </div>
-            <div class="row border-top" style="background-color: #FEFEFE;">
-                <div class="p-1 col-2 col-md-2 border-bottom">
-                    <label for="start_date" class="align-center pt-2 px-2">Anreisedatum:</label>
-                </div>
-                <div class="p-1 border-right col-2 col-md-2 border-bottom">
-                    <input type="date" id="start_date" name="start_date" class="form-control" required="required"
-                           placeholder="Titel" aria-label="Angebotstitel">
-                </div>
-                <div class="p-1 col-2 col-md-2 border-bottom">
-                    <label for="end_date" class="align-center pt-2 px-2">Abreisedatum:<br></label>
-                </div>
-                <div class="p-1 border-right col-2 col-md-2 border-bottom">
-                    <input type="date" id="end_date" name="end_date" class="form-control" required="required"
-                           placeholder="Titel" aria-label="Angebotstitel">
-                </div>
-                <div class="p-1 border-right col-2 col-md-2 border-bottom">
-                    <h5 class="text-center pt-2">3</h5>
-                </div>
-                <div class="p-1 col-2 col-md-2 border-bottom">
-                    <h5 class="text-center pt-2">300,00 €</h5>
-                </div>
+            <div class="p-1 border-right col-2 col-md-2">
+                <h5 class="text-center pt-2 px-2">Tage</h5>
             </div>
-            <div class="row pb-2" style="background-color: #EDEDED;">
+            <div class="p-1 col-2 col-md-2">
+                <h5 class="text-center pt-2 px-2">Kosten</h5>
             </div>
-            <div class="row border-top" style="background-color: #ffffff;">
-                <div class="p-1 border-right col-12 col-md-12">
-                    <h5 class="text-center px-2">Hinzugebuchte Events</h5>
-                </div>
+        </div>
+        <div class="row border-top" style="background-color: #FEFEFE;">
+            <div class="p-1 col-1 col-md-1 border-bottom">
+                <label for="startDate" class="align-center pt-2 px-2">Anreise:</label>
             </div>
-            <div class="row border-top" style="background-color: #ffffff;">
-                <div class="border-right col-5 col-md-5">
-                    <h6 class="text-center pt-2 px-2">Eventname</h6>
-                </div>
-                <div class="border-right col-3 col-md-3">
-                    <h6 class="text-center pt-2 px-2">Datum des Events</h6>
-                </div>
-                <div class="border-right col-2 col-md-2">
-                    <h6 class="text-center pt-2 px-2">Teilnehmerzahl</h6>
-                </div>
-                <div class="border-right col-2 col-md-2">
-                    <h6 class="text-center pt-2 px-2">Kosten</h6>
-                </div>
+            <div class="p-1 border-right col-2 col-md-2 border-bottom">
+                <input type="date" id="startDate" name="newSDate" class="form-control" required="required"
+                       th:value="${arrivalDate}" th:min="${today}" th:oninput="setMinOfDeparture()" placeholder="Anreisedatum" aria-label="Angebotstitel">
+                <script>
+                    function setMinOfDeparture() {
+                        document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
+                    }
+                </script>
             </div>
-            <div class="row border-top" style="background-color: #FEFEFE;">
-                <div class="p-1 col-5 col-md-5 border-right">
-                    <h5 class="text-center pt-2 px-2">
-                        <a href="#">Stadtführung im abendlichen Dresden</a>
-                    </h5>
+            <div class="p-1 col-1 col-md-1 border-bottom">
+                <label for="endDate" class="align-center pt-2 px-2">Abreise:<br></label>
+            </div>
+            <div class="p-1 border-right col-2 col-md-2 border-bottom">
+                <input type="date" id="endDate" name="newEDate" class="form-control" required="required"
+                       th:value="${departureDate}" th:min="${arrivalDate}" th:oninput="setMaxOfArrival()"
+                       placeholder="Abreisedatum" aria-label="Angebotstitel">
+                <script>
+                    function setMaxOfArrival() {
+                        document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
+                    }
+                </script>
+            </div>
+            <div class="p-1 border-right col-2 col-md-2 border-bottom">
+                <button type="submit" class="btn">
+                    <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                </button>
+            </div>
+            <div class="p-1 border-right col-2 col-md-2 border-bottom">
+                <h5 class="text-center pt-2">3</h5>
+            </div>
+            <div class="p-1 col-2 col-md-2 border-bottom">
+                <h5 class="text-center pt-2">300,00 €</h5>
+            </div>
+        </div>
+        <div class="row pb-2" style="background-color: #EDEDED;">
+        </div>
+        <div class="row border-top" style="background-color: #ffffff;">
+            <div class="p-1 border-right col-12 col-md-12">
+                <h5 class="text-center px-2">Hinzugebuchte Events</h5>
+            </div>
+        </div>
+        <div class="row border-top" style="background-color: #ffffff;">
+            <div class="border-right col-5 col-md-5">
+                <h6 class="text-center pt-2 px-2">Eventname</h6>
+            </div>
+            <div class="border-right col-3 col-md-3">
+                <h6 class="text-center pt-2 px-2">Datum des Events</h6>
+            </div>
+            <div class="border-right col-2 col-md-2">
+                <h6 class="text-center pt-2 px-2">Teilnehmerzahl</h6>
+            </div>
+            <div class="border-right col-2 col-md-2">
+                <h6 class="text-center pt-2 px-2">Kosten</h6>
+            </div>
+        </div>
+        <div class="row border-top" style="background-color: #FEFEFE;">
+            <div class="p-1 col-5 col-md-5 border-right">
+                <h5 class="text-center pt-2 px-2">
+                    <a href="#">Stadtführung im abendlichen Dresden</a>
+                </h5>
+            </div>
+            <div class="p-1 col-3 col-md-3 border-right">
+                <h5 class="text-center pt-2 px-2">8. Januar 2021</h5>
+            </div>
+            <div class="p-1 col-2 col-md-2 border-right my-auto">
+                <div style="display: block; width: 60%; margin: auto;">
+                    <input class="text-center" type="number" value="2" style="width: 80%; margin: auto">
+                    <a href="#">X</a>
                 </div>
-                <div class="p-1 col-3 col-md-3 border-right">
-                    <h5 class="text-center pt-2 px-2">8. Januar 2021</h5>
-                </div>
-                <div class="p-1 col-2 col-md-2 border-right my-auto">
-                    <div style="display: block; width: 60%; margin: auto;">
-                        <input class="text-center" type="number" value="2" style="width: 80%; margin: auto">
-                        <a href="#">X</a>
-                    </div>
 
-                </div>
-                <div class="p-1 col-2 col-md-2 border-right">
-                    <h5 class="text-center pt-2 px-2">246€</h5>
-                </div>
             </div>
-            <div class="row pb-2" style="background-color: #EDEDED;">
+            <div class="p-1 col-2 col-md-2 border-right">
+                <h5 class="text-center pt-2 px-2">246€</h5>
             </div>
-            <div class="row border-top p-3" style="background-color: #FEFEFE;">
-                <div class="col-3">
-                    <h4>Gesamtpreis:</h4>
-                </div>
-                <div class="col-3">
-                    <h3 class="text-center">546,00 €</h3>
-                </div>
-                <div class="col-3">
-                    <select class="custom-select" name="paymethod" required="required">
-                        <option value="" disabled selected hidden>Zahlungsmethode</option>
-                        <option>Cash</option>
-                        <option>Cheque</option>
-                        <option>CreditCard</option>
-                        <option>DebitCard</option>
-                    </select>
-                </div>
-                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Buchung ausführen">
+        </div>
+        <div class="row pb-2" style="background-color: #EDEDED;">
+        </div>
+        <div class="row border-top p-3" style="background-color: #FEFEFE;">
+            <div class="col-3">
+                <h4>Gesamtpreis:</h4>
             </div>
-            <div class="row pb-4" style="background-color: #EDEDED;">
+            <div class="col-3">
+                <h3 class="text-center">546,00 €</h3>
             </div>
-            <div class="row border-top" style="background-color: #ffffff;">
-                <div class="p-1 border-right col-12 col-md-12">
-                    <h5 class="text-center px-2 pt-2">Folgende Events finden in der Nähe Ihres Aufenthalts statt:</h5>
-                </div>
+            <div class="col-3">
+                <select class="custom-select" name="paymethod" required="required">
+                    <option value="" disabled selected hidden>Zahlungsmethode</option>
+                    <option>Cash</option>
+                    <option>Cheque</option>
+                    <option>CreditCard</option>
+                    <option>DebitCard</option>
+                </select>
             </div>
-            <div class="row border-top" style="background-color: #FEFEFE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <img class="card-img" src="../static/resources/img/event1.png" alt="">
-                </div>
-                <div class="p-1 col-8 col-md-8 border-right">
-                    <div class="row border-bottom">
-                        <div class="col-12 p-2">
-                            <h4 class="text-center pt-2 px-2">Stadtführung im abendlichen Dresden</h4>
-                        </div>
+            <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Buchung ausführen">
+        </div>
+        <div class="row pb-4" style="background-color: #EDEDED;">
+        </div>
+        <div class="row border-top" style="background-color: #ffffff;">
+            <div class="p-1 border-right col-12 col-md-12">
+                <h5 class="text-center px-2 pt-2">Folgende Events finden in der Nähe Ihres Aufenthalts statt:</h5>
+            </div>
+        </div>
+        <div class="row border-top" style="background-color: #FEFEFE;" th:each="event: ${eventCatalog}"
+             th:if="${formatter.DateIsBetween(event.date, arrivalDate, departureDate)
+                            && !formatter.cartContainsProduct(cart, event)}">
+            <div class="p-1 col-4 col-md-4 border-right">
+                <img class="card-img" src="../static/resources/img/event1.png" alt="Event Bild"
+                     th:src="@{/resources/img/{image}(image=${event.image})}">
+            </div>
+            <div class="p-1 col-8 col-md-8 border-right">
+                <div class="row border-bottom">
+                    <div class="col-12 p-2">
+                        <h4 class="text-center pt-2 px-2" th:text="${event.name}">Stadtführung im abendlichen
+                            Dresden</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <h5 class="text-center pt-2 px-2">8. Januar 2021</h5>
-                        </div>
-                        <div class="col-8 border-left">
-                            Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <h5 class="text-center pt-2 px-2" th:text="${formatter.formatDate(event.date)}">8. Januar
+                            2021</h5>
                     </div>
-                    <div class="row border-bottom">
-                        <div class="col-4">
-                            <h5 class="text-center pt-2 px-2 border-top">123€ p. P.</h5>
-                        </div>
-                        <div class="col-8 border-left border-top p-2">
-                            <input class="text-center" placeholder="Personenzahl" type="number" style="width: 30%; margin: auto">
+                    <div class="col-8 border-left" th:text="${event.description}">
+                        Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende
+                        Geschichte kennen.
+                    </div>
+                </div>
+                <div class="row border-bottom">
+                    <div class="col-4">
+                        <h5 class="text-center pt-2 px-2 border-top"
+                            th:text="${formatter.parsePrice(event.price) + ' p. P.'}">123€ p. P.</h5>
+                    </div>
+                    <div class="col-8 border-left border-top p-2">
+                        <form method="post" th:action="@{/eventcart}">
+                            <label for="persons">Personenzahl: </label>
+                            <input type="hidden" name="eid" value="0" th:value="${event.id}">
+                            <input class="text-center" id="persons" name="number" type="number" min="1"
+                                   th:max="${event.getCapacity()}" step="1" required="required"
+                                   placeholder="Personenzahl"
+                                   style="width: 30%; margin: auto">
                             <input class="btn btn-primary ml-auto mr-auto" type="submit" value="Event hinzubuchen">
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 </div>
