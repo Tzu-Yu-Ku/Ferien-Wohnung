@@ -83,5 +83,20 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventCatalog.save(eventTest);
 		inventory.save(new UniqueInventoryItem(eventTest, Quantity.of(eventTest.getCapacity())));
 
+		Event eventTest2 = new Event();
+		eventTest2.setName("coole coronakonforme Party mit 3 m abstand ohne alles");
+		eventTest2.setDescription("Ist halt ne tolle Party, oder auch nicht...");
+		eventTest2.setPlace(new Place("Straße der Straßen", "1", "01234", "Dresden", 5900, 6100));
+		eventTest2.setCapacity(25);
+		eventTest2.setEventCompanyUuid(("event"));
+		eventTest2.setPrice(Money.of(321, "EUR"));
+		eventTest2.setEventStatus(true);
+		eventTest2.setEventType(EventType.LARGE);
+		eventTest2.setImage("event1.png");
+		eventTest2.setDate(LocalDate.now().plusDays(4));
+		eventTest2.setTime(LocalTime.now());
+		eventCatalog.save(eventTest2);
+		inventory.save(new UniqueInventoryItem(eventTest2, Quantity.of(eventTest.getCapacity())));
+
 	}
 }
