@@ -30,12 +30,7 @@ import org.salespointframework.catalog.ProductIdentifier;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.money.MonetaryAmount;
 
@@ -56,8 +51,8 @@ public class CatalogController {
 	private BookingManagement bookingManagement;
 
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
-			UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
-			AccountRepository accountRepository, BookingManagement bookingManagement) {
+	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
+	                  AccountRepository accountRepository, BookingManagement bookingManagement) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
@@ -96,7 +91,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
 	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
-			@LoggedIn UserAccount userAccount) {
+	                       @LoggedIn UserAccount userAccount) {
 		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
 		Hcatalog.save(myHolidayHome);
 		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
@@ -117,11 +112,11 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editHolidayHome")
 	String editHolidayHomes(Model model, @RequestParam("holidayHomeId") ProductIdentifier holidayHomeId,
-			@RequestParam("name") String name, @RequestParam("description") String description,
-			@RequestParam("price") String price, @RequestParam("capacity") String capacity,
-			@RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
-			@RequestParam("city") String city, @RequestParam("postalCode") String postalCode,
-			@RequestParam("coordinates_x") String coordinates_x, @RequestParam("coordinates_y") String coordinates_y) {
+	                        @RequestParam("name") String name, @RequestParam("description") String description,
+	                        @RequestParam("price") String price, @RequestParam("capacity") String capacity,
+	                        @RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
+	                        @RequestParam("city") String city, @RequestParam("postalCode") String postalCode,
+	                        @RequestParam("coordinates_x") String coordinates_x, @RequestParam("coordinates_y") String coordinates_y) {
 		System.out.println(holidayHomeId);
 		Hcatalog.findById(holidayHomeId);
 
@@ -205,7 +200,9 @@ public class CatalogController {
 		List<Event> allEvents = Ecatalog.findAll().toList();
 		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
 			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))) {
-				nonActivtedEvents.add(allEvents.get(i));
+				if (allEvents.get(i).isEventStatus()) {
+					nonActivtedEvents.add(allEvents.get(i));
+				}
 			}
 		}
 		model.addAttribute("nonActivatedEventCatalog", nonActivtedEvents);
@@ -216,7 +213,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/activateEventForHouse")
 	String activateEventForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId,
-			@RequestParam("event") ProductIdentifier eventId) {
+	                                   @RequestParam("event") ProductIdentifier eventId) {
 		Hcatalog.findById(holidayHomeId).get().acceptEvent(Ecatalog.findById(eventId).get());
 		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
 		return "redirect:/holidayhomes";
@@ -241,8 +238,7 @@ public class CatalogController {
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 		firstname(model);
-		model.addAttribute("eventCatalog", Ecatalog.findAll());
-
+		model.addAttribute("eventCatalog", Ecatalog.findAll().filter(Event::isEventStatus));
 		return "events";
 	}
 
@@ -270,8 +266,9 @@ public class CatalogController {
 		System.out.println("zu löschendes Event " + event);
 		if (holidayHomeStorage.findByProduct(event).isPresent()) {
 			if (!event.isEventStatus()) {
-				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
-				Ecatalog.delete(event);
+//				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
+//				Ecatalog.delete(event);
+				Ecatalog.deleteById(Objects.requireNonNull(event.getId()));
 			}
 		}
 		return "redirect:/events";
@@ -288,13 +285,13 @@ public class CatalogController {
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/editEvent")
 	String editEvent(Model model, @RequestParam("eventId") ProductIdentifier eventId, @RequestParam("name") String name,
-			@RequestParam("description") String description, @RequestParam("price") String price,
-			@RequestParam("date") String date, @RequestParam("time") String time,
-			@RequestParam("repeats") String repeats, @RequestParam("repeateRate") String repeateRate,
-			@RequestParam("capacity") String capacity, @RequestParam("street") String street,
-			@RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
-			@RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
-			@RequestParam("coordinates_y") String coordinates_y) {
+	                 @RequestParam("description") String description, @RequestParam("price") String price,
+	                 @RequestParam("date") String date, @RequestParam("time") String time,
+	                 @RequestParam("repeats") String repeats, @RequestParam("repeateRate") String repeateRate,
+	                 @RequestParam("capacity") String capacity, @RequestParam("street") String street,
+	                 @RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
+	                 @RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
+	                 @RequestParam("coordinates_y") String coordinates_y) {
 		System.out.println(eventId);
 		Ecatalog.findById(eventId);
 		if (Ecatalog.findById(eventId).isPresent()) {

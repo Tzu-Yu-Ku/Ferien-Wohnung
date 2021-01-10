@@ -34,6 +34,7 @@ import javax.money.MonetaryAmountFactory;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -101,9 +102,12 @@ public class CartController {
 		List<Event> bookable = new ArrayList<Event>();
 
 		//eventCatalog.findByHolidayHome()
-		bookable = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.stream()
+		bookable = holidayHomeCatalog
+				.findById(holidayHome.getId()).get().acceptedEvents.stream()
+				.filter(Event::isEventStatus)
 				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
-				||event.getDate().isEqual(arrivalDate)||event.getDate().isEqual(departureDate)).collect(Collectors.toList());
+						|| event.getDate().isEqual(arrivalDate) || event.getDate().isEqual(departureDate))
+				.collect(Collectors.toList());
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
