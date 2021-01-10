@@ -29,6 +29,8 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
 	BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier);
 
+	BookingEntity findFirstByOrderIdentifier(String orderIdentifier);
+
 	@Override
 	Streamable<BookingEntity> findAll();
 

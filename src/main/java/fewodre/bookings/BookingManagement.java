@@ -106,7 +106,7 @@ public class BookingManagement {
 	}
 
 	public boolean cancelEvent(Event event){
-		Iterator<OrderIdentifier> bookingIdentifier = event.getSubscriber().iterator();
+		Iterator<String> bookingIdentifier = event.getSubscriber().iterator();
 		List<BookingEntity> bookingEntities = new LinkedList<BookingEntity>();
 		while (bookingIdentifier.hasNext()){
 			bookingEntities.add(this.bookings.findFirstByOrderIdentifier(bookingIdentifier.next()));

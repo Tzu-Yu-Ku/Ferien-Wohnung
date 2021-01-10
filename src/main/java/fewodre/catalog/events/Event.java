@@ -9,10 +9,7 @@ import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 
 import javax.money.MonetaryAmount;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class Event extends Product {
 	private int repeateRate;
 
 	@ElementCollection
-	private List<OrderIdentifier> subscriber;
+	private List<String> subscriber;
 
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place,
 			boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price, LocalDate date,
@@ -56,13 +53,13 @@ public class Event extends Product {
 		this.time = time;
 		this.repeats = repeats;
 		this.repeateRate = repeateRate;
-		subscriber = new ArrayList<OrderIdentifier>();
+		subscriber = new ArrayList<>();
 	}
 
 	public Event() {
 		super("template_title", Money.parse("EUR 5"));
 		this.addCategory("Event");
-		subscriber = new ArrayList<OrderIdentifier>();
+		subscriber = new ArrayList<>();
 	}
 
 	public String getImage() {
@@ -183,10 +180,10 @@ public class Event extends Product {
 	}
 
 	public void addSubscriber(BookingEntity booking){
-		this.subscriber.add(booking.getId());
+		this.subscriber.add(booking.getId().toString());
 	}
 
-	public List<OrderIdentifier> getSubscriber() {
+	public List<String> getSubscriber() {
 		return subscriber;
 	}
 }

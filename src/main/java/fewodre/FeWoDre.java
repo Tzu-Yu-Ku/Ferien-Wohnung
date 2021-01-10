@@ -47,7 +47,7 @@ public class FeWoDre {
 
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
-			registry.addViewController(LOGIN_ROUTE).setViewName("/login");
+			registry.addViewController(LOGIN_ROUTE).setViewName("login");
 		}
 	}
 
