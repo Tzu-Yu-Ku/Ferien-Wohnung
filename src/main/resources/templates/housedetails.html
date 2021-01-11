@@ -27,12 +27,6 @@
                         <div class="carousel-item active"><img class="d-block img-fluid w-100"
                             th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
-                        <div class="carousel-item"><img class="d-block img-fluid w-100"
-                                                        src="../resources/img/house_1.png">
-                        </div>
-                        <div class="carousel-item"><img class="d-block img-fluid w-100"
-                                                        src="../resources/img/house_1.png">
-                        </div>
                     </div>
                     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev"> <span
                             class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span> </a> <a
@@ -47,7 +41,7 @@
         <div class="row">
             <div class="p-1 col-8 col-md-12"></div>
         </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
                 <h4 class="p-1">Beschreibung</h4>
             </div>
@@ -55,7 +49,7 @@
                 <h5 class="p-1" th:text="${holidayHome.description}"></h5>
             </div>
         </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
                 <h4 class="p-1" style="">Preis (pro Nacht)</h4>
             </div>
@@ -63,7 +57,7 @@
                 <h5 class="p-1" th:text="${holidayHome.price}"></h5>
             </div>
         </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
                 <h4 class="p-1">Vermieter</h4>
             </div>
@@ -71,7 +65,7 @@
                 <h5 class="p-1" th:text="${holidayHome.hostMail}"></h5>
             </div>
         </div>
-        <div class="row border-top" style="background-color: #EEEEEE;">
+        <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
                 <h4 class="p-1">Max. Gästeanzahl</h4>
             </div>

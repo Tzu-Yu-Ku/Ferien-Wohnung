@@ -38,13 +38,13 @@ public class AccountDataInitializer implements DataInitializer {
 
 		LOG.info("Creating mock accounts to populate our database and test our prototype.");
 
-		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Tenant", "Mieter",
-				"tenant@tenant", "123", "123", "1900-01-01", "Test Street",
+		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Kunde", "Account",
+				"tenant@tenant", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", true);
-		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Host", "Vermieter",
-				"host@host", "123", "123", "1900-01-01", "Test Street",
+		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Vermieter", "Account",
+				"host@host", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
-		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm("Event", "Employee",
+		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm("Eventmitarbeiter", "Employee",
 				"event@employee", "123", "123", "EventBois Dresden GmbH");
 
 		accountManagement.createTenantAccount(tenantRegistrationForm);
@@ -52,9 +52,6 @@ public class AccountDataInitializer implements DataInitializer {
 		accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 
 		userAccountManagement.create("admin", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
-		userAccountManagement.create("host", Password.UnencryptedPassword.of("host"), HOST_ROLE);
-		userAccountManagement.create("tenant", Password.UnencryptedPassword.of("tenant"), TENANT_ROLE);
-		userAccountManagement.create("event", Password.UnencryptedPassword.of("event"), EVENTEMPLOYEE_ROLE);
 
 	}
 }

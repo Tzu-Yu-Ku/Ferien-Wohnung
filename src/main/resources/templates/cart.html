@@ -241,7 +241,7 @@
                 <div class="row border-bottom">
                     <div class="col-4">
                         <h5 class="text-center pt-2 px-2 border-top"
-                            th:text="${formatter.parsePrice(event.price.getNumber()) + 'p.P.'}">
+                            th:text="${event.price.getNumber() + ',- € p.P.'}">
                             123€ p. P.
                         </h5>
                     </div>

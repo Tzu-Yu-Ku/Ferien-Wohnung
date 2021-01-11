@@ -108,7 +108,7 @@ public class HolidayHomeForm {
 	}
 
 	public HolidayHome toNewHolidayHome(String hostMail) {
-		return new HolidayHome(getName(), hostMail, getDescription(), "house2.png",
+		return new HolidayHome(getName(), hostMail, getDescription(), "house4.png",
 				new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),
 				true, getCapacity(), Money.of(getPrice(), "EUR"));
 	}
