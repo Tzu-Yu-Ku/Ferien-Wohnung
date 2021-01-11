@@ -82,7 +82,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription(
-				"Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
+				"Nehmen Sie an der Stadtführung teil und lernen Sie Dresden und dessen einzigartige Geschichte kennen.");
 		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 2000, 2000));
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid(("event"));
@@ -96,9 +96,9 @@ public class CatalogDataInitializer implements DataInitializer {
 		inventory.save(new UniqueInventoryItem(eventTest, Quantity.of(eventTest.getCapacity())));
 
 		Event eventTest2 = new Event();
-		eventTest2.setName("coole coronakonforme Party mit 3 m abstand ohne alles");
-		eventTest2.setDescription("Ist halt ne tolle Party, oder auch nicht...");
-		eventTest2.setPlace(new Place("Straße der Straßen", "1", "01234", "Dresden", 5900, 6100));
+		eventTest2.setName("Gemeinsamer Spaziergang an der Elbe");
+		eventTest2.setDescription("Sind Sie gerne unterwegs und möchten eine einmalige Erfahrung hier in Dresden machen? Dann nehmen an unserem berühmten Spaziergang an und um die Elbe herum teil.");
+		eventTest2.setPlace(new Place("An der Elbe", "1", "01234", "Dresden", 5900, 6100));
 		eventTest2.setCapacity(25);
 		eventTest2.setEventCompanyUuid(("event"));
 		eventTest2.setPrice(Money.of(34.99f, "EUR"));

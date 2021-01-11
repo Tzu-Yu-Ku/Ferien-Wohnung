@@ -48,29 +48,29 @@
         </div>
         <div class="row border font-italic border-secondary text-center align-self-center"
              th:if="${!unactivatedTenants.isEmpty()}" style="background-color: #DEDEDE;">
-            <div class="p-1 col-2 col-md-2 border-right border-secondary">
+            <div class="p-1 col-3 col-md-3 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right border-secondary">
+            <div class="p-1 col-md-3 col-3 border-right border-secondary">
                 <h6>E-Mail Adresse</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 border-secondary">
+            <div class="p-1 col-6 col-md-6 border-secondary">
                 <h6>Aktionen</h6>
             </div>
         </div>
         <div class="row border-top bg-white" th:each="account : ${unactivatedTenants}">
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1" th:text="${account.getLastname() + ', ' + account.getFirstname()}">Nachname,
                     Vorname</h6>
             </div>
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1" th:text="${account.getEmail()}">e@mail.de</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 d-flex">
-                <a class="btn btn-outline-info mr-3 mx-auto" href="#">
+            <div class="p-1 col-6 col-md-6 d-flex">
+                <a class="btn btn-outline-info mx-auto" th:href="${'manageaccount?tenant_username=' + account.getUsername()}">
                     Daten bearbeiten
                 </a>
-                <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getEmail()}" href="mailto:">
+                <a class="btn btn-outline-info mx-auto" th:href="${'mailto:' + account.getEmail()}" href="mailto:">
                     E-Mail schreiben
                 </a>
                 <form th:action="@{/activatetenant}" method="post" class="mx-auto">
@@ -97,31 +97,30 @@
         </div>
         <div class="row border font-italic border-secondary text-center align-self-center"
              th:if="${!activatedTenants.isEmpty()}" style="background-color: #DEDEDE;">
-            <div class="p-1 col-2 col-md-2 border-right border-secondary">
+            <div class="p-1 col-3 col-md-3 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right border-secondary">
+            <div class="p-1 col-md-3 col-3 border-right border-secondary">
                 <h6>E-Mail Adresse</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 border-secondary">
+            <div class="p-1 col-6 col-md-6 border-secondary">
                 <h6>Aktionen</h6>
             </div>
         </div>
         <div class="row border-top bg-white" th:each="account : ${activatedTenants}">
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1"
                     th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
                     Nachname, Vorname</h6>
             </div>
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 d-flex">
-                <form th:action="@{/manageaccount}" method="get" class="mx-auto">
-                   <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
-                </form>
-                <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
+            <div class="p-1 col-6 col-md-6 d-flex">
+                <a class="btn btn-outline-info mx-auto" th:href="${'manageaccount?tenant_username=' + account.getAccount().getUsername()}">
+                    Daten ansehen/bearbeiten
+                </a>
+                <a class="btn btn-outline-info mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">
@@ -143,31 +142,30 @@
         </div>
         <div class="row border font-italic border-secondary text-center align-self-center"
              th:if="${!hostAccounts.isEmpty()}" style="background-color: #DEDEDE;">
-            <div class="p-1 col-2 col-md-2 border-right border-secondary">
+            <div class="p-1 col-3 col-md-3 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right border-secondary">
+            <div class="p-1 col-md-3 col-3 border-right border-secondary">
                 <h6>E-Mail Adresse</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 border-secondary">
+            <div class="p-1 col-6 col-md-6 border-secondary">
                 <h6>Aktionen</h6>
             </div>
         </div>
         <div class="row border-top bg-white" th:each="account : ${hostAccounts}">
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1"
                     th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
                     Nachname, Vorname</h6>
             </div>
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 d-flex">
-                <form th:action="@{/manageaccount}" method="get" class="mx-auto">
-                    <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
-                </form>
-                <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
+            <div class="p-1 col-6 col-md-6 d-flex">
+                <a class="btn btn-outline-info mx-auto" th:href="${'manageaccount?tenant_username=' + account.getAccount().getUsername()}">
+                    Daten ansehen/bearbeiten
+                </a>
+                <a class="btn btn-outline-info mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">
@@ -189,31 +187,30 @@
         </div>
         <div class="row border font-italic border-secondary text-center align-self-center"
              th:if="${!eventAccounts.isEmpty()}" style="background-color: #DEDEDE;">
-            <div class="p-1 col-2 col-md-2 border-right border-secondary">
+            <div class="p-1 col-3 col-md-3 border-right border-secondary">
                 <h6>Nachname, Vorname</h6>
             </div>
-            <div class="p-1 col-md-2 col-2 border-right border-secondary">
+            <div class="p-1 col-md-3 col-3 border-right border-secondary">
                 <h6>E-Mail Adresse</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 border-secondary">
+            <div class="p-1 col-6 col-md-6 border-secondary">
                 <h6>Aktionen</h6>
             </div>
         </div>
         <div class="row border-top bg-white" th:each="account : ${eventAccounts}">
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1"
                     th:text="${account.getAccount().getLastname() + ', ' + account.getAccount().getFirstname()}">
                     Nachname, Vorname</h6>
             </div>
-            <div class="p-1 border-right col-2 col-md-2 align-self-center">
+            <div class="p-1 border-right col-3 col-md-3 align-self-center">
                 <h6 class="p-1" th:text="${account.getAccount().getEmail()}">test@test.de</h6>
             </div>
-            <div class="p-1 col-8 col-md-8 d-flex">
-                <form th:action="@{/manageaccount}" method="get" class="mx-auto">
-                    <input type="hidden" name="tenant_username" th:value="${account.getAccount().getUsername()}">
-                    <input type="submit" value="Daten ansehen/bearbeiten" class="btn btn-outline-info mr-3 mx-auto">
-                </form>
-                <a class="btn btn-outline-info mr-3 mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
+            <div class="p-1 col-6 col-md-6 d-flex">
+                <a class="btn btn-outline-info mx-auto" th:href="${'manageaccount?tenant_username=' + account.getAccount().getUsername()}">
+                    Daten ansehen/bearbeiten
+                </a>
+                <a class="btn btn-outline-info mx-auto" th:href="${'mailto:' + account.getAccount().getEmail()}" href="mailto:">
                     E-Mail schreiben
                 </a>
                 <form th:action="@{/deleteaccount}" method="post" class="mx-auto">

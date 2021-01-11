@@ -97,15 +97,14 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><i class="fa fa-users"></i>
-                            <h8 class="card-title" th:text="${holidayHome.capacity}"><b>----capacity----</b></h8>
+                            <h8 class="card-title" th:text="${' ' + holidayHome.capacity + ' Personen'}"><b>----capacity----</b></h8>
                         </li>
                         <li class="list-group-item"><i class="fa fa-money"></i>
-                            <h8 class="card-title" th:text="${holidayHome.price}"><b>----price----</b></h8>
+                            <h8 class="card-title" th:text="${holidayHome.price.getNumber() + ',- € pro Nacht'}"><b>----price----</b></h8>
                         </li>
                         <li class="list-group-item"><i class="fa fa-map"></i>
-                            <h8 class="card-title"
-                                th:text="${holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + '), ' + holidayHome.place.street + ' ' + holidayHome.place.houseNumber}">
-                                <b>----place----</b>
+                            <h8 class="card-title" th:text="${holidayHome.place.street + ' ' + holidayHome.place.houseNumber + ', ' + holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + ')'}">
+                            <b>----place----</b>
                             </h8>
                         </li>
                     </ul>
@@ -155,8 +154,7 @@
                             <h8 class="card-title" th:text="${holidayHome.price.getNumber() + ',- € pro Nacht'}"><b>----price----</b></h8>
                         </li>
                         <li class="list-group-item"><i class="fa fa-map"></i>
-                            <h8 class="card-title"
-                                th:text="${holidayHome.place.street + ' ' + holidayHome.place.houseNumber + ', ' + holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + ')'}">
+                            <h8 class="card-title" th:text="${holidayHome.place.street + ' ' + holidayHome.place.houseNumber + ', ' + holidayHome.place.postalCode + ' ' + holidayHome.place.city + ' (' + holidayHome.place.district + ')'}">
                                 <b>----place----</b>
                             </h8>
                         </li>
