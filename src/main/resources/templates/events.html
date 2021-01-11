@@ -31,30 +31,25 @@
                      alt="">
             </div>
         </div>
-        <br style="">
 
         <!--Button für den EventEmployee zum erstellen von Events-->
-        <div class="row" sec:authorize="hasRole('EVENT_EMPLOYEE')">
-            <div class="col-md-12"><a th:href="@{/addevents}" class="btn btn-primary btn-outline-light"
-                                      style="">Event
-                erstellen<br></a></div>
-        </div>
-        <br style="">
-
-        <!--Buttons zum sortieren von den Events nach bestimmten Kategorien-->
-        <span style="">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> Art des Events </button>
+        <div class="row mb-2 mt-2">
+            <!--Buttons zum sortieren von den Events nach bestimmten Kategorien-->
+            <div class="col-8">
+                <button type="button" class="btn btn-info dropdown-toggle ml-1" data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    Art des Events
+                </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Alle</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Wöchentliche Events</a>
                     <a class="dropdown-item" href="#">Besondere Events</a>
                 </div>
-            </span>
-        <span style="">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> Ort </button>
+                        aria-expanded="false"> Ort
+                </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Alle</a>
                     <div class="dropdown-divider"></div>
@@ -63,8 +58,14 @@
                     <a class="dropdown-item" href="#">Neustadt</a>
                     <a class="dropdown-item" href="#">Löbtau</a>
                 </div>
-            </span>
-        <br style="">
+            </div>
+
+            <div class="col-4 float-right">
+                <a th:href="@{/addevents}" class="btn btn-primary btn-outline-light float-right mr-1" sec:authorize="hasRole('EVENT_EMPLOYEE')">Event
+                    erstellen</a>
+            </div>
+        </div>
+
 
         <div class="col-md-12 col-6 p-1" th:each="event : ${eventCatalog}">
             <!--Cards für EventEmployee mit Buttons (bearbeiten, löschen)-->
@@ -78,18 +79,20 @@
                             <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
                             <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
                             <li class="list-group-item"><i class="fa fa-users"></i>
-                                <h5 class="card-title d-inline ml-2" th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
-                                    <b>----capacity----</b></h5>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
+                                    ----capacity----</p>
                             </li>
                             <li class="list-group-item"><i class="fa fa-money"></i>
-                                <h5 class="card-title d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}"><b>----price----</b>
-                                </h5>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">----price----
+                                </p>
                             </li>
                             <li class="list-group-item"><i class="fa fa-map"></i>
-                                <h5 class="card-title d-inline ml-2"
-                                    th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
-                                    <b>----place----</b>
-                                </h5>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
+                                    ----place----
+                                </p>
                             </li>
                             <div class="d-flex flex-row-reverse">
                             </div>
@@ -135,25 +138,27 @@
                     <div class="row" style="">
                         <div class="col-md-5" style="">
                             <img class="card-img-top w-100 h-100"
-                                                            th:src="@{/resources/img/{image}(image=${event.image})}"
-                                                            alt="Card image cap">
+                                 th:src="@{/resources/img/{image}(image=${event.image})}"
+                                 alt="Card image cap">
                         </div>
                         <div class="col-md-7" style="">
                             <h5 class="card-title" th:text="${event.name}"><b>----title----</b></h5>
                             <p class="card-text" th:text="${event.description}">-----beschreibung-----<br></p>
                             <li class="list-group-item"><i class="fa fa-users"></i>
-                                <h5 class="card-title d-inline ml-2" th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
-                                    <b>----capacity----</b></h5>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
+                                    ----capacity----</p>
                             </li>
                             <li class="list-group-item"><i class="fa fa-money"></i>
-                                <h5 class="card-title d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}"><b>----price----</b>
-                                </h5>
+                                <p class="d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">
+                                    ----price----
+                                </p>
                             </li>
                             <li class="list-group-item"><i class="fa fa-map"></i>
-                                <h5 class="card-title d-inline ml-2"
-                                    th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
+                                <p class="d-inline ml-2"
+                                   th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
                                     ----place----
-                                </h5>
+                                </p>
                             </li>
                             <div class="d-flex flex-row-reverse">
                             </div>
