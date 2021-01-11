@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -83,7 +83,7 @@
                                    th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
                                     ----capacity----</p>
                             </li>
-                            <li class="list-group-item"><i class="fa fa-money"></i>
+                            <li class="list-group-item"><i class="far fa-money-bill-alt"></i>
                                 <p class="card-text d-inline ml-2"
                                    th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">----price----
                                 </p>
@@ -91,6 +91,12 @@
                             <li class="list-group-item"><i class="fa fa-map"></i>
                                 <p class="card-text d-inline ml-2"
                                    th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
+                                    ----place----
+                                </p>
+                            </li>
+                            <li class="list-group-item"><i class="far fa-clock"></i>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${formatter.formatDate(event.getDate())}">
                                     ----place----
                                 </p>
                             </li>
@@ -149,7 +155,7 @@
                                    th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
                                     ----capacity----</p>
                             </li>
-                            <li class="list-group-item"><i class="fa fa-money"></i>
+                            <li class="list-group-item"><i class="far fa-money-bill-alt"></i>
                                 <p class="d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">
                                     ----price----
                                 </p>
@@ -157,6 +163,12 @@
                             <li class="list-group-item"><i class="fa fa-map"></i>
                                 <p class="d-inline ml-2"
                                    th:text="${event.place.street + ' ' + event.place.houseNumber + ', ' + event.place.postalCode + ' ' + event.place.city + ' (' + event.place.district + ')'}">
+                                    ----place----
+                                </p>
+                            </li>
+                            <li class="list-group-item"><i class="far fa-clock"></i>
+                                <p class="card-text d-inline ml-2"
+                                   th:text="${formatter.formatDate(event.getDate())}">
                                     ----place----
                                 </p>
                             </li>

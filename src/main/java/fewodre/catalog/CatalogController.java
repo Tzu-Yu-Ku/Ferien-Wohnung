@@ -1,6 +1,7 @@
 package fewodre.catalog;
 
 import fewodre.bookings.BookingManagement;
+import fewodre.bookings.StringFormatter;
 import fewodre.catalog.events.*;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.catalog.holidayhomes.*;
@@ -246,6 +247,8 @@ public class CatalogController {
 	String EventCatalog(Model model) {
 		firstname(model);
 		model.addAttribute("eventCatalog", Ecatalog.findAll().filter(Event::isEventStatus));
+		StringFormatter formatter = new StringFormatter();
+		model.addAttribute("formatter", formatter);
 		return "events";
 	}
 
