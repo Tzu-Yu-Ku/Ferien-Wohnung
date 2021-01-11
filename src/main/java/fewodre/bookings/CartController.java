@@ -107,6 +107,15 @@ public class CartController {
 				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
 						|| event.getDate().isEqual(arrivalDate) || event.getDate().isEqual(departureDate))
 				.collect(Collectors.toList());
+
+		boolean eventsInCart = false;
+		for(CartItem item : cart) {
+			if(item.getProduct().getCategories().iterator().next().equals("Event")) {
+				eventsInCart = true;
+				break;
+			}
+		}
+		model.addAttribute("eventsInCart", eventsInCart);
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);
@@ -117,6 +126,37 @@ public class CartController {
 		model.addAttribute("today", LocalDate.now());
 		model.addAttribute("check", checkIfBooked());
 		return "cart"; }
+
+//	@GetMapping("/cart")
+//	@PreAuthorize("hasRole('TENANT')")
+//	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
+//		firstname(model);
+//		System.out.println("AcceptedEvent are :" + holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents);
+//		Iterator<Event> iter = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.iterator();
+//		while (iter.hasNext()){
+//			Event event = iter.next();
+//			LOG.info(event.getName());
+//			event.setCapacity(bookingManagement.getStockCountOf(event));
+//		}
+//		List<Event> bookable = new ArrayList<Event>();
+//
+//		//eventCatalog.findByHolidayHome()
+//		bookable = holidayHomeCatalog
+//				.findById(holidayHome.getId()).get().acceptedEvents.stream()
+//				.filter(Event::isEventStatus)
+//				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
+//						|| event.getDate().isEqual(arrivalDate) || event.getDate().isEqual(departureDate))
+//				.collect(Collectors.toList());
+//		model.addAttribute("eventCatalog", bookable);
+//		model.addAttribute("holidayHome", holidayHome);
+//		model.addAttribute("arrivalDate", arrivalDate);
+//		model.addAttribute("departureDate", departureDate);
+//		this.userAccount = userAccount;
+//		model.addAttribute("formatter", formatter);
+//		model.addAttribute("account", this.userAccount);
+//		model.addAttribute("today", LocalDate.now());
+//		model.addAttribute("check", checkIfBooked());
+//		return "cart"; }
 
 	@PostMapping("/cart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")String startDate,
