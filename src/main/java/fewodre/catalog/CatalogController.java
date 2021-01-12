@@ -206,6 +206,7 @@ public class CatalogController {
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("currentDay", LocalDate.now());
 		model.addAttribute("endDay", LocalDate.now().plusDays(2));
+		model.addAttribute("userAccount", accountRepository.findByAccount_Email(holidayHome.getHostMail()).getAccount());
 		return "housedetails";
 	}
 

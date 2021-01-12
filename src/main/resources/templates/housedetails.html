@@ -62,7 +62,10 @@
                 <h4 class="p-1">Vermieter</h4>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${holidayHome.hostMail}"></h5>
+                <h5>
+                    <span class="p-1" th:text="${userAccount.firstname}"></span>
+                    <span class="p-1" th:text="${userAccount.lastname}"></span>
+                </h5>
             </div>
         </div>
         <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
