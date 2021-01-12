@@ -80,7 +80,17 @@ public class CatalogController {
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
-		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
+		
+
+		if (authentication.getPrincipal().toString().contains("HOST")) {
+			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
+			.filter(holidayHome -> holidayHome.getHostMail() == accountRepository
+			.findByAccount_Email(authentication.getName()).getAccount().getEmail())
+			.filter(holidayHome -> holidayHome.getIsBookable()));
+		}
+		else {
+			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
+		}
 		return "holidayhomes";
 	}
 
