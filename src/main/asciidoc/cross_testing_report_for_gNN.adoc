@@ -1,7 +1,7 @@
 = Cross-Testing Feedback
 
-__Durchführende Gruppe:__
-__Anwendung von Gruppe:__
+__Durchführende Gruppe:25__
+__Anwendung von Gruppe:26__
 
 == Getestetes System
 Welche Aufgabe/Problemstellung löst die Anwendung.
@@ -19,5 +19,20 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 * Fehlende Features
 * Interaktion mit der Anwendung (Usability)
 
+== Buchung
+* Die vergangene Daten können trotzdem gebucht werden.Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt.
+* Last Minuten Buchungen(von heute) werden nicht angezeigt bei der Büchungsübersicht. Man weiß nicht, ob es schon gebucht ist.
+ Trotzdem sind die gebuchte Daten nicht mehr buchbar außer des Anfangsdatums.
+* Die Daten von den gecancelte Buchungen werden nicht freigegeben(nicht buchbar).
+* Es wäre besser,dass mehr Informationen haben bei dem  Detail View als Buchungsübersicht.
+* Bei der Bezahlen-Seite können die Kreditkarte mit einem ungültigen Expiry Date bezahlen.
+
+
+
+
 == Verbesserungsvorschläge
-* Was kann noch weiter verbessert werden?
+== Buchung
+* Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar sind.
+* Es wäre schön Hinweise zu geben,dass Nutzer noch nicht eingeloggt ist.
+* Für einsprachige Nutzer sind die Denglisch schwer zu verstehen.
+*
