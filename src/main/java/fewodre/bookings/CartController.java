@@ -107,6 +107,15 @@ public class CartController {
 				.filter(event -> event.getDate().isAfter(arrivalDate) && event.getDate().isBefore(departureDate)
 						|| event.getDate().isEqual(arrivalDate) || event.getDate().isEqual(departureDate))
 				.collect(Collectors.toList());
+
+		boolean eventsInCart = false;
+		for(CartItem item : cart) {
+			if(item.getProduct().getCategories().iterator().next().equals("Event")) {
+				eventsInCart = true;
+				break;
+			}
+		}
+		model.addAttribute("eventsInCart", eventsInCart);
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("arrivalDate", arrivalDate);

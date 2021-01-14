@@ -17,24 +17,26 @@
     <div class="container py-5">
         <div class="row">
             <div class="mx-auto col-lg-8 col-md-6 mb-3">
-                <h1 class="display-3 mb-4 p-2 text-primary text-uppercase"><b>Fewodre</b></h1>
+                <h1 class="display-3 mb-4 p-2 text-primary"><span class="badge badge-primary">FeWoDre</span></h1>
             </div>
         </div>
         <div class="row" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-             background-position: top left;
-             background-size: 100%;
-             background-repeat: repeat;">
+            background-position: top left;
+            background-size: 100%;
+            background-repeat: repeat;
+            border-radius: calc(1rem);">
             <div class="mx-auto col-lg-8 col-md-6 mb-3">
                 <h2 class="display-3 mb-4 p-2">Ihr Urlaub in Dresden.</h2>
                 <p class="lead mb-5">Jetzt das perfekte Ferienhaus in Dresden und Umgebung finden!</p>
-                <a class="btn btn-lg btn-primary mx-1" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser anschauen</a>
+                <a class="btn btn-lg btn-primary mx-1" href="itemlist.html" th:href="@{/holidayhomes}">Ferienhäuser
+                    anschauen</a>
                 <a class="btn btn-lg mx-1 btn-outline-primary" href="register.html" th:href="@{/register}">
                     Registrieren
                 </a>
             </div>
         </div>
-        <div class="row" style="text-shadow: 1px 1px rgba(0,0,0,0.25);">
-            <p class="text-left px-4 pt-2">
+        <div class="row float-right" style="text-shadow: 1px 1px rgba(0,0,0,0.25);">
+            <p class="px-4 pt-2 float-right">
                 <i>Bereits registriert? <a href="accounts/login.html" th:href="@{/login}">Hier einloggen</a>.</i>
             </p>
         </div>

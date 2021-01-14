@@ -109,6 +109,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
+		firstname(model);
 		model.addAttribute("holidayHome", holidayHome);
 		return "editholidayhome";
 	}
@@ -193,6 +194,8 @@ public class CatalogController {
 	@PostMapping("/housedetails")
 	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		model.addAttribute("holidayHome", holidayHome);
+		model.addAttribute("currentDay", LocalDate.now());
+		model.addAttribute("endDay", LocalDate.now().plusDays(2));
 		return "housedetails";
 	}
 
@@ -281,6 +284,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@PostMapping("/editeventpage")
 	String editEventPage(@RequestParam("event") Event event, Model model) {
+		firstname(model);
 		model.addAttribute("event", event);
 		return "editevent";
 	}
@@ -296,6 +300,7 @@ public class CatalogController {
 	                 @RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
 	                 @RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
 	                 @RequestParam("coordinates_y") String coordinates_y) {
+		firstname(model);
 		System.out.println(eventId);
 		Ecatalog.findById(eventId);
 		if (Ecatalog.findById(eventId).isPresent()) {

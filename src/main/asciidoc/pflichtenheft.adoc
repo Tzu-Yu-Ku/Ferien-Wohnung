@@ -736,14 +736,6 @@ Bestellungen werden mit dem Status "Reserviert" erzeugt.
 
 |[F0301]|v0.1|Mitglieder löschen/erstellen/bestätigen a|Das System soll es dem Admin ermöglichen Nutzer zu erstellen und registrierte Nutzer zu löschen, sowie Tenants zu bestätigen.
 
-|[F0310]|v0.1|Bestellungen anzeigen a|Das System soll es dem Admin ermöglichen sich eine Liste, mit allen Bestellungen, die über das Systeme erstellt wurden, anzeigen zu lassen.
-Die folgenden Daten sollen jeder Bestellung hierbei zugeordnet werden:
-
-* Erstellungszeitpunkt
-* Mieter der die Bestellung aufgab
-* Vermieter des Hauses
-* Gesamtpreis der Bestellung
-
 |[F0400]|v0.1|Häuser a|Das System soll dauerhaft Informationen zu den angebotenen Häusern speichern.
 
 |[F0410]|v0.1|Häuser erstellen a|Das System soll es dem Vermieter ermöglichen neue Einträge für seine Häuser zu erstellen

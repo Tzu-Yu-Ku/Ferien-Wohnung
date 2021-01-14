@@ -41,27 +41,39 @@ public class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
+
 		HolidayHome dummyHome1 = new HolidayHome();
-		HolidayHome dummyHome2 = new HolidayHome();
-		dummyHome1.setName("Nette Wohnung in der Innenstadt");
-		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt.");
+		dummyHome1.setName("Nette Wohnung in der Dresdner Innenstadt");
+		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort für Ihren nächsten Aufenthalt in Dresden.");
 		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 5000, 5000));
 		dummyHome1.setIsBookable(true);
 		dummyHome1.setHostMail("host@host");
-		dummyHome1.setImage("house4.png");
+		dummyHome1.setImage("house1.png");
 		dummyHome1.setCapacity(4);
-		dummyHome1.setPrice(Money.of(250, "EUR"));
+		dummyHome1.setPrice(Money.of(149.49f, "EUR"));
+		holidayHomeCatalog.save(dummyHome1);
 
-		dummyHome2.setName("Gemühtliches Haus an der Elbe");
-		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden");
+		HolidayHome dummyHome2 = new HolidayHome();
+		dummyHome2.setName("Gemütliches Haus an der Elbe");
+		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden mit tollem Blick auf die einzigartige Elbe bietet sich diese Wohnung an.");
 		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 8000, 8000));
 		dummyHome2.setIsBookable(true);
 		dummyHome2.setHostMail("host@host");
-		dummyHome2.setImage("house3.png");
+		dummyHome2.setImage("house2.png");
 		dummyHome2.setCapacity(6);
-		dummyHome2.setPrice(Money.of(75, "EUR"));
-		holidayHomeCatalog.save(dummyHome1);
+		dummyHome2.setPrice(Money.of(74.99f, "EUR"));
 		holidayHomeCatalog.save(dummyHome2);
+
+		HolidayHome dummyHome3 = new HolidayHome();
+		dummyHome3.setName("*günstig* Ferienappartment in Blasewitz");
+		dummyHome3.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene Appartment besonders gut an.");
+		dummyHome3.setPlace(new Place("Am Schillerplatz", "1", "01099", "Dresden", 8000, 8000));
+		dummyHome3.setIsBookable(true);
+		dummyHome3.setHostMail("host@host");
+		dummyHome3.setImage("house3.png");
+		dummyHome3.setCapacity(6);
+		dummyHome3.setPrice(Money.of(49.99f, "EUR"));
+		holidayHomeCatalog.save(dummyHome3);
 
 		if (eventCatalog.findAll().iterator().hasNext()) {
 			return;
@@ -70,11 +82,11 @@ public class CatalogDataInitializer implements DataInitializer {
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription(
-				"Nehmen sie an der Stadtführung teil und lernen sie Dresden und dessen atemberaubende Geschichte kennen.");
+				"Nehmen Sie an der Stadtführung teil und lernen Sie Dresden und dessen einzigartige Geschichte kennen.");
 		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 2000, 2000));
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid(("event"));
-		eventTest.setPrice(Money.of(123, "EUR"));
+		eventTest.setPrice(Money.of(49.49f, "EUR"));
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
@@ -84,15 +96,15 @@ public class CatalogDataInitializer implements DataInitializer {
 		inventory.save(new UniqueInventoryItem(eventTest, Quantity.of(eventTest.getCapacity())));
 
 		Event eventTest2 = new Event();
-		eventTest2.setName("coole coronakonforme Party mit 3 m abstand ohne alles");
-		eventTest2.setDescription("Ist halt ne tolle Party, oder auch nicht...");
-		eventTest2.setPlace(new Place("Straße der Straßen", "1", "01234", "Dresden", 5900, 6100));
+		eventTest2.setName("Gemeinsamer Spaziergang an der Elbe");
+		eventTest2.setDescription("Sind Sie gerne unterwegs und möchten eine einmalige Erfahrung hier in Dresden machen? Dann nehmen an unserem berühmten Spaziergang an und um die Elbe herum teil.");
+		eventTest2.setPlace(new Place("An der Elbe", "1", "01234", "Dresden", 5900, 6100));
 		eventTest2.setCapacity(25);
 		eventTest2.setEventCompanyUuid(("event"));
-		eventTest2.setPrice(Money.of(321, "EUR"));
+		eventTest2.setPrice(Money.of(34.99f, "EUR"));
 		eventTest2.setEventStatus(true);
 		eventTest2.setEventType(EventType.LARGE);
-		eventTest2.setImage("event1.png");
+		eventTest2.setImage("event2.png");
 		eventTest2.setDate(LocalDate.now().plusDays(4));
 		eventTest2.setTime(LocalTime.now());
 		eventCatalog.save(eventTest2);
