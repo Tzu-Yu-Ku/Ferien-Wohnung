@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class Date {
-	private LocalDate date;
+	private LocalDate localDate;
 	private Month month;
 	private int dayOfMonth;
 	private DayOfWeek dayOfWeek;
@@ -15,19 +15,19 @@ public class Date {
 	private OrderStatus state;
 
 	public Date(LocalDate date){
-		this.date = date;
+		this.localDate = date;
 		this.month = date.getMonth();
 		this.dayOfMonth = date.getDayOfMonth();
 		this.dayOfWeek = date.getDayOfWeek();
 		this.state = OrderStatus.CANCELLED; // Cancelled wenn noch frei
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getLocalDate() {
+		return localDate;
 	}
 
 	public Month getMonth() {

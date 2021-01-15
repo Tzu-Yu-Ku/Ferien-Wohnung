@@ -15,7 +15,6 @@ import org.salespointframework.order.Cart;
 import org.salespointframework.order.Order;
 import org.salespointframework.order.OrderIdentifier;
 import org.salespointframework.order.OrderManagement;
-import org.salespointframework.payment.Cash;
 import org.salespointframework.quantity.Quantity;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import org.springframework.util.Assert;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -43,8 +41,8 @@ public class BookingManagement {
 
 	@Autowired
 	BookingManagement(BookingRepository bookings, OrderManagement<Order> orderManagement,
-					  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog,
-					  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement){
+	                  HolidayHomeCatalog homeCatalog, EventCatalog eventCatalog,
+	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement) {
 
 		Assert.notNull(bookings, "BookingRepository must not be null!");
 		Assert.notNull(orderManagement, "OrderManagement must not be null!");
@@ -62,41 +60,44 @@ public class BookingManagement {
 
 
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home, Cart cart,
-											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<Event, Integer> events, String paymethod){
+			/*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
+			                                 LocalDate departureDate, HashMap<Event, Integer> events,
+			                                 String paymethod) {
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
 		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, paymethod);
+		BookingEntity bookingEntity = new BookingEntity(userAccount,
+				this.accounts.findByAccount_Email(home.getHostMail()), home, nights, arrivalDate, departureDate,
+				events, paymethod);
 		cart.addItemsTo(bookingEntity);
 		//order open()
 		//will update quantity one time
 		//cart.getItem(home.getId().toString());
-		if(!holidayHomeStorage.findByProduct(home).isPresent()){
+		if (holidayHomeStorage.findByProduct(home).isEmpty()) {
 			holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
-		}else{
+		} else {
 			holidayHomeStorage.findByProduct(home).get().increaseQuantity(nights.add(nights));
 		}
-		Iterator<Event> eventIterator = bookingEntity.getEvents(eventCatalog).iterator();
-		while (eventIterator.hasNext()){
-			eventCatalog.findFirstByProductIdentifier(eventIterator.next().getId()).addSubscriber(bookingEntity);
+		for (Event event : bookingEntity.getEvents(eventCatalog)) {
+			eventCatalog.findFirstByProductIdentifier(event.getId()).addSubscriber(bookingEntity);
 		}
 		cart.clear();
-		System.out.println("cart is empty: "+cart.isEmpty());
+		System.out.println("cart is empty: " + cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
 		System.out.println(result == bookingEntity);
-		return result ;
+		return result;
 	}
 
-	public boolean payDeposit(BookingEntity bookingEntity){
+	public boolean payDeposit(BookingEntity bookingEntity) {
 
-		if(getMoney(bookingEntity.getDepositInCent()*0.01f,
-				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())){
+		if (getMoney(bookingEntity.getDepositInCent() * 0.01f,
+				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
 			//orderManagement.payOrder(bookingEntity)
 			//orderManagement.completeOrder(bookingEntity);
-			if(bookingEntity.pay()){return true;}
-			else {
+			if (bookingEntity.pay()) {
+				return true;
+			} else {
 				System.out.println("etwas ist bei der Bezahlung schiefgelaufen whr. falscher State");
-				giveMoney(bookingEntity.getDepositInCent()*0.01f, bookingEntity.getPaymethod(),
+				giveMoney(bookingEntity.getDepositInCent() * 0.01f,
 						bookingEntity.getUuidTenant()); //return Money
 				return false;
 			}
@@ -105,38 +106,36 @@ public class BookingManagement {
 		return false;
 	}
 
-	public boolean cancelEvent(Event event){
+	public boolean cancelEvent(Event event) {
 		Iterator<String> bookingIdentifier = event.getSubscriber().iterator();
 		List<BookingEntity> bookingEntities = new LinkedList<BookingEntity>();
-		while (bookingIdentifier.hasNext()){
+		while (bookingIdentifier.hasNext()) {
 			bookingEntities.add(this.bookings.findFirstByOrderIdentifier(bookingIdentifier.next()));
 		}
-		Iterator<BookingEntity> bookingIter = bookingEntities.iterator();
-		while (bookingIter.hasNext()){
-			BookingEntity booking = bookingIter.next();
-			if(booking.getState().compareTo(BookingStateEnum.PAID) == 0 ||
-			   booking.getState().compareTo(BookingStateEnum.ACQUIRED) == 0 ||
-				booking.getState().compareTo(BookingStateEnum.CONFIRMED) == 0){
-					giveMoney(booking.getPriceOf(event), booking.getPaymethod(), booking.getUuidTenant());
+		for (BookingEntity booking : bookingEntities) {
+			if (booking.getState().compareTo(BookingStateEnum.PAID) == 0 ||
+					booking.getState().compareTo(BookingStateEnum.ACQUIRED) == 0 ||
+					booking.getState().compareTo(BookingStateEnum.CONFIRMED) == 0) {
+				giveMoney(booking.getPriceOf(event), booking.getUuidTenant());
 			}
 			booking.cancelEvent(event);
 		}
 		return true;
 	}
 
-	public boolean payRest(BookingEntity bookingEntity){
-	if(orderManagement.payOrder(bookingEntity)) {
-		if (getMoney(bookingEntity.getTotal().getNumber().floatValue(),
-				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
-			orderManagement.completeOrder(bookingEntity);
-			return true;
+	public boolean payRest(BookingEntity bookingEntity) {
+		if (orderManagement.payOrder(bookingEntity)) {
+			if (getMoney(bookingEntity.getTotal().getNumber().floatValue(),
+					bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
+				orderManagement.completeOrder(bookingEntity);
+				return true;
+			}
 		}
-	}
 		return false;
 	}
 
-	public int getStockCountOf(Product product){
-		if(holidayHomeStorage.findByProduct(product).isEmpty()){
+	public int getStockCountOf(Product product) {
+		if (holidayHomeStorage.findByProduct(product).isEmpty()) {
 			return 0;
 		}
 		return holidayHomeStorage.findByProduct(product).get().getQuantity().getAmount().intValue();
@@ -146,9 +145,10 @@ public class BookingManagement {
 	 * Interface for the Paying-Framework of the customer.
 	 * Shall return true when the transaction of the money from
 	 * the tenant to the host or us was succesfull
+	 *
 	 * @return
 	 */
-	public boolean getMoney(float bill, Paymethod choosenPaymethod, String uuidTenant){
+	public boolean getMoney(float bill, Paymethod choosenPaymethod, String uuidTenant) {
 		System.out.println(uuidTenant + " paid: " + bill + "€");
 		return true;
 	}
@@ -157,26 +157,35 @@ public class BookingManagement {
 	 * Interface for the Paying-Framework of the customer.
 	 * Shall return true when the transaction of the money from
 	 * the host or us to the tenant was succesfull
+	 *
 	 * @return
 	 */
-	public boolean giveMoney(float bill, Paymethod choosenPaymethod, String uuidTenant){
+	public boolean giveMoney(float bill, String uuidTenant) {
 		System.out.println("depaid: " + bill + "€ to: " + uuidTenant);
 		return true;
 	}
 
-	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
+	public Streamable<BookingEntity> findAll() {
+		return bookings.findAll();
+	}
 
 	//after createBookingEntity, we can already save in bookingRepository
 	//need to create findByStatusPaid
 
-	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
+	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome) {
+		return bookings.findBookingsByUuidHome(holidayHome.toString());
+	}
 
-	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){return bookings.findBookingEntityByUserAccount(userAccount);}
+	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount) {
+		return bookings.findBookingEntityByUserAccount(userAccount);
+	}
 
-	public  BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier){return bookings.findFirstByOrderIdentifier(orderIdentifier);}
+	public BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier) {
+		return bookings.findFirstByOrderIdentifier(orderIdentifier);
+	}
 
-	public Streamable<BookingEntity> findByState(String state,String host){
-		if(state.equals("ALL")){
+	public Streamable<BookingEntity> findByState(String state, String host) {
+		if (state.equals("ALL")) {
 			return bookings.findAllByUuidHost(host);
 		}
 		List<BookingEntity> all = bookings.findAllByUuidHost(host).toList();
@@ -186,13 +195,13 @@ public class BookingManagement {
 		return Streamable.of(stream);
 	}
 
-	public List<BookingEntity> findByTenantName(String name, String host){
+	public List<BookingEntity> findByTenantName(String name, String host) {
 		List<BookingEntity> bookingsFromTenant = bookings.findAllByUuidHost(host).filter(bookingEntity ->
 				bookingEntity.getUserAccount().getLastname().equals(name)).toList();
 		return bookingsFromTenant;
 	}
 
-	public List<BookingEntity> findByHomeName(String home,String host){
+	public List<BookingEntity> findByHomeName(String home, String host) {
 		List<BookingEntity> bookingsFromHome = bookings.findAllByUuidHost(host).filter(bookingEntity ->
 				bookingEntity.getHomeName().equals(home)).toList();
 		return bookingsFromHome;

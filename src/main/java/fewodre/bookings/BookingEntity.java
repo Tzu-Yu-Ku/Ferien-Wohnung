@@ -78,14 +78,14 @@ public class BookingEntity extends Order {
 	                     HashMap<Event, Integer> events, String paymentMethod) {
 		super(userAccount, Cash.CASH);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
-		this.uuidHome = home.getId().getIdentifier();
-		this.uuidHost = (host == null || host.getAccount() == null
-				|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
+		this.uuidHome = Objects.requireNonNull(home.getId()).getIdentifier();
+		this.uuidHost = host == null || host.getAccount() == null ? home.getHostMail() : host.getAccount().getEmail();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
-		this.depositInCent = home.getPrice().multiply(ChronoUnit.DAYS.between(arrivalDate, departureDate)).multiply(0.1 * 100).getNumber().intValue();
+		this.depositInCent = home.getPrice().multiply(ChronoUnit.DAYS.between(arrivalDate, departureDate))
+				.multiply(0.1 * 100).getNumber().intValue();
 		this.state = new BookingState(this.getDateCreated().toLocalDate(), this.arrivalDate);
 		System.out.println("new State: " + this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
@@ -103,18 +103,18 @@ public class BookingEntity extends Order {
 		 */
 		price = getTotal();
 		//need to find out from Home
-		this.hostName = (host == null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
+		this.hostName = host == null || host.getAccount() == null
+				? " " : host.getAccount().getUsername();
 	}
 
-	@Deprecated
 	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome.getIdentifier();
 		//this.homeIdentifier = uuidHome;
 	}
 
-	@Deprecated
-	public BookingEntity(AccountEntity userAccount, HolidayHome holidayHome, Quantity nights, LocalDate arrivalDate, LocalDate depatureDate, PaymentMethod paymentMethod) {
+	public BookingEntity(AccountEntity userAccount, HolidayHome holidayHome, Quantity nights, LocalDate arrivalDate,
+	                     LocalDate depatureDate, PaymentMethod paymentMethod) {
 		super();
 	}
 
@@ -263,7 +263,8 @@ public class BookingEntity extends Order {
 
 	public int getDepositInCent() {
 		if (this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
-			List<OrderLine> events = this.getOrderLines().filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
+			List<OrderLine> events = this.getOrderLines()
+					.filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
 			events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
 		}
 		return depositInCent;
@@ -276,7 +277,8 @@ public class BookingEntity extends Order {
 		while (iter.hasNext()) {
 			ChargeLine charge = iter.next();
 			;
-			if (charge.getPrice().isEqualTo(Money.of(BigDecimal.valueOf(0.01 * depositInCent), "EUR").multiply(-1))) {
+			if (charge.getPrice().isEqualTo(Money.of(BigDecimal.valueOf(0.01 * depositInCent),
+					"EUR").multiply(-1))) {
 				System.out.println("Tried to remove Charge");
 				this.remove(charge);
 				break;

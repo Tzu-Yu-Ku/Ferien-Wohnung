@@ -41,7 +41,7 @@ public class BookingState {
 		this.payDeadline = LocalDate.now();
 		this.freeCancelDeadline = LocalDate.now();
 		this.arrivalDate = LocalDate.now();
-		this.state = deciceState(startState);
+		deciceState(startState);
 	}
 
 	public BookingState(BookingStateEnum startState, LocalDate bookingDate,
@@ -50,7 +50,7 @@ public class BookingState {
 				bookingDate.plus(14, ChronoUnit.DAYS) : arrivalDate;
 		this.arrivalDate = arrivalDate;
 		this.freeCancelDeadline = arrivalDate.minus(7, ChronoUnit.DAYS);
-		this.state = deciceState(startState);
+		deciceState(startState);
 	}
 
 	public boolean cancel(Order order) {
@@ -87,25 +87,25 @@ public class BookingState {
 		}
 	}
 
-	private State deciceState(BookingStateEnum startState) {
+	private void deciceState(BookingStateEnum startState) {
 		switch (startState) {
 			case PAID:
-				return this.paid;
+				this.state = this.paid;
 
 			case CONFIRMED:
-				return this.confirmed;
+				this.state = confirmed;
 
 			case ACQUIRED:
-				return this.acquired;
+				this.state = acquired;
 
 			case COMPLETED:
-				return this.completed;
+				this.state =completed;
 
 			case CANCELED:
-				return this.canceled;
+				this.state = canceled;
 
 			default:
-				return this.ordered;
+				this.state = this.ordered;
 		}
 	}
 

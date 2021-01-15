@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Month {
-	public java.time.Month month;
+	public java.time.Month jMonth;
 	public ArrayList<Date> dates;
 
 	public Month(int year, java.time.Month month, int dateCount){
-		this.month = month;
+		this.jMonth = month;
 		this.dates = new ArrayList<Date>();
 		for(int i = 1; i <= dateCount; i++){
 			dates.add(new Date(LocalDate.of(year, month.getValue(), i)));
@@ -20,12 +20,12 @@ public class Month {
 	}
 
 	public java.time.Month getMonth() {
-		return month;
+		return jMonth;
 	}
 
 	@Override
 	public String toString() {
-		String result = month.name();
+		String result = jMonth.name();
 		result += ": ";
 		for(int i = 0; i < dates.size(); i++){
 			result += dates.get(i).toString();
