@@ -1,36 +1,35 @@
 = Cross-Testing Feedback
 
-
 __Durchführende Gruppe:__ SWT-Gruppe 25 (Jesko, Julian, Tzu, Jimmy, Marten, Janu)
 
 __Anwendung von Gruppe:__ SWT-Gruppe 26
 
 == Getestetes System
-Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäusern in der Region in und um der Stadt Dresden verwirklichen soll. Dabei sind eine vielzahl von Funktionen gefordert, welche wir im Folgenden ausgiebig getestet haben.
+Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäusern in der Region in und um der Stadt Dresden verwirklichen soll. Dabei sind eine Vielzahl von Funktionen gefordert, welche wir im Folgenden ausgiebig getestet haben.
 
 == Fehler-Report
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| / | __keine__ | Der "Suche beginnen!" Knopf hat keine Funktion. | _keine_ 
-| /event/add | Event-Name = "      " (leerer String bestehend aus Leerzeichen) | Gibt der Eventmitarbeiter einen leeren String als Eventnamen ein, so gibt es einen internen Servererror. | Internal Server Error 
-| /event/add | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. | Internal Server Error 
-| /event/edit | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. Die selben Start- und Enddaten werden dennoch übernommen. | Internal Server Error 
-| /event/edit | Strings aus Leerzeichenfür beliebige Eingabefelder | Der Eventmitarbeiter kann Eventdetails in der Bearbeitung beliebig durch Leerzeichen ersetzen. | _keine_
-| /profile | Strings aus Leerzeichenfür Vor- und Nachname sowie E-Mail / Leere Felder | Der Nutzer kann seine Benutzerdaten in der Profilbearbeitung durch Leerzeichen ersetzen. Desweiteren werden nicht veränderte Felder einfach mit nichts abgespeichert. | _keine_
+| / | __keine__ | Der "Suche beginnen!" Knopf hat keine Funktion. | _keine_
+| /event/add | Event-Name = " " (leerer String bestehend aus Leerzeichen) | Gibt der Eventmitarbeiter einen leeren String als Eventnamen ein, so gibt es einen internen Servererror. | Internal Server Error
+| /event/add | start-date = end-date | Gibt der Eventmitarbeiter dasselbe Start- und Enddatum ein, so gibt es einen internen Servererror. | Internal Server Error
+| /event/edit | start-date = end-date | Gibt der Eventmitarbeiter dasselbe Start- und Enddatum ein, so gibt es einen internen Servererror. Dieselben Start- und Enddaten werden dennoch übernommen. | Internal Server Error
+| /event/edit | Strings aus Leerzeichen für beliebige Eingabefelder | Der Eventmitarbeiter kann Eventdetails in der Bearbeitung beliebig durch Leerzeichen ersetzen. | _keine_
+| /profile | Strings aus Leerzeichen für Vor- und Nachname sowie E-Mail / Leere Felder | Der Nutzer kann seine Benutzerdaten in der Profilbearbeitung durch Leerzeichen ersetzen. Des Weiteren werden nicht veränderte Felder einfach mit nichts abgespeichert. | _keine_
 | /booking | Hausbuchung normal, Event-Teilnehmer können beliebig groß gewählt werden | Man kann zu viele Event-Teilnehmer hinzufügen, was in einem Bad Request endet. | Bad Request
-| /registerUser | __keine__ | Wenn man über den Pfad bescheid weiß, kann man ohne Authorisierung die Accounterstellung eines Administrators vornehmen und sich so unbefugten Zugriff erteilen. | __keine__
+| /registerUser | __keine__ | Wenn man über den Pfad bescheid weiß, kann man ohne Autorisierung die Accounterstellung eines Administrators vornehmen und sich so unbefugten Zugriff erteilen. | __keine__
 | /registerUser | Nur Leerzeichen im Feld "Username" | Gibt man einen Benutzernamen ein, der nur aus Leerzeichen besteht, wird zwar kein neuer Account angelegt, aber man erhält kein Feedback zur inkorrekten Eingabe | __keine__
-| /registerUser | Normal ausgefülltes Formular | Legt man einen neuen Nutzer als Admin an, so wird die eingegebene E-Mail Adresse nicht übernommen. Jeder Nutzer hat die "Platzhalter"-E-Mail-Adresse customer@example.com | __keine__
-| /UserManagement#edit_customer | geänderte E-Mail Adresse | Möchte man nur ein bestimmtes Feld der Daten eines Nutzers editieren, so muss man stets alle Felder ausfüllen. | __keine__
-| /UserManagement#edit_customer |  Nur Leerzeichen in Feldern Vorname und Nachname | Man kann Vor- und Nachnamen eines Nutzers auf Leerzeichen setzen. | __keine__
+| /registerUser | Normal ausgefülltes Formular | Legt man einen neuen Nutzer als Admin an, so wird die eingegebene E-Mail-Adresse nicht übernommen. Jeder Nutzer hat die "Platzhalter"-E-Mail-Adresse customer@example.com | __keine__
+| /UserManagement#edit_customer | geänderte E-Mail-Adresse | Möchte man nur ein bestimmtes Feld der Daten eines Nutzers editieren, so muss man stets alle Felder ausfüllen. | __keine__
+| /UserManagement#edit_customer | Nur Leerzeichen in Feldern Vorname und Nachname | Man kann Vor- und Nachnamen eines Nutzers auf Leerzeichen setzen. | __keine__
 | /UserManagement#addEventCompany | Nur Leerzeichen im Feld Name der Event Company | Man kann neue Eventfirmen erstellen dessen Namen nur aus Leerzeichen bestehen und diese auch beim Anlegen eines neuen Event-Mitarbeiters auswählen. | __keine__
-| /profile | __keine__ | Es gibt keinen Logout-Knopf auf der Profilseite. | __keine__ 
+| /profile | __keine__ | Es gibt keinen Logout-Knopf auf der Profilseite. | __keine__
 | /profile | Man ist als kein Nutzer eingeloggt. | Statt auf den Login zu verweisen, liefert das Portal beim Aufrufen der Profilseite, wenn man nicht eingeloggt ist, eine Bad Request Nachricht. | Bad Request
-| /booking | Start- und Enddatum in der Vergangenheit | Die vergangene Daten können trotzdem gebucht werden. Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt. | __keine__
+| /booking | Start- und Enddatum in der Vergangenheit | Vergangenen Daten können trotzdem gebucht werden. Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt. | __keine__
 | /booking | Leeres Start- oder Enddatum | Gibt der Nutzer kein Start- oder Enddatum ein, so folgt ein Bad Request. | Bad Request
-| /bookings | Aktuelles Datum entspricht dem Startdatum einer Buchung | Last Minuten Buchungen(von heute) werden nicht angezeigt bei der Büchungsübersicht. Man weiß nicht, ob es schon gebucht ist. Trotzdem sind die gebuchte Daten nicht mehr buchbar außer das Anfangsdatums. | __keine__
+| /bookings | Aktuelles Datum entspricht dem Startdatum einer Buchung | Last-Minute-Buchungen (von heute) werden bei der Buchungsübersicht nicht angezeigt. Man weiß nicht, ob es bereits gebucht ist. Trotzdem sind die gebuchten Daten nicht mehr buchbar außer das Anfangsdatum. | __keine__
 | /house/{HAUS-ID} | __keine__ | Die Daten von den stornierten Buchungen werden nicht freigegeben sind somit nicht buchbar. | __keine __
 | /booking/pay?bookingId={BOOKING_ID} | ungültige Kreditkarten-Daten | Bei der Bezahlen-Seite kann man mit Kreditkarten mit einem ungültigen Expiry-Date bezahlen, als auch mit sonstigen nicht gültigen Kreditkarten-Daten. | __keine__
 
@@ -39,30 +38,27 @@ Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäuser
 == Sonstiges
 === Optik der Anwendung
 ==== Was uns gefällt
-* Die Platform macht sich an vielen Stellen schöne Animationen zu nutze.
+* Die Plattform macht sich an vielen Stellen schöne Animationen zu Nutze.
 * Die Verwendung von Modals an diversen Stellen ist sehr gut umgesetzt.
 * Die Einbindung einer Datumsauswahl (Datepicker), die es zulässt, bestimmte Daten unauswählbar zu machen, ist sehr gut.
-* Grundsätzlich ist die Platform sehr übersichtlich gestaltet.
+* Grundsätzlich ist die Plattform sehr übersichtlich gestaltet.
 
 ==== Verbesserungsvorschläge
-* Der Hintergrund der Platform ist zu präsent. An einigen Stellen hebt sich der Inhalt nicht vom Hintergrundbild ab und sind daher nur schwer erkennbar. Vor allem die Profilseite des Eventmitarbeiters zeichnet keinen Hintergrund hinter die Eventliste.
+* Der Hintergrund der Plattform ist zu präsent. An einigen Stellen hebt sich der Inhalt nicht vom Hintergrundbild ab und sind daher nur schwer erkennbar. Vor allem die Profilseite des Eventmitarbeiters zeichnet keinen Hintergrund hinter die Eventliste.
 * Auf einigen Unterseiten wander das Hintergrundbild nicht mit, wenn man auf der Seite scrollt. Das Hintergrundbild sollte überall fixiert sein, bzw. auf jeder Unterseite konsistentes Verhalten aufweisen.
 * Einige vertikale Abstände zwischen den Seitenelementen variieren zu stark.
 * Die Detailseite zu einem Haus ist leider etwas mager.
-
 
 === Interaktion mit der Anwendung (Usability)
 
 ==== Was uns gefällt
 * Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar ist.
-* Die Buchsübersicht ist gut kategorisiert.
+* Die Buchungsübersicht ist gut kategorisiert.
 ==== Verbesserungsvorschläge
 * Es wäre schön Hinweise zu geben, dass Nutzer noch nicht eingeloggt ist.
 * Für einsprachige Nutzer ist das Deutsch-Englisch schwer zu verstehen.
-* Es wäre besser, wenn mehr Informationen bei dem  Detail View sichtbar wären als Buchungsübersicht.
+* Es wäre besser, wenn mehr Informationen bei dem Detail View sichtbar wären als Buchungsübersicht.
 * Das Hinzubuchen eines Events ist ein wenig versteckt.
 
-
 == Verbesserungsvorschläge
-* Die Nutzersuche in der Administration könnte eine tatsächliche Suche in der Nutzerdatenbank sein, statt einer Dokumentensuche auf der angezeigten Seite. Desweiteren lässt sich die Suche nicht mit Enter druchführen.
-
+* Die Nutzersuche in der Administration könnte eine tatsächliche Suche in der Nutzerdatenbank sein, statt einer Dokumentensuche auf der angezeigten Seite. Desweiteren lässt sich die Suche nicht mit Enter durchführen.
