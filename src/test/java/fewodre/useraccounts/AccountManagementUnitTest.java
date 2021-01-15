@@ -1,6 +1,5 @@
 package fewodre.useraccounts;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
@@ -12,12 +11,9 @@ import static org.mockito.Mockito.*;
 
 class AccountManagementUnitTest {
 
-	@BeforeEach
-	void setUp() {
-	}
 
 	@Test
-	void createTenantAccount() {
+	public void createTenantAccount() {
 
 		AccountRepository accountRepository = mock(AccountRepository.class);
 		when(accountRepository.save(any())).then(i -> i.getArgument(0));
