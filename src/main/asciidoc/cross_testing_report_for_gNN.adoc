@@ -16,9 +16,9 @@ Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäuser
 | /event/add | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. | Internal Server Error 
 | /event/edit | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. Die selben Start- und Enddaten werden dennoch übernommen. | Internal Server Error 
 | /event/edit | Strings aus Leerzeichenfür beliebige Eingabefelder | Der Eventmitarbeiter kann Eventdetails in der Bearbeitung beliebig durch Leerzeichen ersetzen. 
-| /profile | Strings aus Leerzeichenfür Vor- und Nachname sowie E-Mail | Der Nutzer kann seine Benutzerdaten in der Profilbearbeitung durch Leerzeichen ersetzen. 
+| /profile | Strings aus Leerzeichenfür Vor- und Nachname sowie E-Mail | Der Nutzer kann seine Benutzerdaten in der Profilbearbeitung durch Leerzeichen ersetzen. |  _keine_
 | /booking | Hausbuchung normal, Event-Teilnehmer können beliebig groß gewählt werden | Man kann zu viele Event-Teilnehmer hinzufügen, was in einem Bad Request endet. | Bad Request
-| . | . | . | .
+
 |===
 
 == Sonstiges
