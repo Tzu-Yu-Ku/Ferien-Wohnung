@@ -91,8 +91,8 @@ public class Coordinates {
 			this.district = "Cossebaude";
 		}
 		else if (oberwartha.contains(x_ratio, y_ratio)) {
-			System.out.println("Cossebaude");
-			this.district = "Cossebaude";
+			System.out.println("Oberwartha");
+			this.district = "Oberwartha";
 		}
 		else if (gompitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Gompitz");

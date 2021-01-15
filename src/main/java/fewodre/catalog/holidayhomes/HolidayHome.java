@@ -8,6 +8,7 @@ import org.salespointframework.catalog.Product;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
@@ -45,6 +46,15 @@ public class HolidayHome extends Product {
 	public HolidayHome() {
 		super("template_title", Money.parse("EUR 5"));
 		this.addCategory("HolidayHome");
+	}
+
+	public boolean findInList(HolidayHome holidayHome, ArrayList<HolidayHome> list) {
+		if(list.contains(holidayHome)){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**

@@ -33,37 +33,88 @@
                      alt="">
             </div>
         </div>
-
+        
         <div class="row p-2">
             <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
             <div class="col-md-9">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Platz
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Alle</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">mind. 2</a>
-                    <a class="dropdown-item" href="#">mind. 4</a>
-                    <a class="dropdown-item" href="#">mind. 6</a>
-                    <a class="dropdown-item" href="#">mind. 8</a>
+                <div class="btn-group">
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortcapacity}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Personenanzahl
+                        </button>
+            
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="2"/>
+                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="4"/>
+                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="6"/>
+                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="8"/>
+                        </div>
+                    </form>
+
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortprice}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Preis p.N.
+                        </button>
+
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="0-50 EUR"/>
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="50-100 EUR"/>
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="100-150 EUR"/>
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="150-200 EUR"/>
+                            <input class="dropdown-item" type="submit" name="searchedPrice" value="Über 200 EUR"/>
+                        </div>
+                    </form>
+
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortdistrict}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Stadtteil
+                        </button>
+
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Altfranken"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Altstadt"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Blasewitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Cossebaude"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Cotta"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Gompitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Klotsche"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Langebrück"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Leuben"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Loschwitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Mobschatz"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Neustadt"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Oberwartha"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Pieschen"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Plauen"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Prohlis"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Schönborn"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Schönefeld-Weißig"/>
+                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Weixdorf"/>
+                        </div>
+                    </form>
+
+                    <form role="form" th:method="post" th:action="@{/deletallsorts}">
+                        <input class="btn btn-danger btn-outline-light" type="submit"
+                               value="Alle FIlter zurück setzen"/>
+                    </form>
+
                 </div>
+                    
+
+                
+                <!--
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                    Preis pro Nacht
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Alle</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">0-50 EUR</a>
-                    <a class="dropdown-item" href="#">50-100 EUR</a>
-                    <a class="dropdown-item" href="#">100-150 EUR</a>
-                    <a class="dropdown-item" href="#">150 EUR u. mehr</a>
-                </div>
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Ort
+                    Region
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Alle</a>
@@ -74,6 +125,7 @@
                     <a class="dropdown-item" href="#">Löbtau</a>
                 </div>
             </div>
+        -->
 
 
             <div class="col-md-3">
