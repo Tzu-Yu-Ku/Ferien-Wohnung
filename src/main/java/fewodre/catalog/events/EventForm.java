@@ -2,164 +2,76 @@ package fewodre.catalog.events;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 
+import fewodre.catalog.CatalogForm;
 import org.javamoney.moneta.Money;
 import org.salespointframework.useraccount.UserAccount;
 
 import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
 
-public class EventForm {
-    private String name;
-    private String description;
-    private String eventCompany;
-    private String street;
-    private String number;
-    private String postalnumber;
-    private String city;
-    private int capacity;
-    private int price;
-    private LocalDate date;
-    private LocalTime time;
-    private int repeats;
-    private int repeateRate;
-    private int coordinateX;
-    private int coordinateY;
+public class EventForm extends CatalogForm {
+	private String eventCompany;
+	private LocalDate date;
+	private LocalTime time;
+	private int repeats;
+	private int repeateRate;
 
-    public EventForm() {
-    }
+	public EventForm() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getEventCompanyUuid() {
+		return eventCompany;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setEventCompanyUuid(String eventCompany) {
+		this.eventCompany = eventCompany;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public EventType getEventType() {
+		if (getRepeats() > 0) {
+			return EventType.SMALL;
+		}
+		return EventType.LARGE;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public LocalDate getDate() {
+		return date;
+	}
 
-    public String getEventCompanyUuid() {
-        return eventCompany;
-    }
+	public void setDate(String dateString) {
+		this.date = LocalDate.parse(dateString);
+	}
 
-    public void setEventCompanyUuid(String eventCompany) {
-        this.eventCompany = eventCompany;
-    }
+	public LocalTime getTime() {
+		return time;
+	}
 
-    public String getStreet() {
-        return street;
-    }
+	public void setTime(String timeString) {
+		this.time = LocalTime.parse(timeString);
+	}
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
+	public void setRepeats(int repeats) {
+		this.repeats = repeats;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	public int getRepeats() {
+		return repeats;
+	}
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
+	public void setRepeateRate(int repeateRate) {
+		this.repeateRate = repeateRate;
+	}
 
-    public String getPostalnumber() {
-        return postalnumber;
-    }
+	public int getRepeateRate() {
+		return repeateRate;
+	}
 
-    public void setPostalnumber(String postalnumber) {
-        this.postalnumber = postalnumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public EventType getEventType() {
-        if (getRepeats() > 0) {
-            return EventType.SMALL;
-        }
-        return EventType.LARGE;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(String dateString) {
-        this.date = LocalDate.parse(dateString);
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(String timeString) {
-        this.time = LocalTime.parse(timeString);
-    }
-
-    public void setRepeats(int repeats) {
-        this.repeats = repeats;
-    }
-
-    public int getRepeats() {
-        return repeats;
-    }
-
-    public void setRepeateRate(int repeateRate) {
-        this.repeateRate = repeateRate;
-    }
-
-    public int getRepeateRate() {
-        return repeateRate;
-    }
-
-    public int getCoordinateX() {
-        return coordinateX;
-    }
-
-    public void setCoordinateX(int coordinateX) {
-        this.coordinateX = coordinateX;
-    }
-
-    public int getCoordinateY() {
-        return coordinateY;
-    }
-
-    public void setCoordinateY(int coordinateY) {
-        this.coordinateY = coordinateY;
-    }
-
-    public Event toNewEvent(String userAccount) {
-        return new Event(getName(), userAccount, getDescription(), "event1.png",
-                new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),
-                true, getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(), getTime(), getRepeats(),
-                getRepeateRate());
-    }
+	public Event toNewEvent(String userAccount) {
+		return new Event(getName(), userAccount, getDescription(), "event1.png",
+				new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),
+				true, getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(),
+				getTime(), getRepeats(), getRepeateRate());
+	}
 }
