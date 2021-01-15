@@ -244,14 +244,20 @@ public class AccountController {
 				accountRepository.findByAccount_Email(authentication.getName()).getAccount().getLastname());
 		model.addAttribute("email",
 				accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail());
-		model.addAttribute("birthdate", accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
-		model.addAttribute("street", accountRepository.findByAccount_Email(authentication.getName()).getStreet());
+		model.addAttribute("birthdate",
+				accountRepository.findByAccount_Email(authentication.getName()).getBirthDate());
+		model.addAttribute("street",
+				accountRepository.findByAccount_Email(authentication.getName()).getStreet());
 		model.addAttribute("housenumber",
 				accountRepository.findByAccount_Email(authentication.getName()).getHouseNumber());
-		model.addAttribute("postcode", accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
-		model.addAttribute("city", accountRepository.findByAccount_Email(authentication.getName()).getCity());
-		model.addAttribute("iban", accountRepository.findByAccount_Email(authentication.getName()).getIban());
-		model.addAttribute("bic", accountRepository.findByAccount_Email(authentication.getName()).getBic());
+		model.addAttribute("postcode",
+				accountRepository.findByAccount_Email(authentication.getName()).getPostCode());
+		model.addAttribute("city",
+				accountRepository.findByAccount_Email(authentication.getName()).getCity());
+		model.addAttribute("iban",
+				accountRepository.findByAccount_Email(authentication.getName()).getIban());
+		model.addAttribute("bic",
+				accountRepository.findByAccount_Email(authentication.getName()).getBic());
 		model.addAttribute("eventcompany",
 				accountRepository.findByAccount_Email(authentication.getName()).getEventCompany());
 
@@ -320,7 +326,8 @@ public class AccountController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/neweventemployee")
 	public String registerNewEventEmployee(
-			@Valid @ModelAttribute("eventEmployeeRegistrationForm") EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
+			@Valid @ModelAttribute("eventEmployeeRegistrationForm")
+					EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
 			BindingResult result, Model model) {
 
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);

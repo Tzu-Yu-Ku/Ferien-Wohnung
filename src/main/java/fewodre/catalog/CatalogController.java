@@ -403,8 +403,8 @@ public class CatalogController {
 		if(httpServletRequest.getHeader("referer").contains("editEventLocation")) {
 			Event event = eCatalog.findById(productIdentifier).get();
 			Place eventPlace = event.getPlace();
-			eventPlace.setCoordX(productCoordinates.x_ratio);
-			eventPlace.setCoordY(productCoordinates.y_ratio);
+			eventPlace.setCoordX(productCoordinates.xRatio);
+			eventPlace.setCoordY(productCoordinates.yRatio);
 			eventPlace.setDistrict(productCoordinates.getDistrict());
 			event.setPlace(eventPlace);
 			eCatalog.save(event);
@@ -416,8 +416,8 @@ public class CatalogController {
 			HolidayHome holidayHome = hCatalog.findById(productIdentifier).get();
 			System.out.println("PLACE VORHER:" + holidayHome.getPlace().toString());
 			Place holidayHomePlace = holidayHome.getPlace();
-			holidayHomePlace.setCoordX(productCoordinates.x_ratio);
-			holidayHomePlace.setCoordY(productCoordinates.y_ratio);
+			holidayHomePlace.setCoordX(productCoordinates.xRatio);
+			holidayHomePlace.setCoordY(productCoordinates.yRatio);
 			holidayHomePlace.setDistrict(productCoordinates.getDistrict());
 			holidayHome.setPlace(holidayHomePlace);
 			hCatalog.save(holidayHome);

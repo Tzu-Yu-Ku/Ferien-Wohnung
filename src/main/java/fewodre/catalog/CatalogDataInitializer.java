@@ -44,8 +44,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		HolidayHome dummyHome1 = new HolidayHome();
 		dummyHome1.setName("Nette Wohnung in der Dresdner Innenstadt");
-		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort für Ihren nächsten Aufenthalt in Dresden.");
-		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 5000, 5000));
+		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort" +
+				"für Ihren nächsten Aufenthalt in Dresden.");
+		dummyHome1.setPlace(new Place("An der Goldgrube",
+				"1", "01099", "Dresden", 5000, 5000));
 		dummyHome1.setIsBookable(true);
 		dummyHome1.setHostMail("host@host");
 		dummyHome1.setImage("house1.png");
@@ -55,8 +57,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		HolidayHome dummyHome2 = new HolidayHome();
 		dummyHome2.setName("Gemütliches Haus an der Elbe");
-		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden mit tollem Blick auf die einzigartige Elbe bietet sich diese Wohnung an.");
-		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 8000, 8000));
+		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden mit tollem Blick auf die einzigartige" +
+				" Elbe bietet sich diese Wohnung an.");
+		dummyHome2.setPlace(new Place("An der Elbe",
+				"1", "01099", "Dresden", 8000, 8000));
 		dummyHome2.setIsBookable(true);
 		dummyHome2.setHostMail("host@host");
 		dummyHome2.setImage("house2.png");
@@ -66,8 +70,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		HolidayHome dummyHome3 = new HolidayHome();
 		dummyHome3.setName("*günstig* Ferienappartment in Blasewitz");
-		dummyHome3.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene Appartment besonders gut an.");
-		dummyHome3.setPlace(new Place("Am Schillerplatz", "1", "01099", "Dresden", 8000, 8000));
+		dummyHome3.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene" +
+				" Appartment besonders gut an.");
+		dummyHome3.setPlace(new Place("Am Schillerplatz",
+				"1", "01099", "Dresden", 8000, 8000));
 		dummyHome3.setIsBookable(true);
 		dummyHome3.setHostMail("host@host");
 		dummyHome3.setImage("house3.png");
@@ -81,9 +87,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		Event eventTest = new Event();
 		eventTest.setName("Stadtführung im abendlichen Dresden");
-		eventTest.setDescription(
-				"Nehmen Sie an der Stadtführung teil und lernen Sie Dresden und dessen einzigartige Geschichte kennen.");
-		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 2000, 2000));
+		eventTest.setDescription("Nehmen Sie an der Stadtführung teil und lernen Sie Dresden und dessen einzigartige" +
+				" Geschichte kennen.");
+		eventTest.setPlace(new Place("An der Frauenkirche",
+				"1", "01234", "Dresden", 2000, 2000));
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid(("event"));
 		eventTest.setPrice(Money.of(49.49f, "EUR"));
@@ -97,8 +104,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		Event eventTest2 = new Event();
 		eventTest2.setName("Gemeinsamer Spaziergang an der Elbe");
-		eventTest2.setDescription("Sind Sie gerne unterwegs und möchten eine einmalige Erfahrung hier in Dresden machen? Dann nehmen an unserem berühmten Spaziergang an und um die Elbe herum teil.");
-		eventTest2.setPlace(new Place("An der Elbe", "1", "01234", "Dresden", 5900, 6100));
+		eventTest2.setDescription("Sind Sie gerne unterwegs und möchten eine einmalige Erfahrung hier in Dresden" +
+				" machen? Dann nehmen an unserem berühmten Spaziergang an und um die Elbe herum teil.");
+		eventTest2.setPlace(new Place("An der Elbe",
+				"1", "01234", "Dresden", 5900, 6100));
 		eventTest2.setCapacity(25);
 		eventTest2.setEventCompanyUuid(("event"));
 		eventTest2.setPrice(Money.of(34.99f, "EUR"));
