@@ -12,12 +12,12 @@ public class Coordinates {
 	public float y;
 	public float yRef;
 	public int yRatio;
-	public static ArrayList<Integer> xValue = new ArrayList<>();
-	private static ArrayList<Integer> yValue = new ArrayList<>();
+	public static final ArrayList<Integer> xValue = new ArrayList<>();
+	private static final ArrayList<Integer> yValue = new ArrayList<>();
 	private String district;
 
 	final Polygon pieschen = new Polygon(new int[]{359, 380, 401, 402, 398, 404, 412, 412, 418, 427, 433, 441, 433,
-			430,436, 436, 434, 428, 418, 404, 395, 386, 375, 357, 351, 334, 314, 306, 299, 292, 286, 276, 259, 296,
+			430, 436, 436, 434, 428, 418, 404, 395, 386, 375, 357, 351, 334, 314, 306, 299, 292, 286, 276, 259, 296,
 			346, 360, 362},
 			new int[]{338, 381, 377, 385, 395, 399, 405, 397, 397, 416, 424, 438, 448, 458, 477, 501, 519, 517, 528,
 					534, 517, 501, 503, 515, 542, 554, 556, 552, 532, 503, 477, 438, 401, 342, 304, 310, 342}, 37);
@@ -128,10 +128,10 @@ public class Coordinates {
 		xValue.add(xRatio);
 		yValue.add(yRatio);
 		district = "Stadt";
-		//System.out.println(x_ratio + ",");
-		//System.out.println(y_ratio + ",");
-		//System.out.println("X:" + Xvalue + "Länge:" + Xvalue.size());
-		//System.out.println("Y:" + Yvalue);
+		decideDistrict();
+	}
+
+	private void decideDistrict() {
 		if (weixdorf.contains(xRatio, yRatio)) {
 			System.out.println("Weixdorf");
 			this.district = "Weixdorf";
@@ -190,9 +190,6 @@ public class Coordinates {
 			System.out.println("Mobschatz");
 			this.district = "Mobschatz";
 		}
-	}
-
-	public Coordinates() {
 	}
 
 	@Override

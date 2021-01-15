@@ -27,7 +27,6 @@ public class AccountManagement {
 	public static final Role EVENTEMPLOYEE_ROLE = Role.of("EVENT_EMPLOYEE");
 	public static final Role ADMIN_ROLE = Role.of("ADMIN");
 
-	public String tenant_username;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AccountManagement.class);
 
