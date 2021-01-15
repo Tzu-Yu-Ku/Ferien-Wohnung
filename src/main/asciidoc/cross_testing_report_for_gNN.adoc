@@ -1,23 +1,57 @@
 = Cross-Testing Feedback
 
-__Durchführende Gruppe:__
-__Anwendung von Gruppe:__
+__Durchführende Gruppe:__ SWT-Gruppe 25 (Jesko, Julian, Tzu, Jimmy, Marten, Janu)
+__Anwendung von Gruppe:__ SWT-Gruppe 26
 
 == Getestetes System
-Welche Aufgabe/Problemstellung löst die Anwendung.
+Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäusern in der Region in und um der Stadt Dresden verwirklichen soll. Dabei sind eine vielzahl von Funktionen gefordert, welche wir im Folgenden ausgiebig getestet haben.
 
 == Fehler-Report
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| … | … | … | … |
+| / | __keine__ | Der "Suche beginnen!" Knopf hat keine Funktion. | _keine_ 
+| /event/add | Event-Name = "      " (leerer String bestehend aus Leerzeichen) | Gibt der Eventmitarbeiter einen leeren String als Eventnamen ein, so gibt es einen internen Servererror. | Internal Server Error 
+| /event/add | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. | Internal Server Error 
+| /event/edit | start-date = end-date | Gibt der Eventmitarbeiter das selbe Start- und Enddatum ein, so gibt es einen internen Servererror. Die selben Start- und Enddaten werden dennoch übernommen. | Internal Server Error 
+| /event/edit | Strings aus Leerzeichenfür beliebige Eingabefelder | Der Eventmitarbeiter kann Eventdetails in der Bearbeitung beliebig durch Leerzeichen ersetzen. 
+| /profile | Strings aus Leerzeichenfür Vor- und Nachname sowie E-Mail | Der Nutzer kann seine Benutzerdaten in der Profilbearbeitung durch Leerzeichen ersetzen. 
+
 |===
 
 == Sonstiges
-* Optik der Anwendung
+=== Optik der Anwendung
+==== Was uns gefällt
+* Die Platform macht sich an einigen Stellen schöne Animationen zu nutze.
+* Die Verwendung von Modals an diversen Stellen ist sehr gut umgesetzt.
+* Die Einbindung einer Datumsauswahl (Datepicker), die es zulässt, bestimmte Daten unauswählbar zu machen, ist sehr gut
+* Grundsätzlich ist die Platform sehr übersichtlich gestaltet
+
+==== Verbesserungsvorschläge
+* Der Hintergrund der Platform ist zu präsent. An einigen Stellen hebt sich der Inhalt nicht vom Hintergrundbild ab und sind daher nur schwer erkennbar. Vor allem die Profilseite des Eventmitarbeiters zeichnet keinen Hintergrund hinter die Eventliste.
+* Auf einigen Unterseiten wander das Hitergrundbild nicht mit, wenn man auf der Seite scrollt. Das Hintergrundbild sollte überall fixiert sein.
+* Einige vertikale Abstände zwischen den Seitenelementen variieren zu stark.
+* Die Detailseite zu einem Haus ist leider etwas mager.
+
+
 * Fehlende Features
 * Interaktion mit der Anwendung (Usability)
 
+
+== Buchung
+* Die vergangene Daten können trotzdem gebucht werden.Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt.
+* Last Minuten Buchungen(von heute) werden nicht angezeigt bei der Büchungsübersicht. Man weiß nicht, ob es schon gebucht ist.
+ Trotzdem sind die gebuchte Daten nicht mehr buchbar außer das Anfangsdatums.
+* Die Daten von den stornierten Buchungen werden nicht freigegeben sind somit nicht buchbar.
+* Es wäre besser, wenn mehr Informationen bei dem  Detail View sichtbar wären als Buchungsübersicht.
+* Bei der Bezahlen-Seite kann man mit Kreditkarten mit einem ungültigen Expiry-Date bezahlen.
+
+
+
 == Verbesserungsvorschläge
-* Was kann noch weiter verbessert werden?
+== Buchung
+* Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar ist.
+* Es wäre schön Hinweise zu geben, dass Nutzer noch nicht eingeloggt ist.
+* Für einsprachige Nutzer ist das Deutsch-Englisch schwer zu verstehen.
+*
