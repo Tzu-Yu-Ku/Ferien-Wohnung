@@ -37,7 +37,7 @@
         <div class="row p-2">
             <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
             <div class="col-md-9">
-                <div class="btn-group">
+                <div class="btn-group" sec:authorize="!hasRole('HOST')"> 
                     <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortcapacity}" method="post">
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -108,25 +108,6 @@
                     </form>
 
                 </div>
-                    
-
-                
-                <!--
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Region
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Alle</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Altstadt</a>
-                    <a class="dropdown-item" href="#">Innenstadt</a>
-                    <a class="dropdown-item" href="#">Neustadt</a>
-                    <a class="dropdown-item" href="#">Löbtau</a>
-                </div>
-            </div>
-        -->
-
 
             <div class="col-md-3">
                 <a th:href="@{/addholidayhome}" sec:authorize="hasRole('HOST')"
