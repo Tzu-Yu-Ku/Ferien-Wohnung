@@ -54,11 +54,12 @@ Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäuser
 ==== Was uns gefällt
 * Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar ist.
 * Die Buchungsübersicht ist gut kategorisiert.
+
 ==== Verbesserungsvorschläge
 * Es wäre schön Hinweise zu geben, dass Nutzer noch nicht eingeloggt ist.
 * Für einsprachige Nutzer ist das Deutsch-Englisch schwer zu verstehen.
 * Es wäre besser, wenn mehr Informationen bei dem Detail View sichtbar wären als Buchungsübersicht.
 * Das Hinzubuchen eines Events ist ein wenig versteckt.
 
-== Verbesserungsvorschläge
+== Sonstige Verbesserungsvorschläge
 * Die Nutzersuche in der Administration könnte eine tatsächliche Suche in der Nutzerdatenbank sein, statt einer Dokumentensuche auf der angezeigten Seite. Desweiteren lässt sich die Suche nicht mit Enter durchführen.
