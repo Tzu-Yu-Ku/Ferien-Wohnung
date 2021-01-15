@@ -6,23 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-class HostRegistrationForm {
-
-	@NotBlank(message = "{RegistrationForm.firstname.NotEmpty}")
-	private final String firstName;
-
-	@NotBlank(message = "{RegistrationForm.lastname.NotEmpty}")
-	private final String lastName;
-
-	@NotBlank(message = "{RegistrationForm.email.NotEmpty}")
-	@Email(message = "{RegistrationForm.email.NotValid}")
-	private final String email;
-
-	@NotBlank(message = "{RegistrationForm.password.NotEmpty}")
-	private final String password;
-
-	@NotBlank(message = "{RegistrationForm.password_confirm.NotEmpty}")
-	private final String passwordConfirm;
+class HostRegistrationForm extends RegistrationForm {
 
 	@NotBlank(message = "{RegistrationForm.password_confirm.NotEmpty}")
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -50,11 +34,7 @@ class HostRegistrationForm {
 
 	public HostRegistrationForm(String firstName, String lastName, String email, String password, String passwordConfirm,
 								  String birthDate, String street, String houseNumber, String postcode, String city, String iban, String bic) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.passwordConfirm = passwordConfirm;
+		super(firstName, lastName, email, password, passwordConfirm);
 		this.birthDate = birthDate;
 		this.street = street;
 		this.houseNumber = houseNumber;
@@ -62,26 +42,6 @@ class HostRegistrationForm {
 		this.city = city;
 		this.iban = iban;
 		this.bic = bic;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
 	}
 
 	public String getBirthDate() {
