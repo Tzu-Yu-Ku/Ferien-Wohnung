@@ -36,11 +36,14 @@ Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäuser
 * Die Detailseite zu einem Haus ist leider etwas mager.
 
 
-* Fehlende Features
-* Interaktion mit der Anwendung (Usability)
+=== Fehlende Features
+
+=== Interaktion mit der Anwendung (Usability)
+==== Was uns gefällt
+==== Verbesserungsvorschläge
 
 
-== Buchung
+=== Buchung
 * Die vergangene Daten können trotzdem gebucht werden.Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt.
 * Last Minuten Buchungen(von heute) werden nicht angezeigt bei der Büchungsübersicht. Man weiß nicht, ob es schon gebucht ist.
  Trotzdem sind die gebuchte Daten nicht mehr buchbar außer das Anfangsdatums.
@@ -48,11 +51,11 @@ Das getestete System ist ein Webportal, welches die Vermietung von Ferienhäuser
 * Es wäre besser, wenn mehr Informationen bei dem  Detail View sichtbar wären als Buchungsübersicht.
 * Bei der Bezahlen-Seite kann man mit Kreditkarten mit einem ungültigen Expiry-Date bezahlen.
 
-
-
-== Verbesserungsvorschläge
-== Buchung
+==== Hinweise
 * Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar ist.
 * Es wäre schön Hinweise zu geben, dass Nutzer noch nicht eingeloggt ist.
 * Für einsprachige Nutzer ist das Deutsch-Englisch schwer zu verstehen.
-*
+
+
+
+== Verbesserungsvorschläge
