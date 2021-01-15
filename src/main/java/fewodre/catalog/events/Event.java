@@ -170,10 +170,10 @@ public class Event extends Product {
 	public ArrayList<LocalDate> getPossibleDates(LocalDate StartDate, LocalDate EndDate) {
 		ArrayList<LocalDate> AllPossDates = new ArrayList<LocalDate>();
 		ArrayList<LocalDate> AllDates = getAllDates();
-		for (int i = 0; i < AllDates.size(); i++) {
-			if ((AllDates.get(i).isAfter(StartDate) && AllDates.get(i).isBefore(EndDate))
-					|| AllDates.get(i).equals(StartDate) || AllDates.get(i).equals(EndDate)) {
-				AllPossDates.add(AllDates.get(i));
+		for (LocalDate allDate : AllDates) {
+			if ((allDate.isAfter(StartDate) && allDate.isBefore(EndDate))
+					|| allDate.equals(StartDate) || allDate.equals(EndDate)) {
+				AllPossDates.add(allDate);
 			}
 		}
 		return AllPossDates;

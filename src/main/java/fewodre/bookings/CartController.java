@@ -59,8 +59,9 @@ public class CartController {
 	private LocalDate arrivalDate, departureDate;
 
 
-	CartController(AccountManagement accountManagement, AccountRepository accountRepository, BookingManagement bookingManagement,
-	               EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+	CartController(AccountManagement accountManagement, AccountRepository accountRepository,
+	               BookingManagement bookingManagement, EventCatalog eventCatalog,
+	               HolidayHomeCatalog holidayHomeCatalog) {
 
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingManagement, "BookingManagement must not be null!");
@@ -79,7 +80,8 @@ public class CartController {
 		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
-			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname",
+					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
 
@@ -328,13 +330,13 @@ public class CartController {
 		List<BookingEntity> bookedList = new ArrayList<>(
 				bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
-			if (!b.getState().equals(BookingStateEnum.CANCELED)) {
-				if (arrivalDate.isBefore(b.getDepartureDate()) && departureDate.isAfter(b.getArrivalDate())) {
-					//send message "the chosed duration is not avalible"
-					System.out.println("redirect to Cart because its already booked");
-					//!! Message to customer is missing
-					return true;
-				}
+			if (!b.getState().equals(BookingStateEnum.CANCELED)
+					&& arrivalDate.isBefore(b.getDepartureDate())
+					&& departureDate.isAfter(b.getArrivalDate())) {
+				//send message "the chosed duration is not avalible"
+				System.out.println("redirect to Cart because its already booked");
+				//!! Message to customer is missing
+				return true;
 			}
 		}
 		return false;

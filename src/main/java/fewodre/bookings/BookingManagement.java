@@ -124,12 +124,10 @@ public class BookingManagement {
 	}
 
 	public boolean payRest(BookingEntity bookingEntity) {
-		if (orderManagement.payOrder(bookingEntity)) {
-			if (getMoney(bookingEntity.getTotal().getNumber().floatValue(),
-					bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
-				orderManagement.completeOrder(bookingEntity);
-				return true;
-			}
+		if (orderManagement.payOrder(bookingEntity) && getMoney(bookingEntity.getTotal().getNumber().floatValue(),
+				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())) {
+			orderManagement.completeOrder(bookingEntity);
+			return true;
 		}
 		return false;
 	}
