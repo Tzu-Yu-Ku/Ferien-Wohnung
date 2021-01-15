@@ -22,17 +22,17 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 == Buchung
 * Die vergangene Daten können trotzdem gebucht werden.Die Buchung kann auch bezahlt werden, aber wird nicht bei der Buchungsübersicht angezeigt.
 * Last Minuten Buchungen(von heute) werden nicht angezeigt bei der Büchungsübersicht. Man weiß nicht, ob es schon gebucht ist.
- Trotzdem sind die gebuchte Daten nicht mehr buchbar außer des Anfangsdatums.
-* Die Daten von den gecancelte Buchungen werden nicht freigegeben(nicht buchbar).
-* Es wäre besser,dass mehr Informationen haben bei dem  Detail View als Buchungsübersicht.
-* Bei der Bezahlen-Seite können die Kreditkarte mit einem ungültigen Expiry Date bezahlen.
+ Trotzdem sind die gebuchte Daten nicht mehr buchbar außer das Anfangsdatums.
+* Die Daten von den stornierten Buchungen werden nicht freigegeben sind somit nicht buchbar.
+* Es wäre besser, wenn mehr Informationen bei dem  Detail View sichtbar wären als Buchungsübersicht.
+* Bei der Bezahlen-Seite kann man mit Kreditkarten mit einem ungültigen Expiry-Date bezahlen.
 
 
 
 
 == Verbesserungsvorschläge
 == Buchung
-* Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar sind.
-* Es wäre schön Hinweise zu geben,dass Nutzer noch nicht eingeloggt ist.
-* Für einsprachige Nutzer sind die Denglisch schwer zu verstehen.
+* Es ist schön, dass die Auswahl des Einreisedatums und Abreisedatum überschaubar ist.
+* Es wäre schön Hinweise zu geben, dass Nutzer noch nicht eingeloggt ist.
+* Für einsprachige Nutzer ist das Deutsch-Englisch schwer zu verstehen.
 *
