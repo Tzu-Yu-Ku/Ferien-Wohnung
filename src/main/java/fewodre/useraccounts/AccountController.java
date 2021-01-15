@@ -62,8 +62,8 @@ public class AccountController {
 	@PostMapping("/register")
 	public String registerNewAccount(
 			@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
-			BindingResult result, Model model) {
-		LOG.info(tenantRegistrationForm.getBirthDate());
+			BindingResult result) {
+
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
 			return "register";
@@ -75,9 +75,6 @@ public class AccountController {
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
-
-		AccountEntity test = accountRepository.findByAccount_Email(tenantRegistrationForm.getEmail());
-		LOG.info(test.toString());
 
 		return "redirect:/login";
 	}

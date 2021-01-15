@@ -44,7 +44,6 @@ public class BookingEntity extends Order {
 	private String homeName;
 
 
-
 	@NotBlank
 	private String uuidTenant; //? For Filtering in Repository
 
@@ -74,24 +73,25 @@ public class BookingEntity extends Order {
 	//Handy Attributes for html
 	private String hostName;
 
-	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
-						 LocalDate arrivalDate, LocalDate departureDate,
-						 HashMap<Event, Integer> events, String paymentMethod) {
+	public BookingEntity(UserAccount userAccount, AccountEntity host, HolidayHome home, Quantity nights,
+	                     LocalDate arrivalDate, LocalDate departureDate,
+	                     HashMap<Event, Integer> events, String paymentMethod) {
 		super(userAccount, Cash.CASH);
 		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
 		this.uuidHome = home.getId().getIdentifier();
-		this.uuidHost = (host==null || host.getAccount() == null|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
+		this.uuidHost = (host == null || host.getAccount() == null
+				|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
 		this.homeName = home.getName();
-		this.depositInCent = home.getPrice().multiply(ChronoUnit.DAYS.between(arrivalDate, departureDate)).multiply(0.1*100).getNumber().intValue();
-		this.state = new BookingState(this.getDateCreated().toLocalDate(),this.arrivalDate);
-		System.out.println("new State: "+this.state.toEnum());
+		this.depositInCent = home.getPrice().multiply(ChronoUnit.DAYS.between(arrivalDate, departureDate)).multiply(0.1 * 100).getNumber().intValue();
+		this.state = new BookingState(this.getDateCreated().toLocalDate(), this.arrivalDate);
+		System.out.println("new State: " + this.state.toEnum());
 		this.stateToSave = this.state.toEnum();
 		System.out.println(stateToSave);
 		this.paymethod = Paymethod.valueOf(paymentMethod.toUpperCase());
-		System.out.println("payment method is:"+ paymethod.toString().toLowerCase());
+		System.out.println("payment method is:" + paymethod.toString().toLowerCase());
 		/*
 		Iterator<Event> iter = events.keySet().iterator();
 		while(iter.hasNext()){
@@ -103,7 +103,7 @@ public class BookingEntity extends Order {
 		 */
 		price = getTotal();
 		//need to find out from Home
-		this.hostName = (host==null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
+		this.hostName = (host == null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
 	}
 
 	@Deprecated
@@ -122,34 +122,37 @@ public class BookingEntity extends Order {
 		super();
 	}
 
-	public OrderLine addEvent(Event event, Quantity quantity){
+	public OrderLine addEvent(Event event, Quantity quantity) {
 		return addOrderLine(event, quantity);
 	}
 
-	public OrderLine addEvent(Event event){
+	public OrderLine addEvent(Event event) {
 		return addOrderLine(event, Quantity.of(1));
 	}
 
 	@Deprecated
-	public  HolidayHome getHome(){
+	public HolidayHome getHome() {
 		//!! from HollidayHomeManager
 		return null;
 	}
 
 	public MonetaryAmount getPrice() {
-		if(price == null){price = getTotal();}
+		if (price == null) {
+			price = getTotal();
+		}
 		//if(getTotal().isLessThan(price)){
 		//	price = getTotal();
 		//}
-		return  getTotal();
+		return getTotal();
 	}
 
 	//What i added for checking if it's availible
-	public LocalDate getArrivalDate(){
+	public LocalDate getArrivalDate() {
 		return arrivalDate;
 	}
+
 	//What i added for checking if it's availible
-	public LocalDate getDepartureDate(){
+	public LocalDate getDepartureDate() {
 		return departureDay;
 	}
 
@@ -166,7 +169,7 @@ public class BookingEntity extends Order {
 	 * @return
 	 */
 	@Deprecated
-	public boolean isNotOverlapping(LocalDate arrival, LocalDate departure){
+	public boolean isNotOverlapping(LocalDate arrival, LocalDate departure) {
 		return !(arrival.isBefore(departureDay) && departure.isAfter(arrivalDate));
 	}
 
@@ -193,18 +196,21 @@ public class BookingEntity extends Order {
 		return homeName;
 	}
 
-	public BookingStateEnum getState(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
+	public BookingStateEnum getState() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
 		stateToSave = state.toEnum();
 		return stateToSave;
 	}
 
-	public boolean cancel(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.cancel(this)){
-			throw new IllegalStateException();
+	public boolean cancel() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
 		}
-		else {
+		if (!state.cancel(this)) {
+			throw new IllegalStateException();
+		} else {
 			System.out.println(state.toEnum());
 			this.stateToSave = state.toEnum();
 			//System.out.println(stateToSave);
@@ -212,37 +218,40 @@ public class BookingEntity extends Order {
 		}
 	}
 
-	public boolean confirm(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.confirm()){
-			throw new IllegalStateException();
+	public boolean confirm() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
 		}
-		else {
+		if (!state.confirm()) {
+			throw new IllegalStateException();
+		} else {
 			stateToSave = state.toEnum();
 			return true;
 		}
 	}
 
-	public boolean checkTime(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.checkTime()){
+	public boolean checkTime() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
+		if (!state.checkTime()) {
 			//nothing changed
 			return false;
-		}
-		else {
+		} else {
 			stateToSave = state.toEnum();
 			return true;
 		}
 	}
 
-	public boolean pay(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.pay()){
-			throw new IllegalStateException();
+	public boolean pay() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
 		}
-		else {
+		if (!state.pay()) {
+			throw new IllegalStateException();
+		} else {
 			stateToSave = state.toEnum();
-			super.addChargeLine(Money.of(BigDecimal.valueOf(0.01*depositInCent),"EUR").multiply(-1),
+			super.addChargeLine(Money.of(BigDecimal.valueOf(0.01 * depositInCent), "EUR").multiply(-1),
 					"Anzahlung");
 			return true;
 		}
@@ -253,58 +262,59 @@ public class BookingEntity extends Order {
 	}
 
 	public int getDepositInCent() {
-		if(this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
+		if (this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
 			List<OrderLine> events = this.getOrderLines().filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
 			events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
 		}
 		return depositInCent;
 	}
 
-	public boolean cancelEvent(Product event){
+	public boolean cancelEvent(Product event) {
 		List<OrderLine> lines = this.getOrderLines(event).toList();
 		boolean result = lines.size() > 0;
-		Iterator<ChargeLine> iter =	this.getChargeLines().iterator();
-		while (iter.hasNext()){
-			ChargeLine charge = iter.next();;
-			if(charge.getPrice().isEqualTo(Money.of(BigDecimal.valueOf(0.01*depositInCent),"EUR").multiply(-1))){
+		Iterator<ChargeLine> iter = this.getChargeLines().iterator();
+		while (iter.hasNext()) {
+			ChargeLine charge = iter.next();
+			;
+			if (charge.getPrice().isEqualTo(Money.of(BigDecimal.valueOf(0.01 * depositInCent), "EUR").multiply(-1))) {
 				System.out.println("Tried to remove Charge");
 				this.remove(charge);
 				break;
 			}
 		}
-		for(int i = 0; i < lines.size(); i++){
+		for (int i = 0; i < lines.size(); i++) {
 			OrderLine line = lines.get(i);
 			depositInCent -= line.getPrice().getNumber().floatValue() * 100;
 			this.remove(line);
 		}
-		this.addChargeLine(Money.of(depositInCent*(-0.01),"EUR"),"new Deposit");
+		this.addChargeLine(Money.of(depositInCent * (-0.01), "EUR"), "new Deposit");
 		return result;
 	}
 
-	public float getPriceOf(Product product){
+	public float getPriceOf(Product product) {
 		return this.getOrderLines(product).getTotal().getNumber().floatValue();
 	}
 
-	public List<Event> getEvents(EventCatalog catalog){
+	public List<Event> getEvents(EventCatalog catalog) {
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		List<Event> events = new ArrayList<Event>();
-		while (orderLineIterator.hasNext()){
+		while (orderLineIterator.hasNext()) {
 			OrderLine orderLine = orderLineIterator.next();
 			Event event = catalog.findFirstByProductIdentifier(orderLine.getProductIdentifier());
-			if( event != null){
+			if (event != null) {
 				events.add(event);
 			}
 		}
 		return events;
 	}
 
-	public float getEventTotalPrice(EventCatalog catalog){
+	public float getEventTotalPrice(EventCatalog catalog) {
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		float price = 0;
-		while (orderLineIterator.hasNext()){
+		while (orderLineIterator.hasNext()) {
 			OrderLine orderLine = orderLineIterator.next();
 			Event event = catalog.findFirstByProductIdentifier(orderLine.getProductIdentifier());
-			if( event != null){
+			if (event != null) {
 				price += orderLine.getPrice().getNumber().floatValue();
 			}
 		}

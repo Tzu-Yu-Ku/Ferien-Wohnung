@@ -34,11 +34,14 @@ public class BookingController {
 		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
-			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname",
+					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
 
-	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository, BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog, BookingManagement bookingManagement){
+	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository,
+	                         BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog,
+	                         BookingManagement bookingManagement){
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
@@ -55,15 +58,12 @@ public class BookingController {
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
 		firstname(model);
-			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
 		}else {
 			model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 			model.addAttribute("bookings", bookingRepository.findBookingEntityByUserAccount(userAccount));
-			Iterator<BookingEntity> iter = bookingRepository.findBookingEntityByUserAccount(userAccount).iterator();
-			while (iter.hasNext()){
-				BookingEntity bookingEntity = iter.next();
+			for (BookingEntity bookingEntity : bookingRepository.findBookingEntityByUserAccount(userAccount)) {
 				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
 				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
 				System.out.println(bookingEntity.getId() + bookingEntity.getState().toString());
@@ -94,7 +94,8 @@ public class BookingController {
 
 	@PostMapping("/searchByName")
 	@PreAuthorize("hasRole('HOST')")
-	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount, @RequestParam("lastname")String tenantName){
+	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount,
+	                               @RequestParam("lastname")String tenantName){
 		firstname(model);
 		model.addAttribute("bookings", bookingManagement.findByTenantName(tenantName,userAccount.getEmail()));
 		model.addAttribute("formatter", this.formatter);
@@ -103,7 +104,8 @@ public class BookingController {
 
 	@PostMapping("/searchByHomeName")
 	@PreAuthorize("hasRole('HOST')")
-	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount, @RequestParam("homename")String homeName){
+	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount,
+	                               @RequestParam("homename")String homeName){
 		firstname(model);
 		model.addAttribute("bookings", bookingManagement.findByHomeName(homeName,userAccount.getEmail()));
 		model.addAttribute("formatter", this.formatter);

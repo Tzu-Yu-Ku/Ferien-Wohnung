@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 
-class AccountManagementTest {
+class AccountManagementUnitTest {
 
 	@BeforeEach
 	void setUp() {

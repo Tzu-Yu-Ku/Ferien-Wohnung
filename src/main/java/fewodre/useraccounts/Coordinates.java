@@ -77,76 +77,58 @@ public class Coordinates {
 		if (weixdorf.contains(x_ratio, y_ratio)) {
 			System.out.println("Weixdorf");
 			this.district = "Weixdorf";
-		}
-		else if (klotsche.contains(x_ratio, y_ratio)) {
+		} else if (klotsche.contains(x_ratio, y_ratio)) {
 			System.out.println("Klotsche");
 			this.district = "Klotsche";
-		}
-		else if (pieschen.contains(x_ratio, y_ratio)) {
+		} else if (pieschen.contains(x_ratio, y_ratio)) {
 			System.out.println("Pieschen");
 			this.district = "Pieschen";
-		}
-		else if (cossebaude.contains(x_ratio, y_ratio)) {
+		} else if (cossebaude.contains(x_ratio, y_ratio)) {
 			System.out.println("Cossebaude");
 			this.district = "Cossebaude";
-		}
-		else if (oberwartha.contains(x_ratio, y_ratio)) {
+		} else if (oberwartha.contains(x_ratio, y_ratio)) {
 			System.out.println("Cossebaude");
 			this.district = "Cossebaude";
-		}
-		else if (gompitz.contains(x_ratio, y_ratio)) {
+		} else if (gompitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Gompitz");
 			this.district = "Gompitz";
-		}
-		else if (altfranken.contains(x_ratio, y_ratio)) {
+		} else if (altfranken.contains(x_ratio, y_ratio)) {
 			System.out.println("Altfranken");
 			this.district = "Altfranken";
-		}
-		else if (cotta.contains(x_ratio, y_ratio)) {
+		} else if (cotta.contains(x_ratio, y_ratio)) {
 			System.out.println("Cotta");
 			this.district = "Cotta";
-		}
-		else if (plauen.contains(x_ratio, y_ratio)) {
+		} else if (plauen.contains(x_ratio, y_ratio)) {
 			System.out.println("Plauen");
 			this.district = "Plauen";
-		}
-		else if (prohlis.contains(x_ratio, y_ratio)) {
+		} else if (prohlis.contains(x_ratio, y_ratio)) {
 			System.out.println("Prohlis");
 			this.district = "Prohlis";
-		}
-		else if (leuben.contains(x_ratio, y_ratio)) {
+		} else if (leuben.contains(x_ratio, y_ratio)) {
 			System.out.println("Leuben");
 			this.district = "Leuben";
-		}
-		else if (loschwitz.contains(x_ratio, y_ratio)) {
+		} else if (loschwitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Loschwitz");
 			this.district = "Loschwitz";
-		}
-		else if (schoenefeld_weissig.contains(x_ratio, y_ratio)) {
+		} else if (schoenefeld_weissig.contains(x_ratio, y_ratio)) {
 			System.out.println("Schönefeld-Weißig");
 			this.district = "Schönefeld-Weißig";
-		}
-		else if (langebrueck.contains(x_ratio, y_ratio)) {
+		} else if (langebrueck.contains(x_ratio, y_ratio)) {
 			System.out.println("Langebrück");
 			this.district = "Langebrück";
-		}
-		else if (schoenborn.contains(x_ratio, y_ratio)) {
+		} else if (schoenborn.contains(x_ratio, y_ratio)) {
 			System.out.println("Schönborn");
 			this.district = "Schönborn";
-		}
-		else if (neustadt.contains(x_ratio, y_ratio)) {
+		} else if (neustadt.contains(x_ratio, y_ratio)) {
 			System.out.println("Neustadt");
 			this.district = "Neustadt";
-		}
-		else if (altstadt.contains(x_ratio, y_ratio)) {
+		} else if (altstadt.contains(x_ratio, y_ratio)) {
 			System.out.println("Altstadt");
 			this.district = "Altstadt";
-		}
-		else if (blasewitz.contains(x_ratio, y_ratio)) {
+		} else if (blasewitz.contains(x_ratio, y_ratio)) {
 			System.out.println("Blasewitz");
 			this.district = "Blasewitz";
-		}
-		else if (mobschatz.contains(x_ratio, y_ratio)) {
+		} else if (mobschatz.contains(x_ratio, y_ratio)) {
 			System.out.println("Mobschatz");
 			this.district = "Mobschatz";
 		}

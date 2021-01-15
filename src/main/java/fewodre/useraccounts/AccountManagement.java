@@ -47,7 +47,8 @@ public class AccountManagement {
 	public AccountEntity createTenantAccount(TenantRegistrationForm tenantRegistrationForm) {
 
 		Assert.notNull(tenantRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(tenantRegistrationForm.getPasswordConfirm()))) {
+		if (Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(tenantRegistrationForm.getPasswordConfirm()))) {
 			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
