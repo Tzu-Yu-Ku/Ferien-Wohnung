@@ -38,11 +38,8 @@ public class BookingEntity extends Order {
 	@NotBlank
 	private String uuidHome;
 
-	//private ProductIdentifier homeIdentifier;
-
 	@NotBlank
 	private String homeName;
-
 
 
 	@NotBlank
@@ -78,7 +75,6 @@ public class BookingEntity extends Order {
 						 LocalDate arrivalDate, LocalDate departureDate,
 						 HashMap<Event, Integer> events, String paymentMethod) {
 		super(userAccount, Cash.CASH);
-		//if(uuidHome.isBlank()){throw new NullPointerException("Blank UUID Home");}
 		this.uuidHome = home.getId().getIdentifier();
 		this.uuidHost = (host==null || host.getAccount() == null|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
 		this.uuidTenant = userAccount.getId().getIdentifier();
@@ -92,15 +88,6 @@ public class BookingEntity extends Order {
 		System.out.println(stateToSave);
 		this.paymethod = Paymethod.valueOf(paymentMethod.toUpperCase());
 		System.out.println("payment method is:"+ paymethod.toString().toLowerCase());
-		/*
-		Iterator<Event> iter = events.keySet().iterator();
-		while(iter.hasNext()){
-			Event event = iter.next();
-			addOrderLine(event, Quantity.of(events.get(event)));
-			depositInCent += event.getPrice().multiply(events.get(event)).multiply(100).getNumber().intValue();
-		}
-
-		 */
 		price = getTotal();
 		//need to find out from Home
 		this.hostName = (host==null || host.getAccount() == null || host.getAccount().getUsername() == null) ? " " : host.getAccount().getUsername();
@@ -110,7 +97,6 @@ public class BookingEntity extends Order {
 	public BookingEntity(UserAccount userAccount, @NotBlank ProductIdentifier uuidHome) {
 		super(userAccount);
 		this.uuidHome = uuidHome.getIdentifier();
-		//this.homeIdentifier = uuidHome;
 	}
 
 	@Deprecated
@@ -137,18 +123,14 @@ public class BookingEntity extends Order {
 	}
 
 	public MonetaryAmount getPrice() {
-		if(price == null){price = getTotal();}
-		//if(getTotal().isLessThan(price)){
-		//	price = getTotal();
-		//}
+		if(price == null){price = getTotal();} // Legacy
 		return  getTotal();
 	}
 
-	//What i added for checking if it's availible
 	public LocalDate getArrivalDate(){
 		return arrivalDate;
 	}
-	//What i added for checking if it's availible
+
 	public LocalDate getDepartureDate(){
 		return departureDay;
 	}
@@ -207,7 +189,6 @@ public class BookingEntity extends Order {
 		else {
 			System.out.println(state.toEnum());
 			this.stateToSave = state.toEnum();
-			//System.out.println(stateToSave);
 			return true;
 		}
 	}

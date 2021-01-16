@@ -88,7 +88,7 @@
                     </script>
                     <label for="endDate" class="align-center pt-2 px-2">Abreisedatum:<br></label>
                     <input type="date" id="endDate" name="newEDate" class="form-control" required="required"
-                           th:value="${departureDate}" th:min="${arrivalDate}" th:onchange="setMinOfDeparture()">
+                           th:value="${departureDate}" th:min="${arrivalDate.plusDays(1)}" th:onchange="setMinOfDeparture()">
                     <script>
                         function setMaxOfArrival() {
                             document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
@@ -174,7 +174,7 @@
                 </div>
             </div>
             <div class="p-1 col-2 col-md-2 border-right">
-                <h5 class="text-center pt-2 px-2" th:text="${formatter.parsePrice(item.price)}">246€</h5>
+                <h5 class="text-center pt-2 px-2" th:text="${formatter.parsePrice(item.getPrice())}">246€</h5>
             </div>
         </div>
         <div class="row pb-2" style="background-color: #EDEDED;">
@@ -185,7 +185,7 @@
                     <h4>Gesamtpreis:</h4>
                 </div>
                 <div class="col-3">
-                    <h3 th:text="${formatter.parsePrice(cart.price.getNumber())}">
+                    <h3 th:text="${formatter.parsePrice(cart.price.getNumber().floatValue())}">
                         546,00 €
                     </h3>
                 </div>
@@ -241,7 +241,7 @@
                 <div class="row border-bottom">
                     <div class="col-4">
                         <h5 class="text-center pt-2 px-2 border-top"
-                            th:text="${event.price.getNumber() + ',- € p.P.'}">
+                            th:text="${event.price.getNumber().floatValue() + ',- € p.P.'}">
                             123€ p. P.
                         </h5>
                     </div>
@@ -271,10 +271,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<pingendo onclick="window.open('https://pingendo.com/', '_blank')"
-          style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
-    Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block"
-                                            alt="Pingendo logo" height="16"></pingendo>
+
 </body>
 
 </html>

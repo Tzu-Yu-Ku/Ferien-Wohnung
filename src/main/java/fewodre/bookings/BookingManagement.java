@@ -91,8 +91,6 @@ public class BookingManagement {
 
 		if(getMoney(bookingEntity.getDepositInCent()*0.01f,
 				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())){
-			//orderManagement.payOrder(bookingEntity)
-			//orderManagement.completeOrder(bookingEntity);
 			if(bookingEntity.pay()){return true;}
 			else {
 				System.out.println("etwas ist bei der Bezahlung schiefgelaufen whr. falscher State");

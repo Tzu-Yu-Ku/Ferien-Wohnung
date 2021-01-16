@@ -31,9 +31,19 @@ public class StringFormatter{
 		return date.getDayOfMonth() + ". " + MonthTransDict.get(date.getMonth().toString()) + " " + date.getYear();
 	}
 	public String parsePrice(MonetaryAmount Price){
-		return Price.getNumber().doubleValue()+ (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		float PriceValue = ((int)(Price.getNumber().floatValue()*100))*0.01f;
+		return PriceValue + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 	}
 	public String parsePrice(double Price){
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.HALF_UP);
+		if(Price < 0){
+			return "- " + df.format((-1)*Price) + " €";
+		}
+			return df.format(Price) + " €";
+	}
+
+	public String parsePrice(float Price){
 		DecimalFormat df = new DecimalFormat("#.##");
 		df.setRoundingMode(RoundingMode.HALF_UP);
 		if(Price < 0){
