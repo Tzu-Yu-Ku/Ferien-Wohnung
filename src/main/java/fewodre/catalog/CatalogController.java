@@ -54,7 +54,11 @@ public class CatalogController {
 	ArrayList<HolidayHome> sortCapacityList = new ArrayList<HolidayHome>();
 	ArrayList<HolidayHome> sortPriceList = new ArrayList<HolidayHome>();
 	ArrayList<HolidayHome> sortDistrictList = new ArrayList<HolidayHome>();
+	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
+	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
+	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
 	int i;
+	int j;
 
 
 	private BookingManagement bookingManagement;
@@ -93,6 +97,8 @@ public class CatalogController {
 			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
 			i = 1;
 		}
+
+
 
 		if (authentication.getPrincipal().toString().contains("HOST")) {
 			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
@@ -189,7 +195,6 @@ public class CatalogController {
 		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
 		return "redirect:/holidayhomes";
 	}
-
 
 	// add HolidayHome-----------------
 	@GetMapping("/addholidayhome")
@@ -353,8 +358,71 @@ public class CatalogController {
 	@GetMapping("/events")
 	String EventCatalog(Model model) {
 		firstname(model);
-		model.addAttribute("eventCatalog", Ecatalog.findAll().filter(Event::isEventStatus));
+
+		if (j != 1){
+			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+			j = 1;
+		}
+
+		model.addAttribute("eventCatalog", Ecatalog.findAll()
+			.filter(Event::isEventStatus)
+			.filter(event -> event.findInList(event, sortEventCapacityList))
+			.filter(event -> event.findInList(event, sortEventTypeList))
+			.filter(event -> event.findInList(event, sortEventDistrictList)));
+
 		return "events";
+	}
+
+	@PostMapping("/sorteventtype")
+	String sortEventType(String searchedEventType) {
+		System.out.println(searchedEventType);
+		sortEventTypeList.clear();
+		if (searchedEventType.equals("Alle")) {
+			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+		}
+		else if (searchedEventType.equals("Wiederholende Events")) {
+			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL).forEach(item -> sortEventTypeList.add(item));
+		}
+		else if (searchedEventType.equals("Besondere Events")) {
+			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE).forEach(item -> sortEventTypeList.add(item));
+		}
+		System.out.println(sortEventTypeList);
+		return "redirect:/events";
+	}
+
+	@PostMapping("/sorteventcapacity")
+	String sortEventCapacity(String searchedEventCapacity) {
+		sortEventCapacityList.clear();
+		if (searchedEventCapacity.equals("Alle")) {
+			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+		}
+		else if (!searchedEventCapacity.equals("Alle")) {
+			int searchedEventCapacityInt = Integer.parseInt(searchedEventCapacity);
+			Ecatalog.findAll().filter(events -> events.getCapacity() >= searchedEventCapacityInt).forEach(item -> sortEventCapacityList.add(item));
+		}
+		return "redirect:/events";
+	}
+
+	@PostMapping("/sorteventdistrict")
+	String sortEventDistrict(String searchedEventDistrict) {
+		sortEventDistrictList.clear();
+		if (searchedEventDistrict.equals("Alle")) {
+			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+		}
+		else if (!searchedEventDistrict.equals("Alle")) {
+			Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict)).forEach(item -> sortEventDistrictList.add(item));
+		}
+		return "redirect:/events";
+	}
+
+	@PostMapping("/deletalleventsorts")
+	String deleteAllEventSorts() {
+		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+		return "redirect:/events";
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")

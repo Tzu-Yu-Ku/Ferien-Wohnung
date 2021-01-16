@@ -41,7 +41,7 @@
                     <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortcapacity}" method="post">
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                            Personenanzahl
+                            Personenanzahl (min.)
                         </button>
             
                         <div class="dropdown-menu">
@@ -104,16 +104,17 @@
 
                     <form role="form" th:method="post" th:action="@{/deletallsorts}">
                         <input class="btn btn-danger btn-outline-light" type="submit"
-                               value="Alle FIlter zurück setzen"/>
+                               value="Alle Filter zurück setzen"/>
                     </form>
 
                 </div>
 
-            <div class="col-md-3">
-                <a th:href="@{/addholidayhome}" sec:authorize="hasRole('HOST')"
-                   class="btn btn-primary btn-outline-light float-right">
-                    Angebot erstellen
-                </a>
+                <div class="col-md-3">
+                    <a th:href="@{/addholidayhome}" sec:authorize="hasRole('HOST')"
+                        class="btn btn-primary btn-outline-light float-right">
+                        Angebot erstellen
+                    </a>
+                </div>
             </div>
         </div>
 
