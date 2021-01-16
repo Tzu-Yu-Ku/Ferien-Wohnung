@@ -20,7 +20,7 @@ public class Date {
 		this.month = date.getMonth();
 		this.dayOfMonth = date.getDayOfMonth();
 		this.dayOfWeek = date.getDayOfWeek();
-		this.state = OrderStatus.CANCELLED; // Cancelled wenn noch frei
+		this.state = OrderStatus.CANCELLED; // Cancelled isomorph zu frei
 	}
 
 	public void setDate(LocalDate date) {

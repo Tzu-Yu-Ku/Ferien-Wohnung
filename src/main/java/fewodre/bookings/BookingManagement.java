@@ -62,15 +62,13 @@ public class BookingManagement {
 
 
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home, Cart cart,
-											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<Event, Integer> events, String paymethod){
+											 LocalDate arrivalDate, LocalDate departureDate,
+											 HashMap<Event, Integer> events, String paymethod){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
-		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, paymethod);
+		BookingEntity bookingEntity = new BookingEntity(userAccount,
+				this.accounts.findByAccount_Email(home.getHostMail()),home,
+				nights, arrivalDate, departureDate, events, paymethod);
 		cart.addItemsTo(bookingEntity);
-		//order open()
-		//will update quantity one time
-		//cart.getItem(home.getId().toString());
 		if(!holidayHomeStorage.findByProduct(home).isPresent()){
 			holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
 		}else{
@@ -81,9 +79,7 @@ public class BookingManagement {
 			eventCatalog.findFirstByProductIdentifier(eventIterator.next().getId()).addSubscriber(bookingEntity);
 		}
 		cart.clear();
-		System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
-		System.out.println(result == bookingEntity);
 		return result ;
 	}
 
@@ -164,9 +160,6 @@ public class BookingManagement {
 
 	public Streamable<BookingEntity> findAll(){return bookings.findAll();}
 
-	//after createBookingEntity, we can already save in bookingRepository
-	//need to create findByStatusPaid
-
 	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
 
 	public Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){return bookings.findBookingEntityByUserAccount(userAccount);}
@@ -195,6 +188,5 @@ public class BookingManagement {
 				bookingEntity.getHomeName().equals(home)).toList();
 		return bookingsFromHome;
 	}
-
 
 }

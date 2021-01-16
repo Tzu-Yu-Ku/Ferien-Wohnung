@@ -291,10 +291,6 @@ public class CartController {
 	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
 					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
 	   				  @RequestParam("paymethod") String paymethod){
-		System.out.println(cart.getPrice());
-		System.out.println("Buchungszeitraum0: ");
-		System.out.println(arrivalDate.toString() + " - " +departureDate.toString());
-		System.out.println("Events = "+ events.toString());
 		if(arrivalDate.isBefore(LocalDate.now()) || departureDate.isBefore(LocalDate.now()) || departureDate.isBefore(arrivalDate)) {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";

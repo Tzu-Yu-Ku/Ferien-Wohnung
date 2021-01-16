@@ -34,6 +34,7 @@ public class StringFormatter{
 		float PriceValue = ((int)(Price.getNumber().floatValue()*100))*0.01f;
 		return PriceValue + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 	}
+
 	public String parsePrice(double Price){
 		DecimalFormat df = new DecimalFormat("#.##");
 		df.setRoundingMode(RoundingMode.HALF_UP);

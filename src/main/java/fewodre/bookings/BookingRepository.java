@@ -34,8 +34,5 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	@Override
 	Streamable<BookingEntity> findAll();
 
-	//Iterable<BookingEntity> findBookingsByUuidEvents(String event);
-
-	//Iterable<BookingEntity> findById(OrderIdentifier id);
 
 }
