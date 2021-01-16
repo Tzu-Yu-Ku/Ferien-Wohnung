@@ -71,6 +71,17 @@ public class BookingEntity extends Order {
 	//Handy Attributes for html
 	private String hostName;
 
+	/**
+	 * Creates a new {@link BookingEntity} with the given Parameters.
+	 * @param userAccount
+	 * @param host
+	 * @param home
+	 * @param nights
+	 * @param arrivalDate
+	 * @param departureDate
+	 * @param events
+	 * @param paymentMethod
+	 */
 	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
 						 LocalDate arrivalDate, LocalDate departureDate,
 						 HashMap<Event, Integer> events, String paymentMethod) {
@@ -104,14 +115,28 @@ public class BookingEntity extends Order {
 		super();
 	}
 
+	@Deprecated
 	public BookingEntity() {
 		super();
 	}
 
+	/**
+	 * Adds a new Event to the {@link BookingEntity}.
+	 *
+	 * @param event
+	 * @param quantity
+	 * @return
+	 */
 	public OrderLine addEvent(Event event, Quantity quantity){
 		return addOrderLine(event, quantity);
 	}
 
+	/**
+	 * Adds a new Event to the {@link BookingEntity} with a default {@link Quantity} of 1.
+	 *
+	 * @param event
+	 * @return
+	 */
 	public OrderLine addEvent(Event event){
 		return addOrderLine(event, Quantity.of(1));
 	}
@@ -122,15 +147,27 @@ public class BookingEntity extends Order {
 		return null;
 	}
 
+	/**
+	 * Returns the complete price of the Booking as {@link MonetaryAmount}.
+	 * @return
+	 */
 	public MonetaryAmount getPrice() {
 		if(price == null){price = getTotal();} // Legacy
 		return  getTotal();
 	}
 
+	/**
+	 * Returns the arrival date of the booking period as {@link LocalDate}.
+	 * @return
+	 */
 	public LocalDate getArrivalDate(){
 		return arrivalDate;
 	}
 
+	/**
+	 * Returns the departure date of the booking period as {@link LocalDate}.
+	 * @return
+	 */
 	public LocalDate getDepartureDate(){
 		return departureDay;
 	}
@@ -159,28 +196,54 @@ public class BookingEntity extends Order {
 				.toLocalDate();
 	}
 
+	/**
+	 * Returns the name of the host
+	 *
+	 * @return
+	 */
 	public String getHostName() {
 		return hostName;
 	}
 
+	/**
+	 * Returns the identifier of the host.
+	 *
+	 * @return
+	 */
 	public String getUuidHost() {
 		return uuidHost;
 	}
 
+	/**
+	 * Returns the identifier of the {@link HolidayHome}.
+	 * @return
+	 */
 	public String getUuidHome() {
 		return uuidHome;
 	}
 
+	/**
+	 * Returns the name of the {@link HolidayHome}.
+	 * @return
+	 */
 	public String getHomeName() {
 		return homeName;
 	}
 
+	/**
+	 * Returns the current {@link BookingState} of this booking.
+	 * @return
+	 */
 	public BookingStateEnum getState(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		stateToSave = state.toEnum();
 		return stateToSave;
 	}
 
+	/**
+	 * Cancels the Booking.
+	 * @return
+	 */
 	public boolean cancel(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.cancel(this)){
@@ -193,6 +256,11 @@ public class BookingEntity extends Order {
 		}
 	}
 
+	/**
+	 * Confirms the receipt of the deposit by the host.
+	 *
+	 * @return
+	 */
 	public boolean confirm(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.confirm()){
@@ -204,6 +272,10 @@ public class BookingEntity extends Order {
 		}
 	}
 
+	/**
+	 * Checks current Time and changes State accordingly.
+	 * @return
+	 */
 	public boolean checkTime(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.checkTime()){
@@ -216,6 +288,11 @@ public class BookingEntity extends Order {
 		}
 	}
 
+	/**
+	 * Pays the booking.
+	 *
+	 * @return
+	 */
 	public boolean pay(){
 		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
 		if(!state.pay()){
@@ -229,10 +306,18 @@ public class BookingEntity extends Order {
 		}
 	}
 
+	/**
+	 * Returns the chosen payment method.
+	 * @return
+	 */
 	public Paymethod getPaymethod() {
 		return paymethod;
 	}
 
+	/**
+	 * Returns the Deposit in Cents.
+	 * @return
+	 */
 	public int getDepositInCent() {
 		if(this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
 			List<OrderLine> events = this.getOrderLines().filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
@@ -241,6 +326,11 @@ public class BookingEntity extends Order {
 		return depositInCent;
 	}
 
+	/**
+	 * Cancels the given Event and refunds the according amount of money when necessary.
+	 * @param event
+	 * @return
+	 */
 	public boolean cancelEvent(Product event){
 		List<OrderLine> lines = this.getOrderLines(event).toList();
 		boolean result = lines.size() > 0;
@@ -262,10 +352,20 @@ public class BookingEntity extends Order {
 		return result;
 	}
 
+	/**
+	 * Returns the price of the given {@link Product} in the Booking.
+	 * @param product
+	 * @return
+	 */
 	public float getPriceOf(Product product){
 		return this.getOrderLines(product).getTotal().getNumber().floatValue();
 	}
 
+	/**
+	 * Reurns a list with all events of the {@link BookingEntity} which are also in the given {@link EventCatalog}.
+	 * @param catalog
+	 * @return
+	 */
 	public List<Event> getEvents(EventCatalog catalog){
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		List<Event> events = new ArrayList<Event>();
@@ -279,6 +379,12 @@ public class BookingEntity extends Order {
 		return events;
 	}
 
+	/**
+	 * Reurns the sum of the prices of all events of the
+	 * {@link BookingEntity} which are also in the given {@link EventCatalog}.
+	 * @param catalog
+	 * @return
+	 */
 	public float getEventTotalPrice(EventCatalog catalog){
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		float price = 0;
@@ -292,6 +398,10 @@ public class BookingEntity extends Order {
 		return price;
 	}
 
+	/**
+	 * Returns the Identifier of the Tenant.
+	 * @return
+	 */
 	public String getUuidTenant() {
 		return uuidTenant;
 	}
