@@ -58,7 +58,7 @@ class AccountManagementUnitTest {
 				"1", "12345", "City", true);
 		AccountEntity tenantAccountEnitity = accountManagement.createTenantAccount(form);
 
-		verify(userAccountManagement, times(3)) //
+		verify(userAccountManagement, times(2)) //
 				.create(eq(form.getEmail()), //
 						eq(Password.UnencryptedPassword.of(form.getPassword())), //
 						eq(form.getEmail()), //
