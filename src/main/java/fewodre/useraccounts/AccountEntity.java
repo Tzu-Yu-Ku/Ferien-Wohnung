@@ -44,6 +44,7 @@ public class AccountEntity {
 	private UserAccount account;
 
 	public AccountEntity() {
+		// Spring requires an empty constructor for entities.
 	}
 
 	public String getUuid() {

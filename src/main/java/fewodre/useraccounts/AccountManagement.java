@@ -48,7 +48,9 @@ public class AccountManagement {
 		Assert.notNull(tenantRegistrationForm, "registrationForm should not be null!");
 		if (Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword())
 				.equals(Password.UnencryptedPassword.of(tenantRegistrationForm.getPasswordConfirm()))) {
-			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword());
+			Password.UnencryptedPassword password = Password
+					.UnencryptedPassword
+					.of(tenantRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
 						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
@@ -79,7 +81,8 @@ public class AccountManagement {
 	public AccountEntity createHostAccount(HostRegistrationForm hostRegistrationForm) {
 
 		Assert.notNull(hostRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(hostRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(hostRegistrationForm.getPasswordConfirm()))) {
+		if (Password.UnencryptedPassword.of(hostRegistrationForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(hostRegistrationForm.getPasswordConfirm()))) {
 			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(hostRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(hostRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(hostRegistrationForm.getEmail(), password,
@@ -110,8 +113,11 @@ public class AccountManagement {
 	public AccountEntity createEventEmployeeAccount(EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
 
 		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword()).equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
-			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword());
+		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
+			Password.UnencryptedPassword password = Password
+					.UnencryptedPassword
+					.of(eventEmployeeRegistrationForm.getPassword());
 			if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
 				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
 						eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
@@ -174,7 +180,7 @@ public class AccountManagement {
 		return true;
 	}
 
-	public AccountRepository getRepository(){
+	public AccountRepository getRepository() {
 		return accounts;
 	}
 

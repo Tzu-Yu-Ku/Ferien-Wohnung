@@ -8,6 +8,7 @@ public class HolidayHomeForm extends CatalogForm {
 	private String hostMail;
 
 	public HolidayHomeForm() {
+		// No logic in this constructor is required.
 	}
 
 	public String getHostMail() {

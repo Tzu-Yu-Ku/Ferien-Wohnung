@@ -161,10 +161,8 @@ public class AccountController {
 					accountRepository.findByAccount_Email(authentication.getName()).setBic(bic);
 				}
 			}
-			if (authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
-				if (!eventcompany.isEmpty()) {
-					accountRepository.findByAccount_Email(authentication.getName()).setEventCompany(eventcompany);
-				}
+			if (authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE") && !eventcompany.isEmpty()) {
+				accountRepository.findByAccount_Email(authentication.getName()).setEventCompany(eventcompany);
 			}
 			if (!password.isEmpty()) {
 				UserAccount baum = userAccounts.findByUsername(
@@ -217,10 +215,8 @@ public class AccountController {
 				}
 			}
 			if (accountRepository.findByAccount_Email(tenant_username).getAccount().getRoles().stream().findAny().get()
-					.toString().equals("EVENT_EMPLOYEE")) {
-				if (!eventcompany.isEmpty()) {
-					accountRepository.findByAccount_Email(tenant_username).setEventCompany(eventcompany);
-				}
+					.toString().equals("EVENT_EMPLOYEE") && !eventcompany.isEmpty()) {
+				accountRepository.findByAccount_Email(tenant_username).setEventCompany(eventcompany);
 			}
 			if (!password.isEmpty()) {
 				UserAccount baum = userAccounts

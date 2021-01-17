@@ -19,7 +19,7 @@ public class EventForm extends CatalogForm {
 	private int repeateRate;
 
 	public EventForm() {
-		//Nested comment so that sonarqube doesnt detect this empty constructor as code smell.
+		// No logic in this constructor is required.
 	}
 
 	public String getEventCompanyUuid() {

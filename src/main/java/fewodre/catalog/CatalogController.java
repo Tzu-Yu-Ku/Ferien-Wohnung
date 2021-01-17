@@ -204,10 +204,9 @@ public class CatalogController {
 		List<Event> nonActivtedEvents = new LinkedList<Event>();
 		List<Event> allEvents = eCatalog.findAll().toList();
 		for (int i = 0; i < eCatalog.findAll().toList().size(); i++) {
-			if (!hCatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))) {
-				if (allEvents.get(i).isEventStatus()) {
-					nonActivtedEvents.add(allEvents.get(i));
-				}
+			if (!hCatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))
+					&& allEvents.get(i).isEventStatus()) {
+				nonActivtedEvents.add(allEvents.get(i));
 			}
 		}
 		model.addAttribute("nonActivatedEventCatalog", nonActivtedEvents);
@@ -270,12 +269,10 @@ public class CatalogController {
 	@PostMapping("/deleteevent")
 	String deleteEvent(@RequestParam("event") Event event) {
 		System.out.println("zu löschendes Event " + event);
-		if (holidayHomeStorage.findByProduct(event).isPresent()) {
-			if (!event.isEventStatus()) {
+		if (holidayHomeStorage.findByProduct(event).isPresent() && !event.isEventStatus()) {
 //				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
 //				Ecatalog.delete(event);
-				eCatalog.deleteById(Objects.requireNonNull(event.getId()));
-			}
+			eCatalog.deleteById(Objects.requireNonNull(event.getId()));
 		}
 		return "redirect:/events";
 	}

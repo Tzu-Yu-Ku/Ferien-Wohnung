@@ -14,6 +14,7 @@ public class CatalogForm {
 	private int coordinateY;
 
 	public CatalogForm() {
+		// No logic in this constructor is required.
 	}
 
 	public String getName() {
