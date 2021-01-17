@@ -95,9 +95,7 @@ public class CartController {
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount) {
 		firstname(model);
 		System.out.println("AcceptedEvent are :" + holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents);
-		Iterator<Event> iter = holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents.iterator();
-		while (iter.hasNext()) {
-			Event event = iter.next();
+		for (Event event : holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents) {
 			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
@@ -140,9 +138,7 @@ public class CartController {
 		this.formatter = new StringFormatter();
 
 		if (!cart.isEmpty()) { //checkt ob schon ein HolidayHome im WarenKorb liegt
-			Iterator<CartItem> iter = cart.iterator();
-			while (iter.hasNext()) {
-				CartItem cartItem = iter.next();
+			for (CartItem cartItem : cart) {
 				if (cartItem.getProduct().getClass() == HolidayHome.class) {
 					cart.removeItem(cartItem.getId());
 				}
