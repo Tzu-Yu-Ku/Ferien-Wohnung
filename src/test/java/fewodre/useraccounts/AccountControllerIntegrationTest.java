@@ -43,7 +43,7 @@ class AccountControllerIntegrationTest {
 	MockMvc mvc;
 
 	@Test
-	void registerAdmin() throws Exception {
+	void registerAdminGet() throws Exception {
 
 		Model model = new ExtendedModelMap();
 		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Kunde", "Account",
@@ -56,8 +56,16 @@ class AccountControllerIntegrationTest {
 
 	}
 
+
 	@Test
-	void registerNewAccount() {
+	void registerNewAccount() throws Exception {
+		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Kunde", "Account",
+				"unit@test", "123", "123", "1999-01-01", "Test Street",
+				"1", "12345", "Dresden", true);
+		mvc.perform(post("/register")
+				.flashAttr("tenantRegistrationForm", tenantRegistrationForm))
+				.andExpect(status().isFound());
+		accountManagement.enableTenant("unit@test");
 	}
 
 	@Test
@@ -218,7 +226,7 @@ class AccountControllerIntegrationTest {
 
 		AccountEntity accountEntity = null;
 		for (AccountEntity acc : accountEntites) {
-			if (acc.getAccount().getUsername().equals("test@test")) {
+			if (acc.getAccount().getUsername().equals("unit@test")) {
 				accountEntity = acc;
 			}
 		}
