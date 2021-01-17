@@ -86,7 +86,7 @@ public class CartController {
 	}
 
 	@ModelAttribute("cart")
-	Cart initializeCart() {
+	public Cart initializeCart() {
 		return new Cart();
 	}
 
@@ -99,7 +99,7 @@ public class CartController {
 			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
-		List<Event> bookable = new ArrayList<>();
+		List<Event> bookable;
 
 		//eventCatalog.findByHolidayHome()
 		bookable = holidayHomeCatalog
@@ -116,6 +116,7 @@ public class CartController {
 				break;
 			}
 		}
+
 		model.addAttribute("eventsInCart", eventsInCart);
 		model.addAttribute("eventCatalog", bookable);
 		model.addAttribute("holidayHome", holidayHome);
