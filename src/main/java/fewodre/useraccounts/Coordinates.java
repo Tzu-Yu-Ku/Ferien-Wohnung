@@ -131,6 +131,10 @@ public class Coordinates {
 		decideDistrict();
 	}
 
+	public Coordinates() {
+		// Comment for SonarQube.
+	}
+
 	private void decideDistrict() {
 		if (weixdorf.contains(xRatio, yRatio)) {
 			System.out.println("Weixdorf");
