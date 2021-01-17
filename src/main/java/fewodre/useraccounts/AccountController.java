@@ -46,7 +46,7 @@ public class AccountController {
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
+		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			model.addAttribute("firstname_user",
 					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
@@ -291,7 +291,7 @@ public class AccountController {
 	@PostMapping("/newhost")
 	public String registerNewHost(
 			@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
-			BindingResult result, Model model) {
+			BindingResult result) {
 		LOG.info(hostRegistrationForm.getBirthDate());
 		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
