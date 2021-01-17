@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class AccountController {
@@ -46,7 +49,9 @@ public class AccountController {
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
+		if (authentication != null
+				&& !authentication.getPrincipal().equals("anonymousUser")
+				&& !authentication.getName().equals("admin")) {
 			model.addAttribute("firstname_user",
 					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
@@ -97,20 +102,21 @@ public class AccountController {
 	@GetMapping("/manageaccount")
 	public String editUser(Model model, String tenant_username) {
 		firstname(model);
-		System.out.println(authentication.getPrincipal());
-		if (!(authentication.getPrincipal().toString().contains("TENANT")
-				|| authentication.getPrincipal().toString().contains("ADMIN")
-				|| authentication.getPrincipal().toString().contains("HOST")
-				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE"))) {
+		Object principal = authentication.getPrincipal();
+		System.out.println(principal);
+		if (!(principal.toString().contains("TENANT")
+				|| principal.toString().contains("ADMIN")
+				|| principal.toString().contains("HOST")
+				|| principal.toString().contains("EVENT_EMPLOYEE"))) {
 			return "/login";
 		}
-		if (authentication.getPrincipal().toString().contains("TENANT")
-				|| authentication.getPrincipal().toString().contains("HOST")
-				|| authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+		if (principal.toString().contains("TENANT")
+				|| principal.toString().contains("HOST")
+				|| principal.toString().contains("EVENT_EMPLOYEE")) {
 
 			return getString(model, authentication);
 		}
-		if (authentication.getPrincipal().toString().contains("ADMIN")) {
+		if (principal.toString().contains("ADMIN")) {
 			return getString(model, tenant_username);
 		}
 

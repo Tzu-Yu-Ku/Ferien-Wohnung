@@ -58,6 +58,7 @@ public class CartController {
 	@DateTimeFormat(pattern = "dd.mm.yyyy")
 	private LocalDate arrivalDate, departureDate;
 
+	private Cart cart;
 
 	CartController(AccountManagement accountManagement, AccountRepository accountRepository,
 	               BookingManagement bookingManagement, EventCatalog eventCatalog,
@@ -73,6 +74,7 @@ public class CartController {
 		this.eventcatalog = eventCatalog;
 		this.holidayHomeCatalog = holidayHomeCatalog;
 		this.accountRepository = accountRepository;
+		this.cart = new Cart();
 	}
 
 	private void firstname(Model model) {
@@ -87,7 +89,7 @@ public class CartController {
 
 	@ModelAttribute("cart")
 	public Cart initializeCart() {
-		return new Cart();
+		return cart;
 	}
 
 	@GetMapping("/cart")
@@ -100,6 +102,8 @@ public class CartController {
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
 		List<Event> bookable;
+
+		System.out.println(cart);
 
 		//eventCatalog.findByHolidayHome()
 		bookable = holidayHomeCatalog
@@ -273,7 +277,7 @@ public class CartController {
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {
 		firstname(model);
-		if(cart.getItem(id).isPresent()) {
+		if (cart.getItem(id).isPresent()) {
 			if (cart.getItem(id).get().getProduct().getCategories().iterator().next().equals("HolidayHome")) {
 				cart.clear();
 				return "redirect:/holidayhomes";
