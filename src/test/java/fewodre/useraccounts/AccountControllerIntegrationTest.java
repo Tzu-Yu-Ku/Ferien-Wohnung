@@ -215,8 +215,9 @@ class AccountControllerIntegrationTest {
 	@Test
 	@WithMockUser(username = "admin", roles = "ADMIN")
 	void deleteAccount() throws Exception {
+		registerNewAccount();
 		MvcResult result = mvc.perform(post("/deleteaccount")
-				.param("account_username", "test@test"))
+				.param("account_username", "unit@test"))
 				.andExpect(status().isFound())
 				.andReturn();
 
