@@ -34,7 +34,7 @@ public class AccountManagement {
 	private final UserAccountManagement userAccounts;
 
 	@Autowired
-	AccountManagement(AccountRepository accounts, UserAccountManagement userAccounts) {
+	public AccountManagement(AccountRepository accounts, UserAccountManagement userAccounts) {
 
 		Assert.notNull(accounts, "CustomerRepository must not be null!");
 		Assert.notNull(userAccounts, "UserAccountManagement must not be null!");

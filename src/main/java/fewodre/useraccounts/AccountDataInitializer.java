@@ -54,5 +54,11 @@ public class AccountDataInitializer implements DataInitializer {
 
 		userAccountManagement.create("admin", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
 
+		TenantRegistrationForm testingTenantAccountForm = new TenantRegistrationForm("Kunde", "Account",
+				"test@test", "123", "123", "1999-01-01", "Test Street",
+				"1", "12345", "Dresden", true);
+		accountManagement.createTenantAccount(testingTenantAccountForm);
+		accountManagement.enableTenant("test@test");
+
 	}
 }

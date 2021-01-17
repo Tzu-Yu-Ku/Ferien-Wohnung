@@ -99,7 +99,7 @@ public class CartController {
 			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
 		}
-		List<Event> bookable = new ArrayList<Event>();
+		List<Event> bookable = new ArrayList<>();
 
 		//eventCatalog.findByHolidayHome()
 		bookable = holidayHomeCatalog
@@ -180,8 +180,8 @@ public class CartController {
 				}
 			}
 		}
-		for (int i = 0; i < itemsToRemove.size(); i++) {
-			cart.removeItem(itemsToRemove.get(i).getId());
+		for (CartItem cartItem : itemsToRemove) {
+			cart.removeItem(cartItem.getId());
 		}
 		Quantity differenz = newInterval.subtract(oldInterval);
 		cart.addOrUpdateItem(holidayHome, differenz);
@@ -229,9 +229,7 @@ public class CartController {
 			return "redirect:/holdayhomes";
 		}
 		HolidayHome home;
-		Iterator it = cart.iterator();
-		while (it.hasNext()) {
-			CartItem cartItem = (CartItem) it.next();
+		for (CartItem cartItem : cart) {
 			if (cartItem.getProduct().getClass() == HolidayHome.class) {
 				home = (HolidayHome) cartItem.getProduct();
 			}
@@ -274,11 +272,14 @@ public class CartController {
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {
 		firstname(model);
-		if (cart.getItem(id).get().getProduct().getCategories().iterator().next().equals("HolidayHome")) {
-			cart.clear();
-			return "redirect:/holidayhomes";
+		if(cart.getItem(id).isPresent()) {
+			if (cart.getItem(id).get().getProduct().getCategories().iterator().next().equals("HolidayHome")) {
+				cart.clear();
+				return "redirect:/holidayhomes";
+			}
+			cart.removeItem(id);
+			return "redirect:/cart";
 		}
-		cart.removeItem(id);
 		return "redirect:/cart";
 	}
 

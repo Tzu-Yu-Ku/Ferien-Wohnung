@@ -1,33 +1,46 @@
 package fewodre.bookings;
 
+import fewodre.catalog.events.Event;
 import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountManagement;
 import fewodre.useraccounts.AccountRepository;
+import org.apache.tomcat.jni.Local;
+import org.hamcrest.Matcher;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.order.Cart;
+import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultHandler;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.time.LocalDate;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class CartControllerIntegrationTest {
 
 	@Autowired
-	private AccountManagement accountManagement;
+	static private AccountManagement accountManagement;
 
 	@Autowired
-	private AccountRepository accountRepository;
+	static private AccountRepository accountRepository;
+
+	@Autowired
+	static private UserAccountManagement userAccountManagement;
 
 	@Autowired
 	private BookingManagement bookingManagement;
@@ -39,7 +52,16 @@ class CartControllerIntegrationTest {
 	private HolidayHomeCatalog holidayHomeCatalog;
 
 	@Autowired
+	private CartController cartController;
+
+
+	@Autowired
 	MockMvc mvc;
+
+	HolidayHome testHome;
+	Event testEvent;
+	LocalDate arrivalDate;
+	LocalDate departureDate;
 
 	@Test
 	void basket() {
@@ -47,24 +69,38 @@ class CartControllerIntegrationTest {
 	}
 
 	@Test
-	@WithMockUser(username = "tenant@tenant", roles = "TENANT")
+	@WithMockUser(username = "test@test", roles = "TENANT")
 	void addHolidayHome() throws Exception {
-		HolidayHome testHome = holidayHomeCatalog.findAll().toList().get(0);
-
-		mvc.perform(
-				post("/cart")
-						.param("hid", testHome.getId().toString())
-						.param("arrivaldate", "2021-02-10")
-						.param("departuredate", "2021-02-15")
-		).andExpect(status().isFound());
+		prepareCart();
 
 		mvc.perform(get("/cart"))
 				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
+				.andExpect(model().attribute("arrivalDate", arrivalDate))
+				.andExpect(model().attribute("departureDate", departureDate))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	void updateDatum() {
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void updateDatum() throws Exception {
+		prepareCart();
+
+		mvc.perform(post("/updateDatum/"+testHome.getId().toString())
+				.param("newSDate", arrivalDate.toString())
+				.param("newEDate", departureDate.plusDays(1).toString()))
+				.andDo(new ResultHandler() {
+					@Override
+					public void handle(MvcResult mvcResult) throws Exception {
+						ModelMap modelMap = mvcResult.getModelAndView().getModelMap();
+						System.out.println(modelMap);
+					}
+				})
+				.andExpect(status().isFound());
+
+		mvc.perform(get("/cart"))
+				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
+				.andExpect(model().attribute("departureDate", departureDate.plusDays(1)))
+				.andExpect(status().isOk());
 	}
 
 	@Test
@@ -76,11 +112,68 @@ class CartControllerIntegrationTest {
 	}
 
 	@Test
-	void addEvent() {
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void addEvent() throws Exception {
+		prepareCart();
+
+		testEvent = eventcatalog.findAll().toList().get(0);
+
+		mvc.perform(post("/eventcart")
+				.param("eid", testEvent.getId().toString())
+				.param("number", "1"))
+				.andExpect(redirectedUrl("/holdayhomes"))
+				.andExpect(status().isFound());
+
+		mvc.perform(get("/cart"))
+				.andExpect(model().attributeExists("eventsInCart", "eventCatalog"))
+				.andExpect(status().isOk());
 	}
 
 	@Test
-	void removeItem() {
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void removeEventItem() throws Exception {
+		prepareCart();
+		addEvent();
+		mvc.perform(get("/cart"))
+				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
+				.andExpect(model().attribute("arrivalDate", arrivalDate))
+				.andExpect(model().attribute("departureDate", departureDate))
+				.andExpect(status().isOk());
+	}
+
+	@Test
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void removeHolidayHomeItem() throws Exception {
+		prepareCart();
+
+		mvc.perform(get("/cart"))
+				.andDo(new ResultHandler() {
+					@Override
+					public void handle(MvcResult mvcResult) throws Exception {
+						ModelMap modelMap = mvcResult.getModelAndView().getModelMap();
+						System.out.println(modelMap.toString());
+					}
+				})
+				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
+				.andExpect(model().attribute("arrivalDate", arrivalDate))
+				.andExpect(model().attribute("departureDate", departureDate))
+				.andExpect(status().isOk());
+
+		mvc.perform(get("/removeProduct/" + testHome.getId().toString()))
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrl("/cart"));
+
+	}
+
+	@Test
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void removeItemThatDoesntExist() throws Exception {
+		prepareCart();
+
+		mvc.perform(get("/removeProduct/INVALID_ID"))
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrl("/cart"));
+
 	}
 
 	@Test
@@ -113,5 +206,21 @@ class CartControllerIntegrationTest {
 
 	@Test
 	void confirm() {
+	}
+
+	void prepareCart() throws Exception {
+		testHome = holidayHomeCatalog.findAll().toList().get(0);
+		arrivalDate = LocalDate.parse("2021-02-10");
+		departureDate = LocalDate.parse("2021-02-15");
+
+		String mvcResult = mvc.perform(post("/cart")
+				.param("hid", testHome.getId().toString())
+				.param("arrivaldate", arrivalDate.toString())
+				.param("departuredate", departureDate.toString()))
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrl("/cart"))
+				.andReturn().getResponse().getContentAsString();
+		System.out.println(mvcResult);
+
 	}
 }
