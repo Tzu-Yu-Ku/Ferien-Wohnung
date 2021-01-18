@@ -87,6 +87,55 @@ class CatalogControllerIntegrationTest {
 
 	@Test
 	@WithMockUser(username = "host@host", roles = "HOST")
+	public void editHolidayHomePost() throws Exception {
+		HolidayHome testHome = holidayHomeCatalog.findAll().toList().get(0);
+		mvc.perform(post("/editholidayhome")
+				.param("holidayHome", testHome.getId().toString()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("editholidayhome"));
+	}
+
+	@Test
+	@WithMockUser(username = "host@host", roles = "HOST")
+	public void editHolidayHome() throws Exception {
+		HolidayHome testHome = holidayHomeCatalog.findAll().toList().get(0);
+		MvcResult result = mvc.perform(post("/editHolidayHome")
+				.param("holidayHomeId", testHome.getId().toString())
+				.param("name", "name_edit")
+				.param("description", "desc_edit")
+				.param("price", "111")
+				.param("capacity", "7")
+				.param("street", "street_test")
+				.param("houseNumber", "77")
+				.param("city", "city_test")
+				.param("postalCode", "99999")
+				.param("coordinates_x", "999")
+				.param("coordinates_y", "888"))
+				.andExpect(status().isFound())
+				.andReturn();
+
+		System.out.println(result);
+
+		result = mvc.perform(post("/housedetails")
+				.param("holidayHome", testHome.getId().toString()))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		HolidayHome savedHome = (HolidayHome) result.getModelAndView().getModel().get("holidayHome");
+		assertThat(savedHome.getHostMail()).isEqualTo("host@host");
+		assertThat(savedHome.getName()).isEqualTo("name_edit");
+		assertThat(savedHome.getDescription()).isEqualTo("desc_edit");
+		assertThat(savedHome.getCapacity()).isEqualTo(7);
+		assertThat(savedHome.getPlace().getCity()).isEqualTo("city_test");
+		assertThat(savedHome.getPlace().getStreet()).isEqualTo("street_test");
+		assertThat(savedHome.getPlace().getPostalCode()).isEqualTo("99999");
+		assertThat(savedHome.getPlace().getCoordX()).isEqualTo(999);
+		assertThat(savedHome.getPlace().getCoordY()).isEqualTo(888);
+		assertThat(savedHome.getPrice().toString()).isEqualTo("EUR 111");
+	}
+
+	@Test
+	@WithMockUser(username = "host@host", roles = "HOST")
 	public void addHolidayhomePageGet() throws Exception {
 		Model model = new ExtendedModelMap();
 		String returnedView = catalogController.addHolidayhomePage(model);
@@ -150,6 +199,7 @@ class CatalogControllerIntegrationTest {
 				.andExpect(model().attributeExists("productIdentifier"))
 				.andExpect(status().isOk());
 	}
+
 
 	@Test
 	public void map() {
