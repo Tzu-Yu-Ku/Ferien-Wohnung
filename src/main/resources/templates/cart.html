@@ -74,21 +74,51 @@
                       method="post">
                     <label for="startDate" class="align-center pt-2 px-2 ml-5">Anreisedatum:</label>
                     <input type="date" id="startDate" name="newSDate" class="form-control" required="required"
-                           th:value="${arrivalDate}" th:min="${today}" th:onchange="setMinOfDeparture()">
+                           th:value="${arrivalDate}" th:min="${today}"  th:onchange="setMinOfDeparture()">
                     <script>
                         function setMinOfDeparture() {
                             document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
                             var selectedStartDate = new Date(document.getElementById("startDate").value);
                             var selectedEndDate = new Date(document.getElementById("endDate").value);
-                            if (selectedEndDate < selectedStartDate) {
-                                document.getElementById("endDate").value = document.getElementById("startDate").value;
+                            var selectedStartDayPP = new Date(document.getElementById("startDate").value);
+                            if (selectedEndDate <= selectedStartDate) {
+                                var month = "01";
+                                if(selectedStartDayPP.getMonth()+1<10){
+                                    month = "-0" + (selectedStartDayPP.getMonth() + 1);
+                                }
+                                else {
+                                    month = "-" + (selectedStartDayPP.getMonth() + 1);
+                                }
+                                var day = "01";
+                                if(selectedStartDayPP.getDate()+1<10){
+                                    day = "-0" + (selectedStartDayPP.getDate() + 1);
+                                }
+                                else {
+                                    if(selectedStartDayPP.getDate()+1>28 && selectedStartDayPP.getMonth()+1 ==2){
+                                        month = "-03";
+                                        day =  "-01";
+                                    }
+                                    else if(selectedStartDayPP.getDate()+1>30){
+                                        day = "-01";
+                                        if(selectedStartDayPP.getMonth()+2<10){
+                                            month = "-0" + (selectedStartDayPP.getMonth() + 2);
+                                        }
+                                        else {
+                                            month = "-" + (selectedStartDayPP.getMonth() + 2);
+                                        }
+                                    }
+                                    else {
+                                        day = "-" + (selectedStartDayPP.getDate() + 1);
+                                    }
+                                }
+                                document.getElementById("endDate").value = selectedStartDayPP.getFullYear() + month +day;
                             }
                             document.getElementById("updateDatum").submit();
                         }
                     </script>
                     <label for="endDate" class="align-center pt-2 px-2">Abreisedatum:<br></label>
                     <input type="date" id="endDate" name="newEDate" class="form-control" required="required"
-                           th:value="${departureDate}" th:min="${arrivalDate}" th:onchange="setMinOfDeparture()">
+                           th:value="${departureDate}" th:min="${arrivalDate.plusDays(1)}" th:onchange="setMinOfDeparture()">
                     <script>
                         function setMaxOfArrival() {
                             document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
@@ -174,7 +204,7 @@
                 </div>
             </div>
             <div class="p-1 col-2 col-md-2 border-right">
-                <h5 class="text-center pt-2 px-2" th:text="${formatter.parsePrice(item.price)}">246€</h5>
+                <h5 class="text-center pt-2 px-2" th:text="${formatter.parsePrice(item.getPrice())}">246€</h5>
             </div>
         </div>
         <div class="row pb-2" style="background-color: #EDEDED;">
@@ -185,7 +215,7 @@
                     <h4>Gesamtpreis:</h4>
                 </div>
                 <div class="col-3">
-                    <h3 th:text="${formatter.parsePrice(cart.price.getNumber())}">
+                    <h3 th:text="${formatter.parsePrice(cart.price.getNumber().floatValue())}">
                         546,00 €
                     </h3>
                 </div>
@@ -241,7 +271,7 @@
                 <div class="row border-bottom">
                     <div class="col-4">
                         <h5 class="text-center pt-2 px-2 border-top"
-                            th:text="${event.price.getNumber() + ',- € p.P.'}">
+                            th:text="${event.price.getNumber().floatValue() + ',- € p.P.'}">
                             123€ p. P.
                         </h5>
                     </div>
@@ -271,6 +301,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>
