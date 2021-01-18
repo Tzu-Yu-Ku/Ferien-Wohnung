@@ -94,7 +94,7 @@ class CartControllerIntegrationTest {
 	void updateDatum() throws Exception {
 		prepareCart();
 
-		mvc.perform(post("/updateDatum/"+testHome.getId().toString())
+		mvc.perform(post("/updateDatum/" + testHome.getId().toString())
 				.param("newSDate", arrivalDate.toString())
 				.param("newEDate", departureDate.plusDays(1).toString()))
 				.andDo(new ResultHandler() {
@@ -199,7 +199,7 @@ class CartControllerIntegrationTest {
 
 	@Test
 	@WithMockUser(username = "test@test", roles = "TENANT")
-	void buy() throws Exception {
+	String buy() throws Exception {
 		prepareCart();
 		HashMap<Event, Integer> events = new HashMap<>();
 		String payMethod = "Cash";
@@ -216,8 +216,8 @@ class CartControllerIntegrationTest {
 		assertThat(viewName).isEqualTo("bookingdetails");
 
 		Map<String, Object> model = result.getModelAndView().getModel();
-		System.out.println(model.toString());
-
+		BookingEntity bookingEntity = (BookingEntity) model.get("booking");
+		return bookingEntity.getId().toString();
 	}
 
 	@Test
@@ -228,8 +228,16 @@ class CartControllerIntegrationTest {
 	@WithMockUser(username = "test@test", roles = "TENANT")
 	void details() throws Exception {
 		prepareCart();
-		buy();
+		String bookingId = buy();
+
+		MvcResult result = mvc.perform(get("/bookingdetails/" + bookingId))
+				.andExpect(status().isOk())
+				.andExpect(view().name("bookingdetails"))
+				.andExpect(model().attribute("firstname", "New_First_Name"))
+				.andReturn();
+
 	}
+
 
 	@Test
 	void cancel() {
