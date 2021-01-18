@@ -30,7 +30,7 @@ public class BookingController {
 	private final BookingManagement bookingManagement;
 
 	/**
-	 * View lastname from the current{@link AccountEntity}
+	 * Views firstname from the current{@link AccountEntity}
 	 *
 	 * @param model must not be {@literal null}
 	 */
@@ -69,7 +69,7 @@ public class BookingController {
 	}
 
 	/**
-	 * Show a list of all {@link BookingEntity}s which is booked from the current {@link AccountEntity}(who hat the role of TENANT.)
+	 * Show a list of all {@link BookingEntity}s which are booked from the current {@link AccountEntity}(who hat the role of TENANT.)
 	 *
 	 * @param model must not be {@literal null}
 	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
@@ -150,7 +150,7 @@ public class BookingController {
 	}
 
 	/**
-	 * Show a list of all {@link BookingEntity}s with the given house's name,
+	 * Shows a list of all {@link BookingEntity}s with the given house's name,
 	 * which the booked house belongs to the current {@link AccountEntity}(which hat the role of HOST.)
 	 *
 	 * @param model must not be {@literal null}
