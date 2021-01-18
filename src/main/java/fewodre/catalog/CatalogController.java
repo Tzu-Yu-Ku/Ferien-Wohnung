@@ -66,7 +66,9 @@ public class CatalogController {
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
+		if (authentication != null
+				&& !authentication.getPrincipal().equals("anonymousUser")
+				&& !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
 			model.addAttribute("firstname",

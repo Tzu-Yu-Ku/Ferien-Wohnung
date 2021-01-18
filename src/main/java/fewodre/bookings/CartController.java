@@ -355,9 +355,7 @@ public class CartController {
 		model.addAttribute("accountManager", accountManagement);
 		model.addAttribute("one", one);
 		model.addAttribute("customer", booking.getUserAccount());
-		Iterator<OrderLine> iter = booking.getOrderLines().iterator();
-		while (iter.hasNext()) {
-			OrderLine line = iter.next();
+		for (OrderLine line : booking.getOrderLines()) {
 			if (holidayHomeCatalog.findFirstByProductIdentifier(line.getProductIdentifier()) != null) {
 				HolidayHome home = holidayHomeCatalog.findFirstByProductIdentifier(line.getProductIdentifier());
 				model.addAttribute("holidayHome", home);
