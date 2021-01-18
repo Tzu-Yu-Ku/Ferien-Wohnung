@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.salespointframework.order.Cart;
+import org.salespointframework.order.CartItem;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +28,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -149,22 +154,31 @@ class CartControllerIntegrationTest {
 	void removeHolidayHomeItem() throws Exception {
 		prepareCart();
 
-		mvc.perform(get("/cart"))
-				.andDo(new ResultHandler() {
-					@Override
-					public void handle(MvcResult mvcResult) throws Exception {
-						ModelMap modelMap = mvcResult.getModelAndView().getModelMap();
-						System.out.println(modelMap.toString());
-					}
-				})
+		MvcResult result = mvc.perform(get("/cart"))
 				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
 				.andExpect(model().attribute("arrivalDate", arrivalDate))
 				.andExpect(model().attribute("departureDate", departureDate))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andReturn();
 
-		mvc.perform(get("/removeProduct/" + testHome.getId().toString()))
+		Cart cart = (Cart) result.getModelAndView().getModel().get("cart");
+		String cartItemId = cart.toList().get(0).getId().toString();
+
+		mvc.perform(get("/removeProduct/" + cartItemId))
 				.andExpect(status().isFound())
-				.andExpect(redirectedUrl("/cart"));
+				.andExpect(redirectedUrl("/holidayhomes"));
+
+		result = mvc.perform(get("/cart"))
+				.andExpect(model().attributeExists("holidayHome", "arrivalDate", "departureDate"))
+				.andExpect(model().attribute("arrivalDate", arrivalDate))
+				.andExpect(model().attribute("departureDate", departureDate))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		cart = (Cart) result.getModelAndView().getModel().get("cart");
+		boolean isCartEmpty = cart.toList().isEmpty();
+		assertThat(isCartEmpty).isTrue();
+
 
 	}
 
@@ -184,7 +198,26 @@ class CartControllerIntegrationTest {
 	}
 
 	@Test
-	void buy() {
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void buy() throws Exception {
+		prepareCart();
+		HashMap<Event, Integer> events = new HashMap<>();
+		String payMethod = "Cash";
+		String holidayHomeId = testHome.getId().toString();
+
+		MvcResult result = mvc.perform(post("/purchase")
+				.flashAttr("events", events)
+				.param("hid", holidayHomeId)
+				.param("paymethod", payMethod))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		String viewName = result.getModelAndView().getViewName();
+		assertThat(viewName).isEqualTo("bookingdetails");
+
+		Map<String, Object> model = result.getModelAndView().getModel();
+		System.out.println(model.toString());
+
 	}
 
 	@Test
@@ -192,7 +225,10 @@ class CartControllerIntegrationTest {
 	}
 
 	@Test
-	void details() {
+	@WithMockUser(username = "test@test", roles = "TENANT")
+	void details() throws Exception {
+		prepareCart();
+		buy();
 	}
 
 	@Test

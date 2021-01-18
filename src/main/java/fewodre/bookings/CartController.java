@@ -297,9 +297,12 @@ public class CartController {
 
 
 	@PostMapping("/purchase")
-	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
-	                  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
-	                  @RequestParam("paymethod") String paymethod) {
+	public String buy(Model model,
+	                  @ModelAttribute Cart cart,
+	                  @ModelAttribute HashMap<Event, Integer> events,
+	                  @RequestParam("hid") HolidayHome holidayHome,
+	                  @RequestParam("paymethod") String paymethod,
+	                  @LoggedIn UserAccount userAccount) {
 		System.out.println(cart.getPrice());
 		System.out.println("Buchungszeitraum0: ");
 		System.out.println(arrivalDate.toString() + " - " + departureDate.toString());
