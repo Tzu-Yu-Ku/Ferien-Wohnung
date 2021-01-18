@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -103,14 +104,14 @@ class AccountControllerIntegrationTest {
 				.param("tenant_username", "test@test")
 				.param("firstname", "New_First_Name")
 				.param("lastname", "New_Last_Name")
-				.param("password", "")
-				.param("birthdate", "")
-				.param("street", "")
-				.param("housenumber", "")
-				.param("postcode", "")
-				.param("city", "")
-				.param("iban", "")
-				.param("bic", ""))
+				.param("password", "123")
+				.param("birthdate", "2000-01-01")
+				.param("street", "Street")
+				.param("housenumber", "1")
+				.param("postcode", "12345")
+				.param("city", "Dresden")
+				.param("iban", "DE40500105175632313593")
+				.param("bic", "MALADE61AKI"))
 				.andExpect(status().isOk());
 
 		MvcResult mvcResult = mvc.perform(get("/manageaccounts")).andReturn();
@@ -233,4 +234,5 @@ class AccountControllerIntegrationTest {
 		}
 		assertThat(accountEntity).isNull();
 	}
+
 }
