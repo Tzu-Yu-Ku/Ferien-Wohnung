@@ -45,9 +45,8 @@ public class Year {
 	}
 
 	public Year SetUpBookedDates(LinkedList<Integer> bookedDates) {
-		Iterator<Integer> iter = bookedDates.iterator();
-		while (iter.hasNext()) {
-			Integer dateNumber = iter.next();  // date of Year
+		// date of Year
+		for (Integer dateNumber : bookedDates) {
 			LocalDate date = LocalDate.ofYearDay(yearNumber, dateNumber); // to LocalDate
 			months.get(date.getMonth().getValue()).BookDate(date.getDayOfMonth()); // Set This day booked
 		}
