@@ -78,7 +78,7 @@ public class CatalogController {
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
+		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
 			model.addAttribute("firstname",
@@ -205,7 +205,6 @@ public class CatalogController {
 					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
 		}
 		ProductIdentifier productIdentifier = myHolidayHome.getId();
-		deleteAllSorts();
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
 
@@ -552,7 +551,7 @@ public class CatalogController {
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 
 		ProductIdentifier productIdentifier = event.getId();
-		deleteAllSorts();
+		deleteAllEventSorts();
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
 	}
 

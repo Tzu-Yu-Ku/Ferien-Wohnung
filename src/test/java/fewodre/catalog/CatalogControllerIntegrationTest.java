@@ -18,6 +18,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
+import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,6 +45,7 @@ class CatalogControllerIntegrationTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
+	@WithMockUser(username = "test@test", roles = "TENANT")
 	public void holidayHomeCatalog() {
 
 		Model model = new ExtendedModelMap();
@@ -80,8 +84,6 @@ class CatalogControllerIntegrationTest {
 		Model model = new ExtendedModelMap();
 		String returnedView = catalogController.addEventPage(model);
 
-		Event event = eventCatalog.findAll().toList().get(0);
-
 		EventForm form = new EventForm();
 		form.setEventCompanyUuid("event@employee");
 		form.setName("Test Wohnung");
@@ -94,10 +96,9 @@ class CatalogControllerIntegrationTest {
 		form.setPrice(10);
 		form.setCoordinateX(100);
 		form.setCoordinateY(100);
-		form.setDate("2020-01-01");
+		form.setDate("2021-11-11");
 		form.setRepeateRate(1);
 		form.setRepeats(1);
-		form.setTime("20:00");
 
 		MvcResult result = mvc.perform(post("/addEvent")
 				.flashAttr("form", form))
@@ -111,11 +112,14 @@ class CatalogControllerIntegrationTest {
 				.andExpect(status().isOk())
 				.andReturn();
 
+		System.out.println(result);
 		Streamable<Event> events = (Streamable<Event>) result.getModelAndView().getModel().get("eventCatalog");
+		Set<Event> eventList = events.toSet();
 
 		boolean eventWasCreated = false;
 		for (Event e : events) {
-			if (e.getId().toString().equals(testEventId)) {
+			String string = e.getId().toString();
+			if (string.equals(testEventId)) {
 				eventWasCreated = true;
 			}
 		}
