@@ -79,7 +79,6 @@ public class BookingController {
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
 		firstname(model);
-			//model.addAttribute("userAccount", accountManagement.getRepository().findByAccount_Email(userAccount.getEmail()));
 		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
 			return "redirect:/holidayhomes";
 		}else {

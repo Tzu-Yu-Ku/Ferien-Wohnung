@@ -84,15 +84,13 @@ public class BookingManagement {
 	 * @return a BookingEntity
 	 */
 	public BookingEntity createBookingEntity(UserAccount userAccount, HolidayHome home, Cart cart,
-											 /*PaymentMethod paymentMethod,*/ LocalDate arrivalDate,
-											 LocalDate departureDate, HashMap<Event, Integer> events, String paymethod){
+											 LocalDate arrivalDate, LocalDate departureDate,
+											 HashMap<Event, Integer> events, String paymethod){
 		Quantity nights = Quantity.of(ChronoUnit.DAYS.between(arrivalDate, departureDate));
-		//HolidayHome home = catalog.findFirstByProductIdentifier(uuidHome);
-		BookingEntity bookingEntity = new BookingEntity(userAccount, this.accounts.findByAccount_Email(home.getHostMail()),home, nights, arrivalDate, departureDate, events, paymethod);
+		BookingEntity bookingEntity = new BookingEntity(userAccount,
+				this.accounts.findByAccount_Email(home.getHostMail()),home,
+				nights, arrivalDate, departureDate, events, paymethod);
 		cart.addItemsTo(bookingEntity);
-		//order open()
-		//will update quantity one time
-		//cart.getItem(home.getId().toString());
 		if(!holidayHomeStorage.findByProduct(home).isPresent()){
 			holidayHomeStorage.save(new UniqueInventoryItem(home, nights.add(nights)));
 		}else{
@@ -103,9 +101,7 @@ public class BookingManagement {
 			eventCatalog.findFirstByProductIdentifier(eventIterator.next().getId()).addSubscriber(bookingEntity);
 		}
 		cart.clear();
-		System.out.println("cart is empty: "+cart.isEmpty());
 		BookingEntity result = bookings.save(bookingEntity);
-		System.out.println(result == bookingEntity);
 		return result ;
 	}
 
@@ -119,8 +115,6 @@ public class BookingManagement {
 	public boolean payDeposit(BookingEntity bookingEntity) {
 		if(getMoney(bookingEntity.getDepositInCent()*0.01f,
 				bookingEntity.getPaymethod(), bookingEntity.getUuidTenant())){
-			//orderManagement.payOrder(bookingEntity)
-			//orderManagement.completeOrder(bookingEntity);
 			if(bookingEntity.pay()){return true;}
 			else {
 				System.out.println("etwas ist bei der Bezahlung schiefgelaufen whr. falscher State");
@@ -227,19 +221,13 @@ public class BookingManagement {
 		return bookings.findAll();
 	}
 
-	//after createBookingEntity, we can already save in bookingRepository
-	//need to create findByStatusPaid
-
 	/**
 	 * get all of the {@link BookingEntity} by the given {@link HolidayHome} ID in the system
 	 *
 	 * @param holidayHome muss not be {@literal null}
 	 * @return all bookings which contains the given house's ID
 	 */
-	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome) {
-		return bookings.findBookingsByUuidHome(holidayHome.toString());
-	}
-
+	public Streamable<BookingEntity> findBookingsByUuidHome(ProductIdentifier holidayHome){return  bookings.findBookingsByUuidHome(holidayHome.toString());}
 
 	/**
 	 * get all of the {@link BookingEntity} by the given {@link UserAccount} in the system
@@ -306,6 +294,5 @@ public class BookingManagement {
 				bookingEntity.getHomeName().equals(home)).toList();
 		return bookingsFromHome;
 	}
-
 
 }

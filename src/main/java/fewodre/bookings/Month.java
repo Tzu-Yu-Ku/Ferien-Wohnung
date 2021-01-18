@@ -3,6 +3,7 @@ package fewodre.bookings;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Deprecated
 public class Month {
 	public java.time.Month month;
 	public ArrayList<Date> dates;

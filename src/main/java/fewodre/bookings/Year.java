@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+@Deprecated
 public class Year {
 	private int yearNumber;
 	private int daysOfYear;

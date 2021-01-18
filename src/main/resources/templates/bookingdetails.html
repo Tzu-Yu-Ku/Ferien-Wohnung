@@ -146,11 +146,11 @@
                 <tbody>
                     <tr th:if="${booking.getState().toString() == 'ORDERED'}">
                         <th><h5>Sie bezahlen 10% der gesamten Übernachtungskosten und den Gesamtpreis der Events,um zu reservieren</h5></th>
-                        <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                        <td><h6 th:text="${formatter.parsePrice(booking.getDepositInCent()*0.01)}">123 €</h6></td>
                     </tr>
                     <tr th:if="${booking.getState().toString() != 'ORDERED'}">
                         <th><h5 style="color:blue">Schon bezahlt</h5></th>
-                        <td><h6 style="color:blue" th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                        <td><h6 style="color:blue" th:text="${formatter.parsePrice(booking.getDepositInCent()*0.01)}">123 €</h6></td>
                     </tr>
                     <tr>
                         <th><h5>Sie bezahlen in der Unterkunft</h5></th>
@@ -173,11 +173,11 @@
                 <tbody>
                 <tr th:if="${booking.getState().toString() == 'ORDERED'}">
                     <th><h5>Die Kunden müssen noch die Anzahlung bezahlen</h5></th>
-                    <td><h6 th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                    <td><h6 th:text="${formatter.parsePrice(booking.getDepositInCent()*0.01)}">123 €</h6></td>
                 </tr>
                 <tr th:if="${booking.getState().toString() != 'ORDERED'}">
                     <th><h5 style="color:blue">Schon bezahlt</h5></th>
-                    <td><h6 style="color:blue" th:text="${formatter.parsePrice(deposit)}">123 €</h6></td>
+                    <td><h6 style="color:blue" th:text="${formatter.parsePrice(booking.getDepositInCent()*0.01)}">123 €</h6></td>
                 </tr>
                 <tr>
                     <th><h5>Die Kunden müssen in der Unterkunft noch bezahlen</h5></th>

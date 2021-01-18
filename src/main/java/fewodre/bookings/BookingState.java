@@ -8,6 +8,12 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAmount;
 import java.time.temporal.TemporalUnit;
 
+/**
+ * State of a {@link BookingEntity} by the State Pattern.
+ * For managing the lifecycle of a booking more easily
+ *
+ * @author jimmy
+ */
 public class BookingState {
 	private State state;
 	private Ordered ordered;
@@ -21,6 +27,9 @@ public class BookingState {
 	private LocalDate freeCancelDeadline;
 	private LocalDate arrivalDate;
 
+	/**
+	 * Creates a new {@link BookingState} with a default state of {@link Ordered}
+	 */
 	public BookingState(){
 		this.state = new Ordered();
 		this.ordered = new Ordered();
@@ -34,6 +43,14 @@ public class BookingState {
 		this.freeCancelDeadline = this.arrivalDate.minus(7, ChronoUnit.DAYS);
 	}
 
+	/**
+	 * Creates a new {@link BookingState} with a default state of {@link Ordered}
+	 * It takes two local dates to calculate when it shall switch to {@link Acquired} or {@link Canceled}
+	 * when the host doesn't accept the payment in time.
+	 *
+	 * @param bookingDate
+	 * @param arrivalDate
+	 */
 	public BookingState(LocalDate bookingDate, LocalDate arrivalDate){
 		this.state = new Ordered();
 		this.ordered = new Ordered();
@@ -48,6 +65,13 @@ public class BookingState {
 		this.arrivalDate = arrivalDate;
 	}
 
+	/**
+	 * Creates a new {@link BookingState} with a default state of {@link Ordered}
+	 * It takes a {@link BookingStateEnum} to override the default state with the
+	 * equivalent of the given value
+	 *
+	 * @param startState
+	 */
 	public BookingState(BookingStateEnum startState){
 		this.ordered = new Ordered();
 		this.paid = new Paid();
@@ -89,6 +113,19 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * Creates a new {@link BookingState} with a default state of {@link Ordered}
+	 *
+	 * It takes a {@link BookingStateEnum} to override the default state with the
+	 * equivalent of the given value
+	 *
+	 * It takes two local dates to calculate when it shall switch to {@link Acquired}
+	 * or {@link Canceled} when the host doesn't accept the payment in time.
+	 *
+	 * @param startState
+	 * @param bookingDate
+	 * @param arrivalDate
+	 */
 	public BookingState(BookingStateEnum startState, LocalDate bookingDate,
 						/*LocalDate freeCancelDeadline,*/ LocalDate arrivalDate){
 		this.ordered = new Ordered();
@@ -132,6 +169,14 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * Cancels the booking and adds at the {@link Order} a negative
+	 * {@link org.salespointframework.order.ChargeLine} to show the
+	 * refund and new Price.
+	 * Returns true if no error occured.
+	 * @param order
+	 * @return
+	 */
 	public boolean cancel(Order order){
 		if(!state.cancel(order)){
 			throw new IllegalStateException();
@@ -139,6 +184,11 @@ public class BookingState {
 		else {return true;}
 	}
 
+	/**
+	 * Confirms the receipt of payment by the host.
+	 * Returns true if no error occured.
+	 * @return
+	 */
 	public boolean confirm(){
 		if(!state.confirm()){
 			throw new IllegalStateException();
@@ -146,6 +196,11 @@ public class BookingState {
 		else {return true;}
 	}
 
+	/**
+	 * Checks current Time and returns true if it had to change
+	 * it's state accordingly to the Time.
+	 * @return
+	 */
 	public boolean checkTime(){
 		if(!state.checkTime()){
 			//nothing changed
@@ -157,6 +212,11 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * Pays the booking.
+	 * Returns true if no error occurred.
+	 * @return
+	 */
 	public boolean pay(){
 		if(!state.pay()){
 			throw new IllegalStateException();
@@ -164,6 +224,11 @@ public class BookingState {
 		else {return true;}
 	}
 
+	/**
+	 * Returns the equivalent in {@link BookingStateEnum} to the current State.
+	 *
+	 * @return
+	 */
 	public BookingStateEnum toEnum(){
 		return state.toEnum();
 	}
@@ -172,6 +237,12 @@ public class BookingState {
 	Inner Classes
 	 */
 	private abstract class State{
+		/**
+		 * Cancels the {@link BookingEntity} as long as it isn't completed, yet.
+ 		 * If it's conform with the current State it will change the State of
+		 * the {@link BookingState} to {@link Canceled}
+		 * @return
+		 */
 		public boolean cancel(Order order){
 			System.out.println("Old Price: "+order.getTotal());
 			order.addChargeLine(order.getTotal().multiply(-1), "Storniert");
@@ -180,20 +251,50 @@ public class BookingState {
 			return true;
 		}
 
+		/**
+		 * Confirms the receipt of payment.
+		 * If it's conform with the current State it will change the State of
+		 * the {@link BookingState} to {@link Confirmed}
+		 * @return
+		 */
 		public boolean confirm(){return false;}
 
+		/**
+		 * Checks current Time and returns true if it had to change
+		 * it's state accordingly to the Time and the current State.
+		 * @return
+		 */
 		public abstract boolean checkTime();
 
+		/**
+		 * Pays the {@link BookingEntity} as long as it is still {@link Ordered}, yet.
+		 * If it's conform with the current State it will change the State of
+		 * the {@link BookingState} to {@link Canceled}
+		 * @return
+		 */
 		public boolean pay(){return false;}
 
+		/**
+		 * Returns the equivalent in {@link BookingStateEnum} to the current State.
+		 *
+		 * @return
+		 */
 		public abstract BookingStateEnum toEnum();
 
+		/**
+		 * Returns the equivalent in {@link BookingStateEnum} to the current State as a {@link String}.
+		 *
+		 * @return
+		 */
 		@Override
 		public String toString() {
 			return toEnum().toString();
 		}
 	}
 
+	/**
+	 * The class equivalent to the Ordered State by the state pattern.
+	 */
 	public class Ordered extends State{
 		@Override
 		public boolean confirm() {
@@ -228,6 +329,9 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * The class equivalent to the Paid State by the state pattern.
+	 */
 	public class Paid extends State{
 		@Override
 		public boolean confirm() {
@@ -250,6 +354,9 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * The class equivalent to the Confirmed State by the state pattern.
+	 */
 	public class Confirmed extends State{
 		@Override
 		public boolean checkTime() {
@@ -266,6 +373,9 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * The class equivalent to the Acquired State by the state pattern.
+	 */
 	public class Acquired extends State{
 
 		public boolean cancel(Order order){
@@ -290,6 +400,9 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * The class equivalent to the Completed State by the state pattern.
+	 */
 	public class Completed extends State{
 		@Override
 		public boolean cancel(Order order) {
@@ -307,6 +420,9 @@ public class BookingState {
 		}
 	}
 
+	/**
+	 * The class equivalent to the Canceled State by the state pattern.
+	 */
 	public class Canceled extends State{
 		@Override
 		public boolean cancel(Order order) {
