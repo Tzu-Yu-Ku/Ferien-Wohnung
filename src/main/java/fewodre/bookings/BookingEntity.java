@@ -327,6 +327,15 @@ public class BookingEntity extends Order {
 	}
 
 	/**
+	 * Returns the rest in Cents.
+	 * @return
+	 */
+	public int getRestInCent() {
+		int restInCent = this.getTotal().multiply(100).getNumber().intValue() - depositInCent;
+		return restInCent;
+	}
+
+	/**
 	 * Cancels the given Event and refunds the according amount of money when necessary.
 	 * @param event
 	 * @return

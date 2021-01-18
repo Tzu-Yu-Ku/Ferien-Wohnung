@@ -458,7 +458,7 @@ public class CartController {
 		model.addAttribute("orderlines",events);
 		MonetaryAmount deposit =  Money.of(booking.getDepositInCent()*0.01f,"EUR");
 		model.addAttribute("deposit", deposit);
-		MonetaryAmount rest = booking.getTotal().subtract(deposit);
+		MonetaryAmount rest = Money.of(booking.getRestInCent()*0.01f,"EUR");
 		model.addAttribute("rest",rest);
 		return "bookingdetails";
 	}
