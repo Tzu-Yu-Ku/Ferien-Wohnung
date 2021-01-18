@@ -47,8 +47,7 @@ public class StringFormatter{
 	 * @return
 	 */
 	public String parsePrice(MonetaryAmount Price){
-		float PriceValue = ((int)(Price.getNumber().floatValue()*100))*0.01f;
-		return PriceValue + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
+		return Price.getNumber().doubleValue() + (Price.getCurrency().toString().equals("EUR") ? " €" : Price.getCurrency().toString());
 	}
 
 	/**
