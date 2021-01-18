@@ -5,6 +5,7 @@ import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.useraccounts.AccountController;
+import fewodre.useraccounts.AccountEntity;
 import fewodre.useraccounts.AccountManagement;
 
 import fewodre.useraccounts.AccountRepository;
@@ -59,8 +60,17 @@ public class CartController {
 	private LocalDate arrivalDate, departureDate;
 
 
+	/**
+	 * Creates a new {@link CartController} with the given Parameters.
+	 *
+	 * @param accountManagement  muss not be {@literal null}
+	 * @param accountRepository  muss not be {@literal null}
+	 * @param bookingManagement  muss not be {@literal null}
+	 * @param eventCatalog       muss not be {@literal null}
+	 * @param holidayHomeCatalog muss not be {@literal null}
+	 */
 	CartController(AccountManagement accountManagement, AccountRepository accountRepository, BookingManagement bookingManagement,
-				   EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+				EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
 
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingManagement, "BookingManagement must not be null!");
@@ -73,6 +83,12 @@ public class CartController {
 		this.holidayHomeCatalog = holidayHomeCatalog;
 		this.accountRepository = accountRepository;
 	}
+
+	/**
+	 * View lastname from the current{@link AccountEntity}
+	 *
+	 * @param model must not be {@literal null}
+	 */
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
@@ -82,11 +98,25 @@ public class CartController {
 		}
 	}
 
+	/**
+	 * Creat a new {@link Cart}
+	 *
+	 * @return new created Cart
+	 */
 	@ModelAttribute("cart")
 	Cart initializeCart() {
 		return new Cart();
 	}
 
+	/**
+	 * Show all the informations of the chosen {@link org.salespointframework.catalog.Product}, which are planed to order.
+	 * And show all the {@link Event}s, which take place near to the chosen {@link HolidayHome}.
+	 *
+	 * @param model       muss not be {@literal null}
+	 * @param cart        muss not be {@literal null}
+	 * @param userAccount muss not be {@literal null}
+	 * @return template: cart
+	 */
 	@GetMapping("/cart")
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount){
@@ -127,6 +157,16 @@ public class CartController {
 		model.addAttribute("check", checkIfBooked());
 		return "cart"; }
 
+	/**
+	 * Add a {@link HolidayHome} into the cart,which is planed to be ordered.
+	 * If there is already a  {@link HolidayHome} in cart, it will be replaced.
+	 *
+	 * @param holidayHome template: bookinghist
+	 * @param startDate
+	 * @param endDate
+	 * @param cart
+	 * @return redirect to cart
+	 */
 	@PostMapping("/cart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome, @RequestParam("arrivaldate")String startDate,
 								 @RequestParam("departuredate")String endDate, @ModelAttribute Cart cart){
@@ -150,7 +190,16 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
-
+	/**
+	 * Update the modified arrival date and departure date informations of the {@link HolidayHome}
+	 * The arrival date and departure date will be checked, if it's overlapped between the booked dates.
+	 *
+	 * @param cart        muss not be {@literal null}
+	 * @param newSDate    muss not be {@literal null}
+	 * @param newEDate    muss not be {@literal null}
+	 * @param holidayHome muss not be {@literal null}
+	 * @return redirect to cart
+	 */
 	@PostMapping("/updateDatum/{id}")
 	public String updateDatum(@ModelAttribute Cart cart,@RequestParam("newSDate")String newSDate,
 								@RequestParam("newEDate")String newEDate, @PathVariable("id") HolidayHome holidayHome){
@@ -185,9 +234,19 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
+	/**
+	 * Update the number of the {@link Event}
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param cart  muss not be {@literal null}
+	 * @param count muss not be {@literal null}
+	 * @param event muss not be {@literal null}
+	 * @return redirect to cart
+	 */
 	@PostMapping("/updateTicketCount/{id}")
 	public String updateTicketCount(Model model, @ModelAttribute Cart cart, @RequestParam("count") int count,
 									@PathVariable("id") Event event){
+
 		System.out.println("Let's update the Ticket Amount");
 		System.out.println("Event: "+event.getName());
 		String id = "";
@@ -210,7 +269,13 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
-
+	/**
+	 * If the date is not chosen, set today as the arrival date and 2 days after as the departure day.
+	 *
+	 * @param holidayHome muss not be {@literal null}
+	 * @param cart        muss not be {@literal null}
+	 * @return addHolidayHome function
+	 */
 	@PostMapping("/defaultcart")
 	public String addHolidayHome(@RequestParam("hid") HolidayHome holidayHome,@ModelAttribute Cart cart){
 		LocalDate arrivalDate = LocalDate.now();
@@ -218,11 +283,20 @@ public class CartController {
 		return addHolidayHome(holidayHome, arrivalDate.toString(), departureDate.toString(),cart);
 	}
 
-
-
+	/**
+	 * Checked if the date of chosen {@link Event} is between the arrival date and the departure date of the
+	 * {@link HolidayHome}.
+	 * if not,add the chosen {@link Event}s in the cart
+	 * If there is no {@link HolidayHome} in the cart, the {@link Event} won't be added.
+	 *
+	 * @param event muss not be {@literal null}
+	 * @param anzahl muss not be {@literal null}
+	 * @param cart muss not be {@literal null}
+	 * @return redirect to cart
+	 */
 	@PostMapping("/eventcart")
 	public String addEvent(@RequestParam("eid") Event event,
-						   @RequestParam("number") Quantity anzahl, @ModelAttribute Cart cart){
+						   @RequestParam("number") Quantity anzahl, @ModelAttribute Cart cart) {
 		LocalDate bookedDate = event.getDate();
 		if(cart.isEmpty()){
 			return"redirect:/holdayhomes";
@@ -267,7 +341,15 @@ public class CartController {
 		}
 	}
 
-
+	/**
+	 * Remove item in the cart, if it's {@link HolidayHome}, clear up all items in cart.
+	 * If it is {@link Event}, just remove the chosen item.
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param id muss not be {@literal null}
+	 * @param cart muss not be {@literal null}
+	 * @return redirect to holidayhome if {@link HolidayHome} removed; redirect to event,if {@link Event} removed
+	 */
 	@GetMapping("/removeProduct/{id}")
 	public String removeItem(Model model, @PathVariable("id") String id, @ModelAttribute Cart cart) {
 		firstname(model);
@@ -279,6 +361,13 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
+	/**
+	 * Remove all of the items in cart
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param cart muss not be {@literal null}
+	 * @return redirect to cart
+	 */
 	@GetMapping("/clear")
 	public String clear(Model model, @ModelAttribute Cart cart) {
 		firstname(model);
@@ -286,7 +375,17 @@ public class CartController {
 		return "redirect:/cart";
 	}
 
-
+	/**
+	 * Checkout the cart and creat a {@link BookingEntity} with all the needed parameter from the cart
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param cart muss not be {@literal null}
+	 * @param holidayHome muss not be {@literal null}
+	 * @param events muss not be {@literal null}
+	 * @param userAccount muss not be {@literal null}
+	 * @param paymethod muss not be {@literal null}
+	 * @return template: bookingdetails
+	 */
 	@PostMapping("/purchase")
 	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
 					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
@@ -312,6 +411,11 @@ public class CartController {
 		return "bookingdetails"; //!!
 	}
 
+	/**
+	 * Check if the chosen arrival date and departure date is booked
+	 *
+	 * @return if booked return true, otherwise false
+	 */
 	public boolean checkIfBooked(){
 		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
@@ -327,6 +431,13 @@ public class CartController {
 		return false;
 	}
 
+	/**
+	 * Show all the informations of the {@link BookingEntity}
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param booking muss not be {@literal null}
+	 * @return template: bookingdetails
+	 */
 	@GetMapping("/bookingdetails/{booking}")
 	public String details(Model model, @PathVariable BookingEntity booking){
 		firstname(model);
@@ -356,6 +467,13 @@ public class CartController {
 		return "bookingdetails";
 	}
 
+	/**
+	 * Cancel the {@link BookingEntity}
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param booking muss not be {@literal null}
+	 * @return redirect to holidayahomes
+	 */
 	@GetMapping("/cancel/{id}")
 	public String cancel(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);
@@ -368,6 +486,13 @@ public class CartController {
 		else {return "";}
 	}
 
+	/**
+	 * pay the deposit of the {@link BookingEntity}
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param booking muss not be {@literal null}
+	 * @return if it can be paid redirect to bookings, else redirect to bookingdetails
+	 */
 	@GetMapping("/pay/{id}")
 	public String pay(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);
@@ -378,6 +503,14 @@ public class CartController {
 		//it couldn't be paid maybe it already was or something like that
 		return "redirect:/bookingdetails/" + booking.getId();
 	}
+
+	/**
+	 * pay the rest of the{@link BookingEntity}
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param booking muss not be {@literal null}
+	 * @return if it can be paid redirect to bookings, else redirect to bookingdetails
+	 */
 	@GetMapping("/payRest/{id}")
 	public String payRest(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);
@@ -389,6 +522,13 @@ public class CartController {
 		return "redirect:/bookingdetails/" + booking.getId();
 	}
 
+	/**
+	 * Host confirm the{@link BookingEntity}, which is already paid by tenant
+	 *
+	 * @param model
+	 * @param booking
+	 * @return redirect to holidayhomes
+	 */
 	@GetMapping("/confirm/{id}")
 	public String confirm(Model model, @PathVariable("id") BookingEntity booking){
 		firstname(model);

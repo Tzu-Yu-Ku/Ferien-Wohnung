@@ -29,6 +29,11 @@ public class BookingController {
 	private Authentication authentication;
 	private final BookingManagement bookingManagement;
 
+	/**
+	 * View lastname from the current{@link AccountEntity}
+	 *
+	 * @param model must not be {@literal null}
+	 */
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
@@ -38,7 +43,19 @@ public class BookingController {
 		}
 	}
 
-	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository, BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog, BookingManagement bookingManagement){
+
+	/**
+	 * Creates a new {@link BookingController} with the given Parameters.
+	 *
+	 * @param accountManagement must not be {@literal null}
+	 * @param accountRepository must not be {@literal null}
+	 * @param bookingRepository must not be {@literal null}
+	 * @param holidayHomeCatalog must not be {@literal null}
+	 * @param bookingManagement must not be {@literal null}
+	 */
+	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository,
+	                         BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog,
+	                         BookingManagement bookingManagement){
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
@@ -51,6 +68,13 @@ public class BookingController {
 		this.bookingManagement = bookingManagement;
 	}
 
+	/**
+	 * Show a list of all {@link BookingEntity}s which is booked from the current {@link AccountEntity}(who hat the role of TENANT.)
+	 *
+	 * @param model must not be {@literal null}
+	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
+	 * @return template: bookings
+	 */
 	@GetMapping("/bookings")
 	@PreAuthorize("hasRole('TENANT')")
 	public String bookings(Model model, @LoggedIn UserAccount userAccount){
@@ -74,6 +98,13 @@ public class BookingController {
 		}
 	}
 
+	/**
+	 * Show a list of all {@link BookingEntity}s which the booked house belongs to the current {@link AccountEntity}(which hat the role of HOST.)
+	 *
+	 * @param model must not be {@literal null}
+	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
+	 * @return template: bookinghistory
+	 */
 	@GetMapping("/bookinghistory")
 	@PreAuthorize("hasRole('HOST')")
 	public String bookingsByHost(Model model, @LoggedIn UserAccount userAccount){
@@ -83,6 +114,15 @@ public class BookingController {
 		return "bookinghistory";
 	}
 
+	/**
+	 * Show a list of all {@link BookingEntity}s with the given state,
+	 * which the booked house belongs to the current {@link AccountEntity}(which hat the role of HOST.)
+	 *
+	 * @param model must not be {@literal null}
+	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
+	 * @param state the given state to query,must not be {@literal null}
+	 * @return template: bookinghistory
+	 */
 	@PostMapping("/bookingsFiltered")
 	@PreAuthorize("hasRole('HOST')")
 	public String sortByState(Model model,@LoggedIn UserAccount userAccount, @RequestParam("state") String state){
@@ -92,6 +132,15 @@ public class BookingController {
 		return "bookinghistory";
 	}
 
+	/**
+	 * Show a list of all {@link BookingEntity}s with the given lastname from the TENANT,
+	 * which the booked house belongs to the current {@link AccountEntity}(which hat the role of HOST.)
+	 *
+	 * @param model must not be {@literal null}
+	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
+	 * @param tenantName the given tenant's lastname to query,must not be {@literal null}
+	 * @return template: bookinghistory
+	 */
 	@PostMapping("/searchByName")
 	@PreAuthorize("hasRole('HOST')")
 	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount, @RequestParam("lastname")String tenantName){
@@ -101,6 +150,15 @@ public class BookingController {
 		return "bookinghistory";
 	}
 
+	/**
+	 * Show a list of all {@link BookingEntity}s with the given house's name,
+	 * which the booked house belongs to the current {@link AccountEntity}(which hat the role of HOST.)
+	 *
+	 * @param model must not be {@literal null}
+	 * @param userAccount must not be {@literal null}
+	 * @param homeName the given house's name to query,must not be {@literal null}
+	 * @return template: bookinghistory
+	 */
 	@PostMapping("/searchByHomeName")
 	@PreAuthorize("hasRole('HOST')")
 	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount, @RequestParam("homename")String homeName){
