@@ -19,12 +19,12 @@
     <div class="container">
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-lg-3 w-100">
-                <h1 class="text-center">Neues Event hinzufügen</h1>
+                <h1 class="text-center">Event bearbeiten</h1>
             </div>
         </div>
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-12">
-                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Eventangebots aus.</p>
+                <p class="lead mb-4 p-1 text-center">Füllen Sie die Daten aus, die sie an diesem Event bearbeiten möchten.</p>
             </div>
         </div>
         <form method="post" role="form" id="form" class="gb-form" th:action="@{/editEvent}" th:object="${form}">
@@ -52,7 +52,7 @@
                     <label for="price" class="px-2">Preis:</label>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input class="form-control" id="price" th:name="price" type="number"
+                    <input class="form-control" id="price" th:name="price" type="number" min="0"
                            th:placeholder="${event.price}"/>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="p-1 col-8 col-md-8">
                     <input class="form-control" id="date" th:name="date" type="date"
-                           th:placeholder="${event.date}"/>
+                           th:min="${today}" th:placeholder="${event.date}"/>
                 </div>
             </div>
             <div class="row border-top" style="background-color: #EEEEEE;">
@@ -131,7 +131,7 @@
                 </div>
                 <div class="p-1 col-2 col-md-2">
                     <input type="number" class="form-control" th:name="postalCode"
-                           th:placeholder="${event.place.postalCode}" aria-label="Postleitzahl">
+                           th:placeholder="${event.place.postalCode}" aria-label="Postleitzahl" min="0">
                     <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="hidden"
                            th:value="${event.place.coordX}" min=0 max=10000/>
                     <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="hidden"

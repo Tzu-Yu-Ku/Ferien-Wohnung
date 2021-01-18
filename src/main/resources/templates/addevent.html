@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>FeWoDre - Event erstellen</title>
@@ -55,8 +55,13 @@
                             <label for="price" class="px-2">Preis:</label>
                         </div>
                         <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="price" th:name="price" type="number" min="0"
-                                required="required" placeholder="Preis" />
+                            <div class="input-group-prepend">
+                                <input class="form-control" id="price" th:name="price" type="number" min="0"
+                                       required="required" placeholder="Preis" />
+                                <div class="input-group-text">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row border-top" style="background-color: #EEEEEE;">
@@ -64,8 +69,8 @@
                             <label for="date" class="px-2">Datum:</label>
                         </div>
                         <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="date" th:name="date" required="required" th:min="${today}"
-                                type="date" placeholder="Preis" />
+                            <input class="form-control" id="date" th:name="date" required="required"
+                                   th:min="${today}" type="date" placeholder="Datum" />
                         </div>
                     </div>
                     <div class="row border-top" style="background-color: #EEEEEE;">
@@ -133,7 +138,7 @@
                                 required="required" placeholder="Ort">
                         </div>
                         <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="postalnumber" min="1" required="required"
+                            <input type="number" class="form-control" th:name="postalnumber" min="0" required="required"
                                 placeholder="Postleitzahl" aria-label="Postleitzahl">
                             <input type="hidden" class="form-control" th:name="coordinateX" id="coordinateX" min=0
                                    max=10000 required="required" value="111">

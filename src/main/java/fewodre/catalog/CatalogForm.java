@@ -1,6 +1,9 @@
 package fewodre.catalog;
 
+import javax.validation.constraints.Min;
+
 public class CatalogForm {
+
 
 	private String name;
 	private String description;

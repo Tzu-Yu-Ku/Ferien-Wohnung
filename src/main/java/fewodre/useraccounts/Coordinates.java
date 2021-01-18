@@ -1,5 +1,8 @@
 package fewodre.useraccounts;
 
+import com.mysema.commons.lang.Pair;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -148,10 +151,12 @@ public class Coordinates {
 		} else if (cossebaude.contains(xRatio, yRatio)) {
 			System.out.println("Cossebaude");
 			this.district = "Cossebaude";
-		} else if (oberwartha.contains(xRatio, yRatio)) {
-			System.out.println("Cossebaude");
-			this.district = "Cossebaude";
-		} else if (gompitz.contains(xRatio, yRatio)) {
+		}
+		else if (oberwartha.contains(xRatio, yRatio)) {
+			System.out.println("Oberwartha");
+			this.district = "Oberwartha";
+		}
+		else if (gompitz.contains(xRatio, yRatio)) {
 			System.out.println("Gompitz");
 			this.district = "Gompitz";
 		} else if (altfranken.contains(xRatio, yRatio)) {

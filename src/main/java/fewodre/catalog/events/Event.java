@@ -62,6 +62,15 @@ public class Event extends Product {
 		subscriber = new ArrayList<>();
 	}
 
+	public boolean findInList(Event event, ArrayList<Event> list) {
+		if(list.contains(event)){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public String getImage() {
 		return image;
 	}

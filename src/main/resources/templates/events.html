@@ -33,36 +33,84 @@
         </div>
 
         <!--Button für den EventEmployee zum erstellen von Events-->
-        <div class="row mb-2 mt-2">
+        <div class="row p-2">
             <!--Buttons zum sortieren von den Events nach bestimmten Kategorien-->
-            <div class="col-8">
-                <button type="button" class="btn btn-info dropdown-toggle ml-1" data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                    Art des Events
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Alle</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Wöchentliche Events</a>
-                    <a class="dropdown-item" href="#">Besondere Events</a>
-                </div>
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> Ort
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Alle</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Altstadt</a>
-                    <a class="dropdown-item" href="#">Innenstadt</a>
-                    <a class="dropdown-item" href="#">Neustadt</a>
-                    <a class="dropdown-item" href="#">Löbtau</a>
-                </div>
-            </div>
+            <div class="col-md-9">
+                <div class="btn-group" sec:authorize="!hasRole('EVENT_EMPLOYEE')">
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventtype}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Event Type
+                        </button>
+            
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Wiederholende Events"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Besondere Events"/>
+                        </div>
+                    </form>
 
-            <div class="col-4 float-right">
-                <a th:href="@{/addevents}" class="btn btn-primary btn-outline-light float-right mr-1" sec:authorize="hasRole('EVENT_EMPLOYEE')">Event
-                    erstellen</a>
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventcapacity}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Personenanzahl (min.)
+                        </button>
+            
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="5"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="10"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="15"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="20"/>
+                        </div>
+                    </form>
+
+                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventdistrict}" method="post">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Stadtteil
+                        </button>
+
+                        <div class="dropdown-menu">
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Alle"/>
+                            <div class="dropdown-divider"></div>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Altfranken"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Altstadt"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Blasewitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Cossebaude"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Cotta"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Gompitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Klotsche"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Langebrück"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Leuben"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Loschwitz"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Mobschatz"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Neustadt"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Oberwartha"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Pieschen"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Plauen"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Prohlis"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Schönborn"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Schönefeld-Weißig"/>
+                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Weixdorf"/>
+                        </div>
+                    </form>
+
+                    <form role="form" th:method="post" th:action="@{/deletalleventsorts}">
+                        <input class="btn btn-danger btn-outline-light" type="submit"
+                               value="Alle Filter zurück setzen"/>
+                    </form>
+
+                </div>
+
+                <div class="col-md-3">
+                    <a th:href="@{/addevents}" class="btn btn-primary btn-outline-light float-right mr-1"
+                        sec:authorize="hasRole('EVENT_EMPLOYEE')">
+                        Event erstellen
+                    </a>
+                </div>
             </div>
         </div>
 

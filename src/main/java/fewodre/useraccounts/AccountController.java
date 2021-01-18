@@ -1,13 +1,17 @@
 package fewodre.useraccounts;
 
 import fewodre.catalog.events.Event;
+import fewodre.catalog.holidayhomes.HolidayHome;
+import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import org.salespointframework.catalog.Product;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Password;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +23,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,15 +43,17 @@ public class AccountController {
 	private final AccountRepository accountRepository;
 	private final UserAccountManagement userAccounts;
 	private Authentication authentication;
+	private final HolidayHomeCatalog hCatalog;
 
 	private static final Logger LOG = LoggerFactory.getLogger(AccountController.class);
 
 	AccountController(AccountManagement accountManagement, AccountRepository accountRepository,
-	                  UserAccountManagement userAccounts) {
+	                  HolidayHomeCatalog hCatalog, UserAccountManagement userAccounts) {
 		Assert.notNull(accountManagement, "CustomerManagement must not be null!");
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
 		this.userAccounts = userAccounts;
+		this.hCatalog = hCatalog;
 	}
 
 	private void firstname(Model model) {
@@ -60,6 +69,7 @@ public class AccountController {
 	@GetMapping("/register")
 	public String registerAdmin(Model model, TenantRegistrationForm tenantRegistrationForm) {
 		model.addAttribute("registrationForm", tenantRegistrationForm);
+		model.addAttribute("minAgeDate", LocalDate.now().minusDays(5840));
 		firstname(model);
 		return "register";
 	}
@@ -74,9 +84,18 @@ public class AccountController {
 			return "register";
 		}
 
+		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
+		String birthDate = tenantRegistrationForm.getBirthDate();
+		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
+
+		if (!localDateBirthDate.isBefore(minAgeDate)) {
+			result.addError(new FieldError("birthDate", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			return "register";
+		}
+
 		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantRegistrationForm);
 		if (accountEntity == null) {
-			result.reject("RegistrationForm.username.Taken");
+			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
@@ -84,6 +103,11 @@ public class AccountController {
 		return "redirect:/login";
 	}
 
+	@GetMapping("/resetpassword")
+	public String resetPassword(Model model) {
+		firstname(model);
+		return "accounts/forgotpassword";
+	}
 
 	@GetMapping("/activatetenants")
 	public String activateTenants(Model model) {
@@ -232,6 +256,7 @@ public class AccountController {
 	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
 		firstname(model);
 		model.addAttribute("registrationForm", hostRegistrationForm);
+		model.addAttribute("minAgeDate", LocalDate.now().minusDays(5840));
 		return "accounts/newhost";
 	}
 
@@ -240,15 +265,23 @@ public class AccountController {
 	public String registerNewHost(
 			@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
 			BindingResult result) {
-		LOG.info(hostRegistrationForm.getBirthDate());
+
 		if (result.hasErrors()) {
-			LOG.info(result.getAllErrors().toString());
 			return "accounts/newhost";
+		}
+
+		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
+		String birthDate = hostRegistrationForm.getBirthDate();
+		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
+
+		if (!localDateBirthDate.isBefore(minAgeDate)) {
+			result.addError(new FieldError("birthDate", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			return "register";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
 		if (accountEntity == null) {
-			result.reject("RegistrationForm.username.Taken");
+			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/newhost";
 		}
@@ -274,9 +307,14 @@ public class AccountController {
 					EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
 			BindingResult result, Model model) {
 
+		if (result.hasErrors()) {
+			LOG.info(result.getAllErrors().toString());
+			return "accounts/neweventemployee";
+		}
+
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 		if (accountEntity == null) {
-			result.reject("RegistrationForm.username.Taken");
+			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/neweventemployee";
 		}
@@ -316,6 +354,14 @@ public class AccountController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/deleteaccount")
 	public String deleteAccount(String account_username) {
+		Set<Role> accountRoles = accountRepository.findByAccount_Email(account_username).getAccount().getRoles().toSet();
+		if (accountRoles.contains(AccountManagement.HOST_ROLE)) {
+			Streamable<HolidayHome> hostHolidayHomes = hCatalog.findAll().filter(holidayHome -> holidayHome.getHostMail().equals(account_username));
+			for (HolidayHome h : hostHolidayHomes) {
+				h.setIsBookable(false);
+				hCatalog.save(h);
+			}
+		}
 		accountManagement.deleteAccount(account_username);
 		return "redirect:/manageaccounts";
 	}

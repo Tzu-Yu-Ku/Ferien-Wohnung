@@ -188,18 +188,13 @@
             </div>
             <div class="p-1 col-2 col-md-2 border-right my-auto">
                 <div style="display: block; width: 40%; margin: auto;">
-                    <form id="updateTicketCount" class="form-inline"
+                    <form th:id="${item.product.id.toString()}" id="updateTicketCount" class="form-inline"
                           th:action="@{/updateTicketCount/{id}(id=${item.product.id})}"
                           method="post">
                         <input class="text-center" id="Anzahl" type="number" name="count"
                                th:value="${item.getQuantity().getAmount().intValue()}"
-                               th:min="0" th:max="${item.product.getCapacity()}" th:onchange="updateTicketCount()"
+                               th:min="0" th:max="${item.product.getCapacity()}" th:onchange="updateTicketCount(${item.product.id.toString()})"
                                style="width: 100%; margin: auto">
-                        <script>
-                            function updateTicketCount() {
-                                document.getElementById("updateTicketCount").submit();
-                            }
-                        </script>
                     </form>
                 </div>
             </div>
@@ -291,6 +286,11 @@
     </div>
 </div>
 </div>
+<script>
+    function updateTicketCount(formId) {
+        document.getElementById(formId).submit();
+    }
+</script>
 <footer th:replace="footer :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
