@@ -1,5 +1,6 @@
 package fewodre.bookings;
 
+import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.order.OrderStatus;
 
@@ -16,6 +17,7 @@ class DatesUnitTest {
 		assertThat(testYear.getYearNumber()).isEqualTo(2021);
 		assertThat(testYear.getDaysOfYear()).isEqualTo(365);
 		assertThat(testYear.getMonths().size()).isEqualTo(12);
+		assertThat(testYear.toString()).isEqualTo(testYear.toString());
 	}
 
 	@Test
@@ -35,6 +37,13 @@ class DatesUnitTest {
 		assertThat(testDate.getMonth()).isEqualTo(dateToday.getMonth());
 		assertThat(testDate.getDayOfWeek()).isEqualTo(dateToday.getDayOfWeek());
 		assertThat(testDate.getState()).isEqualTo(OrderStatus.CANCELLED);
+		assertThat(testDate.isBooked()).isFalse();
+
+		testDate.setState(OrderStatus.PAID);
+		assertThat(testDate.getState()).isEqualTo(OrderStatus.PAID);
+
+		testDate.setBooked();
+		assertThat(testDate.getState()).isEqualTo(OrderStatus.PAID);
 	}
 
 }
