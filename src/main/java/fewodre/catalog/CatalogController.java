@@ -92,7 +92,7 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
+	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form,
 	                       @LoggedIn UserAccount userAccount) {
 		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
 		hCatalog.save(myHolidayHome);

@@ -4,6 +4,7 @@ import fewodre.catalog.events.Event;
 import fewodre.catalog.events.EventCatalog;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
+import fewodre.catalog.holidayhomes.HolidayHomeForm;
 import fewodre.useraccounts.Coordinates;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -84,7 +87,7 @@ class CatalogControllerIntegrationTest {
 
 	@Test
 	@WithMockUser(username = "host@host", roles = "HOST")
-	public void addHolidayhomePage() throws Exception {
+	public void addHolidayhomePageGet() throws Exception {
 		Model model = new ExtendedModelMap();
 		String returnedView = catalogController.addHolidayhomePage(model);
 
@@ -94,7 +97,50 @@ class CatalogControllerIntegrationTest {
 
 	@Test
 	@WithMockUser(username = "host@host", roles = "HOST")
-	public void editHolidayHomeLocation() throws Exception {
+	public void addHolidayhomePagePost() throws Exception {
+		Model model = new ExtendedModelMap();
+		String returnedView = catalogController.addHolidayhomePage(model);
+
+		HolidayHomeForm form = new HolidayHomeForm();
+		form.setHostMail("host@host");
+		form.setName("Test Wohnung");
+		form.setDescription("Test Beschreibung");
+		form.setCapacity(4);
+		form.setCity("Dresden");
+		form.setStreet("Straße");
+		form.setNumber("1");
+		form.setPostalnumber("12345");
+		form.setPrice(10);
+		form.setCoordinateX(100);
+		form.setCoordinateY(100);
+
+		MvcResult result = mvc.perform(post("/addHolidayHome")
+				.flashAttr("form", form))
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrlPattern("/editHolidayHomeLocation?holidayhome=**"))
+				.andReturn();
+
+		String testHomeId = result.getModelAndView().getViewName().split("=")[1];
+
+		result = mvc.perform(post("/housedetails")
+				.param("holidayHome", testHomeId))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		HolidayHome savedHome = (HolidayHome) result.getModelAndView().getModel().get("holidayHome");
+		assertThat(savedHome.getHostMail()).isEqualTo("host@host");
+		assertThat(savedHome.getName()).isEqualTo("Test Wohnung");
+		assertThat(savedHome.getDescription()).isEqualTo("Test Beschreibung");
+		assertThat(savedHome.getCapacity()).isEqualTo(4);
+		assertThat(savedHome.getPlace().getCity()).isEqualTo("Dresden");
+		assertThat(savedHome.getPlace().getStreet()).isEqualTo("Straße");
+		assertThat(savedHome.getPlace().getPostalCode()).isEqualTo("12345");
+		assertThat(savedHome.getPrice().toString()).isEqualTo("EUR 10");
+	}
+
+	@Test
+	@WithMockUser(username = "host@host", roles = "HOST")
+	public void editHolidayHomeLocationGet() throws Exception {
 		Model model = new ExtendedModelMap();
 
 		HolidayHome holidayHome = holidayHomeCatalog.findAll().toList().get(0);

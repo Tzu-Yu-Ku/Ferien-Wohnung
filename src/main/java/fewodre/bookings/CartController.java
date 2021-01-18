@@ -265,9 +265,8 @@ public class CartController {
 			System.out.println("please dont ask for that amount this is f*cking impossible");
 			//"Please give in a correct number"
 			return "error";
-		}
-		// check if it's already full or anzahl > updated capacity
-		else {
+		} else {
+			// check if it's already full or anzahl > updated capacity
 			cart.addOrUpdateItem(event, anzahl);
 			return "redirect:/cart";
 		}
