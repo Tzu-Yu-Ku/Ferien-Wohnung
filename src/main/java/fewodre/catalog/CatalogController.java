@@ -372,7 +372,7 @@ public class CatalogController {
 	}
 
 	@PostMapping(path = "/addEvent")
-	String addEvent(@LoggedIn UserAccount userAccount, @ModelAttribute("form") EventForm form, Model model) {
+	String addEvent(@LoggedIn UserAccount userAccount, @ModelAttribute("form") EventForm form) {
 
 		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());

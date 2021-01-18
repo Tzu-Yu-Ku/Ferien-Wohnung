@@ -2,6 +2,7 @@ package fewodre.catalog;
 
 import fewodre.catalog.events.Event;
 import fewodre.catalog.events.EventCatalog;
+import fewodre.catalog.events.EventForm;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
 import fewodre.catalog.holidayhomes.HolidayHomeForm;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.util.Streamable;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -57,18 +59,129 @@ class CatalogControllerIntegrationTest {
 		String returnedView = catalogController.eventCatalog(model);
 		assertThat(returnedView).isEqualTo("events");
 
-		Iterable<Object> objects = (Iterable<Object>) model.asMap().get("eventCatalog");
-		assertThat(objects).hasSize(2);
+		Streamable<Event> events = (Streamable<Event>) model.asMap().get("eventCatalog");
+		assertThat(events.isEmpty()).isFalse();
 	}
 
 	@Test
 	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
-	public void addEventPage() throws Exception {
+	public void addEventPageGet() throws Exception {
 		Model model = new ExtendedModelMap();
 		String returnedView = catalogController.addEventPage(model);
 
 		mvc.perform(get("/addevents"))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(view().name("addevent"));
+	}
+
+	@Test
+	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
+	public void addEventPagePost() throws Exception {
+		Model model = new ExtendedModelMap();
+		String returnedView = catalogController.addEventPage(model);
+
+		Event event = eventCatalog.findAll().toList().get(0);
+
+		EventForm form = new EventForm();
+		form.setEventCompanyUuid("event@employee");
+		form.setName("Test Wohnung");
+		form.setDescription("Test Beschreibung");
+		form.setCapacity(4);
+		form.setCity("Dresden");
+		form.setStreet("Straße");
+		form.setNumber("1");
+		form.setPostalnumber("12345");
+		form.setPrice(10);
+		form.setCoordinateX(100);
+		form.setCoordinateY(100);
+		form.setDate("2020-01-01");
+		form.setRepeateRate(1);
+		form.setRepeats(1);
+		form.setTime("20:00");
+
+		MvcResult result = mvc.perform(post("/addEvent")
+				.flashAttr("form", form))
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrlPattern("/editEventLocation?event=**"))
+				.andReturn();
+
+		String testEventId = result.getModelAndView().getViewName().split("=")[1];
+
+		result = mvc.perform(get("/events"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		Streamable<Event> events = (Streamable<Event>) result.getModelAndView().getModel().get("eventCatalog");
+
+		boolean eventWasCreated = false;
+		for (Event e : events) {
+			if (e.getId().toString().equals(testEventId)) {
+				eventWasCreated = true;
+			}
+		}
+		assertThat(eventWasCreated).isTrue();
+	}
+
+	@Test
+	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
+	public void editEventPage() throws Exception {
+		Event testEvent = eventCatalog.findAll().toList().get(0);
+		mvc.perform(post("/editeventpage")
+				.param("event", testEvent.getId().toString()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("editevent"));
+	}
+
+	@Test
+	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
+	public void editEvent() throws Exception {
+		Event testEvent = eventCatalog.findAll().toList().get(0);
+		mvc.perform(post("/editEvent")
+				.param("eventId", testEvent.getId().toString())
+				.param("name", "test_name")
+				.param("description", "test_desc")
+				.param("price", "1234")
+				.param("date", "2021-12-12")
+				.param("time", "")
+				.param("repeats", "20")
+				.param("repeateRate", "30")
+				.param("capacity", "99")
+				.param("street", "test_street")
+				.param("houseNumber", "1234")
+				.param("postalCode", "55555")
+				.param("city", "test_city")
+				.param("coordinates_x", "999")
+				.param("coordinates_y", "888"))
+				.andExpect(status().isFound());
+
+		MvcResult result = mvc.perform(get("/events"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		Streamable<Event> events = (Streamable<Event>) result.getModelAndView().getModel().get("eventCatalog");
+
+		Event editedEvent = null;
+		for (Event e : events) {
+			if (e.getId().toString().equals(testEvent.getId().toString())) {
+				editedEvent = e;
+			}
+		}
+
+		assertThat(editedEvent).isNotNull();
+		assertThat(editedEvent.getId()).isEqualTo(testEvent.getId());
+		assertThat(editedEvent.getName()).isEqualTo("test_name");
+		assertThat(editedEvent.getDescription()).isEqualTo("test_desc");
+		assertThat(editedEvent.getPrice().toString()).isEqualTo("EUR 1234");
+		assertThat(editedEvent.getDate().toString()).isEqualTo("2021-12-12");
+		assertThat(editedEvent.getRepeats()).isEqualTo(20);
+		assertThat(editedEvent.getRepeateRate()).isEqualTo(30);
+		assertThat(editedEvent.getCapacity()).isEqualTo(99);
+		assertThat(editedEvent.getPlace().getStreet()).isEqualTo("test_street");
+		assertThat(editedEvent.getPlace().getHouseNumber()).isEqualTo("1234");
+		assertThat(editedEvent.getPlace().getPostalCode()).isEqualTo("55555");
+		assertThat(editedEvent.getPlace().getCity()).isEqualTo("test_city");
+		assertThat(editedEvent.getPlace().getCoordX()).isEqualTo(999);
+		assertThat(editedEvent.getPlace().getCoordY()).isEqualTo(888);
 	}
 
 	@Test
@@ -113,8 +226,6 @@ class CatalogControllerIntegrationTest {
 				.param("coordinates_y", "888"))
 				.andExpect(status().isFound())
 				.andReturn();
-
-		System.out.println(result);
 
 		result = mvc.perform(post("/housedetails")
 				.param("holidayHome", testHome.getId().toString()))
