@@ -74,7 +74,7 @@
                       method="post">
                     <label for="startDate" class="align-center pt-2 px-2 ml-5">Anreisedatum:</label>
                     <input type="date" id="startDate" name="newSDate" class="form-control" required="required"
-                           th:value="${arrivalDate}" th:min="${today}" th:onchange="setMinOfDeparture()">
+                           th:value="${arrivalDate}" th:min="${today}" th:max="${departureDate.minusDays(1)}" th:onchange="setMinOfDeparture()">
                     <script>
                         function setMinOfDeparture() {
                             document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
