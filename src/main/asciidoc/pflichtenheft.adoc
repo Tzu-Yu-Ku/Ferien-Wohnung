@@ -656,10 +656,9 @@ Ist der Nutzer bereits im System Registriert so soll es ihm möglich sein, sich 
 * Nutzername
 * Passwort
 
-|[F0020]|v0.1|Registrieren a|Das System soll es dem unregistrierten Nutzer ermöglichen sich zu registrieren bzw. eine Registrierung zu beantragen.
-Je nachdem welche Zugangsrechte der jeweiligen Nutzer erlangen will, müssen folgende Informationen zur Verfügung gestellt werden:
+|[F0020]|v0.1|Registrieren a|Das System soll es dem unregistrierten Nutzer (Tenant) ermöglichen sich zu registrieren bzw. eine Registrierung zu beantragen.
+Der jeweiligen Nutzer muss dafür folgende Informationen zur Verfügung stellen:
 
-* Mieter-Rechte:
 ** Vorname
 ** Nachname
 ** E-Mail-Adresse
@@ -667,16 +666,28 @@ Je nachdem welche Zugangsrechte der jeweiligen Nutzer erlangen will, müssen fol
 ** Adresse
 ** Passwort
 
-* Vermieter-Rechte:
-** Alle Angaben die auch Mieter angeben müssen
-** Angaben zur Bank
+Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
 
-* Event-Mitarbeiter:
-** Alle Angaben die auch Mieter angeben müssen
-** Arbeitgeber
+|[F0022]|v0.1|Vermieter registrieren a|Das System soll es dem Administrator ermöglichen, einen neuen Vermieter-Account zu erstellen. Dafür sind folgende Informationen zur Verfügung zu stellen:
 
-* Admin-Rechte:
-** Alle Angaben die auch Mieter angeben müssen
+** Vorname
+** Nachname
+** E-Mail-Adresse
+** Geburtsdatum
+** Adresse
+** Passwort
+** Bankverbindung
+
+Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
+
+|[F0023]|v0.1|Eventmitarbeiter registrieren a|Das System soll es dem Administrator ermöglichen, einen neuen Eventmitarbeiter-Account zu erstellen. Dafür sind folgende Informationen zur Verfügung zu stellen:
+
+** Vorname
+** Nachname
+** E-Mail-Adresse
+** Eventfirma
+** Passwort
+
 Die Angaben sollen überprüft werden und bei Korrektheit sollen sie im System abgespeichert werden.
 
 |[F0021]|v0.1|Angaben überprüfen a|Das System soll in der Lage sein die angegebenen Daten aus der Registrierung auf deren Korrektheit zu überprüfen.
