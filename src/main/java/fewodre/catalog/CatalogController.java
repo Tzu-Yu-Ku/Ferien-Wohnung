@@ -550,7 +550,6 @@ public class CatalogController {
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 
 		ProductIdentifier productIdentifier = event.getId();
-		deleteAllEventSorts();
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
 	}
 

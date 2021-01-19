@@ -78,8 +78,11 @@ public class Place implements Serializable {
 		return street + " " + houseNumber + ", " + city + ", " + coordX + ", " + coordY + ", D: " + district;
 	}
 
-	// --------------------------------------- Distanz-Berechnung
-
+	/**
+	 * Method will calculate the distance between to Places
+	 * @param place2
+	 * @return Returns a Integer that discribes the distance between to Places
+	 */
 	public int distanceToOtherPlaces(Place place2) {
 		System.out.println(toString());
 		// System.out.println(place2.toString());

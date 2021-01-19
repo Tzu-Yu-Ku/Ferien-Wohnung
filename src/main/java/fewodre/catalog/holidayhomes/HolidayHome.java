@@ -5,18 +5,15 @@ import fewodre.utils.Place;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 /**
- * This class represents Holisay
+ * This class represents Holidayhomes
  */
 @Entity
 public class HolidayHome extends Product {
@@ -48,6 +45,14 @@ public class HolidayHome extends Product {
 		this.addCategory("HolidayHome");
 	}
 
+	/**
+	 * Method shows if a HolidayHome is in specific List.
+	 * 
+	 * @param holidayHome is an object of the class HolidayHome
+	 * @param list is a list with HolidayHomes
+	 *
+	 * @return Returns a boolean to describes if a specific HolidayHome is in a list of HolidayHomes.
+	 */
 	public boolean findInList(HolidayHome holidayHome, ArrayList<HolidayHome> list) {
 		if(list.contains(holidayHome)){
 			return true;
@@ -60,16 +65,16 @@ public class HolidayHome extends Product {
 	/**
 	 * Method gives the capacity of a HolidayHome.
 	 *
-	 * @return Returns a natural number to describes the capacity of a HolidayHome.
+	 * @return Returns a natural number to describes who many People find a place in a HolidayHome.
 	 */
 	public int getCapacity() {
 		return capacity;
 	}
 
 	/**
-	 * Method set the capacity of a HolidayHome to a given one.
+	 * Method set the capacity of a HolidayHome to a given value.
 	 *
-	 * @param capacity 	natural number to describes the capacity of a HolidayHome
+	 * @param capacity 	natural number to describes who many People find a place in a HolidayHome
 	 */
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
@@ -85,9 +90,9 @@ public class HolidayHome extends Product {
 	}
 
 	/**
-	 * Method set the description of a HolidayHome to a given one.
+	 * Method set the description of a HolidayHome to a given value.
 	 *
-	 * @param description String to describes the capacity of a HolidayHome
+	 * @param description String to describes the description of a HolidayHome
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -96,16 +101,16 @@ public class HolidayHome extends Product {
 	/**
 	 * Method gives the hostMail of a HolidayHome.
 	 *
-	 * @return Returns a String to describes the hostMail of a HolidayHome.
+	 * @return Returns a String to math a Host to a HolidayHome
 	 */
 	public String getHostMail() {
 		return hostMail;
 	}
 
 	/**
-	 * Method set the hostMail of a HolidayHome to a given one.
+	 * Method set the hostMail of a HolidayHome to a given value.
 	 *
-	 * @param hostMail String to describes the hostMail of a HolidayHome
+	 * @param hostMail is a String to math a Host to a HolidayHome
 	 */
 	public void setHostMail(String hostMail) {
 		this.hostMail = hostMail;
@@ -114,16 +119,16 @@ public class HolidayHome extends Product {
 	/**
 	 * Method gives the image of a HolidayHome.
 	 *
-	 * @return Returns a String to describes the image of a HolidayHome.
+	 * @return Returns a String to indicate on an image of a HolidayHome.
 	 */
 	public String getImage() {
 		return image;
 	}
 
 	/**
-	 * Method set the image of a HolidayHome to a given one.
+	 * Method set the image of a HolidayHome to a given value.
 	 *
-	 * @param image String to describes the image of a HolidayHome
+	 * @param image String to indicate on an image of a HolidayHome
 	 */
 	public void setImage(String image) {
 		this.image = image;
@@ -132,16 +137,16 @@ public class HolidayHome extends Product {
 	/**
 	 * Method gives the place of a HolidayHome.
 	 *
-	 * @return Returns an object of class Place to describes the place of a HolidayHome.
+	 * @return Returns an object of class Place to describes where a HolidayHome is.
 	 */
 	public Place getPlace() {
 		return place;
 	}
 
 	/**
-	 * Method set the place of a HolidayHome to a given one.
+	 * Method set the place of a HolidayHome to a given value.
 	 *
-	 * @param place Object of class Place to describes the place of a HolidayHome.
+	 * @param place Object of class Place to describes where the HolidayHome is.
 	 */
 	public void setPlace(Place place) {
 		this.place = place;
@@ -150,16 +155,16 @@ public class HolidayHome extends Product {
 	/**
 	 * Method gives the isBookable of a HolidayHome.
 	 *
-	 * @return Returns a boolean to describes the isBookable of a HolidayHome.
+	 * @return Returns a boolean to show if someone is able to book the HolidayHome.
 	 */
 	public boolean getIsBookable() {
 		return isBookable;
 	}
 
 	/**
-	 * Method set the isBookable of a HolidayHome to a given one.
+	 * Method set the isBookable of a HolidayHome to a given value.
 	 *
-	 * @param bookable Boolean to describes the isBookable of a HolidayHome.
+	 * @param bookable Boolean to show if someone is able to book the HolidayHome.
 	 */
 	public void setIsBookable(boolean bookable) {
 		isBookable = bookable;
