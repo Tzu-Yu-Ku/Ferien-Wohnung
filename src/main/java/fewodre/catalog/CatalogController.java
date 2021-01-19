@@ -187,7 +187,7 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
-	// add HolidayHome-----------------
+	@PreAuthorize("hasRole('HOST')")
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {
 		firstname(model);

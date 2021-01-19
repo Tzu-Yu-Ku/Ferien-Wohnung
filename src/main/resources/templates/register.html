@@ -19,6 +19,8 @@
 
 <div class="py-5"
      style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
+    <form id="tenantRegistrationForm" th:action="@{/register}"
+          th:object="${tenantRegistrationForm}" method="post">
     <div class="container">
         <div class="row">
             <div class="p-5 col-6"
@@ -26,8 +28,6 @@
                 <h1>Neu bei uns?</h1>
                 <p class="mb-3">Dann erstellen Sie sich ganz bequem und schnell ein neues
                     Benutzerkonto auf unserer Plattform:</p>
-                <form role="form" id="tenantRegistrationForm" th:action="@{/register}"
-                      th:object="${tenantRegistrationForm}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="firstname" name="firstname" th:field="*{firstName}"
@@ -100,7 +100,7 @@
                                    placeholder="Ortschaft" style="width: 75%;" aria-label="Ortschaft">
                         </div>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check mb-1">
                         <input type="checkbox" id="terms" name="terms" th:field="*{terms}" class="form-check-input"
                                th:classappend="${#fields.hasErrors('terms') ? 'is-invalid' : ''}" placeholder="AGB">
                         <label class="form-check-label" for="terms">
@@ -109,18 +109,14 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-2" oninput="checkpasswords(this)">Jetzt Registrieren<br>
                     </button>
-                </form>
             </div>
-            <div class="col-1" th:if="${#fields.hasErrors('${tenantRegistrationForm}')}">
-                TEST
-            </div>
-            <div class="p-5 col-4" th:if="${#fields.hasErrors('${tenantRegistrationForm}')}">
-                <div class="row alert-danger table-danger" style="border-radius: calc(1rem);">
-                    <span class="p-3" style="color: #881111; height: 0; margin-bottom: 0">
+            <div class="p-5 col-5" th:if="${#fields.hasErrors()}">
+                <div class="row alert-danger table-danger p-3" style="border-radius: calc(1rem);">
+                    <b class="p-3" style="color: #881111; height: 0; margin-bottom: 0">
                         Bitte überprüfen Sie Ihre Angaben:
-                    </span>
-                    <ul class="mt-3">
-                        <li th:each="error : ${#fields.allErrors()}" th:text="error">
+                    </b>
+                    <ul class="mt-3 mb-3">
+                        <li th:each="error : ${#fields.allDetailedErrors()}" th:text="${error.getMessage()}">
                             TEst
                         </li>
                     </ul>
@@ -128,6 +124,7 @@
             </div>
         </div>
     </div>
+    </form>
 </div>
 
 <footer th:replace="footer :: footer"></footer>

@@ -18,8 +18,8 @@ public class PersonalForm extends RegistrationForm {
 	@NotBlank(message = "{RegistrationForm.housenumber.NotEmpty}")
 	private final String houseNumber;
 
-	@NotBlank(message = "{RegistrationForm.postcode.NotEmpty}")
-	@Size(min = 5, max = 5, message = "PLZ muss fünfstellig sein.")
+	@NotBlank(message = "{RegistrationForm.postcode.Invalid}")
+	@Size(min = 5, max = 5, message = "Geben Sie eine gültige Postleitzahl ein.")
 	private final String postcode;
 
 	@NotBlank(message = "{RegistrationForm.city.NotEmpty}")
