@@ -1,5 +1,8 @@
 package fewodre.useraccounts;
 
+import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
+import fewodre.useraccounts.forms.HostRegistrationForm;
+import fewodre.useraccounts.forms.TenantRegistrationForm;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -7,13 +10,11 @@ import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 

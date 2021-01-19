@@ -71,7 +71,8 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
 	public void addEventPageGet() throws Exception {
 		Model model = new ExtendedModelMap();
-		String returnedView = catalogController.addEventPage(model);
+		EventForm eventForm = new EventForm();
+		String returnedView = catalogController.addEventPage(model, eventForm);
 
 		mvc.perform(get("/addevents"))
 				.andExpect(status().isOk())
@@ -82,7 +83,8 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
 	public void addEventPagePost() throws Exception {
 		Model model = new ExtendedModelMap();
-		String returnedView = catalogController.addEventPage(model);
+		EventForm eventForm = new EventForm();
+		String returnedView = catalogController.addEventPage(model, eventForm);
 
 		EventForm form = new EventForm();
 		form.setEventCompanyUuid("event@employee");
@@ -253,7 +255,8 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "host@host", roles = "HOST")
 	public void addHolidayhomePageGet() throws Exception {
 		Model model = new ExtendedModelMap();
-		String returnedView = catalogController.addHolidayhomePage(model);
+		HolidayHomeForm form = new HolidayHomeForm();
+		String returnedView = catalogController.addHolidayhomePage(model, form);
 
 		mvc.perform(get("/addholidayhome"))
 				.andExpect(status().isOk());
@@ -263,9 +266,10 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "host@host", roles = "HOST")
 	public void addHolidayhomePagePost() throws Exception {
 		Model model = new ExtendedModelMap();
-		String returnedView = catalogController.addHolidayhomePage(model);
-
 		HolidayHomeForm form = new HolidayHomeForm();
+		String returnedView = catalogController.addHolidayhomePage(model, form);
+
+		form = new HolidayHomeForm();
 		form.setHostMail("host@host");
 		form.setName("Test Wohnung");
 		form.setDescription("Test Beschreibung");

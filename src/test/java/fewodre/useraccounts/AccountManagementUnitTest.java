@@ -1,16 +1,16 @@
 package fewodre.useraccounts;
 
+import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
+import fewodre.useraccounts.forms.HostRegistrationForm;
+import fewodre.useraccounts.forms.TenantRegistrationForm;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.springframework.data.util.Streamable;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.assertj.core.api.Assertions.assertThat;

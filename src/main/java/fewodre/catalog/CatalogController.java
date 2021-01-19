@@ -5,13 +5,13 @@ import fewodre.bookings.StringFormatter;
 import fewodre.catalog.events.*;
 import fewodre.catalog.events.Event.EventType;
 import fewodre.catalog.holidayhomes.*;
+import fewodre.catalog.storage.StorageService;
 import fewodre.useraccounts.*;
 
 import fewodre.useraccounts.AccountManagement;
 import fewodre.useraccounts.AccountRepository;
 import fewodre.utils.Place;
 
-import org.salespointframework.catalog.Catalog;
 import org.salespointframework.inventory.UniqueInventory;
 import org.salespointframework.inventory.UniqueInventoryItem;
 import org.salespointframework.quantity.Quantity;
@@ -24,6 +24,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,16 +34,12 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.logging.Logger;
 
-import javax.money.MonetaryAmount;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -203,16 +201,32 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('HOST')")
 	@GetMapping("/addholidayhome")
-	String addHolidayhomePage(Model model) {
+	String addHolidayhomePage(Model model, HolidayHomeForm form) {
 		firstname(model);
+		model.addAttribute("form", form);
 		return "addholidayhome";
 	}
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form,
+	String addHolidayHomes(@Valid @ModelAttribute("form") HolidayHomeForm form,
+	                       BindingResult result,
 	                       @RequestParam("imageupload") MultipartFile image,
-	                       @LoggedIn UserAccount userAccount) {
+	                       @LoggedIn UserAccount userAccount,
+	                       Model model) {
+
+		firstname(model);
+
+		String contentType = "." + image.getContentType().split("/")[1];
+		if(!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
+			result.addError(new FieldError("form",
+					"imageupload",
+					"Es werden nur JPG oder PNG Bilder unterstützt."));
+		}
+
+		if(result.hasErrors()) {
+			return "addholidayhome";
+		}
 
 		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
 
@@ -224,7 +238,6 @@ public class CatalogController {
 
 		ProductIdentifier productIdentifier = myHolidayHome.getId();
 
-		String contentType = "." + image.getContentType().split("/")[1];
 		String fileName = productIdentifier.getIdentifier() + contentType;
 		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
 
@@ -598,9 +611,10 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addevents")
-	String addEventPage(Model model) {
+	String addEventPage(Model model, EventForm form) {
 		firstname(model);
 		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("form", form);
 		return "addevent";
 	}
 

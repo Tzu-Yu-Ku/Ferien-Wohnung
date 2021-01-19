@@ -1,11 +1,9 @@
-package fewodre.useraccounts;
-
-import org.hibernate.annotations.ListIndexBase;
+package fewodre.useraccounts.forms;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-class HostRegistrationForm extends PersonalForm {
+public class HostRegistrationForm extends PersonalForm {
 
 	@NotBlank(message = "{RegistrationForm.iban.NotEmpty}")
 	@Pattern(regexp = "^DE\\d{2}[ ]\\d{4}[ ]\\d{4}[ ]\\d{4}[ ]\\d{4}[ ]\\d{2}|DE\\d{20}$",
