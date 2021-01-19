@@ -88,7 +88,7 @@ public class CartController {
 
 
 	/**
-	 * View lastname from the current{@link AccountEntity}
+	 * Shows firstname of the current{@link AccountEntity}
 	 *
 	 * @param model must not be {@literal null}
 	 */
@@ -102,7 +102,7 @@ public class CartController {
 	}
 
 	/**
-	 * Creat a new {@link Cart}
+	 * Creates a new {@link Cart}.
 	 *
 	 * @return new created Cart
 	 */
@@ -112,8 +112,8 @@ public class CartController {
 	}
 
 	/**
-	 * Show all the informations of the chosen {@link org.salespointframework.catalog.Product}, which are planed to order.
-	 * And show all the {@link Event}s, which take place near to the chosen {@link HolidayHome}.
+	 * Shows all the information of the chosen {@link org.salespointframework.catalog.Product}, which is planed to be ordered.
+	 * And shows all the {@link Event}s, which takes place near to the chosen {@link HolidayHome}.
 	 *
 	 * @param model       muss not be {@literal null}
 	 * @param cart        muss not be {@literal null}
@@ -163,7 +163,7 @@ public class CartController {
 	}
 
 	/**
-	 * Add a {@link HolidayHome} into the cart,which is planed to be ordered.
+	 * Adds a {@link HolidayHome} into the cart,which is planed to be ordered.
 	 * If there is already a  {@link HolidayHome} in cart, it will be replaced.
 	 *
 	 * @param holidayHome template: bookinghist
@@ -196,7 +196,7 @@ public class CartController {
 	}
 
 	/**
-	 * Update the modified arrival date and departure date informations of the {@link HolidayHome}
+	 * Updates the modified arrival date and departure date information of the {@link HolidayHome}
 	 * The arrival date and departure date will be checked, if it's overlapped between the booked dates.
 	 *
 	 * @param cart        muss not be {@literal null}
@@ -241,7 +241,7 @@ public class CartController {
 	}
 
 	/**
-	 * Update the number of the {@link Event}
+	 * Updates the number of the given {@link Event}.
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param cart  muss not be {@literal null}
@@ -275,7 +275,7 @@ public class CartController {
 	}
 
 	/**
-	 * If the date is not chosen, set today as the arrival date and 2 days after as the departure day.
+	 * If the date is not given, sets today as the arrival date and 2 days after as the departure day.
 	 *
 	 * @param holidayHome muss not be {@literal null}
 	 * @param cart        muss not be {@literal null}
@@ -289,9 +289,9 @@ public class CartController {
 	}
 
 	/**
-	 * Checked if the date of chosen {@link Event} is between the arrival date and the departure date of the
+	 * Checks if the date of chosen {@link Event} is between the arrival date and the departure date of the
 	 * {@link HolidayHome}.
-	 * if not,add the chosen {@link Event}s in the cart
+	 * If not,adds the given {@link Event} in the cart
 	 * If there is no {@link HolidayHome} in the cart, the {@link Event} won't be added.
 	 *
 	 * @param event muss not be {@literal null}
@@ -347,8 +347,8 @@ public class CartController {
 	}
 
 	/**
-	 * Remove item in the cart, if it's {@link HolidayHome}, clear up all items in cart.
-	 * If it is {@link Event}, just remove the chosen item.
+	 * Removes item in the cart,if it's {@link HolidayHome}, clear up all items in cart.
+	 * If it is {@link Event},removes the given item.
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param id muss not be {@literal null}
@@ -370,7 +370,7 @@ public class CartController {
 	}
 
 	/**
-	 * Remove all of the items in cart
+	 * Removes all of the items in cart
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param cart muss not be {@literal null}
@@ -384,7 +384,7 @@ public class CartController {
 	}
 
 	/**
-	 * Checkout the cart and creat a {@link BookingEntity} with all the needed parameter from the cart
+	 * Checkouts the cart and creates a {@link BookingEntity} with all the needed parameters from the cart
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param cart muss not be {@literal null}
@@ -421,7 +421,7 @@ public class CartController {
 	}
 
 	/**
-	 * Check if the chosen arrival date and departure date is booked
+	 * Checks if the given arrival date and departure date are booked
 	 *
 	 * @return if booked return true, otherwise false
 	 */
@@ -441,7 +441,7 @@ public class CartController {
 	}
 
 	/**
-	 * Show all the informations of the {@link BookingEntity}
+	 * Shows all the information of the {@link BookingEntity}
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
@@ -485,7 +485,7 @@ public class CartController {
 	}
 
 	/**
-	 * Cancel the {@link BookingEntity}
+	 * Cancels the given {@link BookingEntity}
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
@@ -505,7 +505,7 @@ public class CartController {
 	}
 
 	/**
-	 * pay the deposit of the {@link BookingEntity}
+	 * Pays the deposit of the {@link BookingEntity}.
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
@@ -523,7 +523,7 @@ public class CartController {
 	}
 
 	/**
-	 * pay the rest of the{@link BookingEntity}
+	 * Pays the rest of the{@link BookingEntity}.
 	 *
 	 * @param model muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
@@ -541,7 +541,7 @@ public class CartController {
 	}
 
 	/**
-	 * Host confirm the{@link BookingEntity}, which is already paid by tenant
+	 * Host confirms the{@link BookingEntity}, which is already paid by tenant.ü
 	 *
 	 * @param model
 	 * @param booking

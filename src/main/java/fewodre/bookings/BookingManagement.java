@@ -69,7 +69,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * creat a {@link BookingEntity} with the required informations.
+	 * creates a {@link BookingEntity} with the required information.
 	 *
 	 * @param userAccount   the user who make the order, muss not be {@literal null}
 	 * @param home          the house which is booked in this BookingEntity, muss not be {@literal null}
@@ -103,7 +103,7 @@ public class BookingManagement {
 
 
 	/**
-	 * check if the {@link BookingEntity} is paid.
+	 * checks if the {@link BookingEntity} is paid.
 	 *
 	 * @param bookingEntity muss not be {@literal null}
 	 * @return true if is paid, false is not
@@ -125,7 +125,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * when the event be cancelled, call the Paying-Framework from banks to refund the paid
+	 * When the event is cancelled,  refunds the paid and cancels the event from the {@link BookingEntity}.
 	 *
 	 * @param event muss not be {@literal null}
 	 * @return true
@@ -148,7 +148,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * check if the rest of the unpaid from the booking is paid
+	 * Checks if the rest of the unpaid from the booking is paid.
 	 *
 	 * @param bookingEntity muss not be {@literal null}
 	 * @return if is paid return true, otherwise false
@@ -163,7 +163,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * get how much the product being booked from the {@link AccountEntity}(who hat the role of TENANT.)
+	 * Gets the number of the product which are booked from the {@link AccountEntity}(who hat the role of TENANT.)
 	 *
 	 * @param product muss not be {@literal null}
 	 * @return the amount of the being booked product in int type
@@ -205,16 +205,16 @@ public class BookingManagement {
 	}
 
 	/**
-	 * get all of the {@link BookingEntity} in the system
+	 * Streams all of the {@link BookingEntity}s in the system
 	 *
-	 * @return all bookings
+	 * @return all bookingEntities
 	 */
 	public Streamable<BookingEntity> findAll() {
 		return bookings.findAll();
 	}
 
 	/**
-	 * get all of the {@link BookingEntity} by the given {@link HolidayHome} ID in the system
+	 * Streams all of the {@link BookingEntity}s with the given {@link HolidayHome} ID in the system.
 	 *
 	 * @param holidayHome muss not be {@literal null}
 	 * @return all bookings which contains the given house's ID
@@ -224,7 +224,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * get all of the {@link BookingEntity} by the given {@link UserAccount} in the system
+	 * Streams all of the {@link BookingEntity}s with the given {@link UserAccount} in the system.
 	 *
 	 * @param userAccount muss not be {@literal null}
 	 * @return all bookings which booked from the given UserAccount
@@ -235,7 +235,7 @@ public class BookingManagement {
 
 
 	/**
-	 * get the {@link BookingEntity} by the given {@link OrderIdentifier}
+	 * Gets the {@link BookingEntity} with the given {@link OrderIdentifier}.
 	 *
 	 * @param orderIdentifier muss not be {@literal null}
 	 * @return the wanted BookingEntity
@@ -246,7 +246,7 @@ public class BookingManagement {
 
 
 	/**
-	 * get all of the {@link BookingEntity} by the given state and host's ID in the system
+	 * Gets all of the {@link BookingEntity}s with the given state and host's ID in the system.
 	 *
 	 * @param state muss not be {@literal null}
 	 * @param host  muss not be {@literal null}
@@ -264,7 +264,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * get all of the {@link BookingEntity} by the given tenant's lastname and host's ID in the system
+	 * Gets all of the {@link BookingEntity}s with the given tenant's lastname and host's ID in the system.
 	 *
 	 * @param name muss not be {@literal null}
 	 * @param host muss not be {@literal null}
@@ -277,7 +277,7 @@ public class BookingManagement {
 	}
 
 	/**
-	 * get all of the {@link BookingEntity} by the given house's name and host's ID in the system
+	 * Gets all of the {@link BookingEntity}s with the given house's name and host's ID in the system.
 	 *
 	 * @param home muss not be {@literal null}
 	 * @param host muss not be {@literal null}
