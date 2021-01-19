@@ -75,7 +75,7 @@
         <th>Zeitraum</th>
         <th>Preis</th>
         <th>Status</th>
-        <th>Aktionen</th>
+        <th sec:authorize="hasRole('HOST')">Aktionen</th>
         </thead>
         <tbody>
         <tr th:each="booking : ${bookings}">
@@ -87,7 +87,7 @@
                 <p th:text="${'~ '+ formatter.formatDate(booking.getDepartureDate())}">12 Dec, 2020</p></td>
             <td th:text="${formatter.parsePrice(booking.getTotal())}">123 €</td>
             <td th:text="${booking.getState()}"> Ordered</td>
-            <td>
+            <td sec:authorize="hasRole('HOST')">
                 <p><a class="btn btn-danger btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
                       th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren</a></p>
                 <p><a class="btn btn-success btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"

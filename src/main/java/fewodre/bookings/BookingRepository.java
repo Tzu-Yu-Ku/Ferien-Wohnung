@@ -15,7 +15,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	static final Sort DEFAULT_SORT = Sort.by("arrivalDate").ascending();
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given host
+	 * Returns all {@link BookingEntity}s with the given host.
 	 *
 	 * @param host must not be {@literal null}.
 	 * @return the bookingEntities of the given host
@@ -23,7 +23,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	Iterable<BookingEntity> findBookingsByUuidHostEquals(String host);
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given host's ID
+	 * Returns all {@link BookingEntity}s with the given host's ID.
 	 *
 	 * @param host must not be {@literal null}.
 	 * @return the bookingEntities of the given host's ID
@@ -31,7 +31,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	Streamable<BookingEntity> findAllByUuidHost(String host, Sort sort);
 
 	/**
-	 * Returns all {@link BookingEntity}s by host's ID ordered by the arrival's date.
+	 * Returns all {@link BookingEntity}s with the given host's ID, ordered by the arrival's date.
 	 *
 	 * @param host must not be {@literal null}.
 	 * @return the bookingEntities of the given host's ID
@@ -41,7 +41,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	}
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given tenant's ID
+	 * Returns all {@link BookingEntity}s with the given tenant's ID.
 	 *
 	 * @param tenant must not be {@literal null}.
 	 * @return the bookingEntities of the given tenant's ID
@@ -49,7 +49,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	Iterable<BookingEntity> findBookingsByUuidTenant(String tenant);
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given userAccount
+	 * Returns all {@link BookingEntity}s with the given userAccount.
 	 *
 	 * @param userAccount must not be {@literal null}.
 	 * @return the bookingEntities of the given userAccount
@@ -57,7 +57,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount);
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given holidayHome's name
+	 * Returns all {@link BookingEntity}s with the given holidayHome's name.
 	 *
 	 * @param holidayHome must not be {@literal null}.
 	 * @return the bookingEntities of the given holidayHome's name
@@ -65,7 +65,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	Streamable<BookingEntity> findBookingsByUuidHome(String holidayHome);
 
 	/**
-	 * Returns all {@link BookingEntity}s by the given orderIdentifier(in type of OrderIdentifier)
+	 * Returns all {@link BookingEntity}s with the given orderIdentifier(in type of OrderIdentifier).
 	 *
 	 * @param orderIdentifier must not be {@literal null}.
 	 * @return the bookingEntities of the given orderIdentifier
@@ -73,7 +73,7 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	BookingEntity findFirstByOrderIdentifier(OrderIdentifier orderIdentifier);
 
 	/**
-	 *  Returns all {@link BookingEntity}s by the given orderIdentifier(in type of String)
+	 *  Returns all {@link BookingEntity}s with the given orderIdentifier(in type of String).
 	 *
 	 * @param orderIdentifier must not be {@literal null}.
 	 * @return the bookingEntities from the given host

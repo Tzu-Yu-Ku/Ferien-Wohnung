@@ -191,10 +191,13 @@
                     <form th:id="${item.product.id.toString()}" id="updateTicketCount" class="form-inline"
                           th:action="@{/updateTicketCount/{id}(id=${item.product.id})}"
                           method="post">
-                        <input class="text-center" id="Anzahl" type="number" name="count"
+                        <input class="text-center ml-3" id="Anzahl" type="number" name="count"
                                th:value="${item.getQuantity().getAmount().intValue()}"
                                th:min="0" th:max="${item.product.getCapacity()}" th:onchange="updateTicketCount(${item.product.id.toString()})"
                                style="width: 100%; margin: auto">
+                        <button type="submit" class="btn ml-1">
+                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                        </button>
                     </form>
                 </div>
             </div>
