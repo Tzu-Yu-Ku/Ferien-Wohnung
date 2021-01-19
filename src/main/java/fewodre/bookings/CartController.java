@@ -541,7 +541,7 @@ public class CartController {
 	}
 
 	/**
-	 * Host confirms the{@link BookingEntity}, which is already paid by tenant.
+	 * Host confirms the{@link BookingEntity}, which is already paid by tenant.ü
 	 *
 	 * @param model
 	 * @param booking

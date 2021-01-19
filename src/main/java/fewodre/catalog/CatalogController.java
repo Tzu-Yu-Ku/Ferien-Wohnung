@@ -18,6 +18,7 @@ import org.salespointframework.quantity.Quantity;
 import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +30,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -51,6 +57,10 @@ public class CatalogController {
 	private final AccountManagement accountManagement;
 	private final AccountRepository accountRepository;
 	private Authentication authentication;
+
+	@Autowired
+	private final StorageService storageService;
+
 	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
 	ArrayList<HolidayHome> sortCapacityList = new ArrayList<HolidayHome>();
 	ArrayList<HolidayHome> sortPriceList = new ArrayList<HolidayHome>();
@@ -58,15 +68,18 @@ public class CatalogController {
 	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
 	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
 	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
+	ArrayList<Event> recentEvent = new ArrayList<Event>();
 	int i;
 	int j;
 
+	public static String uploadDirectory = Paths.get("").toAbsolutePath().toString() + "/src/main/resources/static/resources/img/";
 
 	private BookingManagement bookingManagement;
 
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
-	                  AccountRepository accountRepository, BookingManagement bookingManagement) {
+	                  AccountRepository accountRepository, BookingManagement bookingManagement,
+	                  StorageService storageService) {
 		this.Hcatalog = Hcatalog;
 		this.Ecatalog = Ecatalog;
 		this.businessTime = businessTime;
@@ -74,6 +87,7 @@ public class CatalogController {
 		this.accountManagement = accountManagement;
 		this.accountRepository = accountRepository;
 		this.bookingManagement = bookingManagement;
+		this.storageService = storageService;
 	}
 
 	private void firstname(Model model) {
@@ -187,7 +201,7 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
-	// add HolidayHome-----------------
+	@PreAuthorize("hasRole('HOST')")
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {
 		firstname(model);
@@ -196,15 +210,32 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
-	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
+	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form,
+	                       @RequestParam("imageupload") MultipartFile image,
 	                       @LoggedIn UserAccount userAccount) {
+
 		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
+
 		Hcatalog.save(myHolidayHome);
 		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
 			System.out.println(
 					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
 		}
+
 		ProductIdentifier productIdentifier = myHolidayHome.getId();
+
+		String contentType = "." + image.getContentType().split("/")[1];
+		String fileName = productIdentifier.getIdentifier() + contentType;
+		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
+
+		storageService.store(image, fileName);
+
+		System.out.println(fileNameAndPath);
+
+		HolidayHome newHome = Hcatalog.findFirstByProductIdentifier(productIdentifier);
+		newHome.setImage(fileName);
+		Hcatalog.save(newHome);
+
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
 
@@ -348,7 +379,38 @@ public class CatalogController {
 	// Events------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/events")
 	String eventCatalog(Model model) {
+		recentEvent.clear();
 		firstname(model);
+
+		ArrayList <ProductIdentifier> recent = new ArrayList();
+		Ecatalog.findAll().forEach(item -> recent.add(item.getId()));
+		LocalDate latestdate = Ecatalog.findById(recent.get(0)).get().getDate();
+		LocalTime latesttime = Ecatalog.findById(recent.get(0)).get().getTime();
+
+		ProductIdentifier latestID = recent.get(0);
+		int count = 0;
+		for (int i = 0; i < recent.size(); i++) {
+			LocalDate nextdate = Ecatalog.findById(recent.get(i)).get().getDate();
+			LocalTime nexttime = Ecatalog.findById(recent.get(i)).get().getTime();
+			if(nextdate.equals(latestdate)) {
+				if(nexttime.isBefore(latesttime)) {
+					latestdate = nextdate;
+					latesttime = nexttime;
+					latestID = recent.get(count);
+				}
+			}
+			if(nextdate.isBefore(latestdate)) {
+				latestdate = nextdate;
+				latesttime = nexttime;
+				latestID = recent.get(count);
+			}
+			count ++;
+		}
+		//System.out.println(latest);
+		//System.out.println(latestID);
+		final ProductIdentifier finallatestID = latestID;
+		Ecatalog.findAll().filter(event -> event.getId().equals(finallatestID)).forEach(item -> recentEvent.add(item));
+
 
 		if (j != 1) {
 			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
@@ -357,6 +419,7 @@ public class CatalogController {
 			j = 1;
 		}
 
+		model.addAttribute("recentEvent", recentEvent);
 		model.addAttribute("eventCatalog", Ecatalog.findAll()
 				.filter(Event::isEventStatus)
 				.filter(event -> event.findInList(event, sortEventCapacityList))
@@ -542,15 +605,27 @@ public class CatalogController {
 	}
 
 	@PostMapping(path = "/addEvent")
-	String addEvent(@LoggedIn UserAccount userAccount, @ModelAttribute("form") EventForm form, Model model) {
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	String addEvent(@LoggedIn UserAccount userAccount,
+	                @RequestParam("imageupload") MultipartFile image,
+	                @ModelAttribute("form") EventForm form) {
 
-		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 
 		ProductIdentifier productIdentifier = event.getId();
+
+		String contentType = "." + image.getContentType().split("/")[1];
+		String fileName = productIdentifier.getIdentifier() + contentType;
+		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
+
+		storageService.store(image, fileName);
+		Event newEvent = Ecatalog.findFirstByProductIdentifier(productIdentifier);
+		newEvent.setImage(fileName);
+		Ecatalog.save(newEvent);
+
 		deleteAllEventSorts();
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
 	}

@@ -33,7 +33,7 @@
                 </div>
             </div>
             <form method="post" role="form" id="form" class="gb-form" th:action="@{/addHolidayHome}"
-                th:object="${form}">
+                th:object="${form}" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="row border-top" style="background-color: #EEEEEE;">
                         <div class="p-1 col-4 col-md-4 border-right">
@@ -64,13 +64,15 @@
                     </div>
                     <div class="row border-top" style="background-color: #EEEEEE;">
                         <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="inputGroupFile02" class="px-2">Bilder:</label>
+                            <label for="imageupload" class="px-2">Bilder:</label>
                         </div>
                         <div class="p-1 col-8 col-md-8">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                <label class="custom-file-label" for="inputGroupFile02"
-                                    aria-describedby="inputGroupFileAddon02">Dateiupload wird leider aktuell noch nicht unterstützt.</label>
+                                <input type="file" class="custom-file-input" id="imageupload"
+                                       name="imageupload" required="required">
+                                <label class="custom-file-label" for="imageupload">
+                                    Wählen Sie Bild aus. (JPG, PNG)
+                                </label>
                             </div>
                         </div>
                     </div>

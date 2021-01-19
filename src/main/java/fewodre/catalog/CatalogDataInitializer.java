@@ -97,7 +97,7 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setEventStatus(true);
 		eventTest.setEventType(EventType.SMALL);
 		eventTest.setImage("event1.png");
-		eventTest.setDate(LocalDate.now().plusDays(3));
+		eventTest.setDate(LocalDate.now().plusDays(10));
 		eventTest.setTime(LocalTime.now());
 		eventCatalog.save(eventTest);
 		inventory.save(new UniqueInventoryItem(eventTest, Quantity.of(eventTest.getCapacity())));
