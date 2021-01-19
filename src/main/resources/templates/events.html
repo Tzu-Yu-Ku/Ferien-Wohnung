@@ -37,72 +37,159 @@
             <!--Buttons zum sortieren von den Events nach bestimmten Kategorien-->
             <div class="col-md-9">
                 <div class="btn-group" sec:authorize="!hasRole('EVENT_EMPLOYEE')">
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventtype}" method="post">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Event Type
-                        </button>
-            
-                        <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Alle"/>
-                            <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Wiederholende Events"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventType" value="Besondere Events"/>
-                        </div>
-                    </form>
 
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventcapacity}" method="post">
+                    <div>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Personenanzahl (min.)
-                        </button>
-            
-                        <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="Alle"/>
-                            <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="5"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="10"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="15"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventCapacity" value="20"/>
-                        </div>
-                    </form>
-
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sorteventdistrict}" method="post">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Stadtteil
+                                aria-haspopup="true" aria-expanded="false">
+                                Event Type
                         </button>
 
                         <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Alle"/>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventType" value="Alle"/>
+                                <input class="dropdown-item" type="submit" value="Alle"/>
+                            </form>
                             <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Altfranken"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Altstadt"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Blasewitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Cossebaude"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Cotta"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Gompitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Klotsche"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Langebrück"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Leuben"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Loschwitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Mobschatz"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Neustadt"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Oberwartha"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Pieschen"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Plauen"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Prohlis"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Schönborn"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Schönefeld-Weißig"/>
-                            <input class="dropdown-item" type="submit" name="searchedEventDistrict" value="Weixdorf"/>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventType" value="SMALL"/>
+                                <input class="dropdown-item" type="submit" value="Wiederholende Events"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventType" value="LARGE"/>
+                                <input class="dropdown-item" type="submit" value="Besonderes Events"/>
+                            </form>
                         </div>
-                    </form>
+                    </div>
 
-                    <form role="form" th:method="post" th:action="@{/deletalleventsorts}">
-                        <input class="btn btn-danger btn-outline-light" type="submit"
-                               value="Alle Filter zurück setzen"/>
-                    </form>
 
+                    <div>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Personenanzahl
+                        </button>
+    
+                        <div class="dropdown-menu">
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventCapacity" value="Alle"/>
+                                <input class="dropdown-item" type="submit" value="Alle"/>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventCapacity" value="5"/>
+                                <input class="dropdown-item" type="submit" value="mind. 5"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventCapacity" value="10"/>
+                                <input class="dropdown-item" type="submit" value="mind. 10"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventCapacity" value="15"/>
+                                <input class="dropdown-item" type="submit" value="mind. 15"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventCapacity" value="20"/>
+                                <input class="dropdown-item" type="submit" value="mind.20"/>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Stadtteil
+                        </button>
+                        
+                        <div class="dropdown-menu">
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Alle"/>
+                                <input class="dropdown-item" type="submit" value="Alle"/>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Altfranken"/>
+                                <input class="dropdown-item" type="submit" value="Altfranken"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Altstadt"/>
+                                <input class="dropdown-item" type="submit" value="Altstadt"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Blasewitz"/>
+                                <input class="dropdown-item" type="submit" value="Blasewitz"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Cossebaude"/>
+                                <input class="dropdown-item" type="submit" value="Cossebaude"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Cotta"/>
+                                <input class="dropdown-item" type="submit" value="Cotta"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Gompitz"/>
+                                <input class="dropdown-item" type="submit" value="Gompitz"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Klotsche"/>
+                                <input class="dropdown-item" type="submit" value="Klotsche"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Langebrück"/>
+                                <input class="dropdown-item" type="submit" value="Langebrück"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Leuben"/>
+                                <input class="dropdown-item" type="submit" value="Leuben"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Loschwitz"/>
+                                <input class="dropdown-item" type="submit" value="Loschwitz"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Mobschatz"/>
+                                <input class="dropdown-item" type="submit" value="Mobschatz"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Neustadt"/>
+                                <input class="dropdown-item" type="submit" value="Neustadt"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Oberwartha"/>
+                                <input class="dropdown-item" type="submit" value="Oberwartha"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Pieschen"/>
+                                <input class="dropdown-item" type="submit" value="Pieschen"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Plauen"/>
+                                <input class="dropdown-item" type="submit" value="Plauen"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Prohlis"/>
+                                <input class="dropdown-item" type="submit" value="Prohlis"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Schönborn"/>
+                                <input class="dropdown-item" type="submit" value="Schönborn"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Schönefeld"/>
+                                <input class="dropdown-item" type="submit" value="Schönefeld-Weißig"/>
+                            </form>
+                            <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
+                                <input type="hidden" name="searchedEventDistrict" value="Weixdorf"/>
+                                <input class="dropdown-item" type="submit" value="Weixdorf"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <form role="form" class="form-inline mr-auto ml-0" method="post" th:action="@{/events}">
+                            <input class="btn btn-danger btn-outline-light" type="submit"
+                                   value="Alle Filter zurück setzen"/>
+                        </form>
+                    </div>
+                
                 </div>
 
                 <div class="col-md-3">

@@ -58,8 +58,8 @@ public class CatalogController {
 	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
 	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
 	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
-	int i;
-	int j;
+	int i = 0;
+	int j = 0;
 
 
 	private BookingManagement bookingManagement;
@@ -90,7 +90,13 @@ public class CatalogController {
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
-		//wichtig damit die Listen zum Start des Programms schon gefüllt sind und nicht leer sind
+
+		/*wichtig damit die Listen zum Start des Programms nicht leer sind und wenn ein neues HolidayHome dazukommt,
+		dann wird es hierdurch in die Sortierlisten hinzugefügt, damit beim sortieren kein Fehler auftritt.
+		*/
+		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
 
 		if (authentication.getPrincipal().toString().contains("HOST")) {
 			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
@@ -108,157 +114,71 @@ public class CatalogController {
 	@PostMapping("/holidayhomes")
 	String sortHolidayHome(Model model, String searchedCapacity, String searchedPrice1, String searchedPrice2, String searchedDistrict) {
 		firstname(model);
-		System.out.println(searchedCapacity);
-		//sortCapacityList.clear();
-		sortPriceList.clear();
-		//sortDistrictList.clear();
-/*
-		if (searchedCapacity.equals("Alle")) {
+
+		if (searchedCapacity == null && searchedPrice1 == null && searchedPrice2 == null && searchedDistrict == null) {
 			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		} else if (!searchedCapacity.equals("Alle")) {
-			int searchedCapacityInt = Integer.parseInt(searchedCapacity);
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortCapacityList.add(item));
-		}
-		System.out.println(sortCapacityList);
-		*/
-		if (searchedPrice1.equals("Alle") && searchedPrice2.equals("Alle")) {
 			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		}
-		else if (searchedPrice1.equals("0")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
-					.forEach(item -> sortPriceList.add(item));
-		}
-		else if (searchedPrice2.equals("0")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR "+searchedPrice1)))
-					.forEach(item -> sortPriceList.add(item));
-		}
-		else {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR "+searchedPrice1)))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
-					.forEach(item -> sortPriceList.add(item));
-		}
-		/*
-		if (searchedPrice.equals("0-50 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 50")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("50-100 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 50")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 100")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("100-150 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 100")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 150")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("150-200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 150")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Über 200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Alle")) {
-			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		}
-		System.out.println(sortPriceList);
-		*/
-		/*
-		if (searchedDistrict.equals("Alle")) {
 			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-		} else if (!searchedDistrict.equals("Alle")) {
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict)).forEach(item -> sortDistrictList.add(item));
 		}
+
+		if (searchedCapacity != null){
+			sortCapacityList.clear();
+
+			if (searchedCapacity.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+			} else if (!searchedCapacity.equals("Alle")) {
+				int searchedCapacityInt = Integer.parseInt(searchedCapacity);
+				Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortCapacityList.add(item));
+			}
+		}
+
+		if (searchedPrice1 != null && searchedPrice2 != null) {
+			sortPriceList.clear();
+
+			if (searchedPrice1.equals("Alle") && searchedPrice2.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+			}
+			else if (searchedPrice1.equals("0")) {
+				Hcatalog.findAll()
+						.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
+						.forEach(item -> sortPriceList.add(item));
+			}
+			else if (searchedPrice2.equals("0")) {
+				Hcatalog.findAll()
+						.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR "+searchedPrice1)))
+						.forEach(item -> sortPriceList.add(item));
+			}
+			else {
+				Hcatalog.findAll()
+						.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR "+searchedPrice1)))
+						.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
+						.forEach(item -> sortPriceList.add(item));
+			}
+		}
+
+		if (searchedDistrict != null) {
+			sortDistrictList.clear();
+			
+			if (searchedDistrict.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+			} else if (!searchedDistrict.equals("Alle")) {
+				Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict)).forEach(item -> sortDistrictList.add(item));
+			}
+		}
+
+		System.out.println(sortCapacityList);
+		System.out.println(sortPriceList);
 		System.out.println(sortDistrictList);
-		*/
+
 		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
 					.filter(holidayHome -> holidayHome.getIsBookable())
-					//.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList)));
-					//.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
+					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
+					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList))
+					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
 
 		return "holidayhomes";
 	}
-/*
-	// sortieren nach Capacity----------
-	@PostMapping("/sortcapacity")
-	String sortCapacity(String searchedCapacity) {
-		System.out.println(searchedCapacity);
-		sortCapacityList.clear();
-		if (searchedCapacity.equals("Alle")) {
-			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		} else if (!searchedCapacity.equals("Alle")) {
-			int searchedCapacityInt = Integer.parseInt(searchedCapacity);
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortCapacityList.add(item));
-		}
-		System.out.println(sortCapacityList);
-		return "redirect:/holidayhomes";
-	}
 
-	// sortieren nach Price-------------
-	@PostMapping("/sortprice")
-	String sortPrice(String searchedPrice) {
-		System.out.println(searchedPrice);
-		sortPriceList.clear();
-		if (searchedPrice.equals("0-50 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 50")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("50-100 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 50")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 100")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("100-150 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 100")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 150")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("150-200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 150")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Über 200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Alle")) {
-			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		}
-		System.out.println(sortPriceList);
-		return "redirect:/holidayhomes";
-	}
-
-	// sortieren nach Destrict------------
-	@PostMapping("/sortdistrict")
-	String sortDistrict(String searchedDistrict) {
-		System.out.println(searchedDistrict);
-		sortDistrictList.clear();
-		if (searchedDistrict.equals("Alle")) {
-			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-		} else if (!searchedDistrict.equals("Alle")) {
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict)).forEach(item -> sortDistrictList.add(item));
-		}
-		System.out.println(sortDistrictList);
-		return "redirect:/holidayhomes";
-	}
-
-	// löscht alle Sortierungen
-	@PostMapping("/deletallsorts")
-	String deleteAllSorts() {
-		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-		return "redirect:/holidayhomes";
-	}
-*/
 	// add HolidayHome-----------------
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {
@@ -422,12 +342,65 @@ public class CatalogController {
 	String eventCatalog(Model model) {
 		firstname(model);
 
-		if (j != 1) {
+		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+
+		model.addAttribute("eventCatalog", Ecatalog.findAll()
+				.filter(Event::isEventStatus));
+
+		Object formatter = new StringFormatter();
+		model.addAttribute("formatter", formatter);
+
+		return "events";
+	}
+
+	@PreAuthorize("!hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/events")
+	String sortEvent(Model model, String searchedEventType, String searchedEventCapacity, String searchedEventDistrict) {
+		firstname(model);
+
+		if (searchedEventType == null && searchedEventCapacity == null && searchedEventDistrict == null) {
 			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-			j = 1;
 		}
+
+		if (searchedEventType != null) {
+			sortEventTypeList.clear();
+
+			if (searchedEventType.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+			} else if (searchedEventType.equals("SMALL")) {
+				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL).forEach(item -> sortEventTypeList.add(item));
+			} else if (searchedEventType.equals("LARGE")) {
+				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE).forEach(item -> sortEventTypeList.add(item));
+			}
+		}
+
+		if (searchedEventCapacity != null) {
+			sortEventCapacityList.clear();
+
+			if (searchedEventCapacity.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+			} else {
+				int searchedCapacityInt = Integer.parseInt(searchedEventCapacity);
+				Ecatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortEventCapacityList.add(item));
+			}
+		}
+
+		if (searchedEventDistrict != null) {
+				sortEventDistrictList.clear();
+
+			if (searchedEventDistrict.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+			} else if (!searchedEventDistrict.equals("Alle")) {
+				Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict)).forEach(item -> sortEventDistrictList.add(item));
+			}
+		}
+		System.out.println(sortEventTypeList);
+		System.out.println(sortEventCapacityList);
+		System.out.println(sortEventDistrictList);
 
 		model.addAttribute("eventCatalog", Ecatalog.findAll()
 				.filter(Event::isEventStatus)
@@ -439,52 +412,6 @@ public class CatalogController {
 		model.addAttribute("formatter", formatter);
 
 		return "events";
-	}
-
-	@PostMapping("/sorteventtype")
-	String sortEventType(String searchedEventType) {
-		System.out.println(searchedEventType);
-		sortEventTypeList.clear();
-		if (searchedEventType.equals("Alle")) {
-			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-		} else if (searchedEventType.equals("Wiederholende Events")) {
-			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL).forEach(item -> sortEventTypeList.add(item));
-		} else if (searchedEventType.equals("Besondere Events")) {
-			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE).forEach(item -> sortEventTypeList.add(item));
-		}
-		System.out.println(sortEventTypeList);
-		return "redirect:/events";
-	}
-
-	@PostMapping("/sorteventcapacity")
-	String sortEventCapacity(String searchedEventCapacity) {
-		sortEventCapacityList.clear();
-		if (searchedEventCapacity.equals("Alle")) {
-			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-		} else if (!searchedEventCapacity.equals("Alle")) {
-			int searchedEventCapacityInt = Integer.parseInt(searchedEventCapacity);
-			Ecatalog.findAll().filter(events -> events.getCapacity() >= searchedEventCapacityInt).forEach(item -> sortEventCapacityList.add(item));
-		}
-		return "redirect:/events";
-	}
-
-	@PostMapping("/sorteventdistrict")
-	String sortEventDistrict(String searchedEventDistrict) {
-		sortEventDistrictList.clear();
-		if (searchedEventDistrict.equals("Alle")) {
-			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-		} else if (!searchedEventDistrict.equals("Alle")) {
-			Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict)).forEach(item -> sortEventDistrictList.add(item));
-		}
-		return "redirect:/events";
-	}
-
-	@PostMapping("/deletalleventsorts")
-	String deleteAllEventSorts() {
-		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-		return "redirect:/events";
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
