@@ -80,13 +80,12 @@ public class Place implements Serializable {
 
 	/**
 	 * Method will calculate the distance between to Places
+	 * 
 	 * @param place2
 	 * @return Returns a Integer that discribes the distance between to Places
 	 */
 	public int distanceToOtherPlaces(Place place2) {
-		System.out.println(toString());
-		// System.out.println(place2.toString());
-		return (int) Math.round(Math.sqrt(Math.pow(Math.abs(getCoordX() - place2.getCoordX()), 2)
-				+ Math.pow(Math.abs(getCoordY() - place2.getCoordY()), 2)));
+		return (int) Math.round(((Math.sqrt(Math.pow(Math.abs(getCoordX() - place2.getCoordX()), 2)
+				+ Math.pow(Math.abs(getCoordY() - place2.getCoordY()), 2))) * 100) / 3334);
 	}
 }
