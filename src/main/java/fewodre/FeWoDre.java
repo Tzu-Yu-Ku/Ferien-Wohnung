@@ -15,31 +15,47 @@
  */
 package fewodre;
 
+import fewodre.catalog.StorageService;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+
+import static fewodre.catalog.CatalogController.uploadDirectory;
 
 @EnableSalespoint
 public class FeWoDre {
 
 	private static final String LOGIN_ROUTE = "/login";
-	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	public static void main(String[] args) {
+		new File(uploadDirectory).mkdir();
 		SpringApplication.run(FeWoDre.class, args);
+	}
+
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			storageService.deleteAll();
+			storageService.init();
+		};
 	}
 
 	@Configuration
@@ -48,6 +64,12 @@ public class FeWoDre {
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry) {
 			registry.addViewController(LOGIN_ROUTE).setViewName("login");
+		}
+
+		@Override
+		public void addResourceHandlers(ResourceHandlerRegistry registry) {
+			registry.addResourceHandler("/upload/**")
+					.addResourceLocations("/upload/");
 		}
 	}
 
