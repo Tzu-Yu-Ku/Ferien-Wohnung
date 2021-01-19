@@ -65,12 +65,12 @@
                     <td colspan="4">
                         <h5 class="p-1" th:text="${booking.id}" align="right">0123789</h5></td>
                 </tr>
-                <tr sec:authorize="hasRole('TENANT')">
+                <tr sec:authorize="hasAnyRole('TENANT','ADMIN')">
                     <th><h4 class="p-1">Vermieter</h4></th>
                     <td colspan="4">
                         <h5 class="p-1" th:text="${booking.hostName}" align="right">Herr Müller</h5></td>
                 </tr>
-                <tr sec:authorize="hasRole('HOST')">
+                <tr sec:authorize="hasAnyRole('HOST','ADMIN')">
                     <th><h4 class="p-1">Mieter</h4></th>
                     <td colspan="4">
                         <h5 class="p-1" th:text="${customer.getFirstname() + ', ' + customer.getLastname()}" align="right">Herr Müller</h5></td>

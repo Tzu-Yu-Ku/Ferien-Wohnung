@@ -75,7 +75,7 @@
         <th>Zeitraum</th>
         <th>Preis</th>
         <th>Status</th>
-        <th sec:authorize="hasRole('HOST')">Aktionen</th>
+        <th>Aktionen</th>
         </thead>
         <tbody>
         <tr th:each="booking : ${bookings}">
@@ -87,10 +87,10 @@
                 <p th:text="${'~ '+ formatter.formatDate(booking.getDepartureDate())}">12 Dec, 2020</p></td>
             <td th:text="${formatter.parsePrice(booking.getTotal())}">123 €</td>
             <td th:text="${booking.getState()}"> Ordered</td>
-            <td sec:authorize="hasRole('HOST')">
-                <p><a class="btn btn-danger btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
+            <td>
+                <p sec:authorize="hasRole('HOST')"><a class="btn btn-danger btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() != 'CANCELED' && booking.getState().toString() != 'COMPLETED'}"
                       th:href="@{/cancel/{id}(id=${booking.id})}">Buchung stornieren</a></p>
-                <p><a class="btn btn-success btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"
+                <p sec:authorize="hasRole('HOST')"><a class="btn btn-success btn-sm mr-3 mx-auto" style="color:white" th:if="${booking.getState().toString() == 'ORDERED' || booking.getState().toString() == 'PAID'}"
                       th:href="@{/confirm/{id}(id=${booking.id})}">Zahlungseingang bestätigen</a></p>
                 <p><a class="btn btn-outline-info btn-sm mr-3 mx-auto" style="color:#17a2b8" th:href="@{/bookingdetails/} + ${booking.id}">Details</a></p>
             </td>

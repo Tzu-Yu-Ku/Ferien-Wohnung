@@ -156,7 +156,7 @@ public class BookingController {
 	 * @return template: bookinghistory
 	 */
 	@PostMapping("/searchByName")
-	@PreAuthorize("hasRole('HOST')")
+	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
 	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount,
 	                               @RequestParam("lastname")String tenantName){
 		firstname(model);
@@ -182,7 +182,7 @@ public class BookingController {
 	 * @return template: bookinghistory
 	 */
 	@PostMapping("/searchByHomeName")
-	@PreAuthorize("hasRole('HOST')")
+	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
 	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount,
 	                               @RequestParam("homename")String homeName){
 		firstname(model);
