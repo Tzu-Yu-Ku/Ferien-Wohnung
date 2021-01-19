@@ -31,11 +31,11 @@
                     <div class="form-group">
                         <div class="form-inline">
                             <input type="text" id="firstname" name="firstname" th:field="*{firstName}"
-                                   class="form-control" pattern="[A-Za-z]"
+                                   class="form-control"
                                    th:classappend="${#fields.hasErrors('firstName') ? ' is-invalid' : ''}"
                                    placeholder="Vorname" style="width: 33%;" aria-label="Vorname">
                             <input type="text" id="lastname" name="lastname" th:field="*{lastName}"
-                                   class="form-control mr-0 ml-auto" pattern="[A-Za-z]"
+                                   class="form-control mr-0 ml-auto"
                                    th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
                                    placeholder="Nachname"
                                    style="width: 65%;" aria-label="Nachname">
