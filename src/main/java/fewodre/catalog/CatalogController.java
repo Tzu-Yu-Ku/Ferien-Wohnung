@@ -58,6 +58,7 @@ public class CatalogController {
 	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
 	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
 	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
+	ArrayList<Event> recentEvent = new ArrayList<Event>();
 	int i;
 	int j;
 
@@ -348,7 +349,38 @@ public class CatalogController {
 	// Events------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping("/events")
 	String eventCatalog(Model model) {
+		recentEvent.clear();
 		firstname(model);
+
+		ArrayList <ProductIdentifier> recent = new ArrayList();
+		Ecatalog.findAll().forEach(item -> recent.add(item.getId()));
+		LocalDate latestdate = Ecatalog.findById(recent.get(0)).get().getDate();
+		LocalTime latesttime = Ecatalog.findById(recent.get(0)).get().getTime();
+
+		ProductIdentifier latestID = recent.get(0);
+		int count = 0;
+		for (int i = 0; i < recent.size(); i++) {
+			LocalDate nextdate = Ecatalog.findById(recent.get(i)).get().getDate();
+			LocalTime nexttime = Ecatalog.findById(recent.get(i)).get().getTime();
+			if(nextdate.equals(latestdate)) {
+				if(nexttime.isBefore(latesttime)) {
+					latestdate = nextdate;
+					latesttime = nexttime;
+					latestID = recent.get(count);
+				}
+			}
+			if(nextdate.isBefore(latestdate)) {
+				latestdate = nextdate;
+				latesttime = nexttime;
+				latestID = recent.get(count);
+			}
+			count ++;
+		}
+		//System.out.println(latest);
+		//System.out.println(latestID);
+		final ProductIdentifier finallatestID = latestID;
+		Ecatalog.findAll().filter(event -> event.getId().equals(finallatestID)).forEach(item -> recentEvent.add(item));
+
 
 		if (j != 1) {
 			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
@@ -357,6 +389,7 @@ public class CatalogController {
 			j = 1;
 		}
 
+		model.addAttribute("recentEvent", recentEvent);
 		model.addAttribute("eventCatalog", Ecatalog.findAll()
 				.filter(Event::isEventStatus)
 				.filter(event -> event.findInList(event, sortEventCapacityList))
