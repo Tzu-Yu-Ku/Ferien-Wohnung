@@ -91,13 +91,6 @@ public class CatalogController {
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
 		//wichtig damit die Listen zum Start des Programms schon gefüllt sind und nicht leer sind
-		if (i != 1) {
-			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-			i = 1;
-		}
-
 
 		if (authentication.getPrincipal().toString().contains("HOST")) {
 			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
@@ -106,14 +99,93 @@ public class CatalogController {
 					.filter(holidayHome -> holidayHome.getIsBookable()));
 		} else {
 			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getIsBookable())
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList))
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
+					.filter(holidayHome -> holidayHome.getIsBookable()));
 		}
 		return "holidayhomes";
 	}
 
+	@PreAuthorize("!hasRole('HOST')")
+	@PostMapping("/holidayhomes")
+	String sortHolidayHome(Model model, String searchedCapacity, String searchedPrice1, String searchedPrice2, String searchedDistrict) {
+		firstname(model);
+		System.out.println(searchedCapacity);
+		//sortCapacityList.clear();
+		sortPriceList.clear();
+		//sortDistrictList.clear();
+/*
+		if (searchedCapacity.equals("Alle")) {
+			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+		} else if (!searchedCapacity.equals("Alle")) {
+			int searchedCapacityInt = Integer.parseInt(searchedCapacity);
+			Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortCapacityList.add(item));
+		}
+		System.out.println(sortCapacityList);
+		*/
+		if (searchedPrice1.equals("Alle") && searchedPrice2.equals("Alle")) {
+			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+		}
+		else if (searchedPrice1.equals("0")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
+					.forEach(item -> sortPriceList.add(item));
+		}
+		else if (searchedPrice2.equals("0")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR "+searchedPrice1)))
+					.forEach(item -> sortPriceList.add(item));
+		}
+		else {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR "+searchedPrice1)))
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR "+searchedPrice2)))
+					.forEach(item -> sortPriceList.add(item));
+		}
+		/*
+		if (searchedPrice.equals("0-50 EUR")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 50")))
+					.forEach(item -> sortPriceList.add(item));
+		} else if (searchedPrice.equals("50-100 EUR")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 50")))
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 100")))
+					.forEach(item -> sortPriceList.add(item));
+		} else if (searchedPrice.equals("100-150 EUR")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 100")))
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 150")))
+					.forEach(item -> sortPriceList.add(item));
+		} else if (searchedPrice.equals("150-200 EUR")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 150")))
+					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 200")))
+					.forEach(item -> sortPriceList.add(item));
+		} else if (searchedPrice.equals("Über 200 EUR")) {
+			Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR 200")))
+					.forEach(item -> sortPriceList.add(item));
+		} else if (searchedPrice.equals("Alle")) {
+			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+		}
+		System.out.println(sortPriceList);
+		*/
+		/*
+		if (searchedDistrict.equals("Alle")) {
+			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+		} else if (!searchedDistrict.equals("Alle")) {
+			Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict)).forEach(item -> sortDistrictList.add(item));
+		}
+		System.out.println(sortDistrictList);
+		*/
+		model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
+					.filter(holidayHome -> holidayHome.getIsBookable())
+					//.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
+					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList)));
+					//.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
+
+		return "holidayhomes";
+	}
+/*
 	// sortieren nach Capacity----------
 	@PostMapping("/sortcapacity")
 	String sortCapacity(String searchedCapacity) {
@@ -186,7 +258,7 @@ public class CatalogController {
 		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
 		return "redirect:/holidayhomes";
 	}
-
+*/
 	// add HolidayHome-----------------
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {

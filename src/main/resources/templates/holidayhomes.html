@@ -38,75 +38,175 @@
             <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
             <div class="col-md-9">
                 <div class="btn-group" sec:authorize="!hasRole('HOST')"> 
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortcapacity}" method="post">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Personenanzahl (min.)
-                        </button>
-            
-                        <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="Alle"/>
-                            <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="2"/>
-                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="4"/>
-                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="6"/>
-                            <input class="dropdown-item" type="submit" name="searchedCapacity" value="8"/>
-                        </div>
-                    </form>
 
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortprice}" method="post">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                <div>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Personenanzahl
+                    </button>
+
+                    <div class="dropdown-menu">
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedCapacity" value="Alle"/>
+                            <input class="dropdown-item" type="submit" value="Alle"/>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedCapacity" value="2"/>
+                            <input class="dropdown-item" type="submit" value="mind. 2"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedCapacity" value="4"/>
+                            <input class="dropdown-item" type="submit" value="mind. 4"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedCapacity" value="6"/>
+                            <input class="dropdown-item" type="submit" value="mind. 6"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedCapacity" value="8"/>
+                            <input class="dropdown-item" type="submit" value="mind. 8"/>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Preis p.N.
-                        </button>
+                    </button>
 
-                        <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="Alle"/>
-                            <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="0-50 EUR"/>
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="50-100 EUR"/>
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="100-150 EUR"/>
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="150-200 EUR"/>
-                            <input class="dropdown-item" type="submit" name="searchedPrice" value="Über 200 EUR"/>
-                        </div>
-                    </form>
+                    <div class="dropdown-menu">
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="Alle"/>
+                            <input type="hidden" name="searchedPrice2" value="Alle"/>
+                            <input class="dropdown-item" type="submit" value="Alle"/>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="0"/>
+                            <input type="hidden" name="searchedPrice2" value="50"/>
+                            <input class="dropdown-item" type="submit" value="0-50 EUR"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="50"/>
+                            <input type="hidden" name="searchedPrice2" value="100"/>
+                            <input class="dropdown-item" type="submit" value="50-100 EUR"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="100"/>
+                            <input type="hidden" name="searchedPrice2" value="150"/>
+                            <input class="dropdown-item" type="submit" value="100-150 EUR"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="150"/>
+                            <input type="hidden" name="searchedPrice2" value="200"/>
+                            <input class="dropdown-item" type="submit" value="150-200 EUR"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedPrice1" value="200"/>
+                            <input type="hidden" name="searchedPrice2" value="0"/>
+                            <input class="dropdown-item" type="submit" value="Über 200 EUR"/>
+                        </form>
+                    </div>
+                </div>
 
-                    <form role="form" class="form-inline mr-auto ml-0" th:action="@{/sortdistrict}" method="post">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                <div>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Stadtteil
-                        </button>
-
-                        <div class="dropdown-menu">
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Alle"/>
-                            <div class="dropdown-divider"></div>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Altfranken"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Altstadt"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Blasewitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Cossebaude"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Cotta"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Gompitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Klotsche"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Langebrück"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Leuben"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Loschwitz"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Mobschatz"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Neustadt"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Oberwartha"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Pieschen"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Plauen"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Prohlis"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Schönborn"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Schönefeld-Weißig"/>
-                            <input class="dropdown-item" type="submit" name="searchedDistrict" value="Weixdorf"/>
-                        </div>
-                    </form>
-
+                    </button>
+                    
+                    <div class="dropdown-menu">
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Alle"/>
+                            <input class="dropdown-item" type="submit" value="Alle"/>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Altfranken"/>
+                            <input class="dropdown-item" type="submit" value="Altfranken"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Altstadt"/>
+                            <input class="dropdown-item" type="submit" value="Altstadt"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Blasewitz"/>
+                            <input class="dropdown-item" type="submit" value="Blasewitz"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Cossebaude"/>
+                            <input class="dropdown-item" type="submit" value="Cossebaude"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Cotta"/>
+                            <input class="dropdown-item" type="submit" value="Cotta"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Gompitz"/>
+                            <input class="dropdown-item" type="submit" value="Gompitz"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Klotsche"/>
+                            <input class="dropdown-item" type="submit" value="Klotsche"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Langebrück"/>
+                            <input class="dropdown-item" type="submit" value="Langebrück"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Leuben"/>
+                            <input class="dropdown-item" type="submit" value="Leuben"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Loschwitz"/>
+                            <input class="dropdown-item" type="submit" value="Loschwitz"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Mobschatz"/>
+                            <input class="dropdown-item" type="submit" value="Mobschatz"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Neustadt"/>
+                            <input class="dropdown-item" type="submit" value="Neustadt"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Oberwartha"/>
+                            <input class="dropdown-item" type="submit" value="Oberwartha"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Pieschen"/>
+                            <input class="dropdown-item" type="submit" value="Pieschen"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Plauen"/>
+                            <input class="dropdown-item" type="submit" value="Plauen"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Prohlis"/>
+                            <input class="dropdown-item" type="submit" value="Prohlis"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Schönborn"/>
+                            <input class="dropdown-item" type="submit" value="Schönborn"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Schönefeld"/>
+                            <input class="dropdown-item" type="submit" value="Schönefeld-Weißig"/>
+                        </form>
+                        <form role="form" class="form-inline mr-auto ml-0" th:action="@{/holidayhomes}" method="post">
+                            <input type="hidden" name="searchedDistrict" value="Weixdorf"/>
+                            <input class="dropdown-item" type="submit" value="Weixdorf"/>
+                        </form>
+                    </div>
+                </div>
+<!--
                     <form role="form" th:method="post" th:action="@{/deletallsorts}">
                         <input class="btn btn-danger btn-outline-light" type="submit"
                                value="Alle Filter zurück setzen"/>
                     </form>
-
+                -->
                 </div>
 
                 <div class="col-md-3">
