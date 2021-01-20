@@ -50,20 +50,8 @@
                                 required="required" placeholder="Beschreibung"></textarea>
                         </div>
                     </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="price" class="px-2">Preis:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <div class="input-group-prepend">
-                                <input class="form-control" id="price" th:name="price" type="number" min="0"
-                                    required="required" placeholder="Preis" />
-                                <div class="input-group-text">
-                                    <i class="fas fa-euro-sign"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <input class="form-control" id="price" th:name="price" type="hidden" min="0" required="required"
+                        placeholder="Preis" value="0" />
                     <div class="row border-top" style="background-color: #EEEEEE;">
                         <div class="p-1 col-4 col-md-4 border-right">
                             <label for="date" class="px-2">Datum:</label>
@@ -81,10 +69,19 @@
                             <input class="form-control" id="time" th:name="time" type="time" placeholder="Zeitpunkt" />
                         </div>
                     </div>
-                    <input class="form-control" id="repeats" th:name="repeats" type="hidden" min=0 required="required"
-                        placeholder="Anzahl an Wiederholungen" value="0" />
-                    <input class="form-control" id="repeateRate" th:name="repeateRate" type="hidden" min=0
-                        required="required" placeholder="Aller x Tage" value="0" />
+                    <div class="row border-top" style="background-color: #EEEEEE;">
+                        <div class="p-1 col-4 col-md-4 border-right">
+                            <label for="repeats" class="px-2">Wiederholungsanzahl &amp; Wiederholungsrate:</label>
+                        </div>
+                        <div class="p-1 col-5 col-md-5">
+                            <input class="form-control" id="repeats" th:name="repeats" type="number" min=1
+                                required="required" placeholder="Anzahl an Wiederholungen (0 = einmaliges Event)" />
+                        </div>
+                        <div class="p-1 col-3 col-md-3">
+                            <input class="form-control" id="repeateRate" th:name="repeateRate" type="number" min=1
+                                required="required" placeholder="Aller x Tage (7 = wöchentlich)" />
+                        </div>
+                    </div>
                     <div class="row border-top" style="background-color: #EEEEEE;">
                         <div class="p-1 col-4 col-md-4 border-right">
                             <label for="inputGroupFile" class="px-2">Bilder:</label>
