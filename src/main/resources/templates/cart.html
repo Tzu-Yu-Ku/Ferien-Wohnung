@@ -187,17 +187,17 @@
                 <b><a th:href="@{/removeProduct/{id}(id=${item.id})}">X</a></b>
             </div>
             <div class="p-1 col-2 col-md-2 border-right my-auto">
-                <div style="display: block; width: 40%; margin: auto;">
+                <div class="row" style="display: block; margin: auto;">
                     <form th:id="${item.product.id.toString()}" id="updateTicketCount" class="form-inline"
                           th:action="@{/updateTicketCount/{id}(id=${item.product.id})}"
                           method="post">
-                        <input class="text-center ml-3" id="Anzahl" type="number" name="count"
-                               th:value="${item.getQuantity().getAmount().intValue()}"
-                               th:min="0" th:max="${item.product.getCapacity()}" th:onchange="updateTicketCount(${item.product.id.toString()})"
-                               style="width: 100%; margin: auto">
-                        <button type="submit" class="btn ml-1">
-                            <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
-                        </button>
+                        <div class="col-md-6" >
+                            <input class="ml-3" id="Anzahl" type="number" name="count" th:value="${item.getQuantity().getAmount().intValue()}" th:min="0" th:max="${item.product.getCapacity()}" th:onchange="updateTicketCount(${item.product.id.toString()})" style="width: 100%; margin: auto"></div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn ml-1">
+                                <img th:src="@{resources/img/refresh.svg}" width="23px" height="23px">
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
