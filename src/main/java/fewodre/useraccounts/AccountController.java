@@ -1,10 +1,10 @@
 package fewodre.useraccounts;
 
-import fewodre.catalog.events.Event;
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
-import org.salespointframework.catalog.Product;
-import org.salespointframework.catalog.ProductIdentifier;
+import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
+import fewodre.useraccounts.forms.HostRegistrationForm;
+import fewodre.useraccounts.forms.TenantRegistrationForm;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -15,25 +15,17 @@ import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -89,13 +81,13 @@ public class AccountController {
 		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
 
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("birthDate", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			result.addError(new FieldError("tenantRegistrationForm", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
 			return "register";
 		}
 
 		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantRegistrationForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("tenantRegistrationForm", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
@@ -275,13 +267,13 @@ public class AccountController {
 		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
 
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("birthDate", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			result.addError(new FieldError("hostRegistrationForm", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
 			return "register";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("hostRegistrationForm", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/newhost";
 		}
@@ -314,7 +306,7 @@ public class AccountController {
 
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("email", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("eventEmployeeRegistrationForm", "email", "RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/neweventemployee";
 		}

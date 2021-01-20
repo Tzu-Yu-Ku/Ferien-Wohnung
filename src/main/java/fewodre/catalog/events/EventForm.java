@@ -12,6 +12,7 @@ import fewodre.catalog.events.Event.EventType;
 import fewodre.utils.Place;
 
 public class EventForm extends CatalogForm {
+
 	private String eventCompany;
 	private LocalDate date;
 	private LocalTime time;

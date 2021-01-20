@@ -1,8 +1,8 @@
-package fewodre.useraccounts;
+package fewodre.useraccounts.forms;
 
 import javax.validation.constraints.NotBlank;
 
-class EventEmployeeRegistrationForm extends RegistrationForm {
+public class EventEmployeeRegistrationForm extends RegistrationForm {
 
 	@NotBlank(message = "{RegistrationForm.eventcompany.NotEmpty}")
 	private final String eventCompany;

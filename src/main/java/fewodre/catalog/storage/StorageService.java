@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
