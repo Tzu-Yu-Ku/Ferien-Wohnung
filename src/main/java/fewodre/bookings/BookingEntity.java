@@ -318,11 +318,14 @@ public class BookingEntity extends Order {
 	 * @return
 	 */
 	public int getDepositInCent() {
-		if (this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
+		//if (this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
 			List<OrderLine> events = this.getOrderLines()
+					.filter(orderLine -> orderLine.getProductName().equals(homeName)).toList();
+			events.forEach(event -> depositInCent = event.getPrice().multiply(10).getNumber().intValue());
+			events = this.getOrderLines()
 					.filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
 			events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
-		}
+		//}
 		return depositInCent;
 	}
 
