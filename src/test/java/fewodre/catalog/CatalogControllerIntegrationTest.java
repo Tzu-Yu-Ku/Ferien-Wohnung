@@ -12,19 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.util.Streamable;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -102,7 +105,12 @@ class CatalogControllerIntegrationTest {
 		form.setRepeateRate(1);
 		form.setRepeats(1);
 
-		MvcResult result = mvc.perform(post("/addEvent")
+		byte[] imageBytes = new byte[]{1};
+		MockMultipartFile image = new MockMultipartFile("imageupload","test.png",
+				MediaType.IMAGE_PNG.toString(), imageBytes);
+
+		MvcResult result = mvc.perform(multipart("/addEvent")
+				.file(image)
 				.flashAttr("form", form))
 				.andExpect(status().isFound())
 				.andExpect(redirectedUrlPattern("/editEventLocation?event=**"))
@@ -282,7 +290,12 @@ class CatalogControllerIntegrationTest {
 		form.setCoordinateX(100);
 		form.setCoordinateY(100);
 
-		MvcResult result = mvc.perform(post("/addHolidayHome")
+		byte[] imageBytes = new byte[]{1};
+		MockMultipartFile image = new MockMultipartFile("imageupload","test.png",
+				MediaType.IMAGE_PNG.toString(), imageBytes);
+
+		MvcResult result = mvc.perform(multipart("/addHolidayHome")
+				.file(image)
 				.flashAttr("form", form))
 				.andExpect(status().isFound())
 				.andExpect(redirectedUrlPattern("/editHolidayHomeLocation?holidayhome=**"))

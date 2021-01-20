@@ -216,8 +216,8 @@ public class CatalogController {
 	                       Model model) {
 
 		firstname(model);
-
-		String contentType = "." + image.getContentType().split("/")[1];
+		String[] strings = image.getContentType().split("/");
+		String contentType = "." + strings[strings.length-1];
 		if(!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
 			result.addError(new FieldError("form",
 					"imageupload",
@@ -631,7 +631,8 @@ public class CatalogController {
 
 		ProductIdentifier productIdentifier = event.getId();
 
-		String contentType = "." + image.getContentType().split("/")[1];
+		String[] strings = image.getContentType().split("/");
+		String contentType = "." + strings[strings.length-1];
 		String fileName = productIdentifier.getIdentifier() + contentType;
 		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
 
