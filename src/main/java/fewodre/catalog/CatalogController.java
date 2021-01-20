@@ -58,8 +58,6 @@ public class CatalogController {
 	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
 	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
 	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
-	int i = 0;
-	int j = 0;
 
 	private BookingManagement bookingManagement;
 
@@ -86,16 +84,16 @@ public class CatalogController {
 		}
 	}
 
-	// HolidayHomes------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Method will model all asked HolidayHomes for the Frontend
+	 * 
+	 * @param model 
+	 * @return template : holidayhomes
+	 */
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
 
-		/*
-		 * wichtig damit die Listen zum Start des Programms nicht leer sind und wenn ein
-		 * neues HolidayHome dazukommt, dann wird es hierdurch in die Sortierlisten
-		 * hinzugefügt, damit beim sortieren kein Fehler auftritt.
-		 */
 		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
 		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
 		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
@@ -112,6 +110,12 @@ public class CatalogController {
 		return "holidayhomes";
 	}
 
+	/**
+	 * Method enable the sort of the HolidayHomes. Will model all new asked HolidayHomes.
+	 * 
+	 * @param model 
+	 * @return template : holidayhomes
+	 */
 	@PreAuthorize("!hasRole('HOST')")
 	@PostMapping("/holidayhomes")
 	String sortHolidayHome(Model model, String searchedCapacity, String searchedPrice1, String searchedPrice2,
@@ -170,10 +174,6 @@ public class CatalogController {
 			}
 		}
 
-		System.out.println(sortCapacityList);
-		System.out.println(sortPriceList);
-		System.out.println(sortDistrictList);
-
 		model.addAttribute("holidayhomeCatalog",
 				Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable())
 						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
@@ -183,13 +183,25 @@ public class CatalogController {
 		return "holidayhomes";
 	}
 
-	// add HolidayHome-----------------
+	/**
+	 * Method will pass to the form, where we can create a new HolidayHome
+	 * 
+	 * @param model 
+	 * @return template : addholidayhome
+	 */
 	@GetMapping("/addholidayhome")
 	String addHolidayhomePage(Model model) {
 		firstname(model);
 		return "addholidayhome";
 	}
 
+	/**
+	 * Method will create a new HolidayHome
+	 * 
+	 * @param model 
+	 * @param form
+	 * @return template : editHolidayHomeLocation and a String that represent the Productidentifier
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
 	String addHolidayHomes(@ModelAttribute("form") HolidayHomeForm form, Model model,
@@ -204,7 +216,13 @@ public class CatalogController {
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
 
-	// edit HolidayHome----------------
+	/**
+	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 * 
+	 * @param model 
+	 * @param holidayHome
+	 * @return template : editholidayhome
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
@@ -213,6 +231,24 @@ public class CatalogController {
 		return "editholidayhome";
 	}
 
+	/**
+	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 * 
+	 * @param model 
+	 * @param holidayHomeId
+	 * @param name
+	 * @param description
+	 * @param price
+	 * @param capacity
+	 * @param street
+	 * @param houseNumber
+	 * @param city
+	 * @param postalCode
+	 * @param coordinates_x
+	 * @param coordinates_y
+	 * 
+	 * @return template : holidayhome
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editHolidayHome")
 	String editHolidayHomes(Model model, @RequestParam("holidayHomeId") ProductIdentifier holidayHomeId,

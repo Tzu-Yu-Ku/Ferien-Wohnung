@@ -56,7 +56,7 @@
                                 </form>
                                 <form role="form" class="form-inline mr-auto ml-0" th:action="@{/events}" method="post">
                                     <input type="hidden" name="searchedEventType" value="LARGE" />
-                                    <input class="dropdown-item" type="submit" value="Besonderes Events" />
+                                    <input class="dropdown-item" type="submit" value="Besondere Events" />
                                 </form>
                             </div>
                         </div>
@@ -195,11 +195,11 @@
                     <div class="d-flex flex-row-reverse">
                         <a th:href="@{/addevents}" class="btn btn-primary btn-outline-light float-right mr-1"
                             sec:authorize="hasRole('EVENT_EMPLOYEE')">
-                            großes einmaliges Event erstellen
+                            Besondere Events
                         </a>
                         <a th:href="@{/addsmallevents}" class="btn btn-primary btn-outline-light float-right mr-1"
                             sec:authorize="hasRole('EVENT_EMPLOYEE')">
-                            kleines wiederkehrendes Event erstellen
+                            Wiederholende Events
                         </a>
                     </div>
                 </div>
