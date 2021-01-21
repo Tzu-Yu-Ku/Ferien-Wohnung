@@ -1,5 +1,6 @@
 package fewodre.catalog.events;
 
+import fewodre.catalog.events.Event.EventType;
 import org.salespointframework.catalog.Catalog;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.domain.Sort;
@@ -11,6 +12,8 @@ public interface EventCatalog extends Catalog<Event> {
 
 	@Override
 	Streamable<Event> findAll();
+
+	Streamable<Event> findAllByEventType(EventType eventType);
 
 	Event findFirstByProductIdentifier(ProductIdentifier productIdentifier);
 }

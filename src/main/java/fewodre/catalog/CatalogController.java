@@ -19,6 +19,7 @@ import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,6 +39,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,8 +69,6 @@ public class CatalogController {
 	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
 	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
 	ArrayList<Event> recentEvent = new ArrayList<Event>();
-	int i;
-	int j;
 
 	public static String uploadDirectory = Paths.get("").toAbsolutePath().toString() + "/src/main/resources/static/resources/img/";
 
@@ -90,7 +90,8 @@ public class CatalogController {
 
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
+		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser")
+				&& !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
 			model.addAttribute("firstname",
@@ -98,115 +99,126 @@ public class CatalogController {
 		}
 	}
 
-	// HolidayHomes------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * Method will model all asked HolidayHomes for the Frontend
+	 *
+	 * @param model
+	 * @return template : holidayhomes
+	 */
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
-		//wichtig damit die Listen zum Start des Programms schon gefüllt sind und nicht leer sind
-		if (i != 1) {
-			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-			i = 1;
-		}
 
+		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
 
 		if (authentication.getPrincipal().toString().contains("HOST")) {
 			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getHostMail().equals(accountRepository
-							.findByAccount_Email(authentication.getName()).getAccount().getEmail()))
+					.filter(holidayHome -> holidayHome.getHostMail().equals(
+							accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail()))
 					.filter(holidayHome -> holidayHome.getIsBookable()));
 		} else {
-			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getIsBookable())
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList))
-					.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
+			model.addAttribute("holidayhomeCatalog",
+					Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
 		}
 		return "holidayhomes";
 	}
 
-	// sortieren nach Capacity----------
-	@PostMapping("/sortcapacity")
-	String sortCapacity(String searchedCapacity) {
-		System.out.println(searchedCapacity);
-		sortCapacityList.clear();
-		if (searchedCapacity.equals("Alle")) {
+	/**
+	 * Method enable the sort of the HolidayHomes. Will model all new asked HolidayHomes.
+	 *
+	 * @param model
+	 * @return template : holidayhomes
+	 */
+	@PreAuthorize("!hasRole('HOST')")
+	@PostMapping("/holidayhomes")
+	String sortHolidayHome(Model model, String searchedCapacity, String searchedPrice1, String searchedPrice2,
+	                       String searchedDistrict) {
+		firstname(model);
+
+		if (searchedCapacity == null && searchedPrice1 == null && searchedPrice2 == null && searchedDistrict == null) {
 			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		} else if (!searchedCapacity.equals("Alle")) {
-			int searchedCapacityInt = Integer.parseInt(searchedCapacity);
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt).forEach(item -> sortCapacityList.add(item));
-		}
-		System.out.println(sortCapacityList);
-		return "redirect:/holidayhomes";
-	}
-
-	// sortieren nach Price-------------
-	@PostMapping("/sortprice")
-	String sortPrice(String searchedPrice) {
-		System.out.println(searchedPrice);
-		sortPriceList.clear();
-		if (searchedPrice.equals("0-50 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 50")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("50-100 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 50")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 100")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("100-150 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 100")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 150")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("150-200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThanOrEqualTo(Money.parse("EUR 150")))
-					.filter(holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Über 200 EUR")) {
-			Hcatalog.findAll()
-					.filter(holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR 200")))
-					.forEach(item -> sortPriceList.add(item));
-		} else if (searchedPrice.equals("Alle")) {
 			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		}
-		System.out.println(sortPriceList);
-		return "redirect:/holidayhomes";
-	}
-
-	// sortieren nach Destrict------------
-	@PostMapping("/sortdistrict")
-	String sortDistrict(String searchedDistrict) {
-		System.out.println(searchedDistrict);
-		sortDistrictList.clear();
-		if (searchedDistrict.equals("Alle")) {
 			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-		} else if (!searchedDistrict.equals("Alle")) {
-			Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict)).forEach(item -> sortDistrictList.add(item));
 		}
-		System.out.println(sortDistrictList);
-		return "redirect:/holidayhomes";
+
+		if (searchedCapacity != null) {
+			sortCapacityList.clear();
+
+			if (searchedCapacity.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+			} else if (!searchedCapacity.equals("Alle")) {
+				int searchedCapacityInt = Integer.parseInt(searchedCapacity);
+				Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
+						.forEach(item -> sortCapacityList.add(item));
+			}
+		}
+
+		if (searchedPrice1 != null && searchedPrice2 != null) {
+			sortPriceList.clear();
+
+			if (searchedPrice1.equals("Alle") && searchedPrice2.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+			} else if (searchedPrice1.equals("0")) {
+				Hcatalog.findAll().filter(
+						holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR " + searchedPrice2)))
+						.forEach(item -> sortPriceList.add(item));
+			} else if (searchedPrice2.equals("0")) {
+				Hcatalog.findAll().filter(
+						holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR " + searchedPrice1)))
+						.forEach(item -> sortPriceList.add(item));
+			} else {
+				Hcatalog.findAll()
+						.filter(holidayHome -> holidayHome.getPrice()
+								.isGreaterThanOrEqualTo(Money.parse("EUR " + searchedPrice1)))
+						.filter(holidayHome -> holidayHome.getPrice()
+								.isLessThanOrEqualTo(Money.parse("EUR " + searchedPrice2)))
+						.forEach(item -> sortPriceList.add(item));
+			}
+		}
+
+		if (searchedDistrict != null) {
+			sortDistrictList.clear();
+
+			if (searchedDistrict.equals("Alle")) {
+				Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+			} else if (!searchedDistrict.equals("Alle")) {
+				Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict))
+						.forEach(item -> sortDistrictList.add(item));
+			}
+		}
+
+		model.addAttribute("holidayhomeCatalog",
+				Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable())
+						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
+						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList))
+						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
+
+		return "holidayhomes";
 	}
 
-	// löscht alle Sortierungen
-	@PostMapping("/deletallsorts")
-	String deleteAllSorts() {
-		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
-		return "redirect:/holidayhomes";
-	}
-
-	@PreAuthorize("hasRole('HOST')")
+	/**
+	 * Method will pass to the form, where we can create a new HolidayHome
+	 *
+	 * @param model
+	 * @return template : addholidayhome
+	 */
 	@GetMapping("/addholidayhome")
+	@PreAuthorize("hasRole('HOST')")
 	String addHolidayhomePage(Model model, HolidayHomeForm form) {
 		firstname(model);
 		model.addAttribute("form", form);
 		return "addholidayhome";
 	}
 
+	/**
+	 * Method will create a new HolidayHome
+	 *
+	 * @param model
+	 * @param form
+	 * @return template : editHolidayHomeLocation and a String that represent the Productidentifier
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping(path = "/addHolidayHome")
 	String addHolidayHomes(@Valid @ModelAttribute("form") HolidayHomeForm form,
@@ -217,14 +229,14 @@ public class CatalogController {
 
 		firstname(model);
 		String[] strings = image.getContentType().split("/");
-		String contentType = "." + strings[strings.length-1];
-		if(!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
+		String contentType = "." + strings[strings.length - 1];
+		if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
 			result.addError(new FieldError("form",
 					"imageupload",
 					"Es werden nur JPG oder PNG Bilder unterstützt."));
 		}
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "addholidayhome";
 		}
 
@@ -252,7 +264,13 @@ public class CatalogController {
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
 
-	// edit HolidayHome----------------
+	/**
+	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 *
+	 * @param model
+	 * @param holidayHome
+	 * @return template : editholidayhome
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editholidayhome")
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
@@ -261,6 +279,23 @@ public class CatalogController {
 		return "editholidayhome";
 	}
 
+	/**
+	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 *
+	 * @param model
+	 * @param holidayHomeId
+	 * @param name
+	 * @param description
+	 * @param price
+	 * @param capacity
+	 * @param street
+	 * @param houseNumber
+	 * @param city
+	 * @param postalCode
+	 * @param coordinates_x
+	 * @param coordinates_y
+	 * @return template : holidayhome
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/editHolidayHome")
 	String editHolidayHomes(Model model, @RequestParam("holidayHomeId") ProductIdentifier holidayHomeId,
@@ -271,7 +306,7 @@ public class CatalogController {
 	                        @RequestParam("coordinates_x") String coordinates_x, @RequestParam("coordinates_y") String coordinates_y) {
 		System.out.println(holidayHomeId);
 		Hcatalog.findById(holidayHomeId);
-
+		boolean holidayHomePlaceUpdated = false;
 		if (Hcatalog.findById(holidayHomeId).isPresent()) {
 			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
 			if (!name.isBlank()) {
@@ -292,15 +327,19 @@ public class CatalogController {
 			Place changedPlace = holidayHomeToChange.getPlace();
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
+				holidayHomePlaceUpdated = true;
 			}
 			if (!houseNumber.isBlank()) {
 				changedPlace.setHouseNumber(houseNumber);
+				holidayHomePlaceUpdated = true;
 			}
 			if (!postalCode.isBlank()) {
 				changedPlace.setPostalCode(postalCode);
+				holidayHomePlaceUpdated = true;
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
+				holidayHomePlaceUpdated = true;
 			}
 			if (!coordinates_x.isBlank()) {
 				int coordinates_x2 = Integer.parseInt(coordinates_x);
@@ -316,6 +355,11 @@ public class CatalogController {
 			Hcatalog.save(holidayHomeToChange);
 
 		}
+
+		if(holidayHomePlaceUpdated) {
+			return "redirect:/editHolidayHomeLocation?holidayhome=" + holidayHomeId.toString();
+		}
+
 		return "redirect:/holidayhomes";
 	}
 
@@ -343,7 +387,8 @@ public class CatalogController {
 		model.addAttribute("holidayHome", holidayHome);
 		model.addAttribute("currentDay", LocalDate.now());
 		model.addAttribute("endDay", LocalDate.now().plusDays(2));
-		model.addAttribute("userAccount", accountRepository.findByAccount_Email(holidayHome.getHostMail()).getAccount());
+		model.addAttribute("userAccount",
+				accountRepository.findByAccount_Email(holidayHome.getHostMail()).getAccount());
 		return "housedetails";
 	}
 
@@ -393,10 +438,16 @@ public class CatalogController {
 	@GetMapping("/events")
 	String eventCatalog(Model model) {
 		recentEvent.clear();
+
+		updateSmallEvents();
 		firstname(model);
 
-		ArrayList <ProductIdentifier> recent = new ArrayList();
-		Ecatalog.findAll().forEach(item -> recent.add(item.getId()));
+		ArrayList<ProductIdentifier> recent = new ArrayList();
+		Ecatalog.findAll()
+				.filter(event -> event.getDate().isAfter(LocalDate.now())
+						|| event.getDate().isEqual(LocalDate.now()))
+				.forEach(item -> recent.add(item.getId()));
+
 		LocalDate latestdate = Ecatalog.findById(recent.get(0)).get().getDate();
 		LocalTime latesttime = Ecatalog.findById(recent.get(0)).get().getTime();
 
@@ -405,39 +456,34 @@ public class CatalogController {
 		for (int i = 0; i < recent.size(); i++) {
 			LocalDate nextdate = Ecatalog.findById(recent.get(i)).get().getDate();
 			LocalTime nexttime = Ecatalog.findById(recent.get(i)).get().getTime();
-			if(nextdate.equals(latestdate)) {
-				if(nexttime.isBefore(latesttime)) {
+			if (nextdate.equals(latestdate)) {
+				if (nexttime.isBefore(latesttime)) {
 					latestdate = nextdate;
 					latesttime = nexttime;
 					latestID = recent.get(count);
 				}
 			}
-			if(nextdate.isBefore(latestdate)) {
+			if (nextdate.isBefore(latestdate)) {
 				latestdate = nextdate;
 				latesttime = nexttime;
 				latestID = recent.get(count);
 			}
-			count ++;
+			count++;
 		}
 		//System.out.println(latest);
 		//System.out.println(latestID);
 		final ProductIdentifier finallatestID = latestID;
 		Ecatalog.findAll().filter(event -> event.getId().equals(finallatestID)).forEach(item -> recentEvent.add(item));
 
-
-		if (j != 1) {
-			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-			j = 1;
-		}
+		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
 
 		model.addAttribute("recentEvent", recentEvent);
 		model.addAttribute("eventCatalog", Ecatalog.findAll()
 				.filter(Event::isEventStatus)
-				.filter(event -> event.findInList(event, sortEventCapacityList))
-				.filter(event -> event.findInList(event, sortEventTypeList))
-				.filter(event -> event.findInList(event, sortEventDistrictList)));
+				.filter(event -> event.getDate().isAfter(LocalDate.now())
+						|| event.getDate().isEqual(LocalDate.now())));
 
 		Object formatter = new StringFormatter();
 		model.addAttribute("formatter", formatter);
@@ -445,50 +491,91 @@ public class CatalogController {
 		return "events";
 	}
 
-	@PostMapping("/sorteventtype")
-	String sortEventType(String searchedEventType) {
-		System.out.println(searchedEventType);
-		sortEventTypeList.clear();
-		if (searchedEventType.equals("Alle")) {
+	private void updateSmallEvents() {
+		LocalDate todayDate = LocalDate.now();
+		LocalTime todayTime = LocalTime.now(ZoneId.systemDefault());
+
+		Streamable<Event> allSmallEvents = Ecatalog.findAllByEventType(EventType.SMALL);
+		for (Event e : allSmallEvents) {
+			boolean todayDateBefore = todayDate.isBefore(e.getDate());
+			boolean todayTimeBefore = todayTime.isBefore(e.getTime());
+
+			if (todayDate.isEqual(e.getDate())) {
+				if (!todayTimeBefore) {
+					e.setDate(e.getDate().plusWeeks(1));
+				}
+			} else if (!todayDateBefore) {
+				e.setDate(e.getDate().plusWeeks(1));
+
+			}
+			Ecatalog.save(e);
+		}
+	}
+
+	@PreAuthorize("!hasRole('EVENT_EMPLOYEE')")
+	@PostMapping("/events")
+	String sortEvent(Model model, String searchedEventType, String searchedEventCapacity,
+	                 String searchedEventDistrict) {
+		firstname(model);
+
+		if (searchedEventType == null && searchedEventCapacity == null && searchedEventDistrict == null) {
 			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-		} else if (searchedEventType.equals("Wiederholende Events")) {
-			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL).forEach(item -> sortEventTypeList.add(item));
-		} else if (searchedEventType.equals("Besondere Events")) {
-			Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE).forEach(item -> sortEventTypeList.add(item));
+			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+		}
+
+		if (searchedEventType != null) {
+			sortEventTypeList.clear();
+
+			if (searchedEventType.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+			} else if (searchedEventType.equals("SMALL")) {
+				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL)
+						.forEach(item -> sortEventTypeList.add(item));
+			} else if (searchedEventType.equals("LARGE")) {
+				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE)
+						.forEach(item -> sortEventTypeList.add(item));
+			}
+		}
+
+		if (searchedEventCapacity != null) {
+			sortEventCapacityList.clear();
+
+			if (searchedEventCapacity.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+			} else {
+				int searchedCapacityInt = Integer.parseInt(searchedEventCapacity);
+				Ecatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
+						.forEach(item -> sortEventCapacityList.add(item));
+			}
+		}
+
+		if (searchedEventDistrict != null) {
+			sortEventDistrictList.clear();
+
+			if (searchedEventDistrict.equals("Alle")) {
+				Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+			} else if (!searchedEventDistrict.equals("Alle")) {
+				Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict))
+						.forEach(item -> sortEventDistrictList.add(item));
+			}
 		}
 		System.out.println(sortEventTypeList);
-		return "redirect:/events";
-	}
+		System.out.println(sortEventCapacityList);
+		System.out.println(sortEventDistrictList);
 
-	@PostMapping("/sorteventcapacity")
-	String sortEventCapacity(String searchedEventCapacity) {
-		sortEventCapacityList.clear();
-		if (searchedEventCapacity.equals("Alle")) {
-			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-		} else if (!searchedEventCapacity.equals("Alle")) {
-			int searchedEventCapacityInt = Integer.parseInt(searchedEventCapacity);
-			Ecatalog.findAll().filter(events -> events.getCapacity() >= searchedEventCapacityInt).forEach(item -> sortEventCapacityList.add(item));
-		}
-		return "redirect:/events";
-	}
+		model.addAttribute("eventCatalog",
+				Ecatalog.findAll().filter(Event::isEventStatus)
+						.filter(event -> event.getDate().isAfter(LocalDate.now())
+								|| event.getDate().isEqual(LocalDate.now()))
+						.filter(event -> event.findInList(event, sortEventCapacityList))
+						.filter(event -> event.findInList(event, sortEventTypeList))
+						.filter(event -> event.findInList(event, sortEventDistrictList)));
 
-	@PostMapping("/sorteventdistrict")
-	String sortEventDistrict(String searchedEventDistrict) {
-		sortEventDistrictList.clear();
-		if (searchedEventDistrict.equals("Alle")) {
-			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-		} else if (!searchedEventDistrict.equals("Alle")) {
-			Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict)).forEach(item -> sortEventDistrictList.add(item));
-		}
-		return "redirect:/events";
-	}
+		Object formatter = new StringFormatter();
+		model.addAttribute("formatter", formatter);
 
-	@PostMapping("/deletalleventsorts")
-	String deleteAllEventSorts() {
-		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
-		return "redirect:/events";
+		return "events";
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
@@ -515,8 +602,8 @@ public class CatalogController {
 		System.out.println("zu löschendes Event " + event);
 		if (holidayHomeStorage.findByProduct(event).isPresent()) {
 			if (!event.isEventStatus()) {
-//				holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
-//				Ecatalog.delete(event);
+				// holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
+				// Ecatalog.delete(event);
 				Ecatalog.deleteById(Objects.requireNonNull(event.getId()));
 			}
 		}
@@ -538,7 +625,6 @@ public class CatalogController {
 	String editEvent(Model model, @RequestParam("eventId") ProductIdentifier eventId, @RequestParam("name") String name,
 	                 @RequestParam("description") String description, @RequestParam("price") String price,
 	                 @RequestParam("date") String date, @RequestParam("time") String time,
-	                 @RequestParam("repeats") String repeats, @RequestParam("repeateRate") String repeateRate,
 	                 @RequestParam("capacity") String capacity, @RequestParam("street") String street,
 	                 @RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
 	                 @RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
@@ -546,6 +632,7 @@ public class CatalogController {
 		firstname(model);
 		System.out.println(eventId);
 		Ecatalog.findById(eventId);
+		boolean eventPlaceUpdated = false;
 		if (Ecatalog.findById(eventId).isPresent()) {
 			Event EventToChange = Ecatalog.findById(eventId).get();
 			if (!name.isBlank()) {
@@ -564,17 +651,6 @@ public class CatalogController {
 			if (!time.isBlank()) {
 				EventToChange.setTime(LocalTime.parse(time));
 			}
-			if (!repeats.isBlank()) {
-				int repeats2 = Integer.parseInt(repeats);
-				EventToChange.setRepeats(repeats2);
-				if (repeats2 > 0) {
-					EventToChange.setEventType(EventType.SMALL);
-				}
-			}
-			if (!repeateRate.isBlank()) {
-				int repeateRate2 = Integer.parseInt(repeateRate);
-				EventToChange.setRepeateRate(repeateRate2);
-			}
 			if (!capacity.isBlank()) {
 				int capacity2 = Integer.parseInt(capacity);
 				EventToChange.setCapacity(capacity2);
@@ -582,15 +658,19 @@ public class CatalogController {
 			Place changedPlace = EventToChange.getPlace();
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
+				eventPlaceUpdated = true;
 			}
 			if (!houseNumber.isBlank()) {
 				changedPlace.setHouseNumber(houseNumber);
+				eventPlaceUpdated = true;
 			}
 			if (!postalCode.isBlank()) {
 				changedPlace.setPostalCode(postalCode);
+				eventPlaceUpdated = true;
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
+				eventPlaceUpdated = true;
 			}
 			if (!coordinates_x.isBlank()) {
 				int coordinates_x2 = Integer.parseInt(coordinates_x);
@@ -606,6 +686,10 @@ public class CatalogController {
 			// holidayHomeStorage.save(UniqueInventoryItem(EventToChange,
 			// EventToChange.getCapacity()));
 		}
+
+		if(eventPlaceUpdated) {
+			return "redirect:/editEventLocation?event=" + eventId.toString();
+		}
 		return "redirect:/events";
 	}
 
@@ -618,12 +702,21 @@ public class CatalogController {
 		return "addevent";
 	}
 
+	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
+	@GetMapping("/addsmallevents")
+	String addSmallEventPage(Model model) {
+		firstname(model);
+		model.addAttribute("today", LocalDate.now());
+		return "addsmallevent";
+	}
+
 	@PostMapping(path = "/addEvent")
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	String addEvent(@LoggedIn UserAccount userAccount,
 	                @RequestParam("imageupload") MultipartFile image,
 	                @ModelAttribute("form") EventForm form) {
 
+		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 
 		Ecatalog.save(event);
@@ -632,7 +725,7 @@ public class CatalogController {
 		ProductIdentifier productIdentifier = event.getId();
 
 		String[] strings = image.getContentType().split("/");
-		String contentType = "." + strings[strings.length-1];
+		String contentType = "." + strings[strings.length - 1];
 		String fileName = productIdentifier.getIdentifier() + contentType;
 		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
 
@@ -641,7 +734,6 @@ public class CatalogController {
 		newEvent.setImage(fileName);
 		Ecatalog.save(newEvent);
 
-		deleteAllEventSorts();
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
 	}
 
@@ -689,16 +781,16 @@ public class CatalogController {
 
 	@GetMapping("/editEventLocation")
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
-	public String editEventLocation(@RequestParam("event") ProductIdentifier productIdentifier, @ModelAttribute("coordinates")
-			Coordinates coordinates, Model model) {
+	public String editEventLocation(@RequestParam("event") ProductIdentifier productIdentifier,
+	                                @ModelAttribute("coordinates") Coordinates coordinates, Model model) {
 		model.addAttribute("productIdentifier", productIdentifier);
 		return "map";
 	}
 
 	@GetMapping("/editHolidayHomeLocation")
 	@PreAuthorize("hasRole('HOST')")
-	public String editHolidayHomeLocation(@RequestParam("holidayhome") ProductIdentifier productIdentifier, @ModelAttribute("coordinates")
-			Coordinates coordinates, Model model) {
+	public String editHolidayHomeLocation(@RequestParam("holidayhome") ProductIdentifier productIdentifier,
+	                                      @ModelAttribute("coordinates") Coordinates coordinates, Model model) {
 		model.addAttribute("productIdentifier", productIdentifier);
 		return "map";
 	}

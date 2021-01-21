@@ -20,17 +20,18 @@
     <div class="container">
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-lg-3 w-100">
-                <h1 class="text-center">Neues besonderes Event hinzufügen</h1>
+                <h1 class="text-center">Neues wiederholendes Event hinzufügen</h1>
             </div>
         </div>
         <div class="row" style="background-color: #EEEEEE;">
             <div class="p-1 col-8 col-md-12">
-                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres Eventangebots aus und
-                    laden Sie ein passendes Bild hoch.</p>
+                <p class="lead mb-4 p-1 text-center">Füllen Sie die benötigten Daten Ihres wiederholenden
+                    Eventangebots aus und laden Sie ein passendes Bild hoch. Diese kostenlosen Events wiederholen
+                    sich wöchentlich.</p>
             </div>
         </div>
-        <form method="post" role="form" id="form" class="gb-form"
-              th:action="@{/addEvent}" th:object="${form}" enctype="multipart/form-data">
+        <form method="post" role="form" id="form" class="gb-form" th:action="@{/addEvent}" th:object="${form}"
+              enctype="multipart/form-data">
             <div class="form-group">
                 <div class="row border-top" style="background-color: #EEEEEE;">
                     <div class="p-1 col-4 col-md-4 border-right">
@@ -50,20 +51,8 @@
                                       required="required" placeholder="Beschreibung"></textarea>
                     </div>
                 </div>
-                <div class="row border-top" style="background-color: #EEEEEE;">
-                    <div class="p-1 col-4 col-md-4 border-right">
-                        <label for="price" class="px-2">Preis:</label>
-                    </div>
-                    <div class="p-1 col-8 col-md-8">
-                        <div class="input-group-prepend">
-                            <input class="form-control" id="price" th:name="price" type="number" min="0"
-                                   required="required" placeholder="Preis"/>
-                            <div class="input-group-text">
-                                <i class="fas fa-euro-sign"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <input class="form-control" id="price" th:name="price" type="hidden" min="0" required="required"
+                       placeholder="Preis" value="0"/>
                 <div class="row border-top" style="background-color: #EEEEEE;">
                     <div class="p-1 col-4 col-md-4 border-right">
                         <label for="date" class="px-2">Datum:</label>
@@ -91,23 +80,12 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="imageupload"
                                    name="imageupload" required="required">
-                            <label class="custom-file-label" for="imageupload" id="upload-label">
+                            <label class="custom-file-label" for="imageupload"
+                                   aria-describedby="inputGroupFileAddon02">
                                 Wählen Sie ein Bild aus. (JPG, PNG)
                             </label>
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        var input = document.getElementById('imageupload');
-                        var infoArea = document.getElementById('upload-label');
-
-                        input.addEventListener('change', showFileName);
-
-                        function showFileName(event) {
-                            var input = event.srcElement;
-                            var fileName = input.files[0].name;
-                            infoArea.textContent = 'Bild: ' + fileName;
-                        }
-                    </script>
                 </div>
                 <div class="row border-top" style="background-color: #EEEEEE;">
                     <div class="p-1 col-4 col-md-4 border-right">

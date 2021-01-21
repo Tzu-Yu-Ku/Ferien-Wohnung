@@ -47,22 +47,25 @@
                                   th:placeholder="${event.description}"></textarea>
                 </div>
             </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
+            <div class="row border-top" style="background-color: #EEEEEE;" th:if="${event.getEventType().toString() == 'LARGE'}">
                 <div class="p-1 col-4 col-md-4 border-right">
-                    <label for="price" class="px-2">Preis:</label>
+                    <label th:for="price" class="px-2">Preis:</label>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input class="form-control" id="price" th:name="price" type="number" min="0"
+                    <input class="form-control" th:id="price" th:name="price" type="number" min="0"
                            th:placeholder="${event.price}"/>
                 </div>
             </div>
+            <input class="form-control" th:id="price" th:name="price" type="hidden" required="required"
+                   th:if="${event.getEventType().toString() == 'SMALL'}" value="0"/>
             <div class="row border-top" style="background-color: #EEEEEE;">
                 <div class="p-1 col-4 col-md-4 border-right">
                     <label for="date" class="px-2">Datum:</label>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input class="form-control" id="date" th:name="date" type="date"
-                           th:min="${today}" th:placeholder="${event.date}"/>
+                    <input class="form-control" id="date" th:name="date" type="text"
+                           th:min="${today}" th:placeholder="${event.date}"
+                           onfocus="(this.type='date')" onblur="(this.type='text')"/>
                 </div>
             </div>
             <div class="row border-top" style="background-color: #EEEEEE;">
@@ -70,23 +73,15 @@
                     <label for="time" class="px-2">Zeitpunkt:</label>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input class="form-control" id="time" th:name="time" type="time"
-                           th:placeholder="${event.time}"/>
+                    <input class="form-control" id="time" th:name="time" type="text"
+                           th:placeholder="${event.time}"
+                           onfocus="(this.type='time')" onblur="(this.type='text')"/>
                 </div>
             </div>
-            <div class="row border-top" style="background-color: #EEEEEE;">
-                <div class="p-1 col-4 col-md-4 border-right">
-                    <label for="repeats" class="px-2">Wiederholungsanzahl &amp; Wiederholungsrate:</label>
-                </div>
-                <div class="p-1 col-4 col-md-4">
-                    <input class="form-control" id="repeats" th:name="repeats" type="number" min=0
-                           th:placeholder="${event.repeats}"/>
-                </div>
-                <div class="p-1 col-4 col-md-4">
-                    <input class="form-control" id="repeateRate" th:name="repeateRate" type="number" min=1
-                           th:placeholder="${event.repeateRate}"/>
-                </div>
-            </div>
+            <input class="form-control" th:id="eventType" th:name="eventType" type="hidden" required="required"
+                   th:if="${event.getEventType().toString() == 'LARGE'}" value="large"/>
+            <input class="form-control" th:id="eventType" th:name="eventType" type="hidden" required="required"
+                   th:if="${event.getEventType().toString() == 'SMALL'}" value="small"/>
             <div class="row border-top" style="background-color: #EEEEEE;">
                 <div class="p-1 col-4 col-md-4 border-right">
                     <label for="inputGroupFile" class="px-2">Bilder:</label>

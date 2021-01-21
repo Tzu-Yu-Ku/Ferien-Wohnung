@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.Calendar;
 
 import fewodre.catalog.CatalogForm;
+import org.apache.tomcat.jni.Local;
 import org.javamoney.moneta.Money;
 import org.salespointframework.useraccount.UserAccount;
 
@@ -16,8 +17,7 @@ public class EventForm extends CatalogForm {
 	private String eventCompany;
 	private LocalDate date;
 	private LocalTime time;
-	private int repeats;
-	private int repeateRate;
+	private String eventType;
 
 	public EventForm() {
 		// No logic in this constructor is required.
@@ -32,7 +32,7 @@ public class EventForm extends CatalogForm {
 	}
 
 	public EventType getEventType() {
-		if (getRepeats() > 0) {
+		if (eventType.equals("small")) {
 			return EventType.SMALL;
 		}
 		return EventType.LARGE;
@@ -54,26 +54,15 @@ public class EventForm extends CatalogForm {
 		this.time = LocalTime.parse(timeString);
 	}
 
-	public void setRepeats(int repeats) {
-		this.repeats = repeats;
-	}
-
-	public int getRepeats() {
-		return repeats;
-	}
-
-	public void setRepeateRate(int repeateRate) {
-		this.repeateRate = repeateRate;
-	}
-
-	public int getRepeateRate() {
-		return repeateRate;
-	}
 
 	public Event toNewEvent(String userAccount) {
 		return new Event(getName(), userAccount, getDescription(), "event1.png",
 				new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),
 				true, getEventType(), getCapacity(), Money.of(getPrice(), "EUR"), getDate(),
-				getTime(), getRepeats(), getRepeateRate());
+				getTime());
+	}
+
+	public void setEventType(String eventType) {
+		this.eventType = eventType;
 	}
 }

@@ -102,8 +102,8 @@ class CatalogControllerIntegrationTest {
 		form.setCoordinateX(100);
 		form.setCoordinateY(100);
 		form.setDate("2021-11-11");
-		form.setRepeateRate(1);
-		form.setRepeats(1);
+//		form.setRepeateRate(1);
+//		form.setRepeats(1);
 
 		byte[] imageBytes = new byte[]{1};
 		MockMultipartFile image = new MockMultipartFile("imageupload","test.png",
@@ -187,8 +187,8 @@ class CatalogControllerIntegrationTest {
 		assertThat(editedEvent.getDescription()).isEqualTo("test_desc");
 		assertThat(editedEvent.getPrice().toString()).isEqualTo("EUR 1234");
 		assertThat(editedEvent.getDate().toString()).isEqualTo("2021-12-12");
-		assertThat(editedEvent.getRepeats()).isEqualTo(20);
-		assertThat(editedEvent.getRepeateRate()).isEqualTo(30);
+//		assertThat(editedEvent.getRepeats()).isEqualTo(20);
+//		assertThat(editedEvent.getRepeateRate()).isEqualTo(30);
 		assertThat(editedEvent.getCapacity()).isEqualTo(99);
 		assertThat(editedEvent.getPlace().getStreet()).isEqualTo("test_street");
 		assertThat(editedEvent.getPlace().getHouseNumber()).isEqualTo("1234");

@@ -31,15 +31,13 @@ public class Event extends Product {
 	private int capacity;
 	private LocalDate date;
 	private LocalTime time;
-	private int repeats;
-	private int repeateRate;
 
 	@ElementCollection
 	private List<String> subscriber;
 
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place,
 			boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price, LocalDate date,
-			LocalTime time, int repeats, int repeateRate) {
+			LocalTime time) {
 		super(title, price);
 		this.description = description;
 		this.eventCompanyUuid = eventCompanyUuid;
@@ -51,8 +49,6 @@ public class Event extends Product {
 		this.addCategory("Event");
 		this.date = date;
 		this.time = time;
-		this.repeats = repeats;
-		this.repeateRate = repeateRate;
 		subscriber = new ArrayList<>();
 	}
 
@@ -143,50 +139,35 @@ public class Event extends Product {
 		this.time = time;
 	}
 
-	public void setRepeats(int repeats) {
-		this.repeats = repeats;
-	}
 
-	public int getRepeats() {
-		return repeats;
-	}
+//	public ArrayList<LocalDate> getAllDates() {
+//		ArrayList<LocalDate> AllDates = new ArrayList<>();
+//		LocalDate myDate = getDate();
+//		int myRepeats = getRepeats();
+//		int myRepeateRate = getRepeateRate();
+//		AllDates.add(myDate);
+//		if (myRepeats == 0) {
+//			return AllDates;
+//		}
+//		while (myRepeats > 1) {
+//			myDate = myDate.plusDays(myRepeateRate);
+//			AllDates.add(myDate);
+//			myRepeats--;
+//		}
+//		return AllDates;
+//	}
 
-	public void setRepeateRate(int repeateRate) {
-		this.repeateRate = repeateRate;
-	}
-
-	public int getRepeateRate() {
-		return repeateRate;
-	}
-
-	public ArrayList<LocalDate> getAllDates() {
-		ArrayList<LocalDate> AllDates = new ArrayList<LocalDate>();
-		LocalDate myDate = getDate();
-		int myRepeats = getRepeats();
-		int myRepeateRate = getRepeateRate();
-		AllDates.add(myDate);
-		if (myRepeats == 0) {
-			return AllDates;
-		}
-		while (myRepeats > 1) {
-			myDate = myDate.plusDays(myRepeateRate);
-			AllDates.add(myDate);
-			myRepeats--;
-		}
-		return AllDates;
-	}
-
-	public ArrayList<LocalDate> getPossibleDates(LocalDate StartDate, LocalDate EndDate) {
-		ArrayList<LocalDate> AllPossDates = new ArrayList<LocalDate>();
-		ArrayList<LocalDate> AllDates = getAllDates();
-		for (LocalDate allDate : AllDates) {
-			if ((allDate.isAfter(StartDate) && allDate.isBefore(EndDate))
-					|| allDate.equals(StartDate) || allDate.equals(EndDate)) {
-				AllPossDates.add(allDate);
-			}
-		}
-		return AllPossDates;
-	}
+//	public ArrayList<LocalDate> getPossibleDates(LocalDate StartDate, LocalDate EndDate) {
+//		ArrayList<LocalDate> AllPossDates = new ArrayList<LocalDate>();
+//		ArrayList<LocalDate> AllDates = getAllDates();
+//		for (LocalDate allDate : AllDates) {
+//			if ((allDate.isAfter(StartDate) && allDate.isBefore(EndDate))
+//					|| allDate.equals(StartDate) || allDate.equals(EndDate)) {
+//				AllPossDates.add(allDate);
+//			}
+//		}
+//		return AllPossDates;
+//	}
 
 	public void addSubscriber(BookingEntity booking){
 		this.subscriber.add(booking.getId().toString());

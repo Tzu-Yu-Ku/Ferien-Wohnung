@@ -22,6 +22,11 @@ public class HolidayHomeForm extends CatalogForm {
 		this.hostMail = hostMail;
 	}
 
+	/**
+	 * Method will create a new HolidayHome
+	 * @param hostMail is a String to math a Host to a HolidayHome
+	 * @return Returns a new HolidayHome 
+	 */
 	public HolidayHome toNewHolidayHome(String hostMail) {
 		return new HolidayHome(getName(), hostMail, getDescription(), "house4.png",
 				new Place(getStreet(), getNumber(), getPostalnumber(), getCity(), getCoordinateX(), getCoordinateY()),

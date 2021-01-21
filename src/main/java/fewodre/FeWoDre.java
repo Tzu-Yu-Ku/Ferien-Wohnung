@@ -96,7 +96,10 @@ public class FeWoDre {
 											.equals("http://localhost:8080/activatetenants")) {
 								System.out.println("true");
 								httpServletResponse.sendRedirect(httpServletRequest.getHeader("referer"));
-							} else {
+							} else if(authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+								httpServletResponse.sendRedirect("http://localhost:8080/events");
+							}
+							else {
 								httpServletResponse.sendRedirect("http://localhost:8080/holidayhomes");
 							}
 						}

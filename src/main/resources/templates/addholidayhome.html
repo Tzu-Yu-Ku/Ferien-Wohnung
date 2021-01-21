@@ -96,7 +96,7 @@
                         <input type="file" class="custom-file-input" id="imageupload"
                                name="imageupload" required="required"
                                th:field="*{imageupload}">
-                        <label class="custom-file-label" for="imageupload">
+                        <label class="custom-file-label" for="imageupload" id="upload-label">
                             Wählen Sie ein Bild aus. (JPG, PNG)
                         </label>
                         <div class="invalid-feedback ml-2" style="display: block;"
@@ -105,6 +105,18 @@
                             Error Text
                         </div>
                     </div>
+                    <script type="text/javascript">
+                        var input = document.getElementById('imageupload');
+                        var infoArea = document.getElementById('upload-label');
+
+                        input.addEventListener('change', showFileName);
+
+                        function showFileName(event) {
+                            var input = event.srcElement;
+                            var fileName = input.files[0].name;
+                            infoArea.textContent = 'Bild: ' + fileName;
+                        }
+                    </script>
                 </div>
             </div>
             <div class="row border-top" style="background-color: #EEEEEE;">
