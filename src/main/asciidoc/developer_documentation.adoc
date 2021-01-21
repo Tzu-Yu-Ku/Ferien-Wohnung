@@ -78,7 +78,7 @@ Die primäre Zielgruppe sind Personen zwischen 18 und 80 Jahren (Tenants), deren
 Es ist nicht angedacht, dass das System regelmäßiger Wartung bedarf. Alle Daten werden in einer Datenbank persistiert und können durch die Anwendung aufgerufen werden, sodass keine Kenntnisse im Umgang mit Datenbanken von irgendeiner der zuvor genannten Entitäten erwartet werden müssen.
 
 == Kontextabgrenzung
-image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidth=100%, title= "Top-Level-Architektur", align=center]
+image::./models/design/Model.svg[Top-Level-Architektur, 100%, 100%, pdfwidth=100%, title= "Top-Level-Architektur", align=center]
 
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
