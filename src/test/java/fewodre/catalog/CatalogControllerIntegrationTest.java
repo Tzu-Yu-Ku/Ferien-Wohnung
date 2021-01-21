@@ -101,6 +101,7 @@ class CatalogControllerIntegrationTest {
 		form.setPrice(10);
 		form.setCoordinateX(100);
 		form.setCoordinateY(100);
+		form.setEventType("large");
 		form.setDate("2021-11-11");
 //		form.setRepeateRate(1);
 //		form.setRepeats(1);
