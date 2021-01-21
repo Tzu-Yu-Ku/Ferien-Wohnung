@@ -74,6 +74,13 @@ public class BookingDataInitializer{
 		bookingEntity4.pay();
 		bookingEntity4.confirm();
 
+		//Acquired
+		cart.addOrUpdateItem(home2, Quantity.of(ChronoUnit.DAYS.between(LocalDate.now(), departureDate3)));
+		BookingEntity bookingEntity5 = bookingManagement.createBookingEntity(user, home2, cart, LocalDate.now(),
+				departureDate3, events1, "Cheque");
+		bookingEntity5.pay();
+		bookingEntity5.confirm();
+
 
 	}
 
