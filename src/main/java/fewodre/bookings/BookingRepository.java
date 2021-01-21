@@ -12,7 +12,7 @@ import org.springframework.data.util.Streamable;
 */
 public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
-	static final Sort DEFAULT_SORT = Sort.by("arrivalDate").ascending();
+	Sort DEFAULT_SORT = Sort.by("arrivalDate").descending();
 
 	/**
 	 * Returns all {@link BookingEntity}s with the given host.
@@ -54,7 +54,17 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 	 * @param userAccount must not be {@literal null}.
 	 * @return the bookingEntities of the given userAccount
 	 */
-	Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount);
+	Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount, Sort sort);
+
+	/**
+	 * Returns all {@link BookingEntity}s with the given userAccount, ordered by the arrival's date.
+	 *
+	 * @param userAccount must not be {@literal null}.
+	 * @return the bookingEntities of the given host's ID
+	 */
+	default Iterable<BookingEntity> findBookingEntityByUserAccount(UserAccount userAccount){
+		return findBookingEntityByUserAccount(userAccount,DEFAULT_SORT);
+	}
 
 	/**
 	 * Returns all {@link BookingEntity}s with the given holidayHome's name.

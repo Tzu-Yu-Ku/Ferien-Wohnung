@@ -1,6 +1,7 @@
 package fewodre.useraccounts;
 
 
+import fewodre.bookings.BookingDataInitializer;
 import org.apache.catalina.Host;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
@@ -20,13 +21,15 @@ public class AccountDataInitializer implements DataInitializer {
 
 	private final AccountManagement accountManagement;
 	private final UserAccountManagement userAccountManagement;
+	private final BookingDataInitializer bookingDataInitializer;
 
-	AccountDataInitializer(AccountManagement accountManagement, UserAccountManagement userAccountManagement) {
+	AccountDataInitializer(AccountManagement accountManagement, UserAccountManagement userAccountManagement, BookingDataInitializer bookingDataInitializer) {
 		Assert.notNull(accountManagement, "accountManagement must not be null!");
 		Assert.notNull(userAccountManagement, "userAccountManagement must not be null!");
 
 		this.accountManagement = accountManagement;
 		this.userAccountManagement = userAccountManagement;
+		this.bookingDataInitializer = bookingDataInitializer;
 	}
 
 	@Override
@@ -59,6 +62,6 @@ public class AccountDataInitializer implements DataInitializer {
 				"1", "12345", "Dresden", true);
 		accountManagement.createTenantAccount(testingTenantAccountForm);
 		accountManagement.enableTenant("test@test");
-
+		bookingDataInitializer.initialize();
 	}
 }
