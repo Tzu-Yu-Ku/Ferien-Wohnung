@@ -1,4 +1,4 @@
-package fewodre.useraccounts;
+package fewodre.useraccounts.forms;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

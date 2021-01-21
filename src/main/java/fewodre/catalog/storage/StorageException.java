@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.storage;
 
 public class StorageException extends RuntimeException {
 

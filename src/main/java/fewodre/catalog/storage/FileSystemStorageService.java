@@ -1,4 +1,4 @@
-package fewodre.catalog;
+package fewodre.catalog.storage;
 
 import java.io.IOException;
 import java.io.InputStream;

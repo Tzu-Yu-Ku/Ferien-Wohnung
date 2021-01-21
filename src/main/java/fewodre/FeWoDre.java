@@ -15,7 +15,7 @@
  */
 package fewodre;
 
-import fewodre.catalog.StorageService;
+import fewodre.catalog.storage.StorageService;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.springframework.boot.CommandLineRunner;

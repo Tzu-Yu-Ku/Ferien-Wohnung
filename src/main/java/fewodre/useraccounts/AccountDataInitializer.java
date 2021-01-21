@@ -1,11 +1,15 @@
 package fewodre.useraccounts;
 
 
+
 import fewodre.bookings.BookingDataInitializer;
-import org.apache.catalina.Host;
+
+import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
+import fewodre.useraccounts.forms.HostRegistrationForm;
+import fewodre.useraccounts.forms.TenantRegistrationForm;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
-import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManagement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,7 +4,10 @@ import fewodre.catalog.CatalogForm;
 import org.javamoney.moneta.Money;
 import fewodre.utils.Place;
 
+import javax.validation.constraints.NotBlank;
+
 public class HolidayHomeForm extends CatalogForm {
+
 	private String hostMail;
 
 	public HolidayHomeForm() {

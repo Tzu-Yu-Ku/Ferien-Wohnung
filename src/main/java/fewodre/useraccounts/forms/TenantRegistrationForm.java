@@ -1,8 +1,8 @@
-package fewodre.useraccounts;
+package fewodre.useraccounts.forms;
 
 import javax.validation.constraints.AssertTrue;
 
-class TenantRegistrationForm extends PersonalForm {
+public class TenantRegistrationForm extends PersonalForm {
 
 	@AssertTrue(message = "{RegistrationForm.terms.NotAgreed}")
 	private final Boolean terms;
