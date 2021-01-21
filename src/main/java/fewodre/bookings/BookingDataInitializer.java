@@ -46,30 +46,36 @@ public class BookingDataInitializer{
 		UserAccount user = accountRepository.findByAccount_Email("test@test").getAccount();
 		//canceled
 		HolidayHome home1 = holidayHomeCatalog.findFirstByName("Nette Wohnung in der Dresdner Innenstadt");
-		LocalDate arrivalDate1 = LocalDate.of(2021, Month.JANUARY, 12);
-		LocalDate departureDate1 = LocalDate.of(2021,Month.JANUARY,15);
+		LocalDate arrivalDate1 = LocalDate.now().minusDays(7);
+		LocalDate departureDate1 = LocalDate.now().minusDays(5);
 		Cart cart1 = new Cart();
 		cart1.addOrUpdateItem(home1, Quantity.of(ChronoUnit.DAYS.between(arrivalDate1, departureDate1)));
 		HashMap<Event, Integer> events1 = new HashMap<Event, Integer>();
 		BookingEntity bookingEntity1 = bookingManagement.createBookingEntity(user, home1, cart1, arrivalDate1,
 				departureDate1, events1, "Cheque");
-		//ordered
+		//acquired
 		HolidayHome home2 = holidayHomeCatalog.findFirstByName("Gemütliches Haus an der Elbe");
-		LocalDate arrivalDate2 = LocalDate.of(2021, Month.FEBRUARY, 12);
-		LocalDate departureDate2 = LocalDate.of(2021,Month.FEBRUARY,15);
+		LocalDate arrivalDate2 = LocalDate.now().plusDays(5);
+		LocalDate departureDate2 = LocalDate.now().plusDays(7);
 		Cart cart2 = new Cart();
 		cart2.addOrUpdateItem(home2, Quantity.of(ChronoUnit.DAYS.between(arrivalDate2, departureDate2)));
 		BookingEntity bookingEntity2 = bookingManagement.createBookingEntity(user, home2, cart2, arrivalDate2, departureDate2,
 				events1, "Cheque");
-		//canceled
-		LocalDate arrivalDate3 = LocalDate.of(2021, Month.DECEMBER, 20);
-		LocalDate departureDate3 = LocalDate.of(2021,Month.DECEMBER,25);
-		Quantity interval3 = Quantity.of(ChronoUnit.DAYS.between(arrivalDate3, departureDate3));
+		//paid
+		LocalDate arrivalDate3 = LocalDate.now().plusDays(30);
+		LocalDate departureDate3 = LocalDate.now().plusDays(38);
 		Cart cart3 = new Cart();
-		cart3.addOrUpdateItem(home1, interval3);
+		cart3.addOrUpdateItem(home1, Quantity.of(ChronoUnit.DAYS.between(arrivalDate3, departureDate3)));
 		BookingEntity bookingEntity3 = bookingManagement.createBookingEntity(user, home1, cart3, arrivalDate3,
 				departureDate3, events1, "Cheque");
 		bookingEntity3.pay();
+		//confirmed
+		Cart cart4 = new Cart();
+		cart3.addOrUpdateItem(home2, Quantity.of(ChronoUnit.DAYS.between(arrivalDate3, departureDate3)));
+		BookingEntity bookingEntity4 = bookingManagement.createBookingEntity(user, home1, cart3, arrivalDate3,
+				departureDate3, events1, "Cheque");
+		bookingEntity4.pay();
+		bookingEntity4.confirm();
 
 	}
 
