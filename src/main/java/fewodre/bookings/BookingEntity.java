@@ -418,4 +418,14 @@ public class BookingEntity extends Order {
 	public String getUuidTenant() {
 		return uuidTenant;
 	}
+
+	/**
+	 * Set the State
+	 * Shouldn't be used.
+	 * @param stateToSave
+	 */
+	@Deprecated
+	public void setStateToSave(BookingStateEnum stateToSave) {
+		this.stateToSave = stateToSave;
+	}
 }
