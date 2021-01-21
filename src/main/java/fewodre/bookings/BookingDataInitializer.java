@@ -53,7 +53,7 @@ public class BookingDataInitializer{
 		HashMap<Event, Integer> events1 = new HashMap<Event, Integer>();
 		BookingEntity bookingEntity1 = bookingManagement.createBookingEntity(user, home1, cart1, arrivalDate1,
 				departureDate1, events1, "Cheque");
-		//acquired
+		//ordered
 		HolidayHome home2 = holidayHomeCatalog.findFirstByName("Gemütliches Haus an der Elbe");
 		LocalDate arrivalDate2 = LocalDate.now().plusDays(5);
 		LocalDate departureDate2 = LocalDate.now().plusDays(7);
@@ -72,10 +72,19 @@ public class BookingDataInitializer{
 		//confirmed
 		Cart cart4 = new Cart();
 		cart3.addOrUpdateItem(home2, Quantity.of(ChronoUnit.DAYS.between(arrivalDate3, departureDate3)));
-		BookingEntity bookingEntity4 = bookingManagement.createBookingEntity(user, home1, cart3, arrivalDate3,
+		BookingEntity bookingEntity4 = bookingManagement.createBookingEntity(user, home2, cart3, arrivalDate3,
 				departureDate3, events1, "Cheque");
 		bookingEntity4.pay();
 		bookingEntity4.confirm();
+
+		//Acquired
+		Cart cart5 = new Cart();
+		cart5.addOrUpdateItem(home2, Quantity.of(ChronoUnit.DAYS.between(LocalDate.now(), departureDate3)));
+		BookingEntity bookingEntity5 = bookingManagement.createBookingEntity(user, home2, cart5, LocalDate.now(),
+				departureDate3, events1, "Cheque");
+		bookingEntity5.pay();
+		bookingEntity5.confirm();
+
 
 	}
 
