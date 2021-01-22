@@ -17,7 +17,7 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |8    |100min   |330min     |160min       |…          |100min         |180min                   |150min
 |9    |720min   |575min     |650min       |345min     |720min         |585min                   |130min    
 |10   |500min   |250min     |620min       |330min     |480min         |1120min                  |120min    
-|11   |350min   |300min     |540min       |…          |540min         |420min                   |210min    
+|11   |350min   |300min     |540min       |…          |540min         |620min                   |210min    
 |12   |…        |…          |…            |…          |…              |…                        |…    
 |===
 
