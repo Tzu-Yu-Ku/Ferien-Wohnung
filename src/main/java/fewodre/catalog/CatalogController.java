@@ -242,24 +242,17 @@ public class CatalogController {
 
 		HolidayHome myHolidayHome = form.toNewHolidayHome(userAccount.getEmail());
 
+		ProductIdentifier productIdentifier = myHolidayHome.getId();
+		String fileName = UUID.randomUUID().toString() + contentType;
+		storageService.store(image, fileName);
+
+		myHolidayHome.setImage(fileName);
+
 		Hcatalog.save(myHolidayHome);
 		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
 			System.out.println(
 					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
 		}
-
-		ProductIdentifier productIdentifier = myHolidayHome.getId();
-
-		String fileName = productIdentifier.getIdentifier() + contentType;
-		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
-
-		storageService.store(image, fileName);
-
-		System.out.println(fileNameAndPath);
-
-		HolidayHome newHome = Hcatalog.findFirstByProductIdentifier(productIdentifier);
-		newHome.setImage(fileName);
-		Hcatalog.save(newHome);
 
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
 	}
@@ -356,7 +349,7 @@ public class CatalogController {
 
 		}
 
-		if(holidayHomePlaceUpdated) {
+		if (holidayHomePlaceUpdated) {
 			return "redirect:/editHolidayHomeLocation?holidayhome=" + holidayHomeId.toString();
 		}
 
@@ -687,7 +680,7 @@ public class CatalogController {
 			// EventToChange.getCapacity()));
 		}
 
-		if(eventPlaceUpdated) {
+		if (eventPlaceUpdated) {
 			return "redirect:/editEventLocation?event=" + eventId.toString();
 		}
 		return "redirect:/events";
@@ -704,9 +697,10 @@ public class CatalogController {
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	@GetMapping("/addsmallevents")
-	String addSmallEventPage(Model model) {
+	String addSmallEventPage(Model model, EventForm form) {
 		firstname(model);
 		model.addAttribute("today", LocalDate.now());
+		model.addAttribute("form", form);
 		return "addsmallevent";
 	}
 
@@ -714,7 +708,18 @@ public class CatalogController {
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	String addEvent(@LoggedIn UserAccount userAccount,
 	                @RequestParam("imageupload") MultipartFile image,
-	                @ModelAttribute("form") EventForm form) {
+	                @Valid @ModelAttribute("form") EventForm form,
+	                BindingResult result,
+	                Model model) {
+
+		firstname(model);
+		String errorReturn;
+		errorReturn = form.getEventType().equals(EventType.SMALL) ? "addsmallevent" : "addevent";
+
+		if(result.hasErrors()) {
+			System.out.println(errorReturn);
+			return errorReturn;
+		}
 
 		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
