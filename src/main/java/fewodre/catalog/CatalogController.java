@@ -138,9 +138,11 @@ public class CatalogController {
 		firstname(model);
 
 		if (searchedCapacity == null && searchedPrice1 == null && searchedPrice2 == null && searchedDistrict == null) {
-			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+			/*Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
 			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
 			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+			*/
+			holidayHomeCatalog(model);
 		}
 
 		if (searchedCapacity != null) {
@@ -519,9 +521,11 @@ public class CatalogController {
 		firstname(model);
 
 		if (searchedEventType == null && searchedEventCapacity == null && searchedEventDistrict == null) {
-			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+			/*Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+			*/
+			eventCatalog(model);
 		}
 
 		if (searchedEventType != null) {
