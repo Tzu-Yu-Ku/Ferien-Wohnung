@@ -129,6 +129,8 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 [options="header", cols="1,2"]
 |===
 |Externes Package |Verwendet von (Klasse der eigenen Anwendung)
+|salespointframework.core a|
+* bookings.BookingDataInitializer
 |salespointframework.catalog a|
 * bookings.BookingEntity
 * bookings.BookingManagement
@@ -143,6 +145,7 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 * bookings.BookingEntity
 * bookings.CartController
 * bookings.BookingManagement
+* bookings.BookingDataInitializer
 |salespointframework.payment a|
 * bookings.BookingEntity
 * bookings.BookingManagement
@@ -151,9 +154,12 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 * bookings.CartController
 * bookings.BookingManagement
 * catalog.CatalogController
+* bookings.BookingDataInitializer
 |salespointframework.useraccount a|
 * bookings.BookingEntity
 * bookings.CartController
+* bookings.BookingController
+* bookings.BookingDataInitializer
 |springframework.beans a|
 * bookings.BookingManagement
 |springframework.data a|
@@ -170,36 +176,60 @@ image:models/design/user_interface_dev_doc.svg[Dialog-Karte]
 * bookings.CartController
 |springframework.security a|
 * bookings.CartController
+* bookings.BookingController
 |springframework.stereotype a|
 * bookings.CartController
 * bookings.BookingManagement
 * catalog.catalogDataInitializer
+* bookings.BookingController
+* bookings.BookingDataInitializer
 |springframework.transaction a|
 * bookings.BookingManagement
 |springframework.ui a|
 * bookings.CartController
 * catalog.catalogcontroller
+* bookings.BookingController
 |springframework.util a|
 * bookings.BookingManagement
 * bookings.BookingManagement
+* bookings.BookingController
+* bookings.BookingDataInitializer
 |springframework.web a|
 * bookings.CartController
 * catalog.catalogController
+* bookings.BookingController
+|java.math a|
+* bookings.BookingEntity
+|java.time a|
+* bookings.BookingDataInitializer
+* bookings.BookingEntity
+* bookings.BookingManagement
+|java.util a|
+* bookings.BookingController
+* bookings.BookingDataInitializer
+* bookings.BookingEntity
+* bookings.BookingManagement
+|javax.validation a|
+* bookings.BookingEntity
 |javax.persistence.Entity a|
 * catalog.Event
 * catalog.HolidayHome
+* bookings.BookingEntity
 |javamoney.moneta.Money a|
 * catalog.Event
 * catalog.HolidayHome
 * catalog.EventForm
 * catalog.HolidayHomeForm
 * catalog.CatalogDataInitializer
+* bookings.BookingEntity
 | slf4j.Logger a|
 * bookings.CartController
 * catalog.catalogDataInitializer
+* bookings.BookingDataInitializer
 |slf4j.LoggerFactory a|
 * bookings.CartController
 * catalog.catalogDataInitializer
+* bookings.BookingDataInitializer
 |
 |===
 
@@ -234,6 +264,8 @@ image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
 |CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
 |BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
 |BookingManagement|Eine Komponente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
+|BookingState|Ein Status des BookingEntitys welcher das Lebenszyklus des BookingEntitys leicht verwaltet werden lässt.
+|BookingRepository|Eine Schnittstelle, die das CrudRepository von Spring erweitert und Methoden zur Abfrage von BookingEntities bereitstellt.
 |===
 
 === Catalog
