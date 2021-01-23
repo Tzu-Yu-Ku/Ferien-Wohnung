@@ -318,7 +318,7 @@ image:models/design/seq_customer.svg[Laufzeit-Ansicht-Tenant - Tenant]
 
 === Booking/Order
 
-image:models/design/FeWoDre_Booking.svg[Laufzeit-Ansicht - Booking/Order]
+image:models/design/seq_booking.png[Laufzeit-Ansicht - Booking/Order]
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues zum Zeitpunkt der Abgabe
