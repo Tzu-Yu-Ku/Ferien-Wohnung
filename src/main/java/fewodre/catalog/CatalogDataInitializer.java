@@ -41,19 +41,19 @@ public class CatalogDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default catalog entries.");
-
 		HolidayHome dummyHome1 = new HolidayHome();
-		dummyHome1.setName("Nette Wohnung in der Dresdner Altstadt");
-		dummyHome1.setDescription("Direkt in der weltbekannten Dresdener Altstadt. Genißen Sie ihren Aufenthalt"
-				+ " in Dresden zwischen Zwinger, Frauenkirche und Semperoper.");
-		dummyHome1.setPlace(new Place("Schlössergasse", "27", "01067", "Dresden", 500, 500));
+		dummyHome1.setName("Nette Wohnung in der Dresdner Innenstadt");
+		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort"
+				+ "für Ihren nächsten Aufenthalt in Dresden.");
+		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 500, 500));
 		dummyHome1.setIsBookable(true);
 		dummyHome1.setHostMail("host@host");
 		dummyHome1.setImage("house1.png");
 		dummyHome1.setCapacity(4);
 		dummyHome1.setPrice(Money.of(149.49f, "EUR"));
-		dummyHome1.getPlace().setDistrict("Neustadt");
 		holidayHomeCatalog.save(dummyHome1);
+
+		
 
 		HolidayHome dummyHome2 = new HolidayHome();
 		dummyHome2.setName("Gemütliches Haus an der Elbe");
