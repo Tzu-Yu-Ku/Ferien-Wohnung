@@ -56,7 +56,7 @@ class CatalogControllerIntegrationTest {
 		assertThat(returnedView).isEqualTo("holidayhomes");
 
 		Iterable<Object> objects = (Iterable<Object>) model.asMap().get("holidayhomeCatalog");
-		assertThat(objects).hasSize(3);
+		assertThat(objects).hasSize(5);
 	}
 
 	@Test
