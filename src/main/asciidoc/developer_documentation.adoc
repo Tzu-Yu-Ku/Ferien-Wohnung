@@ -78,7 +78,7 @@ Die primäre Zielgruppe sind Personen zwischen 18 und 80 Jahren (Tenants), deren
 Es ist nicht angedacht, dass das System regelmäßiger Wartung bedarf. Alle Daten werden in einer Datenbank persistiert und können durch die Anwendung aufgerufen werden, sodass keine Kenntnisse im Umgang mit Datenbanken von irgendeiner der zuvor genannten Entitäten erwartet werden müssen.
 
 == Kontextabgrenzung
-image::./models/analysis/Toplevel.jpg[Top-Level-Architektur, 100%, 100%, pdfwidth=100%, title= "Top-Level-Architektur", align=center]
+image::./models/design/Model.svg[Top-Level-Architektur, 100%, 100%, pdfwidth=100%, title= "Top-Level-Architektur", align=center]
 
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
@@ -263,9 +263,10 @@ image:models/design/Order.svg[Entwurfs-Klasse-Diagramm - Booking]
 |Klasse/Enumeration |Beschreibung
 |CartController|Ein Spring MVC Controller um den Einkaufswagen/Buchungen zu Steuern
 |BookingEntity|Eine Spring Entity welche die Salespoint Order Erweitert und im Booking-Repository abgespeichert wird
+|BookingController| Ein Spring MVC Controller um Buchuhungen Anzeigen zu lassen und zu Steuern
 |BookingManagement|Eine Komponente welche eingegebene Daten für BookingEntities auf korrektheit überprüft und diese dann im Repository abspeichert
-|BookingState|Ein Status des BookingEntitys welcher das Lebenszyklus des BookingEntitys leicht verwaltet werden lässt.
 |BookingRepository|Eine Schnittstelle, die das CrudRepository von Spring erweitert und Methoden zur Abfrage von BookingEntities bereitstellt.
+|BookingState| Ein Status Class, nach State Pattern, um den Status der Buchung darzustellen und zu kontrollieren das nur erlaubte Statuswechsel erfolgen
 |===
 
 === Catalog
