@@ -2,6 +2,7 @@ package fewodre.catalog.holidayhomes;
 
 import fewodre.catalog.events.Event;
 import fewodre.utils.Place;
+
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 
