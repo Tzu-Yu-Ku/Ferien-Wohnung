@@ -74,6 +74,18 @@ public class CatalogController {
 
 	private BookingManagement bookingManagement;
 
+	/**
+	 * Creates a new {@link CatalogController} with the given Parameters.
+	 *
+	 * @param Hcatalog  muss not be {@literal null}
+	 * @param Ecatalog  muss not be {@literal null}
+	 * @param businessTime  muss not be {@literal null}
+	 * @param holidayHomeStorage muss not be {@literal null}
+	 * @param accountManagement muss not be {@literal null}
+	 * @param accountRepository muss not be {@literal null}
+	 * @param bookingManagement muss not be {@literal null}
+	 * @param storageService muss not be {@literal null}
+	 */
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
 	                  AccountRepository accountRepository, BookingManagement bookingManagement,
@@ -88,6 +100,11 @@ public class CatalogController {
 		this.storageService = storageService;
 	}
 
+	/**
+	 * Shows firstname of the current{@link AccountEntity}
+	 *
+	 * @param model must not be {@literal null}
+	 */
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && !authentication.getPrincipal().equals("anonymousUser")
@@ -100,10 +117,10 @@ public class CatalogController {
 	}
 
 	/**
-	 * Method will model all asked HolidayHomes for the Frontend
+	 * Method will show all searched {@link HolidayHome}s. Host will only see his {@link HolidayHome}s.
 	 *
-	 * @param model
-	 * @return template : holidayhomes
+	 * @param model muss not be {@literal null}
+	 * @return template: holidayhomes
 	 */
 	@GetMapping("/holidayhomes")
 	String holidayHomeCatalog(Model model) {
@@ -126,9 +143,9 @@ public class CatalogController {
 	}
 
 	/**
-	 * Method enable the sort of the HolidayHomes. Will model all new asked HolidayHomes.
+	 * Method enable the sort of the {@link HolidayHome}s.
 	 *
-	 * @param model
+	 * @param model muss not be {@literal null}
 	 * @return template : holidayhomes
 	 */
 	@PreAuthorize("!hasRole('HOST')")
@@ -138,9 +155,11 @@ public class CatalogController {
 		firstname(model);
 
 		if (searchedCapacity == null && searchedPrice1 == null && searchedPrice2 == null && searchedDistrict == null) {
-			Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+			/*Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
 			Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
 			Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+			*/
+			holidayHomeCatalog(model);
 		}
 
 		if (searchedCapacity != null) {
@@ -201,7 +220,7 @@ public class CatalogController {
 	/**
 	 * Method will pass to the form, where we can create a new HolidayHome
 	 *
-	 * @param model
+	 * @param model muss not be {@literal null}
 	 * @return template : addholidayhome
 	 */
 	@GetMapping("/addholidayhome")
@@ -213,10 +232,10 @@ public class CatalogController {
 	}
 
 	/**
-	 * Method will create a new HolidayHome
+	 * Method will create and add a HolidayHome to the Hcatalog
 	 *
-	 * @param model
-	 * @param form
+	 * @param model muss not be {@literal null}
+	 * @param form muss not be {@literal null}
 	 * @return template : editHolidayHomeLocation and a String that represent the Productidentifier
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -258,10 +277,10 @@ public class CatalogController {
 	}
 
 	/**
-	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 * Method will pass to the form, where we can edit a {@link HolidayHome}
 	 *
-	 * @param model
-	 * @param holidayHome
+	 * @param model muss not be {@literal null}
+	 * @param holidayHome muss not be {@literal null}
 	 * @return template : editholidayhome
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -273,20 +292,20 @@ public class CatalogController {
 	}
 
 	/**
-	 * Method will pass to the form, where we can edit a existing HolidayHome
+	 * Method will edit a {@link HolidayHome}
 	 *
-	 * @param model
-	 * @param holidayHomeId
-	 * @param name
-	 * @param description
-	 * @param price
-	 * @param capacity
-	 * @param street
-	 * @param houseNumber
-	 * @param city
-	 * @param postalCode
-	 * @param coordinates_x
-	 * @param coordinates_y
+	 * @param model muss not be {@literal null}
+	 * @param holidayHomeId muss not be {@literal null}
+	 * @param name muss not be {@literal null}
+	 * @param description muss not be {@literal null}
+	 * @param price muss not be {@literal null}
+	 * @param capacity muss not be {@literal null}
+	 * @param street muss not be {@literal null}
+	 * @param houseNumber muss not be {@literal null}
+	 * @param city muss not be {@literal null}
+	 * @param postalCode muss not be {@literal null}
+	 * @param coordinates_x muss not be {@literal null}
+	 * @param coordinates_y muss not be {@literal null}
 	 * @return template : holidayhome
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -356,7 +375,14 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
-	// delete HolidayHome--------------
+	/**
+	 * Method set the value isBookable of a {@link HolidayHome} to false.
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param holidayHome muss not be {@literal null}
+	 * 
+	 * @return template : holidayhome
+	 */
 	@PreAuthorize("hasRole('HOST')")
 	@PostMapping("/deleteholidayhome")
 	String deleteHolidayHome(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
@@ -374,7 +400,13 @@ public class CatalogController {
 		return "redirect:/holidayhomes";
 	}
 
-	// HolidayHome housedetails---------
+	/**
+	 * Method give all informations of a {@link HolidayHome}.
+	 *
+	 * @param model muss not be {@literal null}
+	 * @param holidayHome muss not be {@literal null}
+	 * @return template : housedetails
+	 */
 	@PostMapping("/housedetails")
 	String detail(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		model.addAttribute("holidayHome", holidayHome);
@@ -512,9 +544,11 @@ public class CatalogController {
 		firstname(model);
 
 		if (searchedEventType == null && searchedEventCapacity == null && searchedEventDistrict == null) {
-			Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+			/*Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
 			Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+			*/
+			eventCatalog(model);
 		}
 
 		if (searchedEventType != null) {

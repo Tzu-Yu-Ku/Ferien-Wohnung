@@ -1,0 +1,82 @@
+= Protokoll Gruppe 25
+
+Treffen am 11.01.2021
+
+Ort:      Online via BigBlueButton
+Beginn:   17:00 Uhr +
+Ende:     19:30 Uhr
+
+__Schriftführer:__ Jimmy Pöhlmann
+
+*Nächstes Treffen:* +
+18.01.2021, 17:00 Uhr, Online via BigBlueButton
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Tzu-Yu Ku
+- Jesko Kloß
+- Marten Freese
+- Julian Böhm
+- Jimmy Pöhlmann
+- Janujan Thanabalasingham (vorl. Scrum Master)
+- Fabian Wolf (Kunde)
+
+== Bemerkungen
+Tests waren waren noch im Rückstand, und Dateien für das Crosstesting wurden übergeben
+
+
+== Aktueller Stand
+Beim 9.Team-Meeting wurden die Dateien fürs Crosstesting übergeben. Alle Gruppenmitglieder haben darauffolgend
+das Crosstesting begonnen und folgende weitere Aufgaben bewältigt:
+
+- **Julian** testete die Funktionalitäten der Accounts für das Crosstesting
+- **Janu** hat Tests für die FeWoDre implementiert um die Testabdeckung zu gewährleisten, zudem Codesmells und
+Duplicated lines im Code reduziert um die allgemeine Qualität unseres Codes zu verbessern
+- **Jimmy** testete die Funktionalität des Bezahlvorganges für das Crosstesting und hat Javadoc für den Booking Teil erstellt,
+Code aufgeräumt(von unnötigen kommentaren, etc befreit), Preis wird jetzt im Bookingdetailview gerundet, und es muss jetzt mindestens 1 Nacht gebucht werden
+- **Tzu** testete die Funktionalität des Bezahlvorganges für das Crosstesting und hat Javadoc für den Booking Teil erstellt,
+Preis werden jetzt in der Buchungsübersicht gerundet.
+- **Jesko** hat die Abstandsberechnung zur Eventaktivierung hinzugefügt und testete die Funktionalitäten der Events für
+das Crosstesting
+- **Marten** hat begonnen den Code, im Teil HolidayHomes, auszudokumentieren zudem Sortierfunktion für holidayhomes und
+Events hinzugefügt, und testete die Funktionalitäten der Ferienhäuser für das Crosstesting
+
+== Retrospektive des letzten Sprints
+
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/35[#35]     |Abstandsberechnung zwischen Events & HolidayHomes |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/35[#35]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]     |JavaDoc stets ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/15[#15]     |Buchungshistory |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/15[#15]  |Tzu & Jimmy | done
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/14[#14]     |BookingState |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/14[#14]  |Tzu & Jimmy | done
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/8[#8]     |Events entfernen bei Buchungszeitraumänderung |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/8[#8]  |Tzu & Jimmy | done
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]     |Event löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/32[#32]     |Event bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]     |HolidayHome löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]  |Marten | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]     |HolidayHome bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]  |Marten | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/33[#33]     |jUnit- und Integrationstests formulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/33[#33]  |alle Gruppenmitglieder | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/29[#29]     |Eigene (HTTP-)Error-Seite entwerfen und einbetten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/29[#29]  |Janu | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/36[#36]     |Ferienhausdetailseite |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/36[#36]  |Janu | done
+|===
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]     |JavaDoc stets ausformulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/28[#28]  |alle Gruppenmitglieder                | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]     |Event löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/32[#32]     |Event bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/30[#30]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]     |HolidayHome löschen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/21[#21]  |Marten | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]     |HolidayHome bearbeiten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/20[#20]  |Marten | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/42[#42]     |HolidayHomes und Events sortieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/42[#42]  |Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/35[#35]     |Abstandsberechnung zwischen Events und HolidayHomes |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/35[#35]  |alle Gruppenmitglieder | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/25[#25]     |Bilder hochladen |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/25[#25]  |Janu & Jesko | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/16[#16]     |Admin Buchungsübersicht |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/25[#16]  |Tzu | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/33[#33]     |jUnit- und Integrationstests formulieren |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/33[#33]  |alle Gruppenmitglieder | work in progress
+|https://github.com/st-tu-dresden-praktikum/swt20w25/issues/29[#29]     |Eigene (HTTP-)Error-Seite entwerfen und einbetten |siehe https://github.com/st-tu-dresden-praktikum/swt20w25/issues/29[#29]  |Janu | work in progress
+|===

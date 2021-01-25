@@ -51,12 +51,16 @@ public class AccountDataInitializer implements DataInitializer {
 		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Vermieter", "Account",
 				"host@host", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
+		HostRegistrationForm hostRegistrationForm2 = new HostRegistrationForm("Vermieter2", "Account2",
+				"neuer@host", "123", "123", "1999-01-01", "Test Street",
+				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
 		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm(
 				"Eventmitarbeiter", "Employee",
 				"event@employee", "123", "123", "EventBois Dresden GmbH");
 
 		accountManagement.createTenantAccount(tenantRegistrationForm);
 		accountManagement.createHostAccount(hostRegistrationForm);
+		accountManagement.createHostAccount(hostRegistrationForm2);
 		accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
 
 		userAccountManagement.create("admin", Password.UnencryptedPassword.of("admin"), ADMIN_ROLE);
