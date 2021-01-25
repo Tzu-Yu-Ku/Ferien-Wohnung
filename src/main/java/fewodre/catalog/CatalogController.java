@@ -77,14 +77,14 @@ public class CatalogController {
 	/**
 	 * Creates a new {@link CatalogController} with the given Parameters.
 	 *
-	 * @param Hcatalog  muss not be {@literal null}
-	 * @param Ecatalog  muss not be {@literal null}
-	 * @param businessTime  muss not be {@literal null}
+	 * @param Hcatalog           muss not be {@literal null}
+	 * @param Ecatalog           muss not be {@literal null}
+	 * @param businessTime       muss not be {@literal null}
 	 * @param holidayHomeStorage muss not be {@literal null}
-	 * @param accountManagement muss not be {@literal null}
-	 * @param accountRepository muss not be {@literal null}
-	 * @param bookingManagement muss not be {@literal null}
-	 * @param storageService muss not be {@literal null}
+	 * @param accountManagement  muss not be {@literal null}
+	 * @param accountRepository  muss not be {@literal null}
+	 * @param bookingManagement  muss not be {@literal null}
+	 * @param storageService     muss not be {@literal null}
 	 */
 	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
 	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
@@ -235,7 +235,7 @@ public class CatalogController {
 	 * Method will create and add a HolidayHome to the Hcatalog
 	 *
 	 * @param model muss not be {@literal null}
-	 * @param form muss not be {@literal null}
+	 * @param form  muss not be {@literal null}
 	 * @return template : editHolidayHomeLocation and a String that represent the Productidentifier
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -279,7 +279,7 @@ public class CatalogController {
 	/**
 	 * Method will pass to the form, where we can edit a {@link HolidayHome}
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model       muss not be {@literal null}
 	 * @param holidayHome muss not be {@literal null}
 	 * @return template : editholidayhome
 	 */
@@ -294,16 +294,16 @@ public class CatalogController {
 	/**
 	 * Method will edit a {@link HolidayHome}
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model         muss not be {@literal null}
 	 * @param holidayHomeId muss not be {@literal null}
-	 * @param name muss not be {@literal null}
-	 * @param description muss not be {@literal null}
-	 * @param price muss not be {@literal null}
-	 * @param capacity muss not be {@literal null}
-	 * @param street muss not be {@literal null}
-	 * @param houseNumber muss not be {@literal null}
-	 * @param city muss not be {@literal null}
-	 * @param postalCode muss not be {@literal null}
+	 * @param name          muss not be {@literal null}
+	 * @param description   muss not be {@literal null}
+	 * @param price         muss not be {@literal null}
+	 * @param capacity      muss not be {@literal null}
+	 * @param street        muss not be {@literal null}
+	 * @param houseNumber   muss not be {@literal null}
+	 * @param city          muss not be {@literal null}
+	 * @param postalCode    muss not be {@literal null}
 	 * @param coordinates_x muss not be {@literal null}
 	 * @param coordinates_y muss not be {@literal null}
 	 * @return template : holidayhome
@@ -378,9 +378,8 @@ public class CatalogController {
 	/**
 	 * Method set the value isBookable of a {@link HolidayHome} to false.
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model       muss not be {@literal null}
 	 * @param holidayHome muss not be {@literal null}
-	 * 
 	 * @return template : holidayhome
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -403,7 +402,7 @@ public class CatalogController {
 	/**
 	 * Method give all informations of a {@link HolidayHome}.
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model       muss not be {@literal null}
 	 * @param holidayHome muss not be {@literal null}
 	 * @return template : housedetails
 	 */
@@ -418,12 +417,12 @@ public class CatalogController {
 	}
 
 	@PreAuthorize("hasRole('HOST')")
-	@PostMapping(path = "/activateEventPage")
+	@GetMapping(path = "/activateEventPage")
 	String activateEventPage(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
 		System.out.println("BEREITS AKTIVE EVENTS: " + Hcatalog.findById(holidayHomeId).get().acceptedEvents);
-		List<Event> nonActivtedEvents = new LinkedList<Event>();
+		List<Event> nonActivtedEvents = new LinkedList<>();
 		List<Event> allEvents = Ecatalog.findAll().toList();
-		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+		for (int i = 0; i < allEvents.size(); i++) {
 			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))) {
 				if (allEvents.get(i).isEventStatus()) {
 					nonActivtedEvents.add(allEvents.get(i));
@@ -439,9 +438,10 @@ public class CatalogController {
 	@PostMapping(path = "/activateEventForHouse")
 	String activateEventForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId,
 	                                   @RequestParam("event") ProductIdentifier eventId) {
-		Hcatalog.findById(holidayHomeId).get().acceptEvent(Ecatalog.findById(eventId).get());
+		HolidayHome holidayHome = Hcatalog.findById(holidayHomeId).get();
+		holidayHome.acceptEvent(Ecatalog.findById(eventId).get());
 		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
-		return "redirect:/holidayhomes";
+		return "redirect:/activateEventPage?holidayHome=" + holidayHomeId.toString();
 	}
 
 	@PreAuthorize("hasRole('HOST')")
@@ -739,7 +739,6 @@ public class CatalogController {
 	}
 
 
-
 	@PostMapping(path = "/addEvent")
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	String addEvent(@LoggedIn UserAccount userAccount,
@@ -752,7 +751,7 @@ public class CatalogController {
 		String errorReturn;
 		errorReturn = form.getEventType().equals(EventType.SMALL) ? "addsmallevent" : "addevent";
 
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			System.out.println(errorReturn);
 			return errorReturn;
 		}

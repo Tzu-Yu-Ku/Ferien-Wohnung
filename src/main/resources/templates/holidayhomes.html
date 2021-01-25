@@ -293,7 +293,7 @@
                     </div>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-                            <form role="form" th:method="post" th:action="@{/activateEventPage}">
+                            <form role="form" th:method="get" th:action="@{/activateEventPage}">
                                 <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
                                 <input class="btn btn-primary btn-outline-light" type="submit"
                                        value="Events aktivieren"/>
@@ -328,7 +328,7 @@
                     </ul>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-                            <form role="form" th:action="@{/defaultcart}" method="post">
+                            <form role="form" th:action="@{/defaultcart}" method="post" sec:authorize="!hasAnyRole('ADMIN','EVENT_EMPLOYEE')">
                                 <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
                                 <button type="submit" class="btn btn-primary">Jetzt buchen</button>
                             </form>

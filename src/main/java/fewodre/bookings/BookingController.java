@@ -188,7 +188,7 @@ public class BookingController {
 		firstname(model);
 		if(userAccount.hasRole(Role.of("ADMIN"))) {
 			List<BookingEntity> sortedByHomeName = bookingRepository.findAll().filter(bookingEntity ->
-					bookingEntity.getHomeName().equals(homeName)).toList();
+					bookingEntity.getHomeName().contains(homeName)).toList();
 			model.addAttribute("bookings", sortedByHomeName);
 		} else if (userAccount.hasRole(Role.of("HOST"))) {
 			model.addAttribute("bookings", bookingManagement.findByHomeName(homeName, userAccount.getEmail()));

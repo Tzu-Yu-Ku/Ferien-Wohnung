@@ -42,7 +42,7 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default catalog entries.");
 		HolidayHome dummyHome1 = new HolidayHome();
-		dummyHome1.setName("Nette Wohnung in der Dresdner Innenstadt");
+		dummyHome1.setName("Nette Wohnung in der Dresdner Neustadt");
 		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort"
 				+ "für Ihren nächsten Aufenthalt in Dresden.");
 		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 500, 500));
@@ -183,8 +183,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		inventory.save(new UniqueInventoryItem(eventTest5, Quantity.of(eventTest.getCapacity())));
 
 		// Funktioniert nicht :/
-		// dummyHome1.acceptedEvents.add(eventCatalog.findFirstByProductIdentifier(eventTest4.getId()));
-		// dummyHome1.acceptEvent(eventTest4);
-		// holidayHomeCatalog.save(dummyHome1);
+//		 dummyHome1.acceptedEvents.add(eventCatalog.findFirstByProductIdentifier(eventTest4.getId()));
+		 dummyHome1.acceptEvent(eventTest4);
+		 holidayHomeCatalog.save(dummyHome1);
 	}
 }
