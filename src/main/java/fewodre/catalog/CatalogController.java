@@ -738,6 +738,8 @@ public class CatalogController {
 		return "addsmallevent";
 	}
 
+
+
 	@PostMapping(path = "/addEvent")
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
 	String addEvent(@LoggedIn UserAccount userAccount,
