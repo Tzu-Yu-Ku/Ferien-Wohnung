@@ -3,12 +3,13 @@
 // Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
 // Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
 
-**Von:**
+**Von: Marten Freese**
 
-**Gruppe:**
+**Gruppe: 25**
 
 == Was habe ich gelernt / was habe ich nicht gelernt?
 // Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
+Hallo
 
 == Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
 // Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
