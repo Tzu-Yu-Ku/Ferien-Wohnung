@@ -15,20 +15,27 @@ Zum einen wäre da der Bereich des Projekts an sich. Damit meine ich, dass man n
 
 Der zweite Teil zu dem ich viel gelernt habe ist das Programmieren an sich. Dadurch, dass man sich sehr lange und intensiv mit einem Code und Programmiersprache beschäftigt, wird diese immer intuitiver und man eignet sich den einen oder anderen Kniff an. Mit der Zeit fallen einem dann Codestücke auf, die man zu Beginn geschrieben hat, die man mit dem neuen Wissen allerdigs viel effizienter umsetzen kann. 
 In diesem Projekt habe ich mich das erste Mal intensive mit html beschäftigt und daher auch in diesem Bereich etwas gelernt. Ähnlich ist es mit den verwendeten Frameworks und anderweitigen Programmen, die wir in diesem Projekt verwendet haben, wie etwa Salespoint oder Spring Boot.
- 
-Was ich mir sonst noch gewünscht hätte ist, dass ich mich noch ein bisschen mehr mit dem Code meiner Teamkollegen auseinander setzen hätte müssen. Es gibt natürlich Bereiche in denen man zusammen programmiert und sich da absprechen muss. Außerhalb dieser Verknüpfungen unseres Codes gab es da für mich aber wenig Anlässe oder Anreize mich genauer mit dem Code meiner Teamkollegen zu beschäftigen.
 
 == Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
 // Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+//
+Meine Erfahrungen waren fast nur positive. Ich hatte schon seit längerem keine so lange und tiefe Teamarbeit, wie in diesem Projekt. Das hat mich mal wieder daran erinnert, wie berreichernd und auch amüsant und unterhaltsam Teamarbeit sein kann. Auch gerade während der Coronazeit, in der man ja keine weiteren Treffen mit anderen Personen hat, war es sehr schön, sich wöchentlich mit Leuten unterhalten und an einem Projekt arbeiten zu können. 
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
 // Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+//
+Ich fand die Frameworks, die wir verwendeten sehr interessant und habe mittlerweile ein eigenes Projekt mit den selben Frameworks angefangen. Die Einarbeiteung war sicherlich nicht einfach und viele Dinge die die Frameworks beinhalten habe ich noch nicht einmal ausprobiert. Zu den Dingen die ich verwendet bzw. ausprobiert habe kann ich nur guten sagen.
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
 // Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+//
+Was ich mir sonst noch gewünscht hätte ist, dass ich mich noch ein bisschen mehr mit dem Code meiner Teamkollegen auseinander setzen hätte müssen. Es gibt natürlich Bereiche in denen man zusammen programmiert und sich da absprechen muss. Außerhalb dieser Verknüpfungen unseres Codes gab es da für mich aber wenig Anlässe oder Anreize mich genauer mit dem Code meiner Teamkollegen zu beschäftigen.
 
 == Feedback für den Tutor
 // Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+// 
+Ich fand unseren Tutor rundum gut. Im Projekt an sich hat er uns immer genügend Freiheiten gelassen, so das wir uns auch selbst im Projekt verwirklichen konnten. 
+Er kannte sich selbst gut mit dem Themen rund um Java und den Frameworks aus und konnte uns steht weiterhelfen bzw. Denkanstöße geben. Auch war er stehts gut organisiert zu unseren Treffen und hat jeden im Team freundlich und mit Respekt behandelt.
 
 == Sonstiges und Anmerkungen
 // Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
