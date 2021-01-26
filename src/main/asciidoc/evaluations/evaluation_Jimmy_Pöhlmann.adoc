@@ -1,0 +1,55 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020/21
+// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
+// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
+// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
+
+**Von:** Jimmy
+
+**Gruppe: 25**
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+// Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
+
+Ich habe mich zum erstenmal intensiv mit Java und Designpatterns auseinander gesetzt, das
+hat mir sehr geholfen mein Wissen in diesen Bereichen zu festigen welches ich durch die Vorlesungen SoftwareTechnologie und +
+Design-Patterns und Frameworks erlangte, das das hat mir Freude bereitet und ich möchte mich nun noch etwas intensiver damit
+auseinandersetzten. Aber auch die Projektmanagement aspekte die in diesen Projekt verfolgt wurden haben meinen sonst recht
+chaotischen Gedankengängen geholfen etwas Klarheit zu finden.
+
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+
+Wir haben uns in zwei Ebenen Organisiert. Die Oberste Ebene umfasste alle Teammitglieder mit Janu als unseren Scrum-Master
+In dieser Konstellation haben wir uns ein bis zweimal in der Woche getroffen um unsere Pläne zu besprechen
+und etwas größeren Proleme zu fixen.
+In der zweiten Ebene haben wir uns in zweier Gruppen zusammmengefunden um einzelne Komponenten zu erstellen.
+Ich fande diese Aufteilung sehr gut weil in den kleinen Gruppen konnte man sich schnell auf Lösungen einigen und die
+Gruppen dynamic war etwas unbeschwerter wohingegen es in großen Gruppen einfacher
+war Lösungen für grundlegendere Probleme, die durch Beschränkungen in Html oder Spring auftraten, zu finden.
+
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+
+Die Kurzbeschreibung die IntelliJ aufgrund der JavaDoc von Salespoint ausgab war wirklich sehr hilfreich um schnell
+Lösungen zu einfacheren Problemen zu finden, Salespoint fande ich auch sehr praktisch weil es an viele Aspekte dachte
+welche ich schnell vergessen hätte. Jedoch empfande ich das Arbeiten mit Salespoint auch ein bisschen als einscränkung
+weil es mir sehr viel flexibilität genommmen hatte und ich dadurch oft die ein oder andere Idee die ich hatte umändern
+musste für einen mehr an Salespoint orientierten Ansatz.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+
+Ich fände ein zweites Praktikum toll wo man noch ein online Toll programmieren könnte wie z.B. eine Mal-Application oder
+so was anstatt nur einen Job
+
+== Feedback für den Tutor
+// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+
+Unser Tutor war sehr nett und hat sich gut um uns gekümmert. Auch hat er immer über uns gewacht damit wir uns nicht in eine
+falsche Richtung bewegen. Jedoch kam die Info das er uns recht viele Freiheiten lässt bei der ausgestaltung des Projektes
+ein klein wenig spät, vielleicht war es aber auch unsere Schuld die Aufgabenstellung bis ins kleinste Detail genau zu bearbeiten.
+
+== Sonstiges und Anmerkungen
+// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
