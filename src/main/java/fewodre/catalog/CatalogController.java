@@ -328,10 +328,6 @@ public class CatalogController {
 			String contentType = "." + strings[strings.length - 1];
 			if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
 				errorMap.put("imageupload", "Es werden nur JPG oder PNG Bilder unterstützt.");
-//				model.addAttribute("errors", errorMap);
-//				Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
-//				model.addAttribute("holidayHome", holidayHome.get());
-//				return "editholidayhome";
 			}
 			else {
 				fileName = UUID.randomUUID().toString() + contentType;
@@ -462,6 +458,7 @@ public class CatalogController {
 	@PreAuthorize("hasRole('HOST')")
 	@GetMapping(path = "/activateEventPage")
 	String activateEventPage(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
+		firstname(model);
 		System.out.println("BEREITS AKTIVE EVENTS: " + Hcatalog.findById(holidayHomeId).get().acceptedEvents);
 		List<Event> nonActivtedEvents = new LinkedList<>();
 		List<Event> allEvents = Ecatalog.findAll().toList();
@@ -793,6 +790,14 @@ public class CatalogController {
 		String errorReturn;
 		errorReturn = form.getEventType().equals(EventType.SMALL) ? "addsmallevent" : "addevent";
 
+		String[] strings = image.getContentType().split("/");
+		String contentType = "." + strings[strings.length - 1];
+		if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
+			result.addError(new FieldError("form",
+					"imageupload",
+					"Es werden nur JPG oder PNG Bilder unterstützt."));
+		}
+
 		if (result.hasErrors()) {
 			System.out.println(errorReturn);
 			return errorReturn;
@@ -801,20 +806,13 @@ public class CatalogController {
 		System.out.println(userAccount.getId().getIdentifier());
 		Event event = form.toNewEvent(userAccount.getId().getIdentifier());
 
+		ProductIdentifier productIdentifier = event.getId();
+		String fileName = UUID.randomUUID().toString() + contentType;
+		storageService.store(image, fileName);
+		event.setImage(fileName);
+
 		Ecatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
-
-		ProductIdentifier productIdentifier = event.getId();
-
-		String[] strings = image.getContentType().split("/");
-		String contentType = "." + strings[strings.length - 1];
-		String fileName = productIdentifier.getIdentifier() + contentType;
-		Path fileNameAndPath = Paths.get(uploadDirectory, fileName);
-
-		storageService.store(image, fileName);
-		Event newEvent = Ecatalog.findFirstByProductIdentifier(productIdentifier);
-		newEvent.setImage(fileName);
-		Ecatalog.save(newEvent);
 
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
 	}

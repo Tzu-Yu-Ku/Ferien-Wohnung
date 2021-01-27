@@ -9,7 +9,7 @@
           type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>FeWoDre - <Titel des Angebots></title>
+    <title th:text="${'FeWoDre - ' + holidayHome.name}">FeWoDre</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                 <div class="carousel slide" data-ride="carousel" id="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active"><img class="d-block img-fluid w-100"
-                            th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
+                                                               th:src="@{/resources/img/{image}(image=${holidayHome.image})}">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev"> <span
@@ -43,47 +43,46 @@
         </div>
         <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Beschreibung</h4>
+                <h5 class="p-1">Beschreibung: </h5>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${holidayHome.description}"></h5>
+                <p class="m-0 p-1" th:text="${holidayHome.description}"></p>
             </div>
         </div>
         <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1" style="">Preis (pro Nacht)</h4>
+                <h5 class="p-1" style="">Preis (pro Nacht): </h5>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${holidayHome.price}"></h5>
+                <p class="m-0 p-1" th:text="${holidayHome.price}"></p>
             </div>
         </div>
         <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Vermieter</h4>
+                <h5 class="p-1">Vermieter: </h5>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5>
-                    <span class="p-1" th:text="${userAccount.firstname}"></span>
-                    <span class="p-1" th:text="${userAccount.lastname}"></span>
-                </h5>
+                <p class="m-0 p-1" th:text="${userAccount.firstname + ' ' + userAccount.lastname}">
+                </p>
             </div>
         </div>
         <div class="row border-top align-self-center" style="background-color: #EEEEEE;">
             <div class="p-1 col-4 col-md-4 border-right">
-                <h4 class="p-1">Max. Gästeanzahl</h4>
+                <h5 class="p-1">Maximale Gästeanzahl: </h5>
             </div>
             <div class="p-1 col-8 col-md-8">
-                <h5 class="p-1" th:text="${holidayHome.capacity}"></h5>
+                <p class="m-0 p-1" th:text="${holidayHome.capacity}"></p>
             </div>
         </div>
         <form th:action="@{/cart}" method="post">
-            <input type="hidden" name="hid" value="0"  th:value="${holidayHome.id}">
+            <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}">
             <div class="row border-top" style="background-color: #EEEEEE;">
                 <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="p-1">Anreisedatum</h4>
+                    <h5 class="p-1">Anreisedatum: </h5>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input type="date" id="startDate" th:value="${currentDay}" value="2021-01-11" name="arrivaldate" th:oninput="setMinOfDeparture()" th:min="${today}">
+                    <input type="date" id="startDate" th:value="${currentDay}" value="2021-01-11" name="arrivaldate"
+                           th:oninput="setMinOfDeparture()" th:min="${today}">
                     <script>
                         function setMinOfDeparture() {
                             document.getElementById("endDate").setAttribute("min", document.getElementById("startDate").value);
@@ -93,10 +92,11 @@
             </div>
             <div class="row border-top" style="background-color: #EEEEEE;">
                 <div class="p-1 col-4 col-md-4 border-right">
-                    <h4 class="p-1">Abreisedatum</h4>
+                    <h5 class="p-1">Abreisedatum: </h5>
                 </div>
                 <div class="p-1 col-8 col-md-8">
-                    <input type="date" id="endDate" th:value="${endDay}" value="2021-01-12" name="departuredate" th:min="${arrivalDate}" th:oninput="setMaxOfArrival()">
+                    <input type="date" id="endDate" th:value="${endDay}" value="2021-01-12" name="departuredate"
+                           th:min="${arrivalDate}" th:oninput="setMaxOfArrival()">
                     <script>
                         function setMaxOfArrival() {
                             document.getElementById("startDate").setAttribute("max", document.getElementById("endDate").value);
@@ -106,7 +106,7 @@
             </div>
             <div class="row border-top" style="background-color: #EEEEEE;">
                 <div class="col-md-12 text-center p-1">
-                    <button class="btn mx-auto btn-primary text-center" type="submit">Jetzt buchen!</button>
+                    <button class="btn mx-auto btn-primary text-center m-2" type="submit">Jetzt buchen!</button>
                 </div>
             </div>
         </form>

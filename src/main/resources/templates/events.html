@@ -31,15 +31,24 @@
         <div class="row"
              style="background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.05));
                 background-position: top left;	background-size: 100%;	background-repeat: repeat;
-                border-radius: calc(.5rem);">
+                border-radius: calc(.5rem);"
+             sec:authorize="!hasRole('EVENT_EMPLOYEE')">
             <div class="col-md-6 d-flex flex-column justify-content-center">
                 <h1 class="mb-3 mt-1 ml-4">Entdecken Sie unser Eventangebot.</h1>
                 <p class="lead mb-4 ml-4">Hier sehen Sie eine Liste aller Events, die aktuell bei uns angeboten werden.
                 </p>
             </div>
             <div class="col-md-6 p-lg-5 p-3">
-                <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png"
-                     alt="">
+            </div>
+        </div>
+
+        <div class="row"
+             style="background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.05));
+                background-position: top left;	background-size: 100%;	background-repeat: repeat;
+                border-radius: calc(.5rem);"
+             sec:authorize="hasRole('EVENT_EMPLOYEE')">
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <h1 class="mb-3 mt-1 ml-4">Eventverwaltung</h1>
             </div>
         </div>
 
@@ -229,7 +238,7 @@
                                    th:text="${'Max. ' + event.capacity + ' Teilnehmer'}">
                                     ----capacity----</p>
                             </li>
-                            <li class="list-group-item"><i class="far fa-money-bill-alt"></i>
+                            <li class="list-group-item"><i class="fas fa-money-bill-wave"></i>
                                 <p class="d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">
                                     ----price----
                                 </p>
@@ -304,7 +313,8 @@
                 </ul>
                 <div class="card-footer p-2 w-100" sec:authorize="hasRole('EVENT_EMPLOYEE')">
                     <div class="d-flex flex-row-reverse">
-                        <button th:if="${event.eventStatus}" type="button" class="btn btn-danger mr-0" data-toggle="modal"
+                        <button th:if="${event.eventStatus}" type="button" class="btn btn-danger mr-0"
+                                data-toggle="modal"
                                 data-target="#deleteEventModal"
                                 th:data-eventname="${event.name}"
                                 th:data-eventid="${event.id}">
