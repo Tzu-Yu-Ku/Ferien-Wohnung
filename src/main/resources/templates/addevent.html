@@ -38,7 +38,13 @@
                     </div>
                     <div class="p-1 col-8 col-md-8">
                         <input type="text" class="form-control" id="name" th:name="name" required="required"
-                               placeholder="Titel"/>
+                               placeholder="Titel" aria-label="Angebotstitel" th:field="*{name}"
+                               th:classappend="${#fields.hasErrors('name') ? ' is-invalid' : ''}"/>
+                        <div class="invalid-feedback ml-2" style="display: block;"
+                             th:if="${#fields.hasErrors('name')}"
+                             th:text="${#fields.errors('name').get(0)}">
+                            Error Text
+                        </div>
                     </div>
                 </div>
                 <div class="row border-top" style="background-color: #EEEEEE;">
@@ -46,8 +52,15 @@
                         <label for="description" class="px-2">Beschreibung:</label>
                     </div>
                     <div class="p-1 col-8 col-md-8">
-                            <textarea type="text" class="form-control" id="description" th:name="description"
-                                      required="required" placeholder="Beschreibung"></textarea>
+                        <textarea type="text" class="form-control" id="description" th:name="description"
+                                  required="required" placeholder="Beschreibung" aria-label="Beschreibung"
+                                  th:field="*{description}"
+                                  th:classappend="${#fields.hasErrors('description') ? ' is-invalid' : ''}"></textarea>
+                        <div class="invalid-feedback ml-2" style="display: block;"
+                             th:if="${#fields.hasErrors('description')}"
+                             th:text="${#fields.errors('description').get(0)}">
+                            Error Text
+                        </div>
                     </div>
                 </div>
                 <div class="row border-top" style="background-color: #EEEEEE;">
@@ -55,11 +68,18 @@
                         <label for="price" class="px-2">Preis:</label>
                     </div>
                     <div class="p-1 col-8 col-md-8">
-                        <div class="input-group-prepend">
-                            <input class="form-control" id="price" th:name="price" type="number" min="0"
-                                   required="required" placeholder="Preis"/>
+                        <div class="input-group">
+                            <input class="form-control" id="price" th:name="price" min="1" type="number"
+                                   placeholder="Preis p. N." aria-label="Preis pro Nacht" step="0.01"
+                                   th:field="*{price}"
+                                   th:classappend="${#fields.hasErrors('price') ? ' is-invalid' : ''}"/>
                             <div class="input-group-text">
                                 <i class="fas fa-euro-sign"></i>
+                            </div>
+                            <div class="invalid-feedback ml-2" style="display: block;"
+                                 th:if="${#fields.hasErrors('price')}"
+                                 th:text="${#fields.errors('price').get(0)}">
+                                Error Text
                             </div>
                         </div>
                     </div>
@@ -91,10 +111,17 @@
                     <div class="p-1 col-8 col-md-8">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="imageupload"
-                                   name="imageupload" required="required">
+                                   name="imageupload" required="required"
+                                   th:field="*{imageupload}"
+                                   th:classappend="${#fields.hasErrors('imageupload') ? ' is-invalid' : ''}">
                             <label class="custom-file-label" for="imageupload" id="upload-label">
                                 Wählen Sie ein Bild aus. (JPG, PNG)
                             </label>
+                            <div class="invalid-feedback ml-2" style="display: block;"
+                                 th:if="${#fields.hasErrors('imageupload')}"
+                                 th:text="${#fields.errors('imageupload').get(0)}">
+                                Error Text
+                            </div>
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -115,9 +142,16 @@
                         <label for="capacity" class="px-2">Maximale Teilnehmerzahl:</label>
                     </div>
                     <div class="p-1 col-8 col-md-8">
-                        <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
+                        <input class="form-control" type="number" id="capacity" min="1" th:name="capacity"
                                required="required" placeholder="Maximale Personenanzahl"
-                               aria-label="Maximale Personenanzahl"/>
+                               aria-label="Maximale Personenanzahl"
+                               th:field="*{capacity}"
+                               th:classappend="${#fields.hasErrors('capacity') ? ' is-invalid' : ''}"/>
+                        <div class="invalid-feedback ml-2" style="display: block;"
+                             th:if="${#fields.hasErrors('capacity')}"
+                             th:text="${#fields.errors('capacity').get(0)}">
+                            Error Text
+                        </div>
                     </div>
                 </div>
                 <div class="row border-top" style="background-color: #EEEEEE;">
@@ -126,28 +160,56 @@
                     </div>
                     <div class="p-1 col-7 col-md-7" style="">
                         <input type="text" class="form-control" id="street" th:name="street" required="required"
-                               placeholder="Straße" aria-label="Straße">
+                               placeholder="Straße" aria-label="Straße"
+                               th:field="*{street}"
+                               th:classappend="${#fields.hasErrors('street') ? ' is-invalid' : ''}">
+                        <div class="invalid-feedback ml-2 d-inline"
+                             th:if="${#fields.hasErrors('street')}"
+                             th:text="${#fields.errors('street').get(0)}">
+                            Error Text
+                        </div>
+                        <div class="invalid-feedback ml-2 d-inline"
+                             th:if="${#fields.hasErrors('number')}"
+                             th:text="${#fields.errors('number').get(0)}">
+                            Error Text
+                        </div>
                     </div>
                     <div class="p-1 col-1 col-md-1" style="">
                         <input type="text" class="form-control" th:name="number" required="required"
-                               placeholder="Hausnr." aria-label="Hausnummer">
+                               placeholder="Hausnr." aria-label="Hausnummer"
+                               th:field="*{number}"
+                               th:classappend="${#fields.hasErrors('number') ? ' is-invalid' : ''}">
                     </div>
                 </div>
                 <div class="row border-top" style="background-color: #EEEEEE;">
                     <div class="p-1 col-4 col-md-4 border-right">
-                        <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
+                        <label for="city" class="px-2">Postleitzahl & Ort:</label>
                     </div>
-                    <div class="p-1 col-6 col-md-6">
+                    <div class="p-1 col-3 col-md-3">
+                        <input type="number" class="form-control" th:name="postalnumber" required="required"
+                               placeholder="Postleitzahl" aria-label="Postleitzahl" min="1"
+                               th:field="*{postalnumber}"
+                               th:classappend="${#fields.hasErrors('postalnumber') ? ' is-invalid' : ''}">
+                        <div class="invalid-feedback ml-2 d-inline"
+                             th:if="${#fields.hasErrors('postalnumber')}"
+                             th:text="${#fields.errors('postalnumber').get(0)}">
+                            Error Text
+                        </div>
+                    </div>
+                    <div class="p-1 col-5 col-md-5">
                         <input type="text" class="form-control" name="city" id="city" th:name="city"
-                               required="required" placeholder="Ort">
-                    </div>
-                    <div class="p-1 col-2 col-md-2">
-                        <input type="number" class="form-control" th:name="postalnumber" min="0" required="required"
-                               placeholder="Postleitzahl" aria-label="Postleitzahl">
-                        <input type="hidden" class="form-control" th:name="coordinateX" id="coordinateX" min=0
-                               max=10000 required="required" value="111">
-                        <input type="hidden" class="form-control" th:name="coordinateY" id="coordinateY" min=0
-                               max=10000 required="required" value="111">
+                               required="required" placeholder="Ort"
+                               th:field="*{city}"
+                               th:classappend="${#fields.hasErrors('city') ? ' is-invalid' : ''}">
+                        <div class="invalid-feedback ml-2 d-inline"
+                             th:if="${#fields.hasErrors('city')}"
+                             th:text="${#fields.errors('city').get(0)}">
+                            Error Text
+                        </div>
+                        <input type="hidden" class="form-control" th:name="coordinateX" id="coordinateX" min="0"
+                               max=10000 value="111" required="required" placeholder="Koordinate X">
+                        <input type="hidden" class="form-control" th:name="coordinateY" id="coordinateY" min="0"
+                               max=10000 value="111" required="required" placeholder="Koordinate Y">
                     </div>
                 </div>
                 <div class="row border-top p-3" style="background-color: #EEEEEE;">
