@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
  * @author jimmy
  */
 public class DefaultBusinessTime implements BusinessTime {
-	// Why the fuck has java no operation overloading ?!
 	public Duration offset;
 
 	public DefaultBusinessTime(){
