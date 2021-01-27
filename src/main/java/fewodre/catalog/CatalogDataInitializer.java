@@ -184,7 +184,7 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		// Funktioniert nicht :/
 //		 dummyHome1.acceptedEvents.add(eventCatalog.findFirstByProductIdentifier(eventTest4.getId()));
-		 dummyHome1.acceptEvent(eventTest4);
-		 holidayHomeCatalog.save(dummyHome1);
+//		 dummyHome1.acceptEvent(eventTest4);
+//		 holidayHomeCatalog.save(dummyHome1);
 	}
 }
