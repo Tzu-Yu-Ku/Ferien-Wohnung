@@ -45,7 +45,7 @@ public class BookingDataInitializer{
 
 		UserAccount user = accountRepository.findByAccount_Email("test@test").getAccount();
 		//canceled
-		HolidayHome home1 = holidayHomeCatalog.findFirstByName("Nette Wohnung in der Dresdner Innenstadt");
+		HolidayHome home1 = holidayHomeCatalog.findFirstByName("Nette Wohnung in der Dresdner Neustadt");
 		LocalDate arrivalDate1 = LocalDate.now().minusDays(7);
 		LocalDate departureDate1 = LocalDate.now().minusDays(5);
 		Cart cart = new Cart();
