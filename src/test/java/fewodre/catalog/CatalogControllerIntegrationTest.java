@@ -151,7 +151,13 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "event@employee", roles = "EVENT_EMPLOYEE")
 	public void editEvent() throws Exception {
 		Event testEvent = eventCatalog.findAll().toList().get(0);
-		mvc.perform(post("/editEvent")
+
+		byte[] imageBytes = new byte[]{1};
+		MockMultipartFile image = new MockMultipartFile("imageupload","test.png",
+				MediaType.IMAGE_PNG.toString(), imageBytes);
+
+		mvc.perform(multipart("/editEvent")
+				.file(image)
 				.param("eventId", testEvent.getId().toString())
 				.param("name", "test_name")
 				.param("description", "test_desc")
@@ -188,15 +194,11 @@ class CatalogControllerIntegrationTest {
 		assertThat(editedEvent.getDescription()).isEqualTo("test_desc");
 		assertThat(editedEvent.getPrice().toString()).isEqualTo("EUR 1234");
 		assertThat(editedEvent.getDate().toString()).isEqualTo("2021-12-12");
-//		assertThat(editedEvent.getRepeats()).isEqualTo(20);
-//		assertThat(editedEvent.getRepeateRate()).isEqualTo(30);
 		assertThat(editedEvent.getCapacity()).isEqualTo(99);
 		assertThat(editedEvent.getPlace().getStreet()).isEqualTo("test_street");
 		assertThat(editedEvent.getPlace().getHouseNumber()).isEqualTo("1234");
 		assertThat(editedEvent.getPlace().getPostalCode()).isEqualTo("55555");
 		assertThat(editedEvent.getPlace().getCity()).isEqualTo("test_city");
-		assertThat(editedEvent.getPlace().getCoordX()).isEqualTo(999);
-		assertThat(editedEvent.getPlace().getCoordY()).isEqualTo(888);
 	}
 
 	@Test
@@ -227,7 +229,13 @@ class CatalogControllerIntegrationTest {
 	@WithMockUser(username = "host@host", roles = "HOST")
 	public void editHolidayHome() throws Exception {
 		HolidayHome testHome = holidayHomeCatalog.findAll().toList().get(0);
-		MvcResult result = mvc.perform(post("/editHolidayHome")
+
+		byte[] imageBytes = new byte[]{1};
+		MockMultipartFile image = new MockMultipartFile("imageupload","test.png",
+				MediaType.IMAGE_PNG.toString(), imageBytes);
+
+		mvc.perform(multipart("/editHolidayHome")
+				.file(image)
 				.param("holidayHomeId", testHome.getId().toString())
 				.param("name", "name_edit")
 				.param("description", "desc_edit")
@@ -242,7 +250,7 @@ class CatalogControllerIntegrationTest {
 				.andExpect(status().isFound())
 				.andReturn();
 
-		result = mvc.perform(post("/housedetails")
+		MvcResult result = mvc.perform(post("/housedetails")
 				.param("holidayHome", testHome.getId().toString()))
 				.andExpect(status().isOk())
 				.andReturn();
@@ -255,8 +263,6 @@ class CatalogControllerIntegrationTest {
 		assertThat(savedHome.getPlace().getCity()).isEqualTo("city_test");
 		assertThat(savedHome.getPlace().getStreet()).isEqualTo("street_test");
 		assertThat(savedHome.getPlace().getPostalCode()).isEqualTo("99999");
-		assertThat(savedHome.getPlace().getCoordX()).isEqualTo(999);
-		assertThat(savedHome.getPlace().getCoordY()).isEqualTo(888);
 		assertThat(savedHome.getPrice().toString()).isEqualTo("EUR 111");
 	}
 
