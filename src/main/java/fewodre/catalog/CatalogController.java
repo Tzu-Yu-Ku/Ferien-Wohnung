@@ -26,7 +26,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +35,6 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -51,8 +49,8 @@ public class CatalogController {
 
 	private static final Quantity NONE = Quantity.of(0);
 
-	private final HolidayHomeCatalog Hcatalog;
-	private final EventCatalog Ecatalog;
+	private final HolidayHomeCatalog hCatalog;
+	private final EventCatalog eventCatalog;
 	private final BusinessTime businessTime;
 	private UniqueInventory<UniqueInventoryItem> holidayHomeStorage;
 	private final AccountManagement accountManagement;
@@ -62,24 +60,26 @@ public class CatalogController {
 	@Autowired
 	private final StorageService storageService;
 
-	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<ProductIdentifier>();
-	ArrayList<HolidayHome> sortCapacityList = new ArrayList<HolidayHome>();
-	ArrayList<HolidayHome> sortPriceList = new ArrayList<HolidayHome>();
-	ArrayList<HolidayHome> sortDistrictList = new ArrayList<HolidayHome>();
-	ArrayList<Event> sortEventTypeList = new ArrayList<Event>();
-	ArrayList<Event> sortEventCapacityList = new ArrayList<Event>();
-	ArrayList<Event> sortEventDistrictList = new ArrayList<Event>();
-	ArrayList<Event> recentEvent = new ArrayList<Event>();
+	ArrayList<ProductIdentifier> holidayHomeIdList = new ArrayList<>();
+	ArrayList<HolidayHome> sortCapacityList = new ArrayList<>();
+	ArrayList<HolidayHome> sortPriceList = new ArrayList<>();
+	ArrayList<HolidayHome> sortDistrictList = new ArrayList<>();
+	ArrayList<Event> sortEventTypeList = new ArrayList<>();
+	ArrayList<Event> sortEventCapacityList = new ArrayList<>();
+	ArrayList<Event> sortEventDistrictList = new ArrayList<>();
+	ArrayList<Event> recentEvent = new ArrayList<>();
 
-	public static String uploadDirectory = Paths.get("").toAbsolutePath().toString() + "/src/main/resources/static/resources/img/";
+	public static final String uploadDirectory = Paths
+			.get("")
+			.toAbsolutePath().toString() + "/src/main/resources/static/resources/img/";
 
 	private BookingManagement bookingManagement;
 
 	/**
 	 * Creates a new {@link CatalogController} with the given Parameters.
 	 *
-	 * @param Hcatalog           muss not be {@literal null}
-	 * @param Ecatalog           muss not be {@literal null}
+	 * @param hCatalog           muss not be {@literal null}
+	 * @param eventCatalog       muss not be {@literal null}
 	 * @param businessTime       muss not be {@literal null}
 	 * @param holidayHomeStorage muss not be {@literal null}
 	 * @param accountManagement  muss not be {@literal null}
@@ -87,12 +87,12 @@ public class CatalogController {
 	 * @param bookingManagement  muss not be {@literal null}
 	 * @param storageService     muss not be {@literal null}
 	 */
-	CatalogController(HolidayHomeCatalog Hcatalog, EventCatalog Ecatalog, BusinessTime businessTime,
+	CatalogController(HolidayHomeCatalog hCatalog, EventCatalog eventCatalog, BusinessTime businessTime,
 	                  UniqueInventory<UniqueInventoryItem> holidayHomeStorage, AccountManagement accountManagement,
 	                  AccountRepository accountRepository, BookingManagement bookingManagement,
 	                  StorageService storageService) {
-		this.Hcatalog = Hcatalog;
-		this.Ecatalog = Ecatalog;
+		this.hCatalog = hCatalog;
+		this.eventCatalog = eventCatalog;
 		this.businessTime = businessTime;
 		this.holidayHomeStorage = holidayHomeStorage;
 		this.accountManagement = accountManagement;
@@ -127,18 +127,18 @@ public class CatalogController {
 	String holidayHomeCatalog(Model model) {
 		firstname(model);
 
-		Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
-		Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
-		Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+		hCatalog.findAll().forEach(item -> sortCapacityList.add(item));
+		hCatalog.findAll().forEach(item -> sortPriceList.add(item));
+		hCatalog.findAll().forEach(item -> sortDistrictList.add(item));
 
 		if (authentication.getPrincipal().toString().contains("HOST")) {
-			model.addAttribute("holidayhomeCatalog", Hcatalog.findAll()
+			model.addAttribute("holidayhomeCatalog", hCatalog.findAll()
 					.filter(holidayHome -> holidayHome.getHostMail().equals(
 							accountRepository.findByAccount_Email(authentication.getName()).getAccount().getEmail()))
 					.filter(holidayHome -> holidayHome.getIsBookable()));
 		} else {
 			model.addAttribute("holidayhomeCatalog",
-					Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
+					hCatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable()));
 		}
 		return "holidayhomes";
 	}
@@ -167,10 +167,10 @@ public class CatalogController {
 			sortCapacityList.clear();
 
 			if (searchedCapacity.equals("Alle")) {
-				Hcatalog.findAll().forEach(item -> sortCapacityList.add(item));
+				hCatalog.findAll().forEach(item -> sortCapacityList.add(item));
 			} else if (!searchedCapacity.equals("Alle")) {
 				int searchedCapacityInt = Integer.parseInt(searchedCapacity);
-				Hcatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
+				hCatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
 						.forEach(item -> sortCapacityList.add(item));
 			}
 		}
@@ -179,17 +179,17 @@ public class CatalogController {
 			sortPriceList.clear();
 
 			if (searchedPrice1.equals("Alle") && searchedPrice2.equals("Alle")) {
-				Hcatalog.findAll().forEach(item -> sortPriceList.add(item));
+				hCatalog.findAll().forEach(item -> sortPriceList.add(item));
 			} else if (searchedPrice1.equals("0")) {
-				Hcatalog.findAll().filter(
+				hCatalog.findAll().filter(
 						holidayHome -> holidayHome.getPrice().isLessThanOrEqualTo(Money.parse("EUR " + searchedPrice2)))
 						.forEach(item -> sortPriceList.add(item));
 			} else if (searchedPrice2.equals("0")) {
-				Hcatalog.findAll().filter(
+				hCatalog.findAll().filter(
 						holidayHome -> holidayHome.getPrice().isGreaterThan(Money.parse("EUR " + searchedPrice1)))
 						.forEach(item -> sortPriceList.add(item));
 			} else {
-				Hcatalog.findAll()
+				hCatalog.findAll()
 						.filter(holidayHome -> holidayHome.getPrice()
 								.isGreaterThanOrEqualTo(Money.parse("EUR " + searchedPrice1)))
 						.filter(holidayHome -> holidayHome.getPrice()
@@ -202,15 +202,15 @@ public class CatalogController {
 			sortDistrictList.clear();
 
 			if (searchedDistrict.equals("Alle")) {
-				Hcatalog.findAll().forEach(item -> sortDistrictList.add(item));
+				hCatalog.findAll().forEach(item -> sortDistrictList.add(item));
 			} else if (!searchedDistrict.equals("Alle")) {
-				Hcatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict))
+				hCatalog.findAll().filter(holidayHome -> holidayHome.getPlace().getDistrict().equals(searchedDistrict))
 						.forEach(item -> sortDistrictList.add(item));
 			}
 		}
 
 		model.addAttribute("holidayhomeCatalog",
-				Hcatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable())
+				hCatalog.findAll().filter(holidayHome -> holidayHome.getIsBookable())
 						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortCapacityList))
 						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortPriceList))
 						.filter(holidayHome -> holidayHome.findInList(holidayHome, sortDistrictList)));
@@ -268,10 +268,10 @@ public class CatalogController {
 
 		myHolidayHome.setImage(fileName);
 
-		Hcatalog.save(myHolidayHome);
-		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
+		hCatalog.save(myHolidayHome);
+		for (int i = 0; i < eventCatalog.findAll().toList().size(); i++) {
 			System.out.println(
-					Ecatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
+					eventCatalog.findAll().toList().get(i).getPlace().distanceToOtherPlaces(myHolidayHome.getPlace()));
 		}
 
 		return "redirect:/editHolidayHomeLocation?holidayhome=" + productIdentifier.toString();
@@ -335,8 +335,8 @@ public class CatalogController {
 		}
 
 		boolean holidayHomePlaceUpdated = false;
-		if (Hcatalog.findById(holidayHomeId).isPresent()) {
-			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
+		if (hCatalog.findById(holidayHomeId).isPresent()) {
+			HolidayHome holidayHomeToChange = hCatalog.findById(holidayHomeId).get();
 			if (!fileName.equals("unchanged")) {
 				holidayHomeToChange.setImage(fileName);
 			}
@@ -391,14 +391,14 @@ public class CatalogController {
 
 			if (!errorMap.isEmpty()) {
 				model.addAttribute("errors", errorMap);
-				Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
+				Optional<HolidayHome> holidayHome = hCatalog.findById(holidayHomeId);
 				model.addAttribute("holidayHome", holidayHome.get());
 				return "editholidayhome";
 			}
 
 			holidayHomeToChange.setPlace(changedPlace);
 			System.out.println(holidayHomeToChange);
-			Hcatalog.save(holidayHomeToChange);
+			hCatalog.save(holidayHomeToChange);
 
 		}
 
@@ -408,7 +408,7 @@ public class CatalogController {
 
 		errorMap.put("success", "Ihre Änderungen wurden erfolgreich gespeichert.");
 		model.addAttribute("errors", errorMap);
-		Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
+		Optional<HolidayHome> holidayHome = hCatalog.findById(holidayHomeId);
 		model.addAttribute("holidayHome", holidayHome.get());
 		return "editholidayhome";
 	}
@@ -426,12 +426,12 @@ public class CatalogController {
 
 		ProductIdentifier holidayHomeId = holidayHome.getId();
 		System.out.println(holidayHomeId);
-		Hcatalog.findById(holidayHomeId);
+		hCatalog.findById(holidayHomeId);
 
-		if (Hcatalog.findById(holidayHomeId).isPresent()) {
-			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
+		if (hCatalog.findById(holidayHomeId).isPresent()) {
+			HolidayHome holidayHomeToChange = hCatalog.findById(holidayHomeId).get();
 			holidayHomeToChange.setIsBookable(false);
-			Hcatalog.save(holidayHomeToChange);
+			hCatalog.save(holidayHomeToChange);
 		}
 
 		return "redirect:/holidayhomes";
@@ -458,18 +458,17 @@ public class CatalogController {
 	@GetMapping(path = "/activateEventPage")
 	String activateEventPage(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
 		firstname(model);
-		System.out.println("BEREITS AKTIVE EVENTS: " + Hcatalog.findById(holidayHomeId).get().acceptedEvents);
+		System.out.println("BEREITS AKTIVE EVENTS: " + hCatalog.findById(holidayHomeId).get().acceptedEvents);
 		List<Event> nonActivtedEvents = new LinkedList<>();
-		List<Event> allEvents = Ecatalog.findAll().toList();
+		List<Event> allEvents = eventCatalog.findAll().toList();
 		for (int i = 0; i < allEvents.size(); i++) {
-			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))) {
-				if (allEvents.get(i).isEventStatus()) {
-					nonActivtedEvents.add(allEvents.get(i));
-				}
+			if (!hCatalog.findById(holidayHomeId).get().getAcctivatEvents().contains(allEvents.get(i))
+					&& allEvents.get(i).isEventStatus()) {
+				nonActivtedEvents.add(allEvents.get(i));
 			}
 		}
 		model.addAttribute("nonActivatedEventCatalog", nonActivtedEvents);
-		model.addAttribute("holidayHome", Hcatalog.findById(holidayHomeId).get());
+		model.addAttribute("holidayHome", hCatalog.findById(holidayHomeId).get());
 		return "houseEventaccepts";
 	}
 
@@ -477,9 +476,9 @@ public class CatalogController {
 	@PostMapping(path = "/activateEventForHouse")
 	String activateEventForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId,
 	                                   @RequestParam("event") ProductIdentifier eventId) {
-		HolidayHome holidayHome = Hcatalog.findById(holidayHomeId).get();
-		holidayHome.acceptEvent(Ecatalog.findById(eventId).get());
-		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
+		HolidayHome holidayHome = hCatalog.findById(holidayHomeId).get();
+		holidayHome.acceptEvent(eventCatalog.findById(eventId).get());
+		hCatalog.save(hCatalog.findById(holidayHomeId).get());
 		return "redirect:/activateEventPage?holidayHome=" + holidayHomeId.toString();
 	}
 
@@ -487,18 +486,18 @@ public class CatalogController {
 	@PostMapping(path = "/activateAllEventsForHouse")
 	String activateAllEventsForHolidayHome(Model model, @RequestParam("holidayHome") ProductIdentifier holidayHomeId) {
 		List<Event> nonActivtedEvents = new LinkedList<Event>();
-		for (int i = 0; i < Ecatalog.findAll().toList().size(); i++) {
-			if (!Hcatalog.findById(holidayHomeId).get().getAcctivatEvents()
-					.contains(Ecatalog.findAll().toList().get(i))) {
-				nonActivtedEvents.add(Ecatalog.findAll().toList().get(i));
+		for (int i = 0; i < eventCatalog.findAll().toList().size(); i++) {
+			if (!hCatalog.findById(holidayHomeId).get().getAcctivatEvents()
+					.contains(eventCatalog.findAll().toList().get(i))) {
+				nonActivtedEvents.add(eventCatalog.findAll().toList().get(i));
 			}
 		}
-		Hcatalog.findById(holidayHomeId).get().acceptedEvents.addAll(nonActivtedEvents);
-		Hcatalog.save(Hcatalog.findById(holidayHomeId).get());
+		hCatalog.findById(holidayHomeId).get().acceptedEvents.addAll(nonActivtedEvents);
+		hCatalog.save(hCatalog.findById(holidayHomeId).get());
 		return "redirect:/holidayhomes";
 	}
 
-	// Events------------------------------------------------------------------------------------------------------------------------------
+	// Events---------------------------------------------------------------------------------------------------------
 	@GetMapping("/events")
 	String eventCatalog(Model model) {
 		recentEvent.clear();
@@ -507,25 +506,23 @@ public class CatalogController {
 		firstname(model);
 
 		ArrayList<ProductIdentifier> recent = new ArrayList();
-		Ecatalog.findAll()
+		eventCatalog.findAll()
 				.filter(event -> event.getDate().isAfter(LocalDate.now())
 						|| event.getDate().isEqual(LocalDate.now()))
 				.forEach(item -> recent.add(item.getId()));
 
-		LocalDate latestdate = Ecatalog.findById(recent.get(0)).get().getDate();
-		LocalTime latesttime = Ecatalog.findById(recent.get(0)).get().getTime();
+		LocalDate latestdate = eventCatalog.findById(recent.get(0)).get().getDate();
+		LocalTime latesttime = eventCatalog.findById(recent.get(0)).get().getTime();
 
 		ProductIdentifier latestID = recent.get(0);
 		int count = 0;
 		for (int i = 0; i < recent.size(); i++) {
-			LocalDate nextdate = Ecatalog.findById(recent.get(i)).get().getDate();
-			LocalTime nexttime = Ecatalog.findById(recent.get(i)).get().getTime();
-			if (nextdate.equals(latestdate)) {
-				if (nexttime.isBefore(latesttime)) {
-					latestdate = nextdate;
-					latesttime = nexttime;
-					latestID = recent.get(count);
-				}
+			LocalDate nextdate = eventCatalog.findById(recent.get(i)).get().getDate();
+			LocalTime nexttime = eventCatalog.findById(recent.get(i)).get().getTime();
+			if (nextdate.equals(latestdate) && nexttime.isBefore(latesttime)) {
+				latestdate = nextdate;
+				latesttime = nexttime;
+				latestID = recent.get(count);
 			}
 			if (nextdate.isBefore(latestdate)) {
 				latestdate = nextdate;
@@ -537,14 +534,15 @@ public class CatalogController {
 		//System.out.println(latest);
 		//System.out.println(latestID);
 		final ProductIdentifier finallatestID = latestID;
-		Ecatalog.findAll().filter(event -> event.getId().equals(finallatestID)).forEach(item -> recentEvent.add(item));
+		eventCatalog.findAll().filter(event -> event.getId()
+				.equals(finallatestID)).forEach(item -> recentEvent.add(item));
 
-		Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
-		Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+		eventCatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+		eventCatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+		eventCatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
 
 		model.addAttribute("recentEvent", recentEvent);
-		model.addAttribute("eventCatalog", Ecatalog.findAll()
+		model.addAttribute("eventCatalog", eventCatalog.findAll()
 				.filter(event -> event.getDate().isAfter(LocalDate.now())
 						|| event.getDate().isEqual(LocalDate.now())));
 
@@ -558,7 +556,7 @@ public class CatalogController {
 		LocalDate todayDate = LocalDate.now();
 		LocalTime todayTime = LocalTime.now(ZoneId.systemDefault());
 
-		Streamable<Event> allSmallEvents = Ecatalog.findAllByEventType(EventType.SMALL);
+		Streamable<Event> allSmallEvents = eventCatalog.findAllByEventType(EventType.SMALL);
 		for (Event e : allSmallEvents) {
 			boolean todayDateBefore = todayDate.isBefore(e.getDate());
 			boolean todayTimeBefore = todayTime.isBefore(e.getTime());
@@ -571,7 +569,7 @@ public class CatalogController {
 				e.setDate(e.getDate().plusWeeks(1));
 
 			}
-			Ecatalog.save(e);
+			eventCatalog.save(e);
 		}
 	}
 
@@ -591,15 +589,18 @@ public class CatalogController {
 
 		if (searchedEventType != null) {
 			sortEventTypeList.clear();
-
-			if (searchedEventType.equals("Alle")) {
-				Ecatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-			} else if (searchedEventType.equals("SMALL")) {
-				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL)
-						.forEach(item -> sortEventTypeList.add(item));
-			} else if (searchedEventType.equals("LARGE")) {
-				Ecatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE)
-						.forEach(item -> sortEventTypeList.add(item));
+			switch (searchedEventType) {
+				case "Alle":
+					eventCatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+					break;
+				case "SMALL":
+					eventCatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL)
+							.forEach(item -> sortEventTypeList.add(item));
+					break;
+				case "LARGE":
+					eventCatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE)
+							.forEach(item -> sortEventTypeList.add(item));
+					break;
 			}
 		}
 
@@ -607,10 +608,10 @@ public class CatalogController {
 			sortEventCapacityList.clear();
 
 			if (searchedEventCapacity.equals("Alle")) {
-				Ecatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
+				eventCatalog.findAll().forEach(item -> sortEventCapacityList.add(item));
 			} else {
 				int searchedCapacityInt = Integer.parseInt(searchedEventCapacity);
-				Ecatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
+				eventCatalog.findAll().filter(holidayHome -> holidayHome.getCapacity() >= searchedCapacityInt)
 						.forEach(item -> sortEventCapacityList.add(item));
 			}
 		}
@@ -619,9 +620,9 @@ public class CatalogController {
 			sortEventDistrictList.clear();
 
 			if (searchedEventDistrict.equals("Alle")) {
-				Ecatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
+				eventCatalog.findAll().forEach(item -> sortEventDistrictList.add(item));
 			} else if (!searchedEventDistrict.equals("Alle")) {
-				Ecatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict))
+				eventCatalog.findAll().filter(event -> event.getPlace().getDistrict().equals(searchedEventDistrict))
 						.forEach(item -> sortEventDistrictList.add(item));
 			}
 		}
@@ -630,7 +631,7 @@ public class CatalogController {
 		System.out.println(sortEventDistrictList);
 
 		model.addAttribute("eventCatalog",
-				Ecatalog.findAll().filter(Event::isEventStatus)
+				eventCatalog.findAll().filter(Event::isEventStatus)
 						.filter(event -> event.getDate().isAfter(LocalDate.now())
 								|| event.getDate().isEqual(LocalDate.now()))
 						.filter(event -> event.findInList(event, sortEventCapacityList))
@@ -648,7 +649,7 @@ public class CatalogController {
 	String cancelEvent(@RequestParam("event") Event event) {
 		bookingManagement.cancelEvent(event);
 		event.setEventStatus(false);
-		Ecatalog.save(event);
+		eventCatalog.save(event);
 		return "redirect:/events";
 	}
 
@@ -656,7 +657,7 @@ public class CatalogController {
 	@PostMapping("/activateevent")
 	String activateEvent(@RequestParam("event") Event event) {
 		event.setEventStatus(true);
-		Ecatalog.save(event);
+		eventCatalog.save(event);
 		return "redirect:/events";
 	}
 
@@ -665,12 +666,10 @@ public class CatalogController {
 	@PostMapping("/deleteevent")
 	String deleteEvent(@RequestParam("event") Event event) {
 		System.out.println("zu löschendes Event " + event);
-		if (holidayHomeStorage.findByProduct(event).isPresent()) {
-			if (!event.isEventStatus()) {
-				// holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
-				// Ecatalog.delete(event);
-				Ecatalog.delete(event);
-			}
+		if (holidayHomeStorage.findByProduct(event).isPresent() && !event.isEventStatus()) {
+			// holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
+			// Ecatalog.delete(event);
+			eventCatalog.delete(event);
 		}
 		return "redirect:/events";
 	}
@@ -711,10 +710,10 @@ public class CatalogController {
 			}
 		}
 
-		Ecatalog.findById(eventId);
+		eventCatalog.findById(eventId);
 		boolean eventPlaceUpdated = false;
-		if (Ecatalog.findById(eventId).isPresent()) {
-			Event eventToChange = Ecatalog.findById(eventId).get();
+		if (eventCatalog.findById(eventId).isPresent()) {
+			Event eventToChange = eventCatalog.findById(eventId).get();
 			if (!fileName.equals("unchanged")) {
 				eventToChange.setImage(fileName);
 			}
@@ -774,14 +773,14 @@ public class CatalogController {
 
 			if (!errorMap.isEmpty()) {
 				model.addAttribute("errors", errorMap);
-				Optional<Event> event = Ecatalog.findById(eventId);
+				Optional<Event> event = eventCatalog.findById(eventId);
 				model.addAttribute("event", event.get());
 				return "editevent";
 			}
 
 			eventToChange.setPlace(changedPlace);
 			System.out.println(eventToChange);
-			Ecatalog.save(eventToChange);
+			eventCatalog.save(eventToChange);
 		}
 
 		if (eventPlaceUpdated) {
@@ -790,7 +789,7 @@ public class CatalogController {
 
 		errorMap.put("success", "Ihre Änderungen wurden erfolgreich gespeichert.");
 		model.addAttribute("errors", errorMap);
-		Optional<Event> event = Ecatalog.findById(eventId);
+		Optional<Event> event = eventCatalog.findById(eventId);
 		model.addAttribute("event", event.get());
 		return "editevent";
 	}
@@ -847,7 +846,7 @@ public class CatalogController {
 		storageService.store(image, fileName);
 		event.setImage(fileName);
 
-		Ecatalog.save(event);
+		eventCatalog.save(event);
 		holidayHomeStorage.save(new UniqueInventoryItem(event, Quantity.of(event.getCapacity())));
 
 		return "redirect:/editEventLocation?event=" + productIdentifier.toString();
@@ -862,33 +861,34 @@ public class CatalogController {
 	@PostMapping("/map")
 	public String postmap(@RequestParam(value = "size") String size,
 	                      @RequestParam("productIdentifier") ProductIdentifier productIdentifier,
-	                      @Valid @ModelAttribute("coordinates") Coordinates coordinates, HttpServletRequest httpServletRequest) {
+	                      @Valid @ModelAttribute("coordinates") Coordinates coordinates,
+	                      HttpServletRequest httpServletRequest) {
 
 		Coordinates productCoordinates = new Coordinates(size);
 		String returnPage = "/";
 
 		if (httpServletRequest.getHeader("referer").contains("editEventLocation")) {
-			Event event = Ecatalog.findById(productIdentifier).get();
+			Event event = eventCatalog.findById(productIdentifier).get();
 			Place eventPlace = event.getPlace();
 			eventPlace.setCoordX(productCoordinates.xRatio);
 			eventPlace.setCoordY(productCoordinates.yRatio);
 			eventPlace.setDistrict(productCoordinates.getDistrict());
 			event.setPlace(eventPlace);
-			Ecatalog.save(event);
-			Event eventtest = Ecatalog.findById(productIdentifier).get();
+			eventCatalog.save(event);
+			Event eventtest = eventCatalog.findById(productIdentifier).get();
 
 			returnPage = "/events";
 		}
 		if (httpServletRequest.getHeader("referer").contains("editHolidayHomeLocation")) {
-			HolidayHome holidayHome = Hcatalog.findById(productIdentifier).get();
+			HolidayHome holidayHome = hCatalog.findById(productIdentifier).get();
 			System.out.println("PLACE VORHER:" + holidayHome.getPlace().toString());
 			Place holidayHomePlace = holidayHome.getPlace();
 			holidayHomePlace.setCoordX(productCoordinates.xRatio);
 			holidayHomePlace.setCoordY(productCoordinates.yRatio);
 			holidayHomePlace.setDistrict(productCoordinates.getDistrict());
 			holidayHome.setPlace(holidayHomePlace);
-			Hcatalog.save(holidayHome);
-			HolidayHome holidayHometest = Hcatalog.findById(productIdentifier).get();
+			hCatalog.save(holidayHome);
+			HolidayHome holidayHometest = hCatalog.findById(productIdentifier).get();
 			System.out.println("PLACE NACHER:" + holidayHometest.getPlace().toString());
 			returnPage = "/holidayhomes";
 		}

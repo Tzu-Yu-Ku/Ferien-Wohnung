@@ -30,7 +30,7 @@ public class HolidayHome extends Product {
 	private int capacity;
 
 	public HolidayHome(String title, String hostMail, String description, String image, Place place, boolean isBookable,
-			int capacity, MonetaryAmount price) {
+	                   int capacity, MonetaryAmount price) {
 		super(title, price);
 		this.description = description;
 		this.hostMail = hostMail;
@@ -48,17 +48,15 @@ public class HolidayHome extends Product {
 
 	/**
 	 * Method shows if a HolidayHome is in specific List.
-	 * 
-	 * @param holidayHome is an object of the class HolidayHome
-	 * @param list is a list with HolidayHomes
 	 *
+	 * @param holidayHome is an object of the class HolidayHome
+	 * @param list        is a list with HolidayHomes
 	 * @return Returns a boolean to describes if a specific HolidayHome is in a list of HolidayHomes.
 	 */
 	public boolean findInList(HolidayHome holidayHome, ArrayList<HolidayHome> list) {
-		if(list.contains(holidayHome)){
+		if (list.contains(holidayHome)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -75,7 +73,7 @@ public class HolidayHome extends Product {
 	/**
 	 * Method set the capacity of a HolidayHome to a given value.
 	 *
-	 * @param capacity 	natural number to describes who many People find a place in a HolidayHome
+	 * @param capacity natural number to describes who many People find a place in a HolidayHome
 	 */
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;

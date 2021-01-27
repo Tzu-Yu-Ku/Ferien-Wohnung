@@ -23,8 +23,6 @@ import java.util.HashMap;
 @Component
 public class BookingDataInitializer{
 
-	private final Logger LOG= LoggerFactory.getLogger(BookingDataInitializer.class);
-
 	private final BookingManagement bookingManagement;
 	private final HolidayHomeCatalog holidayHomeCatalog;
 	private final AccountRepository accountRepository;

@@ -70,8 +70,9 @@ public class CartController {
 	 * @param eventCatalog       muss not be {@literal null}
 	 * @param holidayHomeCatalog muss not be {@literal null}
 	 */
-	CartController(AccountManagement accountManagement, AccountRepository accountRepository, BookingManagement bookingManagement,
-				EventCatalog eventCatalog, HolidayHomeCatalog holidayHomeCatalog) {
+	CartController(AccountManagement accountManagement, AccountRepository accountRepository,
+	               BookingManagement bookingManagement, EventCatalog eventCatalog,
+	               HolidayHomeCatalog holidayHomeCatalog) {
 
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingManagement, "BookingManagement must not be null!");
@@ -97,7 +98,8 @@ public class CartController {
 		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
-			model.addAttribute("firstname", accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
+			model.addAttribute("firstname",
+					accountRepository.findByAccount_Email(authentication.getName()).getAccount().getFirstname());
 		}
 	}
 
@@ -112,8 +114,9 @@ public class CartController {
 	}
 
 	/**
-	 * Shows all the information of the chosen {@link org.salespointframework.catalog.Product}, which is planed to be ordered.
-	 * And shows all the {@link Event}s, which takes place near to the chosen {@link HolidayHome}.
+	 * Shows all the information of the chosen {@link org.salespointframework.catalog.Product},
+	 * which is planed to be ordered. And shows all the {@link Event}s,
+	 * which takes place near to the chosen {@link HolidayHome}.
 	 *
 	 * @param model       muss not be {@literal null}
 	 * @param cart        muss not be {@literal null}
@@ -124,7 +127,8 @@ public class CartController {
 	@PreAuthorize("hasRole('TENANT')")
 	public String basket(Model model, @ModelAttribute Cart cart, @LoggedIn UserAccount userAccount) {
 		firstname(model);
-		System.out.println("AcceptedEvent are :" + holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents);
+		System.out.println("AcceptedEvent are :" + holidayHomeCatalog
+				.findById(holidayHome.getId()).get().acceptedEvents);
 		for (Event event : holidayHomeCatalog.findById(holidayHome.getId()).get().acceptedEvents) {
 			LOG.info(event.getName());
 			event.setCapacity(bookingManagement.getStockCountOf(event));
@@ -251,7 +255,7 @@ public class CartController {
 	 */
 	@PostMapping("/updateTicketCount/{id}")
 	public String updateTicketCount(Model model, @ModelAttribute Cart cart, @RequestParam("count") int count,
-									@PathVariable("id") Event event){
+	                                @PathVariable("id") Event event) {
 
 		System.out.println("Let's update the Ticket Amount");
 		System.out.println("Event: " + event.getName());
@@ -294,15 +298,15 @@ public class CartController {
 	 * If not,adds the given {@link Event} in the cart
 	 * If there is no {@link HolidayHome} in the cart, the {@link Event} won't be added.
 	 *
-	 * @param event muss not be {@literal null}
+	 * @param event  muss not be {@literal null}
 	 * @param anzahl muss not be {@literal null}
-	 * @param cart muss not be {@literal null}
+	 * @param cart   muss not be {@literal null}
 	 * @return redirect to cart
 	 */
 
 	@PostMapping("/eventcart")
 	public String addEvent(@RequestParam("eid") Event event,
-						   @RequestParam("number") Quantity anzahl, @ModelAttribute Cart cart) {
+	                       @RequestParam("number") Quantity anzahl, @ModelAttribute Cart cart) {
 		LocalDate bookedDate = event.getDate();
 		if (cart.isEmpty()) {
 			return "redirect:/holdayhomes";
@@ -351,8 +355,8 @@ public class CartController {
 	 * If it is {@link Event},removes the given item.
 	 *
 	 * @param model muss not be {@literal null}
-	 * @param id muss not be {@literal null}
-	 * @param cart muss not be {@literal null}
+	 * @param id    muss not be {@literal null}
+	 * @param cart  muss not be {@literal null}
 	 * @return redirect to holidayhome if {@link HolidayHome} removed; redirect to event,if {@link Event} removed
 	 */
 	@GetMapping("/removeProduct/{id}")
@@ -373,7 +377,7 @@ public class CartController {
 	 * Removes all of the items in cart
 	 *
 	 * @param model muss not be {@literal null}
-	 * @param cart muss not be {@literal null}
+	 * @param cart  muss not be {@literal null}
 	 * @return redirect to cart
 	 */
 	@GetMapping("/clear")
@@ -386,19 +390,21 @@ public class CartController {
 	/**
 	 * Checkouts the cart and creates a {@link BookingEntity} with all the needed parameters from the cart
 	 *
-	 * @param model muss not be {@literal null}
-	 * @param cart muss not be {@literal null}
+	 * @param model       muss not be {@literal null}
+	 * @param cart        muss not be {@literal null}
 	 * @param holidayHome muss not be {@literal null}
-	 * @param events muss not be {@literal null}
+	 * @param events      muss not be {@literal null}
 	 * @param userAccount muss not be {@literal null}
-	 * @param paymethod muss not be {@literal null}
+	 * @param paymethod   muss not be {@literal null}
 	 * @return template: bookingdetails
 	 */
 	@PostMapping("/purchase")
 	public String buy(Model model, @ModelAttribute Cart cart, @RequestParam("hid") HolidayHome holidayHome,
-					  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
-	   				  @RequestParam("paymethod") String paymethod){
-		if(arrivalDate.isBefore(LocalDate.now()) || departureDate.isBefore(LocalDate.now()) || departureDate.isBefore(arrivalDate)) {
+	                  @ModelAttribute HashMap<Event, Integer> events, @LoggedIn UserAccount userAccount,
+	                  @RequestParam("paymethod") String paymethod) {
+		if (arrivalDate.isBefore(LocalDate.now())
+				|| departureDate.isBefore(LocalDate.now())
+				|| departureDate.isBefore(arrivalDate)) {
 			//send message "Please choose the correct day"
 			return "redirect:/cart";
 		}
@@ -425,8 +431,9 @@ public class CartController {
 	 *
 	 * @return if booked return true, otherwise false
 	 */
-	public boolean checkIfBooked(){
-		List<BookingEntity> bookedList = new ArrayList<BookingEntity>(bookingManagement.findBookingsByUuidHome(holidayHome.getId()).toList());
+	public boolean checkIfBooked() {
+		List<BookingEntity> bookedList = new ArrayList<>(bookingManagement
+				.findBookingsByUuidHome(holidayHome.getId()).toList());
 		for (BookingEntity b : bookedList) {
 			if (!b.getState().equals(BookingStateEnum.CANCELED)
 					&& arrivalDate.isBefore(b.getDepartureDate())
@@ -443,7 +450,7 @@ public class CartController {
 	/**
 	 * Shows all the information of the {@link BookingEntity}
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model   muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
 	 * @return template: bookingdetails
 	 */
@@ -475,24 +482,24 @@ public class CartController {
 				.filter(orderLine -> eventcatalog
 						.findFirstByProductIdentifier(orderLine.getProductIdentifier()) != null)
 				.toList();
-		//MonetaryAmount deposit = booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
+		//MonetaryAmount deposit=booking.getTotal().add(Money.of(0,"EUR").add(home.getPrice().multiply(0.9)).negate());
 		model.addAttribute("orderlines", events);
 		MonetaryAmount deposit = Money.of(booking.getDepositInCent() * 0.01f, "EUR");
 		model.addAttribute("deposit", deposit);
-		MonetaryAmount rest = Money.of(booking.getRestInCent()*0.01f,"EUR");
-		model.addAttribute("rest",rest);
+		MonetaryAmount rest = Money.of(booking.getRestInCent() * 0.01f, "EUR");
+		model.addAttribute("rest", rest);
 		return "bookingdetails";
 	}
 
 	/**
 	 * Cancels the given {@link BookingEntity}
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model   muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
 	 * @return redirect to holidayahomes
 	 */
 	@GetMapping("/cancel/{id}")
-	public String cancel(Model model, @PathVariable("id") BookingEntity booking){
+	public String cancel(Model model, @PathVariable("id") BookingEntity booking) {
 		firstname(model);
 		System.out.println(booking.getId());
 		if (bookingManagement.findFirstByOrderIdentifier(booking.getId()).cancel()) {
@@ -507,7 +514,7 @@ public class CartController {
 	/**
 	 * Pays the deposit of the {@link BookingEntity}.
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model   muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
 	 * @return if it can be paid redirect to bookings, else redirect to bookingdetails
 	 */
@@ -525,7 +532,7 @@ public class CartController {
 	/**
 	 * Pays the rest of the{@link BookingEntity}.
 	 *
-	 * @param model muss not be {@literal null}
+	 * @param model   muss not be {@literal null}
 	 * @param booking muss not be {@literal null}
 	 * @return if it can be paid redirect to bookings, else redirect to bookingdetails
 	 */

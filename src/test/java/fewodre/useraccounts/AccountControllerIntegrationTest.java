@@ -1,8 +1,8 @@
 package fewodre.useraccounts;
 
-import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
-import fewodre.useraccounts.forms.HostRegistrationForm;
-import fewodre.useraccounts.forms.TenantRegistrationForm;
+import fewodre.useraccounts.forms.EventEmployeeForm;
+import fewodre.useraccounts.forms.HostForm;
+import fewodre.useraccounts.forms.TenantForm;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManagement;
@@ -47,10 +47,10 @@ class AccountControllerIntegrationTest {
 	void registerAdminGet() throws Exception {
 
 		Model model = new ExtendedModelMap();
-		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Kunde", "Account",
+		TenantForm tenantForm = new TenantForm("Kunde", "Account",
 				"tenant@tenant", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", true);
-		String returnedView = accountController.registerAdmin(model, tenantRegistrationForm);
+		String returnedView = accountController.registerAdmin(model, tenantForm);
 		assertThat(returnedView).isEqualTo("register");
 
 		mvc.perform(get("/register")).andExpect(status().isOk());
@@ -60,11 +60,11 @@ class AccountControllerIntegrationTest {
 
 	@Test
 	void registerNewAccount() throws Exception {
-		TenantRegistrationForm tenantRegistrationForm = new TenantRegistrationForm("Kunde", "Account",
+		TenantForm tenantForm = new TenantForm("Kunde", "Account",
 				"unit@test", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", true);
 		mvc.perform(post("/register")
-				.flashAttr("tenantRegistrationForm", tenantRegistrationForm))
+				.flashAttr("tenantRegistrationForm", tenantForm))
 				.andExpect(status().isFound());
 		accountManagement.enableTenant("unit@test");
 	}
@@ -145,12 +145,12 @@ class AccountControllerIntegrationTest {
 	@Test
 	@WithMockUser(username = "admin", roles = "ADMIN")
 	void registerHostPost() throws Exception {
-		HostRegistrationForm hostRegistrationForm = new HostRegistrationForm("Vermieter", "Account",
+		HostForm hostForm = new HostForm("Vermieter", "Account",
 				"test@host", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
 
 		mvc.perform(post("/newhost")
-				.flashAttr("hostRegistrationForm", hostRegistrationForm))
+				.flashAttr("hostRegistrationForm", hostForm))
 				.andExpect(status().isFound());
 
 		MvcResult mvcResult = mvc.perform(get("/manageaccounts")).andReturn();
@@ -183,12 +183,12 @@ class AccountControllerIntegrationTest {
 	@Test
 	@WithMockUser(username = "admin", roles = "ADMIN")
 	void registerNewEventEmployee() throws Exception {
-		EventEmployeeRegistrationForm eventEmployeeRegistrationForm = new EventEmployeeRegistrationForm(
+		EventEmployeeForm eventEmployeeForm = new EventEmployeeForm(
 				"Eventmitarbeiter", "Employee",
 				"test@employee", "123", "123", "EventBois Dresden GmbH");
 
 		MvcResult eventEmployeeRegistrationForm1 = mvc.perform(post("/neweventemployee")
-				.flashAttr("eventEmployeeRegistrationForm", eventEmployeeRegistrationForm))
+				.flashAttr("eventEmployeeRegistrationForm", eventEmployeeForm))
 				.andExpect(status().isFound())
 				.andReturn();
 

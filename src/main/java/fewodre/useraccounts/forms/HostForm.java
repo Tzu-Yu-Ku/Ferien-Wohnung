@@ -3,7 +3,7 @@ package fewodre.useraccounts.forms;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class HostRegistrationForm extends PersonalForm {
+public class HostForm extends PersonalForm {
 
 	@NotBlank(message = "{RegistrationForm.iban.NotEmpty}")
 	@Pattern(regexp = "^DE\\d{2}[ ]\\d{4}[ ]\\d{4}[ ]\\d{4}[ ]\\d{4}[ ]\\d{2}|DE\\d{20}$",
@@ -16,9 +16,9 @@ public class HostRegistrationForm extends PersonalForm {
 	private final String bic;
 
 
-	public HostRegistrationForm(String firstName, String lastName, String email, String password,
-	                            String passwordConfirm, String birthDate, String street, String houseNumber,
-	                            String postcode, String city, String iban, String bic) {
+	public HostForm(String firstName, String lastName, String email, String password,
+	                String passwordConfirm, String birthDate, String street, String houseNumber,
+	                String postcode, String city, String iban, String bic) {
 		super(firstName, lastName, email, password, passwordConfirm, birthDate, street, houseNumber, postcode, city);
 		this.iban = iban;
 		this.bic = bic;

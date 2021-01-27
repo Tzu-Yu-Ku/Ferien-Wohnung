@@ -73,6 +73,7 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Creates a new {@link BookingEntity} with the given Parameters.
+	 *
 	 * @param userAccount
 	 * @param host
 	 * @param home
@@ -82,12 +83,13 @@ public class BookingEntity extends Order {
 	 * @param events
 	 * @param paymentMethod
 	 */
-	public BookingEntity(UserAccount userAccount, AccountEntity host,HolidayHome home, Quantity nights,
-						 LocalDate arrivalDate, LocalDate departureDate,
-						 HashMap<Event, Integer> events, String paymentMethod) {
+	public BookingEntity(UserAccount userAccount, AccountEntity host, HolidayHome home, Quantity nights,
+	                     LocalDate arrivalDate, LocalDate departureDate,
+	                     HashMap<Event, Integer> events, String paymentMethod) {
 		super(userAccount, Cash.CASH);
 		this.uuidHome = home.getId().getIdentifier();
-		this.uuidHost = (host==null || host.getAccount() == null|| host.getAccount().getEmail() == null) ? home.getHostMail() : host.getAccount().getEmail();
+		this.uuidHost = (host == null || host.getAccount() == null || host.getAccount().getEmail() == null)
+				? home.getHostMail() : host.getAccount().getEmail();
 		this.uuidTenant = userAccount.getId().getIdentifier();
 		this.arrivalDate = arrivalDate;
 		this.departureDay = departureDate;
@@ -99,7 +101,7 @@ public class BookingEntity extends Order {
 		this.stateToSave = this.state.toEnum();
 		System.out.println(stateToSave);
 		this.paymethod = Paymethod.valueOf(paymentMethod.toUpperCase());
-		System.out.println("payment method is:"+ paymethod.toString().toLowerCase());
+		System.out.println("payment method is:" + paymethod.toString().toLowerCase());
 		price = getTotal();
 		//need to find out from Home
 		this.hostName = host == null || host.getAccount() == null
@@ -113,7 +115,8 @@ public class BookingEntity extends Order {
 	}
 
 	@Deprecated
-	public BookingEntity(AccountEntity userAccount, HolidayHome holidayHome, Quantity nights, LocalDate arrivalDate, LocalDate depatureDate, PaymentMethod paymentMethod) {
+	public BookingEntity(AccountEntity userAccount, HolidayHome holidayHome, Quantity nights, LocalDate arrivalDate,
+	                     LocalDate depatureDate, PaymentMethod paymentMethod) {
 		super();
 	}
 
@@ -129,7 +132,7 @@ public class BookingEntity extends Order {
 	 * @param quantity
 	 * @return
 	 */
-	public OrderLine addEvent(Event event, Quantity quantity){
+	public OrderLine addEvent(Event event, Quantity quantity) {
 		return addOrderLine(event, quantity);
 	}
 
@@ -139,7 +142,7 @@ public class BookingEntity extends Order {
 	 * @param event
 	 * @return
 	 */
-	public OrderLine addEvent(Event event){
+	public OrderLine addEvent(Event event) {
 		return addOrderLine(event, Quantity.of(1));
 	}
 
@@ -151,26 +154,31 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the complete price of the Booking as {@link MonetaryAmount}.
+	 *
 	 * @return
 	 */
 	public MonetaryAmount getPrice() {
-		if(price == null){price = getTotal();} // Legacy
-		return  getTotal();
+		if (price == null) {
+			price = getTotal();
+		} // Legacy
+		return getTotal();
 	}
 
 	/**
 	 * Returns the arrival date of the booking period as {@link LocalDate}.
+	 *
 	 * @return
 	 */
-	public LocalDate getArrivalDate(){
+	public LocalDate getArrivalDate() {
 		return arrivalDate;
 	}
 
 	/**
 	 * Returns the departure date of the booking period as {@link LocalDate}.
+	 *
 	 * @return
 	 */
-	public LocalDate getDepartureDate(){
+	public LocalDate getDepartureDate() {
 		return departureDay;
 	}
 
@@ -218,6 +226,7 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the identifier of the {@link HolidayHome}.
+	 *
 	 * @return
 	 */
 	public String getUuidHome() {
@@ -226,6 +235,7 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the name of the {@link HolidayHome}.
+	 *
 	 * @return
 	 */
 	public String getHomeName() {
@@ -234,24 +244,29 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the current {@link BookingState} of this booking.
+	 *
 	 * @return
 	 */
-	public BookingStateEnum getState(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
+	public BookingStateEnum getState() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
 		stateToSave = state.toEnum();
 		return stateToSave;
 	}
 
 	/**
 	 * Cancels the Booking.
+	 *
 	 * @return
 	 */
-	public boolean cancel(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.cancel(this)){
-			throw new IllegalStateException();
+	public boolean cancel() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
 		}
-		else {
+		if (!state.cancel(this)) {
+			throw new IllegalStateException();
+		} else {
 			System.out.println(state.toEnum());
 			this.stateToSave = state.toEnum();
 			return true;
@@ -263,9 +278,11 @@ public class BookingEntity extends Order {
 	 *
 	 * @return
 	 */
-	public boolean confirm(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.confirm()){
+	public boolean confirm() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
+		if (!state.confirm()) {
 			throw new IllegalStateException();
 		} else {
 			stateToSave = state.toEnum();
@@ -275,11 +292,14 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Checks current Time and changes State accordingly.
+	 *
 	 * @return
 	 */
-	public boolean checkTime(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.checkTime()){
+	public boolean checkTime() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
+		if (!state.checkTime()) {
 			//nothing changed
 			return false;
 		} else {
@@ -293,9 +313,11 @@ public class BookingEntity extends Order {
 	 *
 	 * @return
 	 */
-	public boolean pay(){
-		if(state == null){state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(),this.arrivalDate); }
-		if(!state.pay()){
+	public boolean pay() {
+		if (state == null) {
+			state = new BookingState(stateToSave, this.getDateCreated().toLocalDate(), this.arrivalDate);
+		}
+		if (!state.pay()) {
 			throw new IllegalStateException();
 		} else {
 			stateToSave = state.toEnum();
@@ -307,6 +329,7 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the chosen payment method.
+	 *
 	 * @return
 	 */
 	public Paymethod getPaymethod() {
@@ -315,22 +338,24 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the Deposit in Cents.
+	 *
 	 * @return
 	 */
 	public int getDepositInCent() {
 		//if (this.getState().compareTo(BookingStateEnum.ORDERED) == 0) {
-			List<OrderLine> events = this.getOrderLines()
-					.filter(orderLine -> orderLine.getProductName().equals(homeName)).toList();
-			events.forEach(event -> depositInCent = event.getPrice().multiply(10).getNumber().intValue());
-			events = this.getOrderLines()
-					.filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
-			events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
+		List<OrderLine> events = this.getOrderLines()
+				.filter(orderLine -> orderLine.getProductName().equals(homeName)).toList();
+		events.forEach(event -> depositInCent = event.getPrice().multiply(10).getNumber().intValue());
+		events = this.getOrderLines()
+				.filter(orderLine -> !orderLine.getProductName().equals(homeName)).toList();
+		events.forEach(event -> depositInCent += event.getPrice().multiply(100).getNumber().intValue());
 		//}
 		return depositInCent;
 	}
 
 	/**
 	 * Returns the rest in Cents.
+	 *
 	 * @return
 	 */
 	public int getRestInCent() {
@@ -340,10 +365,11 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Cancels the given Event and refunds the according amount of money when necessary.
+	 *
 	 * @param event
 	 * @return
 	 */
-	public boolean cancelEvent(Product event){
+	public boolean cancelEvent(Product event) {
 		List<OrderLine> lines = this.getOrderLines(event).toList();
 		boolean result = lines.size() > 0;
 		Iterator<ChargeLine> iter = this.getChargeLines().iterator();
@@ -367,19 +393,21 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the price of the given {@link Product} in the Booking.
+	 *
 	 * @param product
 	 * @return
 	 */
-	public float getPriceOf(Product product){
+	public float getPriceOf(Product product) {
 		return this.getOrderLines(product).getTotal().getNumber().floatValue();
 	}
 
 	/**
 	 * Reurns a list with all events of the {@link BookingEntity} which are also in the given {@link EventCatalog}.
+	 *
 	 * @param catalog
 	 * @return
 	 */
-	public List<Event> getEvents(EventCatalog catalog){
+	public List<Event> getEvents(EventCatalog catalog) {
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		List<Event> events = new ArrayList<Event>();
 		while (orderLineIterator.hasNext()) {
@@ -395,10 +423,11 @@ public class BookingEntity extends Order {
 	/**
 	 * Reurns the sum of the prices of all events of the
 	 * {@link BookingEntity} which are also in the given {@link EventCatalog}.
+	 *
 	 * @param catalog
 	 * @return
 	 */
-	public float getEventTotalPrice(EventCatalog catalog){
+	public float getEventTotalPrice(EventCatalog catalog) {
 		Iterator<OrderLine> orderLineIterator = this.getOrderLines().iterator();
 		float price = 0;
 		while (orderLineIterator.hasNext()) {
@@ -413,6 +442,7 @@ public class BookingEntity extends Order {
 
 	/**
 	 * Returns the Identifier of the Tenant.
+	 *
 	 * @return
 	 */
 	public String getUuidTenant() {
@@ -422,6 +452,7 @@ public class BookingEntity extends Order {
 	/**
 	 * Set the State
 	 * Shouldn't be used.
+	 *
 	 * @param stateToSave
 	 */
 	@Deprecated

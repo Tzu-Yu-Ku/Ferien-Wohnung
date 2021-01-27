@@ -2,9 +2,9 @@ package fewodre.useraccounts;
 
 import fewodre.catalog.holidayhomes.HolidayHome;
 import fewodre.catalog.holidayhomes.HolidayHomeCatalog;
-import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
-import fewodre.useraccounts.forms.HostRegistrationForm;
-import fewodre.useraccounts.forms.TenantRegistrationForm;
+import fewodre.useraccounts.forms.EventEmployeeForm;
+import fewodre.useraccounts.forms.HostForm;
+import fewodre.useraccounts.forms.TenantForm;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -59,8 +59,8 @@ public class AccountController {
 	}
 
 	@GetMapping("/register")
-	public String registerAdmin(Model model, TenantRegistrationForm tenantRegistrationForm) {
-		model.addAttribute("registrationForm", tenantRegistrationForm);
+	public String registerAdmin(Model model, TenantForm tenantForm) {
+		model.addAttribute("registrationForm", tenantForm);
 		model.addAttribute("minAgeDate", LocalDate.now().minusDays(5840));
 		firstname(model);
 		return "register";
@@ -68,7 +68,7 @@ public class AccountController {
 
 	@PostMapping("/register")
 	public String registerNewAccount(
-			@Valid @ModelAttribute("tenantRegistrationForm") TenantRegistrationForm tenantRegistrationForm,
+			@Valid @ModelAttribute("tenantRegistrationForm") TenantForm tenantForm,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -77,17 +77,19 @@ public class AccountController {
 		}
 
 		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
-		String birthDate = tenantRegistrationForm.getBirthDate();
+		String birthDate = tenantForm.getBirthDate();
 		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
 
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("tenantRegistrationForm", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			result.addError(new FieldError("tenantRegistrationForm", "birthDate",
+					"Sie müssen mindestens 18 Jahre alt sein!"));
 			return "register";
 		}
 
-		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantRegistrationForm);
+		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("tenantRegistrationForm", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("tenantRegistrationForm", "email",
+					"RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
@@ -245,9 +247,9 @@ public class AccountController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/newhost")
-	public String registerHost(Model model, HostRegistrationForm hostRegistrationForm) {
+	public String registerHost(Model model, HostForm hostForm) {
 		firstname(model);
-		model.addAttribute("registrationForm", hostRegistrationForm);
+		model.addAttribute("registrationForm", hostForm);
 		model.addAttribute("minAgeDate", LocalDate.now().minusDays(5840));
 		return "accounts/newhost";
 	}
@@ -255,7 +257,7 @@ public class AccountController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/newhost")
 	public String registerNewHost(
-			@Valid @ModelAttribute("hostRegistrationForm") HostRegistrationForm hostRegistrationForm,
+			@Valid @ModelAttribute("hostRegistrationForm") HostForm hostForm,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -263,22 +265,24 @@ public class AccountController {
 		}
 
 		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
-		String birthDate = hostRegistrationForm.getBirthDate();
+		String birthDate = hostForm.getBirthDate();
 		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
 
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("hostRegistrationForm", "birthDate", "Sie müssen mindestens 18 Jahre alt sein!"));
+			result.addError(new FieldError("hostRegistrationForm", "birthDate",
+					"Sie müssen mindestens 18 Jahre alt sein!"));
 			return "register";
 		}
 
-		AccountEntity accountEntity = accountManagement.createHostAccount(hostRegistrationForm);
+		AccountEntity accountEntity = accountManagement.createHostAccount(hostForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("hostRegistrationForm", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("hostRegistrationForm", "email",
+					"RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/newhost";
 		}
 
-		AccountEntity test = accountRepository.findByAccount_Email(hostRegistrationForm.getEmail());
+		AccountEntity test = accountRepository.findByAccount_Email(hostForm.getEmail());
 		LOG.info(test.toString());
 
 		return "redirect:/manageaccounts";
@@ -286,9 +290,9 @@ public class AccountController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/neweventemployee")
-	public String registerEventEmployee(Model model, EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
+	public String registerEventEmployee(Model model, EventEmployeeForm eventEmployeeForm) {
 		firstname(model);
-		model.addAttribute("registrationForm", eventEmployeeRegistrationForm);
+		model.addAttribute("registrationForm", eventEmployeeForm);
 		return "accounts/neweventemployee";
 	}
 
@@ -296,7 +300,7 @@ public class AccountController {
 	@PostMapping("/neweventemployee")
 	public String registerNewEventEmployee(
 			@Valid @ModelAttribute("eventEmployeeRegistrationForm")
-					EventEmployeeRegistrationForm eventEmployeeRegistrationForm,
+					EventEmployeeForm eventEmployeeForm,
 			BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
@@ -304,14 +308,15 @@ public class AccountController {
 			return "accounts/neweventemployee";
 		}
 
-		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeRegistrationForm);
+		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("eventEmployeeRegistrationForm", "email", "RegistrationForm.username.Taken"));
+			result.addError(new FieldError("eventEmployeeRegistrationForm", "email",
+					"RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/neweventemployee";
 		}
 
-		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeRegistrationForm.getEmail());
+		AccountEntity test = accountRepository.findByAccount_Email(eventEmployeeForm.getEmail());
 		LOG.info(test.toString());
 
 		return "redirect:/manageaccounts";
@@ -348,7 +353,8 @@ public class AccountController {
 	public String deleteAccount(String account_username) {
 		Set<Role> accountRoles = accountRepository.findByAccount_Email(account_username).getAccount().getRoles().toSet();
 		if (accountRoles.contains(AccountManagement.HOST_ROLE)) {
-			Streamable<HolidayHome> hostHolidayHomes = hCatalog.findAll().filter(holidayHome -> holidayHome.getHostMail().equals(account_username));
+			Streamable<HolidayHome> hostHolidayHomes = hCatalog.findAll()
+					.filter(holidayHome -> holidayHome.getHostMail().equals(account_username));
 			for (HolidayHome h : hostHolidayHomes) {
 				h.setIsBookable(false);
 				hCatalog.save(h);

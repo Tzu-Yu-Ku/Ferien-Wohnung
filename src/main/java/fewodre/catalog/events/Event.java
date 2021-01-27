@@ -36,8 +36,8 @@ public class Event extends Product {
 	private List<String> subscriber;
 
 	public Event(String title, String eventCompanyUuid, String description, String image, Place place,
-			boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price, LocalDate date,
-			LocalTime time) {
+	             boolean eventStatus, EventType eventType, int capacity, MonetaryAmount price, LocalDate date,
+	             LocalTime time) {
 		super(title, price);
 		this.description = description;
 		this.eventCompanyUuid = eventCompanyUuid;
@@ -59,10 +59,9 @@ public class Event extends Product {
 	}
 
 	public boolean findInList(Event event, ArrayList<Event> list) {
-		if(list.contains(event)){
+		if (list.contains(event)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -169,7 +168,7 @@ public class Event extends Product {
 //		return AllPossDates;
 //	}
 
-	public void addSubscriber(BookingEntity booking){
+	public void addSubscriber(BookingEntity booking) {
 		this.subscriber.add(booking.getId().toString());
 	}
 

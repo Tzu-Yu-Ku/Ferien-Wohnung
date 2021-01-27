@@ -1,8 +1,8 @@
 package fewodre.useraccounts;
 
-import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
-import fewodre.useraccounts.forms.HostRegistrationForm;
-import fewodre.useraccounts.forms.TenantRegistrationForm;
+import fewodre.useraccounts.forms.EventEmployeeForm;
+import fewodre.useraccounts.forms.HostForm;
+import fewodre.useraccounts.forms.TenantForm;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.Answer;
@@ -53,7 +53,7 @@ class AccountManagementUnitTest {
 	@Test
 	public void createTenantAccount() {
 
-		TenantRegistrationForm form = new TenantRegistrationForm("Firstname", "Lastname",
+		TenantForm form = new TenantForm("Firstname", "Lastname",
 				"e@mail.com", "123", "123", "1999-01-01", "Street",
 				"1", "12345", "City", true);
 		AccountEntity tenantAccountEnitity = accountManagement.createTenantAccount(form);
@@ -70,7 +70,7 @@ class AccountManagementUnitTest {
 	@Test
 	void createHostAccount() {
 
-		HostRegistrationForm form = new HostRegistrationForm("Firstname", "Lastname",
+		HostForm form = new HostForm("Firstname", "Lastname",
 				"e@mail.com", "123", "123", "1999-01-01", "Street",
 				"1", "12345", "City", "DE123123123123", "MALADE61AKA");
 		AccountEntity tenantAccountEnitity = accountManagement.createHostAccount(form);
@@ -87,7 +87,7 @@ class AccountManagementUnitTest {
 	@Test
 	void createEventEmployeeAccount() {
 
-		EventEmployeeRegistrationForm form = new EventEmployeeRegistrationForm("Firstname",
+		EventEmployeeForm form = new EventEmployeeForm("Firstname",
 				"Lastname", "e@mail.com", "123", "123", "Company");
 		AccountEntity tenantAccountEnitity = accountManagement.createEventEmployeeAccount(form);
 
@@ -120,7 +120,7 @@ class AccountManagementUnitTest {
 
 	@Test
 	void deleteAccount() {
-		TenantRegistrationForm form = new TenantRegistrationForm("Firstname", "Lastname",
+		TenantForm form = new TenantForm("Firstname", "Lastname",
 				"e@mail.com", "123", "123", "1999-01-01", "Street",
 				"1", "12345", "City", true);
 		AccountEntity tenantAccountEnitity = accountManagement.createTenantAccount(form);

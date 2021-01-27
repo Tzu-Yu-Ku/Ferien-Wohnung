@@ -38,7 +38,7 @@ public class BookingController {
 	 */
 	private void firstname(Model model) {
 		this.authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (! authentication.getPrincipal().equals("anonymousUser") &&  ! authentication.getName().equals("admin") ) {
+		if (!authentication.getPrincipal().equals("anonymousUser") && !authentication.getName().equals("admin")) {
 			System.out.println("authentication: ");
 			System.out.println(authentication.getPrincipal());
 			model.addAttribute("firstname",
@@ -50,15 +50,15 @@ public class BookingController {
 	/**
 	 * Creates a new {@link BookingController} with the given Parameters.
 	 *
-	 * @param accountManagement must not be {@literal null}
-	 * @param accountRepository must not be {@literal null}
-	 * @param bookingRepository must not be {@literal null}
+	 * @param accountManagement  must not be {@literal null}
+	 * @param accountRepository  must not be {@literal null}
+	 * @param bookingRepository  must not be {@literal null}
 	 * @param holidayHomeCatalog must not be {@literal null}
-	 * @param bookingManagement must not be {@literal null}
+	 * @param bookingManagement  must not be {@literal null}
 	 */
-	public BookingController(AccountManagement accountManagement,AccountRepository accountRepository,
+	public BookingController(AccountManagement accountManagement, AccountRepository accountRepository,
 	                         BookingRepository bookingRepository, HolidayHomeCatalog holidayHomeCatalog,
-	                         BookingManagement bookingManagement){
+	                         BookingManagement bookingManagement) {
 		Assert.notNull(accountManagement, "AccountManagement must not be null!");
 		Assert.notNull(bookingRepository, "BookingRepository must not be null!");
 		Assert.notNull(holidayHomeCatalog, "HomeCatalog must not be null!");
@@ -74,17 +74,17 @@ public class BookingController {
 	/**
 	 * Shows all of {@link BookingEntity}s which are booked from the current {@link AccountEntity}(who hat the role of TENANT.)
 	 *
-	 * @param model must not be {@literal null}
+	 * @param model       must not be {@literal null}
 	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
 	 * @return template: bookings
 	 */
 	@GetMapping("/bookings")
 	@PreAuthorize("hasRole('TENANT')")
-	public String bookings(Model model, @LoggedIn UserAccount userAccount){
+	public String bookings(Model model, @LoggedIn UserAccount userAccount) {
 		firstname(model);
-		if(!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()){
+		if (!bookingRepository.findBookingEntityByUserAccount(userAccount).iterator().hasNext()) {
 			return "redirect:/holidayhomes";
-		}else {
+		} else {
 			model.addAttribute("homeCatalog", this.holidayHomeCatalog);
 			model.addAttribute("bookings", bookingRepository.findBookingEntityByUserAccount(userAccount));
 			for (BookingEntity bookingEntity : bookingRepository.findBookingEntityByUserAccount(userAccount)) {
@@ -103,15 +103,15 @@ public class BookingController {
 	 * in which the booked house belongs to.Otherwise, shows all of {@link BookingEntity}s,
 	 * if the current {@link AccountEntity} has the role of ADMIN.
 	 *
-	 * @param model must not be {@literal null}
+	 * @param model       must not be {@literal null}
 	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
 	 * @return template: bookinghistory
 	 */
 	@GetMapping("/bookinghistory")
 	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
-	public String bookingsByHost(Model model, @LoggedIn UserAccount userAccount){
+	public String bookingsByHost(Model model, @LoggedIn UserAccount userAccount) {
 		firstname(model);
-		if(userAccount.hasRole(Role.of("ADMIN"))) {
+		if (userAccount.hasRole(Role.of("ADMIN"))) {
 			model.addAttribute("bookings", bookingRepository.findAll());
 		} else if (userAccount.hasRole(Role.of("HOST"))) {
 			model.addAttribute("bookings", bookingRepository.findAllByUuidHost(userAccount.getEmail()));
@@ -125,16 +125,16 @@ public class BookingController {
 	 * with the given state. Otherwise, shows all of {@link BookingEntity}s with the given state,
 	 * if the current {@link AccountEntity} has the role of ADMIN.
 	 *
-	 * @param model must not be {@literal null}
+	 * @param model       must not be {@literal null}
 	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
-	 * @param state the given state to query,must not be {@literal null}
+	 * @param state       the given state to query,must not be {@literal null}
 	 * @return template: bookinghistory
 	 */
 	@PostMapping("/bookingsFiltered")
 	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
-	public String sortByState(Model model,@LoggedIn UserAccount userAccount, @RequestParam("state") String state){
+	public String sortByState(Model model, @LoggedIn UserAccount userAccount, @RequestParam("state") String state) {
 		firstname(model);
-		if(userAccount.hasRole(Role.of("ADMIN"))) {
+		if (userAccount.hasRole(Role.of("ADMIN"))) {
 			List<BookingEntity> sortedByState = bookingRepository.findAll()
 					.filter(bookingEntity -> bookingEntity.getState().toString().equals(state)).toList();
 			model.addAttribute("bookings", sortedByState);
@@ -150,17 +150,17 @@ public class BookingController {
 	 * with the given lastname from the TENANT. Otherwise, shows all of {@link BookingEntity}s
 	 * with the given state,if the current {@link AccountEntity} has the role of ADMIN.
 	 *
-	 * @param model must not be {@literal null}
+	 * @param model       must not be {@literal null}
 	 * @param userAccount the current {@link AccountEntity}, must not be {@literal null}
-	 * @param tenantName the given tenant's lastname to query,must not be {@literal null}
+	 * @param tenantName  the given tenant's lastname to query,must not be {@literal null}
 	 * @return template: bookinghistory
 	 */
 	@PostMapping("/searchByName")
 	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
-	public String searchByLastname(Model model,@LoggedIn UserAccount userAccount,
-	                               @RequestParam("lastname")String tenantName){
+	public String searchByLastname(Model model, @LoggedIn UserAccount userAccount,
+	                               @RequestParam("lastname") String tenantName) {
 		firstname(model);
-		if(userAccount.hasRole(Role.of("ADMIN"))) {
+		if (userAccount.hasRole(Role.of("ADMIN"))) {
 			List<BookingEntity> sortedByTenantName = bookingRepository.findAll().filter(bookingEntity ->
 					bookingEntity.getUserAccount().getLastname().equals(tenantName)).toList();
 			model.addAttribute("bookings", sortedByTenantName);
@@ -176,23 +176,24 @@ public class BookingController {
 	 * with the given HolidayHome's name. Otherwise, shows all of {@link BookingEntity}s
 	 * with the given HolidayHome's name.,if the current {@link AccountEntity} has the role of ADMIN.
 	 *
-	 * @param model must not be {@literal null}
+	 * @param model       must not be {@literal null}
 	 * @param userAccount must not be {@literal null}
-	 * @param homeName the given house's name to query,must not be {@literal null}
+	 * @param homeName    the given house's name to query,must not be {@literal null}
 	 * @return template: bookinghistory
 	 */
 	@PostMapping("/searchByHomeName")
 	@PreAuthorize("hasAnyRole('HOST','ADMIN')")
-	public String searchByHomeName(Model model,@LoggedIn UserAccount userAccount,
-	                               @RequestParam("homename")String homeName){
+	public String searchByHomeName(Model model, @LoggedIn UserAccount userAccount,
+	                               @RequestParam("homename") String homeName) {
 		firstname(model);
-		if(userAccount.hasRole(Role.of("ADMIN"))) {
+		if (userAccount.hasRole(Role.of("ADMIN"))) {
 			List<BookingEntity> sortedByHomeName = bookingRepository.findAll().filter(bookingEntity ->
 					bookingEntity.getHomeName().contains(homeName)).toList();
 			model.addAttribute("bookings", sortedByHomeName);
 		} else if (userAccount.hasRole(Role.of("HOST"))) {
 			model.addAttribute("bookings", bookingManagement.findByHomeName(homeName, userAccount.getEmail()));
-		}model.addAttribute("formatter", this.formatter);
+		}
+		model.addAttribute("formatter", this.formatter);
 		return "bookinghistory";
 	}
 

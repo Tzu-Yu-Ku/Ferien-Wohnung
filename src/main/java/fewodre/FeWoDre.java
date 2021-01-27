@@ -86,20 +86,19 @@ public class FeWoDre {
 					.successHandler(new AuthenticationSuccessHandler() {
 						@Override
 						public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
-								HttpServletResponse httpServletResponse, Authentication authentication)
+						                                    HttpServletResponse httpServletResponse, Authentication authentication)
 								throws IOException, ServletException {
 							System.out.println(httpServletRequest.getHeader("referer"));
 							if (httpServletRequest.getHeader("referer").equals("http://localhost:8080/newhost")
 									|| httpServletRequest.getHeader("referer")
-											.equals("http://localhost:8080/neweventemployee")
+									.equals("http://localhost:8080/neweventemployee")
 									|| httpServletRequest.getHeader("referer")
-											.equals("http://localhost:8080/activatetenants")) {
+									.equals("http://localhost:8080/activatetenants")) {
 								System.out.println("true");
 								httpServletResponse.sendRedirect(httpServletRequest.getHeader("referer"));
-							} else if(authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
+							} else if (authentication.getPrincipal().toString().contains("EVENT_EMPLOYEE")) {
 								httpServletResponse.sendRedirect("http://localhost:8080/events");
-							}
-							else {
+							} else {
 								httpServletResponse.sendRedirect("http://localhost:8080/holidayhomes");
 							}
 						}

@@ -1,8 +1,8 @@
 package fewodre.useraccounts;
 
-import fewodre.useraccounts.forms.EventEmployeeRegistrationForm;
-import fewodre.useraccounts.forms.HostRegistrationForm;
-import fewodre.useraccounts.forms.TenantRegistrationForm;
+import fewodre.useraccounts.forms.EventEmployeeForm;
+import fewodre.useraccounts.forms.HostForm;
+import fewodre.useraccounts.forms.TenantForm;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -44,26 +44,26 @@ public class AccountManagement {
 		this.userAccounts = userAccounts;
 	}
 
-	public AccountEntity createTenantAccount(TenantRegistrationForm tenantRegistrationForm) {
+	public AccountEntity createTenantAccount(TenantForm tenantForm) {
 
-		Assert.notNull(tenantRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(tenantRegistrationForm.getPassword())
-				.equals(Password.UnencryptedPassword.of(tenantRegistrationForm.getPasswordConfirm()))) {
+		Assert.notNull(tenantForm, "registrationForm should not be null!");
+		if (Password.UnencryptedPassword.of(tenantForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(tenantForm.getPasswordConfirm()))) {
 			Password.UnencryptedPassword password = Password
 					.UnencryptedPassword
-					.of(tenantRegistrationForm.getPassword());
-			if (userAccounts.findByUsername(tenantRegistrationForm.getEmail()).isEmpty()) {
-				UserAccount newUserAccount = userAccounts.create(tenantRegistrationForm.getEmail(), password,
-						tenantRegistrationForm.getEmail(), UNACTIVATED_TENANT_ROLE);
-				newUserAccount.setFirstname(tenantRegistrationForm.getFirstName());
-				newUserAccount.setLastname(tenantRegistrationForm.getLastName());
+					.of(tenantForm.getPassword());
+			if (userAccounts.findByUsername(tenantForm.getEmail()).isEmpty()) {
+				UserAccount newUserAccount = userAccounts.create(tenantForm.getEmail(), password,
+						tenantForm.getEmail(), UNACTIVATED_TENANT_ROLE);
+				newUserAccount.setFirstname(tenantForm.getFirstName());
+				newUserAccount.setLastname(tenantForm.getLastName());
 				newUserAccount.setEnabled(false);
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-						.setBirthDate(tenantRegistrationForm.getBirthDate())
-						.setStreet(tenantRegistrationForm.getStreet())
-						.setHouseNumber(tenantRegistrationForm.getHouseNumber())
-						.setPostCode(tenantRegistrationForm.getPostcode())
-						.setCity(tenantRegistrationForm.getCity())
+						.setBirthDate(tenantForm.getBirthDate())
+						.setStreet(tenantForm.getStreet())
+						.setHouseNumber(tenantForm.getHouseNumber())
+						.setPostCode(tenantForm.getPostcode())
+						.setCity(tenantForm.getCity())
 						.setAccount(newUserAccount)
 						.setIban("NO_IBAN")
 						.setBic("NO_BIC")
@@ -79,25 +79,25 @@ public class AccountManagement {
 
 	}
 
-	public AccountEntity createHostAccount(HostRegistrationForm hostRegistrationForm) {
+	public AccountEntity createHostAccount(HostForm hostForm) {
 
-		Assert.notNull(hostRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(hostRegistrationForm.getPassword())
-				.equals(Password.UnencryptedPassword.of(hostRegistrationForm.getPasswordConfirm()))) {
-			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(hostRegistrationForm.getPassword());
-			if (userAccounts.findByUsername(hostRegistrationForm.getEmail()).isEmpty()) {
-				UserAccount newUserAccount = userAccounts.create(hostRegistrationForm.getEmail(), password,
-						hostRegistrationForm.getEmail(), HOST_ROLE);
-				newUserAccount.setFirstname(hostRegistrationForm.getFirstName());
-				newUserAccount.setLastname(hostRegistrationForm.getLastName());
+		Assert.notNull(hostForm, "registrationForm should not be null!");
+		if (Password.UnencryptedPassword.of(hostForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(hostForm.getPasswordConfirm()))) {
+			Password.UnencryptedPassword password = Password.UnencryptedPassword.of(hostForm.getPassword());
+			if (userAccounts.findByUsername(hostForm.getEmail()).isEmpty()) {
+				UserAccount newUserAccount = userAccounts.create(hostForm.getEmail(), password,
+						hostForm.getEmail(), HOST_ROLE);
+				newUserAccount.setFirstname(hostForm.getFirstName());
+				newUserAccount.setLastname(hostForm.getLastName());
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
-						.setBirthDate(hostRegistrationForm.getBirthDate())
-						.setStreet(hostRegistrationForm.getStreet())
-						.setHouseNumber(hostRegistrationForm.getHouseNumber())
-						.setPostCode(hostRegistrationForm.getPostcode())
-						.setCity(hostRegistrationForm.getCity())
-						.setIban(hostRegistrationForm.getIban())
-						.setBic(hostRegistrationForm.getBic())
+						.setBirthDate(hostForm.getBirthDate())
+						.setStreet(hostForm.getStreet())
+						.setHouseNumber(hostForm.getHouseNumber())
+						.setPostCode(hostForm.getPostcode())
+						.setCity(hostForm.getCity())
+						.setIban(hostForm.getIban())
+						.setBic(hostForm.getBic())
 						.setEventCompany("NO_COMPANY")
 						.setAccount(newUserAccount);
 				LOG.info(newAccount.getUuid());
@@ -111,19 +111,19 @@ public class AccountManagement {
 
 	}
 
-	public AccountEntity createEventEmployeeAccount(EventEmployeeRegistrationForm eventEmployeeRegistrationForm) {
+	public AccountEntity createEventEmployeeAccount(EventEmployeeForm eventEmployeeForm) {
 
-		Assert.notNull(eventEmployeeRegistrationForm, "registrationForm should not be null!");
-		if (Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPassword())
-				.equals(Password.UnencryptedPassword.of(eventEmployeeRegistrationForm.getPasswordConfirm()))) {
+		Assert.notNull(eventEmployeeForm, "registrationForm should not be null!");
+		if (Password.UnencryptedPassword.of(eventEmployeeForm.getPassword())
+				.equals(Password.UnencryptedPassword.of(eventEmployeeForm.getPasswordConfirm()))) {
 			Password.UnencryptedPassword password = Password
 					.UnencryptedPassword
-					.of(eventEmployeeRegistrationForm.getPassword());
-			if (userAccounts.findByUsername(eventEmployeeRegistrationForm.getEmail()).isEmpty()) {
-				UserAccount newUserAccount = userAccounts.create(eventEmployeeRegistrationForm.getEmail(), password,
-						eventEmployeeRegistrationForm.getEmail(), EVENTEMPLOYEE_ROLE);
-				newUserAccount.setFirstname(eventEmployeeRegistrationForm.getFirstName());
-				newUserAccount.setLastname(eventEmployeeRegistrationForm.getLastName());
+					.of(eventEmployeeForm.getPassword());
+			if (userAccounts.findByUsername(eventEmployeeForm.getEmail()).isEmpty()) {
+				UserAccount newUserAccount = userAccounts.create(eventEmployeeForm.getEmail(), password,
+						eventEmployeeForm.getEmail(), EVENTEMPLOYEE_ROLE);
+				newUserAccount.setFirstname(eventEmployeeForm.getFirstName());
+				newUserAccount.setLastname(eventEmployeeForm.getLastName());
 				AccountEntity newAccount = new AccountEntity().setUuid(UUID.randomUUID().toString())
 						.setBirthDate("NO_BIRTHDATE")
 						.setStreet("NO_STREET")
@@ -132,7 +132,7 @@ public class AccountManagement {
 						.setCity("NO_CITY")
 						.setIban("NO_IBAN")
 						.setBic("NO_BIC")
-						.setEventCompany(eventEmployeeRegistrationForm.getEventCompany())
+						.setEventCompany(eventEmployeeForm.getEventCompany())
 						.setAccount(newUserAccount);
 				LOG.info(newAccount.getUuid());
 				return accounts.save(newAccount);

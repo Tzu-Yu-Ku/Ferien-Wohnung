@@ -45,7 +45,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		dummyHome1.setName("Nette Wohnung in der Dresdner Neustadt");
 		dummyHome1.setDescription("Dicht an der bekannten Barszene in Neustadt bietet diese Wohnung einen tollen Ort"
 				+ "für Ihren nächsten Aufenthalt in Dresden.");
-		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden", 512, 503));
+		dummyHome1.setPlace(new Place("An der Goldgrube", "1", "01099", "Dresden",
+				512, 503));
 		dummyHome1.getPlace().setDistrict("Neustadt");
 		dummyHome1.setIsBookable(true);
 		dummyHome1.setHostMail("host@host");
@@ -54,13 +55,13 @@ public class CatalogDataInitializer implements DataInitializer {
 		dummyHome1.setPrice(Money.of(149.49f, "EUR"));
 		holidayHomeCatalog.save(dummyHome1);
 
-		
 
 		HolidayHome dummyHome2 = new HolidayHome();
 		dummyHome2.setName("Gemütliches Haus an der Elbe");
 		dummyHome2.setDescription("Für einen entspannten Urlaub in Dresden mit tollem Blick auf die einzigartige"
 				+ " Elbe bietet sich diese Wohnung an.");
-		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden", 718, 864));
+		dummyHome2.setPlace(new Place("An der Elbe", "1", "01099", "Dresden",
+				718, 864));
 		dummyHome2.getPlace().setDistrict("Loschwitz");
 		dummyHome2.setIsBookable(true);
 		dummyHome2.setHostMail("host@host");
@@ -73,7 +74,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		dummyHome3.setName("*günstig* Ferienappartment in Blasewitz");
 		dummyHome3.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene"
 				+ " Appartment besonders gut an.");
-		dummyHome3.setPlace(new Place("Am Schillerplatz", "1", "01099", "Dresden", 575, 674));
+		dummyHome3.setPlace(new Place("Am Schillerplatz", "1", "01099", "Dresden",
+				575, 674));
 		dummyHome3.getPlace().setDistrict("Blasewitz");
 		dummyHome3.setIsBookable(true);
 		dummyHome3.setHostMail("host@host");
@@ -84,8 +86,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		HolidayHome dummyHome4 = new HolidayHome();
 		dummyHome4.setName("*günstig* Ferienappartment in der Neustadt");
-		dummyHome4.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene Wohnung in der Neustadt");
-		dummyHome4.setPlace(new Place("Am Schützenplatz", "33", "01099", "Dresden", 494, 519));
+		dummyHome4.setDescription("Für die Sparfüchse unter Ihnen bietet sich dieses äußerst günstig gelegene" +
+				" Wohnung in der Neustadt");
+		dummyHome4.setPlace(new Place("Am Schützenplatz", "33", "01099", "Dresden",
+				494, 519));
 		dummyHome4.getPlace().setDistrict("Neustadt");
 		dummyHome4.setIsBookable(true);
 		dummyHome4.setHostMail("neuer@host");
@@ -97,7 +101,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		HolidayHome dummyHome5 = new HolidayHome();
 		dummyHome5.setName("Luxusappartment in der Altstadt");
 		dummyHome5.setDescription("Für den besonderen flair bieten wir ihnen die beste Wohnung von ganz Dresden.");
-		dummyHome5.setPlace(new Place("Am Altmarkt", "1", "01099", "Dresden", 437, 626));
+		dummyHome5.setPlace(new Place("Am Altmarkt", "1", "01099", "Dresden",
+				437, 626));
 		dummyHome5.getPlace().setDistrict("Altstadt");
 		dummyHome5.setIsBookable(true);
 		dummyHome5.setHostMail("neuer@host");
@@ -114,7 +119,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest.setName("Stadtführung im abendlichen Dresden");
 		eventTest.setDescription("Nehmen Sie an der Stadtführung teil und lernen Sie Dresden und dessen einzigartige"
 				+ " Geschichte kennen.");
-		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden", 422, 633));
+		eventTest.setPlace(new Place("An der Frauenkirche", "1", "01234", "Dresden",
+				422, 633));
 		eventTest.getPlace().setDistrict("Altstadt");
 		eventTest.setCapacity(10);
 		eventTest.setEventCompanyUuid(("event"));
@@ -131,7 +137,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		eventTest2.setName("Gemeinsamer Spaziergang an der Elbe");
 		eventTest2.setDescription("Sind Sie gerne unterwegs und möchten eine einmalige Erfahrung hier in Dresden"
 				+ " machen? Dann nehmen an unserem berühmten Spaziergang an und um die Elbe herum teil.");
-		eventTest2.setPlace(new Place("An der Elbe", "1", "01234", "Dresden", 437, 605));
+		eventTest2.setPlace(new Place("An der Elbe", "1", "01234", "Dresden",
+				437, 605));
 		eventTest2.getPlace().setDistrict("Altstadt");
 		eventTest2.setCapacity(25);
 		eventTest2.setEventCompanyUuid(("event"));
@@ -147,7 +154,8 @@ public class CatalogDataInitializer implements DataInitializer {
 		Event eventTest3 = new Event();
 		eventTest3.setName("Konzert am Elbufer");
 		eventTest3.setDescription("Nehmen sie doch gerne am Konzert des weltberühmten unbekannten künstler teil.");
-		eventTest3.setPlace(new Place("An der Elbe", "125a", "12345", "Dresden", 311, 550));
+		eventTest3.setPlace(new Place("An der Elbe", "125a", "12345", "Dresden",
+				311, 550));
 		eventTest3.getPlace().setDistrict("Pieschen");
 		eventTest3.setCapacity(250);
 		eventTest3.setEventCompanyUuid(("event"));
@@ -162,8 +170,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		Event eventTest4 = new Event();
 		eventTest4.setName("Radtour durch die Stadt");
-		eventTest4.setDescription("Nehmen sie doch gerne unserer Fahrradtour durch Dresden teil und erleben Sie wunderbaren Aussichten und die tollsten Stellen der Stadt");
-		eventTest4.setPlace(new Place("Am Altmarkt", "1", "12345", "Dresden", 502, 728));
+		eventTest4.setDescription("Nehmen sie doch gerne unserer Fahrradtour durch Dresden teil und erleben Sie" +
+				" wunderbaren Aussichten und die tollsten Stellen der Stadt");
+		eventTest4.setPlace(new Place("Am Altmarkt", "1", "12345", "Dresden",
+				502, 728));
 		eventTest4.getPlace().setDistrict("Blasewitz");
 		eventTest4.setCapacity(20);
 		eventTest4.setEventCompanyUuid(("event"));
@@ -178,8 +188,10 @@ public class CatalogDataInitializer implements DataInitializer {
 
 		Event eventTest5 = new Event();
 		eventTest5.setName("Besuch im alten Museumskeller");
-		eventTest5.setDescription("Besuchen Sie exklusiv mit uns den alten Museumskeller und entdecken Sie die Geheimnisse Dresdens");
-		eventTest5.setPlace(new Place("Schloßstraße", "13", "12345", "Dresden", 450, 690));
+		eventTest5.setDescription("Besuchen Sie exklusiv mit uns den alten Museumskeller und entdecken Sie die" +
+				" Geheimnisse Dresdens");
+		eventTest5.setPlace(new Place("Schloßstraße", "13", "12345", "Dresden",
+				450, 690));
 		eventTest5.getPlace().setDistrict("Altstadt");
 		eventTest5.setCapacity(25);
 		eventTest5.setEventCompanyUuid(("event"));

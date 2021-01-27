@@ -151,12 +151,10 @@ public class Coordinates {
 		} else if (cossebaude.contains(xRatio, yRatio)) {
 			System.out.println("Cossebaude");
 			this.district = "Cossebaude";
-		}
-		else if (oberwartha.contains(xRatio, yRatio)) {
+		} else if (oberwartha.contains(xRatio, yRatio)) {
 			System.out.println("Oberwartha");
 			this.district = "Oberwartha";
-		}
-		else if (gompitz.contains(xRatio, yRatio)) {
+		} else if (gompitz.contains(xRatio, yRatio)) {
 			System.out.println("Gompitz");
 			this.district = "Gompitz";
 		} else if (altfranken.contains(xRatio, yRatio)) {
