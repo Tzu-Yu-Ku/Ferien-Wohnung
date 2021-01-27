@@ -590,9 +590,6 @@ public class CatalogController {
 		if (searchedEventType != null) {
 			sortEventTypeList.clear();
 			switch (searchedEventType) {
-				case "Alle":
-					eventCatalog.findAll().forEach(item -> sortEventTypeList.add(item));
-					break;
 				case "SMALL":
 					eventCatalog.findAll().filter(events -> events.getEventType() == EventType.SMALL)
 							.forEach(item -> sortEventTypeList.add(item));
@@ -601,6 +598,10 @@ public class CatalogController {
 					eventCatalog.findAll().filter(events -> events.getEventType() == EventType.LARGE)
 							.forEach(item -> sortEventTypeList.add(item));
 					break;
+				default:
+					eventCatalog.findAll().forEach(item -> sortEventTypeList.add(item));
+					break;
+
 			}
 		}
 

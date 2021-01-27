@@ -26,7 +26,8 @@ public class AccountDataInitializer implements DataInitializer {
 	private final UserAccountManagement userAccountManagement;
 	private final BookingDataInitializer bookingDataInitializer;
 
-	AccountDataInitializer(AccountManagement accountManagement, UserAccountManagement userAccountManagement, BookingDataInitializer bookingDataInitializer) {
+	AccountDataInitializer(AccountManagement accountManagement, UserAccountManagement userAccountManagement,
+	                       BookingDataInitializer bookingDataInitializer) {
 		Assert.notNull(accountManagement, "accountManagement must not be null!");
 		Assert.notNull(userAccountManagement, "userAccountManagement must not be null!");
 

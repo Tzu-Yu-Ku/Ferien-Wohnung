@@ -71,10 +71,6 @@ public class AccountController {
 			@Valid @ModelAttribute("tenantRegistrationForm") TenantForm tenantForm,
 			BindingResult result) {
 
-		if (result.hasErrors()) {
-			LOG.info(result.getAllErrors().toString());
-			return "register";
-		}
 
 		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
 		String birthDate = tenantForm.getBirthDate();
@@ -83,13 +79,16 @@ public class AccountController {
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
 			result.addError(new FieldError("tenantRegistrationForm", "birthDate",
 					"Sie müssen mindestens 18 Jahre alt sein!"));
-			return "register";
 		}
 
 		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantForm);
 		if (accountEntity == null) {
 			result.addError(new FieldError("tenantRegistrationForm", "email",
 					"RegistrationForm.username.Taken"));
+			LOG.info(result.getAllErrors().toString());
+		}
+
+		if (result.hasErrors()) {
 			LOG.info(result.getAllErrors().toString());
 			return "register";
 		}
@@ -118,27 +117,17 @@ public class AccountController {
 	}
 
 	@GetMapping("/manageaccount")
+	@PreAuthorize("hasAnyRole('TENANT', 'ADMIN', 'HOST', 'EVENT_EMPLOYEE')")
 	public String editUser(Model model, String tenant_username) {
 		firstname(model);
 		String principal = authentication.getPrincipal().toString();
 
-		if (!(principal.contains("TENANT")
-				|| principal.contains("ADMIN")
-				|| principal.contains("HOST")
-				|| principal.contains("EVENT_EMPLOYEE"))) {
-			return "/login";
-		}
-		if (principal.contains("TENANT")
-				|| principal.contains("HOST")
-				|| principal.contains("EVENT_EMPLOYEE")) {
-
-			return getString(model, authentication.getName());
-		}
 		if (principal.contains("ADMIN")) {
 			return getString(model, tenant_username);
-		}
+		} else {
+			return getString(model, authentication.getName());
 
-		return "/login";
+		}
 	}
 
 	@PostMapping("/manageaccount")
