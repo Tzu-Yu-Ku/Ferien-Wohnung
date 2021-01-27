@@ -231,11 +231,11 @@
                    href="mailto:">
                     E-Mail schreiben
                 </a>
-                    <button type="button" class="btn btn-danger mr-0" data-toggle="modal"
-                            data-target="#deleteAccountModal"
-                            th:data-user="${account.getAccount().getUsername()}">
-                        Account löschen
-                    </button>
+                <button type="button" class="btn btn-danger mr-0" data-toggle="modal"
+                        data-target="#deleteAccountModal"
+                        th:data-user="${account.getAccount().getUsername()}">
+                    Account löschen
+                </button>
             </div>
         </div>
     </div>
@@ -265,7 +265,6 @@
 </div>
 <script type="text/javascript">
     $('#deleteAccountModal').on('show.bs.modal', function (event) {
-        console.log("Test")
         var button = $(event.relatedTarget)
         var recipient = button.data('user')
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).

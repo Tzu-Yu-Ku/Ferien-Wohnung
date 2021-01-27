@@ -9,6 +9,15 @@
           type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <title>FeWoDre - Ferienhäuser</title>
 </head>
 
@@ -29,8 +38,6 @@
                     sind.</p>
             </div>
             <div class="col-md-6 p-lg-5 p-3">
-                <img class="d-block img-fluid" style="height: auto;" src="../static/resources/img/house_1.png"
-                     alt="">
             </div>
         </div>
 
@@ -278,16 +285,22 @@
                     </ul>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-                            <form role="form" th:method="post" th:action="@{/deleteholidayhome}">
-                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
-                                <input class="btn btn-danger btn-outline-light" type="submit"
-                                       value="Ferienhaus löschen"/>
-                            </form>
+<!--                            <form role="form" th:method="post" th:action="@{/deleteholidayhome}">-->
+<!--                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>-->
+<!--                                <input class="btn btn-danger btn-outline-light" type="submit"-->
+<!--                                       value="Ferienhaus löschen"/>-->
+<!--                            </form>-->
+                            <button type="button" class="btn btn-danger mr-0" data-toggle="modal"
+                                    data-target="#deleteHolidayHomeModal"
+                                    th:data-holidayhomename="${holidayHome.name}"
+                                    th:data-holidayhomeid="${holidayHome.id}">
+                                Angebot löschen
+                            </button>
                             <form role="form" class="form-inline mr-auto ml-0" th:method="post"
                                   th:action="@{/editholidayhome}">
                                 <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>
                                 <input class="btn btn-primary btn-outline-light" type="submit"
-                                       value="Ferienhaus bearbeiten"/>
+                                       value="Angebot bearbeiten"/>
                             </form>
                         </div>
                     </div>
@@ -301,7 +314,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!--Cards für alle, die kein Host sind mi"Details" und "Jetzt buchen" Option -->
                 <div class="card" sec:authorize="!hasAnyRole('HOST')">
                     <img class="card-img-top" th:src="@{/resources/img/{image}(image=${holidayHome.image})}"
@@ -328,7 +340,8 @@
                     </ul>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-                            <form role="form" th:action="@{/defaultcart}" method="post" sec:authorize="!hasAnyRole('ADMIN','EVENT_EMPLOYEE')">
+                            <form role="form" th:action="@{/defaultcart}" method="post"
+                                  sec:authorize="!hasAnyRole('ADMIN','EVENT_EMPLOYEE')">
                                 <input type="hidden" name="hid" value="0" th:value="${holidayHome.id}"/>
                                 <button type="submit" class="btn btn-primary">Jetzt buchen</button>
                             </form>
@@ -347,18 +360,40 @@
         <div class="col-md-4 col-6 p-1"></div>
     </div>
 </div>
-
+<div class="modal fade" id="deleteHolidayHomeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Angebot löschen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Account Name
+            </div>
+            <div class="modal-footer">
+                <form th:action="@{/deleteholidayhome}" method="post">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <input type="hidden" id="hiddenHolidayHomeId" name="holidayHome" value="">
+                    <input type="submit" class="btn btn-danger" value="Löschen bestätigen">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#deleteHolidayHomeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var holidayhomename = button.data('holidayhomename')
+        var holidayhomeid = button.data('holidayhomeid')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        $('#deleteHolidayHomeModal').find('.modal-body').text('Möchten Sie wirklich das Angebot \"' + holidayhomename + '\" wirklich löschen?')
+        $('#hiddenHolidayHomeId').val(holidayhomeid)
+    })
+</script>
 <footer th:replace="footer :: footer"></footer>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
 </body>
-
 </html>
