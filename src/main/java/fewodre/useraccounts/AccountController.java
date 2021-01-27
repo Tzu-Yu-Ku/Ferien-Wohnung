@@ -121,6 +121,7 @@ public class AccountController {
 	public String editUser(Model model, String tenant_username) {
 		firstname(model);
 		String principal = authentication.getPrincipal().toString();
+		model.addAttribute("savedchanges", false);
 
 		if (principal.contains("ADMIN")) {
 			return getString(model, tenant_username);
@@ -200,7 +201,7 @@ public class AccountController {
 			userAccounts.changePassword(account, Password.UnencryptedPassword.of(password));
 		}
 		model.addAttribute("tenant", accountManagement.findAllDisabled());
-
+		model.addAttribute("savedchanges", true);
 		return getString(model, tenant_username);
 
 	}

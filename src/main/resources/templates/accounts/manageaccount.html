@@ -15,10 +15,17 @@
 
 <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
 
-<div class="py-5"
-     style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
+<div style="background-image: url('/resources/img/landingpage_bg.png'); background-position:left center; background-size: cover;">
     <div class="container">
-        <div class="row">
+        <div class="row rounded pb-5" th:if="${savedchanges}">
+            <div class="w-100 alert-success">
+                <p class="text-center align-self-center p-1 m-0">
+                    Ihre Änderungen wurden gespeichert.</p>
+            </div>
+        </div>
+        <div class="pb-5" th:unless="${savedchanges}">
+        </div>
+        <div class="row pb-5">
             <div class="p-5 col-lg-6"
                  style="	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));	background-position: top left;	background-size: 100%;	background-repeat: repeat;	box-shadow: 5px 5px 5px  rgba(0,0,0,0.2);">
                 <h1>Sie möchten Ihre Daten ändern?</h1>
@@ -26,16 +33,19 @@
                 <form role="form" id="tenantManageAccountForm" th:action="@{/manageaccount}" method="post">
                     <div class="form-group">
                         <div class="form-inline">
-                            <input type="text" id="firstname" name="firstname" th:placeholder="${firstname}" class="form-control"
+                            <input type="text" id="firstname" name="firstname" th:placeholder="${firstname}"
+                                   class="form-control"
                                    style="width: 33%;" aria-label="Vorname">
-                            <input type="text" id="lastname" name="lastname" th:placeholder="${lastname}" class="form-control mr-0 ml-auto"
+                            <input type="text" id="lastname" name="lastname" th:placeholder="${lastname}"
+                                   class="form-control mr-0 ml-auto"
                                    th:if(this.
                                    style="width: 65%;" aria-label="Nachname">
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email"  class="form-control"
-                               placeholder="Leider kannst du die E-Mail nicht ändern." aria-label="E-Mail Adresse" disabled>
+                        <input type="email" id="email" name="email" class="form-control"
+                               placeholder="Leider kannst du die E-Mail nicht ändern." aria-label="E-Mail Adresse"
+                               disabled>
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" class="form-control"
@@ -56,41 +66,48 @@
                         }
                     </script>
                     <div th:if="${#strings.equals(role, 'HOST') or #authorization.expression('hasRole(''HOST'')') or
-                     #strings.equals(role, 'TENANT') or #authorization.expression('hasRole(''TENANT'')') }" >
-                    <div class="form-group">
-                        <input id="birthdate" name="birthdate" th:placeholder="${birthdate}" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" />
-                    </div>
-                    <div class="form-group">
-                        <div class="form-inline">
-                            <input type="text" id="street" name="street" class="form-control"
-                                   th:placeholder="${street}" style="width: 83%" aria-label="Straße">
-                            <input type="text" id="housenumber" name="housenumber" class="form-control mr-0 ml-auto"
-                                   th:placeholder="${housenumber}" style="width: 15%;" aria-label="Hausnummer">
+                     #strings.equals(role, 'TENANT') or #authorization.expression('hasRole(''TENANT'')') }">
+                        <div class="form-group">
+                            <input id="birthdate" name="birthdate" th:placeholder="${birthdate}" class="form-control"
+                                   type="text" onfocus="(this.type='date')" onblur="(this.type='text')"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <input type="text" id="street" name="street" class="form-control"
+                                       th:placeholder="${street}" style="width: 83%" aria-label="Straße">
+                                <input type="text" id="housenumber" name="housenumber" class="form-control mr-0 ml-auto"
+                                       th:placeholder="${housenumber}" style="width: 15%;" aria-label="Hausnummer">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <input type="text" id="postcode" name="postcode" class="form-control"
+                                       th:placeholder="${postcode}" style="width: 23%" aria-label="Postleitzahl">
+                                <input type="text" id="city" name="city"
+                                       class="form-control mr-0 ml-auto"
+                                       th:placeholder="${city}" style="width: 75%;" aria-label="Ortschaft">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"
+                         th:if="${#strings.equals(role, 'HOST') or #authorization.expression('hasRole(''HOST'')') }">
                         <div class="form-inline">
-                            <input type="text" id="postcode" name="postcode" class="form-control"
-                                   th:placeholder="${postcode}" style="width: 23%" aria-label="Postleitzahl">
-                            <input type="text" id="city" name="city"
-                                   class="form-control mr-0 ml-auto"
-                                   th:placeholder="${city}" style="width: 75%;" aria-label="Ortschaft">
-                        </div>
-                    </div>
-                </div>
-                    <div class="form-group" th:if="${#strings.equals(role, 'HOST') or #authorization.expression('hasRole(''HOST'')') }" >
-                        <div class="form-inline">
-                            <input type="text" id="iban" name="iban" pattern="^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$"
+                            <input type="text" id="iban" name="iban"
+                                   pattern="^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$"
                                    class="form-control" th:placeholder="${iban}" style="width: 50%" aria-label="IBAN">
-                            <input type="text" id="bic" name="bic" pattern="^([a-zA-Z]){6}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$"
-                                   class="form-control mr-0 ml-auto" th:placeholder="${bic}" style="width: 50%;" aria-label="BIC">
+                            <input type="text" id="bic" name="bic"
+                                   pattern="^([a-zA-Z]){6}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$"
+                                   class="form-control mr-0 ml-auto" th:placeholder="${bic}" style="width: 50%;"
+                                   aria-label="BIC">
                         </div>
                     </div>
-                    <div class="form-group" th:if="${#strings.equals(role, 'EVENT_EMPLOYEE') or #authorization.expression('hasRole(''EVENT_EMPLOYEE'')') }">
+                    <div class="form-group"
+                         th:if="${#strings.equals(role, 'EVENT_EMPLOYEE') or #authorization.expression('hasRole(''EVENT_EMPLOYEE'')') }">
                         <input type="text" id="eventcompany" name="eventcompany" class="form-control"
                                th:placeholder="${eventcompany}" aria-label="Arbeitgeber">
                     </div>
-                    <button type="submit" th:value="${email}" name="tenant_username" class="btn btn-primary mt-2" oninput="checkpasswords(this)">Änderungen abschicken<br></button>
+                    <button type="submit" th:value="${email}" name="tenant_username" class="btn btn-primary mt-2"
+                            oninput="checkpasswords(this)">Änderungen abschicken<br></button>
                 </form>
             </div>
         </div>
