@@ -1,0 +1,22 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020/21
+
+**Von:** Janujan Thanabalasingham
+
+**Gruppe:** 25
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+Im SWT-Praktikum 2020/21 habe ich vieles dazugelernt. Als Scrum-Master habe ich ein verstärktes Verantwortungsbewusstsein entwickelt und stets versucht meine Gruppe zu unterstützen, was mir sehr viel Spaß gemacht hat. Des Weiteren konnte ich meine Kenntnisse in der objektorientierten Programmierung, als auch im Entwurf und der Gestaltung einer Website, ausbauen und lernte vieles über den Einsatz verschiedener Frameworks. Vor allem der Nutzen der CRC-Karten-Methode, dessen Wirksamkeit ich während der SWT-Vorlesung nicht wirklich einschätzen konnte, hat sich für mich als besonders nützlich erwiesen.
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+Unsere Teamarbeit zeichnete sich hauptsächlich durch gemeinsame Treffen aller Teammitglieder, als auch durch Zusammenkünfte der von uns zu Beginn ausgemachten Zweierteams aus. Meines Erachtens haben wir den Arbeitsaufwand für das Projekt so möglichst gerecht aufteilen können, sodass niemand zu kurz kommen musste oder mit viel zu viel Arbeit allein gelassen wurde. Im gesamten Verlauf des Praktikums verstanden wir uns sehr gut und konnten konsistent guten Fortschritt bei den wöchentlichen Meetings mit unserem Tutor/Kunden vorzeigen. Bei Unklarheiten, Schwierigkeiten oder sonstigen Nachfragen bei der Entwicklung konnten wir uns darauf verlassen, dass wir gemeinsam eine Lösung finden. Alles in allem habe ich nur positive Erfahrungen während der Zusammenarbeit mit meiner Gruppe machen dürfen.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+Salespoint hat durchaus geholfen, allerdings auch einige kleine Hürden gestellt. Verbesserungen könnten in der Dokumentation erfolgen, da an der ein oder anderen Stelle die korrekte Nutzung bestimmter Salespoint-Komponenten etwas ausführlicher beschrieben werden könnte. Des Weiteren existieren einige @Deprecated Annotationen (z. B. Order), die uns bei der Entwicklung etwas verunsicherten. Die UserAccount-Komponente war besonders nützlich. Diese hat einiges an Einarbeitung in die Sicherheitskonfiguration eines Spring-Projekts erspart.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+Aufgrund der Pandemie war dieses SWT-Praktikum mit Sicherheit anders als gewöhnlich. Trotzdem hat es in meinen Augen sehr gut funktioniert und kann daher durchaus so weiter durchgeführt werden. Der Einsatz von CI und SonarQube sind ebenfalls sehr hilfreich und eine super stütze, um besseres Programmieren zu lernen. Vielleicht könnten zukünftige Gruppen auch in die Einrichtung dieser Funktionen eingeführt werden.
+
+== Feedback für den Tutor
+Fabian hat seine Aufgabe als Tutor sehr gut gemacht. Stets pünktlich, hilfsbereit, humorvoll und unterstützend hat er uns hervorragend betreut.
+
+== Sonstiges und Anmerkungen
