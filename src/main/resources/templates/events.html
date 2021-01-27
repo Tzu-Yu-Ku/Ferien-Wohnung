@@ -239,8 +239,13 @@
                                     ----capacity----</p>
                             </li>
                             <li class="list-group-item"><i class="fas fa-money-bill-wave"></i>
-                                <p class="d-inline ml-2" th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">
-                                    ----price----
+                                <p class="card-text d-inline ml-2"
+                                   th:if="${event.getEventType().toString() == 'LARGE'}"
+                                   th:text="${event.price.getNumber() + ' € Teilnahmegebühr'}">----price----
+                                </p>
+                                <p class="card-text d-inline ml-2"
+                                   th:if="${event.getEventType().toString() == 'SMALL'}">
+                                    <i>kostenlos</i>
                                 </p>
                             </li>
                             <li class="list-group-item"><i class="fa fa-map"></i>
@@ -285,7 +290,7 @@
                             <li class="list-group-item"><i class="far fa-money-bill-alt"></i>
                                 <p class="card-text d-inline ml-2"
                                    th:if="${event.getEventType().toString() == 'LARGE'}"
-                                   th:text="${event.price.getNumber() + ',- € Teilnahmegebühr'}">----price----
+                                   th:text="${event.price.getNumber() + ' € Teilnahmegebühr'}">----price----
                                 </p>
                                 <p class="card-text d-inline ml-2"
                                    th:if="${event.getEventType().toString() == 'SMALL'}">

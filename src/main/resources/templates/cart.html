@@ -247,7 +247,7 @@
                 <img class="card-img" th:src="@{/resources/img/{image}(image=${event.image})}"
                      src="../static/resources/img/event1.png" alt="">
             </div>
-            <div class="p-1 col-8 col-md-8 border-right">
+            <div class="col-8 col-md-8 border-right">
                 <div class="row border-bottom">
                     <div class="col-12 p-2">
                         <h4 class="text-center pt-2 px-2" th:text="${event.name}">
@@ -266,9 +266,9 @@
                         Geschichte kennen.
                     </div>
                 </div>
-                <div class="row border-bottom" th:if="${event.getEventType().toString() == 'LARGE'}">
+                <div class="row border-bottom border-top" th:if="${event.getEventType().toString() == 'LARGE'}">
                     <div class="col-4">
-                        <h5 class="text-center pt-2 px-2 border-top"
+                        <h5 class="text-center pt-2 px-2"
                             th:text="${event.price.getNumber().floatValue() + ',- € p.P.'}">
                             123€ p. P.
                         </h5>
@@ -286,7 +286,7 @@
                 </div>
                 <div class="row border-bottom" th:if="${event.getEventType().toString() == 'SMALL'}">
                     <div class="col-12">
-                        <h5 class="text-center pt-2 px-2 border-top p-4">
+                        <h5 class="text-center pt-2 px-2 border-top p-3">
                             Dieses Event ist kostenlos.
                         </h5>
                     </div>
