@@ -317,7 +317,7 @@ public class CatalogController {
 	                        @RequestParam("price") String price, @RequestParam("capacity") String capacity,
 	                        @RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
 	                        @RequestParam("city") String city, @RequestParam("postalCode") String postalCode,
-                            @RequestParam("imageupload") MultipartFile image) {
+	                        @RequestParam("imageupload") MultipartFile image) {
 
 		firstname(model);
 		HashMap<String, String> errorMap = new HashMap<>();
@@ -328,8 +328,7 @@ public class CatalogController {
 			String contentType = "." + strings[strings.length - 1];
 			if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
 				errorMap.put("imageupload", "Es werden nur JPG oder PNG Bilder unterstützt.");
-			}
-			else {
+			} else {
 				fileName = UUID.randomUUID().toString() + contentType;
 				storageService.store(image, fileName);
 			}
@@ -338,7 +337,7 @@ public class CatalogController {
 		boolean holidayHomePlaceUpdated = false;
 		if (Hcatalog.findById(holidayHomeId).isPresent()) {
 			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
-			if(!fileName.equals("unchanged")) {
+			if (!fileName.equals("unchanged")) {
 				holidayHomeToChange.setImage(fileName);
 			}
 			if (!name.isBlank()) {
@@ -350,7 +349,7 @@ public class CatalogController {
 			}
 			if (!price.isBlank()) {
 				float parsedPrice = Float.parseFloat(price);
-				if(parsedPrice < 1.0f) {
+				if (parsedPrice < 1.0f) {
 					errorMap.put("price", "Bitte geben Sie einen Preis von mind. 1.00 EUR ein.");
 				} else {
 					holidayHomeToChange.setPrice(Money.of(parsedPrice, "EUR"));
@@ -358,7 +357,7 @@ public class CatalogController {
 			}
 			if (!capacity.isBlank()) {
 				int capacityHH = Integer.parseInt(capacity);
-				if(capacityHH < 1) {
+				if (capacityHH < 1) {
 					errorMap.put("capacity", "Bitte geben Sie eine max. Personenzahl von mind. 1 an.");
 				} else {
 					holidayHomeToChange.setCapacity(capacityHH);
@@ -370,7 +369,7 @@ public class CatalogController {
 				holidayHomePlaceUpdated = true;
 			}
 			if (!houseNumber.isBlank()) {
-				if(houseNumber.matches("\\d+[a-zA-Z]*")) {
+				if (houseNumber.matches("\\d+[a-zA-Z]*")) {
 					changedPlace.setHouseNumber(houseNumber);
 					holidayHomePlaceUpdated = true;
 				} else {
@@ -378,7 +377,7 @@ public class CatalogController {
 				}
 			}
 			if (!postalCode.isBlank()) {
-				if(postalCode.matches("[0-9]{5}")) {
+				if (postalCode.matches("[0-9]{5}")) {
 					changedPlace.setPostalCode(postalCode);
 					holidayHomePlaceUpdated = true;
 				} else {
@@ -390,7 +389,7 @@ public class CatalogController {
 				holidayHomePlaceUpdated = true;
 			}
 
-			if(!errorMap.isEmpty()) {
+			if (!errorMap.isEmpty()) {
 				model.addAttribute("errors", errorMap);
 				Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
 				model.addAttribute("holidayHome", holidayHome.get());
@@ -681,6 +680,7 @@ public class CatalogController {
 	String editEventPage(@RequestParam("event") Event event, Model model) {
 		firstname(model);
 		model.addAttribute("event", event);
+		model.addAttribute("errors", new HashMap<String, String>());
 		model.addAttribute("today", LocalDate.now());
 		return "editevent";
 	}
@@ -693,70 +693,106 @@ public class CatalogController {
 	                 @RequestParam("date") String date, @RequestParam("time") String time,
 	                 @RequestParam("capacity") String capacity, @RequestParam("street") String street,
 	                 @RequestParam("houseNumber") String houseNumber, @RequestParam("postalCode") String postalCode,
-	                 @RequestParam("city") String city, @RequestParam("coordinates_x") String coordinates_x,
-	                 @RequestParam("coordinates_y") String coordinates_y) {
+	                 @RequestParam("city") String city, @RequestParam("imageupload") MultipartFile image) {
+
 		firstname(model);
-		System.out.println(eventId);
+
+		HashMap<String, String> errorMap = new HashMap<>();
+		String fileName = "unchanged";
+		if (!image.isEmpty()) {
+			System.out.println(image.toString());
+			String[] strings = image.getContentType().split("/");
+			String contentType = "." + strings[strings.length - 1];
+			if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
+				errorMap.put("imageupload", "Es werden nur JPG oder PNG Bilder unterstützt.");
+			} else {
+				fileName = UUID.randomUUID().toString() + contentType;
+				storageService.store(image, fileName);
+			}
+		}
+
 		Ecatalog.findById(eventId);
 		boolean eventPlaceUpdated = false;
 		if (Ecatalog.findById(eventId).isPresent()) {
-			Event EventToChange = Ecatalog.findById(eventId).get();
+			Event eventToChange = Ecatalog.findById(eventId).get();
+			if (!fileName.equals("unchanged")) {
+				eventToChange.setImage(fileName);
+			}
 			if (!name.isBlank()) {
-				EventToChange.setName(name);
+				eventToChange.setName(name);
 			}
 			if (!description.isBlank()) {
-				EventToChange.setDescription(description);
+				eventToChange.setDescription(description);
 			}
 			if (!price.isBlank()) {
-				int price2 = Integer.parseInt(price);
-				EventToChange.setPrice(Money.of(price2, "EUR"));
+				float parsedPrice = Float.parseFloat(price);
+				if (parsedPrice < 1.0f && eventToChange.getEventType().equals(EventType.LARGE)) {
+					errorMap.put("price", "Bitte geben Sie einen Preis von mind. 1.00 EUR ein.");
+				} else {
+					eventToChange.setPrice(Money.of(parsedPrice, "EUR"));
+				}
 			}
 			if (!date.isBlank()) {
-				EventToChange.setDate(LocalDate.parse(date));
+				eventToChange.setDate(LocalDate.parse(date));
 			}
 			if (!time.isBlank()) {
-				EventToChange.setTime(LocalTime.parse(time));
+				eventToChange.setTime(LocalTime.parse(time));
 			}
 			if (!capacity.isBlank()) {
-				int capacity2 = Integer.parseInt(capacity);
-				EventToChange.setCapacity(capacity2);
+				int capacityHH = Integer.parseInt(capacity);
+				if (capacityHH < 1) {
+					errorMap.put("capacity", "Bitte geben Sie eine max. Personenzahl von mind. 1 an.");
+				} else {
+					eventToChange.setCapacity(capacityHH);
+				}
 			}
-			Place changedPlace = EventToChange.getPlace();
+			Place changedPlace = eventToChange.getPlace();
 			if (!street.isBlank()) {
 				changedPlace.setStreet(street);
 				eventPlaceUpdated = true;
 			}
 			if (!houseNumber.isBlank()) {
-				changedPlace.setHouseNumber(houseNumber);
-				eventPlaceUpdated = true;
+				if (houseNumber.matches("\\d+[a-zA-Z]*")) {
+					changedPlace.setHouseNumber(houseNumber);
+					eventPlaceUpdated = true;
+				} else {
+					errorMap.put("houseNumber", "Bitte geben Sie eine gültige Hausnummer an.");
+				}
 			}
 			if (!postalCode.isBlank()) {
-				changedPlace.setPostalCode(postalCode);
-				eventPlaceUpdated = true;
+				if (postalCode.matches("[0-9]{5}")) {
+					changedPlace.setPostalCode(postalCode);
+					eventPlaceUpdated = true;
+				} else {
+					errorMap.put("postalCode", "Bitte geben sie eine gültige PLZ an.");
+				}
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
 				eventPlaceUpdated = true;
 			}
-			if (!coordinates_x.isBlank()) {
-				int coordinates_x2 = Integer.parseInt(coordinates_x);
-				changedPlace.setCoordX(coordinates_x2);
+
+			if (!errorMap.isEmpty()) {
+				model.addAttribute("errors", errorMap);
+				Optional<Event> event = Ecatalog.findById(eventId);
+				model.addAttribute("event", event.get());
+				return "editevent";
 			}
-			if (!coordinates_y.isBlank()) {
-				int coordinates_y2 = Integer.parseInt(coordinates_y);
-				changedPlace.setCoordY(coordinates_y2);
-			}
-			EventToChange.setPlace(changedPlace);
-			System.out.println(EventToChange);
-			Ecatalog.save(EventToChange);
-			// holidayHomeStorage.save(UniqueInventoryItem(EventToChange,
-			// EventToChange.getCapacity()));
+
+			eventToChange.setPlace(changedPlace);
+			System.out.println(eventToChange);
+			Ecatalog.save(eventToChange);
 		}
 
 		if (eventPlaceUpdated) {
 			return "redirect:/editEventLocation?event=" + eventId.toString();
 		}
-		return "redirect:/events";
+
+		errorMap.put("success", "Ihre Änderungen wurden erfolgreich gespeichert.");
+		model.addAttribute("errors", errorMap);
+		Optional<Event> event = Ecatalog.findById(eventId);
+		model.addAttribute("event", event.get());
+		return "editevent";
 	}
 
 	@PreAuthorize("hasRole('EVENT_EMPLOYEE')")
