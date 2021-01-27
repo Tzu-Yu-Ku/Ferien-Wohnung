@@ -34,7 +34,7 @@ public class CatalogForm {
 	private int capacity;
 
 	@Min(value = 0, message = "Der Preis muss ein positiver Wert sein.")
-	private int price;
+	private float price;
 
 	private MultipartFile imageupload;
 
@@ -101,11 +101,11 @@ public class CatalogForm {
 		this.capacity = capacity;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 

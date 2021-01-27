@@ -26,6 +26,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -288,6 +289,7 @@ public class CatalogController {
 	String editHolidayhomePage(@RequestParam("holidayHome") HolidayHome holidayHome, Model model) {
 		firstname(model);
 		model.addAttribute("holidayHome", holidayHome);
+		model.addAttribute("errors", new HashMap<String, String>());
 		return "editholidayhome";
 	}
 
@@ -304,8 +306,8 @@ public class CatalogController {
 	 * @param houseNumber   muss not be {@literal null}
 	 * @param city          muss not be {@literal null}
 	 * @param postalCode    muss not be {@literal null}
-	 * @param coordinates_x muss not be {@literal null}
-	 * @param coordinates_y muss not be {@literal null}
+	 *                      //	 * @param coordinates_x muss not be {@literal null}
+	 *                      //	 * @param coordinates_y muss not be {@literal null}
 	 * @return template : holidayhome
 	 */
 	@PreAuthorize("hasRole('HOST')")
@@ -315,12 +317,34 @@ public class CatalogController {
 	                        @RequestParam("price") String price, @RequestParam("capacity") String capacity,
 	                        @RequestParam("street") String street, @RequestParam("houseNumber") String houseNumber,
 	                        @RequestParam("city") String city, @RequestParam("postalCode") String postalCode,
-	                        @RequestParam("coordinates_x") String coordinates_x, @RequestParam("coordinates_y") String coordinates_y) {
-		System.out.println(holidayHomeId);
-		Hcatalog.findById(holidayHomeId);
+                            @RequestParam("imageupload") MultipartFile image) {
+
+		firstname(model);
+		HashMap<String, String> errorMap = new HashMap<>();
+		String fileName = "unchanged";
+		if (!image.isEmpty()) {
+			System.out.println(image.toString());
+			String[] strings = image.getContentType().split("/");
+			String contentType = "." + strings[strings.length - 1];
+			if (!(contentType.equals(".jpeg") || contentType.equals(".png") || contentType.equals(".jpg"))) {
+				errorMap.put("imageupload", "Es werden nur JPG oder PNG Bilder unterstützt.");
+//				model.addAttribute("errors", errorMap);
+//				Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
+//				model.addAttribute("holidayHome", holidayHome.get());
+//				return "editholidayhome";
+			}
+			else {
+				fileName = UUID.randomUUID().toString() + contentType;
+				storageService.store(image, fileName);
+			}
+		}
+
 		boolean holidayHomePlaceUpdated = false;
 		if (Hcatalog.findById(holidayHomeId).isPresent()) {
 			HolidayHome holidayHomeToChange = Hcatalog.findById(holidayHomeId).get();
+			if(!fileName.equals("unchanged")) {
+				holidayHomeToChange.setImage(fileName);
+			}
 			if (!name.isBlank()) {
 				holidayHomeToChange.setName(name);
 			}
@@ -329,12 +353,20 @@ public class CatalogController {
 				holidayHomeToChange.setDescription(description);
 			}
 			if (!price.isBlank()) {
-				int price2 = Integer.parseInt(price);
-				holidayHomeToChange.setPrice(Money.of(price2, "EUR"));
+				float parsedPrice = Float.parseFloat(price);
+				if(parsedPrice < 1.0f) {
+					errorMap.put("price", "Bitte geben Sie einen Preis von mind. 1.00 EUR ein.");
+				} else {
+					holidayHomeToChange.setPrice(Money.of(parsedPrice, "EUR"));
+				}
 			}
 			if (!capacity.isBlank()) {
 				int capacityHH = Integer.parseInt(capacity);
-				holidayHomeToChange.setCapacity(capacityHH);
+				if(capacityHH < 1) {
+					errorMap.put("capacity", "Bitte geben Sie eine max. Personenzahl von mind. 1 an.");
+				} else {
+					holidayHomeToChange.setCapacity(capacityHH);
+				}
 			}
 			Place changedPlace = holidayHomeToChange.getPlace();
 			if (!street.isBlank()) {
@@ -342,24 +374,31 @@ public class CatalogController {
 				holidayHomePlaceUpdated = true;
 			}
 			if (!houseNumber.isBlank()) {
-				changedPlace.setHouseNumber(houseNumber);
-				holidayHomePlaceUpdated = true;
+				if(houseNumber.matches("\\d+[a-zA-Z]*")) {
+					changedPlace.setHouseNumber(houseNumber);
+					holidayHomePlaceUpdated = true;
+				} else {
+					errorMap.put("houseNumber", "Bitte geben Sie eine gültige Hausnummer an.");
+				}
 			}
 			if (!postalCode.isBlank()) {
-				changedPlace.setPostalCode(postalCode);
-				holidayHomePlaceUpdated = true;
+				if(postalCode.matches("[0-9]{5}")) {
+					changedPlace.setPostalCode(postalCode);
+					holidayHomePlaceUpdated = true;
+				} else {
+					errorMap.put("postalCode", "Bitte geben sie eine gültige PLZ an.");
+				}
 			}
 			if (!city.isBlank()) {
 				changedPlace.setCity(city);
 				holidayHomePlaceUpdated = true;
 			}
-			if (!coordinates_x.isBlank()) {
-				int coordinates_x2 = Integer.parseInt(coordinates_x);
-				changedPlace.setCoordX(coordinates_x2);
-			}
-			if (!coordinates_y.isBlank()) {
-				int coordinates_y2 = Integer.parseInt(coordinates_y);
-				changedPlace.setCoordY(coordinates_y2);
+
+			if(!errorMap.isEmpty()) {
+				model.addAttribute("errors", errorMap);
+				Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
+				model.addAttribute("holidayHome", holidayHome.get());
+				return "editholidayhome";
 			}
 
 			holidayHomeToChange.setPlace(changedPlace);
@@ -372,7 +411,11 @@ public class CatalogController {
 			return "redirect:/editHolidayHomeLocation?holidayhome=" + holidayHomeId.toString();
 		}
 
-		return "redirect:/holidayhomes";
+		errorMap.put("success", "Ihre Änderungen wurden erfolgreich gespeichert.");
+		model.addAttribute("errors", errorMap);
+		Optional<HolidayHome> holidayHome = Hcatalog.findById(holidayHomeId);
+		model.addAttribute("holidayHome", holidayHome.get());
+		return "editholidayhome";
 	}
 
 	/**
@@ -506,7 +549,6 @@ public class CatalogController {
 
 		model.addAttribute("recentEvent", recentEvent);
 		model.addAttribute("eventCatalog", Ecatalog.findAll()
-				.filter(Event::isEventStatus)
 				.filter(event -> event.getDate().isAfter(LocalDate.now())
 						|| event.getDate().isEqual(LocalDate.now())));
 
@@ -631,7 +673,7 @@ public class CatalogController {
 			if (!event.isEventStatus()) {
 				// holidayHomeStorage.delete(holidayHomeStorage.findByProduct(event).get());
 				// Ecatalog.delete(event);
-				Ecatalog.deleteById(Objects.requireNonNull(event.getId()));
+				Ecatalog.delete(event);
 			}
 		}
 		return "redirect:/events";

@@ -4,242 +4,199 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>FeWoDre - Ferienhausangebot bearbeiten</title>
 </head>
 
 <body>
 
-    <nav th:replace="navbar :: navbar" style="width: 100%"></nav>
+<nav th:replace="navbar :: navbar" style="width: 100%"></nav>
 
-    <div
-        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
-        <div class="container">
-            <div class="row" style="background-color: #EEEEEE;">
-                <div class="p-lg-3 w-100">
-                    <h1 class="text-center">Ferienhaus bearbeiten</h1>
-                </div>
+<div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
+    <div class="container">
+        <div class="row rounded" th:if="${errors.containsKey('success')}">
+            <div class="w-100 alert-success">
+                <p class="text-center align-self-center p-1 m-0" th:text="${errors.get('success')}">Ferienhaus bearbeiten</p>
             </div>
-            <div class="row" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-12">
-                    <p class="lead mb-4 p-1 text-center">Bearbeiten Sie Ihr bestehendes Ferienhaus und speichern Sie die
-                        Änderungen.</p>
-                    <form role="form" id="form" th:action="@{/editHolidayHome}" method="post">
-                        <div class="form-group">
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="name" class="px-2">Angebotstitel:</label>
-                                </div>
-                                <div class="p-1 col-8 col-md-8">
-                                    <input type="text" id="name" name="name" th:placeholder="${holidayHome.name}"
-                                        class="form-control" aria-label="Angebotstitel" />
-                                </div>
+        </div>
+        <div class="row" style="background-color: #EEEEEE;">
+            <div class="p-lg-3 w-100">
+                <h1 class="text-center">Ferienhaus bearbeiten</h1>
+            </div>
+        </div>
+        <div class="row" style="background-color: #EEEEEE;">
+            <div class="p-1 col-8 col-md-12">
+                <p class="lead mb-4 p-1 text-center">Bearbeiten Sie Ihr bestehendes Ferienhaus und speichern Sie die
+                    Änderungen.</p>
+                <form role="form" id="form" th:action="@{/editHolidayHome}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="name" class="px-2">Angebotstitel:</label>
                             </div>
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="description" class="px-2">Beschreibung:</label>
-                                </div>
-                                <div class="p-1 col-8 col-md-8">
+                            <div class="p-1 col-8 col-md-8">
+                                <input type="text" id="name" name="name" th:placeholder="${holidayHome.name}"
+                                       class="form-control" aria-label="Angebotstitel"/>
+                            </div>
+                        </div>
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="description" class="px-2">Beschreibung:</label>
+                            </div>
+                            <div class="p-1 col-8 col-md-8">
                                     <textarea type="text" class="form-control" id="description" name="description"
-                                        th:placeholder="${holidayHome.description}"
-                                        aria-label="Beschreibung"></textarea>
-                                </div>
+                                              th:placeholder="${holidayHome.description}"
+                                              aria-label="Beschreibung"></textarea>
                             </div>
+                        </div>
 
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="price" class="px-2">Preis (pro Nacht):</label>
-                                </div>
-                                <div class="p-1 col-8 col-md-8">
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="price" class="px-2">Preis (pro Nacht):</label>
+                            </div>
+                            <div class="p-1 col-8 col-md-8">
+                                <div class="input-group">
                                     <input class="form-control" id="price" name="price" type="number"
-                                        th:placeholder="${holidayHome.price}" aria-label="Preis pro Nacht" />
-                                </div>
-                            </div>
-
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="imageupload" class="px-2">Bilder:</label>
-                                </div>
-
-                                <div class="p-1 col-8 col-md-8">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="imageupload"
-                                               name="imageupload">
-                                        <label class="custom-file-label" for="imageupload">
-                                            Wählen Sie ein Bild aus. (JPG, PNG)
-                                        </label>
+                                           th:placeholder="${holidayHome.price.number}" aria-label="Preis pro Nacht"
+                                           step="0.01"
+                                           th:classappend="${errors.containsKey('price') ? ' is-invalid' : ''}"/>
+                                    <div class="input-group-text">
+                                        <i class="fas fa-euro-sign"></i>
                                     </div>
-
+                                    <div class="invalid-feedback ml-2" style="display: block;"
+                                         th:if="${errors.containsKey('price')}"
+                                         th:text="${errors.get('price')}">
+                                        Error Text
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="capacity" class="px-2">Maximale Personenanzahl:</label>
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="imageupload" class="px-2">Bilder:</label>
+                            </div>
+
+                            <div class="p-1 col-8 col-md-8">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="imageupload"
+                                           name="imageupload"
+                                           th:classappend="${errors.containsKey('imageupload') ? ' is-invalid' : ''}">
+                                    <label class="custom-file-label" for="imageupload" id="upload-label">
+                                        Wählen Sie ein neues Bild aus. (JPG, PNG)
+                                    </label>
+                                    <div class="invalid-feedback ml-2" style="display: block;"
+                                         th:if="${errors.containsKey('imageupload')}"
+                                         th:text="${errors.get('imageupload')}">
+                                        Error Text
+                                    </div>
                                 </div>
-                                <div class="p-1 col-8 col-md-8">
+                                <script type="text/javascript">
+                                    var input = document.getElementById('imageupload');
+                                    var infoArea = document.getElementById('upload-label');
+
+                                    input.addEventListener('change', showFileName);
+
+                                    function showFileName(event) {
+                                        var input = event.srcElement;
+                                        var fileName = input.files[0].name;
+                                        infoArea.textContent = 'Bild: ' + fileName;
+                                    }
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="capacity" class="px-2">Maximale Personenanzahl:</label>
+                            </div>
+                            <div class="p-1 col-8 col-md-8">
+                                <div class="input-group">
                                     <input class="form-control" type="number" id="capacity" min="0" name="capacity"
-                                        th:placeholder="${holidayHome.capacity}" aria-label="Maximale Personenanzahl" />
+                                           th:placeholder="${holidayHome.capacity}"
+                                           th:classappend="${errors.containsKey('capacity') ? ' is-invalid' : ''}"
+                                           aria-label="Maximale Personenanzahl"/>
+                                    <div class="invalid-feedback ml-2" style="display: block;"
+                                         th:if="${errors.containsKey('capacity')}"
+                                         th:text="${errors.get('capacity')}">
+                                        Error Text
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
-                                </div>
-                                <div class="p-1 col-7 col-md-7" style="">
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
+                            </div>
+                            <div class="p-1 col-7 col-md-7" style="">
+                                <div class="input-group">
                                     <input type="text" class="form-control" id="street" name="street"
-                                        th:placeholder="${holidayHome.place.street}" aria-label="Straße">
+                                           th:placeholder="${holidayHome.place.street}" aria-label="Straße">
                                 </div>
-                                <div class="p-1 col-1 col-md-1" style="">
-                                    <input type="text" class="form-control" name="houseNumber" id="houseNumber"
-                                        th:placeholder="${holidayHome.place.houseNumber}" aria-label="Hausnummer">
-                                </div>
-                            </div>
-
-                            <div class="row border-top m-0" style="background-color: #EEEEEE;">
-                                <div class="p-1 col-4 col-md-4 border-right align-self-center">
-                                    <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
-                                </div>
-                                <div class="p-1 col-6 col-md-6">
-                                    <input type="text" class="form-control" name="city" id="city"
-                                        th:placeholder="${holidayHome.place.city}">
-                                </div>
-                                <div class="p-1 col-2 col-md-2">
-                                    <input type="number" class="form-control" name="postalCode" id="postalCode"
-                                        th:placeholder="${holidayHome.place.postalCode}" aria-label="Postleitzahl" min="0">
-                                    <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="hidden"
-                                           th:value="${holidayHome.place.coordX}" min=0 max=10000 />
-                                    <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="hidden"
-                                           th:value="${holidayHome.place.coordY}" min=0 max=10000 />
+                                <div class="invalid-feedback ml-2" style="display: block;"
+                                     th:if="${errors.containsKey('houseNumber')}"
+                                     th:text="${errors.get('houseNumber')}">
+                                    Error Text
                                 </div>
                             </div>
-
-
-                            <div class="row border-top p-3 m-0" style="background-color: #EEEEEE;">
-                                <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}" />
-                                <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit"
-                                    value="Änderungen speichern">
+                            <div class="p-1 col-1 col-md-1" style="">
+                                <input type="text" class="form-control" name="houseNumber" id="houseNumber"
+                                       th:placeholder="${holidayHome.place.houseNumber}" aria-label="Hausnummer"
+                                       th:classappend="${errors.containsKey('houseNumber') ? ' is-invalid' : ''}">
                             </div>
                         </div>
-                    </form>
-                </div>
+
+                        <div class="row border-top m-0" style="background-color: #EEEEEE;">
+                            <div class="p-1 col-4 col-md-4 border-right align-self-center">
+                                <label for="city" class="px-2">Postleitzahl &amp; Ort:</label>
+                            </div>
+                            <div class="p-1 col-3 col-md-3">
+                                <input type="number" class="form-control" name="postalCode" id="postalCode"
+                                       th:placeholder="${holidayHome.place.postalCode}" aria-label="Postleitzahl"
+                                       min="0"
+                                       th:classappend="${errors.containsKey('postalCode') ? ' is-invalid' : ''}">
+                                <div class="invalid-feedback ml-2 d-inline"
+                                     th:if="${errors.containsKey('postalCode')}"
+                                     th:text="${errors.get('postalCode')}">
+                                    Error Text
+                                </div>
+                            </div>
+                            <div class="p-1 col-5 col-md-5">
+                                <input type="text" class="form-control" name="city" id="city"
+                                       th:placeholder="${holidayHome.place.city}">
+                                <input class="form-control" id="coordinates_x" th:name="coordinates_x" type="hidden"
+                                       th:value="${holidayHome.place.coordX}" min=0 max=10000/>
+                                <input class="form-control" id="coordinates_y" th:name="coordinates_y" type="hidden"
+                                       th:value="${holidayHome.place.coordY}" min=0 max=10000/>
+                            </div>
+                        </div>
+
+
+                        <div class="row border-top p-3 m-0" style="background-color: #EEEEEE;">
+                            <input type="hidden" name="holidayHomeId" th:value="${holidayHome.getId()}"/>
+                            <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit"
+                                   value="Änderungen speichern">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
+<footer th:replace="footer :: footer"></footer>
 
-    <!--
-    <div style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)); background-position: top left; background-size: 100%; background-repeat: repeat;">
-        <div class="container">
-            <div class="row" style="background-color: #EEEEEE;">
-                <div class="p-lg-3 w-100">
-                    <h1 class="text-center">Ferienhaus bearbeiten</h1>
-                </div>
-            </div>
-            <div class="row" style="background-color: #EEEEEE;">
-                <div class="p-1 col-8 col-md-12">
-                    <p class="lead mb-4 p-1 text-center">Bearbeiten sie ihr bestehendes Ferienhaus und speichern sie die Änderungen
-                    </p>
-                </div>
-            </div>
-            <form method="post" role="form" id="form" class="gb-form" th:action="@{/editHolidayHome}" th:object="${form}">
-                <div class="form-group">
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="name" class="px-2">Angebotstitel:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input type="text" class="form-control" id="name" th:name="name" required="required"
-                                th:placeholder="Titel" aria-label="Angebotstitel"/>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="description" class="px-2">Beschreibung:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <textarea type="text" class="form-control" id="description" th:name="description"
-                                  required="required" placeholder="Beschreibung" aria-label="Beschreibung"></textarea>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="price" class="px-2">Preis (pro Nacht):</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" id="price" th:name="price" type="number" placeholder="Preis p. N."
-                               aria-label="Preis pro Nacht"/>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="inputGroupFile02" class="px-2">Bilder:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                <label class="custom-file-label" for="inputGroupFile02"
-                                   aria-describedby="inputGroupFileAddon02">Wählen Sie Bilder aus. (PNG, JPEG)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="capacity" class="px-2">Maximale Personenanzahl:</label>
-                        </div>
-                        <div class="p-1 col-8 col-md-8">
-                            <input class="form-control" type="number" id="capacity" min="0" th:name="capacity"
-                                required="required" placeholder="Maximale Personenanzahl"
-                                aria-label="Maximale Personenanzahl"/>
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right" style="">
-                            <label for="street" class="px-2">Straße &amp; Hausnummer:</label>
-                        </div>
-                        <div class="p-1 col-7 col-md-7" style="">
-                            <input type="text" class="form-control" id="street" th:name="street" required="required"
-                               placeholder="Straße" aria-label="Straße">
-                        </div>
-                        <div class="p-1 col-1 col-md-1" style="">
-                            <input type="text" class="form-control" th:name="number" required="required"
-                               placeholder="Hausnr." aria-label="Hausnummer">
-                        </div>
-                    </div>
-                    <div class="row border-top" style="background-color: #EEEEEE;">
-                        <div class="p-1 col-4 col-md-4 border-right">
-                            <label for="city" class="px-2">Ort &amp; Postleitzahl:</label>
-                        </div>
-                        <div class="p-1 col-6 col-md-6">
-                            <input type="text" class="form-control" name="city" id="city" th:name="city" required="required"
-                               placeholder="Ort">
-                        </div>
-                        <div class="p-1 col-2 col-md-2">
-                            <input type="number" class="form-control" th:name="postalnumber" required="required"
-                               placeholder="Postleitzahl" aria-label="Postleitzahl">
-                        </div>
-                    </div>
-                    <div class="row border-top p-3" style="background-color: #EEEEEE;">
-                        <input class="btn btn-primary w-25 ml-auto mr-auto" type="submit" value="Ferienhaus speichern ">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
--->
-    <footer th:replace="footer :: footer"></footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>

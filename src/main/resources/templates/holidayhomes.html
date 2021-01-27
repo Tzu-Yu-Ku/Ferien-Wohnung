@@ -44,8 +44,8 @@
         <div class="row p-2">
             <!--Buttons zum sortieren von den HolidayHomes nach bestimmten Kategorien-->
             <div class="col-md-9">
-                <div class="btn-group" sec:authorize="!hasRole('HOST')">
-                    <div>
+                <div class="btn-group">
+                    <div sec:authorize="!hasRole('HOST')">
                         <button type="button" class="btn btn-info dropdown-toggle mr-1" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             Personenanzahl
@@ -80,8 +80,7 @@
                             </form>
                         </div>
                     </div>
-
-                    <div>
+                    <div sec:authorize="!hasRole('HOST')">
                         <button type="button" class="btn btn-info dropdown-toggle mr-1" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             Preis p.N.
@@ -127,8 +126,7 @@
                             </form>
                         </div>
                     </div>
-
-                    <div>
+                    <div sec:authorize="!hasRole('HOST')">
                         <button type="button" class="btn btn-info dropdown-toggle mr-1" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                             Stadtteil
@@ -238,18 +236,16 @@
                             </form>
                         </div>
                     </div>
-                    <div>
-                        <form role="form" class="form-inline mr-auto ml-0" method="post" th:action="@{/holidayhomes}">
+                    <div sec:authorize="!hasRole('HOST')">
+                        <form role="form" class="form-inline mr-auto" method="post" th:action="@{/holidayhomes}">
                             <input class="btn btn-danger btn-outline-light" type="submit"
                                    value="Alle Filter zurück setzen"/>
                         </form>
                     </div>
 
-                </div>
 
-                <div class="col-md-3">
                     <a th:href="@{/addholidayhome}" sec:authorize="hasRole('HOST')"
-                       class="btn btn-primary btn-outline-light float-right">
+                       class="btn btn-primary btn-outline-light float-right ml-1">
                         Angebot erstellen
                     </a>
                 </div>
@@ -285,11 +281,6 @@
                     </ul>
                     <div class="card-footer p-2 w-100">
                         <div class="d-flex flex-row-reverse">
-<!--                            <form role="form" th:method="post" th:action="@{/deleteholidayhome}">-->
-<!--                                <input type="hidden" name="holidayHome" th:value="${holidayHome.id}"/>-->
-<!--                                <input class="btn btn-danger btn-outline-light" type="submit"-->
-<!--                                       value="Ferienhaus löschen"/>-->
-<!--                            </form>-->
                             <button type="button" class="btn btn-danger mr-0" data-toggle="modal"
                                     data-target="#deleteHolidayHomeModal"
                                     th:data-holidayhomename="${holidayHome.name}"

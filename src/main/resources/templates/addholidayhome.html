@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -57,10 +57,10 @@
                 </div>
                 <div class="p-1 col-8 col-md-8">
                     <div class="input-group">
-                            <textarea type="text" class="form-control" id="description" th:name="description"
-                                      required="required" placeholder="Beschreibung" aria-label="Beschreibung"
-                                      th:field="*{description}"
-                                      th:classappend="${#fields.hasErrors('description') ? ' is-invalid' : ''}"></textarea>
+                        <textarea type="text" class="form-control" id="description" th:name="description"
+                                  required="required" placeholder="Beschreibung" aria-label="Beschreibung"
+                                  th:field="*{description}"
+                                  th:classappend="${#fields.hasErrors('description') ? ' is-invalid' : ''}"></textarea>
                         <div class="invalid-feedback ml-2" style="display: block;"
                              th:if="${#fields.hasErrors('description')}"
                              th:text="${#fields.errors('description').get(0)}">
@@ -76,9 +76,12 @@
                 <div class="p-1 col-8 col-md-8">
                     <div class="input-group">
                         <input class="form-control" id="price" th:name="price" min="1" type="number"
-                               placeholder="Preis p. N." aria-label="Preis pro Nacht"
+                               placeholder="Preis p. N." aria-label="Preis pro Nacht" step="0.01"
                                th:field="*{price}"
                                th:classappend="${#fields.hasErrors('price') ? ' is-invalid' : ''}"/>
+                        <div class="input-group-text">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
                         <div class="invalid-feedback ml-2" style="display: block;"
                              th:if="${#fields.hasErrors('price')}"
                              th:text="${#fields.errors('price').get(0)}">
@@ -95,7 +98,8 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="imageupload"
                                name="imageupload" required="required"
-                               th:field="*{imageupload}">
+                               th:field="*{imageupload}"
+                               th:classappend="${#fields.hasErrors('imageupload') ? ' is-invalid' : ''}">
                         <label class="custom-file-label" for="imageupload" id="upload-label">
                             Wählen Sie ein Bild aus. (JPG, PNG)
                         </label>
