@@ -1,0 +1,29 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2020/21
+// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
+// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
+// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
+
+**Von: Julian Böhm**
+
+**Gruppe: 25**
+
+== Was habe ich gelernt / was habe ich nicht gelernt?
+Ich habe gelernt, welche Sequenzen es beinhaltet, ein Softwareprojekt vom Anfang bis zum Ende zu betreuen und wie diese miteinander interagieren. 
+Hinzu kommt die ganz praktische Erfahrung mit Java und Spring sowie der Umgang mit UML-Programmen, Git und einer IDE. Ich habe zuvor noch nie an Projekten gearbeitet bei denne ich nicht allein war,
+hier habe ich nun auch konkrete Konzepte für das kollaborative Programmieren gesammelt.
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+In der Zusammenarbeit mit dem Team habe ich uneingeschränkt positive Erfahrungen gemacht. Jeder von uns war motiviert, jedoch nicht übermotiviert, bebei und 
+so kamen wir mit für gewöhnlich mit noch einem zusätzlichen Treffen in der Woche sehr gut durch. Es gab stets einen offenen und konstruktiven Austausch und stets eine Konsensbildung.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+Ich bin mir sicher, implizite Erfahungen damit gemacht zu haben, kann diese an der Stelle jedoch nicht explizit verschriftlichen.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+Der Wegfall der SalesPoint-Einführungsveranstalltung war eine gravierende Zäsur, verstärkt dadurch, dass die Dokumentation nur äußerst selten hilfreich war.
+Dies führte schnell zu einer Aversion gegen ein sicherlich ganz soldies Framework. Eine Einführung hätte dies wahrscheinlich verhindern können.
+
+== Feedback für den Tutor
+Ich bin mit meinem Tutor sehr zufrieden. Er war immer hilfsbereit, ohne dabei aufdringlich zu sein, sympathisch und nahbar.
+
+== Sonstiges und Anmerkungen
