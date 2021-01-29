@@ -509,6 +509,8 @@ public class CartController {
 			String user = authentication.getAuthorities().iterator().next().getAuthority();
 			if(user.equals("ROLE_HOST")){
 				return "redirect:/bookinghistory";
+			}else if (user.equals("ROLE_TENANT")){
+				return "redirect:/bookings";
 			}
 			return "redirect:/holidayhomes";
 		} else {
