@@ -68,24 +68,33 @@ public class AccountController {
 
 	@PostMapping("/register")
 	public String registerNewAccount(
-			@Valid @ModelAttribute("tenantRegistrationForm") TenantForm tenantForm,
+			@Valid @ModelAttribute("tenantForm") TenantForm tenantForm,
 			BindingResult result) {
 
 
 		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
 		String birthDate = tenantForm.getBirthDate();
-		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
+		LocalDate localDateBirthDate;
 
-		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("tenantRegistrationForm", "birthDate",
-					"Sie müssen mindestens 18 Jahre alt sein!"));
+		if(!birthDate.isEmpty()) {
+			localDateBirthDate = LocalDate.parse(birthDate);
+			if (!localDateBirthDate.isBefore(minAgeDate)) {
+				result.addError(new FieldError("tenantForm", "birthDate",
+						"Sie müssen mindestens 18 Jahre alt sein."));
+			}
+		}
+		else {
+			result.addError(new FieldError("tenantForm", "birthDate",
+					"Bitte geben Sie ein Geburtsdatum an."));
 		}
 
-		AccountEntity accountEntity = accountManagement.createTenantAccount(tenantForm);
-		if (accountEntity == null) {
-			result.addError(new FieldError("tenantRegistrationForm", "email",
-					"RegistrationForm.username.Taken"));
-			LOG.info(result.getAllErrors().toString());
+		if(!result.hasErrors()) {
+			AccountEntity accountEntity = accountManagement.createTenantAccount(tenantForm);
+			if (accountEntity == null) {
+				result.addError(new FieldError("tenantForm", "email",
+						"RegistrationForm.username.Taken"));
+				LOG.info(result.getAllErrors().toString());
+			}
 		}
 
 		if (result.hasErrors()) {
@@ -239,7 +248,7 @@ public class AccountController {
 	@GetMapping("/newhost")
 	public String registerHost(Model model, HostForm hostForm) {
 		firstname(model);
-		model.addAttribute("registrationForm", hostForm);
+		model.addAttribute("hostForm", hostForm);
 		model.addAttribute("minAgeDate", LocalDate.now().minusDays(5840));
 		return "accounts/newhost";
 	}
@@ -247,7 +256,7 @@ public class AccountController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/newhost")
 	public String registerNewHost(
-			@Valid @ModelAttribute("hostRegistrationForm") HostForm hostForm,
+			@Valid @ModelAttribute("hostForm") HostForm hostForm,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -259,14 +268,14 @@ public class AccountController {
 		LocalDate localDateBirthDate = LocalDate.parse(birthDate);
 
 		if (!localDateBirthDate.isBefore(minAgeDate)) {
-			result.addError(new FieldError("hostRegistrationForm", "birthDate",
+			result.addError(new FieldError("hostForm", "birthDate",
 					"Sie müssen mindestens 18 Jahre alt sein!"));
 			return "register";
 		}
 
 		AccountEntity accountEntity = accountManagement.createHostAccount(hostForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("hostRegistrationForm", "email",
+			result.addError(new FieldError("hostForm", "email",
 					"RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/newhost";
@@ -282,14 +291,14 @@ public class AccountController {
 	@GetMapping("/neweventemployee")
 	public String registerEventEmployee(Model model, EventEmployeeForm eventEmployeeForm) {
 		firstname(model);
-		model.addAttribute("registrationForm", eventEmployeeForm);
+		model.addAttribute("eventEmployeeForm", eventEmployeeForm);
 		return "accounts/neweventemployee";
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/neweventemployee")
 	public String registerNewEventEmployee(
-			@Valid @ModelAttribute("eventEmployeeRegistrationForm")
+			@Valid @ModelAttribute("eventEmployeeForm")
 					EventEmployeeForm eventEmployeeForm,
 			BindingResult result, Model model) {
 
@@ -300,7 +309,7 @@ public class AccountController {
 
 		AccountEntity accountEntity = accountManagement.createEventEmployeeAccount(eventEmployeeForm);
 		if (accountEntity == null) {
-			result.addError(new FieldError("eventEmployeeRegistrationForm", "email",
+			result.addError(new FieldError("eventEmployeeForm", "email",
 					"RegistrationForm.username.Taken"));
 			LOG.info(result.getAllErrors().toString());
 			return "accounts/neweventemployee";
