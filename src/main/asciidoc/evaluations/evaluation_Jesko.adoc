@@ -9,23 +9,24 @@
 
 == Was habe ich gelernt / was habe ich nicht gelernt?
 // Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
-Ich habe gelernt:
-Grundlegende Umgang mit Spring und Bootstrap.
-
-
+Ich habe einen sehr guten Einblick in den grundlegenden Entwicklungsvorgang von Software gewonnen. Von der Analyse und CRC-Karten, über den Umgang mit dem Kunden, über aufstellen von UML-Diagrammen, bis hin zur tatsächlichen Umsetzung von Objekt-Orientierter-Programmierung in Form von Software.
+Dabei habe ich auch den Grundlegenden Umgang mit Spring und Bootstrap gelernt, sowie meine Kenntnisse im html und Java-Script Bereich aufgefrischt. Außerdem habe ich die Einarbeitung in ein Framwork, in unserem Fall Salespoint, gelernt und wie uns Salespoint bei programmieren helfen kann.
 
 == Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
 // Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+Die Zusammenarbeit im Team war äußerst positiv. Jeder war motiviert, wollte etwas lernen und ich denke dass wir auch die Aufgaben halbwegs gut verteilen konnten, so dass keiner zu viel machen musste. Es konnte sich auch jeder einbringen und dem Team eine Bereicherung sein. 
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
 // Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+Ich habe sowohl gute als auch schwierige Erfahrungen mit salespoint machen dürfen. Es war zum einen eine sehr große Hilfe und hat eine sehr gute Grundlage für Accounts, Bestellungen und Lager(Inventory/Catalog) geliefert. Jedoch gab es auch einige Probleme die im Umgang mit Salespoint entstanden sind, die mich doch manchmal etwas zum verzweifeln brachten.
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
 // Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+Mir hat die Einführung ins Praktikum mit Hilfe des Videoshops und Guestbook sehr gut gefallen, jedoch fand ich es schwierig einen Einstieg in Salespoint zu finden, an dieser Stelle hätte ich mir gerne etwas mehr Unterstützung gewünscht.
 
 == Feedback für den Tutor
 // Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
-Sehr cooler Tutor, mach weiter so ;)
+Unser Tutor war sehr cool, hat gute Hilfestellungen bei Problemen geliefert, so wie uns gut organisiert bzw. immer sehr zeitnah geantwortet.
 
 == Sonstiges und Anmerkungen
 // Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
