@@ -71,7 +71,6 @@ public class AccountController {
 			@Valid @ModelAttribute("tenantForm") TenantForm tenantForm,
 			BindingResult result) {
 
-
 		LocalDate minAgeDate = LocalDate.now().minusDays(5840);
 		String birthDate = tenantForm.getBirthDate();
 		LocalDate localDateBirthDate;

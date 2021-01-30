@@ -64,7 +64,7 @@ class AccountControllerIntegrationTest {
 				"unit@test", "123", "123", "1999-01-01", "Test Street",
 				"1", "12345", "Dresden", true);
 		mvc.perform(post("/register")
-				.flashAttr("tenantRegistrationForm", tenantForm))
+				.flashAttr("tenantForm", tenantForm))
 				.andExpect(status().isFound());
 		accountManagement.enableTenant("unit@test");
 	}
@@ -150,7 +150,7 @@ class AccountControllerIntegrationTest {
 				"1", "12345", "Dresden", "DE55500105171938297534", "MALADE51AKI");
 
 		mvc.perform(post("/newhost")
-				.flashAttr("hostRegistrationForm", hostForm))
+				.flashAttr("hostForm", hostForm))
 				.andExpect(status().isFound());
 
 		MvcResult mvcResult = mvc.perform(get("/manageaccounts")).andReturn();
@@ -188,7 +188,7 @@ class AccountControllerIntegrationTest {
 				"test@employee", "123", "123", "EventBois Dresden GmbH");
 
 		MvcResult eventEmployeeRegistrationForm1 = mvc.perform(post("/neweventemployee")
-				.flashAttr("eventEmployeeRegistrationForm", eventEmployeeForm))
+				.flashAttr("eventEmployeeForm", eventEmployeeForm))
 				.andExpect(status().isFound())
 				.andReturn();
 
