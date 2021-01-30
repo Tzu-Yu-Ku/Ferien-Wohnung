@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -505,6 +506,12 @@ public class CartController {
 		if (bookingManagement.findFirstByOrderIdentifier(booking.getId()).cancel()) {
 			//Work with Copy???
 			System.out.println(bookingManagement.findFirstByOrderIdentifier(booking.getId()).getState());
+			String user = authentication.getAuthorities().iterator().next().getAuthority();
+			if(user.equals("ROLE_HOST")){
+				return "redirect:/bookinghistory";
+			}else if (user.equals("ROLE_TENANT")){
+				return "redirect:/bookings";
+			}
 			return "redirect:/holidayhomes";
 		} else {
 			return "";
@@ -560,10 +567,10 @@ public class CartController {
 		if (bookingManagement.findFirstByOrderIdentifier(booking.getId()).confirm()) {
 			//it's now confirmed
 			System.out.println(bookingManagement.findFirstByOrderIdentifier(booking.getId()).getState());
-			return "redirect:/holidayhomes";
+			return "redirect:/bookinghistory";
 		}
 		//it couldn't be confirmed maybe it already was or something like that
-		return "redirect:/holidayhomes";
+		return "redirect:/bookinghistory";
 	}
 
 }
