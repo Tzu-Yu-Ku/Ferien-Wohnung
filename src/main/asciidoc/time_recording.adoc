@@ -13,12 +13,12 @@ Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Bes
 |4    |950min   |720min     |690min       |510min     |900min         |600min                   |150min    
 |5    |1720min  |690min     |450min       |210min     |1950min        |610min                   |150min    
 |6    |750min   |210min     |150min       |150min     |840min         |250min                   |150min    
-|7    |818min   |150min     |120min       |…          |868min         |180min                   |135min    
-|8    |100min   |330min     |160min       |…          |100min         |180min                   |150min
+|7    |818min   |150min     |120min       |180min     |868min         |180min                   |135min    
+|8    |100min   |330min     |160min       |120min     |100min         |180min                   |150min
 |9    |720min   |575min     |650min       |345min     |720min         |585min                   |130min    
 |10   |500min   |250min     |620min       |330min     |480min         |1120min                  |120min    
-|11   |700min   |300min     |540min       |…          |660min         |620min                   |210min    
-|12   |…        |210min     |…            |…          |…              |…                        |…    
+|11   |700min   |300min     |540min       |410min     |660min         |620min                   |210min    
+|12   |…        |210min     |…            |120min     |…              |…                        |…    
 |===
 
 Bitte tragen Sie am Ende des Praktikums noch folgende weitere Werte ein:
