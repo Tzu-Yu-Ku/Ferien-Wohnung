@@ -74,6 +74,11 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.tudresden.inf.st</groupId>
+			<artifactId>salespoint-framework</artifactId>
+			<version>8.0.1</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 
@@ -83,8 +88,8 @@
 		</repository>
 
 		<repository>
-			<id>salespointframework</id>
-			<url>https://www.st.inf.tu-dresden.de/SalesPoint/repository</url>
+			<id>salespoint-framework</id> <!-- Name doesn't matter -->
+			<url>http://www.st.inf.tu-dresden.de/SalesPoint/repository</url>
 		</repository>
 
 	</repositories>
